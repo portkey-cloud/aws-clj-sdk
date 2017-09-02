@@ -1,7 +1,40 @@
-(ns portkey.aws.internal.spec
+(ns portkey.awsgen
   (:require [clojure.spec.alpha :as spec]
     [cheshire.core :as json]
-    [clojure.java.io :as io]))
+    [clojure.java.io :as io]
+    [net.cgrand.xforms :as x]
+    [clojure.string :as str]))
+
+(defn- file-seq [root]
+  (tree-seq #(.isDirectory ^java.io.File %) #(.listFiles ^java.io.File %) root))
+
+(defn generate-files! []
+  (->> (java.io.File. "resources/aws-sdk-core/apis/")
+   file-seq
+   (into []
+     (comp
+       (filter #(= "api-2.json" (.getName ^java.io.File %)))
+       (x/by-key (fn [^java.io.File f] (-> f .getParentFile .getParentFile .getName))
+         (comp (x/for [^java.io.File f %]
+                 [(-> f .getParentFile .getName) (.getPath f)])
+           (x/into (sorted-map))))
+       (x/for [[api versions] %
+               :let [apifile (str/replace api #"[-.]" "_")
+                     apins (str/replace api #"[.]" "-")
+                     [latest f] (first (rseq versions))]
+               [version json] (cons [nil f] versions)
+               :let [[_ json] (re-matches #"resources/(.*)" json)
+                     [file ns]
+                     (if version
+                       [(java.io.File. (str "src/portkey/aws/" apifile "/_" version ".clj"))
+                        (symbol (str "portkey.aws." apins ".-" version))]
+                       [(java.io.File. (str "src/portkey/aws/" apifile ".clj"))
+                        (symbol (str "portkey.aws." apins))])]]
+         (doto file
+           (-> .getParentFile .mkdirs)
+           (spit (with-out-str
+                   (prn (list 'ns ns '(:require [portkey.aws.internal.spec :as aws])))
+                   (prn (list 'aws/defapi json))))))))))
 
 (spec/def ::TODO #{})
 
@@ -40,9 +73,10 @@
 (defmacro defapi [reource-name]
   (let [api (json/parse-stream (-> reource-name io/resource io/reader))
         ns (name (ns-name *ns*))]
-    `(do
-       ~@(for [shape (api "shapes")]
-           (shape-spec ns shape)))))
+    (case (get-in api ["metadata" "protocol"])
+      "rest-json" `(do
+                     ~@(for [shape (api "shapes")]
+                         (shape-spec ns shape))))))
 
 (defmethod shape-to-spec :default [ns [name _ :as kv]]
   (throw (ex-info (str "unsupported shape " name) {:shape kv})))
