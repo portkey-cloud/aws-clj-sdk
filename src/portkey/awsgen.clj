@@ -95,6 +95,8 @@
      (fn [m#]
        (every? #(contains? m# %) [~@(keys req)]))))
 
+;; :portkey.awsgen/shape is a strict (it fails to validate when unexpected attributes)
+;; retro spec 
 (defmulti shape-type-spec #(get % "type"))
 (spec/def ::shape (spec/multi-spec shape-type-spec #(assoc %1 "type" %2)))
 
@@ -257,3 +259,29 @@
 
 (defmethod shape-to-spec "double" [ns _] `double?)
 
+(spec/def ::operation
+  (strict-strs
+    :req {"name" string?
+          "http" (strict-strs
+                   :req {"method" #{"POST" "DELETE" "GET" "PATCH" "PUT" "HEAD"}
+                         "requestUri" string?}
+                   :opt {"responseCode" int?})}
+    :opt {"input" (strict-strs :req {"shape" string?}
+                    :opt {"xmlNamespace"
+                          (strict-strs :req {"uri" string?})
+                          "locationName" string?}) ; TODO validate
+          "output" (strict-strs :req {"shape" string?}
+                     :opt {"resultWrapper" string?})
+          "idempotent" boolean?
+          "errors"
+          (spec/coll-of
+            (strict-strs :req {"shape" string?}
+              :opt {"exception" boolean?
+                    "fault" true?
+                    "error" (strict-strs
+                              :req {"httpStatusCode" int?}
+                              :opt {"code" string?, "senderFault" boolean?})}))
+          "documentationUrl" string? ; TODO
+          "alias" string?
+          "authtype" #{"none" "v4-unsigned-body"}
+          "deprecated" boolean?}))
