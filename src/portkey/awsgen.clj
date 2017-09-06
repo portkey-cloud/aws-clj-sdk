@@ -332,15 +332,15 @@
                        :body
                        ~(when input-shape
                           `(spec/unform ~(keyword ns input-shape) ~input))}
-                      (params-to-header ~@(into {} (for [[name member] (get-in shapes [input-shape "members"])
-                                                        :when (= "header" (member "location"))]
-                                                    [name [(member "locationName") (member "jsonvalue")]])))
-                      (params-to-uri ~@(into {} (for [[name member] (get-in shapes [input-shape "members"])
-                                                      :when (= "uri" (member "location"))]
-                                                 [(member "locationName") name])))
-                      (params-to-querystring ~@(into {} (for [[name member] (get-in shapes [input-shape "members"])
-                                                              :when (= "querystring" (member "location"))]
-                                                         [(member "locationName") name])))
+                      (params-to-header ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
+                                                       :when (= "header" (member "location"))]
+                                                   [name [(member "locationName") (member "jsonvalue")]])))
+                      (params-to-uri ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
+                                                     :when (= "uri" (member "location"))]
+                                                [(member "locationName") name])))
+                      (params-to-querystring ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
+                                                             :when (= "querystring" (member "location"))]
+                                                        [(member "locationName") name])))
                       (params-to-payload ~(get-in shapes [input-shape "payload"]))
                       (update :body #(some-> % json/generate-string)))]
            (http-client# {:method ~method
