@@ -3,9 +3,9 @@
 (def
  endpoints
  '{"us-east-1"
-   {:credentialScope
-    {"service" "marketplacecommerceanalytics", "region" "us-east-1"},
-    :sslCommonName
+   {:credential-scope
+    {:service "marketplacecommerceanalytics", :region "us-east-1"},
+    :ssl-common-name
     "marketplacecommerceanalytics.us-east-1.amazonaws.com",
     :endpoint
     "https://marketplacecommerceanalytics.us-east-1.amazonaws.com"}})

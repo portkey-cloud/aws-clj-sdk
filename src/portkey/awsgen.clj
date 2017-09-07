@@ -326,35 +326,38 @@
     `(defn ~(symbol (dashed name)) ; TODO add deprecated flag 
        ([input#] (~(symbol (dashed name)) input# aws/*http-client*))
        ([~input http-client#]
-         (->
-           {:method ~method
-            :url (str (:endpoint (~'endpoints aws/*region*)) ~requestUri)
-            :headers {"content-type" "application/json"}
-            :body
-            ~(when input-shape
-               `(spec/unform ~(keyword ns input-shape) ~input))}
-           (params-to-header ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
-                                             :when (= "header" (member "location"))]
-                                         [name [(member "locationName") (member "jsonvalue")]])))
-           (params-to-uri ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
-                                          :when (= "uri" (member "location"))]
-                                      [(member "locationName") name])))
-           (params-to-querystring ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
-                                                  :when (= "querystring" (member "location"))]
-                                              [(member "locationName") name])))
-           (params-to-payload ~(get-in shapes [input-shape "payload"]))
-           (update :body #(some-> % json/generate-string))
-           (http-client# 
-             (fn [~response]
-               (let [errors# ~error-spec]
-                 (if (= ~responseCode (:status ~response))
-                   ~(if output-shape
-                      `(spec/unform ~(keyword ns (dashed output-shape)) (:body ~response))
-                      true)
-                   (if-some [[type# spec#] (find errors# (get-in ~response [:headers "x-amzn-ErrorType"]))]
-                     (let [m# (spec/unform spec# (json/parse-string (:body ~response)))]
-                       (throw (ex-info (str type# ": " (:message m#)) m#)))
-                     (throw (ex-info "Unexpected response" {:response ~response}))))))))))))
+         (let [endpoint# (~(symbol ns "endpoints") aws/*region*)
+               sig-opts# (into (:credential-scope endpoint#) aws/*credentials*) ]
+           (->
+             {:method ~method
+              :url (str (:endpoint (~'endpoints aws/*region*)) ~requestUri)
+              :headers {"content-type" "application/json"}
+              :body
+              ~(when input-shape
+                 `(spec/unform ~(keyword ns input-shape) ~input))}
+             (params-to-header ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
+                                               :when (= "header" (member "location"))]
+                                           [name [(member "locationName") (member "jsonvalue")]])))
+             (params-to-uri ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
+                                            :when (= "uri" (member "location"))]
+                                        [(member "locationName") name])))
+             (params-to-querystring ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
+                                                    :when (= "querystring" (member "location"))]
+                                                [(member "locationName") name])))
+             (params-to-payload ~(get-in shapes [input-shape "payload"]))
+             (update :body #(some-> % json/generate-string))
+             (aws/sign-v4 sig-opts#)
+             (http-client# 
+               (fn [~response]
+                 (let [errors# ~error-spec]
+                   (if (= ~responseCode (:status ~response))
+                     ~(if output-shape
+                        `(spec/unform ~(keyword ns (dashed output-shape)) (:body ~response))
+                        true)
+                     (if-some [[type# spec#] (find errors# (get-in ~response [:headers "x-amzn-ErrorType"]))]
+                       (let [m# (spec/unform spec# (json/parse-string (:body ~response)))]
+                         (throw (ex-info (str type# ": " (:message m#)) m#)))
+                       (throw (ex-info "Unexpected response" {:response ~response})))))))))))))
 
 (defn gen-api [ns-sym resource-name]
   (let [api (json/parse-stream (-> resource-name io/resource io/reader))]
@@ -390,7 +393,8 @@
                   hostname (str/replace hostname #"\{(?:region|service|dnsSuffix)}" env)
                   sslCommonName (str/replace sslCommonName #"\{(?:region|service|dnsSuffix)}" env)
                   endpoint (str protocol "://" hostname)]]
-        [[service region] {:credentialScope credentialScope :sslCommonName sslCommonName :endpoint endpoint}]))))
+        [[service region] {:credential-scope (x/into {} (x/for [[k v] %] [(keyword k) v]) credentialScope)
+                           :ssl-common-name sslCommonName :endpoint endpoint}]))))
 
 (defn generate-files! []
   (let [endpoints (parse-endpoints! "resources/aws-partitions/partitions.json")]
