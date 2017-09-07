@@ -6,7 +6,8 @@
     [clojure.string :as str]
     [portkey.aws :as aws]
     [clj-http.client :as http]
-    [clojure.string :as str]))
+    [clojure.string :as str]
+    [clojure.pprint]))
 
 #_ (def all-apis 
      (->> (java.io.File. "resources/aws-sdk-core/apis/")
@@ -325,28 +326,25 @@
     `(defn ~(symbol (dashed name)) ; TODO add deprecated flag 
        ([input#] (~(symbol (dashed name)) input# aws/*http-client*))
        ([~input http-client#]
-         (let [req# (->
-                      {:method ~method
-                       :url ~(str "https://lambda.eu-central-1.amazonaws.com" requestUri)
-                       :headers {"content-type" "application/json"}
-                       :body
-                       ~(when input-shape
-                          `(spec/unform ~(keyword ns input-shape) ~input))}
-                      (params-to-header ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
-                                                       :when (= "header" (member "location"))]
-                                                   [name [(member "locationName") (member "jsonvalue")]])))
-                      (params-to-uri ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
-                                                     :when (= "uri" (member "location"))]
-                                                [(member "locationName") name])))
-                      (params-to-querystring ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
-                                                             :when (= "querystring" (member "location"))]
-                                                        [(member "locationName") name])))
-                      (params-to-payload ~(get-in shapes [input-shape "payload"]))
-                      (update :body #(some-> % json/generate-string)))]
-           (http-client# {:method ~method
-                          :url ~(str "https://lambda.eu-central-1.amazonaws.com" requestUri)
-                          :headers {"content-type" "application/json"}
-                          :body body#}
+         (->
+           {:method ~method
+            :url (str (:endpoint (~'endpoints aws/*region*)) ~requestUri)
+            :headers {"content-type" "application/json"}
+            :body
+            ~(when input-shape
+               `(spec/unform ~(keyword ns input-shape) ~input))}
+           (params-to-header ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
+                                             :when (= "header" (member "location"))]
+                                         [name [(member "locationName") (member "jsonvalue")]])))
+           (params-to-uri ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
+                                          :when (= "uri" (member "location"))]
+                                      [(member "locationName") name])))
+           (params-to-querystring ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
+                                                  :when (= "querystring" (member "location"))]
+                                              [(member "locationName") name])))
+           (params-to-payload ~(get-in shapes [input-shape "payload"]))
+           (update :body #(some-> % json/generate-string))
+           (http-client# 
              (fn [~response]
                (let [errors# ~error-spec]
                  (if (= ~responseCode (:status ~response))
@@ -373,38 +371,62 @@
       #_"query"
       #_"rest-xml")))
 
+(defn parse-endpoints! [src]
+  (let [endpoints (with-open [r (io/reader src)] (json/parse-stream r))]
+    (reduce (fn [m [p v]] (assoc-in m p v)) {}
+      (for [{:as partition
+             :strs [defaults services regions dnsSuffix]} (endpoints "partitions")
+            :let [regions (set (keys regions))]
+            [service {defaults' "defaults" :strs [endpoints partitionEndpoint]}] services
+            :let [defaults (into defaults defaults')]
+            region (into regions (keys endpoints))
+            :let [desc (or (endpoints region) (endpoints partitionEndpoint))]
+            :when desc
+            :let [{:strs [hostname sslCommonName protocols credentialScope]} (into defaults desc)
+                  protocol (or (some #{"https"} protocols) (first protocols)) ; prefer https
+                  credentialScope (into {"service" service "region" region} credentialScope)
+                  sslCommonName (or sslCommonName hostname) 
+                  env #(case % "{region}" region "{service}" service "{dnsSuffix}" dnsSuffix)
+                  hostname (str/replace hostname #"\{(?:region|service|dnsSuffix)}" env)
+                  sslCommonName (str/replace sslCommonName #"\{(?:region|service|dnsSuffix)}" env)
+                  endpoint (str protocol "://" hostname)]]
+        [[service region] {:credentialScope credentialScope :sslCommonName sslCommonName :endpoint endpoint}]))))
+
 (defn generate-files! []
-  (->> (java.io.File. "resources/aws-sdk-core/apis/")
-   file-seq
-   (into []
-     (comp
-       (filter #(= "api-2.json" (.getName ^java.io.File %)))
-       (x/by-key (fn [^java.io.File f] (-> f .getParentFile .getParentFile .getName))
-         (comp (x/for [^java.io.File f %]
-                 [(-> f .getParentFile .getName) (.getPath f)])
-           (x/into (sorted-map))))
-       (x/for [[api versions] %
-               :let [apifile (str/replace api #"[-.]" "_")
-                     apins (str/replace api #"[.]" "-")
-                     [latest f] (first (rseq versions))]
-               [version json] (cons [nil f] versions)
-               :let [_ (prn 'generating api (or version 'LATEST))
-                     [_ json] (re-matches #"resources/(.*)" json)
-                     [file ns]
-                     (if version
-                       [(java.io.File. (str "src/portkey/aws/" apifile "/_" version ".clj"))
-                        (symbol (str "portkey.aws." apins ".-" version))]
-                       [(java.io.File. (str "src/portkey/aws/" apifile ".clj"))
-                        (symbol (str "portkey.aws." apins))])]]
-         (with-open [w (io/writer (doto file (-> .getParentFile .mkdirs)))]
-           (binding [*out* w]
-             (prn (list 'ns ns '(:require [portkey.aws])))
-             (doseq [form (gen-api ns json)]
-               (newline)
-               (if (and (seq? form) (= 'do (first form)))
-                 (run! prn (next form))
-                 (prn form))))
-           file))))))
+  (let [endpoints (parse-endpoints! "resources/aws-partitions/partitions.json")]
+    (->> (java.io.File. "resources/aws-sdk-core/apis/")
+      file-seq
+      (into []
+        (comp
+          (filter #(= "api-2.json" (.getName ^java.io.File %)))
+          (x/by-key (fn [^java.io.File f] (-> f .getParentFile .getParentFile .getName))
+            (comp (x/for [^java.io.File f %]
+                    [(-> f .getParentFile .getName) (.getPath f)])
+              (x/into (sorted-map))))
+          (x/for [[api versions] %
+                  :let [apifile (str/replace api #"[-.]" "_")
+                        apins (str/replace api #"[.]" "-")
+                        [latest f] (first (rseq versions))]
+                  [version json] (cons [nil f] versions)
+                  :let [_ (prn 'generating api (or version 'LATEST))
+                        [_ json] (re-matches #"resources/(.*)" json)
+                        [file ns]
+                        (if version
+                          [(java.io.File. (str "src/portkey/aws/" apifile "/_" version ".clj"))
+                           (symbol (str "portkey.aws." apins ".-" version))]
+                          [(java.io.File. (str "src/portkey/aws/" apifile ".clj"))
+                           (symbol (str "portkey.aws." apins))])]]
+            (with-open [w (io/writer (doto file (-> .getParentFile .mkdirs)))]
+              (binding [*out* w]
+                (prn (list 'ns ns '(:require [portkey.aws])))
+                (newline)
+                (clojure.pprint/pprint (list 'def 'endpoints (list 'quote (get endpoints apins))))
+                (doseq [form (gen-api ns json)]
+                  (newline)
+                  (if (and (seq? form) (= 'do (first form)))
+                    (run! prn (next form))
+                    (prn form))))
+              file)))))))
 
 #_(client/with-additional-middleware
   [wrap-aws-auth aws-sig4/wrap-aws-date]

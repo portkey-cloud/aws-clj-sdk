@@ -1,3 +1,94 @@
 (ns portkey.aws.elasticloadbalancing.-2012-06-01 (:require [portkey.aws]))
 
+(def
+ endpoints
+ '{"ap-northeast-1"
+   {:credentialScope
+    {"service" "elasticloadbalancing", "region" "ap-northeast-1"},
+    :sslCommonName "elasticloadbalancing.ap-northeast-1.amazonaws.com",
+    :endpoint
+    "https://elasticloadbalancing.ap-northeast-1.amazonaws.com"},
+   "eu-west-1"
+   {:credentialScope
+    {"service" "elasticloadbalancing", "region" "eu-west-1"},
+    :sslCommonName "elasticloadbalancing.eu-west-1.amazonaws.com",
+    :endpoint "https://elasticloadbalancing.eu-west-1.amazonaws.com"},
+   "us-east-2"
+   {:credentialScope
+    {"service" "elasticloadbalancing", "region" "us-east-2"},
+    :sslCommonName "elasticloadbalancing.us-east-2.amazonaws.com",
+    :endpoint "https://elasticloadbalancing.us-east-2.amazonaws.com"},
+   "ap-southeast-2"
+   {:credentialScope
+    {"service" "elasticloadbalancing", "region" "ap-southeast-2"},
+    :sslCommonName "elasticloadbalancing.ap-southeast-2.amazonaws.com",
+    :endpoint
+    "https://elasticloadbalancing.ap-southeast-2.amazonaws.com"},
+   "cn-north-1"
+   {:credentialScope
+    {"service" "elasticloadbalancing", "region" "cn-north-1"},
+    :sslCommonName "elasticloadbalancing.cn-north-1.amazonaws.com.cn",
+    :endpoint
+    "https://elasticloadbalancing.cn-north-1.amazonaws.com.cn"},
+   "sa-east-1"
+   {:credentialScope
+    {"service" "elasticloadbalancing", "region" "sa-east-1"},
+    :sslCommonName "elasticloadbalancing.sa-east-1.amazonaws.com",
+    :endpoint "https://elasticloadbalancing.sa-east-1.amazonaws.com"},
+   "ap-southeast-1"
+   {:credentialScope
+    {"service" "elasticloadbalancing", "region" "ap-southeast-1"},
+    :sslCommonName "elasticloadbalancing.ap-southeast-1.amazonaws.com",
+    :endpoint
+    "https://elasticloadbalancing.ap-southeast-1.amazonaws.com"},
+   "ap-northeast-2"
+   {:credentialScope
+    {"service" "elasticloadbalancing", "region" "ap-northeast-2"},
+    :sslCommonName "elasticloadbalancing.ap-northeast-2.amazonaws.com",
+    :endpoint
+    "https://elasticloadbalancing.ap-northeast-2.amazonaws.com"},
+   "ca-central-1"
+   {:credentialScope
+    {"service" "elasticloadbalancing", "region" "ca-central-1"},
+    :sslCommonName "elasticloadbalancing.ca-central-1.amazonaws.com",
+    :endpoint
+    "https://elasticloadbalancing.ca-central-1.amazonaws.com"},
+   "eu-central-1"
+   {:credentialScope
+    {"service" "elasticloadbalancing", "region" "eu-central-1"},
+    :sslCommonName "elasticloadbalancing.eu-central-1.amazonaws.com",
+    :endpoint
+    "https://elasticloadbalancing.eu-central-1.amazonaws.com"},
+   "eu-west-2"
+   {:credentialScope
+    {"service" "elasticloadbalancing", "region" "eu-west-2"},
+    :sslCommonName "elasticloadbalancing.eu-west-2.amazonaws.com",
+    :endpoint "https://elasticloadbalancing.eu-west-2.amazonaws.com"},
+   "us-gov-west-1"
+   {:credentialScope
+    {"service" "elasticloadbalancing", "region" "us-gov-west-1"},
+    :sslCommonName "elasticloadbalancing.us-gov-west-1.amazonaws.com",
+    :endpoint
+    "https://elasticloadbalancing.us-gov-west-1.amazonaws.com"},
+   "us-west-2"
+   {:credentialScope
+    {"service" "elasticloadbalancing", "region" "us-west-2"},
+    :sslCommonName "elasticloadbalancing.us-west-2.amazonaws.com",
+    :endpoint "https://elasticloadbalancing.us-west-2.amazonaws.com"},
+   "us-east-1"
+   {:credentialScope
+    {"service" "elasticloadbalancing", "region" "us-east-1"},
+    :sslCommonName "elasticloadbalancing.us-east-1.amazonaws.com",
+    :endpoint "https://elasticloadbalancing.us-east-1.amazonaws.com"},
+   "us-west-1"
+   {:credentialScope
+    {"service" "elasticloadbalancing", "region" "us-west-1"},
+    :sslCommonName "elasticloadbalancing.us-west-1.amazonaws.com",
+    :endpoint "https://elasticloadbalancing.us-west-1.amazonaws.com"},
+   "ap-south-1"
+   {:credentialScope
+    {"service" "elasticloadbalancing", "region" "ap-south-1"},
+    :sslCommonName "elasticloadbalancing.ap-south-1.amazonaws.com",
+    :endpoint "https://elasticloadbalancing.ap-south-1.amazonaws.com"}})
+
 (comment TODO support "query")
