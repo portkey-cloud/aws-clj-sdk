@@ -257,19 +257,20 @@
 
 #_(str/replace uri #"\{(.*)}" (fn [[_ name]]))
 
-(defn params-to-header [{:as req :keys [body headers]} [param-to-headers jsonvalue]]
+(defn params-to-header [{:as req :keys [body headers]} param-to-headers]
   (-> req
-    (assoc :headers (reduce-kv (fn [headers param header] (if-some [v (get body param)]
-                                                            (assoc headers header 
-                                                              (cond-> v
-                                                                jsonvalue (-> json/generate-string base64-encode)))
-                                                            headers))
+    (assoc :headers (reduce-kv (fn [headers param [header jsonvalue]]
+                                 (if-some [v (get body param)]
+                                   (assoc headers header 
+                                     (cond-> v
+                                       jsonvalue (-> json/generate-string base64-encode)))
+                                   headers))
                       headers param-to-headers))
-    (assoc :body (reduce dissoc body (keys param-to-headers)))))
+           (assoc :body (reduce dissoc body (keys param-to-headers)))))
 
 (defn params-to-uri [{:as req :keys [body url]} uri-to-param]
   (-> req
-    (assoc :url (str/replace #"\{(.*)}" url (fn [[_ name]]
+    (assoc :url (str/replace url #"\{(.*)}" (fn [[_ name]]
                                               (if-some [v (get body (uri-to-param name))]
                                                 (http/url-encode-illegal-characters v)
                                                 (throw (ex-info (str "Missing parameter " name)
@@ -323,18 +324,20 @@
                          :opt {"required" (spec/coll-of string?)
                                "payload" string?
                                "deprecated" boolean?}) (shapes input-shape)))
-    `(defn ~(symbol (dashed name)) ; TODO add deprecated flag 
-       ([input#] (~(symbol (dashed name)) input# aws/*http-client*))
-       ([~input http-client#]
-         (let [endpoint# (~(symbol ns "endpoints") aws/*region*)
-               sig-opts# (into (:credential-scope endpoint#) aws/*credentials*) ]
+    `(do
+       (defn ~(symbol (dashed name)) ; TODO add deprecated flag 
+         [~input]
+         (let [endpoint# (~(symbol ns "endpoints") aws/*region*)]
            (->
              {:method ~method
+              ::aws/credential-scope (:credential-scope endpoint#)
+              ::aws/signature-version (:signature-version endpoint#)
               :url (str (:endpoint (~'endpoints aws/*region*)) ~requestUri)
               :headers {"content-type" "application/json"}
+              :as :json-string-keys
               :body
               ~(when input-shape
-                 `(spec/unform ~(keyword ns input-shape) ~input))}
+                 `(spec/unform ~(keyword ns (dashed input-shape)) ~input))}
              (params-to-header ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
                                                :when (= "header" (member "location"))]
                                            [name [(member "locationName") (member "jsonvalue")]])))
@@ -346,18 +349,25 @@
                                                 [(member "locationName") name])))
              (params-to-payload ~(get-in shapes [input-shape "payload"]))
              (update :body #(some-> % json/generate-string))
-             (aws/sign-v4 sig-opts#)
-             (http-client# 
+             (aws/*http-client* 
                (fn [~response]
                  (let [errors# ~error-spec]
                    (if (= ~responseCode (:status ~response))
-                     ~(if output-shape
-                        `(spec/unform ~(keyword ns (dashed output-shape)) (:body ~response))
-                        true)
-                     (if-some [[type# spec#] (find errors# (get-in ~response [:headers "x-amzn-ErrorType"]))]
-                       (let [m# (spec/unform spec# (json/parse-string (:body ~response)))]
-                         (throw (ex-info (str type# ": " (:message m#)) m#)))
-                       (throw (ex-info "Unexpected response" {:response ~response})))))))))))))
+                     [:result ~(if output-shape
+                                 `(spec/unform ~(keyword ns (dashed output-shape)) (:body ~response))
+                                 true)]
+                     [:exception
+                      (if-some [[type# spec#] (find errors# (get-in ~response [:headers "x-amzn-ErrorType"]))]
+                        (let [m# (spec/unform spec# (json/parse-string (:body ~response)))]
+                          (ex-info (str type# ": " (:message m#)) m#))
+                        (ex-info "Unexpected response" {:response ~response}))])))))))
+       (spec/fdef ~(symbol (dashed name))
+         ~@(when input-shape
+             [:args `(spec/cat
+                       :sync (spec/tuple ~(keyword ns (dashed input-shape)))
+                       :async (spec/tuple ~(keyword ns (dashed input-shape))
+                                (spec/fspec :args (spec/cat :result any? :exception ex-data))))])
+         ~@(when output-shape [:ret `(spec/and ~(keyword ns (dashed output-shape)))])))))
 
 (defn gen-api [ns-sym resource-name]
   (let [api (json/parse-stream (-> resource-name io/resource io/reader))]
@@ -385,16 +395,20 @@
             region (into regions (keys endpoints))
             :let [desc (or (endpoints region) (endpoints partitionEndpoint))]
             :when desc
-            :let [{:strs [hostname sslCommonName protocols credentialScope]} (into defaults desc)
+            :let [{:strs [hostname sslCommonName protocols credentialScope signatureVersions]} (into defaults desc)
                   protocol (or (some #{"https"} protocols) (first protocols)) ; prefer https
                   credentialScope (into {"service" service "region" region} credentialScope)
                   sslCommonName (or sslCommonName hostname) 
                   env #(case % "{region}" region "{service}" service "{dnsSuffix}" dnsSuffix)
                   hostname (str/replace hostname #"\{(?:region|service|dnsSuffix)}" env)
                   sslCommonName (str/replace sslCommonName #"\{(?:region|service|dnsSuffix)}" env)
-                  endpoint (str protocol "://" hostname)]]
+                  endpoint (str protocol "://" hostname)
+                  signature-version (some->
+                                      (or (some (set signatureVersions) ["v4" "s3v4" "v2" "s3"]) ; most recent first
+                                        (first signatureVersions))
+                                      keyword)]]
         [[service region] {:credential-scope (x/into {} (x/for [[k v] %] [(keyword k) v]) credentialScope)
-                           :ssl-common-name sslCommonName :endpoint endpoint}]))))
+                           :ssl-common-name sslCommonName :endpoint endpoint :signature-version signature-version}]))))
 
 (defn generate-files! []
   (let [endpoints (parse-endpoints! "resources/aws-partitions/partitions.json")]

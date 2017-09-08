@@ -2,10 +2,44 @@
   (:refer-clojure :exclude [cond])
   (:require [clojure.string :as str]
     [clojure.java.io :as io]
+    [clj-http.client :as http]
     [cheshire.core :as json]
-    [aws-sig4.auth :as auth]))
+    [aws-sig4.auth :as auth]
+    [aws-sig4.middleware :as auth-mw]))
 
-(def ^:dynamic *http-client*)
+
+(def ^:private ensure-aws-date (auth-mw/wrap-aws-date identity))
+
+(defn- sign-v4 [req credential-scope]
+  (let [{:keys [token] :as aws-opts} (into *credentials* credential-scope)
+        req (ensure-aws-date req)
+        auth (-> req
+               auth/canonical-request
+               (auth/string-to-sign aws-opts)
+               (auth/authorization aws-opts)
+               :authorization)]
+    (-> req
+      (assoc-in [:headers "Authorization"] auth)
+      (cond-> token (assoc-in [:headers "X-Amz-Security-Token"] token)))))
+
+(defn wrap-sign [client]
+  (fn [{:as req :keys [::credential-scope ::signature-version]}]
+    (let [req (dissoc req ::credential-scope ::signature-version)
+          req (case signature-version
+                :v4 (sign-v4 req credential-scope))]
+      (client req))))
+
+(defn sync-http-client [req coerce-resp]
+  (http/with-additional-middleware [wrap-sign]
+    (let [[tag v] (-> req
+                    (assoc :throw-exceptions false)
+                    http/request
+                    coerce-resp)]
+      (case tag
+        :result v
+        :exception (throw v)))))
+
+(def ^:dynamic *http-client* sync-http-client)
 (def ^:dynamic *region*)
 (def ^:dynamic ^{:doc "A map with keys :access-key, :secret-key and optionally :token"}
                *credentials*)
@@ -62,11 +96,4 @@
                     }))]
     {:access-key a :secret-key s}))
 
-(defn sign-v4 [req {:keys [token] :as aws-opts}]
-  (let [auth (-> req
-               auth/canonical-request
-               (auth/string-to-sign aws-opts)
-               (auth/authorization aws-opts)
-               :authorization)]
-    (cond-> (assoc-in req [:headers "Authorization"] auth)
-      token (assoc-in [:headers "X-Amz-Security-Token"] token))))
+

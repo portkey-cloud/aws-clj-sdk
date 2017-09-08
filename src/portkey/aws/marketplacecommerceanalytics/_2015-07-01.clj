@@ -8,6 +8,7 @@
     :ssl-common-name
     "marketplacecommerceanalytics.us-east-1.amazonaws.com",
     :endpoint
-    "https://marketplacecommerceanalytics.us-east-1.amazonaws.com"}})
+    "https://marketplacecommerceanalytics.us-east-1.amazonaws.com",
+    :signature-version :v4}})
 
 (comment TODO support "json")
