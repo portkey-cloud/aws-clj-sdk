@@ -6,7 +6,8 @@
     [cheshire.core :as json]
     [aws-sig4.auth :as auth]
     [aws-sig4.middleware :as auth-mw]
-    [clojure.spec.alpha :as spec]))
+    [clojure.spec.alpha :as spec]
+    [clojure.core.async :as async]))
 
 (def ^:dynamic *region* nil)
 (def ^:dynamic *credentials*
@@ -102,11 +103,11 @@
       (cond-> token (assoc-in [:headers "X-Amz-Security-Token"] token)))))
 
 (defn wrap-sign [client]
-  (fn [{:as req :keys [::credential-scope ::signature-version]}]
+  (fn [{:as req :keys [::credential-scope ::signature-version]} & args]
     (let [req (dissoc req ::credential-scope ::signature-version)
           req (case signature-version
                 :v4 (sign-v4 req credential-scope))]
-      (client req))))
+      (apply client req args))))
 
 (defn sync-http-client [req coerce-resp]
   (http/with-additional-middleware [wrap-sign]
@@ -117,6 +118,22 @@
       (case tag
         :result v
         :exception (throw v)))))
+
+(defn async-http-client
+  "When this function is bound as *http-client* then AWS functions returns
+   a core.async channel which will eventually receives either [:result r] or
+   [:exception ex]."
+  [req coerce-resp]
+  (let [chan (async/chan 1)]
+    (http/with-additional-middleware [wrap-sign]
+      (-> req
+        (assoc :throw-exceptions false :async? true)
+        (http/request
+          (fn [resp]
+            (async/>!! chan (coerce-resp resp)))
+          (fn [exception]
+            (async/>!! chan [:exception exception])))))
+    chan))
 
 (def ^:dynamic *http-client* sync-http-client)
 

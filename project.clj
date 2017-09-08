@@ -6,4 +6,5 @@
                  [org.sharetribe/aws-sig4 "0.1.3"]
                  [clj-http "3.7.0"]
                  [cheshire "5.7.1"]
-                 [net.cgrand/xforms "0.7.2"]])
+                 [net.cgrand/xforms "0.7.2"]
+                 [org.clojure/core.async "0.3.443"]])
