@@ -1,4 +1,4 @@
-# portkey-aws-clj-sdk
+# portkey/aws-clj-sdk
 
 A Clojure library for AWS.
 
