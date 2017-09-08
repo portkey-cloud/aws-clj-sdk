@@ -222,12 +222,6 @@
           "authtype" #{"none" "v4-unsigned-body"}
           "deprecated" boolean?}))
 
-(defn conform-or-throw [spec x]
-  (let [x' (spec/conform spec x)]
-    (if (spec/invalid? x')
-      (throw (ex-info (spec/explain-str spec x) {:spec spec :x x}))
-      x')))
-
 #_(str/replace uri #"\{(.*)}" (fn [[_ name]]))
 
 (defn gen-operation [ns {:as operation
@@ -240,54 +234,61 @@
                       (map (fn [{:strs [shape] {:strs [httpStatusCode]} "error"}]
                              [shape (keyword ns (aws/dashed shape))]))
                       errors)
-        response (gensym 'response)
-        input (gensym 'input)]
+        varname (symbol (aws/dashed name))
+        input-spec (some->> input-shape aws/dashed (keyword ns))
+        output-spec (some->> output-shape aws/dashed (keyword ns))
+        input (or (some-> input-shape aws/dashed symbol) '_)
+        default-arg (if input-spec (some #(when (spec/valid? input-spec %) %) [[] {}]) {})]
     (when input-shape
-      (conform-or-throw (strict-strs ; validat only what we knows how to map
-                         :req {"type" #{"structure"}
-                               "members" (spec/map-of string? 
-                                           (spec/or
-                                             :atomic
-                                             (strict-strs
-                                              :req {"shape" string?}
-                                              :opt {"location" #{"uri" "querystring" "header" #_#_"headers" "statusCode"}
-                                                    "locationName" string?
-                                                    "deprecated" boolean?})
-                                             :json-value
-                                             (strict-strs
-                                               :req {"shape" string?
-                                                   "location" #{"header"}
-                                                   "locationName" string?
-                                                   "jsonvalue" true?})))}
-                         :opt {"required" (spec/coll-of string?)
-                               "payload" string?
-                               "deprecated" boolean?}) (shapes input-shape)))
+      (aws/conform-or-throw
+        (strict-strs ; validate only what we knows how to map
+          :req {"type" #{"structure"}
+                "members" (spec/map-of string? 
+                            (spec/or
+                              :atomic
+                              (strict-strs
+                               :req {"shape" string?}
+                               :opt {"location" #{"uri" "querystring" "header" #_#_"headers" "statusCode"}
+                                     "locationName" string?
+                                     "deprecated" boolean?})
+                              :json-value
+                              (strict-strs
+                                :req {"shape" string?
+                                    "location" #{"header"}
+                                    "locationName" string?
+                                    "jsonvalue" true?})))}
+         :opt {"required" (spec/coll-of string?)
+               "payload" string?
+               "deprecated" boolean?})
+        (shapes input-shape)))
     `(do
-       (defn ~(symbol (aws/dashed name)) ; TODO add deprecated flag 
-         [input#]
-         (aws/-rest-json-call 
-           ~(symbol ns "endpoints") 
-           ~method ~requestUri input# ~(some->> input-shape aws/dashed (keyword ns))
-           {:headers ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
-                                     :when (= "header" (member "location"))]
-                                 [name [(member "locationName") (member "jsonvalue")]]))
-            :uri ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
-                                 :when (= "uri" (member "location"))]
-                             [(member "locationName") name]))
-            :querystring ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
-                                         :when (= "querystring" (member "location"))]
-                                     [(member "locationName") name]))
-            :payload ~(get-in shapes [input-shape "payload"])}
-           ~responseCode ~(some->> output-shape aws/dashed (keyword ns)) ~error-specs))
-       (spec/fdef ~(symbol (aws/dashed name))
-         ~@(when input-shape
-             [:args `(spec/tuple ~(keyword ns (aws/dashed input-shape)))])
-         ~@(when output-shape [:ret `(spec/and ~(keyword ns (aws/dashed output-shape)))])))))
+       (defn ~varname ; TODO add deprecated flag 
+         ~@(when default-arg `[([] (~varname ~default-arg))])
+         ([~input]
+           (aws/-rest-json-call 
+             ~(symbol ns "endpoints") 
+             ~method ~requestUri ~input ~input-spec
+             {:headers ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
+                                       :when (= "header" (member "location"))]
+                                   [name [(member "locationName") (member "jsonvalue")]]))
+              :uri ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
+                                   :when (= "uri" (member "location"))]
+                               [(member "locationName") name]))
+              :querystring ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
+                                           :when (= "querystring" (member "location"))]
+                                       [(member "locationName") name]))
+              :payload ~(get-in shapes [input-shape "payload"])}
+             ~responseCode ~output-spec ~error-specs)))
+       (spec/fdef ~varname
+         :args ~(if input-spec
+                  `(~(if default-arg `spec/? `spec/tuple) ~input-spec)
+                  `empty?)
+         :ret ~(if output-spec `(spec/and ~output-spec) `true?)))))
 
 (defn gen-api [ns-sym resource-name]
   (let [api (json/parse-stream (-> resource-name io/resource io/reader))]
     (case (get-in api ["metadata" "protocol"])
-      "rest-json" (for [[k gen] {"shapes" gen-shape-spec
+      "rest-json" (for [[k gen] {"shapes" (comp #(doto % eval) gen-shape-spec) ; eval to make specs available right away
                                  "operations" (fn [ns [_ op]] (gen-operation ns op (api "shapes")))}
                         desc (api k)]
                     (gen (name ns-sym) desc))

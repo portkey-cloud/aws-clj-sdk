@@ -159,6 +159,12 @@
     (assoc req :body (get body param))
     req))
 
+(defn conform-or-throw [spec x]
+  (let [x' (spec/conform spec x)]
+    (if (spec/invalid? x')
+      (throw (ex-info (spec/explain-str spec x) {:spec spec :x x}))
+      x')))
+
 (defn -rest-json-call [endpoints method uri input input-spec
                        {headers-params :headers uri-params :uri querystring-params :querystring payload :payload}
                        ok-code output-spec error-specs]
@@ -170,7 +176,7 @@
        :url (str endpoint uri)
        :headers {"content-type" "application/json"}
        :as :json-string-keys
-       :body (some-> input-spec (spec/unform  input))}
+       :body (some-> input-spec (conform-or-throw input))}
       (params-to-header headers-params)
       (params-to-uri uri-params)
       (params-to-querystring querystring-params)
