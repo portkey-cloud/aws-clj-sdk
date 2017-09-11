@@ -7,7 +7,8 @@
     [aws-sig4.auth :as auth]
     [aws-sig4.middleware :as auth-mw]
     [clojure.spec.alpha :as spec]
-    [clojure.core.async :as async]))
+    [clojure.core.async :as async]
+    [net.cgrand.xforms :as x]))
 
 (def ^:dynamic *region* nil)
 (def ^:dynamic *credentials*
@@ -173,8 +174,13 @@
 
 (defn- params-to-payload [{:as req :keys [body]} param]
   (if param
-    (assoc req :body (get body param))
+    (assoc req :body (base64-decode (get body param))) ; proof that conforming & transformation must be decoupled
     req))
+
+(defn- move-params [{:as req :keys [body url]} moves]
+  (assoc req :body 
+    (into (reduce dissoc body (vals moves))
+      (keep (fn [[to from]] (when-some [v (get body from)] [to v])) moves))))
 
 (defn conform-or-throw [spec x]
   (let [x' (spec/conform spec x)]
@@ -182,8 +188,30 @@
       (throw (ex-info (spec/explain-str spec x) {:spec spec :x x}))
       x')))
 
+(extend-protocol buddy.core.hash/IDigest
+  org.apache.http.entity.ByteArrayEntity
+  (-digest [input engine]
+    (buddy.core.hash/-digest (.getContent input) engine)))
+
+(defn- unhal
+  "Remove hypermedia affordances from a HAL payload."
+  [x]
+  (cond
+    (map? x)
+    (let [embeddeds (get x "_embedded")
+          x (dissoc x "_links" "_embedded")]
+      (x/into x (x/by-key (map unhal)) embeddeds))
+    (vector? x)
+    (into [] (map unhal) x)
+    :else x))
+
+(defn- coerce-body [content-type body]
+  (case content-type
+    "application/hal+json" (unhal body)
+    body))
+
 (defn -rest-json-call [endpoints method uri input input-spec
-                       {headers-params :headers uri-params :uri querystring-params :querystring payload :payload}
+                       {headers-params :headers uri-params :uri querystring-params :querystring payload :payload move :move}
                        ok-code output-spec error-specs]
   (let [{:keys [endpoint credential-scope signature-version]} (endpoints (region))]
     (->
@@ -191,25 +219,27 @@
        ::credential-scope credential-scope
        ::signature-version signature-version
        :url (str endpoint uri)
-       :headers {"content-type" "application/json"}
+       :headers {"content-type" "application/x-amz-json-1.0"}
        :as :json-string-keys
        :body (some-> input-spec (conform-or-throw input))}
       (params-to-header headers-params)
       (params-to-uri uri-params)
       (params-to-querystring querystring-params)
+      (move-params move)
       (params-to-payload payload)
-      (update :body #(some-> % json/generate-string))
+      (update :body #(cond-> % (coll? %) json/generate-string))
       (*http-client*
-        (fn [response]
-          (if (= ok-code (:status response))
+        (fn [{:as response {content-type "Content-Type"} :headers}]
+          (if (if ok-code (= ok-code (:status response)) (<= 200 (:status response) 299))
             [:result (if output-spec
-                       (spec/unform output-spec (:body response))
+                       (spec/unform output-spec (coerce-body content-type (:body response)))
                        true)]
-            [:exception
-             (if-some [[type spec] (find error-specs (get-in response [:headers "x-amzn-ErrorType"]))]
-               (let [m (spec/unform spec (json/parse-string (:body response)))]
-                 (ex-info (str type ": " (:message m)) m))
-               (ex-info "Unexpected response" {:response response}))]))))))
+            (if-some [[type spec] (find error-specs (get-in response [:headers "x-amzn-ErrorType"]))]
+              [:exception (let [m (spec/unform spec (json/parse-string (coerce-body content-type (:body response))))]
+                            (ex-info (str type ": " (:message m)) m))]
+              (case (:status response)
+                404 [:result nil]
+                [:exception (ex-info "Unexpected response" {:response response})]))))))))
 
 ;; spec utils
 (defn keep-keys [f]
@@ -228,9 +258,9 @@
     (keyword (namespace e) (dashed (name e)))
     :else e))
 
-(defmacro json-keys [& {:keys [req-un opt-un]}]
+(defmacro json-keys [& {:keys [req-un opt-un locations]}]
   (let [to-string (into {} (comp (mapcat flatten) (map (fn [k] [(keyword (dashed (name k))) (name k)]))) [req-un opt-un])
-        to-keys (into {} (map (fn [[k v]] [v k])) to-string)]
+        to-keys (-> {} (into (map (fn [[k v]] [v k])) to-string) (into (map (fn [[from to]] [from (keyword (dashed to))]))  locations))]
     `(spec/and
        (spec/keys :req-un ~(dash-keys req-un) :opt-un ~(dash-keys opt-un))
        (spec/conformer (keep-keys ~to-string) (keep-keys ~to-keys)))))

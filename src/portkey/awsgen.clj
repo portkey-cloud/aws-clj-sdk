@@ -80,15 +80,20 @@
 
 (defmethod shape-to-spec "structure" [ns [name {:strs [members required payload deprecated error exception]}]]
   (let [spec-names 
-        (into {} (for [[k {:strs [shape] :as v}] members]
-                   [k (keyword (if (not= shape k) (str ns "." (aws/dashed name)) ns) k)]))]
+        (into {} (for [[k {:strs [shape]}] members]
+                   [k (keyword (if (not= shape k) (str ns "." (aws/dashed name)) ns) k)]))
+        locations
+        (into {} (for [[k {:strs [locationName location]}] members
+                       :when (and locationName (nil? location))]
+                   [locationName k]))]
     `(do
        ~@(for [[k {:strs [shape] :as v}] members
                :when (not= shape k)]
            `(spec/def ~(keyword (str ns "." (aws/dashed name)) (aws/dashed k)) (spec/and ~(keyword ns (aws/dashed shape))))) ; spec/and is a hack to delay resolution
        (aws/json-keys :req-un ~(into [] (map spec-names) required)
          :opt-un ~(into []  (comp (remove (set required)) (map spec-names))
-                    (keys members))))))
+                    (keys members))
+         :locations ~locations))))
 
 (defmethod shape-type-spec "list" [_]
   `(strict-strs
@@ -102,7 +107,9 @@
            "sensitive" boolean?}))
 
 (defmethod shape-to-spec "list" [ns [name {{:strs [shape]} "member" :strs [max]}]]
-  `(spec/coll-of ~(keyword ns (aws/dashed shape)) :max-count ~max))
+  `(spec/and
+     (spec/coll-of ~(keyword ns (aws/dashed shape)) :max-count ~max)
+     (spec/conformer identity #(if (sequential? %) % [%])))) ; HAL ❤️
 
 (defmethod shape-type-spec "boolean" [_]
   `(strict-strs :req {"type" string?}
@@ -246,11 +253,21 @@
                 "members" (spec/map-of string? 
                             (spec/or
                               :atomic
+                              (spec/and
+                                (strict-strs
+                                  :req {"shape" string?}
+                                  :opt {"location" #{"uri" "querystring" "header" #_#_"headers" "statusCode"}
+                                        "locationName" string?
+                                        "deprecated" boolean?})
+                                #(= (contains? % "location") (contains? % "locationName")))
+                              :querystringmap
                               (strict-strs
-                               :req {"shape" string?}
-                               :opt {"location" #{"uri" "querystring" "header" #_#_"headers" "statusCode"}
-                                     "locationName" string?
-                                     "deprecated" boolean?})
+                                :req {"shape" string?}
+                                :opt {"location" #{"querystring"}})
+                              :move
+                              (strict-strs
+                                :req {"shape" string?}
+                                :opt {"locationName" string?})
                               :json-value
                               (strict-strs
                                 :req {"shape" string?
@@ -277,7 +294,11 @@
               :querystring ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
                                            :when (= "querystring" (member "location"))]
                                        [(member "locationName") name]))
-              :payload ~(get-in shapes [input-shape "payload"])}
+              :payload ~(get-in shapes [input-shape "payload"])
+              :move ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
+                                    :let [locationName (member "locationName")]
+                                    :when (when-not (member "location") locationName)]
+                                [locationName name]))}
              ~responseCode ~output-spec ~error-specs)))
        (spec/fdef ~varname
          :args ~(if input-spec
@@ -361,17 +382,3 @@
                     (run! prn (next form))
                     (prn form))))
               file)))))))
-
-#_(client/with-additional-middleware
-  [wrap-aws-auth aws-sig4/wrap-aws-date]
-  (binding [aws/*http-client*
-          (fn [req cont]
-            (cont (client/request (assoc req :throw-exceptions false))))]
-  (create-function {:function-name "fromrepl"
-       :handler "portkey.LambdaStub"
-       :code {:zip-file (.getBytes "random bytes")}
-       :role "arn:aws:iam::238568392557:role/portkey"
-       :runtime "java8"
-       :memory-size 1536
-       :timeout 30
-       :environment {:variables {}}})))
