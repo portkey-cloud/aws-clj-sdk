@@ -36,7 +36,7 @@
           (map str/trim)
           (drop-while #(not= profile (second (re-matches #"\[\s*(.+?)\s*]" %))))
           (drop 1)
-          (map #(when-some [[_ k v] (re-matches #"([^\[=][^=]*)=(.*)" %)] [k v]))
+          (map #(when-some [[_ k v] (re-matches #"([^\[=][^=]*)=(.*)" %)] [(.trim k) (.trim v)]))
           (take-while some?))
         (->> rdr java.io.BufferedReader. line-seq)))))
 
