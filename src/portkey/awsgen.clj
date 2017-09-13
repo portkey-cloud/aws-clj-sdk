@@ -96,15 +96,15 @@
          :locations ~locations))))
 
 (defmethod shape-type-spec "list" [_]
-  `(strict-strs
-     :req {"type" string?
-           "member" (strict-strs :req {"shape" string?}
-                      :opt {"locationName" string?})}
-     :opt {"max" int?
-           "min" int?
-           "deprecated" boolean?
-           "flattened" boolean?
-           "sensitive" boolean?}))
+  (strict-strs
+    :req {"type" string?
+          "member" (strict-strs :req {"shape" string?}
+                     :opt {"locationName" string?})}
+    :opt {"max" int?
+          "min" int?
+          "deprecated" boolean?
+          "flattened" boolean?
+          "sensitive" boolean?}))
 
 (defmethod shape-to-spec "list" [ns [name {{:strs [shape]} "member" :strs [max]}]]
   `(spec/and
@@ -112,8 +112,8 @@
      (spec/conformer identity #(if (sequential? %) % [%])))) ; HAL ❤️
 
 (defmethod shape-type-spec "boolean" [_]
-  `(strict-strs :req {"type" string?}
-     :opt {"box" boolean?}))
+  (strict-strs :req {"type" string?}
+    :opt {"box" boolean?}))
 
 (defmethod shape-to-spec "boolean" [ns [name _]] `boolean?)
 
@@ -132,13 +132,13 @@
   `(spec/map-of ~(keyword ns (aws/dashed (key "shape"))) ~(keyword ns (aws/dashed (value "shape")))))
 
 (defmethod shape-type-spec "string" [_]
-  `(strict-strs
-     :req {"type" string?}
-     :opt {"max" int?
-           "min" int?
-           "pattern" string?
-           "enum" (spec/coll-of string?)
-           "sensitive" boolean?}))
+  (strict-strs
+    :req {"type" string?}
+    :opt {"max" int?
+          "min" int?
+          "pattern" string?
+          "enum" (spec/coll-of string?)
+          "sensitive" boolean?}))
 
 (defmethod shape-to-spec "string" [ns [name {:strs [min max sensitive pattern enum]}]] 
   (if enum
@@ -152,53 +152,53 @@
        ~@(when pattern [`(fn [s#] (re-matches ~(re-pattern pattern) s#))]))))
 
 (defmethod shape-type-spec "blob" [_]
-  `(strict-strs
-     :req {"type" string?}
-     :opt {"streaming" boolean?
-           "max" int?
-           "min" int?
-           "sensitive" boolean?}))
+  (strict-strs
+    :req {"type" string?}
+    :opt {"streaming" boolean?
+          "max" int?
+          "min" int?
+          "sensitive" boolean?}))
 
 (defmethod shape-to-spec "blob" [ns [name {:strs [streaming sensitive]}]]
   `(spec/and bytes? (spec/conformer aws/base64-encode aws/base64-decode)))
 
 (defmethod shape-type-spec "long" [_]
-  `(strict-strs
-     :req {"type" string?}
-     :opt {"max" int?
-           "min" int?}))
+  (strict-strs
+    :req {"type" string?}
+    :opt {"max" int?
+          "min" int?}))
 
 (defmethod shape-to-spec "long" [ns _] `int?)
 
 (defmethod shape-type-spec "integer" [_]
-  `(strict-strs
-     :req {"type" string?}
-     :opt {"max" int?
-           "min" int?
-           "box" boolean?
-           "deprecated" boolean?}))
+  (strict-strs
+    :req {"type" string?}
+    :opt {"max" int?
+          "min" int?
+          "box" boolean?
+          "deprecated" boolean?}))
 
 (defmethod shape-to-spec "integer" [ns [name {:strs [min max]}]]
   `(spec/and int? ~@(when min [`#(<= ~min %)]) ~@(when max [`#(<= % ~max)])))
 
 (defmethod shape-type-spec "timestamp" [_]
-  `(strict-strs :req {"type" string?}
-     :opt {"timestampFormat" #{"iso8601"}})) ; TODO pattern
+  (strict-strs :req {"type" string?}
+    :opt {"timestampFormat" #{"iso8601"}})) ; TODO pattern
 
 (defmethod shape-to-spec "timestamp" [ns _] `inst?)
 
 (defmethod shape-type-spec "double" [_]
-  `(strict-strs :req {"type" string?}
-     :opt {"min" number?
-           "max" number?
-           "box" boolean?}))
+  (strict-strs :req {"type" string?}
+    :opt {"min" number?
+          "max" number?
+          "box" boolean?}))
 
 (defmethod shape-to-spec "double" [ns _] `double?)
 
 (defmethod shape-type-spec "float" [_]
-  `(strict-strs :req {"type" string?}
-     :opt {"min" number?
-           "max" number?}))
+  (strict-strs :req {"type" string?}
+    :opt {"min" number?
+          "max" number?}))
 
 (defmethod shape-to-spec "double" [ns _] `double?)
 
