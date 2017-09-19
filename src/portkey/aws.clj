@@ -5,7 +5,6 @@
     [clj-http.client :as http]
     [cheshire.core :as json]
     [aws-sig4.auth :as auth]
-    [aws-sig4.middleware :as auth-mw]
     [clojure.spec.alpha :as spec]
     [clojure.core.async :as async]
     [net.cgrand.xforms :as x]))
@@ -89,7 +88,28 @@
 (defn region []
   (or *region* (guess-region!)))
 
-(def ^:private ensure-aws-date (auth-mw/wrap-aws-date identity))
+(.format
+  (java.time.LocalDateTime/now (java.time.ZoneId/of "Z"))
+  (java.time.format.DateTimeFormatter/ofPattern
+   "yyyyMMdd'T'HHmmss'Z'"))
+
+(def x-amz-date-formatter
+  (java.time.format.DateTimeFormatter/ofPattern "yyyyMMdd'T'HHmmss'Z'"))
+
+(defn- ensure-aws-date
+  "Ensures that either a Date or X-Amz-Date header is present. If none found,
+   an X-Amz-Date header is added."
+  [request]
+  (let [headers (->> request
+                  :headers
+                  (map (fn [[n v]]
+                         [(str/lower-case n) v]))
+                  (into {}))]
+    (if (some #{"date" "x-amz-date"} (keys (:headers request)))
+      request
+      (assoc-in request
+        [:headers "X-Amz-Date"]
+        (.format (java.time.LocalDateTime/now (java.time.ZoneId/of "Z")) x-amz-date-formatter)))))
 
 (defn- sign-v4 [req credential-scope]
   (let [{:keys [token] :as aws-opts} (into (credentials) credential-scope)
