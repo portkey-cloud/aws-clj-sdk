@@ -4,10 +4,10 @@
     [clojure.java.io :as io]
     [clj-http.client :as http]
     [cheshire.core :as json]
-    [aws-sig4.auth :as auth]
     [clojure.spec.alpha :as spec]
     [clojure.core.async :as async]
-    [net.cgrand.xforms :as x]))
+    [net.cgrand.xforms :as x]
+    [portkey.awssig :as sig]))
 
 (def ^:dynamic *region* nil)
 (def ^:dynamic *credentials*
@@ -93,9 +93,6 @@
   (java.time.format.DateTimeFormatter/ofPattern
    "yyyyMMdd'T'HHmmss'Z'"))
 
-(def x-amz-date-formatter
-  (java.time.format.DateTimeFormatter/ofPattern "yyyyMMdd'T'HHmmss'Z'"))
-
 (defn- ensure-aws-date
   "Ensures that either a Date or X-Amz-Date header is present. If none found,
    an X-Amz-Date header is added."
@@ -109,18 +106,13 @@
       request
       (assoc-in request
         [:headers "X-Amz-Date"]
-        (.format (java.time.LocalDateTime/now (java.time.ZoneId/of "Z")) x-amz-date-formatter)))))
+        (.format (java.time.LocalDateTime/now (java.time.ZoneId/of "Z")) sig/x-amz-date-formatter)))))
 
 (defn- sign-v4 [req credential-scope]
-  (let [{:keys [token] :as aws-opts} (into (credentials) credential-scope)
-        req (ensure-aws-date req)
-        auth (-> req
-               auth/canonical-request
-               (auth/string-to-sign aws-opts)
-               (auth/authorization aws-opts)
-               :authorization)]
+  (let [{:keys [token] :as aws-opts} (into (credentials) credential-scope)]
     (-> req
-      (assoc-in [:headers "Authorization"] auth)
+      ensure-aws-date
+      (sig/sigv4 aws-opts)
       (cond-> token (assoc-in [:headers "X-Amz-Security-Token"] token)))))
 
 (defn wrap-sign [client]
@@ -208,10 +200,10 @@
       (throw (ex-info (spec/explain-str spec x) {:spec spec :x x}))
       x')))
 
-(extend-protocol buddy.core.hash/IDigest
-  org.apache.http.entity.ByteArrayEntity
-  (-digest [input engine]
-    (buddy.core.hash/-digest (.getContent input) engine)))
+#_(extend-protocol buddy.core.hash/IDigest
+   org.apache.http.entity.ByteArrayEntity
+   (-digest [input engine]
+     (buddy.core.hash/-digest (.getContent input) engine)))
 
 (defn- unhal
   "Remove hypermedia affordances from a HAL payload."
@@ -284,3 +276,16 @@
     `(spec/and
        (spec/keys :req-un ~(dash-keys req-un) :opt-un ~(dash-keys opt-un))
        (spec/conformer (keep-keys ~to-string) (keep-keys ~to-keys)))))
+
+(defmacro doc [docstring spec]
+  `(doc-impl ~docstring '~spec (delay (spec/spec ~spec))))
+
+(defn doc-impl [docstring form delayed-spec]
+  (reify spec/Spec
+    (conform* [_ x] (spec/conform* @delayed-spec x))
+    (unform* [_ y] (spec/unform* @delayed-spec y))
+    (explain* [_ path via in x] (spec/explain* @delayed-spec path via in x))
+    (gen* [_ overrides path rmap] (spec/gen* @delayed-spec overrides path rmap))
+    (with-gen* [_ gfn] (spec/with-gen* @delayed-spec gfn))
+    (describe* [_]
+      `(doc ~docstring ~(if (keyword? form) form (spec/describe* @delayed-spec))))))
