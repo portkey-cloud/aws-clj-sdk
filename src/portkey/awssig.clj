@@ -16,7 +16,7 @@
       (x/for [[k v] %
               :let [k (str/lower-case k)]
               v (if (coll? v) v [v])]
-        [k (trim-all v)])
+        [k (trim-all v)]) ; despite s3 documentation it's trim-all and not trim even for s3 
       (x/by-key
         (comp (interpose ",")
           (x/reduce rf/str))))
@@ -33,6 +33,9 @@
   (^java.io.InputStream stream [_]))
 
 (extend-protocol Streamable
+  nil
+  (stream [s]
+    (java.io.ByteArrayInputStream. (byte-array 0)))
   String
   (stream [s]
     (-> s (.getBytes "UTF-8") java.io.ByteArrayInputStream.))
@@ -62,40 +65,51 @@
     (doto (.init (javax.crypto.spec.SecretKeySpec. secret "HmacSHA256")))
     (.doFinal (.getBytes s "ASCII"))))
 
+(defn- normalize [^String path]
+  (-> path java.net.URI. .normalize .getPath))
+
 (defn sigv4 [{:keys [request-method uri headers body query-string] :as req}
-             {:keys [secret-key access-key region service]}]
-  (let [{:strs [date x-amz-date] :as canonical-headers} (canonical-headers headers)
-        [canonical-headers req] ; ensure host
-        (if (canonical-headers "host")
-          [canonical-headers req]
-          (let [host (:server-name req)]
-            [(assoc canonical-headers "host" host)
-             (assoc-in req [:headers "Host"] host)]))
-        [canonical-headers req] ; ensure date
-        (if (or (canonical-headers "date") (canonical-headers "x-amz-date"))
-          [canonical-headers req]
-          (let [date (.format (java.time.LocalDateTime/now (java.time.ZoneId/of "Z")) x-amz-date-formatter)]
-            [(assoc canonical-headers "x-amz-date" date)
-             (assoc-in req [:headers "X-Amz-Date"] date)]))
+             {:keys [secret-key access-key region service token payload]}]
+  (let [payload (or (when (= service "s3") payload) :signed)
+        content-hash (case payload
+                       :unsigned "UNSIGNED-PAYLOAD"
+                       :chunked (throw (ex-info "Unsupported chunked payload" {}))
+                       :signed (sha-256 body))
+        headers (cond-> headers token (assoc "X-Amz-Security-Token" token))
+        canonical-headers (cond-> (canonical-headers headers)
+                            (not= "s3" service) (dissoc "x-amz-security-token"))
+        extra-headers (cond-> {}
+                        (= "s3" service) (assoc "x-amz-content-sha256" content-hash)
+                        (not (canonical-headers "host"))
+                        (assoc "host" (:server-name req))
+                        (not (or (canonical-headers "date") (canonical-headers "x-amz-date")))
+                        (assoc "x-amz-date" (.format (java.time.LocalDateTime/now (java.time.ZoneId/of "Z")) x-amz-date-formatter)))
+        headers (into headers extra-headers)
+        {:strs [date x-amz-date] :as canonical-headers} (into canonical-headers extra-headers)
+        
         signed-headers (str/join ";" (keys canonical-headers))
         x-amz-date (or x-amz-date (->> date (.parse java.time.format.DateTimeFormatter/RFC_1123_DATE_TIME)
                                     (.format x-amz-date-formatter)))
         date (subs x-amz-date 0 8)
+
         canonical-request
-        (str request-method "\n"
-          (if (= uri "") "/" uri) "\n"
-            (->> (str/split (or query-string "") #"&")
-              (keep #(re-matches #"([^=]+)=?(.*)" %))
-              sort
-              (map (fn [[_ q v]] (str q "=" v)))
-              (str/join "&")) "\n"
-            (transduce
-              (x/for [[header value] %, s [header ":" value "\n"]] s)
-              rf/str
-              canonical-headers)
-            "\n" ; extra blank line
-            signed-headers "\n"
-            (sha-256 body))
+        (str (str/upper-case (name request-method)) "\n"
+          (cond
+            (= uri "") "/"
+            (= service "s3") uri
+            :else (normalize uri)) "\n"
+          (->> (str/split (or query-string "") #"&")
+            (keep #(re-matches #"([^=]+)=?(.*)" %))
+            sort
+            (map (fn [[_ q v]] (str q "=" v)))
+            (str/join "&")) "\n"
+          (transduce
+            (x/for [[header value] %, s [header ":" value "\n"]] s)
+            rf/str
+            canonical-headers)
+          "\n" ; extra blank line
+          signed-headers "\n"
+          content-hash)
         canonical-request-hash (sha-256 canonical-request)
         credential-scope (str date "/" region "/" service "/aws4_request")
         string-to-sign (str "AWS4-HMAC-SHA256\n" x-amz-date "\n" credential-scope "\n" canonical-request-hash)
@@ -108,6 +122,7 @@
           (hmac-sha-256 "aws4_request"))
         signature (hex-string (hmac-sha-256 signing-key string-to-sign))
         auth (str "AWS4-HMAC-SHA256 Credential=" access-key "/" credential-scope
-               ", SignedHeaders=" signed-headers ", Signature=" signature)]
-    (assoc-in req [:headers "Authorization"] auth)))
+               ", SignedHeaders=" signed-headers ", Signature=" signature)
+        headers (assoc headers "Authorization" auth)]
+    (assoc req :headers headers)))
 

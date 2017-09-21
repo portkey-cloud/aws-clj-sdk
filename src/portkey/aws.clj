@@ -88,38 +88,14 @@
 (defn region []
   (or *region* (guess-region!)))
 
-(.format
-  (java.time.LocalDateTime/now (java.time.ZoneId/of "Z"))
-  (java.time.format.DateTimeFormatter/ofPattern
-   "yyyyMMdd'T'HHmmss'Z'"))
-
-(defn- ensure-aws-date
-  "Ensures that either a Date or X-Amz-Date header is present. If none found,
-   an X-Amz-Date header is added."
-  [request]
-  (let [headers (->> request
-                  :headers
-                  (map (fn [[n v]]
-                         [(str/lower-case n) v]))
-                  (into {}))]
-    (if (some #{"date" "x-amz-date"} (keys (:headers request)))
-      request
-      (assoc-in request
-        [:headers "X-Amz-Date"]
-        (.format (java.time.LocalDateTime/now (java.time.ZoneId/of "Z")) sig/x-amz-date-formatter)))))
-
 (defn- sign-v4 [req credential-scope]
-  (let [{:keys [token] :as aws-opts} (into (credentials) credential-scope)]
-    (-> req
-      ensure-aws-date
-      (sig/sigv4 aws-opts)
-      (cond-> token (assoc-in [:headers "X-Amz-Security-Token"] token)))))
+  (sig/sigv4 req (into (credentials) credential-scope)))
 
 (defn wrap-sign [client]
   (fn [{:as req :keys [::credential-scope ::signature-version]} & args]
     (let [req (dissoc req ::credential-scope ::signature-version)
           req (case signature-version
-                :v4 (sign-v4 req credential-scope))]
+                (:v4 :s3v4) (sign-v4 req credential-scope))]
       (apply client req args))))
 
 (defn sync-http-client [req coerce-resp]
