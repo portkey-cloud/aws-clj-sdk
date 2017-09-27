@@ -150,14 +150,15 @@
                                                          {:url url :url-to-param uri-to-param :input body}))))))
     (assoc :body (reduce dissoc body (vals uri-to-param)))))
 
-(defn- params-to-querystring [{:as req :keys [body url]} querystring-to-param]
+(defn- params-to-querystring [{:as req :keys [body ^String url]} querystring-to-param]
   (-> req
     (assoc :url 
-      (apply str url "?"
-        (keep (fn [[qs name]]
-                (when-some [v (get body name)]
-                  (str (http/url-encode-illegal-characters qs) "=" (http/url-encode-illegal-characters v))))
-          querystring-to-param)))
+      (apply str url (if (neg? (.indexOf url "?")) "?" "&")
+        (interpose "&"
+          (keep (fn [[qs name]]
+                 (when-some [v (get body name)]
+                   (str (http/url-encode-illegal-characters qs) "=" (http/url-encode-illegal-characters v))))
+           querystring-to-param))))
     (assoc :body (reduce dissoc body (vals querystring-to-param)))))
 
 (defn- params-to-payload [{:as req :keys [body]} param]
