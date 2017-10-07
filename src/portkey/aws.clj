@@ -143,11 +143,11 @@
 
 (defn- params-to-uri [{:as req :keys [body url]} uri-to-param]
   (-> req
-    (assoc :url (str/replace url #"\{(.*)}" (fn [[_ name]]
-                                              (if-some [v (get body (uri-to-param name))]
-                                                (http/url-encode-illegal-characters v)
-                                                (throw (ex-info (str "Missing parameter " name)
-                                                         {:url url :url-to-param uri-to-param :input body}))))))
+    (assoc :url (str/replace url #"\{([^\}]*)}" (fn [[_ name]]
+                                                  (if-some [v (get body (uri-to-param name))]
+                                                    (http/url-encode-illegal-characters v)
+                                                    (throw (ex-info (str "Missing parameter " name)
+                                                                    {:url url :url-to-param uri-to-param :input body}))))))
     (assoc :body (reduce dissoc body (vals uri-to-param)))))
 
 (defn- params-to-querystring [{:as req :keys [body ^String url]} querystring-to-param]
