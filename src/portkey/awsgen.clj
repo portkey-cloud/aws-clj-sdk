@@ -199,14 +199,20 @@
           "max" number?
           "box" boolean?}))
 
-(defmethod shape-to-spec "double" [ns _] `double?)
+(defmethod shape-to-spec "double" [ns [_ {:strs [min max]}]]
+  `(spec/and double?
+             ~@(when min [`(fn [s#] (<= ~min s#))])
+             ~@(when max [`(fn [s#] (<= s# ~max))])))
 
 (defmethod shape-type-spec "float" [_]
   (strict-strs :req {"type" string?}
     :opt {"min" number?
           "max" number?}))
 
-(defmethod shape-to-spec "double" [ns _] `double?)
+(defmethod shape-to-spec "float" [ns [_ {:strs [min max]}]]
+  `(spec/and float?
+             ~@(when min [`(fn [s#] (<= ~min s#))])
+             ~@(when max [`(fn [s#] (<= s# ~max))])))
 
 (spec/def ::operation
   (strict-strs
