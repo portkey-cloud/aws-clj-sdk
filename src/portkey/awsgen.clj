@@ -171,7 +171,10 @@
     :opt {"max" int?
           "min" int?}))
 
-(defmethod shape-to-spec "long" [ns _] `int?)
+(defmethod shape-spec "long" [_ [_ {:strs [min max]}]]
+  `(spec/and int?
+             ~@(when min [`(fn [s#] (<= ~min s#))])
+             ~@(when max [`(fn [s#] (<= s# ~max))])))
 
 (defmethod shape-type-spec "integer" [_]
   (strict-strs
