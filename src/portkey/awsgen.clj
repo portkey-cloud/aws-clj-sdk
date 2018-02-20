@@ -128,8 +128,9 @@
           "flattened" boolean?
           "locationName" string?}))
 
-(defmethod shape-to-spec "map" [ns [name {:strs [key value sensitive]}]]
-  `(spec/map-of ~(keyword ns (aws/dashed (key "shape"))) ~(keyword ns (aws/dashed (value "shape")))))
+(defmethod shape-to-spec "map" [ns [name {:strs [key value sensitive min max]}]]
+  `(spec/map-of ~(keyword ns (aws/dashed (key "shape"))) ~(keyword ns (aws/dashed (value "shape")))
+                ~@(when min `[:min-count ~min]) ~@(when max `[:max-count ~max])))
 
 (defmethod shape-type-spec "string" [_]
   (strict-strs
