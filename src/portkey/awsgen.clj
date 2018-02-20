@@ -159,8 +159,11 @@
           "min" int?
           "sensitive" boolean?}))
 
-(defmethod shape-to-spec "blob" [ns [name {:strs [streaming sensitive]}]]
-  `(spec/and bytes? (spec/conformer aws/base64-encode aws/base64-decode)))
+(defmethod shape-to-spec "blob" [ns [name {:strs [min max streaming sensitive]}]]
+  `(spec/and bytes?
+             (spec/conformer aws/base64-encode aws/base64-decode)
+             ~@(when min [`(fn [s#] (<= ~min s#))])
+             ~@(when max [`(fn [s#] (<= s# ~max))])))
 
 (defmethod shape-type-spec "long" [_]
   (strict-strs
