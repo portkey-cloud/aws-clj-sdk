@@ -106,9 +106,9 @@
           "flattened" boolean?
           "sensitive" boolean?}))
 
-(defmethod shape-to-spec "list" [ns [name {{:strs [shape]} "member" :strs [max]}]]
+(defmethod shape-to-spec "list" [ns [name {{:strs [shape]} "member" :strs [min max]}]]
   `(spec/and
-     (spec/coll-of ~(keyword ns (aws/dashed shape)) :max-count ~max)
+     (spec/coll-of ~(keyword ns (aws/dashed shape)) ~@(when min `[:min-count ~min]) ~@(when max `[:max-count ~max]))
      (spec/conformer identity #(if (sequential? %) % [%])))) ; HAL ❤️
 
 (defmethod shape-type-spec "boolean" [_]
