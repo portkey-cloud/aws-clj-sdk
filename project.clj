@@ -6,4 +6,5 @@
                  [clj-http "3.7.0"]
                  [cheshire "5.7.1"]
                  [net.cgrand/xforms "0.7.2"]
-                 [org.clojure/core.async "0.3.443"]])
+                 [org.clojure/core.async "0.3.443"]
+                 [org.jsoup/jsoup "1.10.3"]])
