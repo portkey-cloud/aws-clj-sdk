@@ -128,8 +128,9 @@
           "flattened" boolean?
           "locationName" string?}))
 
-(defmethod shape-to-spec "map" [ns [name {:strs [key value sensitive]}]]
-  `(spec/map-of ~(keyword ns (aws/dashed (key "shape"))) ~(keyword ns (aws/dashed (value "shape")))))
+(defmethod shape-to-spec "map" [ns [name {:strs [key value sensitive min max]}]]
+  `(spec/map-of ~(keyword ns (aws/dashed (key "shape"))) ~(keyword ns (aws/dashed (value "shape")))
+                ~@(when min `[:min-count ~min]) ~@(when max `[:max-count ~max])))
 
 (defmethod shape-type-spec "string" [_]
   (strict-strs
@@ -159,8 +160,11 @@
           "min" int?
           "sensitive" boolean?}))
 
-(defmethod shape-to-spec "blob" [ns [name {:strs [streaming sensitive]}]]
-  `(spec/and bytes? (spec/conformer aws/base64-encode aws/base64-decode)))
+(defmethod shape-to-spec "blob" [ns [name {:strs [min max streaming sensitive]}]]
+  `(spec/and bytes?
+             (spec/conformer aws/base64-encode aws/base64-decode)
+             ~@(when min [`(fn [s#] (<= ~min s#))])
+             ~@(when max [`(fn [s#] (<= s# ~max))])))
 
 (defmethod shape-type-spec "long" [_]
   (strict-strs
@@ -168,7 +172,10 @@
     :opt {"max" int?
           "min" int?}))
 
-(defmethod shape-to-spec "long" [ns _] `int?)
+(defmethod shape-spec "long" [_ [_ {:strs [min max]}]]
+  `(spec/and int?
+             ~@(when min [`(fn [s#] (<= ~min s#))])
+             ~@(when max [`(fn [s#] (<= s# ~max))])))
 
 (defmethod shape-type-spec "integer" [_]
   (strict-strs
@@ -193,14 +200,20 @@
           "max" number?
           "box" boolean?}))
 
-(defmethod shape-to-spec "double" [ns _] `double?)
+(defmethod shape-to-spec "double" [ns [_ {:strs [min max]}]]
+  `(spec/double-in :infinite? false :NaN? false
+                   ~@(when min [:min min])
+                   ~@(when max [:max max])))
 
 (defmethod shape-type-spec "float" [_]
   (strict-strs :req {"type" string?}
     :opt {"min" number?
           "max" number?}))
 
-(defmethod shape-to-spec "double" [ns _] `double?)
+(defmethod shape-to-spec "float" [ns [_ {:strs [min max]}]]
+  `(spec/and float?
+             ~@(when min [`(fn [s#] (<= ~min s#))])
+             ~@(when max [`(fn [s#] (<= s# ~max))])))
 
 (spec/def ::operation
   (strict-strs
