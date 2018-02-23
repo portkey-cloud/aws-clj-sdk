@@ -201,9 +201,9 @@
           "box" boolean?}))
 
 (defmethod shape-to-spec "double" [ns [_ {:strs [min max]}]]
-  `(spec/and double?
-             ~@(when min [`(fn [s#] (<= ~min s#))])
-             ~@(when max [`(fn [s#] (<= s# ~max))])))
+  `(spec/double-in :infinite? false :NaN? false
+                   ~@(when min [:min min])
+                   ~@(when max [:max max])))
 
 (defmethod shape-type-spec "float" [_]
   (strict-strs :req {"type" string?}
