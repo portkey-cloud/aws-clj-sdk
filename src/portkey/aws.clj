@@ -7,7 +7,8 @@
     [clojure.spec.alpha :as spec]
     [clojure.core.async :as async]
     [net.cgrand.xforms :as x]
-    [portkey.awssig :as sig]))
+    [portkey.awssig :as sig]
+    [ring.util.codec :as codec]))
 
 (def ^:dynamic *region* nil)
 (def ^:dynamic *credentials*
@@ -753,7 +754,8 @@
                                "SignatureMethod"   "NOT DONE"}}}
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Signing a request v2 :
+;; Signing a request v2
+;; https://docs.aws.amazon.com/AmazonSimpleDB/latest/DeveloperGuide/HMACAuth.html#REST_RESTAuth
 
 ;; utils
 (def x-amz-date-formatter
@@ -765,13 +767,28 @@
       (doto (.init (javax.crypto.spec.SecretKeySpec. secret "HmacSHA256")))
       (.doFinal (.getBytes s "UTF8"))))
 
+(defn- utf8-natural-byte-cmp [^String a ^String b]
+  ; > Sort the UTF-8 query string components by parameter name with natural byte ordering.
+  ; I wonder if it really matters for the input we deal with
+  (let [sa a sb b
+        a (.getBytes a "UTF8")
+        b (.getBytes b "UTF8")
+        n (min (alength a) (alength b))]
+    (loop [i 0]
+      (if (< i n)
+        (let [r (- (aget a i) (aget b i))]
+          (if (zero? r)
+            (recur (inc i))
+            r))
+        (- (alength a) (alength b))))))
+
 ;; step 1
 (defn create-canonicalized-query-string-v2
   "Create a canonicalized query-string for building the signature."
   [& {:keys [query-params]}]
   (x/str
     (comp
-      (x/sort)
+      (x/sort-by key utf8-natural-byte-cmp)
       (x/for [[k v] %]
              (str (codec/url-encode k) "=" (codec/url-encode v)))
       (interpose "&"))
