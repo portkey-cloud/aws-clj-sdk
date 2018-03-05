@@ -7,14 +7,25 @@ It's not a wrapper around `aws-java-sdk`, it's a pure Clojure, spec-based implem
 ## Status
 
 `aws-clj-sdk` can now be used for the following services (rest-json protocol)
-“AWS Batch” “AWS Greengrass” “AWS IoT” “AWS IoT Data Plane”
-“AWS Lambda” “AWS X-Ray” “Amazon API Gateway”
-“Amazon CloudDirectory” “Amazon CloudSearch Domain”
-“Amazon Cognito Sync” “Amazon Elastic File System”
-“Amazon Elastic Transcoder” “Amazon Elasticsearch Service”
-“Amazon Glacier” “Amazon Lex Model Building Service”
-“Amazon Lex Runtime Service” “Amazon Pinpoint” “Amazon Polly”
-“Amazon WorkDocs
+* AWS Batch
+* AWS Greengrass
+* AWS IoT
+* AWS IoT Data Plane
+* AWS Lambda
+* AWS X-Ray
+* Amazon API Gateway
+* Amazon CloudDirectory
+* Amazon CloudSearch Domain
+* Amazon Cognito Sync
+* Amazon Elastic File System
+* Amazon Elastic Transcoder
+* Amazon Elasticsearch Service
+* Amazon Glacier
+* Amazon Lex Model Building Service
+* Amazon Lex Runtime Service
+* Amazon Pinpoint
+* Amazon Polly
+* Amazon WorkDocs
 
 ## Usage
 
