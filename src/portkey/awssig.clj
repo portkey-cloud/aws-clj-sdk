@@ -3,7 +3,7 @@
   (:require [clojure.string :as str]
     [net.cgrand.xforms :as x]
     [net.cgrand.xforms.rfs :as rf]
-    [ring.util.codec :as codec]))
+    [clj-http.util :as codec]))
 
 (def x-amz-date-formatter
   (java.time.format.DateTimeFormatter/ofPattern "yyyyMMdd'T'HHmmss'Z'"))
@@ -141,6 +141,8 @@
          (doto (.init (javax.crypto.spec.SecretKeySpec. secret "HmacSHA256")))
          (.doFinal (.getBytes s "UTF8"))))
 
+(defn- base64-encode [bytes] (.encodeToString (java.util.Base64/getEncoder) bytes))
+
 (defn- utf8-natural-byte-cmp
    "Sort the UTF-8 query string components by parameter name with natural byte ordering.
    I wonder if it really matters for the input we deal with"
@@ -171,8 +173,7 @@
 (defn- create-string-to-sign-v2
    "Step 2 : Gather request information before signing."
    [verb host uri qs]
-   (->> [verb "\n" host "\n" uri "\n" qs]
-        (apply str)))
+   (str verb "\n" host "\n" uri "\n" qs))
 
 (defn- create-base-64-hmac-signature
    "Step 3 : Sign the string with hmac-signature and base-encode-64 it."
@@ -183,18 +184,21 @@
        base64-encode))
 
 (defn sigv2
-    [{:keys [request-method uri headers body query-string server-name] :as req}
-     {:keys [secret-key access-key region service token payload]}]
-    (let [qp
-      (-> (if (= "GET" request-method) query-string body)
-          (assoc "AWSAccessKeyId" access-key
-                 "SignatureVersion" "2"
-                 "SignatureMethod" "HmacSHA256"
-                 "Timestamp" (.format (java.time.LocalDateTime/now (java.time.ZoneId/of "Z")) x-amz-date-formatter-sign-2)
-                 ;; @todo: change that hardcoded version
-                 "Version" "2009-04-15"))
-      (->> qp
-           (create-canonicalized-query-string-v2 :query-params)
-           (create-string-to-sign-v2 request-method server-name uri)
-           (create-base-64-hmac-signature secret-key)
-           (assoc qp "Signature"))]))
+    [{:keys [request-method uri form-params query-string server-name] :as req}
+     {:keys [secret-key access-key region service token payload] :as o}]
+    (let [qp (-> (if (= "GET" request-method) query-string form-params)
+                 (assoc "AWSAccessKeyId" access-key
+                        "SignatureVersion" "2"
+                        "SignatureMethod" "HmacSHA256"
+                        "Timestamp" (.format (java.time.LocalDateTime/now (java.time.ZoneId/of "Z")) x-amz-date-formatter-sign-2)
+                     ;; @todo: change that hardcoded version
+                        "Version" "2009-04-15"))
+          body (->> qp
+                    (create-canonicalized-query-string-v2 :query-params)
+                    (create-string-to-sign-v2 request-method server-name uri)
+                    (create-base-64-hmac-signature secret-key)
+                    (assoc qp "Signature")
+                    (update req
+                            (if (= "GET" request-method) :query-params :form-params)
+                            #(conj %1 %2)))]
+      (update body :request-method #(keyword (clojure.string/lower-case %)))))

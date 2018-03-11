@@ -103,7 +103,33 @@
       (apply client req args))))
 
 (defn sync-http-client [req coerce-resp]
-  (http/with-additional-middleware [wrap-sign]
+  (http/with-middleware
+    [clj-http.client/wrap-request-timing
+     clj-http.client/wrap-async-pooling
+     clj-http.headers/wrap-header-map
+     clj-http.client/wrap-query-params
+     clj-http.client/wrap-basic-auth
+     clj-http.client/wrap-oauth
+     clj-http.client/wrap-user-info
+     clj-http.client/wrap-url
+     clj-http.client/wrap-decompression
+     clj-http.client/wrap-input-coercion
+     ;; put this before output-coercion, so additional charset
+     ;; headers can be used if desired
+     clj-http.client/wrap-additional-header-parsing
+     clj-http.client/wrap-output-coercion
+     clj-http.client/wrap-exceptions
+     clj-http.client/wrap-accept
+     clj-http.client/wrap-accept-encoding
+     clj-http.client/wrap-content-type
+     clj-http.client/wrap-form-params
+     wrap-sign
+     clj-http.client/wrap-url
+     clj-http.client/wrap-nested-params
+     clj-http.client/wrap-method
+     clj-http.cookies/wrap-cookies
+     clj-http.links/wrap-links
+     clj-http.client/wrap-unknown-host]
     (let [[tag v] (-> req
                     (assoc :throw-exceptions false)
                     http/request
@@ -175,6 +201,17 @@
     (into (reduce dissoc body (vals moves))
       (keep (fn [[to from]] (when-some [v (get body from)] [to v])) moves))))
 
+(defn- body-to-formparams [{:as req :keys [method body]}]
+  (if (= method "POST")
+    (assoc req :form-params body)
+    req))
+
+(defn- body-to-querystring [{:as req :keys [method body]}]
+  (if (= method "GET")
+    (-> (assoc req :query-params body)
+        (dissoc :body))
+    req))
+
 (defn conform-or-throw [spec x]
   (let [x' (spec/conform spec x)]
     (if (spec/invalid? x')
@@ -226,6 +263,37 @@
           (if (if ok-code (= ok-code (:status response)) (<= 200 (:status response) 299))
             [:result (if output-spec
                        (spec/unform output-spec (coerce-body content-type (:body response)))
+                       true)]
+            (if-some [[type spec] (find error-specs (get-in response [:headers "x-amzn-ErrorType"]))]
+              [:exception (let [m (spec/unform spec (json/parse-string (coerce-body content-type (:body response))))]
+                            (ex-info (str type ": " (:message m)) m))]
+              (case (:status response)
+                404 [:result nil]
+                [:exception (ex-info "Unexpected response" {:response response})]))))))))
+
+(defn -query-call [endpoints method uri input input-spec operationName
+                   {move :move}
+                   ok-code output-spec error-specs]
+  (let [{:keys [endpoint credential-scope signature-version]} (endpoints (region))]
+    (->
+      {:method             method
+       ::credential-scope  credential-scope
+       ::signature-version signature-version
+       :url                (str endpoint uri)
+       :headers            {"content-type" "application/x-www-form-urlencoded"}
+       :as                 :x-www-form-urlencoded
+       :body               (some-> input-spec (conform-or-throw input))}
+      (update :body assoc "Action" operationName)
+      (body-to-formparams)
+      (body-to-querystring)
+      (dissoc :body)
+      ;; @todo : figure out why we need this one (just in few case on all protocol)
+      #_(move-params move)
+      (*http-client*
+        (fn [{:as response {content-type "Content-Type"} :headers}]
+          (if (if ok-code (= ok-code (:status response)) (<= 200 (:status response) 299))
+            [:result (if output-spec
+                       (:body response)
                        true)]
             (if-some [[type spec] (find error-specs (get-in response [:headers "x-amzn-ErrorType"]))]
               [:exception (let [m (spec/unform spec (json/parse-string (coerce-body content-type (:body response))))]
