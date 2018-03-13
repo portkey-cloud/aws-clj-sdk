@@ -7,7 +7,8 @@
     [portkey.aws :as aws]
     [clj-http.client :as http]
     [clojure.string :as str]
-    [clojure.pprint]))
+    [clojure.pprint]
+    [clojure.java.classpath :as cp]))
 
 #_ (def all-apis 
      (->> (java.io.File. "resources/aws-sdk-core/apis/")
@@ -348,7 +349,24 @@
                            :ssl-common-name sslCommonName :endpoint endpoint :signature-version signature-version}]))))
 
 (defn generate-files! []
-  (let [endpoints (parse-endpoints! "resources/aws-partitions/partitions.json")]
+  (let [endpoints (parse-endpoints! "resources/aws-partitions/partitions.json")
+        ;; How to draw an owl:
+        ;; 1) Make some circles
+        [[_ jar-path]] (re-seq #"jar:file:([^!]*)" (.toExternalForm (io/resource "META-INF/maven/com.amazonaws/aws-java-sdk-models/pom.properties")))
+        jar-file (java.util.jar.JarFile. jar-path)
+        model-jar-entries  (->> jar-file
+                                (.entries)
+                                (enumeration-seq)
+                                (filter #(and (.startsWith (.getName %) "models/")
+                                              (.endsWith (.getName %) "model.json")
+                                              (not (.isDirectory %)))))
+        model-regex #"^models\/(?<api>.+)-(?<version>\d{4}-\d{2}-\d{2})-model\.json"]
+    ;; Draw rest of the owl
+    (doseq [entry model-jar-entries
+            :let [[_ api version] (re-matches model-regex (.getName entry))]
+            :when api]
+      ;; TODO: Owl here
+      )
     (->> (java.io.File. "resources/aws-sdk-core/apis/")
       file-seq
       (into []
