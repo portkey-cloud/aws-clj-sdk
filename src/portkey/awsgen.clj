@@ -362,7 +362,7 @@
                                               (.endsWith (.getName %) "model.json")
                                               (not (.isDirectory %)))))
         model-regex #"^models\/(?<api>.+)-(?<version>\d{4}-\d{2}-\d{2})-model\.json"]
-    (doseq [entry (->> model-jar-entries)
+    (doseq [entry model-jar-entries
             :let [[_ api version] (re-matches model-regex (.getName entry))]
             :when api
             :let [apifile (str/replace api #"[-.]" "_")
