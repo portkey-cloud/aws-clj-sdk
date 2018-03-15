@@ -307,8 +307,8 @@
                   `empty?)
          :ret ~(if output-spec `(spec/and ~output-spec) `true?)))))
 
-(defn gen-api [ns-sym resource-name]
-  (let [api (json/parse-stream (-> resource-name io/resource io/reader))]
+(defn gen-api [ns-sym resource]
+  (let [api (json/parse-stream (io/reader resource))]
     (case (get-in api ["metadata" "protocol"])
       "rest-json" (for [[k gen] {"shapes" (comp #(doto % eval) gen-shape-spec) ; eval to make specs available right away
                                  "operations" (fn [ns [_ op]] (gen-operation ns op (api "shapes")))}
@@ -350,8 +350,6 @@
 
 (defn generate-files! []
   (let [endpoints (parse-endpoints! "resources/aws-partitions/partitions.json")
-        ;; How to draw an owl:
-        ;; 1) Make some circles
         [[_ jar-path]] (re-seq #"jar:file:([^!]*)" (.toExternalForm (io/resource "META-INF/maven/com.amazonaws/aws-java-sdk-models/pom.properties")))
         jar-file (java.util.jar.JarFile. jar-path)
         model-jar-entries  (->> jar-file
@@ -361,42 +359,23 @@
                                               (.endsWith (.getName %) "model.json")
                                               (not (.isDirectory %)))))
         model-regex #"^models\/(?<api>.+)-(?<version>\d{4}-\d{2}-\d{2})-model\.json"]
-    ;; Draw rest of the owl
-    (doseq [entry model-jar-entries
+    (doseq [entry (take 1 model-jar-entries) ;; TODO remove guard when shapes of the owl conform with spec
             :let [[_ api version] (re-matches model-regex (.getName entry))]
-            :when api]
-      ;; TODO: Owl here
-      )
-    (->> (java.io.File. "resources/aws-sdk-core/apis/")
-      file-seq
-      (into []
-        (comp
-          (filter #(= "api-2.json" (.getName ^java.io.File %)))
-          (x/by-key (fn [^java.io.File f] (-> f .getParentFile .getParentFile .getName))
-            (comp (x/for [^java.io.File f %]
-                    [(-> f .getParentFile .getName) (.getPath f)])
-              (x/into (sorted-map))))
-          (x/for [[api versions] %
-                  :let [apifile (str/replace api #"[-.]" "_")
-                        apins (str/replace api #"[.]" "-")
-                        [latest f] (first (rseq versions))]
-                  [version json] (cons [nil f] versions)
-                  :let [_ (prn 'generating api (or version 'LATEST))
-                        [_ json] (re-matches #"resources/(.*)" json)
-                        [file ns]
-                        (if version
-                          [(java.io.File. (str "src/portkey/aws/" apifile "/_" version ".clj"))
-                           (symbol (str "portkey.aws." apins ".-" version))]
-                          [(java.io.File. (str "src/portkey/aws/" apifile ".clj"))
-                           (symbol (str "portkey.aws." apins))])]]
-            (with-open [w (io/writer (doto file (-> .getParentFile .mkdirs)))]
-              (binding [*out* w]
-                (prn (list 'ns ns '(:require [portkey.aws])))
-                (newline)
-                (clojure.pprint/pprint (list 'def 'endpoints (list 'quote (get endpoints apins))))
-                (doseq [form (gen-api ns json)]
-                  (newline)
-                  (if (and (seq? form) (= 'do (first form)))
-                    (run! prn (next form))
-                    (prn form))))
-              file)))))))
+            :when api
+            :let [apifile (str/replace api #"[-.]" "_")
+                  apins (str/replace api #"[.]" "-")
+                  file (io/file (str "src/portkey/aws/" apifile "/_" version ".clj"))
+                  ns (symbol (str "portkey.aws." apins ".-" version))]]
+      (prn 'generating api version)
+      (with-open [w (io/writer (doto file (-> .getParentFile .mkdirs)))
+                  json (.getInputStream jar-file entry)]
+        (binding [*out* w]
+          (prn (list 'ns ns '(:require [portkey.aws])))
+          (newline)
+          (clojure.pprint/pprint (list 'def 'endpoints (list 'quote (get endpoints apins))))
+          (doseq [form (gen-api ns json)]
+            (newline)
+            (if (and (seq? form) (= 'do (first form)))
+              (run! prn (next form))
+              (prn form))))
+        file))))
