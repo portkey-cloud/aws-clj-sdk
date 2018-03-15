@@ -226,6 +226,7 @@
                               :req {"httpStatusCode" int?}
                               :opt {"code" string?, "senderFault" boolean?})}))
           "documentationUrl" string? ; TODO
+          "documentation" string?
           "alias" string?
           "authtype" #{"none" "v4-unsigned-body"}
           "deprecated" boolean?}))
@@ -259,7 +260,8 @@
                                   :req {"shape" string?}
                                   :opt {"location" #{"uri" "querystring" "header" #_#_"headers" "statusCode"}
                                         "locationName" string?
-                                        "deprecated" boolean?})
+                                        "deprecated" boolean?
+                                        "documentation" string?})
                                 #(= (contains? % "location") (contains? % "locationName")))
                               :querystringmap
                               (strict-strs
@@ -277,7 +279,8 @@
                                     "jsonvalue" true?})))}
          :opt {"required" (spec/coll-of string?)
                "payload" string?
-               "deprecated" boolean?})
+               "deprecated" boolean?
+               "documentation" string?})
         (shapes input-shape)))
     `(do
        (defn ~varname ; TODO add deprecated flag 
@@ -359,7 +362,7 @@
                                               (.endsWith (.getName %) "model.json")
                                               (not (.isDirectory %)))))
         model-regex #"^models\/(?<api>.+)-(?<version>\d{4}-\d{2}-\d{2})-model\.json"]
-    (doseq [entry (take 1 model-jar-entries) ;; TODO remove guard when shapes of the owl conform with spec
+    (doseq [entry (->> model-jar-entries)
             :let [[_ api version] (re-matches model-regex (.getName entry))]
             :when api
             :let [apifile (str/replace api #"[-.]" "_")
