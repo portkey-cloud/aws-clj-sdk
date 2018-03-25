@@ -184,7 +184,7 @@
        base64-encode))
 
 (defn sigv2
-    [{:keys [request-method uri form-params query-string server-name] :as req}
+    [{:keys [request-method uri form-params query-string server-name version] :as req}
      {:keys [secret-key access-key region service token payload] :as o}]
     (let [qp (-> (if (= "GET" request-method) query-string form-params)
                  (assoc "AWSAccessKeyId" access-key
@@ -192,7 +192,7 @@
                         "SignatureMethod" "HmacSHA256"
                         "Timestamp" (.format (java.time.LocalDateTime/now (java.time.ZoneId/of "Z")) x-amz-date-formatter-sign-2)
                      ;; @todo: change that hardcoded version
-                        "Version" "2009-04-15"))
+                        "Version" (if (string? version) version "LATEST")))
           body (->> qp
                     (create-canonicalized-query-string-v2 :query-params)
                     (create-string-to-sign-v2 request-method server-name uri)

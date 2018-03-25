@@ -320,7 +320,8 @@
                             {input-shape "shape"}                    "input"
                             {output-shape "shape"}                   "output"
                             {:strs [method requestUri responseCode]} "http"}
-                           shapes]
+                           shapes
+                           version]
   (let [error-specs (into {}
                           (map (fn [{:strs [shape] {:strs [httpStatusCode]} "error"}]
                                  [shape (keyword ns (aws/dashed shape))]))
@@ -368,7 +369,7 @@
          ([~input]
            (aws/-query-call
              ~(symbol ns "endpoints")
-             ~method ~requestUri ~input ~input-spec ~name
+             ~method ~requestUri ~input ~input-spec ~name ~version
              {:move        ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
                                            :let [locationName (member "locationName")]
                                            :when (when-not (member "location") locationName)]
@@ -381,7 +382,7 @@
                   :ret ~(if output-spec `(spec/and ~output-spec) `true?)))))
 
 
-(defn gen-api [ns-sym resource-name]
+(defn gen-api [ns-sym resource-name version]
   (let [api (json/parse-stream (-> resource-name io/resource io/reader))]
     (case (get-in api ["metadata" "protocol"])
       "rest-json" (for [[k gen] {"shapes" (comp #(doto % eval) gen-shape-spec) ; eval to make specs available right away
@@ -389,7 +390,8 @@
                         desc (api k)]
                     (gen (name ns-sym) desc))
       "query" (for [[k gen] {"shapes"     (comp #(doto % eval) gen-shape-spec) ; eval to make specs available right away
-                             "operations" (fn [ns [_ op]] (gen-operation-query ns op (api "shapes")))}
+                             "operations" (fn [ns [_ op]]
+                                            (gen-operation-query ns op (api "shapes") version))}
                     desc (api k)]
                 (gen (name ns-sym) desc))
       (do
@@ -455,7 +457,7 @@
                 (prn (list 'ns ns '(:require [portkey.aws])))
                 (newline)
                 (clojure.pprint/pprint (list 'def 'endpoints (list 'quote (get endpoints apins))))
-                (doseq [form (gen-api ns json)]
+                (doseq [form (gen-api ns json (or version 'LATEST))]
                   (newline)
                   (if (and (seq? form) (= 'do (first form)))
                     (run! prn (next form))

@@ -271,18 +271,19 @@
                 404 [:result nil]
                 [:exception (ex-info "Unexpected response" {:response response})]))))))))
 
-(defn -query-call [endpoints method uri input input-spec operationName
+(defn -query-call [endpoints method uri input input-spec operationName version
                    {move :move}
                    ok-code output-spec error-specs]
   (let [{:keys [endpoint credential-scope signature-version]} (endpoints (region))]
     (->
-      {:method             method
-       ::credential-scope  credential-scope
-       ::signature-version signature-version
-       :url                (str endpoint uri)
-       :headers            {"content-type" "application/x-www-form-urlencoded"}
-       :as                 :x-www-form-urlencoded
-       :body               (some-> input-spec (conform-or-throw input))}
+     {:method             method
+      :version            version
+      ::credential-scope  credential-scope
+      ::signature-version signature-version
+      :url                (str endpoint uri)
+      :headers            {"content-type" "application/x-www-form-urlencoded"}
+      :as                 :x-www-form-urlencoded
+      :body               (some-> input-spec (conform-or-throw input))}
       (update :body assoc "Action" operationName)
       (body-to-formparams)
       (body-to-querystring)
