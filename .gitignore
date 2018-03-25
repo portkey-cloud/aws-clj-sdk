@@ -13,3 +13,5 @@ pom.xml.asc
 .lein-plugins/
 .lein-failures
 .nrepl-port
+/.idea/
+/aws-clj-sdk.iml

@@ -1,4 +1,4 @@
-(ns portkey.awsgen-test
+  (ns portkey.awsgen-test
   (:require [clojure.test :refer :all]
             [portkey.awsgen :as gen]
             [clojure.spec.alpha :as spec]

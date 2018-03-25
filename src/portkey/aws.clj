@@ -57,7 +57,7 @@
                      (parse-profile file profile)]
                (some? aws_access_key_id)
                [aws_access_key_id aws_secret_access_key]
-    
+
                #_(TODO
                    curl "169.254.170.2$AWS_CONTAINER_CREDENTIALS_RELATIVE_URI"
                    {
@@ -88,6 +88,9 @@
 (defn region []
   (or *region* (guess-region!)))
 
+(defn- sign-v2 [req credential-scope]
+   (sig/sigv2 req (into (credentials) credential-scope)))
+
 (defn- sign-v4 [req credential-scope]
   (sig/sigv4 req (into (credentials) credential-scope)))
 
@@ -95,11 +98,38 @@
   (fn [{:as req :keys [::credential-scope ::signature-version]} & args]
     (let [req (dissoc req ::credential-scope ::signature-version)
           req (case signature-version
-                (:v4 :s3v4) (sign-v4 req credential-scope))]
+                (:v4 :s3v4) (sign-v4 req credential-scope)
+                (:v2) (sign-v2 req credential-scope))]
       (apply client req args))))
 
 (defn sync-http-client [req coerce-resp]
-  (http/with-additional-middleware [wrap-sign]
+  (http/with-middleware
+    [clj-http.client/wrap-request-timing
+     clj-http.client/wrap-async-pooling
+     clj-http.headers/wrap-header-map
+     clj-http.client/wrap-query-params
+     clj-http.client/wrap-basic-auth
+     clj-http.client/wrap-oauth
+     clj-http.client/wrap-user-info
+     clj-http.client/wrap-url
+     clj-http.client/wrap-decompression
+     clj-http.client/wrap-input-coercion
+     ;; put this before output-coercion, so additional charset
+     ;; headers can be used if desired
+     clj-http.client/wrap-additional-header-parsing
+     clj-http.client/wrap-output-coercion
+     clj-http.client/wrap-exceptions
+     clj-http.client/wrap-accept
+     clj-http.client/wrap-accept-encoding
+     clj-http.client/wrap-content-type
+     clj-http.client/wrap-form-params
+     wrap-sign
+     clj-http.client/wrap-url
+     clj-http.client/wrap-nested-params
+     clj-http.client/wrap-method
+     clj-http.cookies/wrap-cookies
+     clj-http.links/wrap-links
+     clj-http.client/wrap-unknown-host]
     (let [[tag v] (-> req
                     (assoc :throw-exceptions false)
                     http/request
@@ -134,7 +164,7 @@
   (-> req
     (assoc :headers (reduce-kv (fn [headers param [header jsonvalue]]
                                  (if-some [v (get body param)]
-                                   (assoc headers header 
+                                   (assoc headers header
                                      (cond-> v
                                        jsonvalue (-> json/generate-string base64-encode)))
                                    headers))
@@ -152,7 +182,7 @@
 
 (defn- params-to-querystring [{:as req :keys [body ^String url]} querystring-to-param]
   (-> req
-    (assoc :url 
+    (assoc :url
       (apply str url (if (neg? (.indexOf url "?")) "?" "&")
         (interpose "&"
           (keep (fn [[qs name]]
@@ -167,9 +197,20 @@
     req))
 
 (defn- move-params [{:as req :keys [body url]} moves]
-  (assoc req :body 
+  (assoc req :body
     (into (reduce dissoc body (vals moves))
       (keep (fn [[to from]] (when-some [v (get body from)] [to v])) moves))))
+
+(defn- body-to-formparams [{:as req :keys [method body]}]
+  (if (= method "POST")
+    (assoc req :form-params body)
+    req))
+
+(defn- body-to-querystring [{:as req :keys [method body]}]
+  (if (= method "GET")
+    (-> (assoc req :query-params body)
+        (dissoc :body))
+    req))
 
 (defn conform-or-throw [spec x]
   (let [x' (spec/conform spec x)]
@@ -222,6 +263,38 @@
           (if (if ok-code (= ok-code (:status response)) (<= 200 (:status response) 299))
             [:result (if output-spec
                        (spec/unform output-spec (coerce-body content-type (:body response)))
+                       true)]
+            (if-some [[type spec] (find error-specs (get-in response [:headers "x-amzn-ErrorType"]))]
+              [:exception (let [m (spec/unform spec (json/parse-string (coerce-body content-type (:body response))))]
+                            (ex-info (str type ": " (:message m)) m))]
+              (case (:status response)
+                404 [:result nil]
+                [:exception (ex-info "Unexpected response" {:response response})]))))))))
+
+(defn -query-call [endpoints method uri input input-spec operationName version
+                   {move :move}
+                   ok-code output-spec error-specs]
+  (let [{:keys [endpoint credential-scope signature-version]} (endpoints (region))]
+    (->
+     {:method             method
+      :version            version
+      ::credential-scope  credential-scope
+      ::signature-version signature-version
+      :url                (str endpoint uri)
+      :headers            {"content-type" "application/x-www-form-urlencoded"}
+      :as                 :x-www-form-urlencoded
+      :body               (some-> input-spec (conform-or-throw input))}
+      (update :body assoc "Action" operationName)
+      (body-to-formparams)
+      (body-to-querystring)
+      (dissoc :body)
+      ;; @todo : figure out why we need this one (just in few case on all protocol)
+      #_(move-params move)
+      (*http-client*
+        (fn [{:as response {content-type "Content-Type"} :headers}]
+          (if (if ok-code (= ok-code (:status response)) (<= 200 (:status response) 299))
+            [:result (if output-spec
+                       (:body response)
                        true)]
             (if-some [[type spec] (find error-specs (get-in response [:headers "x-amzn-ErrorType"]))]
               [:exception (let [m (spec/unform spec (json/parse-string (coerce-body content-type (:body response))))]
