@@ -351,7 +351,7 @@
         [[service region] {:credential-scope (x/into {} (x/for [[k v] %] [(keyword k) v]) credentialScope)
                            :ssl-common-name sslCommonName :endpoint endpoint :signature-version signature-version}]))))
 
-(defn generate-files! []
+(defn generate-files! [& [verbose]]
   (let [endpoints (parse-endpoints! "resources/aws-partitions/partitions.json")
         [[_ jar-path]] (re-seq #"jar:file:([^!]*)" (.toExternalForm (io/resource "META-INF/maven/com.amazonaws/aws-java-sdk-models/pom.properties")))
         jar-file (java.util.jar.JarFile. jar-path)
@@ -361,24 +361,36 @@
                                 (filter #(and (.startsWith (.getName %) "models/")
                                               (.endsWith (.getName %) "model.json")
                                               (not (.isDirectory %)))))
-        model-regex #"^models\/(?<api>.+)-(?<version>\d{4}-\d{2}-\d{2})-model\.json"]
-    (doseq [entry model-jar-entries
-            :let [[_ api version] (re-matches model-regex (.getName entry))]
-            :when api
-            :let [apifile (str/replace api #"[-.]" "_")
-                  apins (str/replace api #"[.]" "-")
-                  file (io/file (str "src/portkey/aws/" apifile "/_" version ".clj"))
-                  ns (symbol (str "portkey.aws." apins ".-" version))]]
-      (prn 'generating api version)
-      (with-open [w (io/writer (doto file (-> .getParentFile .mkdirs)))
-                  json (.getInputStream jar-file entry)]
-        (binding [*out* w]
-          (prn (list 'ns ns '(:require [portkey.aws])))
-          (newline)
-          (clojure.pprint/pprint (list 'def 'endpoints (list 'quote (get endpoints apins))))
-          (doseq [form (gen-api ns json)]
-            (newline)
-            (if (and (seq? form) (= 'do (first form)))
-              (run! prn (next form))
-              (prn form))))
-        file))))
+        model-regex #"^models\/(?<api>.+)-(?<version>\d{4}-\d{2}-\d{2})-model\.json"
+        gen-results (for [entry model-jar-entries
+                          :let [[_ api version] (re-matches model-regex (.getName entry))]
+                          :when api
+                          :let [apifile (str/replace api #"[-.]" "_")
+                                apins (str/replace api #"[.]" "-")
+                                file (io/file (str "src/portkey/aws/" apifile "/_" version ".clj"))
+                                ns (symbol (str "portkey.aws." apins ".-" version))]]
+                      (try
+                        (prn 'generating api version)
+                        (with-open [w (io/writer (doto file (-> .getParentFile .mkdirs)))
+                                    json (.getInputStream jar-file entry)]
+                          (binding [*out* w]
+                            (prn (list 'ns ns '(:require [portkey.aws])))
+                            (newline)
+                            (clojure.pprint/pprint (list 'def 'endpoints (list 'quote (get endpoints apins))))
+                            (doseq [form (gen-api ns json)]
+                              (newline)
+                              (if (and (seq? form) (= 'do (first form)))
+                                (run! prn (next form))
+                                (prn form)))))
+                        {:gen-status :ok}
+                        (catch Throwable t
+                          (println "Failed to generate" api)
+                          (when verbose
+                            (println t))
+                          {:gen-status :fail :api api})))
+        gen-failures (filter #(-> % :gen-status (= :fail)) gen-results)]
+    (if (seq gen-failures)
+      (printf "Encountered %d errors while generating, failed for APIs: %s\n"
+              (count gen-failures)
+              (str/join ", " (map :api gen-failures)))
+      (println "Generation OK!"))))
