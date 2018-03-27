@@ -367,8 +367,8 @@
                           :when api
                           :let [apifile (str/replace api #"[-.]" "_")
                                 apins (str/replace api #"[.]" "-")
-                                file (io/file (str "src/portkey/aws/" apifile "/_" version ".clj"))
-                                ns (symbol (str "portkey.aws." apins ".-" version))]]
+                                file (io/file (str "src/portkey/aws/" apifile ".clj"))
+                                ns (symbol (str "portkey.aws." apins))]]
                       (try
                         (prn 'generating api version)
                         (with-open [w (io/writer (doto file (-> .getParentFile .mkdirs)))
