@@ -7,7 +7,8 @@
     [portkey.aws :as aws]
     [clj-http.client :as http]
     [clojure.string :as str]
-    [clojure.pprint]))
+    [clojure.pprint]
+    [clojure.java.classpath :as cp]))
 
 #_ (def all-apis 
      (->> (java.io.File. "resources/aws-sdk-core/apis/")
@@ -225,6 +226,7 @@
                               :req {"httpStatusCode" int?}
                               :opt {"code" string?, "senderFault" boolean?})}))
           "documentationUrl" string? ; TODO
+          "documentation" string?
           "alias" string?
           "authtype" #{"none" "v4-unsigned-body"}
           "deprecated" boolean?}))
@@ -258,7 +260,8 @@
                                   :req {"shape" string?}
                                   :opt {"location" #{"uri" "querystring" "header" #_#_"headers" "statusCode"}
                                         "locationName" string?
-                                        "deprecated" boolean?})
+                                        "deprecated" boolean?
+                                        "documentation" string?})
                                 #(= (contains? % "location") (contains? % "locationName")))
                               :querystringmap
                               (strict-strs
@@ -276,7 +279,8 @@
                                     "jsonvalue" true?})))}
          :opt {"required" (spec/coll-of string?)
                "payload" string?
-               "deprecated" boolean?})
+               "deprecated" boolean?
+               "documentation" string?})
         (shapes input-shape)))
     `(do
        (defn ~varname ; TODO add deprecated flag 
@@ -306,8 +310,8 @@
                   `empty?)
          :ret ~(if output-spec `(spec/and ~output-spec) `true?)))))
 
-(defn gen-api [ns-sym resource-name]
-  (let [api (json/parse-stream (-> resource-name io/resource io/reader))]
+(defn gen-api [ns-sym resource]
+  (let [api (json/parse-stream (io/reader resource))]
     (case (get-in api ["metadata" "protocol"])
       "rest-json" (for [[k gen] {"shapes" (comp #(doto % eval) gen-shape-spec) ; eval to make specs available right away
                                  "operations" (fn [ns [_ op]] (gen-operation ns op (api "shapes")))}
@@ -347,38 +351,49 @@
         [[service region] {:credential-scope (x/into {} (x/for [[k v] %] [(keyword k) v]) credentialScope)
                            :ssl-common-name sslCommonName :endpoint endpoint :signature-version signature-version}]))))
 
-(defn generate-files! []
-  (let [endpoints (parse-endpoints! "resources/aws-partitions/partitions.json")]
-    (->> (java.io.File. "resources/aws-sdk-core/apis/")
-      file-seq
-      (into []
-        (comp
-          (filter #(= "api-2.json" (.getName ^java.io.File %)))
-          (x/by-key (fn [^java.io.File f] (-> f .getParentFile .getParentFile .getName))
-            (comp (x/for [^java.io.File f %]
-                    [(-> f .getParentFile .getName) (.getPath f)])
-              (x/into (sorted-map))))
-          (x/for [[api versions] %
-                  :let [apifile (str/replace api #"[-.]" "_")
-                        apins (str/replace api #"[.]" "-")
-                        [latest f] (first (rseq versions))]
-                  [version json] (cons [nil f] versions)
-                  :let [_ (prn 'generating api (or version 'LATEST))
-                        [_ json] (re-matches #"resources/(.*)" json)
-                        [file ns]
-                        (if version
-                          [(java.io.File. (str "src/portkey/aws/" apifile "/_" version ".clj"))
-                           (symbol (str "portkey.aws." apins ".-" version))]
-                          [(java.io.File. (str "src/portkey/aws/" apifile ".clj"))
-                           (symbol (str "portkey.aws." apins))])]]
-            (with-open [w (io/writer (doto file (-> .getParentFile .mkdirs)))]
-              (binding [*out* w]
-                (prn (list 'ns ns '(:require [portkey.aws])))
-                (newline)
-                (clojure.pprint/pprint (list 'def 'endpoints (list 'quote (get endpoints apins))))
-                (doseq [form (gen-api ns json)]
-                  (newline)
-                  (if (and (seq? form) (= 'do (first form)))
-                    (run! prn (next form))
-                    (prn form))))
-              file)))))))
+(defn generate-files! [& [verbose]]
+  (let [endpoints (parse-endpoints! "resources/aws-partitions/partitions.json")
+        [[_ jar-path]] (re-seq #"jar:file:([^!]*)" (.toExternalForm (io/resource "META-INF/maven/com.amazonaws/aws-java-sdk-models/pom.properties")))
+        jar-file (java.util.jar.JarFile. jar-path)
+        model-jar-entries  (->> jar-file
+                                (.entries)
+                                (enumeration-seq)
+                                (filter #(and (.startsWith (.getName %) "models/")
+                                              (.endsWith (.getName %) "model.json")
+                                              (not (.isDirectory %)))))
+        model-regex #"^models\/(?<api>.+)-(?<version>\d{4}-\d{2}-\d{2})-model\.json"
+        gen-results (for [entry model-jar-entries
+                          :let [[_ api version] (re-matches model-regex (.getName entry))]
+                          :when api
+                          :let [apifile (str/replace api #"[-.]" "_")
+                                apins (str/replace api #"[.]" "-")
+                                file (io/file (str "src/portkey/aws/" apifile ".clj"))
+                                ns (symbol (str "portkey.aws." apins))]]
+                      (try
+                        (prn 'generating api version)
+                        (with-open [w (io/writer (doto file (-> .getParentFile .mkdirs)))
+                                    json (.getInputStream jar-file entry)]
+                          (binding [*out* w]
+                            (prn (list 'ns ns '(:require [portkey.aws])))
+                            (newline)
+                            (clojure.pprint/pprint (list 'def 'endpoints (list 'quote (get endpoints apins))))
+                            (doseq [form (gen-api ns json)]
+                              (newline)
+                              (if (and (seq? form) (= 'do (first form)))
+                                (run! prn (next form))
+                                (prn form)))))
+                        {:gen-status :ok}
+                        (catch Throwable t
+                          (println "Failed to generate" api)
+                          (when verbose
+                            (println t))
+                          {:gen-status :fail :api api :file file})))
+        gen-failures (filter #(-> % :gen-status (= :fail)) gen-results)]
+    (if (seq gen-failures)
+      (do
+        (printf "Encountered %d errors while generating, failed for APIs: %s\n"
+                (count gen-failures)
+                (str/join ", " (map :api gen-failures)))
+        (doseq [failure gen-failures]
+          (-> failure :file (.delete))))
+      (println "Generation OK!"))))

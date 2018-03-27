@@ -6,4 +6,7 @@
                  [clj-http "3.7.0"]
                  [cheshire "5.7.1"]
                  [net.cgrand/xforms "0.7.2"]
-                 [org.clojure/core.async "0.3.443"]])
+                 [org.clojure/core.async "0.3.443"]]
+  :profiles {:dev {:dependencies [[com.amazonaws/aws-java-sdk-models "1.11.289"]
+                                  [org.clojure/java.classpath "0.2.3"]]}}
+  :aliases {"gen-aws-api" ["run" "-m" "portkey.awsgen/generate-files!"]})

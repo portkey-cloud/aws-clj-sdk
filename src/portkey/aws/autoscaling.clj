@@ -88,4 +88,4 @@
     :endpoint "https://autoscaling.ap-south-1.amazonaws.com",
     :signature-version :v4}})
 
-(comment TODO support "query")
+(comment TODO support "json")
