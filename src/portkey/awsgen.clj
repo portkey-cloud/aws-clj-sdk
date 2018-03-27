@@ -387,10 +387,13 @@
                           (println "Failed to generate" api)
                           (when verbose
                             (println t))
-                          {:gen-status :fail :api api})))
+                          {:gen-status :fail :api api :file file})))
         gen-failures (filter #(-> % :gen-status (= :fail)) gen-results)]
     (if (seq gen-failures)
-      (printf "Encountered %d errors while generating, failed for APIs: %s\n"
-              (count gen-failures)
-              (str/join ", " (map :api gen-failures)))
+      (do
+        (printf "Encountered %d errors while generating, failed for APIs: %s\n"
+                (count gen-failures)
+                (str/join ", " (map :api gen-failures)))
+        (doseq [failure gen-failures]
+          (-> failure :file (.delete))))
       (println "Generation OK!"))))
