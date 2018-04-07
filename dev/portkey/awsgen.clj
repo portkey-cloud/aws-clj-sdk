@@ -234,7 +234,7 @@
 #_(str/replace uri #"\{(.*)}" (fn [[_ name]]))
 
 (defn gen-operation [ns {:as operation
-                         :strs [name errors]
+                         :strs [name errors documentation]
                          {input-shape "shape"} "input"
                          {output-shape "shape"} "output"
                          {:strs [method requestUri responseCode]} "http"}
@@ -283,7 +283,9 @@
                "documentation" string?})
         (shapes input-shape)))
     `(do
-       (defn ~varname ; TODO add deprecated flag 
+       (defn ~varname ; TODO add deprecated flag
+         ~@(when documentation
+             [documentation])
          ~@(when default-arg `[([] (~varname ~default-arg))])
          ([~input]
            (aws/-rest-json-call 
