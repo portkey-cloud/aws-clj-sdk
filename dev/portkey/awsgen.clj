@@ -233,6 +233,24 @@
 
 #_(str/replace uri #"\{(.*)}" (fn [[_ name]]))
 
+(defn format-documentation [doc]
+  (let [acc (StringBuilder.)
+        block #{"br" "dd" "dt" "p" "h1" "h2" "h3" "h4" "h5"}
+        visitor (reify org.jsoup.select.NodeVisitor
+            (head [this node depth]
+              (when (instance? org.jsoup.nodes.TextNode node)
+                (.append acc (.text node)))
+              (when (= "li" (.nodeName node))
+                (.append acc "\n *")))
+            (tail [this node depth]
+              (when (block (.nodeName node))
+                (.append acc "\n"))
+              (when (and (= "a" (.nodeName node))
+                         (not (empty? (.absUrl node "href"))))
+                (.append acc (format " (%s)" (.absUrl node "href"))))))]
+    (org.jsoup.select.NodeTraversor/traverse visitor (org.jsoup.Jsoup/parseBodyFragment doc))
+    (.toString acc)))
+
 (defn gen-operation [ns {:as operation
                          :strs [name errors documentation]
                          {input-shape "shape"} "input"
@@ -285,7 +303,7 @@
     `(do
        (defn ~varname ; TODO add deprecated flag
          ~@(when documentation
-             [documentation])
+             [(format-documentation documentation)])
          ~@(when default-arg `[([] (~varname ~default-arg))])
          ([~input]
            (aws/-rest-json-call 
