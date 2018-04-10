@@ -233,23 +233,40 @@
 
 #_(str/replace uri #"\{(.*)}" (fn [[_ name]]))
 
+(defn split-line [n line]
+  (reduce
+   (fn [lines word]
+     (if (or (empty? lines)
+             (>= (+ (count (last lines)) (count word)) n))
+       (conj lines word)
+       (update lines (dec (count lines)) str " " word)))
+   []
+   (str/split line #"\s+")))
+
+(defn split-to-length [n text]
+  (str/join
+   "\n"
+   (mapcat (partial split-line n)
+           (str/split text #"\n"))))
+
 (defn format-documentation [doc]
   (let [acc (StringBuilder.)
         block #{"br" "dd" "dt" "p" "h1" "h2" "h3" "h4" "h5"}
+        append (fn [text] (.append acc text))
         visitor (reify org.jsoup.select.NodeVisitor
             (head [this node depth]
               (when (instance? org.jsoup.nodes.TextNode node)
-                (.append acc (.text node)))
+                (append (.text node)))
               (when (= "li" (.nodeName node))
-                (.append acc "\n *")))
+                (append "\n *")))
             (tail [this node depth]
               (when (block (.nodeName node))
-                (.append acc "\n"))
+                (append "\n"))
               (when (and (= "a" (.nodeName node))
                          (not (empty? (.absUrl node "href"))))
-                (.append acc (format " (%s)" (.absUrl node "href"))))))]
+                (append (format " (%s)" (.absUrl node "href"))))))]
     (org.jsoup.select.NodeTraversor/traverse visitor (org.jsoup.Jsoup/parseBodyFragment doc))
-    (.toString acc)))
+    (split-to-length 80 (.toString acc))))
 
 (defn gen-operation [ns {:as operation
                          :strs [name errors documentation]
