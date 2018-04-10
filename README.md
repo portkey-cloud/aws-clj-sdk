@@ -46,10 +46,14 @@ user=> (doc lambda/list-functions)
 -------------------------
 portkey.aws.lambda/list-functions
 ([] [list-functions-request])
-  Returns a list of your Lambda functions. For each function, the response includes the function configuration information. You must use GetFunction to retrieve the code for your function.
+  Returns a list of your Lambda functions. For each function, the response
+includes the function configuration information. You must use GetFunction to
+retrieve the code for your function.
  This operation requires permission for the lambda:ListFunctions action.
- If you are using the versioning feature, you can list all of your functions or only $LATEST versions. For information about the versioning feature, see AWS Lambda Function Versioning and Aliases (http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html).
-
+ If you are using the versioning feature, you can list all of your functions or
+only $LATEST versions. For information about the versioning feature, see AWS
+Lambda Function Versioning and Aliases
+(http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html).
 Spec
   args: (? :portkey.aws.lambda/list-functions-request)
   ret: (and :portkey.aws.lambda/list-functions-response)
