@@ -68,8 +68,9 @@
 (defn- normalize [^String path]
   (-> path java.net.URI. .normalize .getPath))
 
-(defn sigv4 [{:keys [request-method uri headers body query-string] :as req}
-             {:keys [secret-key access-key region service token payload]}]
+(defn building-signing-information
+  [{:keys [body headers] :as req}
+   {:keys [service region payload token]}]
   (let [payload (or (when (= service "s3") payload) :signed)
         content-hash (case payload
                        :unsigned "UNSIGNED-PAYLOAD"
@@ -86,43 +87,64 @@
                         (assoc "x-amz-date" (.format (java.time.LocalDateTime/now (java.time.ZoneId/of "Z")) x-amz-date-formatter)))
         headers (into headers extra-headers)
         {:strs [date x-amz-date] :as canonical-headers} (into canonical-headers extra-headers)
-        
+
         signed-headers (str/join ";" (keys canonical-headers))
         x-amz-date (or x-amz-date (->> date (.parse java.time.format.DateTimeFormatter/RFC_1123_DATE_TIME)
-                                    (.format x-amz-date-formatter)))
+                                       (.format x-amz-date-formatter)))
         date (subs x-amz-date 0 8)
+        credential-scope (str date "/" region "/" service "/aws4_request")]
+    {:signed-headers signed-headers
+     :content-hash content-hash
+     :canonical-headers canonical-headers
+     :date date
+     :x-amz-date x-amz-date
+     :headers headers
+     :credential-scope credential-scope}))
 
-        canonical-request
-        (str (str/upper-case (name request-method)) "\n"
-          (cond
-            (= uri "") "/"
-            (= service "s3") uri
-            :else (normalize uri)) "\n"
-          (->> (str/split (or query-string "") #"&")
+(defn sigv4-canonical-request [{:keys [request-method uri headers body query-string] :as req}
+                               {:keys [service token payload] :as creds}
+                               {:keys [signed-headers content-hash canonical-headers]}]
+  (str (str/upper-case (name request-method)) "\n"
+       (cond
+         (= uri "") "/"
+         (= service "s3") uri
+         :else (normalize uri)) "\n"
+       (->> (str/split (or query-string "") #"&")
             (keep #(re-matches #"([^=]+)=?(.*)" %))
             sort
             (map (fn [[_ q v]] (str q "=" v)))
             (str/join "&")) "\n"
-          (transduce
-            (x/for [[header value] %, s [header ":" value "\n"]] s)
-            rf/str
-            canonical-headers)
-          "\n" ; extra blank line
-          signed-headers "\n"
-          content-hash)
-        canonical-request-hash (sha-256 canonical-request)
-        credential-scope (str date "/" region "/" service "/aws4_request")
-        string-to-sign (str "AWS4-HMAC-SHA256\n" x-amz-date "\n" credential-scope "\n" canonical-request-hash)
-        signing-key
-        (-> (str "AWS4" secret-key)
-          (.getBytes "ASCII")
-          (hmac-sha-256 date)
-          (hmac-sha-256 region)
-          (hmac-sha-256 service)
-          (hmac-sha-256 "aws4_request"))
-        signature (hex-string (hmac-sha-256 signing-key string-to-sign))
-        auth (str "AWS4-HMAC-SHA256 Credential=" access-key "/" credential-scope
-               ", SignedHeaders=" signed-headers ", Signature=" signature)
-        headers (assoc headers "Authorization" auth)]
+       (transduce
+        (x/for [[header value] %, s [header ":" value "\n"]] s)
+        rf/str
+        canonical-headers)
+       "\n" ; extra blank line
+       signed-headers "\n"
+       content-hash))
+
+(defn sigv4-string-to-sign
+  [{:keys [x-amz-date credential-scope]} canonical-request]
+  (let [canonical-request-hash (sha-256 canonical-request)]
+    (str "AWS4-HMAC-SHA256\n" x-amz-date "\n" credential-scope "\n" canonical-request-hash)))
+
+(defn sigv4-authorization-headers
+  [{:keys [region service access-key secret-key]} {:keys [date credential-scope signed-headers]} string-to-sign]
+  (let [signing-key (-> (str "AWS4" secret-key)
+                        (.getBytes "ASCII")
+                        (hmac-sha-256 date)
+                        (hmac-sha-256 region)
+                        (hmac-sha-256 service)
+                        (hmac-sha-256 "aws4_request"))
+        signature (hex-string (hmac-sha-256 signing-key string-to-sign))]
+    (str "AWS4-HMAC-SHA256 Credential=" access-key "/" credential-scope
+         ", SignedHeaders=" signed-headers ", Signature=" signature)))
+
+(defn sigv4 [req creds]
+  (let [{:keys [headers] :as sig-info} (building-signing-information req creds)
+        headers (->> sig-info
+                     (sigv4-canonical-request req creds)
+                     (sigv4-string-to-sign sig-info)
+                     (sigv4-authorization-headers creds sig-info)
+                     (assoc headers "Authorization"))]
     (assoc req :headers headers)))
 
