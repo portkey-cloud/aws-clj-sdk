@@ -148,3 +148,81 @@
                      (assoc headers "Authorization"))]
     (assoc req :headers headers)))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; SIGNING REQUEST WITH VERSION 2                                                               ;;
+;; https://docs.aws.amazon.com/AmazonSimpleDB/latest/DeveloperGuide/HMACAuth.html#REST_RESTAuth ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+;; This exist also in aws.clj line 130... circular dependency right here
+(defn- base64-encode [bytes] (.encodeToString (java.util.Base64/getEncoder) bytes))
+
+(defn- utf8-natural-byte-cmp
+  "Sort the UTF-8 query string components by parameter name with natural byte ordering.
+   I wonder if it really matters for the input we deal with"
+  [^String a ^String b]
+  (let [sa a sb b
+        a (.getBytes a "UTF8")
+        b (.getBytes b "UTF8")
+        n (min (alength a) (alength b))]
+    (loop [i 0]
+      (if (< i n)
+        (let [r (- (aget a i) (aget b i))]
+          (if (zero? r)
+            (recur (inc i))
+            r))
+        (- (alength a) (alength b))))))
+
+(def sigv2-x-amz-date-formatter
+  (java.time.format.DateTimeFormatter/ofPattern "yyyy-MM-dd'T'HH:mm:ss'Z'"))
+
+(defn- sigv2-hmac-sha-256
+  [^bytes secret ^String s]
+  (-> (javax.crypto.Mac/getInstance "HmacSHA256")
+      (doto (.init (javax.crypto.spec.SecretKeySpec. secret "HmacSHA256")))
+      (.doFinal (.getBytes s "UTF8"))))
+
+(defn- sigv2-canonicalized-query-string
+  "Step 1 : Create a canonicalized query-string for building the signature v2."
+  [& {:keys [query-params]}]
+  (x/str
+   (comp
+    (x/sort-by key utf8-natural-byte-cmp)
+    (x/for [[k v] %]
+      (str (codec/url-encode k) "=" (codec/url-encode v)))
+    (interpose "&"))
+   query-params))
+
+(defn- sigv2-string-to-sign
+  "Step 2 : Gather request information before signing."
+  [verb host uri qs]
+  (str verb "\n" host "\n" uri "\n" qs))
+
+(defn- sigv2-base-64-hmac-signature
+  "Step 3 : Sign the string with hmac-signature and base-encode-64 it."
+  [secret-key string-to-sign]
+  (-> secret-key
+      (.getBytes "UTF8")
+      (sigv2-hmac-sha-256 string-to-sign)
+      base64-encode))
+
+(defn sigv2
+  [{:keys [request-method uri form-params query-string server-name version] :as req}
+   {:keys [secret-key access-key region service token payload] :as o}]
+  (let [qp (-> (if (= "GET" request-method) query-string form-params)
+               (assoc "AWSAccessKeyId" access-key
+                      "SignatureVersion" "2"
+                      "SignatureMethod" "HmacSHA256"
+                      "Timestamp" (.format (java.time.LocalDateTime/now (java.time.ZoneId/of "Z")) sigv2-x-amz-date-formatter)
+                      "Version" (if (string? version) version "LATEST")))
+        body (->> qp
+                  (sigv2-canonicalized-query-string :query-params)
+                  (sigv2-string-to-sign request-method server-name uri)
+                  (sigv2-base-64-hmac-signature secret-key)
+                  (assoc qp "Signature")
+                  (update req
+                          (if (= "GET" request-method) :query-params :form-params)
+                          #(conj %1 %2)))]
+    (update body :request-method #(keyword (clojure.string/lower-case %)))))
+
