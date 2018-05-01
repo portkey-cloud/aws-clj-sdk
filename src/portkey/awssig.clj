@@ -66,7 +66,8 @@
     (.doFinal (.getBytes s "ASCII"))))
 
 (defn- normalize [^String path]
-  (-> (java.net.URI. "http" "example.com" path nil) .normalize .getPath))
+  (->> (java.net.URI. "http" "example.com" path nil) .normalize .toASCIIString
+    (re-find #"(?<=http://example\.com).*")))
 
 (def ^:private no-canonical-x-amz-security-token
   "For some services, you must include the X-Amz-Security-Token query parameter in the canonical (signed) query string. For other services, you add the X-Amz-Security-Token parameter at the end, after you calculate the signature. For details, see the API reference documentation for that service."
