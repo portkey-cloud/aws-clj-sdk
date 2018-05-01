@@ -50,23 +50,26 @@
   request."
   [req]
   (let [[_ request-method full-uri protocol headers+body] (re-find #"(?s)([A-Z]+)\s(.+)\s(HTTP/1\.1)\n(.*)" req)
-        headers (for [[_ header value] (re-seq #"(?s)(\S+):(.*?\n(?:[\t ].*?\n)*)" (str headers+body "\n"))]
-                  [header (s/trim-newline value)])
+        headers (into {}
+                  (comp
+                    (x/for [[_ header value] %
+                            value (s/split-lines value)]
+                      [header value])
+                    (x/by-key (x/into []))
+                    (x/for [[header values] %]
+                      [header (if (next values) values (first values))]))
+                  (re-seq #"(?s)(\S+):(.*?\n(?:[\t ].*?\n)*)" (str headers+body "\n")))
         body (re-find #"Param1=value1" headers+body)
         [_ uri query-string] (re-find #"(?s)([\S&&[^?]]+)\??(\S+)?" full-uri)]
     (cond->
         {:request-method request-method
          :uri full-uri
          :protocol protocol}
-      (not (or (empty? headers) (nil? headers))) (assoc :headers
-                                                        (into {}
-                                                              (x/by-key (comp (interpose ",")
-                                                                              x/str))
-                                                              headers))
+      (seq headers) (assoc :headers headers)
       (not (nil? body)) (assoc :body body)
       (not (nil? query-string)) (assoc :query-string query-string :uri uri)
       true (as->
-               req-map
+             req-map
                (assoc req-map :server-name (get-in req-map [:headers "Host"]))
              (update req-map :headers dissoc "Host")))))
 
@@ -82,7 +85,7 @@
     (let [req (req-text->req-map req)
           signing-info (sign/building-signing-information req nil)]
       (is (= creq (sign/sigv4-canonical-request req nil signing-info))
-        (str "Test " test-name " is failing to canonicalize request " (pr-str req) " with signing information " (pr-str signing-info))))))
+        (str "Test " test-name " is failing to canonicalize request " (pr-str req))))))
 
 
 (deftest string-to-sign
