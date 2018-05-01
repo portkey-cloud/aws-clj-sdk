@@ -104,7 +104,7 @@
           (= auth (->> signing-info
                        (sign/sigv4-canonical-request req creds)
                        (sign/sigv4-string-to-sign signing-info)
-                       (sign/sigv4-authorization-headers creds signing-info))
-             (str "Test " test-name " is failing to create the authorization headers"))))))
+                       (sign/sigv4-authorization-headers creds signing-info))))
+        (str "Test " test-name " is failing to create the authorization headers"))))
 
 
