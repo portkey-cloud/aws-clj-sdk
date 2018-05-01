@@ -26,15 +26,17 @@
 (def all-req-text-tests
   "Given  the 5  test files  for each  test case  supplied by  Amazon,
   returns a map of test cases with it's file content."
-  (into {}
-        (comp (remove #(.isDirectory ^java.io.File %))
-              (x/by-key #(-> ^java.io.File % .getParentFile .getName)
-                        (comp (x/for [file ^java.io.File %
-                                      :let [filename (.getName file)
-                                            [_ extension] (re-find #"\S+\.(auth|creq|req|sreq|sts)" filename)]]
-                                [extension (slurp file)])
-                              (x/reduce conj {}))))
-        (file-seq (java.io.File. "resources/aws-sig-v4-test-suite/"))))
+  (x/into {}
+    (comp 
+      (x/for [file ^java.io.File %
+              :when (.isFile file) ; ambiguous names...
+              :let [filename (.getName file)
+                    [_ extension] (re-find #"\S+\.(auth|creq|req|sreq|sts)" filename)]
+              :when extension]
+        ; let's hope parent dirs are uniquely named
+        [(-> file .getParentFile .getName) [extension (slurp file)]])
+      (x/by-key (x/into {})))
+    (file-seq (java.io.File. "resources/aws-sig-v4-test-suite/"))))
 
 (def ^:dynamic *enabled-tests* all-req-text-tests)
 
@@ -80,7 +82,7 @@
     (let [req (req-text->req-map req)
           signing-info (sign/building-signing-information req nil)]
       (is (= creq (sign/sigv4-canonical-request req nil signing-info))
-        (str "Test " test-name " is failing to transform a request to a canonical request.")))))
+        (str "Test " test-name " is failing to canonicalize request " (pr-str req) " with signing information " (pr-str signing-info))))))
 
 
 (deftest string-to-sign
