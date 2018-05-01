@@ -1,8 +1,9 @@
 (ns portkey.awssig
   "Functions to sign AWS requests."
   (:require [clojure.string :as str]
-    [net.cgrand.xforms :as x]
-    [net.cgrand.xforms.rfs :as rf]))
+            [net.cgrand.xforms :as x]
+            [net.cgrand.xforms.rfs :as rf]
+            [clj-http.util :as codec]))
 
 (def x-amz-date-formatter
   (java.time.format.DateTimeFormatter/ofPattern "yyyyMMdd'T'HHmmss'Z'"))
