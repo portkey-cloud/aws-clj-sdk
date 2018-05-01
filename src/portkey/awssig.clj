@@ -69,6 +69,10 @@
   (->> (java.net.URI. "http" "example.com" path nil) .normalize .toASCIIString
     (re-find #"(?<=http://example\.com).*")))
 
+(defn- escaped-uri [^String path]
+  (->> (java.net.URI. "http" "example.com" path nil) .toASCIIString
+    (re-find #"(?<=http://example\.com).*")))
+
 (def ^:private no-canonical-x-amz-security-token
   "For some services, you must include the X-Amz-Security-Token query parameter in the canonical (signed) query string. For other services, you add the X-Amz-Security-Token parameter at the end, after you calculate the signature. For details, see the API reference documentation for that service."
   #{"iot"})
@@ -114,11 +118,15 @@
          (= uri "") "/"
          (= service "s3") uri
          :else (normalize uri)) "\n"
-       (->> (str/split (or query-string "") #"&")
-            (keep #(re-matches #"([^=]+)=?(.*)" %))
-            sort
-            (map (fn [[_ q v]] (str q "=" v)))
-            (str/join "&")) "\n"
+       (-> (java.net.URI. nil nil nil (or query-string "") nil)
+         .toASCIIString ; percent encode
+         (subs 1) ; drop the "?"
+         (str/split #"&")
+         (->> 
+             (keep #(re-matches #"([^=]+)=?(.*)" %))
+             sort
+             (map (fn [[_ q v]] (str q "=" v)))
+             (str/join "&"))) "\n"
        (transduce
         (x/for [[header value] %, s [header ":" value "\n"]] s)
         rf/str
