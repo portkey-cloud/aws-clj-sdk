@@ -36,7 +36,7 @@
         ; let's hope parent dirs are uniquely named
         [(-> file .getParentFile .getName) [extension (slurp file)]])
       (x/by-key (x/into {})))
-    (file-seq (java.io.File. "resources/aws-sig-v4-test-suite/"))))
+    (file-seq (java.io.File. "test-resources/aws-sig-v4-test-suite/"))))
 
 (def ^:dynamic *enabled-tests* all-req-text-tests)
 
