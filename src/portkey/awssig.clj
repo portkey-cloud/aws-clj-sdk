@@ -66,7 +66,7 @@
     (.doFinal (.getBytes s "ASCII"))))
 
 (defn- normalize [^String path]
-  (-> path java.net.URI. .normalize .getPath))
+  (-> (java.net.URI. "http" "example.com" path nil) .normalize .getPath))
 
 (defn building-signing-information
   [{:keys [body headers] :as req}
