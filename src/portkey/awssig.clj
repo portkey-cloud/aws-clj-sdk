@@ -68,6 +68,10 @@
 (defn- normalize [^String path]
   (-> (java.net.URI. "http" "example.com" path nil) .normalize .getPath))
 
+(def ^:private no-canonical-x-amz-security-token
+  "For some services, you must include the X-Amz-Security-Token query parameter in the canonical (signed) query string. For other services, you add the X-Amz-Security-Token parameter at the end, after you calculate the signature. For details, see the API reference documentation for that service."
+  #{"iot"})
+
 (defn building-signing-information
   [{:keys [body headers] :as req}
    {:keys [service region payload token]}]
@@ -78,7 +82,7 @@
                        :signed (sha-256 body))
         headers (cond-> headers token (assoc "X-Amz-Security-Token" token))
         canonical-headers (cond-> (canonical-headers headers)
-                            (not= "s3" service) (dissoc "x-amz-security-token"))
+                            (no-canonical-x-amz-security-token service) (dissoc "x-amz-security-token"))
         extra-headers (cond-> {}
                         (= "s3" service) (assoc "x-amz-content-sha256" content-hash)
                         (not (canonical-headers "host"))
