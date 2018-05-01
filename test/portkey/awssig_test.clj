@@ -36,6 +36,7 @@
                               (x/reduce conj {}))))
         (file-seq (java.io.File. "resources/aws-sig-v4-test-suite/"))))
 
+(def ^:dynamic *enabled-tests* all-req-text-tests)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; RAW HTTP REQUEST TO RING REQUEST ;;
@@ -74,37 +75,40 @@
 
 
 (deftest canonical-request
-  (doseq [[test-name {:strs [auth creq req sreq sts]}] all-req-text-tests]
-    (is (let [req (req-text->req-map req)
-              signing-info (sign/building-signing-information req nil)]
-          (= creq (sign/sigv4-canonical-request req nil signing-info)))
-        (str "Test " test-name " is failing to transform a request to a canonical request."))))
+  (doseq [[test-name {:strs [auth creq req sreq sts]}] all-req-text-tests
+          :when (*enabled-tests* test-name)]
+    (let [req (req-text->req-map req)
+          signing-info (sign/building-signing-information req nil)]
+      (is (= creq (sign/sigv4-canonical-request req nil signing-info))
+        (str "Test " test-name " is failing to transform a request to a canonical request.")))))
 
 
 (deftest string-to-sign
-  (doseq [[test-name {:strs [auth creq req sreq sts]}] all-req-text-tests]
-    (is (let [req (req-text->req-map req)
-              creds {:region "us-east-1"
-                     :service "service"}
-              signing-info (sign/building-signing-information req creds)]
-          (= sts (->> signing-info
-                      (sign/sigv4-canonical-request req creds)
-                      (sign/sigv4-string-to-sign signing-info))))
-        (str "Test " test-name " is failing to create the string to sign."))))
+  (doseq [[test-name {:strs [auth creq req sreq sts]}] all-req-text-tests
+          :when (*enabled-tests* test-name)]
+    (let [req (req-text->req-map req)
+          creds {:region "us-east-1"
+                 :service "service"}
+          signing-info (sign/building-signing-information req creds)]
+      (is (= sts (->> signing-info
+                     (sign/sigv4-canonical-request req creds)
+                     (sign/sigv4-string-to-sign signing-info)))
+        (str "Test " test-name " is failing to create the string to sign.")))))
 
 
 (deftest authorization-header
-  (doseq [[test-name {:strs [auth creq req sreq sts]}] all-req-text-tests]
-    (is (let [req (req-text->req-map req)
-              creds {:region "us-east-1"
-                     :service "service"
-                     :access-key "AKIDEXAMPLE"
-                     :secret-key "wJalrXUtnFEMI/K7MDENG+bPxRfiCYEXAMPLEKEY"}
-              signing-info (sign/building-signing-information req creds)]
-          (= auth (->> signing-info
-                       (sign/sigv4-canonical-request req creds)
-                       (sign/sigv4-string-to-sign signing-info)
-                       (sign/sigv4-authorization-headers creds signing-info))))
-        (str "Test " test-name " is failing to create the authorization headers"))))
+  (doseq [[test-name {:strs [auth creq req sreq sts]}] all-req-text-tests
+          :when (*enabled-tests* test-name)]
+    (let [req (req-text->req-map req)
+          creds {:region "us-east-1"
+                 :service "service"
+                 :access-key "AKIDEXAMPLE"
+                 :secret-key "wJalrXUtnFEMI/K7MDENG+bPxRfiCYEXAMPLEKEY"}
+          signing-info (sign/building-signing-information req creds)]
+      (is (= auth (->> signing-info
+                    (sign/sigv4-canonical-request req creds)
+                      (sign/sigv4-string-to-sign signing-info)
+                      (sign/sigv4-authorization-headers creds signing-info)))
+        (str "Test " test-name " is failing to create the authorization headers")))))
 
 
