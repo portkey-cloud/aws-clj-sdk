@@ -19,7 +19,7 @@
 (clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01.unauthorized-exception/message (clojure.spec.alpha/and :portkey.aws.mobile.-2017-07-01/error-message))
 (clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01/unauthorized-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.mobile.-2017-07-01.unauthorized-exception/message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01/platform (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"JAVASCRIPT" "JAVASCRIPT", :javascript "JAVASCRIPT", :windows "WINDOWS", "OSX" "OSX", :osx "OSX", "WINDOWS" "WINDOWS", :swift "SWIFT", "LINUX" "LINUX", "OBJC" "OBJC", :android "ANDROID", :linux "LINUX", "ANDROID" "ANDROID", "SWIFT" "SWIFT", :objc "OBJC"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01/platform (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"JAVASCRIPT" "JAVASCRIPT", :javascript "JAVASCRIPT", :windows "WINDOWS", "OSX" "OSX", :osx "OSX", "WINDOWS" "WINDOWS", :swift "SWIFT", "LINUX" "LINUX", "OBJC" "OBJC", :android "ANDROID", :linux "LINUX", "ANDROID" "ANDROID", "SWIFT" "SWIFT", :objc "OBJC"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01/bundle-version (clojure.spec.alpha/and clojure.core/string?))
 
@@ -30,7 +30,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01/share-url (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01/project-state (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"NORMAL" "NORMAL", :normal "NORMAL", "SYNCING" "SYNCING", :syncing "SYNCING", "IMPORTING" "IMPORTING", :importing "IMPORTING"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01/project-state (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"NORMAL" "NORMAL", :normal "NORMAL", "SYNCING" "SYNCING", :syncing "SYNCING", "IMPORTING" "IMPORTING", :importing "IMPORTING"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01.export-bundle-result/download-url (clojure.spec.alpha/and :portkey.aws.mobile.-2017-07-01/download-url))
 (clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01/export-bundle-result (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.mobile.-2017-07-01.export-bundle-result/downloadUrl] :locations {}))
@@ -40,7 +40,7 @@
 (clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01.export-project-request/project-id (clojure.spec.alpha/and :portkey.aws.mobile.-2017-07-01/project-id))
 (clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01/export-project-request (portkey.aws/json-keys :req-un [:portkey.aws.mobile.-2017-07-01.export-project-request/projectId] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01/bundle-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.mobile.-2017-07-01/bundle-details) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01/bundle-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.mobile.-2017-07-01/bundle-details) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01.limit-exceeded-exception/retry-after-seconds (clojure.spec.alpha/and :portkey.aws.mobile.-2017-07-01/error-message))
 (clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01.limit-exceeded-exception/message (clojure.spec.alpha/and :portkey.aws.mobile.-2017-07-01/error-message))
@@ -69,7 +69,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01/error-message (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01/project-summaries (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.mobile.-2017-07-01/project-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01/project-summaries (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.mobile.-2017-07-01/project-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01/date clojure.core/inst?)
 
@@ -96,7 +96,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01/attribute-value (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01/resources (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.mobile.-2017-07-01/resource) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01/resources (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.mobile.-2017-07-01/resource) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01/attribute-key (clojure.spec.alpha/and clojure.core/string?))
 
@@ -184,7 +184,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01/snapshot-id (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01/platforms (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.mobile.-2017-07-01/platform) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01/platforms (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.mobile.-2017-07-01/platform) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.mobile.-2017-07-01/boolean clojure.core/boolean?)
 

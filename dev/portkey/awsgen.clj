@@ -389,7 +389,7 @@
                            :ssl-common-name sslCommonName :endpoint endpoint :signature-version signature-version}]))))
 
 (defn generate-files! [& [verbose]]
-  (let [endpoints (parse-endpoints! "resources/aws-partitions/partitions.json")
+  (let [endpoints (parse-endpoints! "api-resources/aws-sdk-ruby/gems/aws-partitions/partitions.json")
         entries (into []
                       (comp
                        (filter #(re-find #"api-2.json" (.getName ^java.io.File  %)))

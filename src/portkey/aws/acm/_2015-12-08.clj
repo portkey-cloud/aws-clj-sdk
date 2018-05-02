@@ -37,6 +37,11 @@
     :ssl-common-name "acm.ap-northeast-2.amazonaws.com",
     :endpoint "https://acm.ap-northeast-2.amazonaws.com",
     :signature-version :v4},
+   "eu-west-3"
+   {:credential-scope {:service "acm", :region "eu-west-3"},
+    :ssl-common-name "acm.eu-west-3.amazonaws.com",
+    :endpoint "https://acm.eu-west-3.amazonaws.com",
+    :signature-version :v4},
    "ca-central-1"
    {:credential-scope {:service "acm", :region "ca-central-1"},
     :ssl-common-name "acm.ca-central-1.amazonaws.com",

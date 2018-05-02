@@ -1,6 +1,91 @@
 (ns portkey.aws.resource-groups.-2017-11-27 (:require [portkey.aws]))
 
-(def endpoints 'nil)
+(def
+ endpoints
+ '{"ap-northeast-1"
+   {:credential-scope
+    {:service "resource-groups", :region "ap-northeast-1"},
+    :ssl-common-name "resource-groups.ap-northeast-1.amazonaws.com",
+    :endpoint "https://resource-groups.ap-northeast-1.amazonaws.com",
+    :signature-version :v4},
+   "eu-west-1"
+   {:credential-scope
+    {:service "resource-groups", :region "eu-west-1"},
+    :ssl-common-name "resource-groups.eu-west-1.amazonaws.com",
+    :endpoint "https://resource-groups.eu-west-1.amazonaws.com",
+    :signature-version :v4},
+   "us-east-2"
+   {:credential-scope
+    {:service "resource-groups", :region "us-east-2"},
+    :ssl-common-name "resource-groups.us-east-2.amazonaws.com",
+    :endpoint "https://resource-groups.us-east-2.amazonaws.com",
+    :signature-version :v4},
+   "ap-southeast-2"
+   {:credential-scope
+    {:service "resource-groups", :region "ap-southeast-2"},
+    :ssl-common-name "resource-groups.ap-southeast-2.amazonaws.com",
+    :endpoint "https://resource-groups.ap-southeast-2.amazonaws.com",
+    :signature-version :v4},
+   "sa-east-1"
+   {:credential-scope
+    {:service "resource-groups", :region "sa-east-1"},
+    :ssl-common-name "resource-groups.sa-east-1.amazonaws.com",
+    :endpoint "https://resource-groups.sa-east-1.amazonaws.com",
+    :signature-version :v4},
+   "ap-southeast-1"
+   {:credential-scope
+    {:service "resource-groups", :region "ap-southeast-1"},
+    :ssl-common-name "resource-groups.ap-southeast-1.amazonaws.com",
+    :endpoint "https://resource-groups.ap-southeast-1.amazonaws.com",
+    :signature-version :v4},
+   "ap-northeast-2"
+   {:credential-scope
+    {:service "resource-groups", :region "ap-northeast-2"},
+    :ssl-common-name "resource-groups.ap-northeast-2.amazonaws.com",
+    :endpoint "https://resource-groups.ap-northeast-2.amazonaws.com",
+    :signature-version :v4},
+   "ca-central-1"
+   {:credential-scope
+    {:service "resource-groups", :region "ca-central-1"},
+    :ssl-common-name "resource-groups.ca-central-1.amazonaws.com",
+    :endpoint "https://resource-groups.ca-central-1.amazonaws.com",
+    :signature-version :v4},
+   "eu-central-1"
+   {:credential-scope
+    {:service "resource-groups", :region "eu-central-1"},
+    :ssl-common-name "resource-groups.eu-central-1.amazonaws.com",
+    :endpoint "https://resource-groups.eu-central-1.amazonaws.com",
+    :signature-version :v4},
+   "eu-west-2"
+   {:credential-scope
+    {:service "resource-groups", :region "eu-west-2"},
+    :ssl-common-name "resource-groups.eu-west-2.amazonaws.com",
+    :endpoint "https://resource-groups.eu-west-2.amazonaws.com",
+    :signature-version :v4},
+   "us-west-2"
+   {:credential-scope
+    {:service "resource-groups", :region "us-west-2"},
+    :ssl-common-name "resource-groups.us-west-2.amazonaws.com",
+    :endpoint "https://resource-groups.us-west-2.amazonaws.com",
+    :signature-version :v4},
+   "us-east-1"
+   {:credential-scope
+    {:service "resource-groups", :region "us-east-1"},
+    :ssl-common-name "resource-groups.us-east-1.amazonaws.com",
+    :endpoint "https://resource-groups.us-east-1.amazonaws.com",
+    :signature-version :v4},
+   "us-west-1"
+   {:credential-scope
+    {:service "resource-groups", :region "us-west-1"},
+    :ssl-common-name "resource-groups.us-west-1.amazonaws.com",
+    :endpoint "https://resource-groups.us-west-1.amazonaws.com",
+    :signature-version :v4},
+   "ap-south-1"
+   {:credential-scope
+    {:service "resource-groups", :region "ap-south-1"},
+    :ssl-common-name "resource-groups.ap-south-1.amazonaws.com",
+    :endpoint "https://resource-groups.ap-south-1.amazonaws.com",
+    :signature-version :v4}})
 
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27.internal-server-error-exception/message (clojure.spec.alpha/and :portkey.aws.resource-groups.-2017-11-27/error-message))
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/internal-server-error-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.resource-groups.-2017-11-27.internal-server-error-exception/Message] :locations {}))
@@ -23,12 +108,12 @@
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27.resource-query/type (clojure.spec.alpha/and :portkey.aws.resource-groups.-2017-11-27/query-type))
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/resource-query (portkey.aws/json-keys :req-un [:portkey.aws.resource-groups.-2017-11-27.resource-query/Type :portkey.aws.resource-groups.-2017-11-27/Query] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/resource-identifier-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.resource-groups.-2017-11-27/resource-identifier) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/resource-identifier-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.resource-groups.-2017-11-27/resource-identifier) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27.forbidden-exception/message (clojure.spec.alpha/and :portkey.aws.resource-groups.-2017-11-27/error-message))
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/forbidden-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.resource-groups.-2017-11-27.forbidden-exception/Message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/group-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.resource-groups.-2017-11-27/group) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/group-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.resource-groups.-2017-11-27/group) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/update-group-query-output (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.resource-groups.-2017-11-27/GroupQuery] :locations {}))
 
@@ -36,7 +121,7 @@
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27.untag-output/keys (clojure.spec.alpha/and :portkey.aws.resource-groups.-2017-11-27/tag-key-list))
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/untag-output (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.resource-groups.-2017-11-27.untag-output/Arn :portkey.aws.resource-groups.-2017-11-27.untag-output/Keys] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/tag-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 1 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 128)) (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/tag-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30632__auto__] (clojure.core/<= 1 (clojure.core/count s__30632__auto__))) (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 128)) (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$" s__30634__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27.list-group-resources-output/resource-identifiers (clojure.spec.alpha/and :portkey.aws.resource-groups.-2017-11-27/resource-identifier-list))
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/list-group-resources-output (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.resource-groups.-2017-11-27.list-group-resources-output/ResourceIdentifiers :portkey.aws.resource-groups.-2017-11-27/NextToken] :locations {}))
@@ -45,7 +130,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/group-query (portkey.aws/json-keys :req-un [:portkey.aws.resource-groups.-2017-11-27/GroupName :portkey.aws.resource-groups.-2017-11-27/ResourceQuery] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/group-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 1 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 128)) (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_\.-]+" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/group-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30632__auto__] (clojure.core/<= 1 (clojure.core/count s__30632__auto__))) (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 128)) (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_\.-]+" s__30634__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27.update-group-input/description (clojure.spec.alpha/and :portkey.aws.resource-groups.-2017-11-27/group-description))
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/update-group-input (portkey.aws/json-keys :req-un [:portkey.aws.resource-groups.-2017-11-27/GroupName] :opt-un [:portkey.aws.resource-groups.-2017-11-27.update-group-input/Description] :locations {}))
@@ -59,12 +144,12 @@
 
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/next-token (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/error-message (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 1 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 1024))))
+(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/error-message (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30632__auto__] (clojure.core/<= 1 (clojure.core/count s__30632__auto__))) (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 1024))))
 
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27.too-many-requests-exception/message (clojure.spec.alpha/and :portkey.aws.resource-groups.-2017-11-27/error-message))
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/too-many-requests-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.resource-groups.-2017-11-27.too-many-requests-exception/Message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/query (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 2048))))
+(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/query (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 2048))))
 
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27.tag-output/arn (clojure.spec.alpha/and :portkey.aws.resource-groups.-2017-11-27/group-arn))
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/tag-output (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.resource-groups.-2017-11-27.tag-output/Arn :portkey.aws.resource-groups.-2017-11-27/Tags] :locations {}))
@@ -72,11 +157,11 @@
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27.get-tags-input/arn (clojure.spec.alpha/and :portkey.aws.resource-groups.-2017-11-27/group-arn))
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/get-tags-input (portkey.aws/json-keys :req-un [:portkey.aws.resource-groups.-2017-11-27.get-tags-input/Arn] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/tag-key-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.resource-groups.-2017-11-27/tag-key) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/tag-key-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.resource-groups.-2017-11-27/tag-key) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/search-resources-input (portkey.aws/json-keys :req-un [:portkey.aws.resource-groups.-2017-11-27/ResourceQuery] :opt-un [:portkey.aws.resource-groups.-2017-11-27/MaxResults :portkey.aws.resource-groups.-2017-11-27/NextToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/tag-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 0 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 256)) (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/tag-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30632__auto__] (clojure.core/<= 0 (clojure.core/count s__30632__auto__))) (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 256)) (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$" s__30634__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27.search-resources-output/resource-identifiers (clojure.spec.alpha/and :portkey.aws.resource-groups.-2017-11-27/resource-identifier-list))
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/search-resources-output (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.resource-groups.-2017-11-27.search-resources-output/ResourceIdentifiers :portkey.aws.resource-groups.-2017-11-27/NextToken] :locations {}))
@@ -90,7 +175,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/update-group-query-input (portkey.aws/json-keys :req-un [:portkey.aws.resource-groups.-2017-11-27/GroupName :portkey.aws.resource-groups.-2017-11-27/ResourceQuery] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/resource-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"AWS::[a-zA-Z0-9]+::\w+" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/resource-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"AWS::[a-zA-Z0-9]+::\w+" s__30634__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/resource-identifier (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.resource-groups.-2017-11-27/ResourceArn :portkey.aws.resource-groups.-2017-11-27/ResourceType] :locations {}))
 
@@ -103,13 +188,13 @@
 
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/get-group-input (portkey.aws/json-keys :req-un [:portkey.aws.resource-groups.-2017-11-27/GroupName] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/query-type (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"TAG_FILTERS_1_0" "TAG_FILTERS_1_0", :tag-filters-1-0 "TAG_FILTERS_1_0"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/query-type (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"TAG_FILTERS_1_0" "TAG_FILTERS_1_0", :tag-filters-1-0 "TAG_FILTERS_1_0"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/resource-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"arn:aws:[a-z0-9]*:([a-z]{2}-[a-z]+-\d{1})?:([0-9]{12})?:.+" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/resource-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"arn:aws:[a-z0-9]*:([a-z]{2}-[a-z]+-\d{1})?:([0-9]{12})?:.+" s__30634__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/group-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"arn:aws:resource-groups:[a-z]{2}-[a-z]+-\d{1}:[0-9]{12}:group/[a-zA-Z0-9_\.-]{1,128}" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/group-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"arn:aws:resource-groups:[a-z]{2}-[a-z]+-\d{1}:[0-9]{12}:group/[a-zA-Z0-9_\.-]{1,128}" s__30634__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/max-results (clojure.spec.alpha/and clojure.core/int? (fn* [p1__14021__14022__auto__] (clojure.core/<= 1 p1__14021__14022__auto__)) (fn* [p1__14023__14024__auto__] (clojure.core/<= p1__14023__14024__auto__ 50))))
+(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/max-results (clojure.spec.alpha/and clojure.core/int? (fn* [p1__30692__30693__auto__] (clojure.core/<= 1 p1__30692__30693__auto__)) (fn* [p1__30694__30695__auto__] (clojure.core/<= p1__30694__30695__auto__ 50))))
 
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27.get-tags-output/arn (clojure.spec.alpha/and :portkey.aws.resource-groups.-2017-11-27/group-arn))
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/get-tags-output (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.resource-groups.-2017-11-27.get-tags-output/Arn :portkey.aws.resource-groups.-2017-11-27/Tags] :locations {}))
@@ -126,7 +211,7 @@
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27.untag-input/keys (clojure.spec.alpha/and :portkey.aws.resource-groups.-2017-11-27/tag-key-list))
 (clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/untag-input (portkey.aws/json-keys :req-un [:portkey.aws.resource-groups.-2017-11-27.untag-input/Arn :portkey.aws.resource-groups.-2017-11-27.untag-input/Keys] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/group-description (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 512)) (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"[\sa-zA-Z0-9_\.-]+" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.resource-groups.-2017-11-27/group-description (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 512)) (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"[\sa-zA-Z0-9_\.-]+" s__30634__auto__))))
 
 (clojure.core/defn delete-group ([delete-group-input] (portkey.aws/-rest-json-call portkey.aws.resource-groups.-2017-11-27/endpoints "DELETE" "/groups/{GroupName}" delete-group-input :portkey.aws.resource-groups.-2017-11-27/delete-group-input {:payload nil, :move {}, :headers {}, :uri {"GroupName" "GroupName"}, :querystring {}} nil :portkey.aws.resource-groups.-2017-11-27/delete-group-output {"BadRequestException" :portkey.aws.resource-groups.-2017-11-27/bad-request-exception, "ForbiddenException" :portkey.aws.resource-groups.-2017-11-27/forbidden-exception, "NotFoundException" :portkey.aws.resource-groups.-2017-11-27/not-found-exception, "MethodNotAllowedException" :portkey.aws.resource-groups.-2017-11-27/method-not-allowed-exception, "TooManyRequestsException" :portkey.aws.resource-groups.-2017-11-27/too-many-requests-exception, "InternalServerErrorException" :portkey.aws.resource-groups.-2017-11-27/internal-server-error-exception})))
 (clojure.spec.alpha/fdef delete-group :args (clojure.spec.alpha/tuple :portkey.aws.resource-groups.-2017-11-27/delete-group-input) :ret (clojure.spec.alpha/and :portkey.aws.resource-groups.-2017-11-27/delete-group-output))

@@ -37,10 +37,20 @@
     :ssl-common-name "sns.ap-southeast-1.amazonaws.com",
     :endpoint "https://sns.ap-southeast-1.amazonaws.com",
     :signature-version :v4},
+   "cn-northwest-1"
+   {:credential-scope {:service "sns", :region "cn-northwest-1"},
+    :ssl-common-name "sns.cn-northwest-1.amazonaws.com.cn",
+    :endpoint "https://sns.cn-northwest-1.amazonaws.com.cn",
+    :signature-version :v4},
    "ap-northeast-2"
    {:credential-scope {:service "sns", :region "ap-northeast-2"},
     :ssl-common-name "sns.ap-northeast-2.amazonaws.com",
     :endpoint "https://sns.ap-northeast-2.amazonaws.com",
+    :signature-version :v4},
+   "eu-west-3"
+   {:credential-scope {:service "sns", :region "eu-west-3"},
+    :ssl-common-name "sns.eu-west-3.amazonaws.com",
+    :endpoint "https://sns.eu-west-3.amazonaws.com",
     :signature-version :v4},
    "ca-central-1"
    {:credential-scope {:service "sns", :region "ca-central-1"},

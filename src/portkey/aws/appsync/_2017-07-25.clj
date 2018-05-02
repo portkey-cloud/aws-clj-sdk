@@ -22,7 +22,7 @@
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25.bad-request-exception/message (clojure.spec.alpha/and :portkey.aws.appsync.-2017-07-25/error-message))
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/bad-request-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.appsync.-2017-07-25.bad-request-exception/message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/schema-status (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"PROCESSING" "PROCESSING", :processing "PROCESSING", "ACTIVE" "ACTIVE", :active "ACTIVE", "DELETING" "DELETING", :deleting "DELETING"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/schema-status (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"PROCESSING" "PROCESSING", :processing "PROCESSING", "ACTIVE" "ACTIVE", :active "ACTIVE", "DELETING" "DELETING", :deleting "DELETING"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25.update-data-source-request/api-id (clojure.spec.alpha/and :portkey.aws.appsync.-2017-07-25/string))
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25.update-data-source-request/name (clojure.spec.alpha/and :portkey.aws.appsync.-2017-07-25/resource-name))
@@ -41,7 +41,7 @@
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25.type/format (clojure.spec.alpha/and :portkey.aws.appsync.-2017-07-25/type-definition-format))
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/type (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.appsync.-2017-07-25.type/name :portkey.aws.appsync.-2017-07-25.type/description :portkey.aws.appsync.-2017-07-25.type/arn :portkey.aws.appsync.-2017-07-25.type/definition :portkey.aws.appsync.-2017-07-25.type/format] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/data-source-type (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"AWS_LAMBDA" "AWS_LAMBDA", :aws-lambda "AWS_LAMBDA", "AMAZON_DYNAMODB" "AMAZON_DYNAMODB", :amazon-dynamodb "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH" "AMAZON_ELASTICSEARCH", :amazon-elasticsearch "AMAZON_ELASTICSEARCH", "NONE" "NONE", :none "NONE"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/data-source-type (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"AWS_LAMBDA" "AWS_LAMBDA", :aws-lambda "AWS_LAMBDA", "AMAZON_DYNAMODB" "AMAZON_DYNAMODB", :amazon-dynamodb "AMAZON_DYNAMODB", "AMAZON_ELASTICSEARCH" "AMAZON_ELASTICSEARCH", :amazon-elasticsearch "AMAZON_ELASTICSEARCH", "NONE" "NONE", :none "NONE"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25.api-limit-exceeded-exception/message (clojure.spec.alpha/and :portkey.aws.appsync.-2017-07-25/string))
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/api-limit-exceeded-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.appsync.-2017-07-25.api-limit-exceeded-exception/message] :locations {}))
@@ -80,7 +80,7 @@
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25.list-api-keys-response/next-token (clojure.spec.alpha/and :portkey.aws.appsync.-2017-07-25/pagination-token))
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/list-api-keys-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.appsync.-2017-07-25.list-api-keys-response/apiKeys :portkey.aws.appsync.-2017-07-25.list-api-keys-response/nextToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/graphql-apis (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.appsync.-2017-07-25/graphql-api) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/graphql-apis (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.appsync.-2017-07-25/graphql-api) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25.delete-api-key-request/api-id (clojure.spec.alpha/and :portkey.aws.appsync.-2017-07-25/string))
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25.delete-api-key-request/id (clojure.spec.alpha/and :portkey.aws.appsync.-2017-07-25/string))
@@ -97,12 +97,12 @@
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25.list-resolvers-request/max-results (clojure.spec.alpha/and :portkey.aws.appsync.-2017-07-25/max-results))
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/list-resolvers-request (portkey.aws/json-keys :req-un [:portkey.aws.appsync.-2017-07-25.list-resolvers-request/apiId :portkey.aws.appsync.-2017-07-25.list-resolvers-request/typeName] :opt-un [:portkey.aws.appsync.-2017-07-25.list-resolvers-request/nextToken :portkey.aws.appsync.-2017-07-25.list-resolvers-request/maxResults] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/default-action (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"ALLOW" "ALLOW", :allow "ALLOW", "DENY" "DENY", :deny "DENY"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/default-action (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"ALLOW" "ALLOW", :allow "ALLOW", "DENY" "DENY", :deny "DENY"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25.delete-graphql-api-request/api-id (clojure.spec.alpha/and :portkey.aws.appsync.-2017-07-25/string))
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/delete-graphql-api-request (portkey.aws/json-keys :req-un [:portkey.aws.appsync.-2017-07-25.delete-graphql-api-request/apiId] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/pagination-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"[\\S]+" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/pagination-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"[\\S]+" s__30634__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25.limit-exceeded-exception/message (clojure.spec.alpha/and :portkey.aws.appsync.-2017-07-25/string))
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/limit-exceeded-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.appsync.-2017-07-25.limit-exceeded-exception/message] :locations {}))
@@ -127,7 +127,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/delete-resolver-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/type-definition-format (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"SDL" "SDL", :sdl "SDL", "JSON" "JSON", :json "JSON"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/type-definition-format (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"SDL" "SDL", :sdl "SDL", "JSON" "JSON", :json "JSON"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25.list-resolvers-response/resolvers (clojure.spec.alpha/and :portkey.aws.appsync.-2017-07-25/resolvers))
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25.list-resolvers-response/next-token (clojure.spec.alpha/and :portkey.aws.appsync.-2017-07-25/pagination-token))
@@ -139,7 +139,7 @@
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25.create-data-source-response/data-source (clojure.spec.alpha/and :portkey.aws.appsync.-2017-07-25/data-source))
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/create-data-source-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.appsync.-2017-07-25.create-data-source-response/dataSource] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/type-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.appsync.-2017-07-25/type) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/type-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.appsync.-2017-07-25/type) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25.list-graphql-apis-request/next-token (clojure.spec.alpha/and :portkey.aws.appsync.-2017-07-25/pagination-token))
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25.list-graphql-apis-request/max-results (clojure.spec.alpha/and :portkey.aws.appsync.-2017-07-25/max-results))
@@ -158,16 +158,16 @@
 
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/error-message (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/output-type (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"SDL" "SDL", :sdl "SDL", "JSON" "JSON", :json "JSON"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/output-type (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"SDL" "SDL", :sdl "SDL", "JSON" "JSON", :json "JSON"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25.internal-failure-exception/message (clojure.spec.alpha/and :portkey.aws.appsync.-2017-07-25/string))
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/internal-failure-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.appsync.-2017-07-25.internal-failure-exception/message] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/delete-api-key-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/data-sources (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.appsync.-2017-07-25/data-source) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/data-sources (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.appsync.-2017-07-25/data-source) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/resolvers (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.appsync.-2017-07-25/resolver) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/resolvers (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.appsync.-2017-07-25/resolver) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25.delete-resolver-request/api-id (clojure.spec.alpha/and :portkey.aws.appsync.-2017-07-25/string))
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25.delete-resolver-request/type-name (clojure.spec.alpha/and :portkey.aws.appsync.-2017-07-25/resource-name))
@@ -200,7 +200,7 @@
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25.create-api-key-request/expires (clojure.spec.alpha/and :portkey.aws.appsync.-2017-07-25/long))
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/create-api-key-request (portkey.aws/json-keys :req-un [:portkey.aws.appsync.-2017-07-25.create-api-key-request/apiId] :opt-un [:portkey.aws.appsync.-2017-07-25.create-api-key-request/description :portkey.aws.appsync.-2017-07-25.create-api-key-request/expires] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/resource-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"[_A-Za-z][_0-9A-Za-z]*" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/resource-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"[_A-Za-z][_0-9A-Za-z]*" s__30634__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/string (clojure.spec.alpha/and clojure.core/string?))
 
@@ -208,9 +208,9 @@
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25.delete-type-request/type-name (clojure.spec.alpha/and :portkey.aws.appsync.-2017-07-25/resource-name))
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/delete-type-request (portkey.aws/json-keys :req-un [:portkey.aws.appsync.-2017-07-25.delete-type-request/apiId :portkey.aws.appsync.-2017-07-25.delete-type-request/typeName] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/authentication-type (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"API_KEY" "API_KEY", :api-key "API_KEY", "AWS_IAM" "AWS_IAM", :aws-iam "AWS_IAM", "AMAZON_COGNITO_USER_POOLS" "AMAZON_COGNITO_USER_POOLS", :amazon-cognito-user-pools "AMAZON_COGNITO_USER_POOLS"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/authentication-type (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"API_KEY" "API_KEY", :api-key "API_KEY", "AWS_IAM" "AWS_IAM", :aws-iam "AWS_IAM", "AMAZON_COGNITO_USER_POOLS" "AMAZON_COGNITO_USER_POOLS", :amazon-cognito-user-pools "AMAZON_COGNITO_USER_POOLS"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/mapping-template (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 0 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 65536))))
+(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/mapping-template (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30632__auto__] (clojure.core/<= 0 (clojure.core/count s__30632__auto__))) (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 65536))))
 
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25.data-source/data-source-arn (clojure.spec.alpha/and :portkey.aws.appsync.-2017-07-25/string))
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25.data-source/name (clojure.spec.alpha/and :portkey.aws.appsync.-2017-07-25/resource-name))
@@ -267,7 +267,7 @@
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25.create-resolver-response/resolver (clojure.spec.alpha/and :portkey.aws.appsync.-2017-07-25/resolver))
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/create-resolver-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.appsync.-2017-07-25.create-resolver-response/resolver] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/api-keys (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.appsync.-2017-07-25/api-key) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/api-keys (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.appsync.-2017-07-25/api-key) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/long clojure.core/int?)
 
@@ -289,7 +289,7 @@
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25.api-key-validity-out-of-bounds-exception/message (clojure.spec.alpha/and :portkey.aws.appsync.-2017-07-25/string))
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/api-key-validity-out-of-bounds-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.appsync.-2017-07-25.api-key-validity-out-of-bounds-exception/message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/max-results (clojure.spec.alpha/and clojure.core/int? (fn* [p1__14021__14022__auto__] (clojure.core/<= 0 p1__14021__14022__auto__)) (fn* [p1__14023__14024__auto__] (clojure.core/<= p1__14023__14024__auto__ 25))))
+(clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25/max-results (clojure.spec.alpha/and clojure.core/int? (fn* [p1__30692__30693__auto__] (clojure.core/<= 0 p1__30692__30693__auto__)) (fn* [p1__30694__30695__auto__] (clojure.core/<= p1__30694__30695__auto__ 25))))
 
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25.delete-data-source-request/api-id (clojure.spec.alpha/and :portkey.aws.appsync.-2017-07-25/string))
 (clojure.spec.alpha/def :portkey.aws.appsync.-2017-07-25.delete-data-source-request/name (clojure.spec.alpha/and :portkey.aws.appsync.-2017-07-25/resource-name))

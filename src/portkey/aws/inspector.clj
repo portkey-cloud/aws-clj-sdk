@@ -12,6 +12,11 @@
     :ssl-common-name "inspector.eu-west-1.amazonaws.com",
     :endpoint "https://inspector.eu-west-1.amazonaws.com",
     :signature-version :v4},
+   "us-east-2"
+   {:credential-scope {:service "inspector", :region "us-east-2"},
+    :ssl-common-name "inspector.us-east-2.amazonaws.com",
+    :endpoint "https://inspector.us-east-2.amazonaws.com",
+    :signature-version :v4},
    "ap-southeast-2"
    {:credential-scope {:service "inspector", :region "ap-southeast-2"},
     :ssl-common-name "inspector.ap-southeast-2.amazonaws.com",
@@ -21,6 +26,11 @@
    {:credential-scope {:service "inspector", :region "ap-northeast-2"},
     :ssl-common-name "inspector.ap-northeast-2.amazonaws.com",
     :endpoint "https://inspector.ap-northeast-2.amazonaws.com",
+    :signature-version :v4},
+   "eu-central-1"
+   {:credential-scope {:service "inspector", :region "eu-central-1"},
+    :ssl-common-name "inspector.eu-central-1.amazonaws.com",
+    :endpoint "https://inspector.eu-central-1.amazonaws.com",
     :signature-version :v4},
    "us-west-2"
    {:credential-scope {:service "inspector", :region "us-west-2"},

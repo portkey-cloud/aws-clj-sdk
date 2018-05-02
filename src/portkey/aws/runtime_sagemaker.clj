@@ -11,9 +11,9 @@
 
 (clojure.spec.alpha/def :portkey.aws.runtime-sagemaker/status-code (clojure.spec.alpha/and clojure.core/int?))
 
-(clojure.spec.alpha/def :portkey.aws.runtime-sagemaker/header (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 1024))))
+(clojure.spec.alpha/def :portkey.aws.runtime-sagemaker/header (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 1024))))
 
-(clojure.spec.alpha/def :portkey.aws.runtime-sagemaker/endpoint-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 63)) (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9](-*[a-zA-Z0-9])*" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.runtime-sagemaker/endpoint-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 63)) (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9](-*[a-zA-Z0-9])*" s__30634__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.runtime-sagemaker/service-unavailable (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.runtime-sagemaker/Message] :locations {}))
 
@@ -23,7 +23,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.runtime-sagemaker/body-blob (clojure.spec.alpha/and clojure.core/bytes? (clojure.spec.alpha/conformer portkey.aws/base64-encode portkey.aws/base64-decode)))
 
-(clojure.spec.alpha/def :portkey.aws.runtime-sagemaker/message (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 2048))))
+(clojure.spec.alpha/def :portkey.aws.runtime-sagemaker/message (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 2048))))
 
 (clojure.spec.alpha/def :portkey.aws.runtime-sagemaker/internal-failure (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.runtime-sagemaker/Message] :locations {}))
 

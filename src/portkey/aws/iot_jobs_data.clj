@@ -27,11 +27,11 @@
 
 (clojure.spec.alpha/def :portkey.aws.iot-jobs-data/include-job-document clojure.core/boolean?)
 
-(clojure.spec.alpha/def :portkey.aws.iot-jobs-data/job-execution-summary-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot-jobs-data/job-execution-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot-jobs-data/job-execution-summary-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot-jobs-data/job-execution-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot-jobs-data/last-updated-at clojure.core/int?)
 
-(clojure.spec.alpha/def :portkey.aws.iot-jobs-data/job-document (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 32768))))
+(clojure.spec.alpha/def :portkey.aws.iot-jobs-data/job-document (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 32768))))
 
 (clojure.spec.alpha/def :portkey.aws.iot-jobs-data.get-pending-job-executions-response/in-progress-jobs (clojure.spec.alpha/and :portkey.aws.iot-jobs-data/job-execution-summary-list))
 (clojure.spec.alpha/def :portkey.aws.iot-jobs-data.get-pending-job-executions-response/queued-jobs (clojure.spec.alpha/and :portkey.aws.iot-jobs-data/job-execution-summary-list))
@@ -65,22 +65,22 @@
 (clojure.spec.alpha/def :portkey.aws.iot-jobs-data.job-execution-state/version-number (clojure.spec.alpha/and :portkey.aws.iot-jobs-data/version-number))
 (clojure.spec.alpha/def :portkey.aws.iot-jobs-data/job-execution-state (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot-jobs-data.job-execution-state/status :portkey.aws.iot-jobs-data.job-execution-state/statusDetails :portkey.aws.iot-jobs-data.job-execution-state/versionNumber] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot-jobs-data/details-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 1 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 1024)) (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"[^\p{C}]*+" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot-jobs-data/details-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30632__auto__] (clojure.core/<= 1 (clojure.core/count s__30632__auto__))) (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 1024)) (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"[^\p{C}]*+" s__30634__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot-jobs-data.invalid-state-transition-exception/message (clojure.spec.alpha/and :portkey.aws.iot-jobs-data/error-message))
 (clojure.spec.alpha/def :portkey.aws.iot-jobs-data/invalid-state-transition-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot-jobs-data.invalid-state-transition-exception/message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot-jobs-data/thing-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 1 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 128)) (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"[a-zA-Z0-9:_-]+" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot-jobs-data/thing-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30632__auto__] (clojure.core/<= 1 (clojure.core/count s__30632__auto__))) (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 128)) (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"[a-zA-Z0-9:_-]+" s__30634__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.iot-jobs-data/job-execution-status (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"CANCELED" "CANCELED", "IN_PROGRESS" "IN_PROGRESS", :in-progress "IN_PROGRESS", :rejected "REJECTED", "REMOVED" "REMOVED", :queued "QUEUED", :canceled "CANCELED", "SUCCEEDED" "SUCCEEDED", "REJECTED" "REJECTED", "QUEUED" "QUEUED", "FAILED" "FAILED", :removed "REMOVED", :failed "FAILED", :succeeded "SUCCEEDED"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.iot-jobs-data/job-execution-status (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"CANCELED" "CANCELED", "IN_PROGRESS" "IN_PROGRESS", :in-progress "IN_PROGRESS", :rejected "REJECTED", "REMOVED" "REMOVED", :queued "QUEUED", :canceled "CANCELED", "SUCCEEDED" "SUCCEEDED", "REJECTED" "REJECTED", "QUEUED" "QUEUED", "FAILED" "FAILED", :removed "REMOVED", :failed "FAILED", :succeeded "SUCCEEDED"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.iot-jobs-data.update-job-execution-response/execution-state (clojure.spec.alpha/and :portkey.aws.iot-jobs-data/job-execution-state))
 (clojure.spec.alpha/def :portkey.aws.iot-jobs-data.update-job-execution-response/job-document (clojure.spec.alpha/and :portkey.aws.iot-jobs-data/job-document))
 (clojure.spec.alpha/def :portkey.aws.iot-jobs-data/update-job-execution-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot-jobs-data.update-job-execution-response/executionState :portkey.aws.iot-jobs-data.update-job-execution-response/jobDocument] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot-jobs-data/details-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 1 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 128)) (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"[a-zA-Z0-9:_-]+" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot-jobs-data/details-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30632__auto__] (clojure.core/<= 1 (clojure.core/count s__30632__auto__))) (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 128)) (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"[a-zA-Z0-9:_-]+" s__30634__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.iot-jobs-data/describe-job-execution-job-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_-]+|^\$next" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot-jobs-data/describe-job-execution-job-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_-]+|^\$next" s__30634__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot-jobs-data.get-pending-job-executions-request/thing-name (clojure.spec.alpha/and :portkey.aws.iot-jobs-data/thing-name))
 (clojure.spec.alpha/def :portkey.aws.iot-jobs-data/get-pending-job-executions-request (portkey.aws/json-keys :req-un [:portkey.aws.iot-jobs-data.get-pending-job-executions-request/thingName] :opt-un [] :locations {}))
@@ -119,7 +119,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.iot-jobs-data/started-at clojure.core/int?)
 
-(clojure.spec.alpha/def :portkey.aws.iot-jobs-data/job-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 1 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 64)) (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_-]+" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot-jobs-data/job-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30632__auto__] (clojure.core/<= 1 (clojure.core/count s__30632__auto__))) (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 64)) (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_-]+" s__30634__auto__))))
 
 (clojure.core/defn describe-job-execution ([describe-job-execution-request] (portkey.aws/-rest-json-call portkey.aws.iot-jobs-data/endpoints "GET" "/things/{thingName}/jobs/{jobId}" describe-job-execution-request :portkey.aws.iot-jobs-data/describe-job-execution-request {:payload nil, :move {}, :headers {}, :uri {"jobId" "jobId", "thingName" "thingName"}, :querystring {"includeJobDocument" "includeJobDocument", "executionNumber" "executionNumber"}} nil :portkey.aws.iot-jobs-data/describe-job-execution-response {"InvalidRequestException" :portkey.aws.iot-jobs-data/invalid-request-exception, "ResourceNotFoundException" :portkey.aws.iot-jobs-data/resource-not-found-exception, "ThrottlingException" :portkey.aws.iot-jobs-data/throttling-exception, "ServiceUnavailableException" :portkey.aws.iot-jobs-data/service-unavailable-exception, "CertificateValidationException" :portkey.aws.iot-jobs-data/certificate-validation-exception, "TerminalStateException" :portkey.aws.iot-jobs-data/terminal-state-exception})))
 (clojure.spec.alpha/fdef describe-job-execution :args (clojure.spec.alpha/tuple :portkey.aws.iot-jobs-data/describe-job-execution-request) :ret (clojure.spec.alpha/and :portkey.aws.iot-jobs-data/describe-job-execution-response))

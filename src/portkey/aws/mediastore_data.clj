@@ -10,23 +10,23 @@
 (clojure.spec.alpha/def :portkey.aws.mediastore-data.list-items-request/next-token (clojure.spec.alpha/and :portkey.aws.mediastore-data/pagination-token))
 (clojure.spec.alpha/def :portkey.aws.mediastore-data/list-items-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.mediastore-data.list-items-request/Path :portkey.aws.mediastore-data.list-items-request/MaxResults :portkey.aws.mediastore-data.list-items-request/NextToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.mediastore-data/content-range-pattern (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"^bytes=\d+\-\d+/\d+$" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.mediastore-data/content-range-pattern (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"^bytes=\d+\-\d+/\d+$" s__30634__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.mediastore-data.put-object-request/body (clojure.spec.alpha/and :portkey.aws.mediastore-data/payload-blob))
 (clojure.spec.alpha/def :portkey.aws.mediastore-data.put-object-request/path (clojure.spec.alpha/and :portkey.aws.mediastore-data/path-naming))
 (clojure.spec.alpha/def :portkey.aws.mediastore-data.put-object-request/cache-control (clojure.spec.alpha/and :portkey.aws.mediastore-data/string-primitive))
 (clojure.spec.alpha/def :portkey.aws.mediastore-data/put-object-request (portkey.aws/json-keys :req-un [:portkey.aws.mediastore-data.put-object-request/Body :portkey.aws.mediastore-data.put-object-request/Path] :opt-un [:portkey.aws.mediastore-data/ContentType :portkey.aws.mediastore-data.put-object-request/CacheControl :portkey.aws.mediastore-data/StorageClass] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.mediastore-data/list-limit (clojure.spec.alpha/and clojure.core/int? (fn* [p1__14021__14022__auto__] (clojure.core/<= 1 p1__14021__14022__auto__)) (fn* [p1__14023__14024__auto__] (clojure.core/<= p1__14023__14024__auto__ 1000))))
+(clojure.spec.alpha/def :portkey.aws.mediastore-data/list-limit (clojure.spec.alpha/and clojure.core/int? (fn* [p1__30692__30693__auto__] (clojure.core/<= 1 p1__30692__30693__auto__)) (fn* [p1__30694__30695__auto__] (clojure.core/<= p1__30694__30695__auto__ 1000))))
 
 (clojure.spec.alpha/def :portkey.aws.mediastore-data.container-not-found-exception/message (clojure.spec.alpha/and :portkey.aws.mediastore-data/error-message))
 (clojure.spec.alpha/def :portkey.aws.mediastore-data/container-not-found-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.mediastore-data.container-not-found-exception/Message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.mediastore-data/sha256-hash (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 64 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 64)) (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"[0-9A-Fa-f]{64}" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.mediastore-data/sha256-hash (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30632__auto__] (clojure.core/<= 64 (clojure.core/count s__30632__auto__))) (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 64)) (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"[0-9A-Fa-f]{64}" s__30634__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.mediastore-data/pagination-token (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.mediastore-data/item-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.mediastore-data/item) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.mediastore-data/item-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.mediastore-data/item) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.mediastore-data.get-object-response/body (clojure.spec.alpha/and :portkey.aws.mediastore-data/payload-blob))
 (clojure.spec.alpha/def :portkey.aws.mediastore-data.get-object-response/cache-control (clojure.spec.alpha/and :portkey.aws.mediastore-data/string-primitive))
@@ -36,15 +36,15 @@
 (clojure.spec.alpha/def :portkey.aws.mediastore-data.get-object-response/status-code (clojure.spec.alpha/and :portkey.aws.mediastore-data/status-code))
 (clojure.spec.alpha/def :portkey.aws.mediastore-data/get-object-response (portkey.aws/json-keys :req-un [:portkey.aws.mediastore-data.get-object-response/StatusCode] :opt-un [:portkey.aws.mediastore-data.get-object-response/Body :portkey.aws.mediastore-data.get-object-response/CacheControl :portkey.aws.mediastore-data.get-object-response/ContentRange :portkey.aws.mediastore-data.get-object-response/ContentLength :portkey.aws.mediastore-data/ContentType :portkey.aws.mediastore-data/ETag :portkey.aws.mediastore-data.get-object-response/LastModified] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.mediastore-data/error-message (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 1 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 255)) (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"[ \w:\.\?-]+" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.mediastore-data/error-message (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30632__auto__] (clojure.core/<= 1 (clojure.core/count s__30632__auto__))) (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 255)) (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"[ \w:\.\?-]+" s__30634__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.mediastore-data/etag (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 1 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 64)) (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"[0-9A-Fa-f]+" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.mediastore-data/etag (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30632__auto__] (clojure.core/<= 1 (clojure.core/count s__30632__auto__))) (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 64)) (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"[0-9A-Fa-f]+" s__30634__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.mediastore-data/item-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"[A-Za-z0-9_\.\-\~]+" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.mediastore-data/item-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"[A-Za-z0-9_\.\-\~]+" s__30634__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.mediastore-data/content-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"^[\w\-\/\.]{1,255}$" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.mediastore-data/content-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"^[\w\-\/\.]{1,255}$" s__30634__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.mediastore-data/item-type (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"OBJECT" "OBJECT", :object "OBJECT", "FOLDER" "FOLDER", :folder "FOLDER"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.mediastore-data/item-type (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"OBJECT" "OBJECT", :object "OBJECT", "FOLDER" "FOLDER", :folder "FOLDER"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.mediastore-data/status-code (clojure.spec.alpha/and clojure.core/int?))
 
@@ -69,16 +69,16 @@
 (clojure.spec.alpha/def :portkey.aws.mediastore-data.describe-object-request/path (clojure.spec.alpha/and :portkey.aws.mediastore-data/path-naming))
 (clojure.spec.alpha/def :portkey.aws.mediastore-data/describe-object-request (portkey.aws/json-keys :req-un [:portkey.aws.mediastore-data.describe-object-request/Path] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.mediastore-data/path-naming (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 1 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 900)) (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"(?:[A-Za-z0-9_\.\-\~]+/){0,10}[A-Za-z0-9_\.\-\~]+" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.mediastore-data/path-naming (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30632__auto__] (clojure.core/<= 1 (clojure.core/count s__30632__auto__))) (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 900)) (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"(?:[A-Za-z0-9_\.\-\~]+/){0,10}[A-Za-z0-9_\.\-\~]+" s__30634__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.mediastore-data/range-pattern (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"^bytes=(?:\d+\-\d*|\d*\-\d+)$" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.mediastore-data/range-pattern (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"^bytes=(?:\d+\-\d*|\d*\-\d+)$" s__30634__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.mediastore-data/payload-blob (clojure.spec.alpha/and clojure.core/bytes? (clojure.spec.alpha/conformer portkey.aws/base64-encode portkey.aws/base64-decode)))
 
 (clojure.spec.alpha/def :portkey.aws.mediastore-data.internal-server-error/message (clojure.spec.alpha/and :portkey.aws.mediastore-data/error-message))
 (clojure.spec.alpha/def :portkey.aws.mediastore-data/internal-server-error (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.mediastore-data.internal-server-error/Message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.mediastore-data/storage-class (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"TEMPORAL" "TEMPORAL", :temporal "TEMPORAL"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.mediastore-data/storage-class (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"TEMPORAL" "TEMPORAL", :temporal "TEMPORAL"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.mediastore-data.object-not-found-exception/message (clojure.spec.alpha/and :portkey.aws.mediastore-data/error-message))
 (clojure.spec.alpha/def :portkey.aws.mediastore-data/object-not-found-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.mediastore-data.object-not-found-exception/Message] :locations {}))
@@ -93,7 +93,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.mediastore-data/time-stamp clojure.core/inst?)
 
-(clojure.spec.alpha/def :portkey.aws.mediastore-data/list-path-naming (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 0 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 900)) (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"/?(?:[A-Za-z0-9_\.\-\~]+/){0,10}(?:[A-Za-z0-9_\.\-\~]+)?/?" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.mediastore-data/list-path-naming (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30632__auto__] (clojure.core/<= 0 (clojure.core/count s__30632__auto__))) (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 900)) (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"/?(?:[A-Za-z0-9_\.\-\~]+/){0,10}(?:[A-Za-z0-9_\.\-\~]+)?/?" s__30634__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.mediastore-data.describe-object-response/content-length (clojure.spec.alpha/and :portkey.aws.mediastore-data/non-negative-long))
 (clojure.spec.alpha/def :portkey.aws.mediastore-data.describe-object-response/cache-control (clojure.spec.alpha/and :portkey.aws.mediastore-data/string-primitive))

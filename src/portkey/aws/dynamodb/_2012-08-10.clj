@@ -37,10 +37,25 @@
     :ssl-common-name "dynamodb.ap-southeast-1.amazonaws.com",
     :endpoint "https://dynamodb.ap-southeast-1.amazonaws.com",
     :signature-version :v4},
+   "cn-northwest-1"
+   {:credential-scope {:service "dynamodb", :region "cn-northwest-1"},
+    :ssl-common-name "dynamodb.cn-northwest-1.amazonaws.com.cn",
+    :endpoint "https://dynamodb.cn-northwest-1.amazonaws.com.cn",
+    :signature-version :v4},
    "ap-northeast-2"
    {:credential-scope {:service "dynamodb", :region "ap-northeast-2"},
     :ssl-common-name "dynamodb.ap-northeast-2.amazonaws.com",
     :endpoint "https://dynamodb.ap-northeast-2.amazonaws.com",
+    :signature-version :v4},
+   "eu-west-3"
+   {:credential-scope {:service "dynamodb", :region "eu-west-3"},
+    :ssl-common-name "dynamodb.eu-west-3.amazonaws.com",
+    :endpoint "https://dynamodb.eu-west-3.amazonaws.com",
+    :signature-version :v4},
+   "us-gov-west-1-fips"
+   {:credential-scope {:service "dynamodb", :region "us-gov-west-1"},
+    :ssl-common-name "dynamodb.us-gov-west-1.amazonaws.com",
+    :endpoint "https://dynamodb.us-gov-west-1.amazonaws.com",
     :signature-version :v4},
    "ca-central-1"
    {:credential-scope {:service "dynamodb", :region "ca-central-1"},

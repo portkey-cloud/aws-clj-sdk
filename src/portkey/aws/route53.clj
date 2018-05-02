@@ -37,6 +37,11 @@
     :ssl-common-name "route53.amazonaws.com",
     :endpoint "https://route53.amazonaws.com",
     :signature-version :v4},
+   "eu-west-3"
+   {:credential-scope {:service "route53", :region "us-east-1"},
+    :ssl-common-name "route53.amazonaws.com",
+    :endpoint "https://route53.amazonaws.com",
+    :signature-version :v4},
    "ca-central-1"
    {:credential-scope {:service "route53", :region "us-east-1"},
     :ssl-common-name "route53.amazonaws.com",

@@ -2,7 +2,7 @@
 
 (def endpoints 'nil)
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/messages (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iotanalytics.-2017-11-27/message) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/messages (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iotanalytics.-2017-11-27/message) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.list-datastores-request/next-token (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/next-token))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.list-datastores-request/max-results (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/max-results))
@@ -14,11 +14,11 @@
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.describe-datastore-request/datastore-name (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/datastore-name))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/describe-datastore-request (portkey.aws/json-keys :req-un [:portkey.aws.iotanalytics.-2017-11-27.describe-datastore-request/datastoreName] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/activity-batch-size (clojure.spec.alpha/and clojure.core/int? (fn* [p1__14021__14022__auto__] (clojure.core/<= 1 p1__14021__14022__auto__)) (fn* [p1__14023__14024__auto__] (clojure.core/<= p1__14023__14024__auto__ 1000))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/activity-batch-size (clojure.spec.alpha/and clojure.core/int? (fn* [p1__30692__30693__auto__] (clojure.core/<= 1 p1__30692__30693__auto__)) (fn* [p1__30694__30695__auto__] (clojure.core/<= p1__30694__30695__auto__ 1000))))
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/cancel-pipeline-reprocessing-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/attribute-names (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iotanalytics.-2017-11-27/attribute-name :min-count 1 :max-count 50) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/attribute-names (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iotanalytics.-2017-11-27/attribute-name :min-count 1 :max-count 50) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/dataset-content-version (clojure.spec.alpha/and clojure.core/string?))
 
@@ -65,7 +65,7 @@
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.invalid-request-exception/message (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/error-message))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/invalid-request-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iotanalytics.-2017-11-27.invalid-request-exception/message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/message-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 1 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 128))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/message-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30632__auto__] (clojure.core/<= 1 (clojure.core/count s__30632__auto__))) (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 128))))
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.start-pipeline-reprocessing-response/reprocessing-id (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/reprocessing-id))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/start-pipeline-reprocessing-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iotanalytics.-2017-11-27.start-pipeline-reprocessing-response/reprocessingId] :locations {}))
@@ -85,13 +85,13 @@
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.create-pipeline-request/pipeline-activities (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/pipeline-activities))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/create-pipeline-request (portkey.aws/json-keys :req-un [:portkey.aws.iotanalytics.-2017-11-27.create-pipeline-request/pipelineName :portkey.aws.iotanalytics.-2017-11-27.create-pipeline-request/pipelineActivities] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/attribute-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 1 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 256))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/attribute-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30632__auto__] (clojure.core/<= 1 (clojure.core/count s__30632__auto__))) (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 256))))
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.list-datastores-response/datastore-summaries (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/datastore-summaries))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.list-datastores-response/next-token (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/next-token))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/list-datastores-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iotanalytics.-2017-11-27.list-datastores-response/datastoreSummaries :portkey.aws.iotanalytics.-2017-11-27.list-datastores-response/nextToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/dataset-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 1 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 128)) (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9_]+$" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/dataset-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30632__auto__] (clojure.core/<= 1 (clojure.core/count s__30632__auto__))) (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 128)) (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9_]+$" s__30634__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/error-message (clojure.spec.alpha/and clojure.core/string?))
 
@@ -104,7 +104,7 @@
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.device-shadow-enrich-activity/next (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/activity-name))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/device-shadow-enrich-activity (portkey.aws/json-keys :req-un [:portkey.aws.iotanalytics.-2017-11-27.device-shadow-enrich-activity/name :portkey.aws.iotanalytics.-2017-11-27.device-shadow-enrich-activity/attribute :portkey.aws.iotanalytics.-2017-11-27.device-shadow-enrich-activity/thingName :portkey.aws.iotanalytics.-2017-11-27.device-shadow-enrich-activity/roleArn] :opt-un [:portkey.aws.iotanalytics.-2017-11-27.device-shadow-enrich-activity/next] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/pipeline-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 1 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 128)) (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9_]+$" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/pipeline-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30632__auto__] (clojure.core/<= 1 (clojure.core/count s__30632__auto__))) (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 128)) (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9_]+$" s__30634__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.select-attributes-activity/name (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/activity-name))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.select-attributes-activity/attributes (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/attribute-names))
@@ -115,16 +115,16 @@
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.batch-put-message-request/messages (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/messages))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/batch-put-message-request (portkey.aws/json-keys :req-un [:portkey.aws.iotanalytics.-2017-11-27.batch-put-message-request/channelName :portkey.aws.iotanalytics.-2017-11-27.batch-put-message-request/messages] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/dataset-content-state (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"CREATING" "CREATING", :creating "CREATING", "SUCCEEDED" "SUCCEEDED", :succeeded "SUCCEEDED", "FAILED" "FAILED", :failed "FAILED"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/dataset-content-state (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"CREATING" "CREATING", :creating "CREATING", "SUCCEEDED" "SUCCEEDED", :succeeded "SUCCEEDED", "FAILED" "FAILED", :failed "FAILED"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.create-channel-response/channel-name (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/channel-name))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.create-channel-response/channel-arn (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/channel-arn))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.create-channel-response/retention-period (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/retention-period))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/create-channel-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iotanalytics.-2017-11-27.create-channel-response/channelName :portkey.aws.iotanalytics.-2017-11-27.create-channel-response/channelArn :portkey.aws.iotanalytics.-2017-11-27.create-channel-response/retentionPeriod] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/datastore-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 1 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 128)) (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9_]+$" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/datastore-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30632__auto__] (clojure.core/<= 1 (clojure.core/count s__30632__auto__))) (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 128)) (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9_]+$" s__30634__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/role-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 20 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 2048))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/role-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30632__auto__] (clojure.core/<= 20 (clojure.core/count s__30632__auto__))) (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 2048))))
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.datastore-summary/datastore-name (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/datastore-name))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.datastore-summary/status (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/datastore-status))
@@ -163,11 +163,11 @@
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.logging-options/enabled (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/logging-enabled))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/logging-options (portkey.aws/json-keys :req-un [:portkey.aws.iotanalytics.-2017-11-27.logging-options/roleArn :portkey.aws.iotanalytics.-2017-11-27.logging-options/level :portkey.aws.iotanalytics.-2017-11-27.logging-options/enabled] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/pipeline-activities (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iotanalytics.-2017-11-27/pipeline-activity :min-count 1 :max-count 25) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/pipeline-activities (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iotanalytics.-2017-11-27/pipeline-activity :min-count 1 :max-count 25) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/message-payloads (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iotanalytics.-2017-11-27/message-payload :min-count 1 :max-count 10) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/message-payloads (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iotanalytics.-2017-11-27/message-payload :min-count 1 :max-count 10) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/datastore-summaries (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iotanalytics.-2017-11-27/datastore-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/datastore-summaries (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iotanalytics.-2017-11-27/datastore-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.resource-already-exists-exception/message (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/error-message))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/resource-already-exists-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iotanalytics.-2017-11-27.resource-already-exists-exception/message :portkey.aws.iotanalytics.-2017-11-27/resourceId :portkey.aws.iotanalytics.-2017-11-27/resourceArn] :locations {}))
@@ -177,9 +177,9 @@
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/dataset-arn (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/dataset-entries (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iotanalytics.-2017-11-27/dataset-entry) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/dataset-entries (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iotanalytics.-2017-11-27/dataset-entry) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/reprocessing-status (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"RUNNING" "RUNNING", :running "RUNNING", "SUCCEEDED" "SUCCEEDED", :succeeded "SUCCEEDED", "CANCELLED" "CANCELLED", :cancelled "CANCELLED", "FAILED" "FAILED", :failed "FAILED"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/reprocessing-status (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"RUNNING" "RUNNING", :running "RUNNING", "SUCCEEDED" "SUCCEEDED", :succeeded "SUCCEEDED", "CANCELLED" "CANCELLED", :cancelled "CANCELLED", "FAILED" "FAILED", :failed "FAILED"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/next-token (clojure.spec.alpha/and clojure.core/string?))
 
@@ -204,7 +204,7 @@
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.create-channel-request/retention-period (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/retention-period))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/create-channel-request (portkey.aws/json-keys :req-un [:portkey.aws.iotanalytics.-2017-11-27.create-channel-request/channelName] :opt-un [:portkey.aws.iotanalytics.-2017-11-27.create-channel-request/retentionPeriod] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/dataset-action-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 1 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 128)) (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9_]+$" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/dataset-action-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30632__auto__] (clojure.core/<= 1 (clojure.core/count s__30632__auto__))) (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 128)) (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9_]+$" s__30634__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.create-dataset-response/dataset-name (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/dataset-name))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.create-dataset-response/dataset-arn (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/dataset-arn))
@@ -246,14 +246,14 @@
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/error-code (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/filter-expression (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 1 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 256))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/filter-expression (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30632__auto__] (clojure.core/<= 1 (clojure.core/count s__30632__auto__))) (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 256))))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/lambda-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 1 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 64)) (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9_-]+$" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/lambda-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30632__auto__] (clojure.core/<= 1 (clojure.core/count s__30632__auto__))) (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 64)) (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9_-]+$" s__30634__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.resource-not-found-exception/message (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/error-message))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/resource-not-found-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iotanalytics.-2017-11-27.resource-not-found-exception/message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/channel-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 1 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 128)) (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9_]+$" s__13963__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/channel-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30632__auto__] (clojure.core/<= 1 (clojure.core/count s__30632__auto__))) (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 128)) (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9_]+$" s__30634__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.pipeline-activity/device-shadow-enrich (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/device-shadow-enrich-activity))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.pipeline-activity/device-registry-enrich (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/device-registry-enrich-activity))
@@ -283,7 +283,7 @@
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.message/payload (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/message-payload))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/message (portkey.aws/json-keys :req-un [:portkey.aws.iotanalytics.-2017-11-27.message/messageId :portkey.aws.iotanalytics.-2017-11-27.message/payload] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/dataset-actions (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iotanalytics.-2017-11-27/dataset-action :min-count 1 :max-count 1) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/dataset-actions (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iotanalytics.-2017-11-27/dataset-action :min-count 1 :max-count 1) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.describe-dataset-request/dataset-name (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/dataset-name))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/describe-dataset-request (portkey.aws/json-keys :req-un [:portkey.aws.iotanalytics.-2017-11-27.describe-dataset-request/datasetName] :opt-un [] :locations {}))
@@ -329,16 +329,16 @@
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.dataset-entry/datauri (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/presigneduri))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/dataset-entry (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iotanalytics.-2017-11-27.dataset-entry/entryName :portkey.aws.iotanalytics.-2017-11-27.dataset-entry/dataURI] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/batch-put-message-error-entries (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iotanalytics.-2017-11-27/batch-put-message-error-entry) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/batch-put-message-error-entries (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iotanalytics.-2017-11-27/batch-put-message-error-entry) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.update-dataset-request/dataset-name (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/dataset-name))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.update-dataset-request/actions (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/dataset-actions))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.update-dataset-request/triggers (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/dataset-triggers))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/update-dataset-request (portkey.aws/json-keys :req-un [:portkey.aws.iotanalytics.-2017-11-27.update-dataset-request/datasetName :portkey.aws.iotanalytics.-2017-11-27.update-dataset-request/actions] :opt-un [:portkey.aws.iotanalytics.-2017-11-27.update-dataset-request/triggers] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/dataset-status (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"CREATING" "CREATING", :creating "CREATING", "ACTIVE" "ACTIVE", :active "ACTIVE", "DELETING" "DELETING", :deleting "DELETING"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/dataset-status (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"CREATING" "CREATING", :creating "CREATING", "ACTIVE" "ACTIVE", :active "ACTIVE", "DELETING" "DELETING", :deleting "DELETING"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/reprocessing-summaries (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iotanalytics.-2017-11-27/reprocessing-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/reprocessing-summaries (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iotanalytics.-2017-11-27/reprocessing-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.add-attributes-activity/name (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/activity-name))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.add-attributes-activity/attributes (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/attribute-name-mapping))
@@ -347,15 +347,15 @@
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/channel-arn (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/dataset-triggers (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iotanalytics.-2017-11-27/dataset-trigger :min-count 0 :max-count 5) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/dataset-triggers (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iotanalytics.-2017-11-27/dataset-trigger :min-count 0 :max-count 5) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/sql-query (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/max-messages (clojure.spec.alpha/and clojure.core/int? (fn* [p1__14021__14022__auto__] (clojure.core/<= 1 p1__14021__14022__auto__)) (fn* [p1__14023__14024__auto__] (clojure.core/<= p1__14023__14024__auto__ 10))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/max-messages (clojure.spec.alpha/and clojure.core/int? (fn* [p1__30692__30693__auto__] (clojure.core/<= 1 p1__30692__30693__auto__)) (fn* [p1__30694__30695__auto__] (clojure.core/<= p1__30694__30695__auto__ 10))))
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/schedule-expression (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/channel-status (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"CREATING" "CREATING", :creating "CREATING", "ACTIVE" "ACTIVE", :active "ACTIVE", "DELETING" "DELETING", :deleting "DELETING"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/channel-status (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"CREATING" "CREATING", :creating "CREATING", "ACTIVE" "ACTIVE", :active "ACTIVE", "DELETING" "DELETING", :deleting "DELETING"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.list-channels-request/next-token (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/next-token))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.list-channels-request/max-results (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/max-results))
@@ -397,7 +397,7 @@
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.list-pipelines-response/next-token (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/next-token))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/list-pipelines-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iotanalytics.-2017-11-27.list-pipelines-response/pipelineSummaries :portkey.aws.iotanalytics.-2017-11-27.list-pipelines-response/nextToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/max-results (clojure.spec.alpha/and clojure.core/int? (fn* [p1__14021__14022__auto__] (clojure.core/<= 1 p1__14021__14022__auto__)) (fn* [p1__14023__14024__auto__] (clojure.core/<= p1__14023__14024__auto__ 250))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/max-results (clojure.spec.alpha/and clojure.core/int? (fn* [p1__30692__30693__auto__] (clojure.core/<= 1 p1__30692__30693__auto__)) (fn* [p1__30694__30695__auto__] (clojure.core/<= p1__30694__30695__auto__ 250))))
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.delete-datastore-request/datastore-name (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/datastore-name))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/delete-datastore-request (portkey.aws/json-keys :req-un [:portkey.aws.iotanalytics.-2017-11-27.delete-datastore-request/datastoreName] :opt-un [] :locations {}))
@@ -422,7 +422,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/resource-arn (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/datastore-status (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"CREATING" "CREATING", :creating "CREATING", "ACTIVE" "ACTIVE", :active "ACTIVE", "DELETING" "DELETING", :deleting "DELETING"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/datastore-status (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"CREATING" "CREATING", :creating "CREATING", "ACTIVE" "ACTIVE", :active "ACTIVE", "DELETING" "DELETING", :deleting "DELETING"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.schedule/expression (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/schedule-expression))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/schedule (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iotanalytics.-2017-11-27.schedule/expression] :locations {}))
@@ -442,7 +442,7 @@
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.create-datastore-request/retention-period (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/retention-period))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/create-datastore-request (portkey.aws/json-keys :req-un [:portkey.aws.iotanalytics.-2017-11-27.create-datastore-request/datastoreName] :opt-un [:portkey.aws.iotanalytics.-2017-11-27.create-datastore-request/retentionPeriod] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/logging-level (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"ERROR" "ERROR", :error "ERROR"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/logging-level (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"ERROR" "ERROR", :error "ERROR"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.sample-channel-data-response/payloads (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/message-payloads))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/sample-channel-data-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iotanalytics.-2017-11-27.sample-channel-data-response/payloads] :locations {}))
@@ -451,9 +451,9 @@
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.retention-period/number-of-days (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/retention-period-in-days))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/retention-period (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iotanalytics.-2017-11-27.retention-period/unlimited :portkey.aws.iotanalytics.-2017-11-27.retention-period/numberOfDays] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/retention-period-in-days (clojure.spec.alpha/and clojure.core/int? (fn* [p1__14021__14022__auto__] (clojure.core/<= 1 p1__14021__14022__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/retention-period-in-days (clojure.spec.alpha/and clojure.core/int? (fn* [p1__30692__30693__auto__] (clojure.core/<= 1 p1__30692__30693__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/pipeline-summaries (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iotanalytics.-2017-11-27/pipeline-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/pipeline-summaries (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iotanalytics.-2017-11-27/pipeline-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.create-dataset-content-request/dataset-name (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/dataset-name))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/create-dataset-content-request (portkey.aws/json-keys :req-un [:portkey.aws.iotanalytics.-2017-11-27.create-dataset-content-request/datasetName] :opt-un [] :locations {}))
@@ -468,7 +468,7 @@
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.cancel-pipeline-reprocessing-request/reprocessing-id (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/reprocessing-id))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/cancel-pipeline-reprocessing-request (portkey.aws/json-keys :req-un [:portkey.aws.iotanalytics.-2017-11-27.cancel-pipeline-reprocessing-request/pipelineName :portkey.aws.iotanalytics.-2017-11-27.cancel-pipeline-reprocessing-request/reprocessingId] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/channel-summaries (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iotanalytics.-2017-11-27/channel-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/channel-summaries (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iotanalytics.-2017-11-27/channel-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.list-datasets-response/dataset-summaries (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/dataset-summaries))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.list-datasets-response/next-token (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/next-token))
@@ -482,11 +482,11 @@
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27.dataset-summary/last-update-time (clojure.spec.alpha/and :portkey.aws.iotanalytics.-2017-11-27/timestamp))
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/dataset-summary (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iotanalytics.-2017-11-27.dataset-summary/datasetName :portkey.aws.iotanalytics.-2017-11-27.dataset-summary/status :portkey.aws.iotanalytics.-2017-11-27.dataset-summary/creationTime :portkey.aws.iotanalytics.-2017-11-27.dataset-summary/lastUpdateTime] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/dataset-summaries (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iotanalytics.-2017-11-27/dataset-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/dataset-summaries (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iotanalytics.-2017-11-27/dataset-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/math-expression (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 1 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 256))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/math-expression (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30632__auto__] (clojure.core/<= 1 (clojure.core/count s__30632__auto__))) (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 256))))
 
-(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/activity-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 1 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 128))))
+(clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/activity-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30632__auto__] (clojure.core/<= 1 (clojure.core/count s__30632__auto__))) (clojure.core/fn [s__30633__auto__] (clojure.core/< (clojure.core/count s__30633__auto__) 128))))
 
 (clojure.spec.alpha/def :portkey.aws.iotanalytics.-2017-11-27/reprocessing-id (clojure.spec.alpha/and clojure.core/string?))
 

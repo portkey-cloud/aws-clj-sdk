@@ -1,6 +1,84 @@
 (ns portkey.aws.serverlessrepo (:require [portkey.aws]))
 
-(def endpoints 'nil)
+(def
+ endpoints
+ '{"ap-northeast-1"
+   {:credential-scope
+    {:service "serverlessrepo", :region "ap-northeast-1"},
+    :ssl-common-name "serverlessrepo.ap-northeast-1.amazonaws.com",
+    :endpoint "https://serverlessrepo.ap-northeast-1.amazonaws.com",
+    :signature-version :v4},
+   "eu-west-1"
+   {:credential-scope {:service "serverlessrepo", :region "eu-west-1"},
+    :ssl-common-name "serverlessrepo.eu-west-1.amazonaws.com",
+    :endpoint "https://serverlessrepo.eu-west-1.amazonaws.com",
+    :signature-version :v4},
+   "us-east-2"
+   {:credential-scope {:service "serverlessrepo", :region "us-east-2"},
+    :ssl-common-name "serverlessrepo.us-east-2.amazonaws.com",
+    :endpoint "https://serverlessrepo.us-east-2.amazonaws.com",
+    :signature-version :v4},
+   "ap-southeast-2"
+   {:credential-scope
+    {:service "serverlessrepo", :region "ap-southeast-2"},
+    :ssl-common-name "serverlessrepo.ap-southeast-2.amazonaws.com",
+    :endpoint "https://serverlessrepo.ap-southeast-2.amazonaws.com",
+    :signature-version :v4},
+   "sa-east-1"
+   {:credential-scope {:service "serverlessrepo", :region "sa-east-1"},
+    :ssl-common-name "serverlessrepo.sa-east-1.amazonaws.com",
+    :endpoint "https://serverlessrepo.sa-east-1.amazonaws.com",
+    :signature-version :v4},
+   "ap-southeast-1"
+   {:credential-scope
+    {:service "serverlessrepo", :region "ap-southeast-1"},
+    :ssl-common-name "serverlessrepo.ap-southeast-1.amazonaws.com",
+    :endpoint "https://serverlessrepo.ap-southeast-1.amazonaws.com",
+    :signature-version :v4},
+   "ap-northeast-2"
+   {:credential-scope
+    {:service "serverlessrepo", :region "ap-northeast-2"},
+    :ssl-common-name "serverlessrepo.ap-northeast-2.amazonaws.com",
+    :endpoint "https://serverlessrepo.ap-northeast-2.amazonaws.com",
+    :signature-version :v4},
+   "ca-central-1"
+   {:credential-scope
+    {:service "serverlessrepo", :region "ca-central-1"},
+    :ssl-common-name "serverlessrepo.ca-central-1.amazonaws.com",
+    :endpoint "https://serverlessrepo.ca-central-1.amazonaws.com",
+    :signature-version :v4},
+   "eu-central-1"
+   {:credential-scope
+    {:service "serverlessrepo", :region "eu-central-1"},
+    :ssl-common-name "serverlessrepo.eu-central-1.amazonaws.com",
+    :endpoint "https://serverlessrepo.eu-central-1.amazonaws.com",
+    :signature-version :v4},
+   "eu-west-2"
+   {:credential-scope {:service "serverlessrepo", :region "eu-west-2"},
+    :ssl-common-name "serverlessrepo.eu-west-2.amazonaws.com",
+    :endpoint "https://serverlessrepo.eu-west-2.amazonaws.com",
+    :signature-version :v4},
+   "us-west-2"
+   {:credential-scope {:service "serverlessrepo", :region "us-west-2"},
+    :ssl-common-name "serverlessrepo.us-west-2.amazonaws.com",
+    :endpoint "https://serverlessrepo.us-west-2.amazonaws.com",
+    :signature-version :v4},
+   "us-east-1"
+   {:credential-scope {:service "serverlessrepo", :region "us-east-1"},
+    :ssl-common-name "serverlessrepo.us-east-1.amazonaws.com",
+    :endpoint "https://serverlessrepo.us-east-1.amazonaws.com",
+    :signature-version :v4},
+   "us-west-1"
+   {:credential-scope {:service "serverlessrepo", :region "us-west-1"},
+    :ssl-common-name "serverlessrepo.us-west-1.amazonaws.com",
+    :endpoint "https://serverlessrepo.us-west-1.amazonaws.com",
+    :signature-version :v4},
+   "ap-south-1"
+   {:credential-scope
+    {:service "serverlessrepo", :region "ap-south-1"},
+    :ssl-common-name "serverlessrepo.ap-south-1.amazonaws.com",
+    :endpoint "https://serverlessrepo.ap-south-1.amazonaws.com",
+    :signature-version :v4}})
 
 (clojure.spec.alpha/def :portkey.aws.serverlessrepo.application/license-url (clojure.spec.alpha/and :portkey.aws.serverlessrepo/--string))
 (clojure.spec.alpha/def :portkey.aws.serverlessrepo.application/spdx-license-id (clojure.spec.alpha/and :portkey.aws.serverlessrepo/--string))
@@ -23,7 +101,7 @@
 (clojure.spec.alpha/def :portkey.aws.serverlessrepo.application-policy-statement/statement-id (clojure.spec.alpha/and :portkey.aws.serverlessrepo/--string))
 (clojure.spec.alpha/def :portkey.aws.serverlessrepo/application-policy-statement (portkey.aws/json-keys :req-un [:portkey.aws.serverlessrepo.application-policy-statement/Principals :portkey.aws.serverlessrepo.application-policy-statement/Actions] :opt-un [:portkey.aws.serverlessrepo.application-policy-statement/StatementId] :locations {"actions" "Actions", "principals" "Principals", "statementId" "StatementId"}))
 
-(clojure.spec.alpha/def :portkey.aws.serverlessrepo/--list-of-application-summary (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.serverlessrepo/application-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.serverlessrepo/--list-of-application-summary (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.serverlessrepo/application-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.serverlessrepo.bad-request-exception/error-code (clojure.spec.alpha/and :portkey.aws.serverlessrepo/--string))
 (clojure.spec.alpha/def :portkey.aws.serverlessrepo.bad-request-exception/message (clojure.spec.alpha/and :portkey.aws.serverlessrepo/--string))
@@ -53,7 +131,7 @@
 (clojure.spec.alpha/def :portkey.aws.serverlessrepo.create-application-version-input/template-url (clojure.spec.alpha/and :portkey.aws.serverlessrepo/--string))
 (clojure.spec.alpha/def :portkey.aws.serverlessrepo/create-application-version-input (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.serverlessrepo.create-application-version-input/SourceCodeUrl :portkey.aws.serverlessrepo.create-application-version-input/TemplateBody :portkey.aws.serverlessrepo.create-application-version-input/TemplateUrl] :locations {"sourceCodeUrl" "SourceCodeUrl", "templateBody" "TemplateBody", "templateUrl" "TemplateUrl"}))
 
-(clojure.spec.alpha/def :portkey.aws.serverlessrepo/--list-of-application-policy-statement (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.serverlessrepo/application-policy-statement) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.serverlessrepo/--list-of-application-policy-statement (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.serverlessrepo/application-policy-statement) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.serverlessrepo.list-application-versions-response/next-token (clojure.spec.alpha/and :portkey.aws.serverlessrepo/--string))
 (clojure.spec.alpha/def :portkey.aws.serverlessrepo.list-application-versions-response/versions (clojure.spec.alpha/and :portkey.aws.serverlessrepo/--list-of-version-summary))
@@ -78,7 +156,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.serverlessrepo/--long clojure.core/int?)
 
-(clojure.spec.alpha/def :portkey.aws.serverlessrepo/--list-of-version-summary (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.serverlessrepo/version-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.serverlessrepo/--list-of-version-summary (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.serverlessrepo/version-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.serverlessrepo.application-summary/application-id (clojure.spec.alpha/and :portkey.aws.serverlessrepo/--string))
 (clojure.spec.alpha/def :portkey.aws.serverlessrepo.application-summary/author (clojure.spec.alpha/and :portkey.aws.serverlessrepo/--string))
@@ -138,7 +216,7 @@
 (clojure.spec.alpha/def :portkey.aws.serverlessrepo.create-application-version-response/template-url (clojure.spec.alpha/and :portkey.aws.serverlessrepo/--string))
 (clojure.spec.alpha/def :portkey.aws.serverlessrepo/create-application-version-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.serverlessrepo.create-application-version-response/ApplicationId :portkey.aws.serverlessrepo.create-application-version-response/CreationTime :portkey.aws.serverlessrepo.create-application-version-response/ParameterDefinitions :portkey.aws.serverlessrepo.create-application-version-response/SemanticVersion :portkey.aws.serverlessrepo.create-application-version-response/SourceCodeUrl :portkey.aws.serverlessrepo.create-application-version-response/TemplateUrl] :locations {"applicationId" "ApplicationId", "creationTime" "CreationTime", "parameterDefinitions" "ParameterDefinitions", "semanticVersion" "SemanticVersion", "sourceCodeUrl" "SourceCodeUrl", "templateUrl" "TemplateUrl"}))
 
-(clojure.spec.alpha/def :portkey.aws.serverlessrepo/--list-of-parameter-definition (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.serverlessrepo/parameter-definition) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.serverlessrepo/--list-of-parameter-definition (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.serverlessrepo/parameter-definition) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.serverlessrepo.version-summary/application-id (clojure.spec.alpha/and :portkey.aws.serverlessrepo/--string))
 (clojure.spec.alpha/def :portkey.aws.serverlessrepo.version-summary/creation-time (clojure.spec.alpha/and :portkey.aws.serverlessrepo/--string))
@@ -152,7 +230,7 @@
 (clojure.spec.alpha/def :portkey.aws.serverlessrepo.change-set-details/stack-id (clojure.spec.alpha/and :portkey.aws.serverlessrepo/--string))
 (clojure.spec.alpha/def :portkey.aws.serverlessrepo/change-set-details (portkey.aws/json-keys :req-un [:portkey.aws.serverlessrepo.change-set-details/ChangeSetId :portkey.aws.serverlessrepo.change-set-details/ApplicationId :portkey.aws.serverlessrepo.change-set-details/StackId :portkey.aws.serverlessrepo.change-set-details/SemanticVersion] :opt-un [] :locations {"applicationId" "ApplicationId", "changeSetId" "ChangeSetId", "semanticVersion" "SemanticVersion", "stackId" "StackId"}))
 
-(clojure.spec.alpha/def :portkey.aws.serverlessrepo/--list-of--string (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.serverlessrepo/--string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.serverlessrepo/--list-of--string (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.serverlessrepo/--string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.serverlessrepo.put-application-policy-request/application-id (clojure.spec.alpha/and :portkey.aws.serverlessrepo/--string))
 (clojure.spec.alpha/def :portkey.aws.serverlessrepo.put-application-policy-request/statements (clojure.spec.alpha/and :portkey.aws.serverlessrepo/--list-of-application-policy-statement))
@@ -183,7 +261,7 @@
 (clojure.spec.alpha/def :portkey.aws.serverlessrepo.create-application-response/name (clojure.spec.alpha/and :portkey.aws.serverlessrepo/--string))
 (clojure.spec.alpha/def :portkey.aws.serverlessrepo/create-application-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.serverlessrepo.create-application-response/LicenseUrl :portkey.aws.serverlessrepo.create-application-response/SpdxLicenseId :portkey.aws.serverlessrepo.create-application-response/ApplicationId :portkey.aws.serverlessrepo.create-application-response/Description :portkey.aws.serverlessrepo.create-application-response/Labels :portkey.aws.serverlessrepo.create-application-response/HomePageUrl :portkey.aws.serverlessrepo.create-application-response/ReadmeUrl :portkey.aws.serverlessrepo.create-application-response/CreationTime :portkey.aws.serverlessrepo.create-application-response/Author :portkey.aws.serverlessrepo/Version :portkey.aws.serverlessrepo.create-application-response/Name] :locations {"spdxLicenseId" "SpdxLicenseId", "applicationId" "ApplicationId", "author" "Author", "name" "Name", "labels" "Labels", "homePageUrl" "HomePageUrl", "creationTime" "CreationTime", "version" "Version", "readmeUrl" "ReadmeUrl", "licenseUrl" "LicenseUrl", "description" "Description"}))
 
-(clojure.spec.alpha/def :portkey.aws.serverlessrepo/max-items (clojure.spec.alpha/and clojure.core/int? (fn* [p1__14021__14022__auto__] (clojure.core/<= 1 p1__14021__14022__auto__)) (fn* [p1__14023__14024__auto__] (clojure.core/<= p1__14023__14024__auto__ 100))))
+(clojure.spec.alpha/def :portkey.aws.serverlessrepo/max-items (clojure.spec.alpha/and clojure.core/int? (fn* [p1__30692__30693__auto__] (clojure.core/<= 1 p1__30692__30693__auto__)) (fn* [p1__30694__30695__auto__] (clojure.core/<= p1__30694__30695__auto__ 100))))
 
 (clojure.spec.alpha/def :portkey.aws.serverlessrepo.get-application-policy-request/application-id (clojure.spec.alpha/and :portkey.aws.serverlessrepo/--string))
 (clojure.spec.alpha/def :portkey.aws.serverlessrepo/get-application-policy-request (portkey.aws/json-keys :req-un [:portkey.aws.serverlessrepo.get-application-policy-request/ApplicationId] :opt-un [] :locations {}))
@@ -282,7 +360,7 @@
 (clojure.spec.alpha/def :portkey.aws.serverlessrepo.parameter-value/value (clojure.spec.alpha/and :portkey.aws.serverlessrepo/--string))
 (clojure.spec.alpha/def :portkey.aws.serverlessrepo/parameter-value (portkey.aws/json-keys :req-un [:portkey.aws.serverlessrepo.parameter-value/Value :portkey.aws.serverlessrepo.parameter-value/Name] :opt-un [] :locations {"name" "Name", "value" "Value"}))
 
-(clojure.spec.alpha/def :portkey.aws.serverlessrepo/--list-of-parameter-value (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.serverlessrepo/parameter-value) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.serverlessrepo/--list-of-parameter-value (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.serverlessrepo/parameter-value) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.core/defn list-applications ([] (list-applications {})) ([list-applications-request] (portkey.aws/-rest-json-call portkey.aws.serverlessrepo/endpoints "GET" "/applications" list-applications-request :portkey.aws.serverlessrepo/list-applications-request {:payload nil, :move {}, :headers {}, :uri {}, :querystring {"maxItems" "MaxItems", "nextToken" "NextToken"}} 200 :portkey.aws.serverlessrepo/list-applications-response {"NotFoundException" :portkey.aws.serverlessrepo/not-found-exception, "BadRequestException" :portkey.aws.serverlessrepo/bad-request-exception, "InternalServerErrorException" :portkey.aws.serverlessrepo/internal-server-error-exception, "ForbiddenException" :portkey.aws.serverlessrepo/forbidden-exception})))
 (clojure.spec.alpha/fdef list-applications :args (clojure.spec.alpha/? :portkey.aws.serverlessrepo/list-applications-request) :ret (clojure.spec.alpha/and :portkey.aws.serverlessrepo/list-applications-response))
