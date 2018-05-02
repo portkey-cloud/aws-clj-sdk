@@ -84,11 +84,11 @@
 (clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11.add-event-source-request/parameters (clojure.spec.alpha/and :portkey.aws.lambda.-2014-11-11/map))
 (clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/add-event-source-request (portkey.aws/json-keys :req-un [:portkey.aws.lambda.-2014-11-11.add-event-source-request/EventSource :portkey.aws.lambda.-2014-11-11/FunctionName :portkey.aws.lambda.-2014-11-11.add-event-source-request/Role] :opt-un [:portkey.aws.lambda.-2014-11-11.add-event-source-request/BatchSize :portkey.aws.lambda.-2014-11-11.add-event-source-request/Parameters] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/function-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__96547__auto__] (clojure.core/re-matches #"arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?" s__96547__auto__))))
+(clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/function-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"arn:aws:lambda:[a-z]{2}-[a-z]+-\d{1}:\d{12}:function:[a-zA-Z0-9-_]+(\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?" s__13963__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/function-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__96545__auto__] (clojure.core/<= 1 (clojure.core/count s__96545__auto__))) (clojure.core/fn [s__96546__auto__] (clojure.core/< (clojure.core/count s__96546__auto__) 64)) (clojure.core/fn [s__96547__auto__] (clojure.core/re-matches #"[a-zA-Z0-9-_]+" s__96547__auto__))))
+(clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/function-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 1 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 64)) (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"[a-zA-Z0-9-_]+" s__13963__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/timeout (clojure.spec.alpha/and clojure.core/int? (fn* [p1__96584__96585__auto__] (clojure.core/<= 1 p1__96584__96585__auto__)) (fn* [p1__96586__96587__auto__] (clojure.core/<= p1__96586__96587__auto__ 60))))
+(clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/timeout (clojure.spec.alpha/and clojure.core/int? (fn* [p1__14021__14022__auto__] (clojure.core/<= 1 p1__14021__14022__auto__)) (fn* [p1__14023__14024__auto__] (clojure.core/<= p1__14023__14024__auto__ 60))))
 
 (clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11.upload-function-request/function-zip (clojure.spec.alpha/and :portkey.aws.lambda.-2014-11-11/blob))
 (clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11.upload-function-request/role (clojure.spec.alpha/and :portkey.aws.lambda.-2014-11-11/role-arn))
@@ -99,13 +99,13 @@
 (clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11.remove-event-source-request/uuid (clojure.spec.alpha/and :portkey.aws.lambda.-2014-11-11/string))
 (clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/remove-event-source-request (portkey.aws/json-keys :req-un [:portkey.aws.lambda.-2014-11-11.remove-event-source-request/UUID] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/handler (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__96547__auto__] (clojure.core/re-matches #"[a-zA-Z0-9./\-_]+" s__96547__auto__))))
+(clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/handler (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"[a-zA-Z0-9./\-_]+" s__13963__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/function-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.lambda.-2014-11-11/function-configuration :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/function-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.lambda.-2014-11-11/function-configuration) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/runtime (clojure.spec.alpha/conformer (clojure.core/let [m__96543__auto__ {"nodejs" "nodejs", :nodejs "nodejs"}] (clojure.core/fn [s__96544__auto__] (m__96543__auto__ s__96544__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/runtime (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"nodejs" "nodejs", :nodejs "nodejs"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/role-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__96547__auto__] (clojure.core/re-matches #"arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+" s__96547__auto__))))
+(clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/role-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+" s__13963__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11.service-exception/type (clojure.spec.alpha/and :portkey.aws.lambda.-2014-11-11/string))
 (clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11.service-exception/message (clojure.spec.alpha/and :portkey.aws.lambda.-2014-11-11/string))
@@ -117,13 +117,13 @@
 
 (clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/delete-function-request (portkey.aws/json-keys :req-un [:portkey.aws.lambda.-2014-11-11/FunctionName] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/mode (clojure.spec.alpha/conformer (clojure.core/let [m__96543__auto__ {"event" "event", :event "event"}] (clojure.core/fn [s__96544__auto__] (m__96543__auto__ s__96544__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/mode (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"event" "event", :event "event"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11.get-function-response/configuration (clojure.spec.alpha/and :portkey.aws.lambda.-2014-11-11/function-configuration))
 (clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11.get-function-response/code (clojure.spec.alpha/and :portkey.aws.lambda.-2014-11-11/function-code-location))
 (clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/get-function-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.lambda.-2014-11-11.get-function-response/Configuration :portkey.aws.lambda.-2014-11-11.get-function-response/Code] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/memory-size (clojure.spec.alpha/and clojure.core/int? (fn* [p1__96584__96585__auto__] (clojure.core/<= 128 p1__96584__96585__auto__)) (fn* [p1__96586__96587__auto__] (clojure.core/<= p1__96586__96587__auto__ 1024))))
+(clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/memory-size (clojure.spec.alpha/and clojure.core/int? (fn* [p1__14021__14022__auto__] (clojure.core/<= 128 p1__14021__14022__auto__)) (fn* [p1__14023__14024__auto__] (clojure.core/<= p1__14023__14024__auto__ 1024))))
 
 (clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11.invalid-request-content-exception/type (clojure.spec.alpha/and :portkey.aws.lambda.-2014-11-11/string))
 (clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11.invalid-request-content-exception/message (clojure.spec.alpha/and :portkey.aws.lambda.-2014-11-11/string))
@@ -136,9 +136,9 @@
 (clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11.invoke-async-request/invoke-args (clojure.spec.alpha/and :portkey.aws.lambda.-2014-11-11/blob))
 (clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/invoke-async-request (portkey.aws/json-keys :req-un [:portkey.aws.lambda.-2014-11-11/FunctionName :portkey.aws.lambda.-2014-11-11.invoke-async-request/InvokeArgs] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/description (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__96545__auto__] (clojure.core/<= 0 (clojure.core/count s__96545__auto__))) (clojure.core/fn [s__96546__auto__] (clojure.core/< (clojure.core/count s__96546__auto__) 256))))
+(clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/description (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 0 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 256))))
 
-(clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/max-list-items (clojure.spec.alpha/and clojure.core/int? (fn* [p1__96584__96585__auto__] (clojure.core/<= 1 p1__96584__96585__auto__)) (fn* [p1__96586__96587__auto__] (clojure.core/<= p1__96586__96587__auto__ 10000))))
+(clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/max-list-items (clojure.spec.alpha/and clojure.core/int? (fn* [p1__14021__14022__auto__] (clojure.core/<= 1 p1__14021__14022__auto__)) (fn* [p1__14023__14024__auto__] (clojure.core/<= p1__14023__14024__auto__ 10000))))
 
 (clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/integer (clojure.spec.alpha/and clojure.core/int?))
 
@@ -185,7 +185,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/blob (clojure.spec.alpha/and clojure.core/bytes? (clojure.spec.alpha/conformer portkey.aws/base64-encode portkey.aws/base64-decode)))
 
-(clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/event-source-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.lambda.-2014-11-11/event-source-configuration :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11/event-source-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.lambda.-2014-11-11/event-source-configuration) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11.event-source-configuration/is-active (clojure.spec.alpha/and :portkey.aws.lambda.-2014-11-11/boolean))
 (clojure.spec.alpha/def :portkey.aws.lambda.-2014-11-11.event-source-configuration/batch-size (clojure.spec.alpha/and :portkey.aws.lambda.-2014-11-11/integer))

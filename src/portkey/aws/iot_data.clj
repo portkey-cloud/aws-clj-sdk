@@ -45,9 +45,9 @@
 (clojure.spec.alpha/def :portkey.aws.iot-data.conflict-exception/message (clojure.spec.alpha/and :portkey.aws.iot-data/error-message))
 (clojure.spec.alpha/def :portkey.aws.iot-data/conflict-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot-data.conflict-exception/message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot-data/qos (clojure.spec.alpha/and clojure.core/int? (fn* [p1__96584__96585__auto__] (clojure.core/<= 0 p1__96584__96585__auto__)) (fn* [p1__96586__96587__auto__] (clojure.core/<= p1__96586__96587__auto__ 1))))
+(clojure.spec.alpha/def :portkey.aws.iot-data/qos (clojure.spec.alpha/and clojure.core/int? (fn* [p1__14021__14022__auto__] (clojure.core/<= 0 p1__14021__14022__auto__)) (fn* [p1__14023__14024__auto__] (clojure.core/<= p1__14023__14024__auto__ 1))))
 
-(clojure.spec.alpha/def :portkey.aws.iot-data/thing-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__96545__auto__] (clojure.core/<= 1 (clojure.core/count s__96545__auto__))) (clojure.core/fn [s__96546__auto__] (clojure.core/< (clojure.core/count s__96546__auto__) 128)) (clojure.core/fn [s__96547__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_-]+" s__96547__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot-data/thing-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13961__auto__] (clojure.core/<= 1 (clojure.core/count s__13961__auto__))) (clojure.core/fn [s__13962__auto__] (clojure.core/< (clojure.core/count s__13962__auto__) 128)) (clojure.core/fn [s__13963__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_-]+" s__13963__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot-data.publish-request/topic (clojure.spec.alpha/and :portkey.aws.iot-data/topic))
 (clojure.spec.alpha/def :portkey.aws.iot-data.publish-request/qos (clojure.spec.alpha/and :portkey.aws.iot-data/qos))

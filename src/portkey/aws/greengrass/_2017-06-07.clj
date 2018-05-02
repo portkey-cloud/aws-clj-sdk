@@ -24,7 +24,11 @@
     :endpoint "https://greengrass.us-east-1.amazonaws.com",
     :signature-version :v4}})
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.device-definition-version/devices (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-of-device))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/update-resource-definition-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/software-to-update (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"core" "core", :core "core", "ota_agent" "ota_agent", :ota-agent "ota_agent"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.device-definition-version/devices (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-device))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/device-definition-version (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.device-definition-version/Devices] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.update-function-definition-request/function-definition-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
@@ -74,6 +78,10 @@
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/--timestamp clojure.core/inst?)
 
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.update-resource-definition-request/name (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.update-resource-definition-request/resource-definition-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/update-resource-definition-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.update-resource-definition-request/ResourceDefinitionId] :opt-un [:portkey.aws.greengrass.-2017-06-07.update-resource-definition-request/Name] :locations {}))
+
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-device-definition-version-response/arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-device-definition-version-response/creation-timestamp (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-device-definition-version-response/id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
@@ -92,17 +100,15 @@
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-deployment-status-response/deployment-status (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-deployment-status-response/error-message (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-deployment-status-response/updated-at (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/get-deployment-status-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.get-deployment-status-response/DeploymentStatus :portkey.aws.greengrass.-2017-06-07.get-deployment-status-response/ErrorMessage :portkey.aws.greengrass.-2017-06-07.get-deployment-status-response/UpdatedAt] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/get-deployment-status-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.get-deployment-status-response/DeploymentStatus :portkey.aws.greengrass.-2017-06-07/DeploymentType :portkey.aws.greengrass.-2017-06-07/ErrorDetails :portkey.aws.greengrass.-2017-06-07.get-deployment-status-response/ErrorMessage :portkey.aws.greengrass.-2017-06-07.get-deployment-status-response/UpdatedAt] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-function-definition-versions-response/next-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-function-definition-versions-response/versions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-of-version-information))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-function-definition-versions-response/versions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-version-information))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-function-definition-versions-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.list-function-definition-versions-response/NextToken :portkey.aws.greengrass.-2017-06-07.list-function-definition-versions-response/Versions] :locations {}))
-
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-of-device (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.greengrass.-2017-06-07/device :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-core-definition-version-request/amzn-client-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-core-definition-version-request/core-definition-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-core-definition-version-request/cores (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-of-core))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-core-definition-version-request/cores (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-core))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/create-core-definition-version-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.create-core-definition-version-request/CoreDefinitionId] :opt-un [:portkey.aws.greengrass.-2017-06-07.create-core-definition-version-request/AmznClientToken :portkey.aws.greengrass.-2017-06-07.create-core-definition-version-request/Cores] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-logger-definition-request/amzn-client-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
@@ -112,7 +118,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-logger-definition-version-request/amzn-client-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-logger-definition-version-request/logger-definition-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-logger-definition-version-request/loggers (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-of-logger))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-logger-definition-version-request/loggers (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-logger))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/create-logger-definition-version-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.create-logger-definition-version-request/LoggerDefinitionId] :opt-un [:portkey.aws.greengrass.-2017-06-07.create-logger-definition-version-request/AmznClientToken :portkey.aws.greengrass.-2017-06-07.create-logger-definition-version-request/Loggers] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.associate-role-to-group-request/group-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
@@ -121,31 +127,46 @@
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-device-definition-version-request/amzn-client-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-device-definition-version-request/device-definition-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-device-definition-version-request/devices (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-of-device))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-device-definition-version-request/devices (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-device))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/create-device-definition-version-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.create-device-definition-version-request/DeviceDefinitionId] :opt-un [:portkey.aws.greengrass.-2017-06-07.create-device-definition-version-request/AmznClientToken :portkey.aws.greengrass.-2017-06-07.create-device-definition-version-request/Devices] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.deployment/created-at (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.deployment/deployment-arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.deployment/deployment-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.deployment/group-arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/deployment (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.deployment/CreatedAt :portkey.aws.greengrass.-2017-06-07.deployment/DeploymentArn :portkey.aws.greengrass.-2017-06-07.deployment/DeploymentId :portkey.aws.greengrass.-2017-06-07.deployment/GroupArn] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/deployment (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.deployment/CreatedAt :portkey.aws.greengrass.-2017-06-07.deployment/DeploymentArn :portkey.aws.greengrass.-2017-06-07.deployment/DeploymentId :portkey.aws.greengrass.-2017-06-07/DeploymentType :portkey.aws.greengrass.-2017-06-07.deployment/GroupArn] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.bad-request-exception/message (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/bad-request-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07/ErrorDetails :portkey.aws.greengrass.-2017-06-07.bad-request-exception/Message] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-resource-definition-response/arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-resource-definition-response/creation-timestamp (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-resource-definition-response/id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-resource-definition-response/last-updated-timestamp (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-resource-definition-response/latest-version (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-resource-definition-response/latest-version-arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-resource-definition-response/name (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/create-resource-definition-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.create-resource-definition-response/Arn :portkey.aws.greengrass.-2017-06-07.create-resource-definition-response/CreationTimestamp :portkey.aws.greengrass.-2017-06-07.create-resource-definition-response/Id :portkey.aws.greengrass.-2017-06-07.create-resource-definition-response/LastUpdatedTimestamp :portkey.aws.greengrass.-2017-06-07.create-resource-definition-response/LatestVersion :portkey.aws.greengrass.-2017-06-07.create-resource-definition-response/LatestVersionArn :portkey.aws.greengrass.-2017-06-07.create-resource-definition-response/Name] :locations {}))
+
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-device-definition-request/device-definition-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/get-device-definition-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.get-device-definition-request/DeviceDefinitionId] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/deployment-type (clojure.spec.alpha/conformer (clojure.core/let [m__96543__auto__ {"NewDeployment" "NewDeployment", :new-deployment "NewDeployment", "Redeployment" "Redeployment", :redeployment "Redeployment"}] (clojure.core/fn [s__96544__auto__] (m__96543__auto__ s__96544__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/deployment-type (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"NewDeployment" "NewDeployment", :new-deployment "NewDeployment", "Redeployment" "Redeployment", :redeployment "Redeployment", "ResetDeployment" "ResetDeployment", :reset-deployment "ResetDeployment", "ForceResetDeployment" "ForceResetDeployment", :force-reset-deployment "ForceResetDeployment"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-resource-definition-versions-response/next-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-resource-definition-versions-response/versions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-version-information))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-resource-definition-versions-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.list-resource-definition-versions-response/NextToken :portkey.aws.greengrass.-2017-06-07.list-resource-definition-versions-response/Versions] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-subscription-definition-versions-request/max-results (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-subscription-definition-versions-request/next-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-subscription-definition-versions-request/subscription-definition-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-subscription-definition-versions-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.list-subscription-definition-versions-request/SubscriptionDefinitionId] :opt-un [:portkey.aws.greengrass.-2017-06-07.list-subscription-definition-versions-request/MaxResults :portkey.aws.greengrass.-2017-06-07.list-subscription-definition-versions-request/NextToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/logger-level (clojure.spec.alpha/conformer (clojure.core/let [m__96543__auto__ {:warn "WARN", "WARN" "WARN", :debug "DEBUG", "ERROR" "ERROR", :fatal "FATAL", "DEBUG" "DEBUG", "FATAL" "FATAL", :info "INFO", :error "ERROR", "INFO" "INFO"}] (clojure.core/fn [s__96544__auto__] (m__96543__auto__ s__96544__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/logger-level (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {:warn "WARN", "WARN" "WARN", :debug "DEBUG", "ERROR" "ERROR", :fatal "FATAL", "DEBUG" "DEBUG", "FATAL" "FATAL", :info "INFO", :error "ERROR", "INFO" "INFO"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/get-service-role-for-account-request (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/encoding-type (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"binary" "binary", :binary "binary", "json" "json", :json "json"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.connectivity-info/host-address (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.connectivity-info/id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
@@ -155,6 +176,8 @@
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.associate-service-role-to-account-request/role-arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/associate-service-role-to-account-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.associate-service-role-to-account-request/RoleArn] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/permission (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"ro" "ro", :ro "ro", "rw" "rw", :rw "rw"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/update-logger-definition-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
@@ -171,16 +194,18 @@
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-subscription-definition-version-request/subscription-definition-version-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/get-subscription-definition-version-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.get-subscription-definition-version-request/SubscriptionDefinitionId :portkey.aws.greengrass.-2017-06-07.get-subscription-definition-version-request/SubscriptionDefinitionVersionId] :opt-un [] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/--list-of-group-information (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.greengrass.-2017-06-07/group-information) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-logger-definition-versions-request/logger-definition-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-logger-definition-versions-request/max-results (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-logger-definition-versions-request/next-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-logger-definition-versions-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.list-logger-definition-versions-request/LoggerDefinitionId] :opt-un [:portkey.aws.greengrass.-2017-06-07.list-logger-definition-versions-request/MaxResults :portkey.aws.greengrass.-2017-06-07.list-logger-definition-versions-request/NextToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-function-definitions-response/definitions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-of-definition-information))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-function-definitions-response/definitions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-definition-information))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-function-definitions-response/next-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-function-definitions-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.list-function-definitions-response/Definitions :portkey.aws.greengrass.-2017-06-07.list-function-definitions-response/NextToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/logger-type (clojure.spec.alpha/conformer (clojure.core/let [m__96543__auto__ {"FileSystem" "FileSystem", :file-system "FileSystem", "AWSCloudWatch" "AWSCloudWatch", :awscloud-watch "AWSCloudWatch"}] (clojure.core/fn [s__96544__auto__] (m__96543__auto__ s__96544__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/logger-type (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"FileSystem" "FileSystem", :file-system "FileSystem", "AWSCloudWatch" "AWSCloudWatch", :awscloud-watch "AWSCloudWatch"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-core-definitions-request/max-results (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-core-definitions-request/next-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
@@ -195,6 +220,12 @@
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-device-definition-response/name (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/get-device-definition-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.get-device-definition-response/Arn :portkey.aws.greengrass.-2017-06-07.get-device-definition-response/CreationTimestamp :portkey.aws.greengrass.-2017-06-07.get-device-definition-response/Id :portkey.aws.greengrass.-2017-06-07.get-device-definition-response/LastUpdatedTimestamp :portkey.aws.greengrass.-2017-06-07.get-device-definition-response/LatestVersion :portkey.aws.greengrass.-2017-06-07.get-device-definition-response/LatestVersionArn :portkey.aws.greengrass.-2017-06-07.get-device-definition-response/Name] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/--list-of-subscription (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.greengrass.-2017-06-07/subscription) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-resource-definition-version-request/resource-definition-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-resource-definition-version-request/resource-definition-version-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/get-resource-definition-version-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.get-resource-definition-version-request/ResourceDefinitionVersionId :portkey.aws.greengrass.-2017-06-07.get-resource-definition-version-request/ResourceDefinitionId] :opt-un [] :locations {}))
+
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.associate-service-role-to-account-response/associated-at (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/associate-service-role-to-account-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.associate-service-role-to-account-response/AssociatedAt] :locations {}))
 
@@ -208,20 +239,30 @@
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-group-certificate-authority-request/group-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/create-group-certificate-authority-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.create-group-certificate-authority-request/GroupId] :opt-un [:portkey.aws.greengrass.-2017-06-07.create-group-certificate-authority-request/AmznClientToken] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-resource-definition-response/arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-resource-definition-response/creation-timestamp (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-resource-definition-response/id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-resource-definition-response/last-updated-timestamp (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-resource-definition-response/latest-version (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-resource-definition-response/latest-version-arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-resource-definition-response/name (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/get-resource-definition-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.get-resource-definition-response/Arn :portkey.aws.greengrass.-2017-06-07.get-resource-definition-response/CreationTimestamp :portkey.aws.greengrass.-2017-06-07.get-resource-definition-response/Id :portkey.aws.greengrass.-2017-06-07.get-resource-definition-response/LastUpdatedTimestamp :portkey.aws.greengrass.-2017-06-07.get-resource-definition-response/LatestVersion :portkey.aws.greengrass.-2017-06-07.get-resource-definition-response/LatestVersionArn :portkey.aws.greengrass.-2017-06-07.get-resource-definition-response/Name] :locations {}))
+
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/update-function-definition-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-of-group-information (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.greengrass.-2017-06-07/group-information :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-resource-definition-versions-request/max-results (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-resource-definition-versions-request/next-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-resource-definition-versions-request/resource-definition-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-resource-definition-versions-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.list-resource-definition-versions-request/ResourceDefinitionId] :opt-un [:portkey.aws.greengrass.-2017-06-07.list-resource-definition-versions-request/MaxResults :portkey.aws.greengrass.-2017-06-07.list-resource-definition-versions-request/NextToken] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-group-certificate-authority-response/group-certificate-authority-arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-group-certificate-authority-response/group-certificate-authority-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-group-certificate-authority-response/pem-encoded-certificate (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/get-group-certificate-authority-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.get-group-certificate-authority-response/GroupCertificateAuthorityArn :portkey.aws.greengrass.-2017-06-07.get-group-certificate-authority-response/GroupCertificateAuthorityId :portkey.aws.greengrass.-2017-06-07.get-group-certificate-authority-response/PemEncodedCertificate] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-core-definitions-response/definitions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-of-definition-information))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-core-definitions-response/definitions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-definition-information))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-core-definitions-response/next-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-core-definitions-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.list-core-definitions-response/Definitions :portkey.aws.greengrass.-2017-06-07.list-core-definitions-response/NextToken] :locations {}))
-
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-of-core (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.greengrass.-2017-06-07/core :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.disassociate-role-from-group-response/disassociated-at (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/disassociate-role-from-group-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.disassociate-role-from-group-response/DisassociatedAt] :locations {}))
@@ -233,14 +274,16 @@
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-associated-role-request/group-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/get-associated-role-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.get-associated-role-request/GroupId] :opt-un [] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/--long clojure.core/int?)
+
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-device-definition-versions-response/next-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-device-definition-versions-response/versions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-of-version-information))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-device-definition-versions-response/versions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-version-information))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-device-definition-versions-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.list-device-definition-versions-response/NextToken :portkey.aws.greengrass.-2017-06-07.list-device-definition-versions-response/Versions] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.function-definition-version/functions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-of-function))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.function-definition-version/functions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-function))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/function-definition-version (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.function-definition-version/Functions] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.logger-definition-version/loggers (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-of-logger))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.logger-definition-version/loggers (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-logger))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/logger-definition-version (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.logger-definition-version/Loggers] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-subscription-definition-request/subscription-definition-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
@@ -267,6 +310,10 @@
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-group-response/name (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/get-group-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.get-group-response/Arn :portkey.aws.greengrass.-2017-06-07.get-group-response/CreationTimestamp :portkey.aws.greengrass.-2017-06-07.get-group-response/Id :portkey.aws.greengrass.-2017-06-07.get-group-response/LastUpdatedTimestamp :portkey.aws.greengrass.-2017-06-07.get-group-response/LatestVersion :portkey.aws.greengrass.-2017-06-07.get-group-response/LatestVersionArn :portkey.aws.greengrass.-2017-06-07.get-group-response/Name] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-resource-definitions-response/definitions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-definition-information))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-resource-definitions-response/next-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-resource-definitions-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.list-resource-definitions-response/Definitions :portkey.aws.greengrass.-2017-06-07.list-resource-definitions-response/NextToken] :locations {}))
+
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/update-group-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.disassociate-role-from-group-request/group-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
@@ -277,14 +324,18 @@
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.update-group-certificate-configuration-response/group-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/update-group-certificate-configuration-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.update-group-certificate-configuration-response/CertificateAuthorityExpiryInMilliseconds :portkey.aws.greengrass.-2017-06-07.update-group-certificate-configuration-response/CertificateExpiryInMilliseconds :portkey.aws.greengrass.-2017-06-07.update-group-certificate-configuration-response/GroupId] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/--list-of-group-certificate-authority-properties (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.greengrass.-2017-06-07/group-certificate-authority-properties) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-group-versions-request/group-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-group-versions-request/max-results (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-group-versions-request/next-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-group-versions-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.list-group-versions-request/GroupId] :opt-un [:portkey.aws.greengrass.-2017-06-07.list-group-versions-request/MaxResults :portkey.aws.greengrass.-2017-06-07.list-group-versions-request/NextToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-groups-response/groups (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-of-group-information))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-groups-response/groups (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-group-information))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-groups-response/next-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-groups-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.list-groups-response/Groups :portkey.aws.greengrass.-2017-06-07.list-groups-response/NextToken] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/update-targets (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.greengrass.-2017-06-07/--string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.group-certificate-configuration/certificate-authority-expiry-in-milliseconds (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.group-certificate-configuration/certificate-expiry-in-milliseconds (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
@@ -306,11 +357,13 @@
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.associate-role-to-group-response/associated-at (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/associate-role-to-group-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.associate-role-to-group-response/AssociatedAt] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.update-connectivity-info-request/connectivity-info (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-of-connectivity-info))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.update-connectivity-info-request/connectivity-info (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-connectivity-info))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.update-connectivity-info-request/thing-name (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/update-connectivity-info-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.update-connectivity-info-request/ThingName] :opt-un [:portkey.aws.greengrass.-2017-06-07.update-connectivity-info-request/ConnectivityInfo] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-of-version-information (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.greengrass.-2017-06-07/version-information :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/--list-of-device (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.greengrass.-2017-06-07/device) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/--list-of-core (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.greengrass.-2017-06-07/core) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.version-information/arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.version-information/creation-timestamp (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
@@ -344,15 +397,21 @@
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-function-definition-request/name (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/create-function-definition-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.create-function-definition-request/AmznClientToken :portkey.aws.greengrass.-2017-06-07.create-function-definition-request/InitialVersion :portkey.aws.greengrass.-2017-06-07.create-function-definition-request/Name] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.s3-machine-learning-model-resource-data/destination-path (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.s3-machine-learning-model-resource-data/s3-uri (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/s3-machine-learning-model-resource-data (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.s3-machine-learning-model-resource-data/DestinationPath :portkey.aws.greengrass.-2017-06-07.s3-machine-learning-model-resource-data/S3Uri] :locations {}))
+
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-logger-definitions-request/max-results (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-logger-definitions-request/next-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-logger-definitions-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.list-logger-definitions-request/MaxResults :portkey.aws.greengrass.-2017-06-07.list-logger-definitions-request/NextToken] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/update-targets-architecture (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"armv7l" "armv7l", :armv7l "armv7l", "x86_64" "x86_64", :x86-64 "x86_64", "aarch64" "aarch64", :aarch64 "aarch64"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/update-core-definition-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/update-device-definition-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-device-definitions-response/definitions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-of-definition-information))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-device-definitions-response/definitions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-definition-information))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-device-definitions-response/next-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-device-definitions-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.list-device-definitions-response/Definitions :portkey.aws.greengrass.-2017-06-07.list-device-definitions-response/NextToken] :locations {}))
 
@@ -369,8 +428,12 @@
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.group-version/device-definition-version-arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.group-version/function-definition-version-arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.group-version/logger-definition-version-arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.group-version/resource-definition-version-arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.group-version/subscription-definition-version-arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/group-version (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.group-version/CoreDefinitionVersionArn :portkey.aws.greengrass.-2017-06-07.group-version/DeviceDefinitionVersionArn :portkey.aws.greengrass.-2017-06-07.group-version/FunctionDefinitionVersionArn :portkey.aws.greengrass.-2017-06-07.group-version/LoggerDefinitionVersionArn :portkey.aws.greengrass.-2017-06-07.group-version/SubscriptionDefinitionVersionArn] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/group-version (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.group-version/CoreDefinitionVersionArn :portkey.aws.greengrass.-2017-06-07.group-version/DeviceDefinitionVersionArn :portkey.aws.greengrass.-2017-06-07.group-version/FunctionDefinitionVersionArn :portkey.aws.greengrass.-2017-06-07.group-version/LoggerDefinitionVersionArn :portkey.aws.greengrass.-2017-06-07.group-version/ResourceDefinitionVersionArn :portkey.aws.greengrass.-2017-06-07.group-version/SubscriptionDefinitionVersionArn] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-resource-definition-request/resource-definition-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/get-resource-definition-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.get-resource-definition-request/ResourceDefinitionId] :opt-un [] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.group-information/arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.group-information/creation-timestamp (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
@@ -396,14 +459,16 @@
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/get-subscription-definition-version-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.get-subscription-definition-version-response/Arn :portkey.aws.greengrass.-2017-06-07.get-subscription-definition-version-response/CreationTimestamp :portkey.aws.greengrass.-2017-06-07.get-subscription-definition-version-response/Definition :portkey.aws.greengrass.-2017-06-07.get-subscription-definition-version-response/Id :portkey.aws.greengrass.-2017-06-07.get-subscription-definition-version-response/Version] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-logger-definition-versions-response/next-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-logger-definition-versions-response/versions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-of-version-information))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-logger-definition-versions-response/versions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-version-information))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-logger-definition-versions-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.list-logger-definition-versions-response/NextToken :portkey.aws.greengrass.-2017-06-07.list-logger-definition-versions-response/Versions] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/--list-of-resource (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.greengrass.-2017-06-07/resource) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-logger-definition-version-request/logger-definition-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-logger-definition-version-request/logger-definition-version-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/get-logger-definition-version-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.get-logger-definition-version-request/LoggerDefinitionVersionId :portkey.aws.greengrass.-2017-06-07.get-logger-definition-version-request/LoggerDefinitionId] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-logger-definitions-response/definitions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-of-definition-information))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-logger-definitions-response/definitions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-definition-information))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-logger-definitions-response/next-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-logger-definitions-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.list-logger-definitions-response/Definitions :portkey.aws.greengrass.-2017-06-07.list-logger-definitions-response/NextToken] :locations {}))
 
@@ -411,8 +476,10 @@
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-service-role-for-account-response/role-arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/get-service-role-for-account-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.get-service-role-for-account-response/AssociatedAt :portkey.aws.greengrass.-2017-06-07.get-service-role-for-account-response/RoleArn] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/update-agent-log-level (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {:warn "WARN", :trace "TRACE", "WARN" "WARN", :verbose "VERBOSE", :debug "DEBUG", "ERROR" "ERROR", :fatal "FATAL", "NONE" "NONE", "TRACE" "TRACE", "DEBUG" "DEBUG", "VERBOSE" "VERBOSE", "FATAL" "FATAL", :info "INFO", :error "ERROR", "INFO" "INFO", :none "NONE"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-group-versions-response/next-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-group-versions-response/versions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-of-version-information))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-group-versions-response/versions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-version-information))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-group-versions-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.list-group-versions-response/NextToken :portkey.aws.greengrass.-2017-06-07.list-group-versions-response/Versions] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/delete-function-definition-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
@@ -422,7 +489,7 @@
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-group-certificate-configuration-response/group-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/get-group-certificate-configuration-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.get-group-certificate-configuration-response/CertificateAuthorityExpiryInMilliseconds :portkey.aws.greengrass.-2017-06-07.get-group-certificate-configuration-response/CertificateExpiryInMilliseconds :portkey.aws.greengrass.-2017-06-07.get-group-certificate-configuration-response/GroupId] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-connectivity-info-response/connectivity-info (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-of-connectivity-info))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-connectivity-info-response/connectivity-info (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-connectivity-info))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-connectivity-info-response/message (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/get-connectivity-info-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.get-connectivity-info-response/ConnectivityInfo :portkey.aws.greengrass.-2017-06-07.get-connectivity-info-response/Message] :locations {"message" "Message"}))
 
@@ -433,17 +500,22 @@
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/--boolean clojure.core/boolean?)
 
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/--list-of-version-information (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.greengrass.-2017-06-07/version-information) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.resource-definition-version/resources (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-resource))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/resource-definition-version (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.resource-definition-version/Resources] :locations {}))
+
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/delete-core-definition-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-of-definition-information (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.greengrass.-2017-06-07/definition-information :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/--list-of-function (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.greengrass.-2017-06-07/function) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.disassociate-service-role-from-account-response/disassociated-at (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/disassociate-service-role-from-account-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.disassociate-service-role-from-account-response/DisassociatedAt] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-group-certificate-authorities-response/group-certificate-authorities (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-of-group-certificate-authority-properties))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-group-certificate-authorities-response/group-certificate-authorities (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-group-certificate-authority-properties))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-group-certificate-authorities-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.list-group-certificate-authorities-response/GroupCertificateAuthorities] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.core-definition-version/cores (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-of-core))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.core-definition-version/cores (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-core))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/core-definition-version (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.core-definition-version/Cores] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-deployment-request/amzn-client-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
@@ -453,10 +525,14 @@
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/create-deployment-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.create-deployment-request/GroupId] :opt-un [:portkey.aws.greengrass.-2017-06-07.create-deployment-request/AmznClientToken :portkey.aws.greengrass.-2017-06-07.create-deployment-request/DeploymentId :portkey.aws.greengrass.-2017-06-07/DeploymentType :portkey.aws.greengrass.-2017-06-07.create-deployment-request/GroupVersionId] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-versions-response/next-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-versions-response/versions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-of-version-information))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-versions-response/versions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-version-information))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-versions-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.list-versions-response/NextToken :portkey.aws.greengrass.-2017-06-07.list-versions-response/Versions] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.subscription-definition-version/subscriptions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-of-subscription))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-software-update-job-response/iot-job-arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-software-update-job-response/iot-job-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/create-software-update-job-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.create-software-update-job-response/IotJobArn :portkey.aws.greengrass.-2017-06-07.create-software-update-job-response/IotJobId] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.subscription-definition-version/subscriptions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-subscription))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/subscription-definition-version (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.subscription-definition-version/Subscriptions] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.delete-group-request/group-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
@@ -469,11 +545,15 @@
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-group-certificate-authorities-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.list-group-certificate-authorities-request/GroupId] :opt-un [] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-core-definition-versions-response/next-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-core-definition-versions-response/versions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-of-version-information))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-core-definition-versions-response/versions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-version-information))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-core-definition-versions-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.list-core-definition-versions-response/NextToken :portkey.aws.greengrass.-2017-06-07.list-core-definition-versions-response/Versions] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-group-certificate-authority-response/group-certificate-authority-arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/create-group-certificate-authority-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.create-group-certificate-authority-response/GroupCertificateAuthorityArn] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/--list-of-logger (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.greengrass.-2017-06-07/logger) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/update-targets-operating-system (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"ubuntu" "ubuntu", :ubuntu "ubuntu", "raspbian" "raspbian", :raspbian "raspbian", "amazon_linux" "amazon_linux", :amazon-linux "amazon_linux"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.update-logger-definition-request/logger-definition-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.update-logger-definition-request/name (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
@@ -502,14 +582,15 @@
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-group-version-request/function-definition-version-arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-group-version-request/group-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-group-version-request/logger-definition-version-arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-group-version-request/resource-definition-version-arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-group-version-request/subscription-definition-version-arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/create-group-version-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.create-group-version-request/GroupId] :opt-un [:portkey.aws.greengrass.-2017-06-07.create-group-version-request/AmznClientToken :portkey.aws.greengrass.-2017-06-07.create-group-version-request/CoreDefinitionVersionArn :portkey.aws.greengrass.-2017-06-07.create-group-version-request/DeviceDefinitionVersionArn :portkey.aws.greengrass.-2017-06-07.create-group-version-request/FunctionDefinitionVersionArn :portkey.aws.greengrass.-2017-06-07.create-group-version-request/LoggerDefinitionVersionArn :portkey.aws.greengrass.-2017-06-07.create-group-version-request/SubscriptionDefinitionVersionArn] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/create-group-version-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.create-group-version-request/GroupId] :opt-un [:portkey.aws.greengrass.-2017-06-07.create-group-version-request/AmznClientToken :portkey.aws.greengrass.-2017-06-07.create-group-version-request/CoreDefinitionVersionArn :portkey.aws.greengrass.-2017-06-07.create-group-version-request/DeviceDefinitionVersionArn :portkey.aws.greengrass.-2017-06-07.create-group-version-request/FunctionDefinitionVersionArn :portkey.aws.greengrass.-2017-06-07.create-group-version-request/LoggerDefinitionVersionArn :portkey.aws.greengrass.-2017-06-07.create-group-version-request/ResourceDefinitionVersionArn :portkey.aws.greengrass.-2017-06-07.create-group-version-request/SubscriptionDefinitionVersionArn] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.update-core-definition-request/core-definition-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.update-core-definition-request/name (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/update-core-definition-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.update-core-definition-request/CoreDefinitionId] :opt-un [:portkey.aws.greengrass.-2017-06-07.update-core-definition-request/Name] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-subscription-definitions-response/definitions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-of-definition-information))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-subscription-definitions-response/definitions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-definition-information))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-subscription-definitions-response/next-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-subscription-definitions-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.list-subscription-definitions-response/Definitions :portkey.aws.greengrass.-2017-06-07.list-subscription-definitions-response/NextToken] :locations {}))
 
@@ -533,11 +614,31 @@
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-device-definition-version-response/version (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/get-device-definition-version-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.get-device-definition-version-response/Arn :portkey.aws.greengrass.-2017-06-07.get-device-definition-version-response/CreationTimestamp :portkey.aws.greengrass.-2017-06-07.get-device-definition-version-response/Definition :portkey.aws.greengrass.-2017-06-07.get-device-definition-version-response/Id :portkey.aws.greengrass.-2017-06-07.get-device-definition-version-response/Version] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-resource-definition-version-response/arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-resource-definition-version-response/creation-timestamp (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-resource-definition-version-response/definition (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/resource-definition-version))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-resource-definition-version-response/id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-resource-definition-version-response/version (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/get-resource-definition-version-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.get-resource-definition-version-response/Arn :portkey.aws.greengrass.-2017-06-07.get-resource-definition-version-response/CreationTimestamp :portkey.aws.greengrass.-2017-06-07.get-resource-definition-version-response/Definition :portkey.aws.greengrass.-2017-06-07.get-resource-definition-version-response/Id :portkey.aws.greengrass.-2017-06-07.get-resource-definition-version-response/Version] :locations {}))
+
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-function-definition-version-response/arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-function-definition-version-response/creation-timestamp (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-function-definition-version-response/id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-function-definition-version-response/version (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/create-function-definition-version-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.create-function-definition-version-response/Arn :portkey.aws.greengrass.-2017-06-07.create-function-definition-version-response/CreationTimestamp :portkey.aws.greengrass.-2017-06-07.create-function-definition-version-response/Id :portkey.aws.greengrass.-2017-06-07.create-function-definition-version-response/Version] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/--list-of-resource-access-policy (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.greengrass.-2017-06-07/resource-access-policy) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.sage-maker-machine-learning-model-resource-data/destination-path (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.sage-maker-machine-learning-model-resource-data/sage-maker-job-arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/sage-maker-machine-learning-model-resource-data (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.sage-maker-machine-learning-model-resource-data/DestinationPath :portkey.aws.greengrass.-2017-06-07.sage-maker-machine-learning-model-resource-data/SageMakerJobArn] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-software-update-job-request/amzn-client-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/create-software-update-job-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.create-software-update-job-request/AmznClientToken :portkey.aws.greengrass.-2017-06-07/S3UrlSignerRole :portkey.aws.greengrass.-2017-06-07/SoftwareToUpdate :portkey.aws.greengrass.-2017-06-07/UpdateAgentLogLevel :portkey.aws.greengrass.-2017-06-07/UpdateTargets :portkey.aws.greengrass.-2017-06-07/UpdateTargetsArchitecture :portkey.aws.greengrass.-2017-06-07/UpdateTargetsOperatingSystem] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-resource-definitions-request/max-results (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-resource-definitions-request/next-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-resource-definitions-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.list-resource-definitions-request/MaxResults :portkey.aws.greengrass.-2017-06-07.list-resource-definitions-request/NextToken] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.function-configuration/environment (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/function-configuration-environment))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.function-configuration/exec-args (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
@@ -545,7 +646,7 @@
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.function-configuration/memory-size (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--integer))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.function-configuration/pinned (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--boolean))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.function-configuration/timeout (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--integer))
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/function-configuration (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.function-configuration/Environment :portkey.aws.greengrass.-2017-06-07.function-configuration/ExecArgs :portkey.aws.greengrass.-2017-06-07.function-configuration/Executable :portkey.aws.greengrass.-2017-06-07.function-configuration/MemorySize :portkey.aws.greengrass.-2017-06-07.function-configuration/Pinned :portkey.aws.greengrass.-2017-06-07.function-configuration/Timeout] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/function-configuration (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07/EncodingType :portkey.aws.greengrass.-2017-06-07.function-configuration/Environment :portkey.aws.greengrass.-2017-06-07.function-configuration/ExecArgs :portkey.aws.greengrass.-2017-06-07.function-configuration/Executable :portkey.aws.greengrass.-2017-06-07.function-configuration/MemorySize :portkey.aws.greengrass.-2017-06-07.function-configuration/Pinned :portkey.aws.greengrass.-2017-06-07.function-configuration/Timeout] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-device-definition-versions-request/device-definition-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-device-definition-versions-request/max-results (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
@@ -556,14 +657,24 @@
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-groups-request/next-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-groups-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.list-groups-request/MaxResults :portkey.aws.greengrass.-2017-06-07.list-groups-request/NextToken] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.reset-deployments-request/amzn-client-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.reset-deployments-request/force (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--boolean))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.reset-deployments-request/group-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/reset-deployments-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.reset-deployments-request/GroupId] :opt-un [:portkey.aws.greengrass.-2017-06-07.reset-deployments-request/AmznClientToken :portkey.aws.greengrass.-2017-06-07.reset-deployments-request/Force] :locations {}))
+
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-subscription-definition-versions-response/next-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-subscription-definition-versions-response/versions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-of-version-information))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-subscription-definition-versions-response/versions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-version-information))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-subscription-definition-versions-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.list-subscription-definition-versions-response/NextToken :portkey.aws.greengrass.-2017-06-07.list-subscription-definition-versions-response/Versions] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.delete-resource-definition-request/resource-definition-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/delete-resource-definition-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.delete-resource-definition-request/ResourceDefinitionId] :opt-un [] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/--double clojure.core/double?)
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.function-configuration-environment/variables (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/map-of--string))
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/function-configuration-environment (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.function-configuration-environment/Variables] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.function-configuration-environment/access-sysfs (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--boolean))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.function-configuration-environment/resource-access-policies (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-resource-access-policy))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.function-configuration-environment/variables (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--map-of--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/function-configuration-environment (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.function-configuration-environment/AccessSysfs :portkey.aws.greengrass.-2017-06-07.function-configuration-environment/ResourceAccessPolicies :portkey.aws.greengrass.-2017-06-07.function-configuration-environment/Variables] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-group-response/arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-group-response/creation-timestamp (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
@@ -574,11 +685,16 @@
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-group-response/name (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/create-group-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.create-group-response/Arn :portkey.aws.greengrass.-2017-06-07.create-group-response/CreationTimestamp :portkey.aws.greengrass.-2017-06-07.create-group-response/Id :portkey.aws.greengrass.-2017-06-07.create-group-response/LastUpdatedTimestamp :portkey.aws.greengrass.-2017-06-07.create-group-response/LatestVersion :portkey.aws.greengrass.-2017-06-07.create-group-response/LatestVersionArn :portkey.aws.greengrass.-2017-06-07.create-group-response/Name] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/error-details (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.greengrass.-2017-06-07/error-detail :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/error-details (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.greengrass.-2017-06-07/error-detail) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-function-definitions-request/max-results (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-function-definitions-request/next-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-function-definitions-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.list-function-definitions-request/MaxResults :portkey.aws.greengrass.-2017-06-07.list-function-definitions-request/NextToken] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-resource-definition-version-request/amzn-client-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-resource-definition-version-request/resource-definition-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-resource-definition-version-request/resources (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-resource))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/create-resource-definition-version-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.create-resource-definition-version-request/ResourceDefinitionId] :opt-un [:portkey.aws.greengrass.-2017-06-07.create-resource-definition-version-request/AmznClientToken :portkey.aws.greengrass.-2017-06-07.create-resource-definition-version-request/Resources] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-logger-definition-request/logger-definition-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/get-logger-definition-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.get-logger-definition-request/LoggerDefinitionId] :opt-un [] :locations {}))
@@ -594,6 +710,8 @@
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-group-request/name (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/create-group-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.create-group-request/AmznClientToken :portkey.aws.greengrass.-2017-06-07.create-group-request/InitialVersion :portkey.aws.greengrass.-2017-06-07.create-group-request/Name] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/--list-of-connectivity-info (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.greengrass.-2017-06-07/connectivity-info) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.core/certificate-arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.core/id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.core/sync-shadow (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--boolean))
@@ -608,20 +726,30 @@
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-subscription-definition-version-request/amzn-client-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-subscription-definition-version-request/subscription-definition-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-subscription-definition-version-request/subscriptions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-of-subscription))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-subscription-definition-version-request/subscriptions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-subscription))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/create-subscription-definition-version-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.create-subscription-definition-version-request/SubscriptionDefinitionId] :opt-un [:portkey.aws.greengrass.-2017-06-07.create-subscription-definition-version-request/AmznClientToken :portkey.aws.greengrass.-2017-06-07.create-subscription-definition-version-request/Subscriptions] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-group-certificate-configuration-request/group-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/get-group-certificate-configuration-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.get-group-certificate-configuration-request/GroupId] :opt-un [] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/--list-of-definition-information (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.greengrass.-2017-06-07/definition-information) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
+
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-deployments-response/next-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-deployments-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07/Deployments :portkey.aws.greengrass.-2017-06-07.list-deployments-response/NextToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-of-subscription (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.greengrass.-2017-06-07/subscription :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.resource/id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.resource/name (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/resource (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.resource/Id :portkey.aws.greengrass.-2017-06-07.resource/Name :portkey.aws.greengrass.-2017-06-07/ResourceDataContainer] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.group-owner-setting/auto-add-group-owner (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--boolean))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.group-owner-setting/group-owner (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/group-owner-setting (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.group-owner-setting/AutoAddGroupOwner :portkey.aws.greengrass.-2017-06-07.group-owner-setting/GroupOwner] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/resource-data-container (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07/LocalDeviceResourceData :portkey.aws.greengrass.-2017-06-07/LocalVolumeResourceData :portkey.aws.greengrass.-2017-06-07/S3MachineLearningModelResourceData :portkey.aws.greengrass.-2017-06-07/SageMakerMachineLearningModelResourceData] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-function-definition-version-request/amzn-client-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-function-definition-version-request/function-definition-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-function-definition-version-request/functions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-of-function))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-function-definition-version-request/functions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-function))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/create-function-definition-version-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.create-function-definition-version-request/FunctionDefinitionId] :opt-un [:portkey.aws.greengrass.-2017-06-07.create-function-definition-version-request/AmznClientToken :portkey.aws.greengrass.-2017-06-07.create-function-definition-version-request/Functions] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-group-request/group-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
@@ -633,6 +761,10 @@
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/--integer (clojure.spec.alpha/and clojure.core/int?))
 
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.reset-deployments-response/deployment-arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.reset-deployments-response/deployment-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/reset-deployments-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.reset-deployments-response/DeploymentArn :portkey.aws.greengrass.-2017-06-07.reset-deployments-response/DeploymentId] :locations {}))
+
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-deployment-response/deployment-arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-deployment-response/deployment-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/create-deployment-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.create-deployment-response/DeploymentArn :portkey.aws.greengrass.-2017-06-07.create-deployment-response/DeploymentId] :locations {}))
@@ -642,6 +774,10 @@
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.delete-device-definition-request/device-definition-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/delete-device-definition-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.delete-device-definition-request/DeviceDefinitionId] :opt-un [] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.local-volume-resource-data/destination-path (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.local-volume-resource-data/source-path (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/local-volume-resource-data (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.local-volume-resource-data/DestinationPath :portkey.aws.greengrass.-2017-06-07/GroupOwnerSetting :portkey.aws.greengrass.-2017-06-07.local-volume-resource-data/SourcePath] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-logger-definition-response/arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-logger-definition-response/creation-timestamp (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
@@ -679,6 +815,11 @@
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-group-certificate-authority-request/group-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/get-group-certificate-authority-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.get-group-certificate-authority-request/CertificateAuthorityId :portkey.aws.greengrass.-2017-06-07.get-group-certificate-authority-request/GroupId] :opt-un [] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-resource-definition-request/amzn-client-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-resource-definition-request/initial-version (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/resource-definition-version))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-resource-definition-request/name (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/create-resource-definition-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.create-resource-definition-request/AmznClientToken :portkey.aws.greengrass.-2017-06-07.create-resource-definition-request/InitialVersion :portkey.aws.greengrass.-2017-06-07.create-resource-definition-request/Name] :locations {}))
+
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-logger-definition-response/arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-logger-definition-response/creation-timestamp (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-logger-definition-response/id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
@@ -688,25 +829,26 @@
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-logger-definition-response/name (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/create-logger-definition-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.create-logger-definition-response/Arn :portkey.aws.greengrass.-2017-06-07.create-logger-definition-response/CreationTimestamp :portkey.aws.greengrass.-2017-06-07.create-logger-definition-response/Id :portkey.aws.greengrass.-2017-06-07.create-logger-definition-response/LastUpdatedTimestamp :portkey.aws.greengrass.-2017-06-07.create-logger-definition-response/LatestVersion :portkey.aws.greengrass.-2017-06-07.create-logger-definition-response/LatestVersionArn :portkey.aws.greengrass.-2017-06-07.create-logger-definition-response/Name] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/s3-url-signer-role (clojure.spec.alpha/and clojure.core/string?))
+
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.device/certificate-arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.device/id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.device/sync-shadow (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--boolean))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.device/thing-arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/device (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.device/CertificateArn :portkey.aws.greengrass.-2017-06-07.device/Id :portkey.aws.greengrass.-2017-06-07.device/SyncShadow :portkey.aws.greengrass.-2017-06-07.device/ThingArn] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/logger-component (clojure.spec.alpha/conformer (clojure.core/let [m__96543__auto__ {"GreengrassSystem" "GreengrassSystem", :greengrass-system "GreengrassSystem", "Lambda" "Lambda", :lambda "Lambda"}] (clojure.core/fn [s__96544__auto__] (m__96543__auto__ s__96544__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/logger-component (clojure.spec.alpha/conformer (clojure.core/let [m__13959__auto__ {"GreengrassSystem" "GreengrassSystem", :greengrass-system "GreengrassSystem", "Lambda" "Lambda", :lambda "Lambda"}] (clojure.core/fn [s__13960__auto__] (m__13959__auto__ s__13960__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-function-definition-request/function-definition-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/get-function-definition-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.get-function-definition-request/FunctionDefinitionId] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-of-connectivity-info (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.greengrass.-2017-06-07/connectivity-info :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.resource-access-policy/resource-id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/resource-access-policy (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07/Permission :portkey.aws.greengrass.-2017-06-07.resource-access-policy/ResourceId] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-device-definition-request/amzn-client-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-device-definition-request/initial-version (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/device-definition-version))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-device-definition-request/name (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/create-device-definition-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.create-device-definition-request/AmznClientToken :portkey.aws.greengrass.-2017-06-07.create-device-definition-request/InitialVersion :portkey.aws.greengrass.-2017-06-07.create-device-definition-request/Name] :locations {}))
-
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-of-group-certificate-authority-properties (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.greengrass.-2017-06-07/group-certificate-authority-properties :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.get-connectivity-info-request/thing-name (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/get-connectivity-info-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.get-connectivity-info-request/ThingName] :opt-un [] :locations {}))
@@ -717,9 +859,12 @@
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-group-version-response/version (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/create-group-version-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.create-group-version-response/Arn :portkey.aws.greengrass.-2017-06-07.create-group-version-response/CreationTimestamp :portkey.aws.greengrass.-2017-06-07.create-group-version-response/Id :portkey.aws.greengrass.-2017-06-07.create-group-version-response/Version] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-definitions-response/definitions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-of-definition-information))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-definitions-response/definitions (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--list-of-definition-information))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.list-definitions-response/next-token (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-definitions-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.list-definitions-response/Definitions :portkey.aws.greengrass.-2017-06-07.list-definitions-response/NextToken] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.local-device-resource-data/source-path (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/local-device-resource-data (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07/GroupOwnerSetting :portkey.aws.greengrass.-2017-06-07.local-device-resource-data/SourcePath] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-core-definition-response/arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-core-definition-response/creation-timestamp (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
@@ -732,8 +877,6 @@
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.general-error/message (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/general-error (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07/ErrorDetails :portkey.aws.greengrass.-2017-06-07.general-error/Message] :locations {}))
-
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-of-function (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.greengrass.-2017-06-07/function :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-function-definition-response/arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-function-definition-response/creation-timestamp (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
@@ -761,9 +904,15 @@
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.update-group-request/name (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/update-group-request (portkey.aws/json-keys :req-un [:portkey.aws.greengrass.-2017-06-07.update-group-request/GroupId] :opt-un [:portkey.aws.greengrass.-2017-06-07.update-group-request/Name] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/list-of-logger (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.greengrass.-2017-06-07/logger :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/delete-resource-definition-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/map-of--string (clojure.spec.alpha/map-of :portkey.aws.greengrass.-2017-06-07/--string :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/--map-of--string (clojure.spec.alpha/map-of :portkey.aws.greengrass.-2017-06-07/--string :portkey.aws.greengrass.-2017-06-07/--string))
+
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-resource-definition-version-response/arn (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-resource-definition-version-response/creation-timestamp (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-resource-definition-version-response/id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.create-resource-definition-version-response/version (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/create-resource-definition-version-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.greengrass.-2017-06-07.create-resource-definition-version-response/Arn :portkey.aws.greengrass.-2017-06-07.create-resource-definition-version-response/CreationTimestamp :portkey.aws.greengrass.-2017-06-07.create-resource-definition-version-response/Id :portkey.aws.greengrass.-2017-06-07.create-resource-definition-version-response/Version] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.logger/component (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/logger-component))
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07.logger/id (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/--string))
@@ -774,7 +923,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/delete-device-definition-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/deployments (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.greengrass.-2017-06-07/deployment :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.greengrass.-2017-06-07/deployments (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.greengrass.-2017-06-07/deployment) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13880__13881__auto__] (if (clojure.core/sequential? p1__13880__13881__auto__) p1__13880__13881__auto__ [p1__13880__13881__auto__])))))
 
 (clojure.core/defn create-device-definition ([] (create-device-definition {})) ([create-device-definition-request] (portkey.aws/-rest-json-call portkey.aws.greengrass.-2017-06-07/endpoints "POST" "/greengrass/definition/devices" create-device-definition-request :portkey.aws.greengrass.-2017-06-07/create-device-definition-request {:payload nil, :move {}, :headers {"AmznClientToken" ["X-Amzn-Client-Token" nil]}, :uri {}, :querystring {}} 200 :portkey.aws.greengrass.-2017-06-07/create-device-definition-response {"BadRequestException" :portkey.aws.greengrass.-2017-06-07/bad-request-exception})))
 (clojure.spec.alpha/fdef create-device-definition :args (clojure.spec.alpha/? :portkey.aws.greengrass.-2017-06-07/create-device-definition-request) :ret (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/create-device-definition-response))
@@ -797,6 +946,9 @@
 (clojure.core/defn create-function-definition ([] (create-function-definition {})) ([create-function-definition-request] (portkey.aws/-rest-json-call portkey.aws.greengrass.-2017-06-07/endpoints "POST" "/greengrass/definition/functions" create-function-definition-request :portkey.aws.greengrass.-2017-06-07/create-function-definition-request {:payload nil, :move {}, :headers {"AmznClientToken" ["X-Amzn-Client-Token" nil]}, :uri {}, :querystring {}} 200 :portkey.aws.greengrass.-2017-06-07/create-function-definition-response {"BadRequestException" :portkey.aws.greengrass.-2017-06-07/bad-request-exception})))
 (clojure.spec.alpha/fdef create-function-definition :args (clojure.spec.alpha/? :portkey.aws.greengrass.-2017-06-07/create-function-definition-request) :ret (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/create-function-definition-response))
 
+(clojure.core/defn get-resource-definition-version ([get-resource-definition-version-request] (portkey.aws/-rest-json-call portkey.aws.greengrass.-2017-06-07/endpoints "GET" "/greengrass/definition/resources/{ResourceDefinitionId}/versions/{ResourceDefinitionVersionId}" get-resource-definition-version-request :portkey.aws.greengrass.-2017-06-07/get-resource-definition-version-request {:payload nil, :move {}, :headers {}, :uri {"ResourceDefinitionId" "ResourceDefinitionId", "ResourceDefinitionVersionId" "ResourceDefinitionVersionId"}, :querystring {}} 200 :portkey.aws.greengrass.-2017-06-07/get-resource-definition-version-response {"BadRequestException" :portkey.aws.greengrass.-2017-06-07/bad-request-exception})))
+(clojure.spec.alpha/fdef get-resource-definition-version :args (clojure.spec.alpha/tuple :portkey.aws.greengrass.-2017-06-07/get-resource-definition-version-request) :ret (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/get-resource-definition-version-response))
+
 (clojure.core/defn create-core-definition ([] (create-core-definition {})) ([create-core-definition-request] (portkey.aws/-rest-json-call portkey.aws.greengrass.-2017-06-07/endpoints "POST" "/greengrass/definition/cores" create-core-definition-request :portkey.aws.greengrass.-2017-06-07/create-core-definition-request {:payload nil, :move {}, :headers {"AmznClientToken" ["X-Amzn-Client-Token" nil]}, :uri {}, :querystring {}} 200 :portkey.aws.greengrass.-2017-06-07/create-core-definition-response {"BadRequestException" :portkey.aws.greengrass.-2017-06-07/bad-request-exception})))
 (clojure.spec.alpha/fdef create-core-definition :args (clojure.spec.alpha/? :portkey.aws.greengrass.-2017-06-07/create-core-definition-request) :ret (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/create-core-definition-response))
 
@@ -805,6 +957,9 @@
 
 (clojure.core/defn create-logger-definition ([] (create-logger-definition {})) ([create-logger-definition-request] (portkey.aws/-rest-json-call portkey.aws.greengrass.-2017-06-07/endpoints "POST" "/greengrass/definition/loggers" create-logger-definition-request :portkey.aws.greengrass.-2017-06-07/create-logger-definition-request {:payload nil, :move {}, :headers {"AmznClientToken" ["X-Amzn-Client-Token" nil]}, :uri {}, :querystring {}} 200 :portkey.aws.greengrass.-2017-06-07/create-logger-definition-response {"BadRequestException" :portkey.aws.greengrass.-2017-06-07/bad-request-exception})))
 (clojure.spec.alpha/fdef create-logger-definition :args (clojure.spec.alpha/? :portkey.aws.greengrass.-2017-06-07/create-logger-definition-request) :ret (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/create-logger-definition-response))
+
+(clojure.core/defn update-resource-definition ([update-resource-definition-request] (portkey.aws/-rest-json-call portkey.aws.greengrass.-2017-06-07/endpoints "PUT" "/greengrass/definition/resources/{ResourceDefinitionId}" update-resource-definition-request :portkey.aws.greengrass.-2017-06-07/update-resource-definition-request {:payload nil, :move {}, :headers {}, :uri {"ResourceDefinitionId" "ResourceDefinitionId"}, :querystring {}} 200 :portkey.aws.greengrass.-2017-06-07/update-resource-definition-response {"BadRequestException" :portkey.aws.greengrass.-2017-06-07/bad-request-exception})))
+(clojure.spec.alpha/fdef update-resource-definition :args (clojure.spec.alpha/tuple :portkey.aws.greengrass.-2017-06-07/update-resource-definition-request) :ret (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/update-resource-definition-response))
 
 (clojure.core/defn get-subscription-definition-version ([get-subscription-definition-version-request] (portkey.aws/-rest-json-call portkey.aws.greengrass.-2017-06-07/endpoints "GET" "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}/versions/{SubscriptionDefinitionVersionId}" get-subscription-definition-version-request :portkey.aws.greengrass.-2017-06-07/get-subscription-definition-version-request {:payload nil, :move {}, :headers {}, :uri {"SubscriptionDefinitionId" "SubscriptionDefinitionId", "SubscriptionDefinitionVersionId" "SubscriptionDefinitionVersionId"}, :querystring {}} 200 :portkey.aws.greengrass.-2017-06-07/get-subscription-definition-version-response {"BadRequestException" :portkey.aws.greengrass.-2017-06-07/bad-request-exception})))
 (clojure.spec.alpha/fdef get-subscription-definition-version :args (clojure.spec.alpha/tuple :portkey.aws.greengrass.-2017-06-07/get-subscription-definition-version-request) :ret (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/get-subscription-definition-version-response))
@@ -817,6 +972,9 @@
 
 (clojure.core/defn disassociate-service-role-from-account ([] (disassociate-service-role-from-account {})) ([disassociate-service-role-from-account-request] (portkey.aws/-rest-json-call portkey.aws.greengrass.-2017-06-07/endpoints "DELETE" "/greengrass/servicerole" disassociate-service-role-from-account-request :portkey.aws.greengrass.-2017-06-07/disassociate-service-role-from-account-request {:payload nil, :move {}, :headers {}, :uri {}, :querystring {}} 200 :portkey.aws.greengrass.-2017-06-07/disassociate-service-role-from-account-response {"InternalServerErrorException" :portkey.aws.greengrass.-2017-06-07/internal-server-error-exception})))
 (clojure.spec.alpha/fdef disassociate-service-role-from-account :args (clojure.spec.alpha/? :portkey.aws.greengrass.-2017-06-07/disassociate-service-role-from-account-request) :ret (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/disassociate-service-role-from-account-response))
+
+(clojure.core/defn reset-deployments ([reset-deployments-request] (portkey.aws/-rest-json-call portkey.aws.greengrass.-2017-06-07/endpoints "POST" "/greengrass/groups/{GroupId}/deployments/$reset" reset-deployments-request :portkey.aws.greengrass.-2017-06-07/reset-deployments-request {:payload nil, :move {}, :headers {"AmznClientToken" ["X-Amzn-Client-Token" nil]}, :uri {"GroupId" "GroupId"}, :querystring {}} 200 :portkey.aws.greengrass.-2017-06-07/reset-deployments-response {"BadRequestException" :portkey.aws.greengrass.-2017-06-07/bad-request-exception})))
+(clojure.spec.alpha/fdef reset-deployments :args (clojure.spec.alpha/tuple :portkey.aws.greengrass.-2017-06-07/reset-deployments-request) :ret (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/reset-deployments-response))
 
 (clojure.core/defn create-subscription-definition-version ([create-subscription-definition-version-request] (portkey.aws/-rest-json-call portkey.aws.greengrass.-2017-06-07/endpoints "POST" "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}/versions" create-subscription-definition-version-request :portkey.aws.greengrass.-2017-06-07/create-subscription-definition-version-request {:payload nil, :move {}, :headers {"AmznClientToken" ["X-Amzn-Client-Token" nil]}, :uri {"SubscriptionDefinitionId" "SubscriptionDefinitionId"}, :querystring {}} 200 :portkey.aws.greengrass.-2017-06-07/create-subscription-definition-version-response {"BadRequestException" :portkey.aws.greengrass.-2017-06-07/bad-request-exception})))
 (clojure.spec.alpha/fdef create-subscription-definition-version :args (clojure.spec.alpha/tuple :portkey.aws.greengrass.-2017-06-07/create-subscription-definition-version-request) :ret (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/create-subscription-definition-version-response))
@@ -848,6 +1006,9 @@
 (clojure.core/defn list-group-versions ([list-group-versions-request] (portkey.aws/-rest-json-call portkey.aws.greengrass.-2017-06-07/endpoints "GET" "/greengrass/groups/{GroupId}/versions" list-group-versions-request :portkey.aws.greengrass.-2017-06-07/list-group-versions-request {:payload nil, :move {}, :headers {}, :uri {"GroupId" "GroupId"}, :querystring {"MaxResults" "MaxResults", "NextToken" "NextToken"}} 200 :portkey.aws.greengrass.-2017-06-07/list-group-versions-response {"BadRequestException" :portkey.aws.greengrass.-2017-06-07/bad-request-exception})))
 (clojure.spec.alpha/fdef list-group-versions :args (clojure.spec.alpha/tuple :portkey.aws.greengrass.-2017-06-07/list-group-versions-request) :ret (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-group-versions-response))
 
+(clojure.core/defn create-software-update-job ([] (create-software-update-job {})) ([create-software-update-job-request] (portkey.aws/-rest-json-call portkey.aws.greengrass.-2017-06-07/endpoints "POST" "/greengrass/updates" create-software-update-job-request :portkey.aws.greengrass.-2017-06-07/create-software-update-job-request {:payload nil, :move {}, :headers {"AmznClientToken" ["X-Amzn-Client-Token" nil]}, :uri {}, :querystring {}} 200 :portkey.aws.greengrass.-2017-06-07/create-software-update-job-response {"BadRequestException" :portkey.aws.greengrass.-2017-06-07/bad-request-exception, "InternalServerErrorException" :portkey.aws.greengrass.-2017-06-07/internal-server-error-exception})))
+(clojure.spec.alpha/fdef create-software-update-job :args (clojure.spec.alpha/? :portkey.aws.greengrass.-2017-06-07/create-software-update-job-request) :ret (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/create-software-update-job-response))
+
 (clojure.core/defn list-subscription-definition-versions ([list-subscription-definition-versions-request] (portkey.aws/-rest-json-call portkey.aws.greengrass.-2017-06-07/endpoints "GET" "/greengrass/definition/subscriptions/{SubscriptionDefinitionId}/versions" list-subscription-definition-versions-request :portkey.aws.greengrass.-2017-06-07/list-subscription-definition-versions-request {:payload nil, :move {}, :headers {}, :uri {"SubscriptionDefinitionId" "SubscriptionDefinitionId"}, :querystring {"MaxResults" "MaxResults", "NextToken" "NextToken"}} 200 :portkey.aws.greengrass.-2017-06-07/list-subscription-definition-versions-response {"BadRequestException" :portkey.aws.greengrass.-2017-06-07/bad-request-exception})))
 (clojure.spec.alpha/fdef list-subscription-definition-versions :args (clojure.spec.alpha/tuple :portkey.aws.greengrass.-2017-06-07/list-subscription-definition-versions-request) :ret (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-subscription-definition-versions-response))
 
@@ -869,6 +1030,12 @@
 (clojure.core/defn get-core-definition ([get-core-definition-request] (portkey.aws/-rest-json-call portkey.aws.greengrass.-2017-06-07/endpoints "GET" "/greengrass/definition/cores/{CoreDefinitionId}" get-core-definition-request :portkey.aws.greengrass.-2017-06-07/get-core-definition-request {:payload nil, :move {}, :headers {}, :uri {"CoreDefinitionId" "CoreDefinitionId"}, :querystring {}} 200 :portkey.aws.greengrass.-2017-06-07/get-core-definition-response {"BadRequestException" :portkey.aws.greengrass.-2017-06-07/bad-request-exception})))
 (clojure.spec.alpha/fdef get-core-definition :args (clojure.spec.alpha/tuple :portkey.aws.greengrass.-2017-06-07/get-core-definition-request) :ret (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/get-core-definition-response))
 
+(clojure.core/defn create-resource-definition ([] (create-resource-definition {})) ([create-resource-definition-request] (portkey.aws/-rest-json-call portkey.aws.greengrass.-2017-06-07/endpoints "POST" "/greengrass/definition/resources" create-resource-definition-request :portkey.aws.greengrass.-2017-06-07/create-resource-definition-request {:payload nil, :move {}, :headers {"AmznClientToken" ["X-Amzn-Client-Token" nil]}, :uri {}, :querystring {}} 200 :portkey.aws.greengrass.-2017-06-07/create-resource-definition-response {"BadRequestException" :portkey.aws.greengrass.-2017-06-07/bad-request-exception})))
+(clojure.spec.alpha/fdef create-resource-definition :args (clojure.spec.alpha/? :portkey.aws.greengrass.-2017-06-07/create-resource-definition-request) :ret (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/create-resource-definition-response))
+
+(clojure.core/defn create-resource-definition-version ([create-resource-definition-version-request] (portkey.aws/-rest-json-call portkey.aws.greengrass.-2017-06-07/endpoints "POST" "/greengrass/definition/resources/{ResourceDefinitionId}/versions" create-resource-definition-version-request :portkey.aws.greengrass.-2017-06-07/create-resource-definition-version-request {:payload nil, :move {}, :headers {"AmznClientToken" ["X-Amzn-Client-Token" nil]}, :uri {"ResourceDefinitionId" "ResourceDefinitionId"}, :querystring {}} 200 :portkey.aws.greengrass.-2017-06-07/create-resource-definition-version-response {"BadRequestException" :portkey.aws.greengrass.-2017-06-07/bad-request-exception})))
+(clojure.spec.alpha/fdef create-resource-definition-version :args (clojure.spec.alpha/tuple :portkey.aws.greengrass.-2017-06-07/create-resource-definition-version-request) :ret (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/create-resource-definition-version-response))
+
 (clojure.core/defn list-core-definitions ([] (list-core-definitions {})) ([list-core-definitions-request] (portkey.aws/-rest-json-call portkey.aws.greengrass.-2017-06-07/endpoints "GET" "/greengrass/definition/cores" list-core-definitions-request :portkey.aws.greengrass.-2017-06-07/list-core-definitions-request {:payload nil, :move {}, :headers {}, :uri {}, :querystring {"MaxResults" "MaxResults", "NextToken" "NextToken"}} 200 :portkey.aws.greengrass.-2017-06-07/list-core-definitions-response {})))
 (clojure.spec.alpha/fdef list-core-definitions :args (clojure.spec.alpha/? :portkey.aws.greengrass.-2017-06-07/list-core-definitions-request) :ret (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-core-definitions-response))
 
@@ -881,6 +1048,9 @@
 (clojure.core/defn get-device-definition ([get-device-definition-request] (portkey.aws/-rest-json-call portkey.aws.greengrass.-2017-06-07/endpoints "GET" "/greengrass/definition/devices/{DeviceDefinitionId}" get-device-definition-request :portkey.aws.greengrass.-2017-06-07/get-device-definition-request {:payload nil, :move {}, :headers {}, :uri {"DeviceDefinitionId" "DeviceDefinitionId"}, :querystring {}} 200 :portkey.aws.greengrass.-2017-06-07/get-device-definition-response {"BadRequestException" :portkey.aws.greengrass.-2017-06-07/bad-request-exception})))
 (clojure.spec.alpha/fdef get-device-definition :args (clojure.spec.alpha/tuple :portkey.aws.greengrass.-2017-06-07/get-device-definition-request) :ret (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/get-device-definition-response))
 
+(clojure.core/defn list-resource-definition-versions ([list-resource-definition-versions-request] (portkey.aws/-rest-json-call portkey.aws.greengrass.-2017-06-07/endpoints "GET" "/greengrass/definition/resources/{ResourceDefinitionId}/versions" list-resource-definition-versions-request :portkey.aws.greengrass.-2017-06-07/list-resource-definition-versions-request {:payload nil, :move {}, :headers {}, :uri {"ResourceDefinitionId" "ResourceDefinitionId"}, :querystring {"MaxResults" "MaxResults", "NextToken" "NextToken"}} 200 :portkey.aws.greengrass.-2017-06-07/list-resource-definition-versions-response {"BadRequestException" :portkey.aws.greengrass.-2017-06-07/bad-request-exception})))
+(clojure.spec.alpha/fdef list-resource-definition-versions :args (clojure.spec.alpha/tuple :portkey.aws.greengrass.-2017-06-07/list-resource-definition-versions-request) :ret (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-resource-definition-versions-response))
+
 (clojure.core/defn list-deployments ([list-deployments-request] (portkey.aws/-rest-json-call portkey.aws.greengrass.-2017-06-07/endpoints "GET" "/greengrass/groups/{GroupId}/deployments" list-deployments-request :portkey.aws.greengrass.-2017-06-07/list-deployments-request {:payload nil, :move {}, :headers {}, :uri {"GroupId" "GroupId"}, :querystring {"MaxResults" "MaxResults", "NextToken" "NextToken"}} 200 :portkey.aws.greengrass.-2017-06-07/list-deployments-response {"BadRequestException" :portkey.aws.greengrass.-2017-06-07/bad-request-exception})))
 (clojure.spec.alpha/fdef list-deployments :args (clojure.spec.alpha/tuple :portkey.aws.greengrass.-2017-06-07/list-deployments-request) :ret (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-deployments-response))
 
@@ -892,6 +1062,9 @@
 
 (clojure.core/defn update-function-definition ([update-function-definition-request] (portkey.aws/-rest-json-call portkey.aws.greengrass.-2017-06-07/endpoints "PUT" "/greengrass/definition/functions/{FunctionDefinitionId}" update-function-definition-request :portkey.aws.greengrass.-2017-06-07/update-function-definition-request {:payload nil, :move {}, :headers {}, :uri {"FunctionDefinitionId" "FunctionDefinitionId"}, :querystring {}} 200 :portkey.aws.greengrass.-2017-06-07/update-function-definition-response {"BadRequestException" :portkey.aws.greengrass.-2017-06-07/bad-request-exception})))
 (clojure.spec.alpha/fdef update-function-definition :args (clojure.spec.alpha/tuple :portkey.aws.greengrass.-2017-06-07/update-function-definition-request) :ret (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/update-function-definition-response))
+
+(clojure.core/defn list-resource-definitions ([] (list-resource-definitions {})) ([list-resource-definitions-request] (portkey.aws/-rest-json-call portkey.aws.greengrass.-2017-06-07/endpoints "GET" "/greengrass/definition/resources" list-resource-definitions-request :portkey.aws.greengrass.-2017-06-07/list-resource-definitions-request {:payload nil, :move {}, :headers {}, :uri {}, :querystring {"MaxResults" "MaxResults", "NextToken" "NextToken"}} 200 :portkey.aws.greengrass.-2017-06-07/list-resource-definitions-response {})))
+(clojure.spec.alpha/fdef list-resource-definitions :args (clojure.spec.alpha/? :portkey.aws.greengrass.-2017-06-07/list-resource-definitions-request) :ret (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/list-resource-definitions-response))
 
 (clojure.core/defn delete-function-definition ([delete-function-definition-request] (portkey.aws/-rest-json-call portkey.aws.greengrass.-2017-06-07/endpoints "DELETE" "/greengrass/definition/functions/{FunctionDefinitionId}" delete-function-definition-request :portkey.aws.greengrass.-2017-06-07/delete-function-definition-request {:payload nil, :move {}, :headers {}, :uri {"FunctionDefinitionId" "FunctionDefinitionId"}, :querystring {}} 200 :portkey.aws.greengrass.-2017-06-07/delete-function-definition-response {"BadRequestException" :portkey.aws.greengrass.-2017-06-07/bad-request-exception})))
 (clojure.spec.alpha/fdef delete-function-definition :args (clojure.spec.alpha/tuple :portkey.aws.greengrass.-2017-06-07/delete-function-definition-request) :ret (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/delete-function-definition-response))
@@ -907,6 +1080,12 @@
 
 (clojure.core/defn update-device-definition ([update-device-definition-request] (portkey.aws/-rest-json-call portkey.aws.greengrass.-2017-06-07/endpoints "PUT" "/greengrass/definition/devices/{DeviceDefinitionId}" update-device-definition-request :portkey.aws.greengrass.-2017-06-07/update-device-definition-request {:payload nil, :move {}, :headers {}, :uri {"DeviceDefinitionId" "DeviceDefinitionId"}, :querystring {}} 200 :portkey.aws.greengrass.-2017-06-07/update-device-definition-response {"BadRequestException" :portkey.aws.greengrass.-2017-06-07/bad-request-exception})))
 (clojure.spec.alpha/fdef update-device-definition :args (clojure.spec.alpha/tuple :portkey.aws.greengrass.-2017-06-07/update-device-definition-request) :ret (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/update-device-definition-response))
+
+(clojure.core/defn get-resource-definition ([get-resource-definition-request] (portkey.aws/-rest-json-call portkey.aws.greengrass.-2017-06-07/endpoints "GET" "/greengrass/definition/resources/{ResourceDefinitionId}" get-resource-definition-request :portkey.aws.greengrass.-2017-06-07/get-resource-definition-request {:payload nil, :move {}, :headers {}, :uri {"ResourceDefinitionId" "ResourceDefinitionId"}, :querystring {}} 200 :portkey.aws.greengrass.-2017-06-07/get-resource-definition-response {"BadRequestException" :portkey.aws.greengrass.-2017-06-07/bad-request-exception})))
+(clojure.spec.alpha/fdef get-resource-definition :args (clojure.spec.alpha/tuple :portkey.aws.greengrass.-2017-06-07/get-resource-definition-request) :ret (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/get-resource-definition-response))
+
+(clojure.core/defn delete-resource-definition ([delete-resource-definition-request] (portkey.aws/-rest-json-call portkey.aws.greengrass.-2017-06-07/endpoints "DELETE" "/greengrass/definition/resources/{ResourceDefinitionId}" delete-resource-definition-request :portkey.aws.greengrass.-2017-06-07/delete-resource-definition-request {:payload nil, :move {}, :headers {}, :uri {"ResourceDefinitionId" "ResourceDefinitionId"}, :querystring {}} 200 :portkey.aws.greengrass.-2017-06-07/delete-resource-definition-response {"BadRequestException" :portkey.aws.greengrass.-2017-06-07/bad-request-exception})))
+(clojure.spec.alpha/fdef delete-resource-definition :args (clojure.spec.alpha/tuple :portkey.aws.greengrass.-2017-06-07/delete-resource-definition-request) :ret (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/delete-resource-definition-response))
 
 (clojure.core/defn create-group-certificate-authority ([create-group-certificate-authority-request] (portkey.aws/-rest-json-call portkey.aws.greengrass.-2017-06-07/endpoints "POST" "/greengrass/groups/{GroupId}/certificateauthorities" create-group-certificate-authority-request :portkey.aws.greengrass.-2017-06-07/create-group-certificate-authority-request {:payload nil, :move {}, :headers {"AmznClientToken" ["X-Amzn-Client-Token" nil]}, :uri {"GroupId" "GroupId"}, :querystring {}} 200 :portkey.aws.greengrass.-2017-06-07/create-group-certificate-authority-response {"BadRequestException" :portkey.aws.greengrass.-2017-06-07/bad-request-exception, "InternalServerErrorException" :portkey.aws.greengrass.-2017-06-07/internal-server-error-exception})))
 (clojure.spec.alpha/fdef create-group-certificate-authority :args (clojure.spec.alpha/tuple :portkey.aws.greengrass.-2017-06-07/create-group-certificate-authority-request) :ret (clojure.spec.alpha/and :portkey.aws.greengrass.-2017-06-07/create-group-certificate-authority-response))
