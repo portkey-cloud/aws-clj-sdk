@@ -37,6 +37,11 @@
     :ssl-common-name "waf.amazonaws.com",
     :endpoint "https://waf.amazonaws.com",
     :signature-version :v4},
+   "eu-west-3"
+   {:credential-scope {:service "waf", :region "us-east-1"},
+    :ssl-common-name "waf.amazonaws.com",
+    :endpoint "https://waf.amazonaws.com",
+    :signature-version :v4},
    "ca-central-1"
    {:credential-scope {:service "waf", :region "us-east-1"},
     :ssl-common-name "waf.amazonaws.com",

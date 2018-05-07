@@ -37,6 +37,16 @@
     :ssl-common-name "opsworks.ap-northeast-2.amazonaws.com",
     :endpoint "https://opsworks.ap-northeast-2.amazonaws.com",
     :signature-version :v4},
+   "eu-west-3"
+   {:credential-scope {:service "opsworks", :region "eu-west-3"},
+    :ssl-common-name "opsworks.eu-west-3.amazonaws.com",
+    :endpoint "https://opsworks.eu-west-3.amazonaws.com",
+    :signature-version :v4},
+   "ca-central-1"
+   {:credential-scope {:service "opsworks", :region "ca-central-1"},
+    :ssl-common-name "opsworks.ca-central-1.amazonaws.com",
+    :endpoint "https://opsworks.ca-central-1.amazonaws.com",
+    :signature-version :v4},
    "eu-central-1"
    {:credential-scope {:service "opsworks", :region "eu-central-1"},
     :ssl-common-name "opsworks.eu-central-1.amazonaws.com",

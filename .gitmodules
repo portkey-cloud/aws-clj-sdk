@@ -1,0 +1,3 @@
+[submodule "api-resources/aws-sdk-ruby"]
+	path = api-resources/aws-sdk-ruby
+	url = git@github.com:aws/aws-sdk-ruby.git

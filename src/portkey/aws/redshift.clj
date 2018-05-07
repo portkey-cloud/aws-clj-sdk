@@ -37,10 +37,20 @@
     :ssl-common-name "redshift.ap-southeast-1.amazonaws.com",
     :endpoint "https://redshift.ap-southeast-1.amazonaws.com",
     :signature-version :v4},
+   "cn-northwest-1"
+   {:credential-scope {:service "redshift", :region "cn-northwest-1"},
+    :ssl-common-name "redshift.cn-northwest-1.amazonaws.com.cn",
+    :endpoint "https://redshift.cn-northwest-1.amazonaws.com.cn",
+    :signature-version :v4},
    "ap-northeast-2"
    {:credential-scope {:service "redshift", :region "ap-northeast-2"},
     :ssl-common-name "redshift.ap-northeast-2.amazonaws.com",
     :endpoint "https://redshift.ap-northeast-2.amazonaws.com",
+    :signature-version :v4},
+   "eu-west-3"
+   {:credential-scope {:service "redshift", :region "eu-west-3"},
+    :ssl-common-name "redshift.eu-west-3.amazonaws.com",
+    :endpoint "https://redshift.eu-west-3.amazonaws.com",
     :signature-version :v4},
    "ca-central-1"
    {:credential-scope {:service "redshift", :region "ca-central-1"},

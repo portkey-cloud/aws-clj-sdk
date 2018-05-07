@@ -2,7 +2,12 @@
 
 (def
  endpoints
- '{"eu-west-1"
+ '{"ap-northeast-1"
+   {:credential-scope {:service "snowball", :region "ap-northeast-1"},
+    :ssl-common-name "snowball.ap-northeast-1.amazonaws.com",
+    :endpoint "https://snowball.ap-northeast-1.amazonaws.com",
+    :signature-version :v4},
+   "eu-west-1"
    {:credential-scope {:service "snowball", :region "eu-west-1"},
     :ssl-common-name "snowball.eu-west-1.amazonaws.com",
     :endpoint "https://snowball.eu-west-1.amazonaws.com",
@@ -17,10 +22,30 @@
     :ssl-common-name "snowball.ap-southeast-2.amazonaws.com",
     :endpoint "https://snowball.ap-southeast-2.amazonaws.com",
     :signature-version :v4},
+   "cn-north-1"
+   {:credential-scope {:service "snowball", :region "cn-north-1"},
+    :ssl-common-name "snowball.cn-north-1.amazonaws.com.cn",
+    :endpoint "https://snowball.cn-north-1.amazonaws.com.cn",
+    :signature-version :v4},
    "sa-east-1"
    {:credential-scope {:service "snowball", :region "sa-east-1"},
     :ssl-common-name "snowball.sa-east-1.amazonaws.com",
     :endpoint "https://snowball.sa-east-1.amazonaws.com",
+    :signature-version :v4},
+   "ap-southeast-1"
+   {:credential-scope {:service "snowball", :region "ap-southeast-1"},
+    :ssl-common-name "snowball.ap-southeast-1.amazonaws.com",
+    :endpoint "https://snowball.ap-southeast-1.amazonaws.com",
+    :signature-version :v4},
+   "eu-west-3"
+   {:credential-scope {:service "snowball", :region "eu-west-3"},
+    :ssl-common-name "snowball.eu-west-3.amazonaws.com",
+    :endpoint "https://snowball.eu-west-3.amazonaws.com",
+    :signature-version :v4},
+   "ca-central-1"
+   {:credential-scope {:service "snowball", :region "ca-central-1"},
+    :ssl-common-name "snowball.ca-central-1.amazonaws.com",
+    :endpoint "https://snowball.ca-central-1.amazonaws.com",
     :signature-version :v4},
    "eu-central-1"
    {:credential-scope {:service "snowball", :region "eu-central-1"},

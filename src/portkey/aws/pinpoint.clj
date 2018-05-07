@@ -16,7 +16,11 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.treatment-resource/treatment-name (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/treatment-resource (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.treatment-resource/Id :portkey.aws.pinpoint/MessageConfiguration :portkey.aws.pinpoint/Schedule :portkey.aws.pinpoint.treatment-resource/SizePercent :portkey.aws.pinpoint.treatment-resource/State :portkey.aws.pinpoint.treatment-resource/TreatmentDescription :portkey.aws.pinpoint.treatment-resource/TreatmentName] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/attribute-type (clojure.spec.alpha/conformer (clojure.core/let [m__15964__auto__ {"INCLUSIVE" "INCLUSIVE", :inclusive "INCLUSIVE", "EXCLUSIVE" "EXCLUSIVE", :exclusive "EXCLUSIVE"}] (clojure.core/fn [s__15965__auto__] (m__15964__auto__ s__15965__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.export-jobs-response/item (clojure.spec.alpha/and :portkey.aws.pinpoint/list-of-export-job-response))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.export-jobs-response/next-token (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/export-jobs-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.export-jobs-response/Item :portkey.aws.pinpoint.export-jobs-response/NextToken] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.pinpoint/attribute-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"INCLUSIVE" "INCLUSIVE", :inclusive "INCLUSIVE", "EXCLUSIVE" "EXCLUSIVE", :exclusive "EXCLUSIVE"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.import-job-request/define-segment (clojure.spec.alpha/and :portkey.aws.pinpoint/--boolean))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.import-job-request/external-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
@@ -45,10 +49,13 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.write-campaign-request/segment-version (clojure.spec.alpha/and :portkey.aws.pinpoint/--integer))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.write-campaign-request/description (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.write-campaign-request/is-paused (clojure.spec.alpha/and :portkey.aws.pinpoint/--boolean))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.write-campaign-request/hook (clojure.spec.alpha/and :portkey.aws.pinpoint/campaign-hook))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.write-campaign-request/segment-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.write-campaign-request/name (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.write-campaign-request/holdout-percent (clojure.spec.alpha/and :portkey.aws.pinpoint/--integer))
-(clojure.spec.alpha/def :portkey.aws.pinpoint/write-campaign-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.write-campaign-request/AdditionalTreatments :portkey.aws.pinpoint.write-campaign-request/TreatmentDescription :portkey.aws.pinpoint.write-campaign-request/TreatmentName :portkey.aws.pinpoint.write-campaign-request/Limits :portkey.aws.pinpoint.write-campaign-request/SegmentVersion :portkey.aws.pinpoint.write-campaign-request/Description :portkey.aws.pinpoint.write-campaign-request/IsPaused :portkey.aws.pinpoint/MessageConfiguration :portkey.aws.pinpoint.write-campaign-request/SegmentId :portkey.aws.pinpoint/Schedule :portkey.aws.pinpoint.write-campaign-request/Name :portkey.aws.pinpoint.write-campaign-request/HoldoutPercent] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/write-campaign-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.write-campaign-request/AdditionalTreatments :portkey.aws.pinpoint.write-campaign-request/TreatmentDescription :portkey.aws.pinpoint.write-campaign-request/TreatmentName :portkey.aws.pinpoint.write-campaign-request/Limits :portkey.aws.pinpoint.write-campaign-request/SegmentVersion :portkey.aws.pinpoint.write-campaign-request/Description :portkey.aws.pinpoint.write-campaign-request/IsPaused :portkey.aws.pinpoint.write-campaign-request/Hook :portkey.aws.pinpoint/MessageConfiguration :portkey.aws.pinpoint.write-campaign-request/SegmentId :portkey.aws.pinpoint/Schedule :portkey.aws.pinpoint.write-campaign-request/Name :portkey.aws.pinpoint.write-campaign-request/HoldoutPercent] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.pinpoint/create-export-job-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/ExportJobResponse] :opt-un [] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.gcmmessage/collapse-key (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.gcmmessage/restricted-package-name (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
@@ -104,7 +111,10 @@
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/create-app-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/ApplicationResponse] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-segment-response (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/segment-response) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__15885__15886__auto__] (if (clojure.core/sequential? p1__15885__15886__auto__) p1__15885__15886__auto__ [p1__15885__15886__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.create-export-job-request/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/create-export-job-request (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint.create-export-job-request/ApplicationId :portkey.aws.pinpoint/ExportJobRequest] :opt-un [] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-segment-response (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/segment-response) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.message-request/addresses (clojure.spec.alpha/and :portkey.aws.pinpoint/map-of-address-configuration))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.message-request/context (clojure.spec.alpha/and :portkey.aws.pinpoint/map-of--string))
@@ -164,11 +174,18 @@
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/get-app-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/ApplicationResponse] :opt-un [] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.pinpoint.export-job-resource/role-arn (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.export-job-resource/s3-url-prefix (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.export-job-resource/segment-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/export-job-resource (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.export-job-resource/RoleArn :portkey.aws.pinpoint.export-job-resource/S3UrlPrefix :portkey.aws.pinpoint.export-job-resource/SegmentId] :locations {}))
+
 (clojure.spec.alpha/def :portkey.aws.pinpoint.bad-request-exception/message (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.bad-request-exception/requestid (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/bad-request-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.bad-request-exception/Message :portkey.aws.pinpoint.bad-request-exception/RequestID] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/get-campaigns-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/CampaignsResponse] :opt-un [] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-export-job-response (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/export-job-response) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.activity-response/total-endpoint-count (clojure.spec.alpha/and :portkey.aws.pinpoint/--integer))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.activity-response/timezones-completed-count (clojure.spec.alpha/and :portkey.aws.pinpoint/--integer))
@@ -185,7 +202,7 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.activity-response/treatment-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/activity-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.activity-response/TotalEndpointCount :portkey.aws.pinpoint.activity-response/TimezonesCompletedCount :portkey.aws.pinpoint.activity-response/Start :portkey.aws.pinpoint.activity-response/End :portkey.aws.pinpoint.activity-response/Result :portkey.aws.pinpoint.activity-response/ApplicationId :portkey.aws.pinpoint.activity-response/SuccessfulEndpointCount :portkey.aws.pinpoint.activity-response/State :portkey.aws.pinpoint.activity-response/ScheduledStart :portkey.aws.pinpoint.activity-response/TimezonesTotalCount :portkey.aws.pinpoint.activity-response/CampaignId :portkey.aws.pinpoint.activity-response/Id :portkey.aws.pinpoint.activity-response/TreatmentId] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/job-status (clojure.spec.alpha/conformer (clojure.core/let [m__15964__auto__ {"COMPLETED" "COMPLETED", :initializing "INITIALIZING", "FAILING" "FAILING", :processing "PROCESSING", :completed "COMPLETED", :created "CREATED", "COMPLETING" "COMPLETING", :failing "FAILING", "FAILED" "FAILED", :completing "COMPLETING", "INITIALIZING" "INITIALIZING", "PROCESSING" "PROCESSING", :failed "FAILED", "CREATED" "CREATED"}] (clojure.core/fn [s__15965__auto__] (m__15964__auto__ s__15965__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/job-status (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"COMPLETED" "COMPLETED", :initializing "INITIALIZING", "FAILING" "FAILING", :processing "PROCESSING", :completed "COMPLETED", :created "CREATED", "COMPLETING" "COMPLETING", :failing "FAILING", "FAILED" "FAILED", :completing "COMPLETING", "INITIALIZING" "INITIALIZING", "PROCESSING" "PROCESSING", :failed "FAILED", "CREATED" "CREATED"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/create-app-request (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/CreateApplicationRequest] :opt-un [] :locations {}))
 
@@ -216,6 +233,7 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.campaign-response/segment-version (clojure.spec.alpha/and :portkey.aws.pinpoint/--integer))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.campaign-response/description (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.campaign-response/is-paused (clojure.spec.alpha/and :portkey.aws.pinpoint/--boolean))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.campaign-response/hook (clojure.spec.alpha/and :portkey.aws.pinpoint/campaign-hook))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.campaign-response/segment-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.campaign-response/creation-date (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.campaign-response/state (clojure.spec.alpha/and :portkey.aws.pinpoint/campaign-state))
@@ -223,12 +241,12 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.campaign-response/name (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.campaign-response/id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.campaign-response/holdout-percent (clojure.spec.alpha/and :portkey.aws.pinpoint/--integer))
-(clojure.spec.alpha/def :portkey.aws.pinpoint/campaign-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.campaign-response/DefaultState :portkey.aws.pinpoint.campaign-response/LastModifiedDate :portkey.aws.pinpoint.campaign-response/AdditionalTreatments :portkey.aws.pinpoint.campaign-response/TreatmentDescription :portkey.aws.pinpoint.campaign-response/TreatmentName :portkey.aws.pinpoint.campaign-response/Limits :portkey.aws.pinpoint.campaign-response/ApplicationId :portkey.aws.pinpoint.campaign-response/SegmentVersion :portkey.aws.pinpoint.campaign-response/Description :portkey.aws.pinpoint.campaign-response/IsPaused :portkey.aws.pinpoint/MessageConfiguration :portkey.aws.pinpoint.campaign-response/SegmentId :portkey.aws.pinpoint.campaign-response/CreationDate :portkey.aws.pinpoint.campaign-response/State :portkey.aws.pinpoint.campaign-response/Version :portkey.aws.pinpoint/Schedule :portkey.aws.pinpoint.campaign-response/Name :portkey.aws.pinpoint.campaign-response/Id :portkey.aws.pinpoint.campaign-response/HoldoutPercent] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/campaign-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.campaign-response/DefaultState :portkey.aws.pinpoint.campaign-response/LastModifiedDate :portkey.aws.pinpoint.campaign-response/AdditionalTreatments :portkey.aws.pinpoint.campaign-response/TreatmentDescription :portkey.aws.pinpoint.campaign-response/TreatmentName :portkey.aws.pinpoint.campaign-response/Limits :portkey.aws.pinpoint.campaign-response/ApplicationId :portkey.aws.pinpoint.campaign-response/SegmentVersion :portkey.aws.pinpoint.campaign-response/Description :portkey.aws.pinpoint.campaign-response/IsPaused :portkey.aws.pinpoint.campaign-response/Hook :portkey.aws.pinpoint/MessageConfiguration :portkey.aws.pinpoint.campaign-response/SegmentId :portkey.aws.pinpoint.campaign-response/CreationDate :portkey.aws.pinpoint.campaign-response/State :portkey.aws.pinpoint.campaign-response/Version :portkey.aws.pinpoint/Schedule :portkey.aws.pinpoint.campaign-response/Name :portkey.aws.pinpoint.campaign-response/Id :portkey.aws.pinpoint.campaign-response/HoldoutPercent] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.create-application-request/name (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/create-application-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.create-application-request/Name] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/segment-type (clojure.spec.alpha/conformer (clojure.core/let [m__15964__auto__ {"DIMENSIONAL" "DIMENSIONAL", :dimensional "DIMENSIONAL", "IMPORT" "IMPORT", :import "IMPORT"}] (clojure.core/fn [s__15965__auto__] (m__15964__auto__ s__15965__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/segment-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"DIMENSIONAL" "DIMENSIONAL", :dimensional "DIMENSIONAL", "IMPORT" "IMPORT", :import "IMPORT"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.delete-apns-sandbox-channel-request/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/delete-apns-sandbox-channel-request (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint.delete-apns-sandbox-channel-request/ApplicationId] :opt-un [] :locations {}))
@@ -239,6 +257,20 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.update-apns-voip-channel-request/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/update-apns-voip-channel-request (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint.update-apns-voip-channel-request/ApplicationId :portkey.aws.pinpoint/APNSVoipChannelRequest] :opt-un [] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.pinpoint.export-job-response/failures (clojure.spec.alpha/and :portkey.aws.pinpoint/list-of--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.export-job-response/completion-date (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.export-job-response/type (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.export-job-response/total-pieces (clojure.spec.alpha/and :portkey.aws.pinpoint/--integer))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.export-job-response/total-failures (clojure.spec.alpha/and :portkey.aws.pinpoint/--integer))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.export-job-response/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.export-job-response/definition (clojure.spec.alpha/and :portkey.aws.pinpoint/export-job-resource))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.export-job-response/failed-pieces (clojure.spec.alpha/and :portkey.aws.pinpoint/--integer))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.export-job-response/completed-pieces (clojure.spec.alpha/and :portkey.aws.pinpoint/--integer))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.export-job-response/creation-date (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.export-job-response/id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.export-job-response/total-processed (clojure.spec.alpha/and :portkey.aws.pinpoint/--integer))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/export-job-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint/JobStatus :portkey.aws.pinpoint.export-job-response/Failures :portkey.aws.pinpoint.export-job-response/CompletionDate :portkey.aws.pinpoint.export-job-response/Type :portkey.aws.pinpoint.export-job-response/TotalPieces :portkey.aws.pinpoint.export-job-response/TotalFailures :portkey.aws.pinpoint.export-job-response/ApplicationId :portkey.aws.pinpoint.export-job-response/Definition :portkey.aws.pinpoint.export-job-response/FailedPieces :portkey.aws.pinpoint.export-job-response/CompletedPieces :portkey.aws.pinpoint.export-job-response/CreationDate :portkey.aws.pinpoint.export-job-response/Id :portkey.aws.pinpoint.export-job-response/TotalProcessed] :locations {}))
+
 (clojure.spec.alpha/def :portkey.aws.pinpoint/delete-adm-channel-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/ADMChannelResponse] :opt-un [] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.send-users-message-response/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
@@ -246,7 +278,7 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.send-users-message-response/result (clojure.spec.alpha/and :portkey.aws.pinpoint/map-of-map-of-endpoint-message-result))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/send-users-message-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.send-users-message-response/ApplicationId :portkey.aws.pinpoint.send-users-message-response/RequestId :portkey.aws.pinpoint.send-users-message-response/Result] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/recency-type (clojure.spec.alpha/conformer (clojure.core/let [m__15964__auto__ {"ACTIVE" "ACTIVE", :active "ACTIVE", "INACTIVE" "INACTIVE", :inactive "INACTIVE"}] (clojure.core/fn [s__15965__auto__] (m__15964__auto__ s__15965__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/recency-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"ACTIVE" "ACTIVE", :active "ACTIVE", "INACTIVE" "INACTIVE", :inactive "INACTIVE"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.application-response/id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.application-response/name (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
@@ -255,12 +287,12 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint/get-campaign-versions-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/CampaignsResponse] :opt-un [] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.write-application-settings-request/limits (clojure.spec.alpha/and :portkey.aws.pinpoint/campaign-limits))
-(clojure.spec.alpha/def :portkey.aws.pinpoint/write-application-settings-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.write-application-settings-request/Limits :portkey.aws.pinpoint/QuietTime] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/write-application-settings-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint/CampaignHook :portkey.aws.pinpoint.write-application-settings-request/Limits :portkey.aws.pinpoint/QuietTime] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.get-adm-channel-request/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/get-adm-channel-request (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint.get-adm-channel-request/ApplicationId] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-treatment-resource (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/treatment-resource) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__15885__15886__auto__] (if (clojure.core/sequential? p1__15885__15886__auto__) p1__15885__15886__auto__ [p1__15885__15886__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-treatment-resource (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/treatment-resource) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/delete-apns-channel-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/APNSChannelResponse] :opt-un [] :locations {}))
 
@@ -308,7 +340,7 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.get-apns-voip-sandbox-channel-request/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/get-apns-voip-sandbox-channel-request (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint.get-apns-voip-sandbox-channel-request/ApplicationId] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/delivery-status (clojure.spec.alpha/conformer (clojure.core/let [m__15964__auto__ {:permanent-failure "PERMANENT_FAILURE", :duplicate "DUPLICATE", "PERMANENT_FAILURE" "PERMANENT_FAILURE", :unknown-failure "UNKNOWN_FAILURE", :opt-out "OPT_OUT", :successful "SUCCESSFUL", "OPT_OUT" "OPT_OUT", "TEMPORARY_FAILURE" "TEMPORARY_FAILURE", "UNKNOWN_FAILURE" "UNKNOWN_FAILURE", :throttled "THROTTLED", :temporary-failure "TEMPORARY_FAILURE", "DUPLICATE" "DUPLICATE", "THROTTLED" "THROTTLED", "SUCCESSFUL" "SUCCESSFUL"}] (clojure.core/fn [s__15965__auto__] (m__15964__auto__ s__15965__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/delivery-status (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {:permanent-failure "PERMANENT_FAILURE", :duplicate "DUPLICATE", "PERMANENT_FAILURE" "PERMANENT_FAILURE", :unknown-failure "UNKNOWN_FAILURE", :opt-out "OPT_OUT", :successful "SUCCESSFUL", "OPT_OUT" "OPT_OUT", "TEMPORARY_FAILURE" "TEMPORARY_FAILURE", "UNKNOWN_FAILURE" "UNKNOWN_FAILURE", :throttled "THROTTLED", :temporary-failure "TEMPORARY_FAILURE", "DUPLICATE" "DUPLICATE", "THROTTLED" "THROTTLED", "SUCCESSFUL" "SUCCESSFUL"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/update-segment-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/SegmentResponse] :opt-un [] :locations {}))
 
@@ -353,13 +385,19 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.delete-apns-channel-request/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/delete-apns-channel-request (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint.delete-apns-channel-request/ApplicationId] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/format (clojure.spec.alpha/conformer (clojure.core/let [m__15964__auto__ {"CSV" "CSV", :csv "CSV", "JSON" "JSON", :json "JSON"}] (clojure.core/fn [s__15965__auto__] (m__15964__auto__ s__15965__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/format (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"CSV" "CSV", :csv "CSV", "JSON" "JSON", :json "JSON"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+
+(clojure.spec.alpha/def :portkey.aws.pinpoint/mode (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"DELIVERY" "DELIVERY", :delivery "DELIVERY", "FILTER" "FILTER", :filter "FILTER"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.import-jobs-response/item (clojure.spec.alpha/and :portkey.aws.pinpoint/list-of-import-job-response))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.import-jobs-response/next-token (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/import-jobs-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.import-jobs-response/Item :portkey.aws.pinpoint.import-jobs-response/NextToken] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/update-sms-channel-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/SMSChannelResponse] :opt-un [] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.pinpoint.delete-endpoint-request/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.delete-endpoint-request/endpoint-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/delete-endpoint-request (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint.delete-endpoint-request/ApplicationId :portkey.aws.pinpoint.delete-endpoint-request/EndpointId] :opt-un [] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/get-segments-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/SegmentsResponse] :opt-un [] :locations {}))
 
@@ -395,7 +433,7 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.import-job-resource/segment-name (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/import-job-resource (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.import-job-resource/DefineSegment :portkey.aws.pinpoint.import-job-resource/ExternalId :portkey.aws.pinpoint/Format :portkey.aws.pinpoint.import-job-resource/RegisterEndpoints :portkey.aws.pinpoint.import-job-resource/RoleArn :portkey.aws.pinpoint.import-job-resource/S3Url :portkey.aws.pinpoint.import-job-resource/SegmentId :portkey.aws.pinpoint.import-job-resource/SegmentName] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of--string (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/--string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__15885__15886__auto__] (if (clojure.core/sequential? p1__15885__15886__auto__) p1__15885__15886__auto__ [p1__15885__15886__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of--string (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/--string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.smschannel-response/has-credential (clojure.spec.alpha/and :portkey.aws.pinpoint/--boolean))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.smschannel-response/platform (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
@@ -415,7 +453,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/update-baidu-channel-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/BaiduChannelResponse] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-endpoint-batch-item (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/endpoint-batch-item) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__15885__15886__auto__] (if (clojure.core/sequential? p1__15885__15886__auto__) p1__15885__15886__auto__ [p1__15885__15886__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-endpoint-batch-item (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/endpoint-batch-item) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/get-segment-versions-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/SegmentsResponse] :opt-un [] :locations {}))
 
@@ -449,6 +487,10 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint/message-body (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.message-body/Message :portkey.aws.pinpoint.message-body/RequestID] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/update-apns-voip-sandbox-channel-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/APNSVoipSandboxChannelResponse] :opt-un [] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.pinpoint.get-export-job-request/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.get-export-job-request/job-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/get-export-job-request (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint.get-export-job-request/ApplicationId :portkey.aws.pinpoint.get-export-job-request/JobId] :opt-un [] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.get-apns-channel-request/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/get-apns-channel-request (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint.get-apns-channel-request/ApplicationId] :opt-un [] :locations {}))
@@ -488,6 +530,12 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.get-apns-sandbox-channel-request/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/get-apns-sandbox-channel-request (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint.get-apns-sandbox-channel-request/ApplicationId] :opt-un [] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.pinpoint.get-segment-export-jobs-request/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.get-segment-export-jobs-request/page-size (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.get-segment-export-jobs-request/segment-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.get-segment-export-jobs-request/token (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/get-segment-export-jobs-request (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint.get-segment-export-jobs-request/SegmentId :portkey.aws.pinpoint.get-segment-export-jobs-request/ApplicationId] :opt-un [:portkey.aws.pinpoint.get-segment-export-jobs-request/PageSize :portkey.aws.pinpoint.get-segment-export-jobs-request/Token] :locations {}))
+
 (clojure.spec.alpha/def :portkey.aws.pinpoint.send-messages-request/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/send-messages-request (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint.send-messages-request/ApplicationId :portkey.aws.pinpoint/MessageRequest] :opt-un [] :locations {}))
 
@@ -500,6 +548,8 @@
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.update-sms-channel-request/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/update-sms-channel-request (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint.update-sms-channel-request/ApplicationId :portkey.aws.pinpoint/SMSChannelRequest] :opt-un [] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.pinpoint/get-export-jobs-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/ExportJobsResponse] :opt-un [] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/map-of--double (clojure.spec.alpha/map-of :portkey.aws.pinpoint/--string :portkey.aws.pinpoint/--double))
 
@@ -538,6 +588,11 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.apnsvoip-channel-response/id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/apnsvoip-channel-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.apnsvoip-channel-response/HasCredential :portkey.aws.pinpoint.apnsvoip-channel-response/HasTokenKey :portkey.aws.pinpoint.apnsvoip-channel-response/Platform :portkey.aws.pinpoint.apnsvoip-channel-response/LastModifiedDate :portkey.aws.pinpoint.apnsvoip-channel-response/Enabled :portkey.aws.pinpoint.apnsvoip-channel-response/ApplicationId :portkey.aws.pinpoint.apnsvoip-channel-response/IsArchived :portkey.aws.pinpoint.apnsvoip-channel-response/DefaultAuthenticationMethod :portkey.aws.pinpoint.apnsvoip-channel-response/CreationDate :portkey.aws.pinpoint.apnsvoip-channel-response/Version :portkey.aws.pinpoint.apnsvoip-channel-response/LastModifiedBy :portkey.aws.pinpoint.apnsvoip-channel-response/Id] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.pinpoint.export-job-request/role-arn (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.export-job-request/s3-url-prefix (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.export-job-request/segment-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/export-job-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.export-job-request/RoleArn :portkey.aws.pinpoint.export-job-request/S3UrlPrefix :portkey.aws.pinpoint.export-job-request/SegmentId] :locations {}))
+
 (clojure.spec.alpha/def :portkey.aws.pinpoint.admmessage/body (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.admmessage/image-url (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.admmessage/title (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
@@ -564,6 +619,8 @@
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.get-email-channel-request/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/get-email-channel-request (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint.get-email-channel-request/ApplicationId] :opt-un [] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.pinpoint/delete-endpoint-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/EndpointResponse] :opt-un [] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.default-message/body (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.default-message/substitutions (clojure.spec.alpha/and :portkey.aws.pinpoint/map-of-list-of--string))
@@ -596,12 +653,16 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.apnschannel-request/token-key-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/apnschannel-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.apnschannel-request/BundleId :portkey.aws.pinpoint.apnschannel-request/Certificate :portkey.aws.pinpoint.apnschannel-request/DefaultAuthenticationMethod :portkey.aws.pinpoint.apnschannel-request/Enabled :portkey.aws.pinpoint.apnschannel-request/PrivateKey :portkey.aws.pinpoint.apnschannel-request/TeamId :portkey.aws.pinpoint.apnschannel-request/TokenKey :portkey.aws.pinpoint.apnschannel-request/TokenKeyId] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/dimension-type (clojure.spec.alpha/conformer (clojure.core/let [m__15964__auto__ {"INCLUSIVE" "INCLUSIVE", :inclusive "INCLUSIVE", "EXCLUSIVE" "EXCLUSIVE", :exclusive "EXCLUSIVE"}] (clojure.core/fn [s__15965__auto__] (m__15964__auto__ s__15965__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/dimension-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"INCLUSIVE" "INCLUSIVE", :inclusive "INCLUSIVE", "EXCLUSIVE" "EXCLUSIVE", :exclusive "EXCLUSIVE"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.application-settings-resource/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.application-settings-resource/last-modified-date (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.application-settings-resource/limits (clojure.spec.alpha/and :portkey.aws.pinpoint/campaign-limits))
-(clojure.spec.alpha/def :portkey.aws.pinpoint/application-settings-resource (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.application-settings-resource/ApplicationId :portkey.aws.pinpoint.application-settings-resource/LastModifiedDate :portkey.aws.pinpoint.application-settings-resource/Limits :portkey.aws.pinpoint/QuietTime] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/application-settings-resource (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.application-settings-resource/ApplicationId :portkey.aws.pinpoint/CampaignHook :portkey.aws.pinpoint.application-settings-resource/LastModifiedDate :portkey.aws.pinpoint.application-settings-resource/Limits :portkey.aws.pinpoint/QuietTime] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.pinpoint.campaign-hook/lambda-function-name (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.campaign-hook/web-url (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/campaign-hook (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.campaign-hook/LambdaFunctionName :portkey.aws.pinpoint/Mode :portkey.aws.pinpoint.campaign-hook/WebUrl] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.delete-app-request/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/delete-app-request (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint.delete-app-request/ApplicationId] :opt-un [] :locations {}))
@@ -619,7 +680,7 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.get-campaign-versions-request/token (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/get-campaign-versions-request (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint.get-campaign-versions-request/ApplicationId :portkey.aws.pinpoint.get-campaign-versions-request/CampaignId] :opt-un [:portkey.aws.pinpoint.get-campaign-versions-request/PageSize :portkey.aws.pinpoint.get-campaign-versions-request/Token] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/duration (clojure.spec.alpha/conformer (clojure.core/let [m__15964__auto__ {"HR_24" "HR_24", :hr-24 "HR_24", "DAY_7" "DAY_7", :day-7 "DAY_7", "DAY_14" "DAY_14", :day-14 "DAY_14", "DAY_30" "DAY_30", :day-30 "DAY_30"}] (clojure.core/fn [s__15965__auto__] (m__15964__auto__ s__15965__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/duration (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"HR_24" "HR_24", :hr-24 "HR_24", "DAY_7" "DAY_7", :day-7 "DAY_7", "DAY_14" "DAY_14", :day-14 "DAY_14", "DAY_30" "DAY_30", :day-30 "DAY_30"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/update-gcm-channel-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/GCMChannelResponse] :opt-un [] :locations {}))
 
@@ -636,6 +697,11 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint/write-segment-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.write-segment-request/Dimensions :portkey.aws.pinpoint.write-segment-request/Name] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/update-apns-voip-channel-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/APNSVoipChannelResponse] :opt-un [] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.pinpoint.get-export-jobs-request/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.get-export-jobs-request/page-size (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.get-export-jobs-request/token (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/get-export-jobs-request (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint.get-export-jobs-request/ApplicationId] :opt-un [:portkey.aws.pinpoint.get-export-jobs-request/PageSize :portkey.aws.pinpoint.get-export-jobs-request/Token] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/get-campaign-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/CampaignResponse] :opt-un [] :locations {}))
 
@@ -706,7 +772,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/create-import-job-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/ImportJobResponse] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-write-treatment-resource (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/write-treatment-resource) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__15885__15886__auto__] (if (clojure.core/sequential? p1__15885__15886__auto__) p1__15885__15886__auto__ [p1__15885__15886__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-write-treatment-resource (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/write-treatment-resource) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.write-treatment-resource/size-percent (clojure.spec.alpha/and :portkey.aws.pinpoint/--integer))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.write-treatment-resource/treatment-description (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
@@ -729,10 +795,13 @@
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/delete-email-channel-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/EmailChannelResponse] :opt-un [] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.pinpoint/get-segment-export-jobs-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/ExportJobsResponse] :opt-un [] :locations {}))
+
 (clojure.spec.alpha/def :portkey.aws.pinpoint.smsmessage/body (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
+(clojure.spec.alpha/def :portkey.aws.pinpoint.smsmessage/origination-number (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.smsmessage/sender-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.smsmessage/substitutions (clojure.spec.alpha/and :portkey.aws.pinpoint/map-of-list-of--string))
-(clojure.spec.alpha/def :portkey.aws.pinpoint/smsmessage (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.smsmessage/Body :portkey.aws.pinpoint/MessageType :portkey.aws.pinpoint.smsmessage/SenderId :portkey.aws.pinpoint.smsmessage/Substitutions] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/smsmessage (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.smsmessage/Body :portkey.aws.pinpoint/MessageType :portkey.aws.pinpoint.smsmessage/OriginationNumber :portkey.aws.pinpoint.smsmessage/SenderId :portkey.aws.pinpoint.smsmessage/Substitutions] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.get-apps-request/page-size (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.get-apps-request/token (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
@@ -752,7 +821,7 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.campaign-email-message/title (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/campaign-email-message (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.campaign-email-message/Body :portkey.aws.pinpoint.campaign-email-message/FromAddress :portkey.aws.pinpoint.campaign-email-message/HtmlBody :portkey.aws.pinpoint.campaign-email-message/Title] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-import-job-response (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/import-job-response) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__15885__15886__auto__] (if (clojure.core/sequential? p1__15885__15886__auto__) p1__15885__15886__auto__ [p1__15885__15886__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-import-job-response (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/import-job-response) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.message-configuration/admmessage (clojure.spec.alpha/and :portkey.aws.pinpoint/message))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.message-configuration/apnsmessage (clojure.spec.alpha/and :portkey.aws.pinpoint/message))
@@ -774,11 +843,11 @@
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/get-segment-import-jobs-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/ImportJobsResponse] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/message-type (clojure.spec.alpha/conformer (clojure.core/let [m__15964__auto__ {"TRANSACTIONAL" "TRANSACTIONAL", :transactional "TRANSACTIONAL", "PROMOTIONAL" "PROMOTIONAL", :promotional "PROMOTIONAL"}] (clojure.core/fn [s__15965__auto__] (m__15964__auto__ s__15965__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/message-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"TRANSACTIONAL" "TRANSACTIONAL", :transactional "TRANSACTIONAL", "PROMOTIONAL" "PROMOTIONAL", :promotional "PROMOTIONAL"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/update-campaign-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/CampaignResponse] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/frequency (clojure.spec.alpha/conformer (clojure.core/let [m__15964__auto__ {:daily "DAILY", "ONCE" "ONCE", :monthly "MONTHLY", "MONTHLY" "MONTHLY", "WEEKLY" "WEEKLY", :hourly "HOURLY", :once "ONCE", "DAILY" "DAILY", :weekly "WEEKLY", "HOURLY" "HOURLY"}] (clojure.core/fn [s__15965__auto__] (m__15964__auto__ s__15965__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/frequency (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {:daily "DAILY", "ONCE" "ONCE", :monthly "MONTHLY", "MONTHLY" "MONTHLY", "WEEKLY" "WEEKLY", :hourly "HOURLY", :once "ONCE", "DAILY" "DAILY", :weekly "WEEKLY", "HOURLY" "HOURLY"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.segment-response/last-modified-date (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.segment-response/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
@@ -796,7 +865,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/delete-segment-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/SegmentResponse] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-campaign-response (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/campaign-response) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__15885__15886__auto__] (if (clojure.core/sequential? p1__15885__15886__auto__) p1__15885__15886__auto__ [p1__15885__15886__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-campaign-response (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/campaign-response) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/get-apns-voip-sandbox-channel-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/APNSVoipSandboxChannelResponse] :opt-un [] :locations {}))
 
@@ -821,7 +890,7 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.admchannel-request/enabled (clojure.spec.alpha/and :portkey.aws.pinpoint/--boolean))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/admchannel-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.admchannel-request/ClientId :portkey.aws.pinpoint.admchannel-request/ClientSecret :portkey.aws.pinpoint.admchannel-request/Enabled] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/campaign-status (clojure.spec.alpha/conformer (clojure.core/let [m__15964__auto__ {"COMPLETED" "COMPLETED", :paused "PAUSED", :completed "COMPLETED", "EXECUTING" "EXECUTING", "SCHEDULED" "SCHEDULED", :executing "EXECUTING", :pending-next-run "PENDING_NEXT_RUN", :scheduled "SCHEDULED", "PAUSED" "PAUSED", "PENDING_NEXT_RUN" "PENDING_NEXT_RUN"}] (clojure.core/fn [s__15965__auto__] (m__15964__auto__ s__15965__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/campaign-status (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"COMPLETED" "COMPLETED", :paused "PAUSED", :completed "COMPLETED", "EXECUTING" "EXECUTING", "SCHEDULED" "SCHEDULED", :executing "EXECUTING", :pending-next-run "PENDING_NEXT_RUN", :scheduled "SCHEDULED", "PAUSED" "PAUSED", "PENDING_NEXT_RUN" "PENDING_NEXT_RUN"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.update-segment-request/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.update-segment-request/segment-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
@@ -870,6 +939,8 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.segment-import-resource/s3-url (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.segment-import-resource/size (clojure.spec.alpha/and :portkey.aws.pinpoint/--integer))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/segment-import-resource (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.segment-import-resource/ChannelCounts :portkey.aws.pinpoint.segment-import-resource/ExternalId :portkey.aws.pinpoint/Format :portkey.aws.pinpoint.segment-import-resource/RoleArn :portkey.aws.pinpoint.segment-import-resource/S3Url :portkey.aws.pinpoint.segment-import-resource/Size] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.pinpoint/get-export-job-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/ExportJobResponse] :opt-un [] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.create-segment-request/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/create-segment-request (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint.create-segment-request/ApplicationId :portkey.aws.pinpoint/WriteSegmentRequest] :opt-un [] :locations {}))
@@ -924,7 +995,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/direct-message-configuration (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint/ADMMessage :portkey.aws.pinpoint/APNSMessage :portkey.aws.pinpoint/BaiduMessage :portkey.aws.pinpoint/DefaultMessage :portkey.aws.pinpoint/DefaultPushNotificationMessage :portkey.aws.pinpoint/GCMMessage :portkey.aws.pinpoint/SMSMessage] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-application-response (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/application-response) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__15885__15886__auto__] (if (clojure.core/sequential? p1__15885__15886__auto__) p1__15885__15886__auto__ [p1__15885__15886__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-application-response (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/application-response) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.apnssandbox-channel-request/bundle-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.apnssandbox-channel-request/certificate (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
@@ -979,9 +1050,9 @@
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/update-apns-sandbox-channel-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/APNSSandboxChannelResponse] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/action (clojure.spec.alpha/conformer (clojure.core/let [m__15964__auto__ {"OPEN_APP" "OPEN_APP", :open-app "OPEN_APP", "DEEP_LINK" "DEEP_LINK", :deep-link "DEEP_LINK", "URL" "URL", :url "URL"}] (clojure.core/fn [s__15965__auto__] (m__15964__auto__ s__15965__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/action (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"OPEN_APP" "OPEN_APP", :open-app "OPEN_APP", "DEEP_LINK" "DEEP_LINK", :deep-link "DEEP_LINK", "URL" "URL", :url "URL"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-activity-response (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/activity-response) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__15885__15886__auto__] (if (clojure.core/sequential? p1__15885__15886__auto__) p1__15885__15886__auto__ [p1__15885__15886__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-activity-response (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/activity-response) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/get-sms-channel-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/SMSChannelResponse] :opt-un [] :locations {}))
 
@@ -1041,7 +1112,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/get-email-channel-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/EmailChannelResponse] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/channel-type (clojure.spec.alpha/conformer (clojure.core/let [m__15964__auto__ {:email "EMAIL", "SMS" "SMS", "APNS_VOIP" "APNS_VOIP", "ADM" "ADM", "BAIDU" "BAIDU", "GCM" "GCM", "APNS" "APNS", :apns-voip "APNS_VOIP", :apns-sandbox "APNS_SANDBOX", "APNS_VOIP_SANDBOX" "APNS_VOIP_SANDBOX", :gcm "GCM", :sms "SMS", :adm "ADM", "APNS_SANDBOX" "APNS_SANDBOX", "EMAIL" "EMAIL", :baidu "BAIDU", :apns-voip-sandbox "APNS_VOIP_SANDBOX", :apns "APNS"}] (clojure.core/fn [s__15965__auto__] (m__15964__auto__ s__15965__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/channel-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {:email "EMAIL", "CUSTOM" "CUSTOM", "SMS" "SMS", "APNS_VOIP" "APNS_VOIP", "ADM" "ADM", "BAIDU" "BAIDU", "GCM" "GCM", "APNS" "APNS", :custom "CUSTOM", :apns-voip "APNS_VOIP", :apns-sandbox "APNS_SANDBOX", "APNS_VOIP_SANDBOX" "APNS_VOIP_SANDBOX", :gcm "GCM", :sms "SMS", :adm "ADM", "APNS_SANDBOX" "APNS_SANDBOX", "EMAIL" "EMAIL", :baidu "BAIDU", :apns-voip-sandbox "APNS_VOIP_SANDBOX", :apns "APNS"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.get-import-jobs-request/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.get-import-jobs-request/page-size (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
@@ -1064,7 +1135,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/update-email-channel-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/EmailChannelResponse] :opt-un [] :locations {}))
 
-(clojure.core/defn get-apns-voip-sandbox-channel "Get an APNS VoipSandbox channel" ([get-apns-voip-sandbox-channel-request] (portkey.aws/-rest-json-call portkey.aws.pinpoint/endpoints "GET" "/v1/apps/{application-id}/channels/apns_voip_sandbox" get-apns-voip-sandbox-channel-request :portkey.aws.pinpoint/get-apns-voip-sandbox-channel-request {:payload nil, :move {}, :headers {}, :uri {"application-id" "ApplicationId"}, :querystring {}} 200 :portkey.aws.pinpoint/get-apns-voip-sandbox-channel-response {"BadRequestException" :portkey.aws.pinpoint/bad-request-exception, "InternalServerErrorException" :portkey.aws.pinpoint/internal-server-error-exception, "ForbiddenException" :portkey.aws.pinpoint/forbidden-exception, "NotFoundException" :portkey.aws.pinpoint/not-found-exception, "MethodNotAllowedException" :portkey.aws.pinpoint/method-not-allowed-exception, "TooManyRequestsException" :portkey.aws.pinpoint/too-many-requests-exception})))
+(clojure.core/defn get-apns-voip-sandbox-channel "Get an APNS VoIPSandbox channel" ([get-apns-voip-sandbox-channel-request] (portkey.aws/-rest-json-call portkey.aws.pinpoint/endpoints "GET" "/v1/apps/{application-id}/channels/apns_voip_sandbox" get-apns-voip-sandbox-channel-request :portkey.aws.pinpoint/get-apns-voip-sandbox-channel-request {:payload nil, :move {}, :headers {}, :uri {"application-id" "ApplicationId"}, :querystring {}} 200 :portkey.aws.pinpoint/get-apns-voip-sandbox-channel-response {"BadRequestException" :portkey.aws.pinpoint/bad-request-exception, "InternalServerErrorException" :portkey.aws.pinpoint/internal-server-error-exception, "ForbiddenException" :portkey.aws.pinpoint/forbidden-exception, "NotFoundException" :portkey.aws.pinpoint/not-found-exception, "MethodNotAllowedException" :portkey.aws.pinpoint/method-not-allowed-exception, "TooManyRequestsException" :portkey.aws.pinpoint/too-many-requests-exception})))
 (clojure.spec.alpha/fdef get-apns-voip-sandbox-channel :args (clojure.spec.alpha/tuple :portkey.aws.pinpoint/get-apns-voip-sandbox-channel-request) :ret (clojure.spec.alpha/and :portkey.aws.pinpoint/get-apns-voip-sandbox-channel-response))
 
 (clojure.core/defn get-baidu-channel "Get a BAIDU GCM channel" ([get-baidu-channel-request] (portkey.aws/-rest-json-call portkey.aws.pinpoint/endpoints "GET" "/v1/apps/{application-id}/channels/baidu" get-baidu-channel-request :portkey.aws.pinpoint/get-baidu-channel-request {:payload nil, :move {}, :headers {}, :uri {"application-id" "ApplicationId"}, :querystring {}} 200 :portkey.aws.pinpoint/get-baidu-channel-response {"BadRequestException" :portkey.aws.pinpoint/bad-request-exception, "InternalServerErrorException" :portkey.aws.pinpoint/internal-server-error-exception, "ForbiddenException" :portkey.aws.pinpoint/forbidden-exception, "NotFoundException" :portkey.aws.pinpoint/not-found-exception, "MethodNotAllowedException" :portkey.aws.pinpoint/method-not-allowed-exception, "TooManyRequestsException" :portkey.aws.pinpoint/too-many-requests-exception})))
@@ -1073,8 +1144,14 @@
 (clojure.core/defn update-apns-channel "Use to update the APNs channel for an app." ([update-apns-channel-request] (portkey.aws/-rest-json-call portkey.aws.pinpoint/endpoints "PUT" "/v1/apps/{application-id}/channels/apns" update-apns-channel-request :portkey.aws.pinpoint/update-apns-channel-request {:payload "APNSChannelRequest", :move {}, :headers {}, :uri {"application-id" "ApplicationId"}, :querystring {}} 200 :portkey.aws.pinpoint/update-apns-channel-response {"BadRequestException" :portkey.aws.pinpoint/bad-request-exception, "InternalServerErrorException" :portkey.aws.pinpoint/internal-server-error-exception, "ForbiddenException" :portkey.aws.pinpoint/forbidden-exception, "NotFoundException" :portkey.aws.pinpoint/not-found-exception, "MethodNotAllowedException" :portkey.aws.pinpoint/method-not-allowed-exception, "TooManyRequestsException" :portkey.aws.pinpoint/too-many-requests-exception})))
 (clojure.spec.alpha/fdef update-apns-channel :args (clojure.spec.alpha/tuple :portkey.aws.pinpoint/update-apns-channel-request) :ret (clojure.spec.alpha/and :portkey.aws.pinpoint/update-apns-channel-response))
 
+(clojure.core/defn get-export-job "Returns information about an export job." ([get-export-job-request] (portkey.aws/-rest-json-call portkey.aws.pinpoint/endpoints "GET" "/v1/apps/{application-id}/jobs/export/{job-id}" get-export-job-request :portkey.aws.pinpoint/get-export-job-request {:payload nil, :move {}, :headers {}, :uri {"application-id" "ApplicationId", "job-id" "JobId"}, :querystring {}} 200 :portkey.aws.pinpoint/get-export-job-response {"BadRequestException" :portkey.aws.pinpoint/bad-request-exception, "InternalServerErrorException" :portkey.aws.pinpoint/internal-server-error-exception, "ForbiddenException" :portkey.aws.pinpoint/forbidden-exception, "NotFoundException" :portkey.aws.pinpoint/not-found-exception, "MethodNotAllowedException" :portkey.aws.pinpoint/method-not-allowed-exception, "TooManyRequestsException" :portkey.aws.pinpoint/too-many-requests-exception})))
+(clojure.spec.alpha/fdef get-export-job :args (clojure.spec.alpha/tuple :portkey.aws.pinpoint/get-export-job-request) :ret (clojure.spec.alpha/and :portkey.aws.pinpoint/get-export-job-response))
+
 (clojure.core/defn delete-apns-voip-channel "Delete an APNS VoIP channel" ([delete-apns-voip-channel-request] (portkey.aws/-rest-json-call portkey.aws.pinpoint/endpoints "DELETE" "/v1/apps/{application-id}/channels/apns_voip" delete-apns-voip-channel-request :portkey.aws.pinpoint/delete-apns-voip-channel-request {:payload nil, :move {}, :headers {}, :uri {"application-id" "ApplicationId"}, :querystring {}} 200 :portkey.aws.pinpoint/delete-apns-voip-channel-response {"BadRequestException" :portkey.aws.pinpoint/bad-request-exception, "InternalServerErrorException" :portkey.aws.pinpoint/internal-server-error-exception, "ForbiddenException" :portkey.aws.pinpoint/forbidden-exception, "NotFoundException" :portkey.aws.pinpoint/not-found-exception, "MethodNotAllowedException" :portkey.aws.pinpoint/method-not-allowed-exception, "TooManyRequestsException" :portkey.aws.pinpoint/too-many-requests-exception})))
 (clojure.spec.alpha/fdef delete-apns-voip-channel :args (clojure.spec.alpha/tuple :portkey.aws.pinpoint/delete-apns-voip-channel-request) :ret (clojure.spec.alpha/and :portkey.aws.pinpoint/delete-apns-voip-channel-response))
+
+(clojure.core/defn create-export-job "Creates an export job." ([create-export-job-request] (portkey.aws/-rest-json-call portkey.aws.pinpoint/endpoints "POST" "/v1/apps/{application-id}/jobs/export" create-export-job-request :portkey.aws.pinpoint/create-export-job-request {:payload "ExportJobRequest", :move {}, :headers {}, :uri {"application-id" "ApplicationId"}, :querystring {}} 202 :portkey.aws.pinpoint/create-export-job-response {"BadRequestException" :portkey.aws.pinpoint/bad-request-exception, "InternalServerErrorException" :portkey.aws.pinpoint/internal-server-error-exception, "ForbiddenException" :portkey.aws.pinpoint/forbidden-exception, "NotFoundException" :portkey.aws.pinpoint/not-found-exception, "MethodNotAllowedException" :portkey.aws.pinpoint/method-not-allowed-exception, "TooManyRequestsException" :portkey.aws.pinpoint/too-many-requests-exception})))
+(clojure.spec.alpha/fdef create-export-job :args (clojure.spec.alpha/tuple :portkey.aws.pinpoint/create-export-job-request) :ret (clojure.spec.alpha/and :portkey.aws.pinpoint/create-export-job-response))
 
 (clojure.core/defn get-apns-channel "Returns information about the APNs channel for an app." ([get-apns-channel-request] (portkey.aws/-rest-json-call portkey.aws.pinpoint/endpoints "GET" "/v1/apps/{application-id}/channels/apns" get-apns-channel-request :portkey.aws.pinpoint/get-apns-channel-request {:payload nil, :move {}, :headers {}, :uri {"application-id" "ApplicationId"}, :querystring {}} 200 :portkey.aws.pinpoint/get-apns-channel-response {"BadRequestException" :portkey.aws.pinpoint/bad-request-exception, "InternalServerErrorException" :portkey.aws.pinpoint/internal-server-error-exception, "ForbiddenException" :portkey.aws.pinpoint/forbidden-exception, "NotFoundException" :portkey.aws.pinpoint/not-found-exception, "MethodNotAllowedException" :portkey.aws.pinpoint/method-not-allowed-exception, "TooManyRequestsException" :portkey.aws.pinpoint/too-many-requests-exception})))
 (clojure.spec.alpha/fdef get-apns-channel :args (clojure.spec.alpha/tuple :portkey.aws.pinpoint/get-apns-channel-request) :ret (clojure.spec.alpha/and :portkey.aws.pinpoint/get-apns-channel-response))
@@ -1129,6 +1206,9 @@
 
 (clojure.core/defn get-campaign-versions "Returns information about your campaign versions." ([get-campaign-versions-request] (portkey.aws/-rest-json-call portkey.aws.pinpoint/endpoints "GET" "/v1/apps/{application-id}/campaigns/{campaign-id}/versions" get-campaign-versions-request :portkey.aws.pinpoint/get-campaign-versions-request {:payload nil, :move {}, :headers {}, :uri {"application-id" "ApplicationId", "campaign-id" "CampaignId"}, :querystring {"page-size" "PageSize", "token" "Token"}} 200 :portkey.aws.pinpoint/get-campaign-versions-response {"BadRequestException" :portkey.aws.pinpoint/bad-request-exception, "InternalServerErrorException" :portkey.aws.pinpoint/internal-server-error-exception, "ForbiddenException" :portkey.aws.pinpoint/forbidden-exception, "NotFoundException" :portkey.aws.pinpoint/not-found-exception, "MethodNotAllowedException" :portkey.aws.pinpoint/method-not-allowed-exception, "TooManyRequestsException" :portkey.aws.pinpoint/too-many-requests-exception})))
 (clojure.spec.alpha/fdef get-campaign-versions :args (clojure.spec.alpha/tuple :portkey.aws.pinpoint/get-campaign-versions-request) :ret (clojure.spec.alpha/and :portkey.aws.pinpoint/get-campaign-versions-response))
+
+(clojure.core/defn get-export-jobs "Returns information about your export jobs." ([get-export-jobs-request] (portkey.aws/-rest-json-call portkey.aws.pinpoint/endpoints "GET" "/v1/apps/{application-id}/jobs/export" get-export-jobs-request :portkey.aws.pinpoint/get-export-jobs-request {:payload nil, :move {}, :headers {}, :uri {"application-id" "ApplicationId"}, :querystring {"page-size" "PageSize", "token" "Token"}} 200 :portkey.aws.pinpoint/get-export-jobs-response {"BadRequestException" :portkey.aws.pinpoint/bad-request-exception, "InternalServerErrorException" :portkey.aws.pinpoint/internal-server-error-exception, "ForbiddenException" :portkey.aws.pinpoint/forbidden-exception, "NotFoundException" :portkey.aws.pinpoint/not-found-exception, "MethodNotAllowedException" :portkey.aws.pinpoint/method-not-allowed-exception, "TooManyRequestsException" :portkey.aws.pinpoint/too-many-requests-exception})))
+(clojure.spec.alpha/fdef get-export-jobs :args (clojure.spec.alpha/tuple :portkey.aws.pinpoint/get-export-jobs-request) :ret (clojure.spec.alpha/and :portkey.aws.pinpoint/get-export-jobs-response))
 
 (clojure.core/defn delete-apns-voip-sandbox-channel "Delete an APNS VoIP sandbox channel" ([delete-apns-voip-sandbox-channel-request] (portkey.aws/-rest-json-call portkey.aws.pinpoint/endpoints "DELETE" "/v1/apps/{application-id}/channels/apns_voip_sandbox" delete-apns-voip-sandbox-channel-request :portkey.aws.pinpoint/delete-apns-voip-sandbox-channel-request {:payload nil, :move {}, :headers {}, :uri {"application-id" "ApplicationId"}, :querystring {}} 200 :portkey.aws.pinpoint/delete-apns-voip-sandbox-channel-response {"BadRequestException" :portkey.aws.pinpoint/bad-request-exception, "InternalServerErrorException" :portkey.aws.pinpoint/internal-server-error-exception, "ForbiddenException" :portkey.aws.pinpoint/forbidden-exception, "NotFoundException" :portkey.aws.pinpoint/not-found-exception, "MethodNotAllowedException" :portkey.aws.pinpoint/method-not-allowed-exception, "TooManyRequestsException" :portkey.aws.pinpoint/too-many-requests-exception})))
 (clojure.spec.alpha/fdef delete-apns-voip-sandbox-channel :args (clojure.spec.alpha/tuple :portkey.aws.pinpoint/delete-apns-voip-sandbox-channel-request) :ret (clojure.spec.alpha/and :portkey.aws.pinpoint/delete-apns-voip-sandbox-channel-response))
@@ -1226,6 +1306,9 @@
 (clojure.core/defn get-endpoint "Returns information about an endpoint." ([get-endpoint-request] (portkey.aws/-rest-json-call portkey.aws.pinpoint/endpoints "GET" "/v1/apps/{application-id}/endpoints/{endpoint-id}" get-endpoint-request :portkey.aws.pinpoint/get-endpoint-request {:payload nil, :move {}, :headers {}, :uri {"application-id" "ApplicationId", "endpoint-id" "EndpointId"}, :querystring {}} 200 :portkey.aws.pinpoint/get-endpoint-response {"BadRequestException" :portkey.aws.pinpoint/bad-request-exception, "InternalServerErrorException" :portkey.aws.pinpoint/internal-server-error-exception, "ForbiddenException" :portkey.aws.pinpoint/forbidden-exception, "NotFoundException" :portkey.aws.pinpoint/not-found-exception, "MethodNotAllowedException" :portkey.aws.pinpoint/method-not-allowed-exception, "TooManyRequestsException" :portkey.aws.pinpoint/too-many-requests-exception})))
 (clojure.spec.alpha/fdef get-endpoint :args (clojure.spec.alpha/tuple :portkey.aws.pinpoint/get-endpoint-request) :ret (clojure.spec.alpha/and :portkey.aws.pinpoint/get-endpoint-response))
 
+(clojure.core/defn delete-endpoint "Deletes an endpoint." ([delete-endpoint-request] (portkey.aws/-rest-json-call portkey.aws.pinpoint/endpoints "DELETE" "/v1/apps/{application-id}/endpoints/{endpoint-id}" delete-endpoint-request :portkey.aws.pinpoint/delete-endpoint-request {:payload nil, :move {}, :headers {}, :uri {"application-id" "ApplicationId", "endpoint-id" "EndpointId"}, :querystring {}} 202 :portkey.aws.pinpoint/delete-endpoint-response {"BadRequestException" :portkey.aws.pinpoint/bad-request-exception, "InternalServerErrorException" :portkey.aws.pinpoint/internal-server-error-exception, "ForbiddenException" :portkey.aws.pinpoint/forbidden-exception, "NotFoundException" :portkey.aws.pinpoint/not-found-exception, "MethodNotAllowedException" :portkey.aws.pinpoint/method-not-allowed-exception, "TooManyRequestsException" :portkey.aws.pinpoint/too-many-requests-exception})))
+(clojure.spec.alpha/fdef delete-endpoint :args (clojure.spec.alpha/tuple :portkey.aws.pinpoint/delete-endpoint-request) :ret (clojure.spec.alpha/and :portkey.aws.pinpoint/delete-endpoint-response))
+
 (clojure.core/defn update-apns-sandbox-channel "Update an APNS sandbox channel" ([update-apns-sandbox-channel-request] (portkey.aws/-rest-json-call portkey.aws.pinpoint/endpoints "PUT" "/v1/apps/{application-id}/channels/apns_sandbox" update-apns-sandbox-channel-request :portkey.aws.pinpoint/update-apns-sandbox-channel-request {:payload "APNSSandboxChannelRequest", :move {}, :headers {}, :uri {"application-id" "ApplicationId"}, :querystring {}} 200 :portkey.aws.pinpoint/update-apns-sandbox-channel-response {"BadRequestException" :portkey.aws.pinpoint/bad-request-exception, "InternalServerErrorException" :portkey.aws.pinpoint/internal-server-error-exception, "ForbiddenException" :portkey.aws.pinpoint/forbidden-exception, "NotFoundException" :portkey.aws.pinpoint/not-found-exception, "MethodNotAllowedException" :portkey.aws.pinpoint/method-not-allowed-exception, "TooManyRequestsException" :portkey.aws.pinpoint/too-many-requests-exception})))
 (clojure.spec.alpha/fdef update-apns-sandbox-channel :args (clojure.spec.alpha/tuple :portkey.aws.pinpoint/update-apns-sandbox-channel-request) :ret (clojure.spec.alpha/and :portkey.aws.pinpoint/update-apns-sandbox-channel-response))
 
@@ -1234,6 +1317,9 @@
 
 (clojure.core/defn update-sms-channel "Update an SMS channel" ([update-sms-channel-request] (portkey.aws/-rest-json-call portkey.aws.pinpoint/endpoints "PUT" "/v1/apps/{application-id}/channels/sms" update-sms-channel-request :portkey.aws.pinpoint/update-sms-channel-request {:payload "SMSChannelRequest", :move {}, :headers {}, :uri {"application-id" "ApplicationId"}, :querystring {}} 200 :portkey.aws.pinpoint/update-sms-channel-response {"BadRequestException" :portkey.aws.pinpoint/bad-request-exception, "InternalServerErrorException" :portkey.aws.pinpoint/internal-server-error-exception, "ForbiddenException" :portkey.aws.pinpoint/forbidden-exception, "NotFoundException" :portkey.aws.pinpoint/not-found-exception, "MethodNotAllowedException" :portkey.aws.pinpoint/method-not-allowed-exception, "TooManyRequestsException" :portkey.aws.pinpoint/too-many-requests-exception})))
 (clojure.spec.alpha/fdef update-sms-channel :args (clojure.spec.alpha/tuple :portkey.aws.pinpoint/update-sms-channel-request) :ret (clojure.spec.alpha/and :portkey.aws.pinpoint/update-sms-channel-response))
+
+(clojure.core/defn get-segment-export-jobs "Returns a list of export jobs for a specific segment." ([get-segment-export-jobs-request] (portkey.aws/-rest-json-call portkey.aws.pinpoint/endpoints "GET" "/v1/apps/{application-id}/segments/{segment-id}/jobs/export" get-segment-export-jobs-request :portkey.aws.pinpoint/get-segment-export-jobs-request {:payload nil, :move {}, :headers {}, :uri {"application-id" "ApplicationId", "segment-id" "SegmentId"}, :querystring {"page-size" "PageSize", "token" "Token"}} 200 :portkey.aws.pinpoint/get-segment-export-jobs-response {"BadRequestException" :portkey.aws.pinpoint/bad-request-exception, "InternalServerErrorException" :portkey.aws.pinpoint/internal-server-error-exception, "ForbiddenException" :portkey.aws.pinpoint/forbidden-exception, "NotFoundException" :portkey.aws.pinpoint/not-found-exception, "MethodNotAllowedException" :portkey.aws.pinpoint/method-not-allowed-exception, "TooManyRequestsException" :portkey.aws.pinpoint/too-many-requests-exception})))
+(clojure.spec.alpha/fdef get-segment-export-jobs :args (clojure.spec.alpha/tuple :portkey.aws.pinpoint/get-segment-export-jobs-request) :ret (clojure.spec.alpha/and :portkey.aws.pinpoint/get-segment-export-jobs-response))
 
 (clojure.core/defn create-segment "Used to create or update a segment." ([create-segment-request] (portkey.aws/-rest-json-call portkey.aws.pinpoint/endpoints "POST" "/v1/apps/{application-id}/segments" create-segment-request :portkey.aws.pinpoint/create-segment-request {:payload "WriteSegmentRequest", :move {}, :headers {}, :uri {"application-id" "ApplicationId"}, :querystring {}} 201 :portkey.aws.pinpoint/create-segment-response {"BadRequestException" :portkey.aws.pinpoint/bad-request-exception, "InternalServerErrorException" :portkey.aws.pinpoint/internal-server-error-exception, "ForbiddenException" :portkey.aws.pinpoint/forbidden-exception, "NotFoundException" :portkey.aws.pinpoint/not-found-exception, "MethodNotAllowedException" :portkey.aws.pinpoint/method-not-allowed-exception, "TooManyRequestsException" :portkey.aws.pinpoint/too-many-requests-exception})))
 (clojure.spec.alpha/fdef create-segment :args (clojure.spec.alpha/tuple :portkey.aws.pinpoint/create-segment-request) :ret (clojure.spec.alpha/and :portkey.aws.pinpoint/create-segment-response))

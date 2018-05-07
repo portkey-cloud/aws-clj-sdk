@@ -32,10 +32,20 @@
     :ssl-common-name "es.ap-southeast-1.amazonaws.com",
     :endpoint "https://es.ap-southeast-1.amazonaws.com",
     :signature-version :v4},
+   "cn-northwest-1"
+   {:credential-scope {:service "es", :region "cn-northwest-1"},
+    :ssl-common-name "es.cn-northwest-1.amazonaws.com.cn",
+    :endpoint "https://es.cn-northwest-1.amazonaws.com.cn",
+    :signature-version :v4},
    "ap-northeast-2"
    {:credential-scope {:service "es", :region "ap-northeast-2"},
     :ssl-common-name "es.ap-northeast-2.amazonaws.com",
     :endpoint "https://es.ap-northeast-2.amazonaws.com",
+    :signature-version :v4},
+   "eu-west-3"
+   {:credential-scope {:service "es", :region "eu-west-3"},
+    :ssl-common-name "es.eu-west-3.amazonaws.com",
+    :endpoint "https://es.eu-west-3.amazonaws.com",
     :signature-version :v4},
    "ca-central-1"
    {:credential-scope {:service "es", :region "ca-central-1"},
@@ -51,6 +61,11 @@
    {:credential-scope {:service "es", :region "eu-west-2"},
     :ssl-common-name "es.eu-west-2.amazonaws.com",
     :endpoint "https://es.eu-west-2.amazonaws.com",
+    :signature-version :v4},
+   "us-gov-west-1"
+   {:credential-scope {:service "es", :region "us-gov-west-1"},
+    :ssl-common-name "es.us-gov-west-1.amazonaws.com",
+    :endpoint "https://es.us-gov-west-1.amazonaws.com",
     :signature-version :v4},
    "us-west-2"
    {:credential-scope {:service "es", :region "us-west-2"},
@@ -84,9 +99,9 @@
 (clojure.spec.alpha/def :portkey.aws.es.log-publishing-option/enabled (clojure.spec.alpha/and :portkey.aws.es/boolean))
 (clojure.spec.alpha/def :portkey.aws.es/log-publishing-option (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.es/CloudWatchLogsLogGroupArn :portkey.aws.es.log-publishing-option/Enabled] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.es/string-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.es/string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__15885__15886__auto__] (if (clojure.core/sequential? p1__15885__15886__auto__) p1__15885__15886__auto__ [p1__15885__15886__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.es/string-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.es/string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.es/storage-type-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.es/storage-type) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__15885__15886__auto__] (if (clojure.core/sequential? p1__15885__15886__auto__) p1__15885__15886__auto__ [p1__15885__15886__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.es/storage-type-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.es/storage-type) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.es.ebsoptions/ebsenabled (clojure.spec.alpha/and :portkey.aws.es/boolean))
 (clojure.spec.alpha/def :portkey.aws.es.ebsoptions/volume-size (clojure.spec.alpha/and :portkey.aws.es/integer-class))
@@ -99,14 +114,15 @@
 (clojure.spec.alpha/def :portkey.aws.es.elasticsearch-domain-config/ebsoptions (clojure.spec.alpha/and :portkey.aws.es/ebsoptions-status))
 (clojure.spec.alpha/def :portkey.aws.es.elasticsearch-domain-config/elasticsearch-version (clojure.spec.alpha/and :portkey.aws.es/elasticsearch-version-status))
 (clojure.spec.alpha/def :portkey.aws.es.elasticsearch-domain-config/access-policies (clojure.spec.alpha/and :portkey.aws.es/access-policies-status))
+(clojure.spec.alpha/def :portkey.aws.es.elasticsearch-domain-config/cognito-options (clojure.spec.alpha/and :portkey.aws.es/cognito-options-status))
 (clojure.spec.alpha/def :portkey.aws.es.elasticsearch-domain-config/elasticsearch-cluster-config (clojure.spec.alpha/and :portkey.aws.es/elasticsearch-cluster-config-status))
 (clojure.spec.alpha/def :portkey.aws.es.elasticsearch-domain-config/advanced-options (clojure.spec.alpha/and :portkey.aws.es/advanced-options-status))
 (clojure.spec.alpha/def :portkey.aws.es.elasticsearch-domain-config/log-publishing-options (clojure.spec.alpha/and :portkey.aws.es/log-publishing-options-status))
 (clojure.spec.alpha/def :portkey.aws.es.elasticsearch-domain-config/encryption-at-rest-options (clojure.spec.alpha/and :portkey.aws.es/encryption-at-rest-options-status))
 (clojure.spec.alpha/def :portkey.aws.es.elasticsearch-domain-config/vpcoptions (clojure.spec.alpha/and :portkey.aws.es/vpcderived-info-status))
-(clojure.spec.alpha/def :portkey.aws.es/elasticsearch-domain-config (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.es.elasticsearch-domain-config/SnapshotOptions :portkey.aws.es.elasticsearch-domain-config/EBSOptions :portkey.aws.es.elasticsearch-domain-config/ElasticsearchVersion :portkey.aws.es.elasticsearch-domain-config/AccessPolicies :portkey.aws.es.elasticsearch-domain-config/ElasticsearchClusterConfig :portkey.aws.es.elasticsearch-domain-config/AdvancedOptions :portkey.aws.es.elasticsearch-domain-config/LogPublishingOptions :portkey.aws.es.elasticsearch-domain-config/EncryptionAtRestOptions :portkey.aws.es.elasticsearch-domain-config/VPCOptions] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.es/elasticsearch-domain-config (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.es.elasticsearch-domain-config/SnapshotOptions :portkey.aws.es.elasticsearch-domain-config/EBSOptions :portkey.aws.es.elasticsearch-domain-config/ElasticsearchVersion :portkey.aws.es.elasticsearch-domain-config/AccessPolicies :portkey.aws.es.elasticsearch-domain-config/CognitoOptions :portkey.aws.es.elasticsearch-domain-config/ElasticsearchClusterConfig :portkey.aws.es.elasticsearch-domain-config/AdvancedOptions :portkey.aws.es.elasticsearch-domain-config/LogPublishingOptions :portkey.aws.es.elasticsearch-domain-config/EncryptionAtRestOptions :portkey.aws.es.elasticsearch-domain-config/VPCOptions] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.es/storage-type-limit-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.es/storage-type-limit) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__15885__15886__auto__] (if (clojure.core/sequential? p1__15885__15886__auto__) p1__15885__15886__auto__ [p1__15885__15886__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.es/storage-type-limit-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.es/storage-type-limit) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.es/cloud-watch-logs-log-group-arn (clojure.spec.alpha/and clojure.core/string?))
 
@@ -124,17 +140,19 @@
 (clojure.spec.alpha/def :portkey.aws.es/instance-role (clojure.spec.alpha/and clojure.core/string?))
 
 (clojure.spec.alpha/def :portkey.aws.es.update-elasticsearch-domain-config-request/access-policies (clojure.spec.alpha/and :portkey.aws.es/policy-document))
-(clojure.spec.alpha/def :portkey.aws.es/update-elasticsearch-domain-config-request (portkey.aws/json-keys :req-un [:portkey.aws.es/DomainName] :opt-un [:portkey.aws.es/ElasticsearchClusterConfig :portkey.aws.es/EBSOptions :portkey.aws.es/SnapshotOptions :portkey.aws.es/VPCOptions :portkey.aws.es/AdvancedOptions :portkey.aws.es.update-elasticsearch-domain-config-request/AccessPolicies :portkey.aws.es/LogPublishingOptions] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.es/update-elasticsearch-domain-config-request (portkey.aws/json-keys :req-un [:portkey.aws.es/DomainName] :opt-un [:portkey.aws.es/SnapshotOptions :portkey.aws.es/EBSOptions :portkey.aws.es.update-elasticsearch-domain-config-request/AccessPolicies :portkey.aws.es/CognitoOptions :portkey.aws.es/ElasticsearchClusterConfig :portkey.aws.es/AdvancedOptions :portkey.aws.es/LogPublishingOptions :portkey.aws.es/VPCOptions] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.es.encryption-at-rest-options-status/options (clojure.spec.alpha/and :portkey.aws.es/encryption-at-rest-options))
 (clojure.spec.alpha/def :portkey.aws.es.encryption-at-rest-options-status/status (clojure.spec.alpha/and :portkey.aws.es/option-status))
 (clojure.spec.alpha/def :portkey.aws.es/encryption-at-rest-options-status (portkey.aws/json-keys :req-un [:portkey.aws.es.encryption-at-rest-options-status/Options :portkey.aws.es.encryption-at-rest-options-status/Status] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.es/limit-value-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.es/limit-value) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__15885__15886__auto__] (if (clojure.core/sequential? p1__15885__15886__auto__) p1__15885__15886__auto__ [p1__15885__15886__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.es/limit-value-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.es/limit-value) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.es/list-tags-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.es/TagList] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.es/additional-limit-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.es/additional-limit) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__15885__15886__auto__] (if (clojure.core/sequential? p1__15885__15886__auto__) p1__15885__15886__auto__ [p1__15885__15886__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.es/role-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 20 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 2048))))
+
+(clojure.spec.alpha/def :portkey.aws.es/additional-limit-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.es/additional-limit) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.es.list-elasticsearch-versions-response/elasticsearch-versions (clojure.spec.alpha/and :portkey.aws.es/elasticsearch-version-list))
 (clojure.spec.alpha/def :portkey.aws.es/list-elasticsearch-versions-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.es.list-elasticsearch-versions-response/ElasticsearchVersions :portkey.aws.es/NextToken] :locations {}))
@@ -143,20 +161,24 @@
 (clojure.spec.alpha/def :portkey.aws.es.log-publishing-options-status/status (clojure.spec.alpha/and :portkey.aws.es/option-status))
 (clojure.spec.alpha/def :portkey.aws.es/log-publishing-options-status (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.es.log-publishing-options-status/Options :portkey.aws.es.log-publishing-options-status/Status] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.es/elasticsearch-domain-status-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.es/elasticsearch-domain-status) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__15885__15886__auto__] (if (clojure.core/sequential? p1__15885__15886__auto__) p1__15885__15886__auto__ [p1__15885__15886__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.es/elasticsearch-domain-status-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.es/elasticsearch-domain-status) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.es/tag-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__15966__auto__] (clojure.core/<= 1 (clojure.core/count s__15966__auto__))) (clojure.core/fn [s__15967__auto__] (clojure.core/< (clojure.core/count s__15967__auto__) 128))))
+(clojure.spec.alpha/def :portkey.aws.es/tag-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128))))
 
 (clojure.spec.alpha/def :portkey.aws.es/arn (clojure.spec.alpha/and clojure.core/string?))
 
 (clojure.spec.alpha/def :portkey.aws.es/limit-exceeded-exception (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.es/domain-info-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.es/domain-info) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__15885__15886__auto__] (if (clojure.core/sequential? p1__15885__15886__auto__) p1__15885__15886__auto__ [p1__15885__15886__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.es/domain-info-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.es/domain-info) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+
+(clojure.spec.alpha/def :portkey.aws.es/identity-pool-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 55)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[\w-]+:[0-9a-f-]+" s__16144__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.es/resource-already-exists-exception (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.es.list-elasticsearch-instance-types-request/elasticsearch-version (clojure.spec.alpha/and :portkey.aws.es/elasticsearch-version-string))
 (clojure.spec.alpha/def :portkey.aws.es/list-elasticsearch-instance-types-request (portkey.aws/json-keys :req-un [:portkey.aws.es.list-elasticsearch-instance-types-request/ElasticsearchVersion] :opt-un [:portkey.aws.es/DomainName :portkey.aws.es/MaxResults :portkey.aws.es/NextToken] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.es/user-pool-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 55)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[\w-]+_[0-9a-zA-Z]+" s__16144__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.es/endpoints-map (clojure.spec.alpha/map-of :portkey.aws.es/string :portkey.aws.es/service-url))
 
@@ -165,6 +187,9 @@
 (clojure.spec.alpha/def :portkey.aws.es/next-token (clojure.spec.alpha/and clojure.core/string?))
 
 (clojure.spec.alpha/def :portkey.aws.es/error-message (clojure.spec.alpha/and clojure.core/string?))
+
+(clojure.spec.alpha/def :portkey.aws.es.cognito-options/enabled (clojure.spec.alpha/and :portkey.aws.es/boolean))
+(clojure.spec.alpha/def :portkey.aws.es/cognito-options (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.es.cognito-options/Enabled :portkey.aws.es/UserPoolId :portkey.aws.es/IdentityPoolId :portkey.aws.es/RoleArn] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.es.update-elasticsearch-domain-config-response/domain-config (clojure.spec.alpha/and :portkey.aws.es/elasticsearch-domain-config))
 (clojure.spec.alpha/def :portkey.aws.es/update-elasticsearch-domain-config-response (portkey.aws/json-keys :req-un [:portkey.aws.es.update-elasticsearch-domain-config-response/DomainConfig] :opt-un [] :locations {}))
@@ -196,26 +221,26 @@
 (clojure.spec.alpha/def :portkey.aws.es.elasticsearch-domain-status/processing (clojure.spec.alpha/and :portkey.aws.es/boolean))
 (clojure.spec.alpha/def :portkey.aws.es.elasticsearch-domain-status/endpoint (clojure.spec.alpha/and :portkey.aws.es/service-url))
 (clojure.spec.alpha/def :portkey.aws.es.elasticsearch-domain-status/vpcoptions (clojure.spec.alpha/and :portkey.aws.es/vpcderived-info))
-(clojure.spec.alpha/def :portkey.aws.es/elasticsearch-domain-status (portkey.aws/json-keys :req-un [:portkey.aws.es/DomainId :portkey.aws.es/DomainName :portkey.aws.es/ARN :portkey.aws.es/ElasticsearchClusterConfig] :opt-un [:portkey.aws.es/SnapshotOptions :portkey.aws.es/EBSOptions :portkey.aws.es.elasticsearch-domain-status/Created :portkey.aws.es.elasticsearch-domain-status/ElasticsearchVersion :portkey.aws.es.elasticsearch-domain-status/AccessPolicies :portkey.aws.es.elasticsearch-domain-status/Endpoints :portkey.aws.es.elasticsearch-domain-status/Deleted :portkey.aws.es/AdvancedOptions :portkey.aws.es.elasticsearch-domain-status/Processing :portkey.aws.es/LogPublishingOptions :portkey.aws.es/EncryptionAtRestOptions :portkey.aws.es.elasticsearch-domain-status/Endpoint :portkey.aws.es.elasticsearch-domain-status/VPCOptions] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.es/elasticsearch-domain-status (portkey.aws/json-keys :req-un [:portkey.aws.es/DomainId :portkey.aws.es/DomainName :portkey.aws.es/ARN :portkey.aws.es/ElasticsearchClusterConfig] :opt-un [:portkey.aws.es/SnapshotOptions :portkey.aws.es/EBSOptions :portkey.aws.es.elasticsearch-domain-status/Created :portkey.aws.es.elasticsearch-domain-status/ElasticsearchVersion :portkey.aws.es.elasticsearch-domain-status/AccessPolicies :portkey.aws.es.elasticsearch-domain-status/Endpoints :portkey.aws.es/CognitoOptions :portkey.aws.es.elasticsearch-domain-status/Deleted :portkey.aws.es/AdvancedOptions :portkey.aws.es.elasticsearch-domain-status/Processing :portkey.aws.es/LogPublishingOptions :portkey.aws.es/EncryptionAtRestOptions :portkey.aws.es.elasticsearch-domain-status/Endpoint :portkey.aws.es.elasticsearch-domain-status/VPCOptions] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.es/disabled-operation-exception (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.es.list-domain-names-response/domain-names (clojure.spec.alpha/and :portkey.aws.es/domain-info-list))
 (clojure.spec.alpha/def :portkey.aws.es/list-domain-names-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.es.list-domain-names-response/DomainNames] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.es/domain-name-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.es/domain-name) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__15885__15886__auto__] (if (clojure.core/sequential? p1__15885__15886__auto__) p1__15885__15886__auto__ [p1__15885__15886__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.es/domain-name-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.es/domain-name) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.es/log-type (clojure.spec.alpha/conformer (clojure.core/let [m__15964__auto__ {"INDEX_SLOW_LOGS" "INDEX_SLOW_LOGS", :index-slow-logs "INDEX_SLOW_LOGS", "SEARCH_SLOW_LOGS" "SEARCH_SLOW_LOGS", :search-slow-logs "SEARCH_SLOW_LOGS"}] (clojure.core/fn [s__15965__auto__] (m__15964__auto__ s__15965__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.es/log-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"INDEX_SLOW_LOGS" "INDEX_SLOW_LOGS", :index-slow-logs "INDEX_SLOW_LOGS", "SEARCH_SLOW_LOGS" "SEARCH_SLOW_LOGS", :search-slow-logs "SEARCH_SLOW_LOGS"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.es/add-tags-request (portkey.aws/json-keys :req-un [:portkey.aws.es/ARN :portkey.aws.es/TagList] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.es/elasticsearch-instance-type-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.es/espartition-instance-type) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__15885__15886__auto__] (if (clojure.core/sequential? p1__15885__15886__auto__) p1__15885__15886__auto__ [p1__15885__15886__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.es/elasticsearch-instance-type-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.es/espartition-instance-type) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.es.limits/storage-types (clojure.spec.alpha/and :portkey.aws.es/storage-type-list))
 (clojure.spec.alpha/def :portkey.aws.es.limits/additional-limits (clojure.spec.alpha/and :portkey.aws.es/additional-limit-list))
 (clojure.spec.alpha/def :portkey.aws.es/limits (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.es.limits/StorageTypes :portkey.aws.es/InstanceLimits :portkey.aws.es.limits/AdditionalLimits] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.es/tag-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.es/tag) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__15885__15886__auto__] (if (clojure.core/sequential? p1__15885__15886__auto__) p1__15885__15886__auto__ [p1__15885__15886__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.es/tag-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.es/tag) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.es.ebsoptions-status/options (clojure.spec.alpha/and :portkey.aws.es/ebsoptions))
 (clojure.spec.alpha/def :portkey.aws.es.ebsoptions-status/status (clojure.spec.alpha/and :portkey.aws.es/option-status))
@@ -234,11 +259,11 @@
 
 (clojure.spec.alpha/def :portkey.aws.es/resource-not-found-exception (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.es/elasticsearch-version-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.es/elasticsearch-version-string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__15885__15886__auto__] (if (clojure.core/sequential? p1__15885__15886__auto__) p1__15885__15886__auto__ [p1__15885__15886__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.es/elasticsearch-version-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.es/elasticsearch-version-string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.es/list-elasticsearch-versions-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.es/MaxResults :portkey.aws.es/NextToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.es/espartition-instance-type (clojure.spec.alpha/conformer (clojure.core/let [m__15964__auto__ {"i3.large.elasticsearch" "i3.large.elasticsearch", :i3.large.elasticsearch "i3.large.elasticsearch", :r3.8xlarge.elasticsearch "r3.8xlarge.elasticsearch", :c4.4xlarge.elasticsearch "c4.4xlarge.elasticsearch", "m4.2xlarge.elasticsearch" "m4.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch" "d2.4xlarge.elasticsearch", "t2.micro.elasticsearch" "t2.micro.elasticsearch", :m3.medium.elasticsearch "m3.medium.elasticsearch", "r3.2xlarge.elasticsearch" "r3.2xlarge.elasticsearch", "c4.large.elasticsearch" "c4.large.elasticsearch", :r3.4xlarge.elasticsearch "r3.4xlarge.elasticsearch", "r4.2xlarge.elasticsearch" "r4.2xlarge.elasticsearch", "m4.xlarge.elasticsearch" "m4.xlarge.elasticsearch", :c4.large.elasticsearch "c4.large.elasticsearch", :i3.8xlarge.elasticsearch "i3.8xlarge.elasticsearch", :r4.16xlarge.elasticsearch "r4.16xlarge.elasticsearch", "m3.xlarge.elasticsearch" "m3.xlarge.elasticsearch", "i2.2xlarge.elasticsearch" "i2.2xlarge.elasticsearch", :m3.xlarge.elasticsearch "m3.xlarge.elasticsearch", :r3.xlarge.elasticsearch "r3.xlarge.elasticsearch", "r4.8xlarge.elasticsearch" "r4.8xlarge.elasticsearch", "r4.large.elasticsearch" "r4.large.elasticsearch", :d2.2xlarge.elasticsearch "d2.2xlarge.elasticsearch", "r3.xlarge.elasticsearch" "r3.xlarge.elasticsearch", :c4.8xlarge.elasticsearch "c4.8xlarge.elasticsearch", "r3.4xlarge.elasticsearch" "r3.4xlarge.elasticsearch", "r4.16xlarge.elasticsearch" "r4.16xlarge.elasticsearch", "i3.8xlarge.elasticsearch" "i3.8xlarge.elasticsearch", "m3.medium.elasticsearch" "m3.medium.elasticsearch", "i3.16xlarge.elasticsearch" "i3.16xlarge.elasticsearch", "i3.4xlarge.elasticsearch" "i3.4xlarge.elasticsearch", "t2.medium.elasticsearch" "t2.medium.elasticsearch", :d2.xlarge.elasticsearch "d2.xlarge.elasticsearch", "c4.xlarge.elasticsearch" "c4.xlarge.elasticsearch", :i3.16xlarge.elasticsearch "i3.16xlarge.elasticsearch", :m4.2xlarge.elasticsearch "m4.2xlarge.elasticsearch", :i2.2xlarge.elasticsearch "i2.2xlarge.elasticsearch", :i3.xlarge.elasticsearch "i3.xlarge.elasticsearch", :t2.small.elasticsearch "t2.small.elasticsearch", "i3.xlarge.elasticsearch" "i3.xlarge.elasticsearch", :r4.large.elasticsearch "r4.large.elasticsearch", "r4.4xlarge.elasticsearch" "r4.4xlarge.elasticsearch", "d2.2xlarge.elasticsearch" "d2.2xlarge.elasticsearch", "m4.large.elasticsearch" "m4.large.elasticsearch", :i3.4xlarge.elasticsearch "i3.4xlarge.elasticsearch", :d2.4xlarge.elasticsearch "d2.4xlarge.elasticsearch", :r4.xlarge.elasticsearch "r4.xlarge.elasticsearch", :d2.8xlarge.elasticsearch "d2.8xlarge.elasticsearch", "t2.small.elasticsearch" "t2.small.elasticsearch", "m4.4xlarge.elasticsearch" "m4.4xlarge.elasticsearch", :m4.10xlarge.elasticsearch "m4.10xlarge.elasticsearch", :i3.2xlarge.elasticsearch "i3.2xlarge.elasticsearch", :r3.large.elasticsearch "r3.large.elasticsearch", "d2.8xlarge.elasticsearch" "d2.8xlarge.elasticsearch", "c4.2xlarge.elasticsearch" "c4.2xlarge.elasticsearch", "r3.large.elasticsearch" "r3.large.elasticsearch", "m3.2xlarge.elasticsearch" "m3.2xlarge.elasticsearch", "m4.10xlarge.elasticsearch" "m4.10xlarge.elasticsearch", :c4.xlarge.elasticsearch "c4.xlarge.elasticsearch", "d2.xlarge.elasticsearch" "d2.xlarge.elasticsearch", :m4.xlarge.elasticsearch "m4.xlarge.elasticsearch", :m3.large.elasticsearch "m3.large.elasticsearch", :i2.xlarge.elasticsearch "i2.xlarge.elasticsearch", :r4.8xlarge.elasticsearch "r4.8xlarge.elasticsearch", "m3.large.elasticsearch" "m3.large.elasticsearch", "i2.xlarge.elasticsearch" "i2.xlarge.elasticsearch", :t2.medium.elasticsearch "t2.medium.elasticsearch", :t2.micro.elasticsearch "t2.micro.elasticsearch", "r4.xlarge.elasticsearch" "r4.xlarge.elasticsearch", "i3.2xlarge.elasticsearch" "i3.2xlarge.elasticsearch", :r3.2xlarge.elasticsearch "r3.2xlarge.elasticsearch", :m3.2xlarge.elasticsearch "m3.2xlarge.elasticsearch", :r4.2xlarge.elasticsearch "r4.2xlarge.elasticsearch", :m4.large.elasticsearch "m4.large.elasticsearch", :r4.4xlarge.elasticsearch "r4.4xlarge.elasticsearch", :c4.2xlarge.elasticsearch "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch" "c4.4xlarge.elasticsearch", :m4.4xlarge.elasticsearch "m4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch" "c4.8xlarge.elasticsearch", "r3.8xlarge.elasticsearch" "r3.8xlarge.elasticsearch"}] (clojure.core/fn [s__15965__auto__] (m__15964__auto__ s__15965__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.es/espartition-instance-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"i3.large.elasticsearch" "i3.large.elasticsearch", :i3.large.elasticsearch "i3.large.elasticsearch", :r3.8xlarge.elasticsearch "r3.8xlarge.elasticsearch", :c4.4xlarge.elasticsearch "c4.4xlarge.elasticsearch", "m4.2xlarge.elasticsearch" "m4.2xlarge.elasticsearch", "d2.4xlarge.elasticsearch" "d2.4xlarge.elasticsearch", "t2.micro.elasticsearch" "t2.micro.elasticsearch", :m3.medium.elasticsearch "m3.medium.elasticsearch", "r3.2xlarge.elasticsearch" "r3.2xlarge.elasticsearch", "c4.large.elasticsearch" "c4.large.elasticsearch", :r3.4xlarge.elasticsearch "r3.4xlarge.elasticsearch", "r4.2xlarge.elasticsearch" "r4.2xlarge.elasticsearch", "m4.xlarge.elasticsearch" "m4.xlarge.elasticsearch", :c4.large.elasticsearch "c4.large.elasticsearch", :i3.8xlarge.elasticsearch "i3.8xlarge.elasticsearch", :r4.16xlarge.elasticsearch "r4.16xlarge.elasticsearch", "m3.xlarge.elasticsearch" "m3.xlarge.elasticsearch", "i2.2xlarge.elasticsearch" "i2.2xlarge.elasticsearch", :m3.xlarge.elasticsearch "m3.xlarge.elasticsearch", :r3.xlarge.elasticsearch "r3.xlarge.elasticsearch", "r4.8xlarge.elasticsearch" "r4.8xlarge.elasticsearch", "r4.large.elasticsearch" "r4.large.elasticsearch", :d2.2xlarge.elasticsearch "d2.2xlarge.elasticsearch", "r3.xlarge.elasticsearch" "r3.xlarge.elasticsearch", :c4.8xlarge.elasticsearch "c4.8xlarge.elasticsearch", "r3.4xlarge.elasticsearch" "r3.4xlarge.elasticsearch", "r4.16xlarge.elasticsearch" "r4.16xlarge.elasticsearch", "i3.8xlarge.elasticsearch" "i3.8xlarge.elasticsearch", "m3.medium.elasticsearch" "m3.medium.elasticsearch", "i3.16xlarge.elasticsearch" "i3.16xlarge.elasticsearch", "i3.4xlarge.elasticsearch" "i3.4xlarge.elasticsearch", "t2.medium.elasticsearch" "t2.medium.elasticsearch", :d2.xlarge.elasticsearch "d2.xlarge.elasticsearch", "c4.xlarge.elasticsearch" "c4.xlarge.elasticsearch", :i3.16xlarge.elasticsearch "i3.16xlarge.elasticsearch", :m4.2xlarge.elasticsearch "m4.2xlarge.elasticsearch", :i2.2xlarge.elasticsearch "i2.2xlarge.elasticsearch", :i3.xlarge.elasticsearch "i3.xlarge.elasticsearch", :t2.small.elasticsearch "t2.small.elasticsearch", "i3.xlarge.elasticsearch" "i3.xlarge.elasticsearch", :r4.large.elasticsearch "r4.large.elasticsearch", "r4.4xlarge.elasticsearch" "r4.4xlarge.elasticsearch", "d2.2xlarge.elasticsearch" "d2.2xlarge.elasticsearch", "m4.large.elasticsearch" "m4.large.elasticsearch", :i3.4xlarge.elasticsearch "i3.4xlarge.elasticsearch", :d2.4xlarge.elasticsearch "d2.4xlarge.elasticsearch", :r4.xlarge.elasticsearch "r4.xlarge.elasticsearch", :d2.8xlarge.elasticsearch "d2.8xlarge.elasticsearch", "t2.small.elasticsearch" "t2.small.elasticsearch", "m4.4xlarge.elasticsearch" "m4.4xlarge.elasticsearch", :m4.10xlarge.elasticsearch "m4.10xlarge.elasticsearch", :i3.2xlarge.elasticsearch "i3.2xlarge.elasticsearch", :r3.large.elasticsearch "r3.large.elasticsearch", "d2.8xlarge.elasticsearch" "d2.8xlarge.elasticsearch", "c4.2xlarge.elasticsearch" "c4.2xlarge.elasticsearch", "r3.large.elasticsearch" "r3.large.elasticsearch", "m3.2xlarge.elasticsearch" "m3.2xlarge.elasticsearch", "m4.10xlarge.elasticsearch" "m4.10xlarge.elasticsearch", :c4.xlarge.elasticsearch "c4.xlarge.elasticsearch", "d2.xlarge.elasticsearch" "d2.xlarge.elasticsearch", :m4.xlarge.elasticsearch "m4.xlarge.elasticsearch", :m3.large.elasticsearch "m3.large.elasticsearch", :i2.xlarge.elasticsearch "i2.xlarge.elasticsearch", :r4.8xlarge.elasticsearch "r4.8xlarge.elasticsearch", "m3.large.elasticsearch" "m3.large.elasticsearch", "i2.xlarge.elasticsearch" "i2.xlarge.elasticsearch", :t2.medium.elasticsearch "t2.medium.elasticsearch", :t2.micro.elasticsearch "t2.micro.elasticsearch", "r4.xlarge.elasticsearch" "r4.xlarge.elasticsearch", "i3.2xlarge.elasticsearch" "i3.2xlarge.elasticsearch", :r3.2xlarge.elasticsearch "r3.2xlarge.elasticsearch", :m3.2xlarge.elasticsearch "m3.2xlarge.elasticsearch", :r4.2xlarge.elasticsearch "r4.2xlarge.elasticsearch", :m4.large.elasticsearch "m4.large.elasticsearch", :r4.4xlarge.elasticsearch "r4.4xlarge.elasticsearch", :c4.2xlarge.elasticsearch "c4.2xlarge.elasticsearch", "c4.4xlarge.elasticsearch" "c4.4xlarge.elasticsearch", :m4.4xlarge.elasticsearch "m4.4xlarge.elasticsearch", "c4.8xlarge.elasticsearch" "c4.8xlarge.elasticsearch", "r3.8xlarge.elasticsearch" "r3.8xlarge.elasticsearch"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.es.option-status/creation-date (clojure.spec.alpha/and :portkey.aws.es/update-timestamp))
 (clojure.spec.alpha/def :portkey.aws.es.option-status/update-date (clojure.spec.alpha/and :portkey.aws.es/update-timestamp))
@@ -247,7 +272,7 @@
 (clojure.spec.alpha/def :portkey.aws.es.option-status/pending-deletion (clojure.spec.alpha/and :portkey.aws.es/boolean))
 (clojure.spec.alpha/def :portkey.aws.es/option-status (portkey.aws/json-keys :req-un [:portkey.aws.es.option-status/CreationDate :portkey.aws.es.option-status/UpdateDate :portkey.aws.es.option-status/State] :opt-un [:portkey.aws.es.option-status/UpdateVersion :portkey.aws.es.option-status/PendingDeletion] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.es/tag-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__15966__auto__] (clojure.core/<= 0 (clojure.core/count s__15966__auto__))) (clojure.core/fn [s__15967__auto__] (clojure.core/< (clojure.core/count s__15967__auto__) 256))))
+(clojure.spec.alpha/def :portkey.aws.es/tag-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 0 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 256))))
 
 (clojure.spec.alpha/def :portkey.aws.es.vpcderived-info-status/options (clojure.spec.alpha/and :portkey.aws.es/vpcderived-info))
 (clojure.spec.alpha/def :portkey.aws.es.vpcderived-info-status/status (clojure.spec.alpha/and :portkey.aws.es/option-status))
@@ -266,7 +291,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.es/instance-limits (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.es/InstanceCountLimits] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.es/kms-key-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__15966__auto__] (clojure.core/<= 1 (clojure.core/count s__15966__auto__))) (clojure.core/fn [s__15967__auto__] (clojure.core/< (clojure.core/count s__15967__auto__) 500))))
+(clojure.spec.alpha/def :portkey.aws.es/kms-key-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 500))))
 
 (clojure.spec.alpha/def :portkey.aws.es.describe-elasticsearch-domains-response/domain-status-list (clojure.spec.alpha/and :portkey.aws.es/elasticsearch-domain-status-list))
 (clojure.spec.alpha/def :portkey.aws.es/describe-elasticsearch-domains-response (portkey.aws/json-keys :req-un [:portkey.aws.es.describe-elasticsearch-domains-response/DomainStatusList] :opt-un [] :locations {}))
@@ -282,9 +307,9 @@
 
 (clojure.spec.alpha/def :portkey.aws.es.create-elasticsearch-domain-request/elasticsearch-version (clojure.spec.alpha/and :portkey.aws.es/elasticsearch-version-string))
 (clojure.spec.alpha/def :portkey.aws.es.create-elasticsearch-domain-request/access-policies (clojure.spec.alpha/and :portkey.aws.es/policy-document))
-(clojure.spec.alpha/def :portkey.aws.es/create-elasticsearch-domain-request (portkey.aws/json-keys :req-un [:portkey.aws.es/DomainName] :opt-un [:portkey.aws.es/SnapshotOptions :portkey.aws.es/EBSOptions :portkey.aws.es.create-elasticsearch-domain-request/ElasticsearchVersion :portkey.aws.es.create-elasticsearch-domain-request/AccessPolicies :portkey.aws.es/ElasticsearchClusterConfig :portkey.aws.es/AdvancedOptions :portkey.aws.es/LogPublishingOptions :portkey.aws.es/EncryptionAtRestOptions :portkey.aws.es/VPCOptions] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.es/create-elasticsearch-domain-request (portkey.aws/json-keys :req-un [:portkey.aws.es/DomainName] :opt-un [:portkey.aws.es/SnapshotOptions :portkey.aws.es/EBSOptions :portkey.aws.es.create-elasticsearch-domain-request/ElasticsearchVersion :portkey.aws.es.create-elasticsearch-domain-request/AccessPolicies :portkey.aws.es/CognitoOptions :portkey.aws.es/ElasticsearchClusterConfig :portkey.aws.es/AdvancedOptions :portkey.aws.es/LogPublishingOptions :portkey.aws.es/EncryptionAtRestOptions :portkey.aws.es/VPCOptions] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.es/domain-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__15966__auto__] (clojure.core/<= 1 (clojure.core/count s__15966__auto__))) (clojure.core/fn [s__15967__auto__] (clojure.core/< (clojure.core/count s__15967__auto__) 64))))
+(clojure.spec.alpha/def :portkey.aws.es/domain-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 64))))
 
 (clojure.spec.alpha/def :portkey.aws.es/minimum-instance-count (clojure.spec.alpha/and clojure.core/int?))
 
@@ -302,11 +327,15 @@
 (clojure.spec.alpha/def :portkey.aws.es.encryption-at-rest-options/enabled (clojure.spec.alpha/and :portkey.aws.es/boolean))
 (clojure.spec.alpha/def :portkey.aws.es/encryption-at-rest-options (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.es.encryption-at-rest-options/Enabled :portkey.aws.es/KmsKeyId] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.es/volume-type (clojure.spec.alpha/conformer (clojure.core/let [m__15964__auto__ {"standard" "standard", :standard "standard", "gp2" "gp2", :gp2 "gp2", "io1" "io1", :io1 "io1"}] (clojure.core/fn [s__15965__auto__] (m__15964__auto__ s__15965__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.es/volume-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"standard" "standard", :standard "standard", "gp2" "gp2", :gp2 "gp2", "io1" "io1", :io1 "io1"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+
+(clojure.spec.alpha/def :portkey.aws.es.cognito-options-status/options (clojure.spec.alpha/and :portkey.aws.es/cognito-options))
+(clojure.spec.alpha/def :portkey.aws.es.cognito-options-status/status (clojure.spec.alpha/and :portkey.aws.es/option-status))
+(clojure.spec.alpha/def :portkey.aws.es/cognito-options-status (portkey.aws/json-keys :req-un [:portkey.aws.es.cognito-options-status/Options :portkey.aws.es.cognito-options-status/Status] :opt-un [] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.es/describe-elasticsearch-domain-config-request (portkey.aws/json-keys :req-un [:portkey.aws.es/DomainName] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.es/max-results (clojure.spec.alpha/and clojure.core/int? (fn* [p1__16028__16029__auto__] (clojure.core/<= p1__16028__16029__auto__ 100))))
+(clojure.spec.alpha/def :portkey.aws.es/max-results (clojure.spec.alpha/and clojure.core/int? (fn* [p1__16204__16205__auto__] (clojure.core/<= p1__16204__16205__auto__ 100))))
 
 (clojure.spec.alpha/def :portkey.aws.es.tag/key (clojure.spec.alpha/and :portkey.aws.es/tag-key))
 (clojure.spec.alpha/def :portkey.aws.es.tag/value (clojure.spec.alpha/and :portkey.aws.es/tag-value))
@@ -323,7 +352,7 @@
 (clojure.spec.alpha/def :portkey.aws.es.elasticsearch-version-status/status (clojure.spec.alpha/and :portkey.aws.es/option-status))
 (clojure.spec.alpha/def :portkey.aws.es/elasticsearch-version-status (portkey.aws/json-keys :req-un [:portkey.aws.es.elasticsearch-version-status/Options :portkey.aws.es.elasticsearch-version-status/Status] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.es/domain-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__15966__auto__] (clojure.core/<= 3 (clojure.core/count s__15966__auto__))) (clojure.core/fn [s__15967__auto__] (clojure.core/< (clojure.core/count s__15967__auto__) 28)) (clojure.core/fn [s__15968__auto__] (clojure.core/re-matches #"[a-z][a-z0-9\-]+" s__15968__auto__))))
+(clojure.spec.alpha/def :portkey.aws.es/domain-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 3 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 28)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[a-z][a-z0-9\-]+" s__16144__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.es.describe-elasticsearch-domains-request/domain-names (clojure.spec.alpha/and :portkey.aws.es/domain-name-list))
 (clojure.spec.alpha/def :portkey.aws.es/describe-elasticsearch-domains-request (portkey.aws/json-keys :req-un [:portkey.aws.es.describe-elasticsearch-domains-request/DomainNames] :opt-un [] :locations {}))
@@ -334,9 +363,9 @@
 
 (clojure.spec.alpha/def :portkey.aws.es/instance-count-limits (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.es/MinimumInstanceCount :portkey.aws.es/MaximumInstanceCount] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.es/option-state (clojure.spec.alpha/conformer (clojure.core/let [m__15964__auto__ {"RequiresIndexDocuments" "RequiresIndexDocuments", :requires-index-documents "RequiresIndexDocuments", "Processing" "Processing", :processing "Processing", "Active" "Active", :active "Active"}] (clojure.core/fn [s__15965__auto__] (m__15964__auto__ s__15965__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.es/option-state (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"RequiresIndexDocuments" "RequiresIndexDocuments", :requires-index-documents "RequiresIndexDocuments", "Processing" "Processing", :processing "Processing", "Active" "Active", :active "Active"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.es/uint-value (clojure.spec.alpha/and clojure.core/int? (fn* [p1__16026__16027__auto__] (clojure.core/<= 0 p1__16026__16027__auto__))))
+(clojure.spec.alpha/def :portkey.aws.es/uint-value (clojure.spec.alpha/and clojure.core/int? (fn* [p1__16202__16203__auto__] (clojure.core/<= 0 p1__16202__16203__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.es/limit-name (clojure.spec.alpha/and clojure.core/string?))
 

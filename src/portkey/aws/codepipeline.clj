@@ -41,6 +41,11 @@
     :ssl-common-name "codepipeline.ap-northeast-2.amazonaws.com",
     :endpoint "https://codepipeline.ap-northeast-2.amazonaws.com",
     :signature-version :v4},
+   "eu-west-3"
+   {:credential-scope {:service "codepipeline", :region "eu-west-3"},
+    :ssl-common-name "codepipeline.eu-west-3.amazonaws.com",
+    :endpoint "https://codepipeline.eu-west-3.amazonaws.com",
+    :signature-version :v4},
    "ca-central-1"
    {:credential-scope
     {:service "codepipeline", :region "ca-central-1"},
