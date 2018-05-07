@@ -37,6 +37,11 @@
     :ssl-common-name "cloudfront.amazonaws.com",
     :endpoint "https://cloudfront.amazonaws.com",
     :signature-version :v4},
+   "eu-west-3"
+   {:credential-scope {:service "cloudfront", :region "us-east-1"},
+    :ssl-common-name "cloudfront.amazonaws.com",
+    :endpoint "https://cloudfront.amazonaws.com",
+    :signature-version :v4},
    "ca-central-1"
    {:credential-scope {:service "cloudfront", :region "us-east-1"},
     :ssl-common-name "cloudfront.amazonaws.com",

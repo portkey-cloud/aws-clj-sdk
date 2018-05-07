@@ -27,10 +27,25 @@
     :ssl-common-name "glacier.cn-north-1.amazonaws.com.cn",
     :endpoint "https://glacier.cn-north-1.amazonaws.com.cn",
     :signature-version :v4},
+   "ap-southeast-1"
+   {:credential-scope {:service "glacier", :region "ap-southeast-1"},
+    :ssl-common-name "glacier.ap-southeast-1.amazonaws.com",
+    :endpoint "https://glacier.ap-southeast-1.amazonaws.com",
+    :signature-version :v4},
+   "cn-northwest-1"
+   {:credential-scope {:service "glacier", :region "cn-northwest-1"},
+    :ssl-common-name "glacier.cn-northwest-1.amazonaws.com.cn",
+    :endpoint "https://glacier.cn-northwest-1.amazonaws.com.cn",
+    :signature-version :v4},
    "ap-northeast-2"
    {:credential-scope {:service "glacier", :region "ap-northeast-2"},
     :ssl-common-name "glacier.ap-northeast-2.amazonaws.com",
     :endpoint "https://glacier.ap-northeast-2.amazonaws.com",
+    :signature-version :v4},
+   "eu-west-3"
+   {:credential-scope {:service "glacier", :region "eu-west-3"},
+    :ssl-common-name "glacier.eu-west-3.amazonaws.com",
+    :endpoint "https://glacier.eu-west-3.amazonaws.com",
     :signature-version :v4},
    "ca-central-1"
    {:credential-scope {:service "glacier", :region "ca-central-1"},
@@ -101,7 +116,10 @@
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.data-retrieval-rule/bytes-per-hour (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/nullable-long))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/data-retrieval-rule (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01.data-retrieval-rule/Strategy :portkey.aws.glacier.-2012-06-01.data-retrieval-rule/BytesPerHour] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/uploads-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.glacier.-2012-06-01/upload-list-element :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/uploads-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.glacier.-2012-06-01/upload-list-element) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
+
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.input-serialization/csv (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/csvinput))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/input-serialization (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01.input-serialization/csv] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.create-vault-input/account-id (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.create-vault-input/vault-name (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
@@ -136,7 +154,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/string (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/job-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.glacier.-2012-06-01/glacier-job-description :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/job-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.glacier.-2012-06-01/glacier-job-description) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.complete-multipart-upload-input/account-id (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.complete-multipart-upload-input/vault-name (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
@@ -145,10 +163,16 @@
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.complete-multipart-upload-input/checksum (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/complete-multipart-upload-input (portkey.aws/json-keys :req-un [:portkey.aws.glacier.-2012-06-01.complete-multipart-upload-input/accountId :portkey.aws.glacier.-2012-06-01.complete-multipart-upload-input/vaultName :portkey.aws.glacier.-2012-06-01.complete-multipart-upload-input/uploadId] :opt-un [:portkey.aws.glacier.-2012-06-01.complete-multipart-upload-input/archiveSize :portkey.aws.glacier.-2012-06-01.complete-multipart-upload-input/checksum] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/status-code (clojure.spec.alpha/conformer (clojure.core/let [m__96543__auto__ {"InProgress" "InProgress", :in-progress "InProgress", "Succeeded" "Succeeded", :succeeded "Succeeded", "Failed" "Failed", :failed "Failed"}] (clojure.core/fn [s__96544__auto__] (m__96543__auto__ s__96544__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/type (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"AmazonCustomerByEmail" "AmazonCustomerByEmail", :amazon-customer-by-email "AmazonCustomerByEmail", "CanonicalUser" "CanonicalUser", :canonical-user "CanonicalUser", "Group" "Group", :group "Group"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/status-code (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"InProgress" "InProgress", :in-progress "InProgress", "Succeeded" "Succeeded", :succeeded "Succeeded", "Failed" "Failed", :failed "Failed"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/permission (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"WRITE" "WRITE", "FULL_CONTROL" "FULL_CONTROL", :read "READ", :read-acp "READ_ACP", "READ_ACP" "READ_ACP", :write-acp "WRITE_ACP", :write "WRITE", "WRITE_ACP" "WRITE_ACP", "READ" "READ", :full-control "FULL_CONTROL"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.list-multipart-uploads-output/marker (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/list-multipart-uploads-output (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01/UploadsList :portkey.aws.glacier.-2012-06-01.list-multipart-uploads-output/Marker] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/cannedacl (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"authenticated-read" "authenticated-read", "public-read-write" "public-read-write", :bucket-owner-full-control "bucket-owner-full-control", :private "private", "bucket-owner-full-control" "bucket-owner-full-control", "private" "private", :authenticated-read "authenticated-read", "aws-exec-read" "aws-exec-read", :aws-exec-read "aws-exec-read", :bucket-owner-read "bucket-owner-read", "bucket-owner-read" "bucket-owner-read", "public-read" "public-read", :public-read-write "public-read-write", :public-read "public-read"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.create-vault-output/location (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/create-vault-output (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01.create-vault-output/location] :locations {}))
@@ -195,7 +219,7 @@
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.vault-notification-config/events (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/notification-event-list))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/vault-notification-config (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01.vault-notification-config/SNSTopic :portkey.aws.glacier.-2012-06-01.vault-notification-config/Events] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/provisioned-capacity-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.glacier.-2012-06-01/provisioned-capacity-description :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/provisioned-capacity-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.glacier.-2012-06-01/provisioned-capacity-description) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.list-parts-output/multipart-upload-id (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.list-parts-output/vaultarn (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
@@ -209,7 +233,9 @@
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.list-jobs-output/marker (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/list-jobs-output (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01/JobList :portkey.aws.glacier.-2012-06-01.list-jobs-output/Marker] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/vault-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.glacier.-2012-06-01/describe-vault-output :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/access-control-policy-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.glacier.-2012-06-01/grant) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
+
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/vault-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.glacier.-2012-06-01/describe-vault-output) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.service-unavailable-exception/type (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.service-unavailable-exception/code (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
@@ -229,10 +255,15 @@
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.initiate-vault-lock-input/policy (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/vault-lock-policy))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/initiate-vault-lock-input (portkey.aws/json-keys :req-un [:portkey.aws.glacier.-2012-06-01.initiate-vault-lock-input/accountId :portkey.aws.glacier.-2012-06-01.initiate-vault-lock-input/vaultName] :opt-un [:portkey.aws.glacier.-2012-06-01.initiate-vault-lock-input/policy] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.output-serialization/csv (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/csvoutput))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/output-serialization (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01.output-serialization/csv] :locations {}))
+
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.data-retrieval-policy/rules (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/data-retrieval-rules-list))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/data-retrieval-policy (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01.data-retrieval-policy/Rules] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/action-code (clojure.spec.alpha/conformer (clojure.core/let [m__96543__auto__ {"ArchiveRetrieval" "ArchiveRetrieval", :archive-retrieval "ArchiveRetrieval", "InventoryRetrieval" "InventoryRetrieval", :inventory-retrieval "InventoryRetrieval"}] (clojure.core/fn [s__96544__auto__] (m__96543__auto__ s__96544__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/encryption-type (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"aws:kms" "aws:kms", :aws:kms "aws:kms", "AES256" "AES256", :aes256 "AES256"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/action-code (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"ArchiveRetrieval" "ArchiveRetrieval", :archive-retrieval "ArchiveRetrieval", "InventoryRetrieval" "InventoryRetrieval", :inventory-retrieval "InventoryRetrieval", "Select" "Select", :select "Select"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.delete-vault-access-policy-input/account-id (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.delete-vault-access-policy-input/vault-name (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
@@ -253,7 +284,9 @@
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.abort-multipart-upload-input/upload-id (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/abort-multipart-upload-input (portkey.aws/json-keys :req-un [:portkey.aws.glacier.-2012-06-01.abort-multipart-upload-input/accountId :portkey.aws.glacier.-2012-06-01.abort-multipart-upload-input/vaultName :portkey.aws.glacier.-2012-06-01.abort-multipart-upload-input/uploadId] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/tag-key-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.glacier.-2012-06-01/string :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/grant (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01/Grantee :portkey.aws.glacier.-2012-06-01/Permission] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/tag-key-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.glacier.-2012-06-01/string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.get-vault-access-policy-input/account-id (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.get-vault-access-policy-input/vault-name (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
@@ -263,10 +296,18 @@
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.delete-vault-input/vault-name (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/delete-vault-input (portkey.aws/json-keys :req-un [:portkey.aws.glacier.-2012-06-01.delete-vault-input/accountId :portkey.aws.glacier.-2012-06-01.delete-vault-input/vaultName] :opt-un [] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.csvoutput/quote-escape-character (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.csvoutput/record-delimiter (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.csvoutput/field-delimiter (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.csvoutput/quote-character (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/csvoutput (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01/QuoteFields :portkey.aws.glacier.-2012-06-01.csvoutput/QuoteEscapeCharacter :portkey.aws.glacier.-2012-06-01.csvoutput/RecordDelimiter :portkey.aws.glacier.-2012-06-01.csvoutput/FieldDelimiter :portkey.aws.glacier.-2012-06-01.csvoutput/QuoteCharacter] :locations {}))
+
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.resource-not-found-exception/type (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.resource-not-found-exception/code (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.resource-not-found-exception/message (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/resource-not-found-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01.resource-not-found-exception/type :portkey.aws.glacier.-2012-06-01.resource-not-found-exception/code :portkey.aws.glacier.-2012-06-01.resource-not-found-exception/message] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/hashmap (clojure.spec.alpha/map-of :portkey.aws.glacier.-2012-06-01/string :portkey.aws.glacier.-2012-06-01/string))
 
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.policy-enforced-exception/type (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.policy-enforced-exception/code (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
@@ -304,7 +345,8 @@
 
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.initiate-job-output/location (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.initiate-job-output/job-id (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
-(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/initiate-job-output (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01.initiate-job-output/location :portkey.aws.glacier.-2012-06-01.initiate-job-output/jobId] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.initiate-job-output/job-output-path (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/initiate-job-output (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01.initiate-job-output/location :portkey.aws.glacier.-2012-06-01.initiate-job-output/jobId :portkey.aws.glacier.-2012-06-01.initiate-job-output/jobOutputPath] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.get-vault-notifications-output/vault-notification-config (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/vault-notification-config))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/get-vault-notifications-output (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01.get-vault-notifications-output/vaultNotificationConfig] :locations {}))
@@ -317,7 +359,7 @@
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.list-jobs-input/completed (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/list-jobs-input (portkey.aws/json-keys :req-un [:portkey.aws.glacier.-2012-06-01.list-jobs-input/accountId :portkey.aws.glacier.-2012-06-01.list-jobs-input/vaultName] :opt-un [:portkey.aws.glacier.-2012-06-01.list-jobs-input/limit :portkey.aws.glacier.-2012-06-01.list-jobs-input/marker :portkey.aws.glacier.-2012-06-01.list-jobs-input/statuscode :portkey.aws.glacier.-2012-06-01.list-jobs-input/completed] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/part-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.glacier.-2012-06-01/part-list-element :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/part-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.glacier.-2012-06-01/part-list-element) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/tag-map (clojure.spec.alpha/map-of :portkey.aws.glacier.-2012-06-01/tag-key :portkey.aws.glacier.-2012-06-01/tag-value))
 
@@ -334,6 +376,16 @@
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.upload-list-element/part-size-in-bytes (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/long))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.upload-list-element/creation-date (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/upload-list-element (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01.upload-list-element/MultipartUploadId :portkey.aws.glacier.-2012-06-01.upload-list-element/VaultARN :portkey.aws.glacier.-2012-06-01.upload-list-element/ArchiveDescription :portkey.aws.glacier.-2012-06-01.upload-list-element/PartSizeInBytes :portkey.aws.glacier.-2012-06-01.upload-list-element/CreationDate] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.select-parameters/expression (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/select-parameters (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01/InputSerialization :portkey.aws.glacier.-2012-06-01/ExpressionType :portkey.aws.glacier.-2012-06-01.select-parameters/Expression :portkey.aws.glacier.-2012-06-01/OutputSerialization] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.s3-location/bucket-name (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.s3-location/prefix (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.s3-location/access-control-list (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/access-control-policy-list))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.s3-location/tagging (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/hashmap))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.s3-location/user-metadata (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/hashmap))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/s3-location (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01.s3-location/BucketName :portkey.aws.glacier.-2012-06-01.s3-location/Prefix :portkey.aws.glacier.-2012-06-01/Encryption :portkey.aws.glacier.-2012-06-01/CannedACL :portkey.aws.glacier.-2012-06-01.s3-location/AccessControlList :portkey.aws.glacier.-2012-06-01.s3-location/Tagging :portkey.aws.glacier.-2012-06-01.s3-location/UserMetadata :portkey.aws.glacier.-2012-06-01/StorageClass] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.list-vaults-input/account-id (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.list-vaults-input/marker (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
@@ -377,7 +429,14 @@
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.describe-job-input/job-id (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/describe-job-input (portkey.aws/json-keys :req-un [:portkey.aws.glacier.-2012-06-01.describe-job-input/accountId :portkey.aws.glacier.-2012-06-01.describe-job-input/vaultName :portkey.aws.glacier.-2012-06-01.describe-job-input/jobId] :opt-un [] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.encryption/kmskey-id (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.encryption/kmscontext (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/encryption (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01/EncryptionType :portkey.aws.glacier.-2012-06-01.encryption/KMSKeyId :portkey.aws.glacier.-2012-06-01.encryption/KMSContext] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/expression-type (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"SQL" "SQL", :sql "SQL"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.glacier-job-description/tier (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.glacier-job-description/job-output-path (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.glacier-job-description/completion-date (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.glacier-job-description/archive-id (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.glacier-job-description/status-message (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
@@ -394,7 +453,7 @@
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.glacier-job-description/job-description (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.glacier-job-description/retrieval-byte-range (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.glacier-job-description/job-id (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
-(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/glacier-job-description (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01.glacier-job-description/Tier :portkey.aws.glacier.-2012-06-01.glacier-job-description/CompletionDate :portkey.aws.glacier.-2012-06-01/StatusCode :portkey.aws.glacier.-2012-06-01.glacier-job-description/ArchiveId :portkey.aws.glacier.-2012-06-01.glacier-job-description/StatusMessage :portkey.aws.glacier.-2012-06-01.glacier-job-description/ArchiveSizeInBytes :portkey.aws.glacier.-2012-06-01.glacier-job-description/SNSTopic :portkey.aws.glacier.-2012-06-01.glacier-job-description/VaultARN :portkey.aws.glacier.-2012-06-01.glacier-job-description/InventoryRetrievalParameters :portkey.aws.glacier.-2012-06-01.glacier-job-description/ArchiveSHA256TreeHash :portkey.aws.glacier.-2012-06-01.glacier-job-description/SHA256TreeHash :portkey.aws.glacier.-2012-06-01.glacier-job-description/CreationDate :portkey.aws.glacier.-2012-06-01.glacier-job-description/InventorySizeInBytes :portkey.aws.glacier.-2012-06-01.glacier-job-description/Completed :portkey.aws.glacier.-2012-06-01.glacier-job-description/Action :portkey.aws.glacier.-2012-06-01.glacier-job-description/JobDescription :portkey.aws.glacier.-2012-06-01.glacier-job-description/RetrievalByteRange :portkey.aws.glacier.-2012-06-01.glacier-job-description/JobId] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/glacier-job-description (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01.glacier-job-description/Tier :portkey.aws.glacier.-2012-06-01.glacier-job-description/JobOutputPath :portkey.aws.glacier.-2012-06-01.glacier-job-description/CompletionDate :portkey.aws.glacier.-2012-06-01/StatusCode :portkey.aws.glacier.-2012-06-01.glacier-job-description/ArchiveId :portkey.aws.glacier.-2012-06-01.glacier-job-description/StatusMessage :portkey.aws.glacier.-2012-06-01.glacier-job-description/ArchiveSizeInBytes :portkey.aws.glacier.-2012-06-01.glacier-job-description/SNSTopic :portkey.aws.glacier.-2012-06-01.glacier-job-description/VaultARN :portkey.aws.glacier.-2012-06-01.glacier-job-description/InventoryRetrievalParameters :portkey.aws.glacier.-2012-06-01.glacier-job-description/ArchiveSHA256TreeHash :portkey.aws.glacier.-2012-06-01/SelectParameters :portkey.aws.glacier.-2012-06-01.glacier-job-description/SHA256TreeHash :portkey.aws.glacier.-2012-06-01.glacier-job-description/CreationDate :portkey.aws.glacier.-2012-06-01.glacier-job-description/InventorySizeInBytes :portkey.aws.glacier.-2012-06-01.glacier-job-description/Completed :portkey.aws.glacier.-2012-06-01/OutputLocation :portkey.aws.glacier.-2012-06-01.glacier-job-description/Action :portkey.aws.glacier.-2012-06-01.glacier-job-description/JobDescription :portkey.aws.glacier.-2012-06-01.glacier-job-description/RetrievalByteRange :portkey.aws.glacier.-2012-06-01.glacier-job-description/JobId] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.missing-parameter-value-exception/type (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.missing-parameter-value-exception/code (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
@@ -412,6 +471,8 @@
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.list-parts-input/limit (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/list-parts-input (portkey.aws/json-keys :req-un [:portkey.aws.glacier.-2012-06-01.list-parts-input/accountId :portkey.aws.glacier.-2012-06-01.list-parts-input/vaultName :portkey.aws.glacier.-2012-06-01.list-parts-input/uploadId] :opt-un [:portkey.aws.glacier.-2012-06-01.list-parts-input/marker :portkey.aws.glacier.-2012-06-01.list-parts-input/limit] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/storage-class (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"STANDARD" "STANDARD", :standard "STANDARD", "REDUCED_REDUNDANCY" "REDUCED_REDUNDANCY", :reduced-redundancy "REDUCED_REDUNDANCY", "STANDARD_IA" "STANDARD_IA", :standard-ia "STANDARD_IA"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.get-vault-access-policy-output/policy (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/vault-access-policy))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/get-vault-access-policy-output (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01.get-vault-access-policy-output/policy] :locations {}))
 
@@ -422,6 +483,14 @@
 
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/list-provisioned-capacity-output (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01/ProvisionedCapacityList] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.grantee/display-name (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.grantee/uri (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.grantee/id (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.grantee/email-address (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/grantee (portkey.aws/json-keys :req-un [:portkey.aws.glacier.-2012-06-01/Type] :opt-un [:portkey.aws.glacier.-2012-06-01.grantee/DisplayName :portkey.aws.glacier.-2012-06-01.grantee/URI :portkey.aws.glacier.-2012-06-01.grantee/ID :portkey.aws.glacier.-2012-06-01.grantee/EmailAddress] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/file-header-info (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"USE" "USE", :use "USE", "IGNORE" "IGNORE", :ignore "IGNORE", "NONE" "NONE", :none "NONE"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.inventory-retrieval-job-input/start-date (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.inventory-retrieval-job-input/end-date (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.inventory-retrieval-job-input/limit (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
@@ -431,6 +500,9 @@
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.upload-multipart-part-output/checksum (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/upload-multipart-part-output (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01.upload-multipart-part-output/checksum] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.output-location/s3 (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/s3-location))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/output-location (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01.output-location/S3] :locations {}))
+
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.upload-archive-input/vault-name (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.upload-archive-input/account-id (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.upload-archive-input/archive-description (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
@@ -438,7 +510,7 @@
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.upload-archive-input/body (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/stream))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/upload-archive-input (portkey.aws/json-keys :req-un [:portkey.aws.glacier.-2012-06-01.upload-archive-input/vaultName :portkey.aws.glacier.-2012-06-01.upload-archive-input/accountId] :opt-un [:portkey.aws.glacier.-2012-06-01.upload-archive-input/archiveDescription :portkey.aws.glacier.-2012-06-01.upload-archive-input/checksum :portkey.aws.glacier.-2012-06-01.upload-archive-input/body] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/data-retrieval-rules-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.glacier.-2012-06-01/data-retrieval-rule :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/data-retrieval-rules-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.glacier.-2012-06-01/data-retrieval-rule) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.invalid-parameter-value-exception/type (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.invalid-parameter-value-exception/code (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
@@ -452,22 +524,31 @@
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.list-vaults-output/marker (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/list-vaults-output (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01/VaultList :portkey.aws.glacier.-2012-06-01.list-vaults-output/Marker] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.job-parameters/format (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.job-parameters/tier (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.job-parameters/type (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.job-parameters/archive-id (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
-(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.job-parameters/description (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.job-parameters/snstopic (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
-(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.job-parameters/retrieval-byte-range (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
-(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.job-parameters/tier (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.job-parameters/format (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.job-parameters/description (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.job-parameters/inventory-retrieval-parameters (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/inventory-retrieval-job-input))
-(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/job-parameters (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01.job-parameters/Format :portkey.aws.glacier.-2012-06-01.job-parameters/Type :portkey.aws.glacier.-2012-06-01.job-parameters/ArchiveId :portkey.aws.glacier.-2012-06-01.job-parameters/Description :portkey.aws.glacier.-2012-06-01.job-parameters/SNSTopic :portkey.aws.glacier.-2012-06-01.job-parameters/RetrievalByteRange :portkey.aws.glacier.-2012-06-01.job-parameters/Tier :portkey.aws.glacier.-2012-06-01.job-parameters/InventoryRetrievalParameters] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.job-parameters/retrieval-byte-range (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/job-parameters (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01.job-parameters/Tier :portkey.aws.glacier.-2012-06-01.job-parameters/Type :portkey.aws.glacier.-2012-06-01.job-parameters/ArchiveId :portkey.aws.glacier.-2012-06-01.job-parameters/SNSTopic :portkey.aws.glacier.-2012-06-01.job-parameters/Format :portkey.aws.glacier.-2012-06-01.job-parameters/Description :portkey.aws.glacier.-2012-06-01.job-parameters/InventoryRetrievalParameters :portkey.aws.glacier.-2012-06-01/SelectParameters :portkey.aws.glacier.-2012-06-01/OutputLocation :portkey.aws.glacier.-2012-06-01.job-parameters/RetrievalByteRange] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.csvinput/comments (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.csvinput/quote-escape-character (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.csvinput/record-delimiter (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.csvinput/field-delimiter (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.csvinput/quote-character (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/csvinput (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.glacier.-2012-06-01/FileHeaderInfo :portkey.aws.glacier.-2012-06-01.csvinput/Comments :portkey.aws.glacier.-2012-06-01.csvinput/QuoteEscapeCharacter :portkey.aws.glacier.-2012-06-01.csvinput/RecordDelimiter :portkey.aws.glacier.-2012-06-01.csvinput/FieldDelimiter :portkey.aws.glacier.-2012-06-01.csvinput/QuoteCharacter] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.set-vault-notifications-input/account-id (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.set-vault-notifications-input/vault-name (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/string))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01.set-vault-notifications-input/vault-notification-config (clojure.spec.alpha/and :portkey.aws.glacier.-2012-06-01/vault-notification-config))
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/set-vault-notifications-input (portkey.aws/json-keys :req-un [:portkey.aws.glacier.-2012-06-01.set-vault-notifications-input/accountId :portkey.aws.glacier.-2012-06-01.set-vault-notifications-input/vaultName] :opt-un [:portkey.aws.glacier.-2012-06-01.set-vault-notifications-input/vaultNotificationConfig] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/notification-event-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.glacier.-2012-06-01/string :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/quote-fields (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"ALWAYS" "ALWAYS", :always "ALWAYS", "ASNEEDED" "ASNEEDED", :asneeded "ASNEEDED"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+
+(clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/notification-event-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.glacier.-2012-06-01/string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.glacier.-2012-06-01/httpstatus (clojure.spec.alpha/and clojure.core/int?))
 

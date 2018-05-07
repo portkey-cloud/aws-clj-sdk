@@ -44,11 +44,25 @@
     :ssl-common-name "ap-southeast-1.elasticmapreduce.amazonaws.com",
     :endpoint "https://elasticmapreduce.ap-southeast-1.amazonaws.com",
     :signature-version :v4},
+   "cn-northwest-1"
+   {:credential-scope
+    {:service "elasticmapreduce", :region "cn-northwest-1"},
+    :ssl-common-name
+    "elasticmapreduce.cn-northwest-1.amazonaws.com.cn",
+    :endpoint
+    "https://elasticmapreduce.cn-northwest-1.amazonaws.com.cn",
+    :signature-version :v4},
    "ap-northeast-2"
    {:credential-scope
     {:service "elasticmapreduce", :region "ap-northeast-2"},
     :ssl-common-name "ap-northeast-2.elasticmapreduce.amazonaws.com",
     :endpoint "https://elasticmapreduce.ap-northeast-2.amazonaws.com",
+    :signature-version :v4},
+   "eu-west-3"
+   {:credential-scope
+    {:service "elasticmapreduce", :region "eu-west-3"},
+    :ssl-common-name "eu-west-3.elasticmapreduce.amazonaws.com",
+    :endpoint "https://elasticmapreduce.eu-west-3.amazonaws.com",
     :signature-version :v4},
    "ca-central-1"
    {:credential-scope

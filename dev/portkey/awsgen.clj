@@ -389,27 +389,30 @@
                            :ssl-common-name sslCommonName :endpoint endpoint :signature-version signature-version}]))))
 
 (defn generate-files! [& [verbose]]
-  (let [endpoints (parse-endpoints! "resources/aws-partitions/partitions.json")
-        [[_ jar-path]] (re-seq #"jar:file:([^!]*)" (.toExternalForm (io/resource "META-INF/maven/com.amazonaws/aws-java-sdk-models/pom.properties")))
-        jar-file (java.util.jar.JarFile. jar-path)
-        model-jar-entries  (->> jar-file
-                                (.entries)
-                                (enumeration-seq)
-                                (filter #(and (.startsWith (.getName %) "models/")
-                                              (.endsWith (.getName %) "model.json")
-                                              (not (.isDirectory %)))))
-        model-regex #"^models\/(?<api>.+)-(?<version>\d{4}-\d{2}-\d{2})-model\.json"
-        gen-results (for [entry model-jar-entries
-                          :let [[_ api version] (re-matches model-regex (.getName entry))]
-                          :when api
+  (let [endpoints (parse-endpoints! "api-resources/aws-sdk-ruby/gems/aws-partitions/partitions.json")
+        entries (into []
+                      (comp
+                       (filter #(re-find #"api-2.json" (.getName ^java.io.File  %)))
+                       (x/by-key (fn [^java.io.File f] (-> f .getParentFile .getParentFile .getName))
+                                 (comp (x/for [^java.io.File f %]
+                                         [(-> f .getParentFile .getName) (.getPath f)])
+                                       (x/into (sorted-map))))
+                       (x/sort))
+                      (file-seq (java.io.File. "api-resources/aws-sdk-ruby/apis/")))
+        gen-results (for [[api versions] entries
                           :let [apifile (str/replace api #"[-.]" "_")
                                 apins (str/replace api #"[.]" "-")
-                                file (io/file (str "src/portkey/aws/" apifile ".clj"))
-                                ns (symbol (str "portkey.aws." apins))]]
+                                [latest f] (first (rseq versions))]
+                          [version json] (cons [nil f] versions)
+                          :let [[file ns] (if version
+                                            [(java.io.File. (str "src/portkey/aws/" apifile "/_" version ".clj"))
+                                             (symbol (str "portkey.aws." apins ".-" version))]
+                                            [(java.io.File. (str "src/portkey/aws/" apifile ".clj"))
+                                             (symbol (str "portkey.aws." apins))])]]
                       (try
-                        (prn 'generating api version)
+                        (prn 'generating api (or version 'LATEST))
                         (with-open [w (io/writer (doto file (-> .getParentFile .mkdirs)))
-                                    json (.getInputStream jar-file entry)]
+                                    json (java.io.FileInputStream. json)]
                           (binding [*out* w]
                             (prn (list 'ns ns '(:require [portkey.aws])))
                             (newline)

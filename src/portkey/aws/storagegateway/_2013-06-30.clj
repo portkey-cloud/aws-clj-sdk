@@ -47,6 +47,11 @@
     :ssl-common-name "storagegateway.ap-northeast-2.amazonaws.com",
     :endpoint "https://storagegateway.ap-northeast-2.amazonaws.com",
     :signature-version :v4},
+   "eu-west-3"
+   {:credential-scope {:service "storagegateway", :region "eu-west-3"},
+    :ssl-common-name "storagegateway.eu-west-3.amazonaws.com",
+    :endpoint "https://storagegateway.eu-west-3.amazonaws.com",
+    :signature-version :v4},
    "ca-central-1"
    {:credential-scope
     {:service "storagegateway", :region "ca-central-1"},
@@ -63,6 +68,12 @@
    {:credential-scope {:service "storagegateway", :region "eu-west-2"},
     :ssl-common-name "storagegateway.eu-west-2.amazonaws.com",
     :endpoint "https://storagegateway.eu-west-2.amazonaws.com",
+    :signature-version :v4},
+   "us-gov-west-1"
+   {:credential-scope
+    {:service "storagegateway", :region "us-gov-west-1"},
+    :ssl-common-name "storagegateway.us-gov-west-1.amazonaws.com",
+    :endpoint "https://storagegateway.us-gov-west-1.amazonaws.com",
     :signature-version :v4},
    "us-west-2"
    {:credential-scope {:service "storagegateway", :region "us-west-2"},

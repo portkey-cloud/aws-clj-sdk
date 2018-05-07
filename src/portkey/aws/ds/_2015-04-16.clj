@@ -61,6 +61,16 @@
    {:credential-scope {:service "ds", :region "us-east-1"},
     :ssl-common-name "ds.us-east-1.amazonaws.com",
     :endpoint "https://ds.us-east-1.amazonaws.com",
+    :signature-version :v4},
+   "us-west-1"
+   {:credential-scope {:service "ds", :region "us-west-1"},
+    :ssl-common-name "ds.us-west-1.amazonaws.com",
+    :endpoint "https://ds.us-west-1.amazonaws.com",
+    :signature-version :v4},
+   "ap-south-1"
+   {:credential-scope {:service "ds", :region "ap-south-1"},
+    :ssl-common-name "ds.ap-south-1.amazonaws.com",
+    :endpoint "https://ds.ap-south-1.amazonaws.com",
     :signature-version :v4}})
 
 (comment TODO support "json")

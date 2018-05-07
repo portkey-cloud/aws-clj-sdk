@@ -40,11 +40,22 @@
     :ssl-common-name "monitoring.ap-southeast-1.amazonaws.com",
     :endpoint "https://monitoring.ap-southeast-1.amazonaws.com",
     :signature-version :v4},
+   "cn-northwest-1"
+   {:credential-scope
+    {:service "monitoring", :region "cn-northwest-1"},
+    :ssl-common-name "monitoring.cn-northwest-1.amazonaws.com.cn",
+    :endpoint "https://monitoring.cn-northwest-1.amazonaws.com.cn",
+    :signature-version :v4},
    "ap-northeast-2"
    {:credential-scope
     {:service "monitoring", :region "ap-northeast-2"},
     :ssl-common-name "monitoring.ap-northeast-2.amazonaws.com",
     :endpoint "https://monitoring.ap-northeast-2.amazonaws.com",
+    :signature-version :v4},
+   "eu-west-3"
+   {:credential-scope {:service "monitoring", :region "eu-west-3"},
+    :ssl-common-name "monitoring.eu-west-3.amazonaws.com",
+    :endpoint "https://monitoring.eu-west-3.amazonaws.com",
     :signature-version :v4},
    "ca-central-1"
    {:credential-scope {:service "monitoring", :region "ca-central-1"},

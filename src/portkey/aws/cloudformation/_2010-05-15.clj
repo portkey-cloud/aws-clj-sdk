@@ -41,11 +41,22 @@
     :ssl-common-name "cloudformation.ap-southeast-1.amazonaws.com",
     :endpoint "https://cloudformation.ap-southeast-1.amazonaws.com",
     :signature-version :v4},
+   "cn-northwest-1"
+   {:credential-scope
+    {:service "cloudformation", :region "cn-northwest-1"},
+    :ssl-common-name "cloudformation.cn-northwest-1.amazonaws.com.cn",
+    :endpoint "https://cloudformation.cn-northwest-1.amazonaws.com.cn",
+    :signature-version :v4},
    "ap-northeast-2"
    {:credential-scope
     {:service "cloudformation", :region "ap-northeast-2"},
     :ssl-common-name "cloudformation.ap-northeast-2.amazonaws.com",
     :endpoint "https://cloudformation.ap-northeast-2.amazonaws.com",
+    :signature-version :v4},
+   "eu-west-3"
+   {:credential-scope {:service "cloudformation", :region "eu-west-3"},
+    :ssl-common-name "cloudformation.eu-west-3.amazonaws.com",
+    :endpoint "https://cloudformation.eu-west-3.amazonaws.com",
     :signature-version :v4},
    "ca-central-1"
    {:credential-scope

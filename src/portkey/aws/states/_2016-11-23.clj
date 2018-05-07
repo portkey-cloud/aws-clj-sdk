@@ -22,6 +22,16 @@
     :ssl-common-name "states.ap-southeast-2.amazonaws.com",
     :endpoint "https://states.ap-southeast-2.amazonaws.com",
     :signature-version :v4},
+   "ap-southeast-1"
+   {:credential-scope {:service "states", :region "ap-southeast-1"},
+    :ssl-common-name "states.ap-southeast-1.amazonaws.com",
+    :endpoint "https://states.ap-southeast-1.amazonaws.com",
+    :signature-version :v4},
+   "ca-central-1"
+   {:credential-scope {:service "states", :region "ca-central-1"},
+    :ssl-common-name "states.ca-central-1.amazonaws.com",
+    :endpoint "https://states.ca-central-1.amazonaws.com",
+    :signature-version :v4},
    "eu-central-1"
    {:credential-scope {:service "states", :region "eu-central-1"},
     :ssl-common-name "states.eu-central-1.amazonaws.com",

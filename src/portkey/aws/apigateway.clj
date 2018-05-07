@@ -24,6 +24,11 @@
     :ssl-common-name "apigateway.ap-southeast-2.amazonaws.com",
     :endpoint "https://apigateway.ap-southeast-2.amazonaws.com",
     :signature-version :v4},
+   "cn-north-1"
+   {:credential-scope {:service "apigateway", :region "cn-north-1"},
+    :ssl-common-name "apigateway.cn-north-1.amazonaws.com.cn",
+    :endpoint "https://apigateway.cn-north-1.amazonaws.com.cn",
+    :signature-version :v4},
    "sa-east-1"
    {:credential-scope {:service "apigateway", :region "sa-east-1"},
     :ssl-common-name "apigateway.sa-east-1.amazonaws.com",
@@ -40,6 +45,11 @@
     {:service "apigateway", :region "ap-northeast-2"},
     :ssl-common-name "apigateway.ap-northeast-2.amazonaws.com",
     :endpoint "https://apigateway.ap-northeast-2.amazonaws.com",
+    :signature-version :v4},
+   "eu-west-3"
+   {:credential-scope {:service "apigateway", :region "eu-west-3"},
+    :ssl-common-name "apigateway.eu-west-3.amazonaws.com",
+    :endpoint "https://apigateway.eu-west-3.amazonaws.com",
     :signature-version :v4},
    "ca-central-1"
    {:credential-scope {:service "apigateway", :region "ca-central-1"},
@@ -87,7 +97,7 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.create-resource-request/path-part (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway/create-resource-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.create-resource-request/restApiId :portkey.aws.apigateway.create-resource-request/parentId :portkey.aws.apigateway.create-resource-request/pathPart] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/documentation-part-location-status-code (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__96547__auto__] (clojure.core/re-matches #"^([1-5]\d\d|\*|\s*)$" s__96547__auto__))))
+(clojure.spec.alpha/def :portkey.aws.apigateway/documentation-part-location-status-code (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"^([1-5]\d\d|\*|\s*)$" s__30634__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.put-rest-api-request/rest-api-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.put-rest-api-request/mode (clojure.spec.alpha/and :portkey.aws.apigateway/put-mode))
@@ -100,14 +110,18 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.get-stages-request/deployment-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway/get-stages-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.get-stages-request/restApiId] :opt-un [:portkey.aws.apigateway.get-stages-request/deploymentId] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.apigateway.rest-api/api-key-source (clojure.spec.alpha/and :portkey.aws.apigateway/api-key-source-type))
+(clojure.spec.alpha/def :portkey.aws.apigateway.rest-api/created-date (clojure.spec.alpha/and :portkey.aws.apigateway/timestamp))
 (clojure.spec.alpha/def :portkey.aws.apigateway.rest-api/id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.rest-api/name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
-(clojure.spec.alpha/def :portkey.aws.apigateway.rest-api/description (clojure.spec.alpha/and :portkey.aws.apigateway/string))
-(clojure.spec.alpha/def :portkey.aws.apigateway.rest-api/created-date (clojure.spec.alpha/and :portkey.aws.apigateway/timestamp))
-(clojure.spec.alpha/def :portkey.aws.apigateway.rest-api/version (clojure.spec.alpha/and :portkey.aws.apigateway/string))
-(clojure.spec.alpha/def :portkey.aws.apigateway.rest-api/warnings (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.rest-api/binary-media-types (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-string))
-(clojure.spec.alpha/def :portkey.aws.apigateway/rest-api (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.rest-api/id :portkey.aws.apigateway.rest-api/name :portkey.aws.apigateway.rest-api/description :portkey.aws.apigateway.rest-api/createdDate :portkey.aws.apigateway.rest-api/version :portkey.aws.apigateway.rest-api/warnings :portkey.aws.apigateway.rest-api/binaryMediaTypes] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.apigateway.rest-api/endpoint-configuration (clojure.spec.alpha/and :portkey.aws.apigateway/endpoint-configuration))
+(clojure.spec.alpha/def :portkey.aws.apigateway.rest-api/policy (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.rest-api/version (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.rest-api/minimum-compression-size (clojure.spec.alpha/and :portkey.aws.apigateway/nullable-integer))
+(clojure.spec.alpha/def :portkey.aws.apigateway.rest-api/warnings (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.rest-api/description (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway/rest-api (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.rest-api/apiKeySource :portkey.aws.apigateway.rest-api/createdDate :portkey.aws.apigateway.rest-api/id :portkey.aws.apigateway.rest-api/name :portkey.aws.apigateway.rest-api/binaryMediaTypes :portkey.aws.apigateway.rest-api/endpointConfiguration :portkey.aws.apigateway.rest-api/policy :portkey.aws.apigateway.rest-api/version :portkey.aws.apigateway.rest-api/minimumCompressionSize :portkey.aws.apigateway.rest-api/warnings :portkey.aws.apigateway.rest-api/description] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.delete-domain-name-request/domain-name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway/delete-domain-name-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.delete-domain-name-request/domainName] :opt-un [] :locations {}))
@@ -122,9 +136,14 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.unauthorized-exception/message (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway/unauthorized-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.unauthorized-exception/message] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.apigateway.create-vpc-link-request/name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.create-vpc-link-request/description (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.create-vpc-link-request/target-arns (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-string))
+(clojure.spec.alpha/def :portkey.aws.apigateway/create-vpc-link-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.create-vpc-link-request/name :portkey.aws.apigateway.create-vpc-link-request/targetArns] :opt-un [:portkey.aws.apigateway.create-vpc-link-request/description] :locations {}))
+
 (clojure.spec.alpha/def :portkey.aws.apigateway/double clojure.core/double?)
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-documentation-part (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/documentation-part :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-documentation-part (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/documentation-part) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.get-resources-request/rest-api-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.get-resources-request/position (clojure.spec.alpha/and :portkey.aws.apigateway/string))
@@ -166,9 +185,9 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.deployment/api-summary (clojure.spec.alpha/and :portkey.aws.apigateway/path-to-map-of-method-snapshot))
 (clojure.spec.alpha/def :portkey.aws.apigateway/deployment (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.deployment/id :portkey.aws.apigateway.deployment/description :portkey.aws.apigateway.deployment/createdDate :portkey.aws.apigateway.deployment/apiSummary] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/gateway-response-type (clojure.spec.alpha/conformer (clojure.core/let [m__96543__auto__ {:integration-timeout "INTEGRATION_TIMEOUT", :default-4xx "DEFAULT_4XX", "REQUEST_TOO_LARGE" "REQUEST_TOO_LARGE", :unauthorized "UNAUTHORIZED", "INTEGRATION_TIMEOUT" "INTEGRATION_TIMEOUT", "RESOURCE_NOT_FOUND" "RESOURCE_NOT_FOUND", :invalid-api-key "INVALID_API_KEY", :integration-failure "INTEGRATION_FAILURE", "AUTHORIZER_CONFIGURATION_ERROR" "AUTHORIZER_CONFIGURATION_ERROR", "INTEGRATION_FAILURE" "INTEGRATION_FAILURE", "DEFAULT_5XX" "DEFAULT_5XX", "UNAUTHORIZED" "UNAUTHORIZED", :quota-exceeded "QUOTA_EXCEEDED", :invalid-signature "INVALID_SIGNATURE", :expired-token "EXPIRED_TOKEN", :bad-request-parameters "BAD_REQUEST_PARAMETERS", "AUTHORIZER_FAILURE" "AUTHORIZER_FAILURE", :unsupported-media-type "UNSUPPORTED_MEDIA_TYPE", "INVALID_API_KEY" "INVALID_API_KEY", "ACCESS_DENIED" "ACCESS_DENIED", "API_CONFIGURATION_ERROR" "API_CONFIGURATION_ERROR", "DEFAULT_4XX" "DEFAULT_4XX", "INVALID_SIGNATURE" "INVALID_SIGNATURE", :bad-request-body "BAD_REQUEST_BODY", :api-configuration-error "API_CONFIGURATION_ERROR", "EXPIRED_TOKEN" "EXPIRED_TOKEN", "UNSUPPORTED_MEDIA_TYPE" "UNSUPPORTED_MEDIA_TYPE", :authorizer-configuration-error "AUTHORIZER_CONFIGURATION_ERROR", :default-5xx "DEFAULT_5XX", :request-too-large "REQUEST_TOO_LARGE", :authorizer-failure "AUTHORIZER_FAILURE", :throttled "THROTTLED", "QUOTA_EXCEEDED" "QUOTA_EXCEEDED", "BAD_REQUEST_PARAMETERS" "BAD_REQUEST_PARAMETERS", "MISSING_AUTHENTICATION_TOKEN" "MISSING_AUTHENTICATION_TOKEN", :missing-authentication-token "MISSING_AUTHENTICATION_TOKEN", "BAD_REQUEST_BODY" "BAD_REQUEST_BODY", :resource-not-found "RESOURCE_NOT_FOUND", :access-denied "ACCESS_DENIED", "THROTTLED" "THROTTLED"}] (clojure.core/fn [s__96544__auto__] (m__96543__auto__ s__96544__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.apigateway/gateway-response-type (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {:integration-timeout "INTEGRATION_TIMEOUT", :default-4xx "DEFAULT_4XX", "REQUEST_TOO_LARGE" "REQUEST_TOO_LARGE", :unauthorized "UNAUTHORIZED", "INTEGRATION_TIMEOUT" "INTEGRATION_TIMEOUT", "RESOURCE_NOT_FOUND" "RESOURCE_NOT_FOUND", :invalid-api-key "INVALID_API_KEY", :integration-failure "INTEGRATION_FAILURE", "AUTHORIZER_CONFIGURATION_ERROR" "AUTHORIZER_CONFIGURATION_ERROR", "INTEGRATION_FAILURE" "INTEGRATION_FAILURE", "DEFAULT_5XX" "DEFAULT_5XX", "UNAUTHORIZED" "UNAUTHORIZED", :quota-exceeded "QUOTA_EXCEEDED", :invalid-signature "INVALID_SIGNATURE", :expired-token "EXPIRED_TOKEN", :bad-request-parameters "BAD_REQUEST_PARAMETERS", "AUTHORIZER_FAILURE" "AUTHORIZER_FAILURE", :unsupported-media-type "UNSUPPORTED_MEDIA_TYPE", "INVALID_API_KEY" "INVALID_API_KEY", "ACCESS_DENIED" "ACCESS_DENIED", "API_CONFIGURATION_ERROR" "API_CONFIGURATION_ERROR", "DEFAULT_4XX" "DEFAULT_4XX", "INVALID_SIGNATURE" "INVALID_SIGNATURE", :bad-request-body "BAD_REQUEST_BODY", :api-configuration-error "API_CONFIGURATION_ERROR", "EXPIRED_TOKEN" "EXPIRED_TOKEN", "UNSUPPORTED_MEDIA_TYPE" "UNSUPPORTED_MEDIA_TYPE", :authorizer-configuration-error "AUTHORIZER_CONFIGURATION_ERROR", :default-5xx "DEFAULT_5XX", :request-too-large "REQUEST_TOO_LARGE", :authorizer-failure "AUTHORIZER_FAILURE", :throttled "THROTTLED", "QUOTA_EXCEEDED" "QUOTA_EXCEEDED", "BAD_REQUEST_PARAMETERS" "BAD_REQUEST_PARAMETERS", "MISSING_AUTHENTICATION_TOKEN" "MISSING_AUTHENTICATION_TOKEN", :missing-authentication-token "MISSING_AUTHENTICATION_TOKEN", "BAD_REQUEST_BODY" "BAD_REQUEST_BODY", :resource-not-found "RESOURCE_NOT_FOUND", :access-denied "ACCESS_DENIED", "THROTTLED" "THROTTLED"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-client-certificate (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/client-certificate :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-client-certificate (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/client-certificate) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.get-sdk-request/rest-api-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.get-sdk-request/stage-name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
@@ -219,7 +238,7 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.delete-documentation-part-request/documentation-part-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway/delete-documentation-part-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.delete-documentation-part-request/restApiId :portkey.aws.apigateway.delete-documentation-part-request/documentationPartId] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/status-code (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__96547__auto__] (clojure.core/re-matches #"[1-5]\d\d" s__96547__auto__))))
+(clojure.spec.alpha/def :portkey.aws.apigateway/status-code (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__30634__auto__] (clojure.core/re-matches #"[1-5]\d\d" s__30634__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.api-stage/api-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.api-stage/stage (clojure.spec.alpha/and :portkey.aws.apigateway/string))
@@ -232,6 +251,8 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway/get-integration-response-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.get-integration-response-request/restApiId :portkey.aws.apigateway.get-integration-response-request/resourceId :portkey.aws.apigateway.get-integration-response-request/httpMethod :portkey.aws.apigateway.get-integration-response-request/statusCode] :opt-un [] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway/map-of-method (clojure.spec.alpha/map-of :portkey.aws.apigateway/string :portkey.aws.apigateway/method))
+
+(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-vpc-link (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/vpc-link) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway/map-of-header-values (clojure.spec.alpha/map-of :portkey.aws.apigateway/string :portkey.aws.apigateway/string))
 
@@ -264,7 +285,7 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.update-base-path-mapping-request/patch-operations (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-patch-operation))
 (clojure.spec.alpha/def :portkey.aws.apigateway/update-base-path-mapping-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.update-base-path-mapping-request/domainName :portkey.aws.apigateway.update-base-path-mapping-request/basePath] :opt-un [:portkey.aws.apigateway.update-base-path-mapping-request/patchOperations] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-model (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/model :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-model (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/model) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.get-sdk-types-request/position (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.get-sdk-types-request/limit (clojure.spec.alpha/and :portkey.aws.apigateway/nullable-integer))
@@ -279,11 +300,13 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.generate-client-certificate-request/description (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway/generate-client-certificate-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.generate-client-certificate-request/description] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.apigateway/endpoint-type (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"REGIONAL" "REGIONAL", :regional "REGIONAL", "EDGE" "EDGE", :edge "EDGE"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+
 (clojure.spec.alpha/def :portkey.aws.apigateway.rest-apis/position (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.rest-apis/items (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-rest-api))
 (clojure.spec.alpha/def :portkey.aws.apigateway/rest-apis (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.rest-apis/position :portkey.aws.apigateway.rest-apis/items] :locations {"item" "items"}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-sdk-configuration-property (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/sdk-configuration-property :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-sdk-configuration-property (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/sdk-configuration-property) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.get-client-certificate-request/client-certificate-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway/get-client-certificate-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.get-client-certificate-request/clientCertificateId] :opt-un [] :locations {}))
@@ -301,11 +324,13 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.documentation-versions/items (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-documentation-version))
 (clojure.spec.alpha/def :portkey.aws.apigateway/documentation-versions (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.documentation-versions/position :portkey.aws.apigateway.documentation-versions/items] :locations {"item" "items"}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-string (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/string :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-string (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
+(clojure.spec.alpha/def :portkey.aws.apigateway.put-integration-request/connection-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.put-integration-request/resource-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.put-integration-request/uri (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.put-integration-request/integration-http-method (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.put-integration-request/connection-type (clojure.spec.alpha/and :portkey.aws.apigateway/connection-type))
 (clojure.spec.alpha/def :portkey.aws.apigateway.put-integration-request/http-method (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.put-integration-request/request-templates (clojure.spec.alpha/and :portkey.aws.apigateway/map-of-string-to-string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.put-integration-request/request-parameters (clojure.spec.alpha/and :portkey.aws.apigateway/map-of-string-to-string))
@@ -316,9 +341,10 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.put-integration-request/content-handling (clojure.spec.alpha/and :portkey.aws.apigateway/content-handling-strategy))
 (clojure.spec.alpha/def :portkey.aws.apigateway.put-integration-request/cache-key-parameters (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.put-integration-request/credentials (clojure.spec.alpha/and :portkey.aws.apigateway/string))
-(clojure.spec.alpha/def :portkey.aws.apigateway/put-integration-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.put-integration-request/restApiId :portkey.aws.apigateway.put-integration-request/resourceId :portkey.aws.apigateway.put-integration-request/httpMethod :portkey.aws.apigateway.put-integration-request/type] :opt-un [:portkey.aws.apigateway.put-integration-request/uri :portkey.aws.apigateway.put-integration-request/integrationHttpMethod :portkey.aws.apigateway.put-integration-request/requestTemplates :portkey.aws.apigateway.put-integration-request/requestParameters :portkey.aws.apigateway.put-integration-request/cacheNamespace :portkey.aws.apigateway.put-integration-request/passthroughBehavior :portkey.aws.apigateway.put-integration-request/contentHandling :portkey.aws.apigateway.put-integration-request/cacheKeyParameters :portkey.aws.apigateway.put-integration-request/credentials] :locations {"httpMethod" "integrationHttpMethod"}))
+(clojure.spec.alpha/def :portkey.aws.apigateway.put-integration-request/timeout-in-millis (clojure.spec.alpha/and :portkey.aws.apigateway/nullable-integer))
+(clojure.spec.alpha/def :portkey.aws.apigateway/put-integration-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.put-integration-request/restApiId :portkey.aws.apigateway.put-integration-request/resourceId :portkey.aws.apigateway.put-integration-request/httpMethod :portkey.aws.apigateway.put-integration-request/type] :opt-un [:portkey.aws.apigateway.put-integration-request/connectionId :portkey.aws.apigateway.put-integration-request/uri :portkey.aws.apigateway.put-integration-request/integrationHttpMethod :portkey.aws.apigateway.put-integration-request/connectionType :portkey.aws.apigateway.put-integration-request/requestTemplates :portkey.aws.apigateway.put-integration-request/requestParameters :portkey.aws.apigateway.put-integration-request/cacheNamespace :portkey.aws.apigateway.put-integration-request/passthroughBehavior :portkey.aws.apigateway.put-integration-request/contentHandling :portkey.aws.apigateway.put-integration-request/cacheKeyParameters :portkey.aws.apigateway.put-integration-request/credentials :portkey.aws.apigateway.put-integration-request/timeoutInMillis] :locations {"httpMethod" "integrationHttpMethod"}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/documentation-part-type (clojure.spec.alpha/conformer (clojure.core/let [m__96543__auto__ {:response "RESPONSE", "PATH_PARAMETER" "PATH_PARAMETER", :api "API", :response-header "RESPONSE_HEADER", :method "METHOD", "API" "API", "REQUEST_HEADER" "REQUEST_HEADER", :path-parameter "PATH_PARAMETER", "METHOD" "METHOD", :request-body "REQUEST_BODY", :resource "RESOURCE", :request-header "REQUEST_HEADER", "RESOURCE" "RESOURCE", :response-body "RESPONSE_BODY", :query-parameter "QUERY_PARAMETER", "RESPONSE_HEADER" "RESPONSE_HEADER", :authorizer "AUTHORIZER", "REQUEST_BODY" "REQUEST_BODY", "QUERY_PARAMETER" "QUERY_PARAMETER", "AUTHORIZER" "AUTHORIZER", "MODEL" "MODEL", "RESPONSE" "RESPONSE", "RESPONSE_BODY" "RESPONSE_BODY", :model "MODEL"}] (clojure.core/fn [s__96544__auto__] (m__96543__auto__ s__96544__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.apigateway/documentation-part-type (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {:response "RESPONSE", "PATH_PARAMETER" "PATH_PARAMETER", :api "API", :response-header "RESPONSE_HEADER", :method "METHOD", "API" "API", "REQUEST_HEADER" "REQUEST_HEADER", :path-parameter "PATH_PARAMETER", "METHOD" "METHOD", :request-body "REQUEST_BODY", :resource "RESOURCE", :request-header "REQUEST_HEADER", "RESOURCE" "RESOURCE", :response-body "RESPONSE_BODY", :query-parameter "QUERY_PARAMETER", "RESPONSE_HEADER" "RESPONSE_HEADER", :authorizer "AUTHORIZER", "REQUEST_BODY" "REQUEST_BODY", "QUERY_PARAMETER" "QUERY_PARAMETER", "AUTHORIZER" "AUTHORIZER", "MODEL" "MODEL", "RESPONSE" "RESPONSE", "RESPONSE_BODY" "RESPONSE_BODY", :model "MODEL"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.update-usage-request/usage-plan-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.update-usage-request/key-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
@@ -343,12 +369,16 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.get-base-path-mappings-request/limit (clojure.spec.alpha/and :portkey.aws.apigateway/nullable-integer))
 (clojure.spec.alpha/def :portkey.aws.apigateway/get-base-path-mappings-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.get-base-path-mappings-request/domainName] :opt-un [:portkey.aws.apigateway.get-base-path-mappings-request/position :portkey.aws.apigateway.get-base-path-mappings-request/limit] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway.create-rest-api-request/name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
-(clojure.spec.alpha/def :portkey.aws.apigateway.create-rest-api-request/description (clojure.spec.alpha/and :portkey.aws.apigateway/string))
-(clojure.spec.alpha/def :portkey.aws.apigateway.create-rest-api-request/version (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.create-rest-api-request/api-key-source (clojure.spec.alpha/and :portkey.aws.apigateway/api-key-source-type))
 (clojure.spec.alpha/def :portkey.aws.apigateway.create-rest-api-request/clone-from (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.create-rest-api-request/name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.create-rest-api-request/binary-media-types (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-string))
-(clojure.spec.alpha/def :portkey.aws.apigateway/create-rest-api-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.create-rest-api-request/name] :opt-un [:portkey.aws.apigateway.create-rest-api-request/description :portkey.aws.apigateway.create-rest-api-request/version :portkey.aws.apigateway.create-rest-api-request/cloneFrom :portkey.aws.apigateway.create-rest-api-request/binaryMediaTypes] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.apigateway.create-rest-api-request/endpoint-configuration (clojure.spec.alpha/and :portkey.aws.apigateway/endpoint-configuration))
+(clojure.spec.alpha/def :portkey.aws.apigateway.create-rest-api-request/policy (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.create-rest-api-request/version (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.create-rest-api-request/minimum-compression-size (clojure.spec.alpha/and :portkey.aws.apigateway/nullable-integer))
+(clojure.spec.alpha/def :portkey.aws.apigateway.create-rest-api-request/description (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway/create-rest-api-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.create-rest-api-request/name] :opt-un [:portkey.aws.apigateway.create-rest-api-request/apiKeySource :portkey.aws.apigateway.create-rest-api-request/cloneFrom :portkey.aws.apigateway.create-rest-api-request/binaryMediaTypes :portkey.aws.apigateway.create-rest-api-request/endpointConfiguration :portkey.aws.apigateway.create-rest-api-request/policy :portkey.aws.apigateway.create-rest-api-request/version :portkey.aws.apigateway.create-rest-api-request/minimumCompressionSize :portkey.aws.apigateway.create-rest-api-request/description] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.put-integration-response-request/rest-api-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.put-integration-response-request/resource-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
@@ -363,7 +393,7 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.stages/item (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-stage))
 (clojure.spec.alpha/def :portkey.aws.apigateway/stages (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.stages/item] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-request-validator (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/request-validator :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-request-validator (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/request-validator) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.update-gateway-response-request/rest-api-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.update-gateway-response-request/response-type (clojure.spec.alpha/and :portkey.aws.apigateway/gateway-response-type))
@@ -374,9 +404,12 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.get-authorizer-request/authorizer-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway/get-authorizer-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.get-authorizer-request/restApiId :portkey.aws.apigateway.get-authorizer-request/authorizerId] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-rest-api (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/rest-api :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-rest-api (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/rest-api) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-usage-plan-key (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/usage-plan-key :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-usage-plan-key (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/usage-plan-key) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
+
+(clojure.spec.alpha/def :portkey.aws.apigateway.tags/tags (clojure.spec.alpha/and :portkey.aws.apigateway/map-of-string-to-string))
+(clojure.spec.alpha/def :portkey.aws.apigateway/tags (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.tags/tags] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.template/value (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway/template (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.template/value] :locations {}))
@@ -402,7 +435,7 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.method-response/response-models (clojure.spec.alpha/and :portkey.aws.apigateway/map-of-string-to-string))
 (clojure.spec.alpha/def :portkey.aws.apigateway/method-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.method-response/statusCode :portkey.aws.apigateway.method-response/responseParameters :portkey.aws.apigateway.method-response/responseModels] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-deployment (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/deployment :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-deployment (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/deployment) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.get-model-request/rest-api-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.get-model-request/model-name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
@@ -443,7 +476,7 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.get-usage-plan-key-request/key-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway/get-usage-plan-key-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.get-usage-plan-key-request/usagePlanId :portkey.aws.apigateway.get-usage-plan-key-request/keyId] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/cache-cluster-status (clojure.spec.alpha/conformer (clojure.core/let [m__96543__auto__ {"DELETE_IN_PROGRESS" "DELETE_IN_PROGRESS", "AVAILABLE" "AVAILABLE", :flush-in-progress "FLUSH_IN_PROGRESS", "CREATE_IN_PROGRESS" "CREATE_IN_PROGRESS", :delete-in-progress "DELETE_IN_PROGRESS", :create-in-progress "CREATE_IN_PROGRESS", "NOT_AVAILABLE" "NOT_AVAILABLE", "FLUSH_IN_PROGRESS" "FLUSH_IN_PROGRESS", :not-available "NOT_AVAILABLE", :available "AVAILABLE"}] (clojure.core/fn [s__96544__auto__] (m__96543__auto__ s__96544__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.apigateway/cache-cluster-status (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"DELETE_IN_PROGRESS" "DELETE_IN_PROGRESS", "AVAILABLE" "AVAILABLE", :flush-in-progress "FLUSH_IN_PROGRESS", "CREATE_IN_PROGRESS" "CREATE_IN_PROGRESS", :delete-in-progress "DELETE_IN_PROGRESS", :create-in-progress "CREATE_IN_PROGRESS", "NOT_AVAILABLE" "NOT_AVAILABLE", "FLUSH_IN_PROGRESS" "FLUSH_IN_PROGRESS", :not-available "NOT_AVAILABLE", :available "AVAILABLE"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.service-unavailable-exception/retry-after-seconds (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.service-unavailable-exception/message (clojure.spec.alpha/and :portkey.aws.apigateway/string))
@@ -469,15 +502,15 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.update-resource-request/patch-operations (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-patch-operation))
 (clojure.spec.alpha/def :portkey.aws.apigateway/update-resource-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.update-resource-request/restApiId :portkey.aws.apigateway.update-resource-request/resourceId] :opt-un [:portkey.aws.apigateway.update-resource-request/patchOperations] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-gateway-response (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/gateway-response :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-gateway-response (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/gateway-response) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway/map-of-string-to-boolean (clojure.spec.alpha/map-of :portkey.aws.apigateway/string :portkey.aws.apigateway/nullable-boolean))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway/map-of-method-settings (clojure.spec.alpha/map-of :portkey.aws.apigateway/string :portkey.aws.apigateway/method-setting))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/quota-period-type (clojure.spec.alpha/conformer (clojure.core/let [m__96543__auto__ {"DAY" "DAY", :day "DAY", "WEEK" "WEEK", :week "WEEK", "MONTH" "MONTH", :month "MONTH"}] (clojure.core/fn [s__96544__auto__] (m__96543__auto__ s__96544__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.apigateway/quota-period-type (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"DAY" "DAY", :day "DAY", "WEEK" "WEEK", :week "WEEK", "MONTH" "MONTH", :month "MONTH"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/put-mode (clojure.spec.alpha/conformer (clojure.core/let [m__96543__auto__ {"merge" "merge", :merge "merge", "overwrite" "overwrite", :overwrite "overwrite"}] (clojure.core/fn [s__96544__auto__] (m__96543__auto__ s__96544__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.apigateway/put-mode (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"merge" "merge", :merge "merge", "overwrite" "overwrite", :overwrite "overwrite"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.request-validators/position (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.request-validators/items (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-request-validator))
@@ -507,7 +540,7 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.usage-plan/product-code (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway/usage-plan (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.usage-plan/id :portkey.aws.apigateway.usage-plan/name :portkey.aws.apigateway.usage-plan/description :portkey.aws.apigateway.usage-plan/apiStages :portkey.aws.apigateway.usage-plan/throttle :portkey.aws.apigateway.usage-plan/quota :portkey.aws.apigateway.usage-plan/productCode] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-long (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/long :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-long (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/long) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.create-model-request/rest-api-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.create-model-request/name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
@@ -519,6 +552,11 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.too-many-requests-exception/retry-after-seconds (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.too-many-requests-exception/message (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway/too-many-requests-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.too-many-requests-exception/retryAfterSeconds :portkey.aws.apigateway.too-many-requests-exception/message] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.apigateway.deployment-canary-settings/percent-traffic (clojure.spec.alpha/and :portkey.aws.apigateway/double))
+(clojure.spec.alpha/def :portkey.aws.apigateway.deployment-canary-settings/stage-variable-overrides (clojure.spec.alpha/and :portkey.aws.apigateway/map-of-string-to-string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.deployment-canary-settings/use-stage-cache (clojure.spec.alpha/and :portkey.aws.apigateway/boolean))
+(clojure.spec.alpha/def :portkey.aws.apigateway/deployment-canary-settings (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.deployment-canary-settings/percentTraffic :portkey.aws.apigateway.deployment-canary-settings/stageVariableOverrides :portkey.aws.apigateway.deployment-canary-settings/useStageCache] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.delete-rest-api-request/rest-api-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway/delete-rest-api-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.delete-rest-api-request/restApiId] :opt-un [] :locations {}))
@@ -534,13 +572,19 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.delete-model-request/model-name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway/delete-model-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.delete-model-request/restApiId :portkey.aws.apigateway.delete-model-request/modelName] :opt-un [] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.apigateway.tag-resource-request/resource-arn (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.tag-resource-request/tags (clojure.spec.alpha/and :portkey.aws.apigateway/map-of-string-to-string))
+(clojure.spec.alpha/def :portkey.aws.apigateway/tag-resource-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.tag-resource-request/resourceArn :portkey.aws.apigateway.tag-resource-request/tags] :opt-un [] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.apigateway/api-key-source-type (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"HEADER" "HEADER", :header "HEADER", "AUTHORIZER" "AUTHORIZER", :authorizer "AUTHORIZER"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+
 (clojure.spec.alpha/def :portkey.aws.apigateway.throttle-settings/burst-limit (clojure.spec.alpha/and :portkey.aws.apigateway/integer))
 (clojure.spec.alpha/def :portkey.aws.apigateway.throttle-settings/rate-limit (clojure.spec.alpha/and :portkey.aws.apigateway/double))
 (clojure.spec.alpha/def :portkey.aws.apigateway/throttle-settings (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.throttle-settings/burstLimit :portkey.aws.apigateway.throttle-settings/rateLimit] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-sdk-type (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/sdk-type :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-sdk-type (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/sdk-type) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/cache-cluster-size (clojure.spec.alpha/conformer (clojure.core/let [m__96543__auto__ {"118" "118", "237" "237", "1.6" "1.6", :118 "118", "0.5" "0.5", :28.4 "28.4", :13.5 "13.5", "28.4" "28.4", "58.2" "58.2", :1.6 "1.6", "6.1" "6.1", :58.2 "58.2", :6.1 "6.1", :237 "237", :0.5 "0.5", "13.5" "13.5"}] (clojure.core/fn [s__96544__auto__] (m__96543__auto__ s__96544__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.apigateway/cache-cluster-size (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"118" "118", "237" "237", "1.6" "1.6", :118 "118", "0.5" "0.5", :28.4 "28.4", :13.5 "13.5", "28.4" "28.4", "58.2" "58.2", :1.6 "1.6", "6.1" "6.1", :58.2 "58.2", :6.1 "6.1", :237 "237", :0.5 "0.5", "13.5" "13.5"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.gateway-response/response-type (clojure.spec.alpha/and :portkey.aws.apigateway/gateway-response-type))
 (clojure.spec.alpha/def :portkey.aws.apigateway.gateway-response/status-code (clojure.spec.alpha/and :portkey.aws.apigateway/status-code))
@@ -559,7 +603,7 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.delete-integration-response-request/status-code (clojure.spec.alpha/and :portkey.aws.apigateway/status-code))
 (clojure.spec.alpha/def :portkey.aws.apigateway/delete-integration-response-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.delete-integration-response-request/restApiId :portkey.aws.apigateway.delete-integration-response-request/resourceId :portkey.aws.apigateway.delete-integration-response-request/httpMethod :portkey.aws.apigateway.delete-integration-response-request/statusCode] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/integration-type (clojure.spec.alpha/conformer (clojure.core/let [m__96543__auto__ {:aws "AWS", "AWS" "AWS", :aws-proxy "AWS_PROXY", "MOCK" "MOCK", "AWS_PROXY" "AWS_PROXY", "HTTP_PROXY" "HTTP_PROXY", :http "HTTP", :http-proxy "HTTP_PROXY", "HTTP" "HTTP", :mock "MOCK"}] (clojure.core/fn [s__96544__auto__] (m__96543__auto__ s__96544__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.apigateway/integration-type (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {:aws "AWS", "AWS" "AWS", :aws-proxy "AWS_PROXY", "MOCK" "MOCK", "AWS_PROXY" "AWS_PROXY", "HTTP_PROXY" "HTTP_PROXY", :http "HTTP", :http-proxy "HTTP_PROXY", "HTTP" "HTTP", :mock "MOCK"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.base-path-mapping/base-path (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.base-path-mapping/rest-api-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
@@ -570,9 +614,9 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.get-request-validator-request/request-validator-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway/get-request-validator-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.get-request-validator-request/restApiId :portkey.aws.apigateway.get-request-validator-request/requestValidatorId] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-resource (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/resource :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-resource (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/resource) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/op (clojure.spec.alpha/conformer (clojure.core/let [m__96543__auto__ {:remove "remove", :copy "copy", "copy" "copy", :replace "replace", :move "move", "replace" "replace", "remove" "remove", "move" "move", "add" "add", :add "add", :test "test", "test" "test"}] (clojure.core/fn [s__96544__auto__] (m__96543__auto__ s__96544__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.apigateway/op (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {:remove "remove", :copy "copy", "copy" "copy", :replace "replace", :move "move", "replace" "replace", "remove" "remove", "move" "move", "add" "add", :add "add", :test "test", "test" "test"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.documentation-part-ids/ids (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.documentation-part-ids/warnings (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-string))
@@ -602,7 +646,7 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.get-base-path-mapping-request/base-path (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway/get-base-path-mapping-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.get-base-path-mapping-request/domainName :portkey.aws.apigateway.get-base-path-mapping-request/basePath] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/authorizer-type (clojure.spec.alpha/conformer (clojure.core/let [m__96543__auto__ {"TOKEN" "TOKEN", :token "TOKEN", "COGNITO_USER_POOLS" "COGNITO_USER_POOLS", :cognito-user-pools "COGNITO_USER_POOLS"}] (clojure.core/fn [s__96544__auto__] (m__96543__auto__ s__96544__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.apigateway/authorizer-type (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"TOKEN" "TOKEN", :token "TOKEN", "REQUEST" "REQUEST", :request "REQUEST", "COGNITO_USER_POOLS" "COGNITO_USER_POOLS", :cognito-user-pools "COGNITO_USER_POOLS"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.update-method-response-request/rest-api-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.update-method-response-request/resource-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
@@ -611,9 +655,9 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.update-method-response-request/patch-operations (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-patch-operation))
 (clojure.spec.alpha/def :portkey.aws.apigateway/update-method-response-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.update-method-response-request/restApiId :portkey.aws.apigateway.update-method-response-request/resourceId :portkey.aws.apigateway.update-method-response-request/httpMethod :portkey.aws.apigateway.update-method-response-request/statusCode] :opt-un [:portkey.aws.apigateway.update-method-response-request/patchOperations] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/list-ofarns (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/providerarn :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.apigateway/list-ofarns (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/providerarn) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-api-stage (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/api-stage :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-api-stage (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/api-stage) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.domain-names/position (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.domain-names/items (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-domain-name))
@@ -668,13 +712,14 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.method/http-method (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.method/operation-name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.method/request-parameters (clojure.spec.alpha/and :portkey.aws.apigateway/map-of-string-to-boolean))
+(clojure.spec.alpha/def :portkey.aws.apigateway.method/authorization-scopes (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.method/api-key-required (clojure.spec.alpha/and :portkey.aws.apigateway/nullable-boolean))
 (clojure.spec.alpha/def :portkey.aws.apigateway.method/request-models (clojure.spec.alpha/and :portkey.aws.apigateway/map-of-string-to-string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.method/method-integration (clojure.spec.alpha/and :portkey.aws.apigateway/integration))
 (clojure.spec.alpha/def :portkey.aws.apigateway.method/method-responses (clojure.spec.alpha/and :portkey.aws.apigateway/map-of-method-response))
-(clojure.spec.alpha/def :portkey.aws.apigateway/method (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.method/authorizerId :portkey.aws.apigateway.method/requestValidatorId :portkey.aws.apigateway.method/authorizationType :portkey.aws.apigateway.method/httpMethod :portkey.aws.apigateway.method/operationName :portkey.aws.apigateway.method/requestParameters :portkey.aws.apigateway.method/apiKeyRequired :portkey.aws.apigateway.method/requestModels :portkey.aws.apigateway.method/methodIntegration :portkey.aws.apigateway.method/methodResponses] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.apigateway/method (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.method/authorizerId :portkey.aws.apigateway.method/requestValidatorId :portkey.aws.apigateway.method/authorizationType :portkey.aws.apigateway.method/httpMethod :portkey.aws.apigateway.method/operationName :portkey.aws.apigateway.method/requestParameters :portkey.aws.apigateway.method/authorizationScopes :portkey.aws.apigateway.method/apiKeyRequired :portkey.aws.apigateway.method/requestModels :portkey.aws.apigateway.method/methodIntegration :portkey.aws.apigateway.method/methodResponses] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-stage (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/stage :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-stage (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/stage) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.create-deployment-request/rest-api-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.create-deployment-request/stage-name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
@@ -683,15 +728,25 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.create-deployment-request/cache-cluster-enabled (clojure.spec.alpha/and :portkey.aws.apigateway/nullable-boolean))
 (clojure.spec.alpha/def :portkey.aws.apigateway.create-deployment-request/cache-cluster-size (clojure.spec.alpha/and :portkey.aws.apigateway/cache-cluster-size))
 (clojure.spec.alpha/def :portkey.aws.apigateway.create-deployment-request/variables (clojure.spec.alpha/and :portkey.aws.apigateway/map-of-string-to-string))
-(clojure.spec.alpha/def :portkey.aws.apigateway/create-deployment-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.create-deployment-request/restApiId] :opt-un [:portkey.aws.apigateway.create-deployment-request/stageName :portkey.aws.apigateway.create-deployment-request/stageDescription :portkey.aws.apigateway.create-deployment-request/description :portkey.aws.apigateway.create-deployment-request/cacheClusterEnabled :portkey.aws.apigateway.create-deployment-request/cacheClusterSize :portkey.aws.apigateway.create-deployment-request/variables] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.apigateway.create-deployment-request/canary-settings (clojure.spec.alpha/and :portkey.aws.apigateway/deployment-canary-settings))
+(clojure.spec.alpha/def :portkey.aws.apigateway/create-deployment-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.create-deployment-request/restApiId] :opt-un [:portkey.aws.apigateway.create-deployment-request/stageName :portkey.aws.apigateway.create-deployment-request/stageDescription :portkey.aws.apigateway.create-deployment-request/description :portkey.aws.apigateway.create-deployment-request/cacheClusterEnabled :portkey.aws.apigateway.create-deployment-request/cacheClusterSize :portkey.aws.apigateway.create-deployment-request/variables :portkey.aws.apigateway.create-deployment-request/canarySettings] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway/map-of-method-response (clojure.spec.alpha/map-of :portkey.aws.apigateway/string :portkey.aws.apigateway/method-response))
+
+(clojure.spec.alpha/def :portkey.aws.apigateway.canary-settings/percent-traffic (clojure.spec.alpha/and :portkey.aws.apigateway/double))
+(clojure.spec.alpha/def :portkey.aws.apigateway.canary-settings/deployment-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.canary-settings/stage-variable-overrides (clojure.spec.alpha/and :portkey.aws.apigateway/map-of-string-to-string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.canary-settings/use-stage-cache (clojure.spec.alpha/and :portkey.aws.apigateway/boolean))
+(clojure.spec.alpha/def :portkey.aws.apigateway/canary-settings (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.canary-settings/percentTraffic :portkey.aws.apigateway.canary-settings/deploymentId :portkey.aws.apigateway.canary-settings/stageVariableOverrides :portkey.aws.apigateway.canary-settings/useStageCache] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.resources/position (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.resources/items (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-resource))
 (clojure.spec.alpha/def :portkey.aws.apigateway/resources (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.resources/position :portkey.aws.apigateway.resources/items] :locations {"item" "items"}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-usage (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/list-of-long :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.apigateway.get-vpc-link-request/vpc-link-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway/get-vpc-link-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.get-vpc-link-request/vpcLinkId] :opt-un [] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-usage (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/list-of-long) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.create-request-validator-request/rest-api-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.create-request-validator-request/name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
@@ -745,6 +800,10 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.sdk-types/items (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-sdk-type))
 (clojure.spec.alpha/def :portkey.aws.apigateway/sdk-types (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.sdk-types/position :portkey.aws.apigateway.sdk-types/items] :locations {"item" "items"}))
 
+(clojure.spec.alpha/def :portkey.aws.apigateway.access-log-settings/format (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.access-log-settings/destination-arn (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway/access-log-settings (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.access-log-settings/format :portkey.aws.apigateway.access-log-settings/destinationArn] :locations {}))
+
 (clojure.spec.alpha/def :portkey.aws.apigateway.delete-documentation-version-request/rest-api-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.delete-documentation-version-request/documentation-version (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway/delete-documentation-version-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.delete-documentation-version-request/restApiId :portkey.aws.apigateway.delete-documentation-version-request/documentationVersion] :opt-un [] :locations {}))
@@ -761,7 +820,13 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.delete-base-path-mapping-request/base-path (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway/delete-base-path-mapping-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.delete-base-path-mapping-request/domainName :portkey.aws.apigateway.delete-base-path-mapping-request/basePath] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-documentation-version (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/documentation-version :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.apigateway/vpc-link-status (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"AVAILABLE" "AVAILABLE", :available "AVAILABLE", "PENDING" "PENDING", :pending "PENDING", "DELETING" "DELETING", :deleting "DELETING", "FAILED" "FAILED", :failed "FAILED"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+
+(clojure.spec.alpha/def :portkey.aws.apigateway.vpc-links/position (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.vpc-links/items (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-vpc-link))
+(clojure.spec.alpha/def :portkey.aws.apigateway/vpc-links (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.vpc-links/position :portkey.aws.apigateway.vpc-links/items] :locations {"item" "items"}))
+
+(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-documentation-version (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/documentation-version) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.update-model-request/rest-api-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.update-model-request/model-name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
@@ -794,6 +859,8 @@
 
 (clojure.spec.alpha/def :portkey.aws.apigateway/map-of-string-to-string (clojure.spec.alpha/map-of :portkey.aws.apigateway/string :portkey.aws.apigateway/string))
 
+(clojure.spec.alpha/def :portkey.aws.apigateway/connection-type (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"INTERNET" "INTERNET", :internet "INTERNET", "VPC_LINK" "VPC_LINK", :vpc-link "VPC_LINK"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+
 (clojure.spec.alpha/def :portkey.aws.apigateway.create-authorizer-request/authorizer-credentials (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.create-authorizer-request/identity-validation-expression (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.create-authorizer-request/name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
@@ -804,11 +871,16 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.create-authorizer-request/auth-type (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.create-authorizer-request/identity-source (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.create-authorizer-request/providerarns (clojure.spec.alpha/and :portkey.aws.apigateway/list-ofarns))
-(clojure.spec.alpha/def :portkey.aws.apigateway/create-authorizer-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.create-authorizer-request/restApiId :portkey.aws.apigateway.create-authorizer-request/name :portkey.aws.apigateway.create-authorizer-request/type :portkey.aws.apigateway.create-authorizer-request/identitySource] :opt-un [:portkey.aws.apigateway.create-authorizer-request/authorizerCredentials :portkey.aws.apigateway.create-authorizer-request/identityValidationExpression :portkey.aws.apigateway.create-authorizer-request/authorizerResultTtlInSeconds :portkey.aws.apigateway.create-authorizer-request/authorizerUri :portkey.aws.apigateway.create-authorizer-request/authType :portkey.aws.apigateway.create-authorizer-request/providerARNs] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.apigateway/create-authorizer-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.create-authorizer-request/restApiId :portkey.aws.apigateway.create-authorizer-request/name :portkey.aws.apigateway.create-authorizer-request/type] :opt-un [:portkey.aws.apigateway.create-authorizer-request/authorizerCredentials :portkey.aws.apigateway.create-authorizer-request/identityValidationExpression :portkey.aws.apigateway.create-authorizer-request/authorizerResultTtlInSeconds :portkey.aws.apigateway.create-authorizer-request/authorizerUri :portkey.aws.apigateway.create-authorizer-request/authType :portkey.aws.apigateway.create-authorizer-request/identitySource :portkey.aws.apigateway.create-authorizer-request/providerARNs] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.delete-gateway-response-request/rest-api-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.delete-gateway-response-request/response-type (clojure.spec.alpha/and :portkey.aws.apigateway/gateway-response-type))
 (clojure.spec.alpha/def :portkey.aws.apigateway/delete-gateway-response-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.delete-gateway-response-request/restApiId :portkey.aws.apigateway.delete-gateway-response-request/responseType] :opt-un [] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.apigateway.get-tags-request/resource-arn (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.get-tags-request/position (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.get-tags-request/limit (clojure.spec.alpha/and :portkey.aws.apigateway/nullable-integer))
+(clojure.spec.alpha/def :portkey.aws.apigateway/get-tags-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.get-tags-request/resourceArn] :opt-un [:portkey.aws.apigateway.get-tags-request/position :portkey.aws.apigateway.get-tags-request/limit] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.get-gateway-response-request/rest-api-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.get-gateway-response-request/response-type (clojure.spec.alpha/and :portkey.aws.apigateway/gateway-response-type))
@@ -851,17 +923,19 @@
 
 (clojure.spec.alpha/def :portkey.aws.apigateway/long clojure.core/int?)
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-authorizer (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/authorizer :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-authorizer (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/authorizer) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway.create-stage-request/rest-api-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
-(clojure.spec.alpha/def :portkey.aws.apigateway.create-stage-request/stage-name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
-(clojure.spec.alpha/def :portkey.aws.apigateway.create-stage-request/deployment-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
-(clojure.spec.alpha/def :portkey.aws.apigateway.create-stage-request/description (clojure.spec.alpha/and :portkey.aws.apigateway/string))
-(clojure.spec.alpha/def :portkey.aws.apigateway.create-stage-request/cache-cluster-enabled (clojure.spec.alpha/and :portkey.aws.apigateway/boolean))
-(clojure.spec.alpha/def :portkey.aws.apigateway.create-stage-request/cache-cluster-size (clojure.spec.alpha/and :portkey.aws.apigateway/cache-cluster-size))
-(clojure.spec.alpha/def :portkey.aws.apigateway.create-stage-request/variables (clojure.spec.alpha/and :portkey.aws.apigateway/map-of-string-to-string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.create-stage-request/tags (clojure.spec.alpha/and :portkey.aws.apigateway/map-of-string-to-string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.create-stage-request/documentation-version (clojure.spec.alpha/and :portkey.aws.apigateway/string))
-(clojure.spec.alpha/def :portkey.aws.apigateway/create-stage-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.create-stage-request/restApiId :portkey.aws.apigateway.create-stage-request/stageName :portkey.aws.apigateway.create-stage-request/deploymentId] :opt-un [:portkey.aws.apigateway.create-stage-request/description :portkey.aws.apigateway.create-stage-request/cacheClusterEnabled :portkey.aws.apigateway.create-stage-request/cacheClusterSize :portkey.aws.apigateway.create-stage-request/variables :portkey.aws.apigateway.create-stage-request/documentationVersion] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.apigateway.create-stage-request/canary-settings (clojure.spec.alpha/and :portkey.aws.apigateway/canary-settings))
+(clojure.spec.alpha/def :portkey.aws.apigateway.create-stage-request/deployment-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.create-stage-request/variables (clojure.spec.alpha/and :portkey.aws.apigateway/map-of-string-to-string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.create-stage-request/rest-api-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.create-stage-request/cache-cluster-enabled (clojure.spec.alpha/and :portkey.aws.apigateway/boolean))
+(clojure.spec.alpha/def :portkey.aws.apigateway.create-stage-request/stage-name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.create-stage-request/description (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.create-stage-request/cache-cluster-size (clojure.spec.alpha/and :portkey.aws.apigateway/cache-cluster-size))
+(clojure.spec.alpha/def :portkey.aws.apigateway/create-stage-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.create-stage-request/restApiId :portkey.aws.apigateway.create-stage-request/stageName :portkey.aws.apigateway.create-stage-request/deploymentId] :opt-un [:portkey.aws.apigateway.create-stage-request/tags :portkey.aws.apigateway.create-stage-request/documentationVersion :portkey.aws.apigateway.create-stage-request/canarySettings :portkey.aws.apigateway.create-stage-request/variables :portkey.aws.apigateway.create-stage-request/cacheClusterEnabled :portkey.aws.apigateway.create-stage-request/description :portkey.aws.apigateway.create-stage-request/cacheClusterSize] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway/timestamp clojure.core/inst?)
 
@@ -889,7 +963,7 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.update-rest-api-request/patch-operations (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-patch-operation))
 (clojure.spec.alpha/def :portkey.aws.apigateway/update-rest-api-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.update-rest-api-request/restApiId] :opt-un [:portkey.aws.apigateway.update-rest-api-request/patchOperations] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/api-keys-format (clojure.spec.alpha/conformer (clojure.core/let [m__96543__auto__ {"csv" "csv", :csv "csv"}] (clojure.core/fn [s__96544__auto__] (m__96543__auto__ s__96544__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.apigateway/api-keys-format (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"csv" "csv", :csv "csv"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.get-documentation-versions-request/rest-api-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.get-documentation-versions-request/position (clojure.spec.alpha/and :portkey.aws.apigateway/string))
@@ -903,12 +977,16 @@
 
 (clojure.spec.alpha/def :portkey.aws.apigateway/get-account-request (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-usage-plan (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/usage-plan :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-usage-plan (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/usage-plan) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.import-api-keys-request/body (clojure.spec.alpha/and :portkey.aws.apigateway/blob))
 (clojure.spec.alpha/def :portkey.aws.apigateway.import-api-keys-request/format (clojure.spec.alpha/and :portkey.aws.apigateway/api-keys-format))
 (clojure.spec.alpha/def :portkey.aws.apigateway.import-api-keys-request/fail-on-warnings (clojure.spec.alpha/and :portkey.aws.apigateway/boolean))
 (clojure.spec.alpha/def :portkey.aws.apigateway/import-api-keys-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.import-api-keys-request/body :portkey.aws.apigateway.import-api-keys-request/format] :opt-un [:portkey.aws.apigateway.import-api-keys-request/failOnWarnings] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.apigateway.get-vpc-links-request/position (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.get-vpc-links-request/limit (clojure.spec.alpha/and :portkey.aws.apigateway/nullable-integer))
+(clojure.spec.alpha/def :portkey.aws.apigateway/get-vpc-links-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.get-vpc-links-request/position :portkey.aws.apigateway.get-vpc-links-request/limit] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.resource/id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.resource/parent-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
@@ -917,12 +995,14 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.resource/resource-methods (clojure.spec.alpha/and :portkey.aws.apigateway/map-of-method))
 (clojure.spec.alpha/def :portkey.aws.apigateway/resource (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.resource/id :portkey.aws.apigateway.resource/parentId :portkey.aws.apigateway.resource/pathPart :portkey.aws.apigateway.resource/path :portkey.aws.apigateway.resource/resourceMethods] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-endpoint-type (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/endpoint-type) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
+
 (clojure.spec.alpha/def :portkey.aws.apigateway.create-usage-plan-key-request/usage-plan-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.create-usage-plan-key-request/key-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.create-usage-plan-key-request/key-type (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway/create-usage-plan-key-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.create-usage-plan-key-request/usagePlanId :portkey.aws.apigateway.create-usage-plan-key-request/keyId :portkey.aws.apigateway.create-usage-plan-key-request/keyType] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-patch-operation (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/patch-operation :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-patch-operation (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/patch-operation) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.sdk-configuration-property/name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.sdk-configuration-property/friendly-name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
@@ -952,7 +1032,8 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.get-documentation-parts-request/path (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.get-documentation-parts-request/position (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.get-documentation-parts-request/limit (clojure.spec.alpha/and :portkey.aws.apigateway/nullable-integer))
-(clojure.spec.alpha/def :portkey.aws.apigateway/get-documentation-parts-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.get-documentation-parts-request/restApiId] :opt-un [:portkey.aws.apigateway.get-documentation-parts-request/type :portkey.aws.apigateway.get-documentation-parts-request/nameQuery :portkey.aws.apigateway.get-documentation-parts-request/path :portkey.aws.apigateway.get-documentation-parts-request/position :portkey.aws.apigateway.get-documentation-parts-request/limit] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.apigateway.get-documentation-parts-request/location-status (clojure.spec.alpha/and :portkey.aws.apigateway/location-status-type))
+(clojure.spec.alpha/def :portkey.aws.apigateway/get-documentation-parts-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.get-documentation-parts-request/restApiId] :opt-un [:portkey.aws.apigateway.get-documentation-parts-request/type :portkey.aws.apigateway.get-documentation-parts-request/nameQuery :portkey.aws.apigateway.get-documentation-parts-request/path :portkey.aws.apigateway.get-documentation-parts-request/position :portkey.aws.apigateway.get-documentation-parts-request/limit :portkey.aws.apigateway.get-documentation-parts-request/locationStatus] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.api-key/created-date (clojure.spec.alpha/and :portkey.aws.apigateway/timestamp))
 (clojure.spec.alpha/def :portkey.aws.apigateway.api-key/enabled (clojure.spec.alpha/and :portkey.aws.apigateway/boolean))
@@ -974,13 +1055,19 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway/update-method-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.update-method-request/restApiId :portkey.aws.apigateway.update-method-request/resourceId :portkey.aws.apigateway.update-method-request/httpMethod] :opt-un [:portkey.aws.apigateway.update-method-request/patchOperations] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.domain-name/domain-name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
-(clojure.spec.alpha/def :portkey.aws.apigateway.domain-name/certificate-name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.domain-name/endpoint-configuration (clojure.spec.alpha/and :portkey.aws.apigateway/endpoint-configuration))
 (clojure.spec.alpha/def :portkey.aws.apigateway.domain-name/certificate-arn (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.domain-name/regional-hosted-zone-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.domain-name/regional-certificate-arn (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.domain-name/regional-certificate-name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.domain-name/distribution-hosted-zone-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.domain-name/certificate-upload-date (clojure.spec.alpha/and :portkey.aws.apigateway/timestamp))
+(clojure.spec.alpha/def :portkey.aws.apigateway.domain-name/certificate-name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.domain-name/distribution-domain-name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
-(clojure.spec.alpha/def :portkey.aws.apigateway/domain-name (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.domain-name/domainName :portkey.aws.apigateway.domain-name/certificateName :portkey.aws.apigateway.domain-name/certificateArn :portkey.aws.apigateway.domain-name/certificateUploadDate :portkey.aws.apigateway.domain-name/distributionDomainName] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.apigateway.domain-name/regional-domain-name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway/domain-name (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.domain-name/domainName :portkey.aws.apigateway.domain-name/endpointConfiguration :portkey.aws.apigateway.domain-name/certificateArn :portkey.aws.apigateway.domain-name/regionalHostedZoneId :portkey.aws.apigateway.domain-name/regionalCertificateArn :portkey.aws.apigateway.domain-name/regionalCertificateName :portkey.aws.apigateway.domain-name/distributionHostedZoneId :portkey.aws.apigateway.domain-name/certificateUploadDate :portkey.aws.apigateway.domain-name/certificateName :portkey.aws.apigateway.domain-name/distributionDomainName :portkey.aws.apigateway.domain-name/regionalDomainName] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-base-path-mapping (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/base-path-mapping :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-base-path-mapping (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/base-path-mapping) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway/blob (clojure.spec.alpha/and clojure.core/bytes? (clojure.spec.alpha/conformer portkey.aws/base64-encode portkey.aws/base64-decode)))
 
@@ -1007,20 +1094,29 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.get-api-key-request/include-value (clojure.spec.alpha/and :portkey.aws.apigateway/nullable-boolean))
 (clojure.spec.alpha/def :portkey.aws.apigateway/get-api-key-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.get-api-key-request/apiKey] :opt-un [:portkey.aws.apigateway.get-api-key-request/includeValue] :locations {}))
 
+(clojure.spec.alpha/def :portkey.aws.apigateway.update-vpc-link-request/vpc-link-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.update-vpc-link-request/patch-operations (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-patch-operation))
+(clojure.spec.alpha/def :portkey.aws.apigateway/update-vpc-link-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.update-vpc-link-request/vpcLinkId] :opt-un [:portkey.aws.apigateway.update-vpc-link-request/patchOperations] :locations {}))
+
 (clojure.spec.alpha/def :portkey.aws.apigateway.gateway-responses/position (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.gateway-responses/items (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-gateway-response))
 (clojure.spec.alpha/def :portkey.aws.apigateway/gateway-responses (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.gateway-responses/position :portkey.aws.apigateway.gateway-responses/items] :locations {"item" "items"}))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.create-domain-name-request/domain-name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
-(clojure.spec.alpha/def :portkey.aws.apigateway.create-domain-name-request/certificate-name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
-(clojure.spec.alpha/def :portkey.aws.apigateway.create-domain-name-request/certificate-body (clojure.spec.alpha/and :portkey.aws.apigateway/string))
-(clojure.spec.alpha/def :portkey.aws.apigateway.create-domain-name-request/certificate-private-key (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.create-domain-name-request/certificate-chain (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.create-domain-name-request/endpoint-configuration (clojure.spec.alpha/and :portkey.aws.apigateway/endpoint-configuration))
 (clojure.spec.alpha/def :portkey.aws.apigateway.create-domain-name-request/certificate-arn (clojure.spec.alpha/and :portkey.aws.apigateway/string))
-(clojure.spec.alpha/def :portkey.aws.apigateway/create-domain-name-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.create-domain-name-request/domainName] :opt-un [:portkey.aws.apigateway.create-domain-name-request/certificateName :portkey.aws.apigateway.create-domain-name-request/certificateBody :portkey.aws.apigateway.create-domain-name-request/certificatePrivateKey :portkey.aws.apigateway.create-domain-name-request/certificateChain :portkey.aws.apigateway.create-domain-name-request/certificateArn] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.apigateway.create-domain-name-request/certificate-private-key (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.create-domain-name-request/regional-certificate-arn (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.create-domain-name-request/regional-certificate-name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.create-domain-name-request/certificate-body (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.create-domain-name-request/certificate-name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway/create-domain-name-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.create-domain-name-request/domainName] :opt-un [:portkey.aws.apigateway.create-domain-name-request/certificateChain :portkey.aws.apigateway.create-domain-name-request/endpointConfiguration :portkey.aws.apigateway.create-domain-name-request/certificateArn :portkey.aws.apigateway.create-domain-name-request/certificatePrivateKey :portkey.aws.apigateway.create-domain-name-request/regionalCertificateArn :portkey.aws.apigateway.create-domain-name-request/regionalCertificateName :portkey.aws.apigateway.create-domain-name-request/certificateBody :portkey.aws.apigateway.create-domain-name-request/certificateName] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.integration/integration-responses (clojure.spec.alpha/and :portkey.aws.apigateway/map-of-integration-response))
+(clojure.spec.alpha/def :portkey.aws.apigateway.integration/connection-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.integration/uri (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.integration/connection-type (clojure.spec.alpha/and :portkey.aws.apigateway/connection-type))
 (clojure.spec.alpha/def :portkey.aws.apigateway.integration/http-method (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.integration/request-templates (clojure.spec.alpha/and :portkey.aws.apigateway/map-of-string-to-string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.integration/request-parameters (clojure.spec.alpha/and :portkey.aws.apigateway/map-of-string-to-string))
@@ -1030,7 +1126,8 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.integration/content-handling (clojure.spec.alpha/and :portkey.aws.apigateway/content-handling-strategy))
 (clojure.spec.alpha/def :portkey.aws.apigateway.integration/cache-key-parameters (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.integration/credentials (clojure.spec.alpha/and :portkey.aws.apigateway/string))
-(clojure.spec.alpha/def :portkey.aws.apigateway/integration (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.integration/integrationResponses :portkey.aws.apigateway.integration/uri :portkey.aws.apigateway.integration/httpMethod :portkey.aws.apigateway.integration/requestTemplates :portkey.aws.apigateway.integration/requestParameters :portkey.aws.apigateway.integration/cacheNamespace :portkey.aws.apigateway.integration/passthroughBehavior :portkey.aws.apigateway.integration/type :portkey.aws.apigateway.integration/contentHandling :portkey.aws.apigateway.integration/cacheKeyParameters :portkey.aws.apigateway.integration/credentials] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.apigateway.integration/timeout-in-millis (clojure.spec.alpha/and :portkey.aws.apigateway/integer))
+(clojure.spec.alpha/def :portkey.aws.apigateway/integration (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.integration/integrationResponses :portkey.aws.apigateway.integration/connectionId :portkey.aws.apigateway.integration/uri :portkey.aws.apigateway.integration/connectionType :portkey.aws.apigateway.integration/httpMethod :portkey.aws.apigateway.integration/requestTemplates :portkey.aws.apigateway.integration/requestParameters :portkey.aws.apigateway.integration/cacheNamespace :portkey.aws.apigateway.integration/passthroughBehavior :portkey.aws.apigateway.integration/type :portkey.aws.apigateway.integration/contentHandling :portkey.aws.apigateway.integration/cacheKeyParameters :portkey.aws.apigateway.integration/credentials :portkey.aws.apigateway.integration/timeoutInMillis] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.flush-stage-authorizers-cache-request/rest-api-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.flush-stage-authorizers-cache-request/stage-name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
@@ -1044,13 +1141,16 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.get-usage-plan-request/usage-plan-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway/get-usage-plan-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.get-usage-plan-request/usagePlanId] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/unauthorized-cache-control-header-strategy (clojure.spec.alpha/conformer (clojure.core/let [m__96543__auto__ {"FAIL_WITH_403" "FAIL_WITH_403", :fail-with-403 "FAIL_WITH_403", "SUCCEED_WITH_RESPONSE_HEADER" "SUCCEED_WITH_RESPONSE_HEADER", :succeed-with-response-header "SUCCEED_WITH_RESPONSE_HEADER", "SUCCEED_WITHOUT_RESPONSE_HEADER" "SUCCEED_WITHOUT_RESPONSE_HEADER", :succeed-without-response-header "SUCCEED_WITHOUT_RESPONSE_HEADER"}] (clojure.core/fn [s__96544__auto__] (m__96543__auto__ s__96544__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.apigateway/unauthorized-cache-control-header-strategy (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"FAIL_WITH_403" "FAIL_WITH_403", :fail-with-403 "FAIL_WITH_403", "SUCCEED_WITH_RESPONSE_HEADER" "SUCCEED_WITH_RESPONSE_HEADER", :succeed-with-response-header "SUCCEED_WITH_RESPONSE_HEADER", "SUCCEED_WITHOUT_RESPONSE_HEADER" "SUCCEED_WITHOUT_RESPONSE_HEADER", :succeed-without-response-header "SUCCEED_WITHOUT_RESPONSE_HEADER"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.delete-deployment-request/rest-api-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.delete-deployment-request/deployment-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway/delete-deployment-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.delete-deployment-request/restApiId :portkey.aws.apigateway.delete-deployment-request/deploymentId] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-api-key (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/api-key :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.apigateway.delete-vpc-link-request/vpc-link-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway/delete-vpc-link-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.delete-vpc-link-request/vpcLinkId] :opt-un [] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-api-key (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/api-key) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.integration-response/status-code (clojure.spec.alpha/and :portkey.aws.apigateway/status-code))
 (clojure.spec.alpha/def :portkey.aws.apigateway.integration-response/selection-pattern (clojure.spec.alpha/and :portkey.aws.apigateway/string))
@@ -1059,10 +1159,15 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.integration-response/content-handling (clojure.spec.alpha/and :portkey.aws.apigateway/content-handling-strategy))
 (clojure.spec.alpha/def :portkey.aws.apigateway/integration-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.integration-response/statusCode :portkey.aws.apigateway.integration-response/selectionPattern :portkey.aws.apigateway.integration-response/responseParameters :portkey.aws.apigateway.integration-response/responseTemplates :portkey.aws.apigateway.integration-response/contentHandling] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-domain-name (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/domain-name :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-domain-name (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/domain-name) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
+
+(clojure.spec.alpha/def :portkey.aws.apigateway/location-status-type (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"DOCUMENTED" "DOCUMENTED", :documented "DOCUMENTED", "UNDOCUMENTED" "UNDOCUMENTED", :undocumented "UNDOCUMENTED"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.get-rest-api-request/rest-api-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway/get-rest-api-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.get-rest-api-request/restApiId] :opt-un [] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.apigateway.endpoint-configuration/types (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-endpoint-type))
+(clojure.spec.alpha/def :portkey.aws.apigateway/endpoint-configuration (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.endpoint-configuration/types] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.update-integration-request/rest-api-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.update-integration-request/resource-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
@@ -1077,10 +1182,19 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.put-method-request/http-method (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.put-method-request/operation-name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.put-method-request/request-parameters (clojure.spec.alpha/and :portkey.aws.apigateway/map-of-string-to-boolean))
+(clojure.spec.alpha/def :portkey.aws.apigateway.put-method-request/authorization-scopes (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.put-method-request/rest-api-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.put-method-request/api-key-required (clojure.spec.alpha/and :portkey.aws.apigateway/boolean))
 (clojure.spec.alpha/def :portkey.aws.apigateway.put-method-request/request-models (clojure.spec.alpha/and :portkey.aws.apigateway/map-of-string-to-string))
-(clojure.spec.alpha/def :portkey.aws.apigateway/put-method-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.put-method-request/restApiId :portkey.aws.apigateway.put-method-request/resourceId :portkey.aws.apigateway.put-method-request/httpMethod :portkey.aws.apigateway.put-method-request/authorizationType] :opt-un [:portkey.aws.apigateway.put-method-request/authorizerId :portkey.aws.apigateway.put-method-request/requestValidatorId :portkey.aws.apigateway.put-method-request/operationName :portkey.aws.apigateway.put-method-request/requestParameters :portkey.aws.apigateway.put-method-request/apiKeyRequired :portkey.aws.apigateway.put-method-request/requestModels] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.apigateway/put-method-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.put-method-request/restApiId :portkey.aws.apigateway.put-method-request/resourceId :portkey.aws.apigateway.put-method-request/httpMethod :portkey.aws.apigateway.put-method-request/authorizationType] :opt-un [:portkey.aws.apigateway.put-method-request/authorizerId :portkey.aws.apigateway.put-method-request/requestValidatorId :portkey.aws.apigateway.put-method-request/operationName :portkey.aws.apigateway.put-method-request/requestParameters :portkey.aws.apigateway.put-method-request/authorizationScopes :portkey.aws.apigateway.put-method-request/apiKeyRequired :portkey.aws.apigateway.put-method-request/requestModels] :locations {}))
+
+(clojure.spec.alpha/def :portkey.aws.apigateway.vpc-link/id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.vpc-link/name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.vpc-link/description (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.vpc-link/target-arns (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.vpc-link/status (clojure.spec.alpha/and :portkey.aws.apigateway/vpc-link-status))
+(clojure.spec.alpha/def :portkey.aws.apigateway.vpc-link/status-message (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway/vpc-link (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.vpc-link/id :portkey.aws.apigateway.vpc-link/name :portkey.aws.apigateway.vpc-link/description :portkey.aws.apigateway.vpc-link/targetArns :portkey.aws.apigateway.vpc-link/status :portkey.aws.apigateway.vpc-link/statusMessage] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.models/position (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.models/items (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-model))
@@ -1092,8 +1206,11 @@
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.stage/cache-cluster-status (clojure.spec.alpha/and :portkey.aws.apigateway/cache-cluster-status))
 (clojure.spec.alpha/def :portkey.aws.apigateway.stage/created-date (clojure.spec.alpha/and :portkey.aws.apigateway/timestamp))
+(clojure.spec.alpha/def :portkey.aws.apigateway.stage/access-log-settings (clojure.spec.alpha/and :portkey.aws.apigateway/access-log-settings))
+(clojure.spec.alpha/def :portkey.aws.apigateway.stage/tags (clojure.spec.alpha/and :portkey.aws.apigateway/map-of-string-to-string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.stage/documentation-version (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.stage/method-settings (clojure.spec.alpha/and :portkey.aws.apigateway/map-of-method-settings))
+(clojure.spec.alpha/def :portkey.aws.apigateway.stage/canary-settings (clojure.spec.alpha/and :portkey.aws.apigateway/canary-settings))
 (clojure.spec.alpha/def :portkey.aws.apigateway.stage/deployment-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.stage/client-certificate-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.stage/last-updated-date (clojure.spec.alpha/and :portkey.aws.apigateway/timestamp))
@@ -1102,16 +1219,20 @@
 (clojure.spec.alpha/def :portkey.aws.apigateway.stage/stage-name (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.stage/description (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.stage/cache-cluster-size (clojure.spec.alpha/and :portkey.aws.apigateway/cache-cluster-size))
-(clojure.spec.alpha/def :portkey.aws.apigateway/stage (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.stage/cacheClusterStatus :portkey.aws.apigateway.stage/createdDate :portkey.aws.apigateway.stage/documentationVersion :portkey.aws.apigateway.stage/methodSettings :portkey.aws.apigateway.stage/deploymentId :portkey.aws.apigateway.stage/clientCertificateId :portkey.aws.apigateway.stage/lastUpdatedDate :portkey.aws.apigateway.stage/variables :portkey.aws.apigateway.stage/cacheClusterEnabled :portkey.aws.apigateway.stage/stageName :portkey.aws.apigateway.stage/description :portkey.aws.apigateway.stage/cacheClusterSize] :locations {}))
+(clojure.spec.alpha/def :portkey.aws.apigateway/stage (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.apigateway.stage/cacheClusterStatus :portkey.aws.apigateway.stage/createdDate :portkey.aws.apigateway.stage/accessLogSettings :portkey.aws.apigateway.stage/tags :portkey.aws.apigateway.stage/documentationVersion :portkey.aws.apigateway.stage/methodSettings :portkey.aws.apigateway.stage/canarySettings :portkey.aws.apigateway.stage/deploymentId :portkey.aws.apigateway.stage/clientCertificateId :portkey.aws.apigateway.stage/lastUpdatedDate :portkey.aws.apigateway.stage/variables :portkey.aws.apigateway.stage/cacheClusterEnabled :portkey.aws.apigateway.stage/stageName :portkey.aws.apigateway.stage/description :portkey.aws.apigateway.stage/cacheClusterSize] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.update-authorizer-request/rest-api-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.update-authorizer-request/authorizer-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.update-authorizer-request/patch-operations (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-patch-operation))
 (clojure.spec.alpha/def :portkey.aws.apigateway/update-authorizer-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.update-authorizer-request/restApiId :portkey.aws.apigateway.update-authorizer-request/authorizerId] :opt-un [:portkey.aws.apigateway.update-authorizer-request/patchOperations] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-stage-keys (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/stage-key :max-count nil) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__129128__129129__auto__] (if (clojure.core/sequential? p1__129128__129129__auto__) p1__129128__129129__auto__ [p1__129128__129129__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.apigateway/list-of-stage-keys (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.apigateway/stage-key) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__30551__30552__auto__] (if (clojure.core/sequential? p1__30551__30552__auto__) p1__30551__30552__auto__ [p1__30551__30552__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.apigateway/content-handling-strategy (clojure.spec.alpha/conformer (clojure.core/let [m__96543__auto__ {"CONVERT_TO_BINARY" "CONVERT_TO_BINARY", :convert-to-binary "CONVERT_TO_BINARY", "CONVERT_TO_TEXT" "CONVERT_TO_TEXT", :convert-to-text "CONVERT_TO_TEXT"}] (clojure.core/fn [s__96544__auto__] (m__96543__auto__ s__96544__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.apigateway/content-handling-strategy (clojure.spec.alpha/conformer (clojure.core/let [m__30630__auto__ {"CONVERT_TO_BINARY" "CONVERT_TO_BINARY", :convert-to-binary "CONVERT_TO_BINARY", "CONVERT_TO_TEXT" "CONVERT_TO_TEXT", :convert-to-text "CONVERT_TO_TEXT"}] (clojure.core/fn [s__30631__auto__] (m__30630__auto__ s__30631__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+
+(clojure.spec.alpha/def :portkey.aws.apigateway.untag-resource-request/resource-arn (clojure.spec.alpha/and :portkey.aws.apigateway/string))
+(clojure.spec.alpha/def :portkey.aws.apigateway.untag-resource-request/tag-keys (clojure.spec.alpha/and :portkey.aws.apigateway/list-of-string))
+(clojure.spec.alpha/def :portkey.aws.apigateway/untag-resource-request (portkey.aws/json-keys :req-un [:portkey.aws.apigateway.untag-resource-request/resourceArn :portkey.aws.apigateway.untag-resource-request/tagKeys] :opt-un [] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.apigateway.delete-request-validator-request/rest-api-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
 (clojure.spec.alpha/def :portkey.aws.apigateway.delete-request-validator-request/request-validator-id (clojure.spec.alpha/and :portkey.aws.apigateway/string))
@@ -1157,8 +1278,14 @@
 
 (clojure.spec.alpha/def :portkey.aws.apigateway/boolean clojure.core/boolean?)
 
+(clojure.core/defn tag-resource ([tag-resource-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "PUT" "/tags/{resource_arn}" tag-resource-request :portkey.aws.apigateway/tag-resource-request {:payload nil, :move {}, :headers {}, :uri {"resource_arn" "resourceArn"}, :querystring {}} 204 nil {"BadRequestException" :portkey.aws.apigateway/bad-request-exception, "UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception, "NotFoundException" :portkey.aws.apigateway/not-found-exception, "LimitExceededException" :portkey.aws.apigateway/limit-exceeded-exception, "ConflictException" :portkey.aws.apigateway/conflict-exception})))
+(clojure.spec.alpha/fdef tag-resource :args (clojure.spec.alpha/tuple :portkey.aws.apigateway/tag-resource-request) :ret clojure.core/true?)
+
 (clojure.core/defn flush-stage-cache ([flush-stage-cache-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "DELETE" "/restapis/{restapi_id}/stages/{stage_name}/cache/data" flush-stage-cache-request :portkey.aws.apigateway/flush-stage-cache-request {:payload nil, :move {}, :headers {}, :uri {"restapi_id" "restApiId", "stage_name" "stageName"}, :querystring {}} 202 nil {"UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "NotFoundException" :portkey.aws.apigateway/not-found-exception, "BadRequestException" :portkey.aws.apigateway/bad-request-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception})))
 (clojure.spec.alpha/fdef flush-stage-cache :args (clojure.spec.alpha/tuple :portkey.aws.apigateway/flush-stage-cache-request) :ret clojure.core/true?)
+
+(clojure.core/defn delete-vpc-link ([delete-vpc-link-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "DELETE" "/vpclinks/{vpclink_id}" delete-vpc-link-request :portkey.aws.apigateway/delete-vpc-link-request {:payload nil, :move {}, :headers {}, :uri {"vpclink_id" "vpcLinkId"}, :querystring {}} 202 nil {"UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "NotFoundException" :portkey.aws.apigateway/not-found-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception, "BadRequestException" :portkey.aws.apigateway/bad-request-exception})))
+(clojure.spec.alpha/fdef delete-vpc-link :args (clojure.spec.alpha/tuple :portkey.aws.apigateway/delete-vpc-link-request) :ret clojure.core/true?)
 
 (clojure.core/defn get-usage-plan ([get-usage-plan-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "GET" "/usageplans/{usageplanId}" get-usage-plan-request :portkey.aws.apigateway/get-usage-plan-request {:payload nil, :move {}, :headers {}, :uri {"usageplanId" "usagePlanId"}, :querystring {}} nil :portkey.aws.apigateway/usage-plan {"BadRequestException" :portkey.aws.apigateway/bad-request-exception, "UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "NotFoundException" :portkey.aws.apigateway/not-found-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception})))
 (clojure.spec.alpha/fdef get-usage-plan :args (clojure.spec.alpha/tuple :portkey.aws.apigateway/get-usage-plan-request) :ret (clojure.spec.alpha/and :portkey.aws.apigateway/usage-plan))
@@ -1190,7 +1317,7 @@
 (clojure.core/defn get-rest-apis ([] (get-rest-apis {})) ([get-rest-apis-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "GET" "/restapis" get-rest-apis-request :portkey.aws.apigateway/get-rest-apis-request {:payload nil, :move {}, :headers {}, :uri {}, :querystring {"position" "position", "limit" "limit"}} nil :portkey.aws.apigateway/rest-apis {"BadRequestException" :portkey.aws.apigateway/bad-request-exception, "UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception})))
 (clojure.spec.alpha/fdef get-rest-apis :args (clojure.spec.alpha/? :portkey.aws.apigateway/get-rest-apis-request) :ret (clojure.spec.alpha/and :portkey.aws.apigateway/rest-apis))
 
-(clojure.core/defn get-documentation-parts ([get-documentation-parts-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "GET" "/restapis/{restapi_id}/documentation/parts" get-documentation-parts-request :portkey.aws.apigateway/get-documentation-parts-request {:payload nil, :move {}, :headers {}, :uri {"restapi_id" "restApiId"}, :querystring {"type" "type", "name" "nameQuery", "path" "path", "position" "position", "limit" "limit"}} nil :portkey.aws.apigateway/documentation-parts {"BadRequestException" :portkey.aws.apigateway/bad-request-exception, "UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "NotFoundException" :portkey.aws.apigateway/not-found-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception})))
+(clojure.core/defn get-documentation-parts ([get-documentation-parts-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "GET" "/restapis/{restapi_id}/documentation/parts" get-documentation-parts-request :portkey.aws.apigateway/get-documentation-parts-request {:payload nil, :move {}, :headers {}, :uri {"restapi_id" "restApiId"}, :querystring {"type" "type", "name" "nameQuery", "path" "path", "position" "position", "limit" "limit", "locationStatus" "locationStatus"}} nil :portkey.aws.apigateway/documentation-parts {"BadRequestException" :portkey.aws.apigateway/bad-request-exception, "UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "NotFoundException" :portkey.aws.apigateway/not-found-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception})))
 (clojure.spec.alpha/fdef get-documentation-parts :args (clojure.spec.alpha/tuple :portkey.aws.apigateway/get-documentation-parts-request) :ret (clojure.spec.alpha/and :portkey.aws.apigateway/documentation-parts))
 
 (clojure.core/defn get-deployment ([get-deployment-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "GET" "/restapis/{restapi_id}/deployments/{deployment_id}" get-deployment-request :portkey.aws.apigateway/get-deployment-request {:payload nil, :move {}, :headers {}, :uri {"restapi_id" "restApiId", "deployment_id" "deploymentId"}, :querystring {"embed" "embed"}} nil :portkey.aws.apigateway/deployment {"UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "NotFoundException" :portkey.aws.apigateway/not-found-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception, "ServiceUnavailableException" :portkey.aws.apigateway/service-unavailable-exception})))
@@ -1208,11 +1335,17 @@
 (clojure.core/defn get-stages ([get-stages-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "GET" "/restapis/{restapi_id}/stages" get-stages-request :portkey.aws.apigateway/get-stages-request {:payload nil, :move {}, :headers {}, :uri {"restapi_id" "restApiId"}, :querystring {"deploymentId" "deploymentId"}} nil :portkey.aws.apigateway/stages {"UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "NotFoundException" :portkey.aws.apigateway/not-found-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception})))
 (clojure.spec.alpha/fdef get-stages :args (clojure.spec.alpha/tuple :portkey.aws.apigateway/get-stages-request) :ret (clojure.spec.alpha/and :portkey.aws.apigateway/stages))
 
+(clojure.core/defn get-tags ([get-tags-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "GET" "/tags/{resource_arn}" get-tags-request :portkey.aws.apigateway/get-tags-request {:payload nil, :move {}, :headers {}, :uri {"resource_arn" "resourceArn"}, :querystring {"position" "position", "limit" "limit"}} nil :portkey.aws.apigateway/tags {"BadRequestException" :portkey.aws.apigateway/bad-request-exception, "UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception, "NotFoundException" :portkey.aws.apigateway/not-found-exception, "LimitExceededException" :portkey.aws.apigateway/limit-exceeded-exception})))
+(clojure.spec.alpha/fdef get-tags :args (clojure.spec.alpha/tuple :portkey.aws.apigateway/get-tags-request) :ret (clojure.spec.alpha/and :portkey.aws.apigateway/tags))
+
 (clojure.core/defn get-resource ([get-resource-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "GET" "/restapis/{restapi_id}/resources/{resource_id}" get-resource-request :portkey.aws.apigateway/get-resource-request {:payload nil, :move {}, :headers {}, :uri {"restapi_id" "restApiId", "resource_id" "resourceId"}, :querystring {"embed" "embed"}} nil :portkey.aws.apigateway/resource {"UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "NotFoundException" :portkey.aws.apigateway/not-found-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception})))
 (clojure.spec.alpha/fdef get-resource :args (clojure.spec.alpha/tuple :portkey.aws.apigateway/get-resource-request) :ret (clojure.spec.alpha/and :portkey.aws.apigateway/resource))
 
 (clojure.core/defn update-documentation-part ([update-documentation-part-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "PATCH" "/restapis/{restapi_id}/documentation/parts/{part_id}" update-documentation-part-request :portkey.aws.apigateway/update-documentation-part-request {:payload nil, :move {}, :headers {}, :uri {"restapi_id" "restApiId", "part_id" "documentationPartId"}, :querystring {}} nil :portkey.aws.apigateway/documentation-part {"BadRequestException" :portkey.aws.apigateway/bad-request-exception, "UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "NotFoundException" :portkey.aws.apigateway/not-found-exception, "ConflictException" :portkey.aws.apigateway/conflict-exception, "LimitExceededException" :portkey.aws.apigateway/limit-exceeded-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception})))
 (clojure.spec.alpha/fdef update-documentation-part :args (clojure.spec.alpha/tuple :portkey.aws.apigateway/update-documentation-part-request) :ret (clojure.spec.alpha/and :portkey.aws.apigateway/documentation-part))
+
+(clojure.core/defn create-vpc-link ([create-vpc-link-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "POST" "/vpclinks" create-vpc-link-request :portkey.aws.apigateway/create-vpc-link-request {:payload nil, :move {}, :headers {}, :uri {}, :querystring {}} 202 :portkey.aws.apigateway/vpc-link {"UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "BadRequestException" :portkey.aws.apigateway/bad-request-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception})))
+(clojure.spec.alpha/fdef create-vpc-link :args (clojure.spec.alpha/tuple :portkey.aws.apigateway/create-vpc-link-request) :ret (clojure.spec.alpha/and :portkey.aws.apigateway/vpc-link))
 
 (clojure.core/defn import-api-keys ([import-api-keys-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "POST" "/apikeys?mode=import" import-api-keys-request :portkey.aws.apigateway/import-api-keys-request {:payload "body", :move {}, :headers {}, :uri {}, :querystring {"format" "format", "failonwarnings" "failOnWarnings"}} 201 :portkey.aws.apigateway/api-key-ids {"UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "NotFoundException" :portkey.aws.apigateway/not-found-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception, "LimitExceededException" :portkey.aws.apigateway/limit-exceeded-exception, "BadRequestException" :portkey.aws.apigateway/bad-request-exception, "ConflictException" :portkey.aws.apigateway/conflict-exception})))
 (clojure.spec.alpha/fdef import-api-keys :args (clojure.spec.alpha/tuple :portkey.aws.apigateway/import-api-keys-request) :ret (clojure.spec.alpha/and :portkey.aws.apigateway/api-key-ids))
@@ -1240,6 +1373,12 @@
 
 (clojure.core/defn get-base-path-mapping ([get-base-path-mapping-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "GET" "/domainnames/{domain_name}/basepathmappings/{base_path}" get-base-path-mapping-request :portkey.aws.apigateway/get-base-path-mapping-request {:payload nil, :move {}, :headers {}, :uri {"domain_name" "domainName", "base_path" "basePath"}, :querystring {}} nil :portkey.aws.apigateway/base-path-mapping {"UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "NotFoundException" :portkey.aws.apigateway/not-found-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception})))
 (clojure.spec.alpha/fdef get-base-path-mapping :args (clojure.spec.alpha/tuple :portkey.aws.apigateway/get-base-path-mapping-request) :ret (clojure.spec.alpha/and :portkey.aws.apigateway/base-path-mapping))
+
+(clojure.core/defn update-vpc-link ([update-vpc-link-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "PATCH" "/vpclinks/{vpclink_id}" update-vpc-link-request :portkey.aws.apigateway/update-vpc-link-request {:payload nil, :move {}, :headers {}, :uri {"vpclink_id" "vpcLinkId"}, :querystring {}} nil :portkey.aws.apigateway/vpc-link {"UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "NotFoundException" :portkey.aws.apigateway/not-found-exception, "BadRequestException" :portkey.aws.apigateway/bad-request-exception, "ConflictException" :portkey.aws.apigateway/conflict-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception})))
+(clojure.spec.alpha/fdef update-vpc-link :args (clojure.spec.alpha/tuple :portkey.aws.apigateway/update-vpc-link-request) :ret (clojure.spec.alpha/and :portkey.aws.apigateway/vpc-link))
+
+(clojure.core/defn get-vpc-links ([] (get-vpc-links {})) ([get-vpc-links-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "GET" "/vpclinks" get-vpc-links-request :portkey.aws.apigateway/get-vpc-links-request {:payload nil, :move {}, :headers {}, :uri {}, :querystring {"position" "position", "limit" "limit"}} nil :portkey.aws.apigateway/vpc-links {"BadRequestException" :portkey.aws.apigateway/bad-request-exception, "UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception})))
+(clojure.spec.alpha/fdef get-vpc-links :args (clojure.spec.alpha/? :portkey.aws.apigateway/get-vpc-links-request) :ret (clojure.spec.alpha/and :portkey.aws.apigateway/vpc-links))
 
 (clojure.core/defn delete-integration ([delete-integration-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "DELETE" "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/integration" delete-integration-request :portkey.aws.apigateway/delete-integration-request {:payload nil, :move {}, :headers {}, :uri {"restapi_id" "restApiId", "resource_id" "resourceId", "http_method" "httpMethod"}, :querystring {}} 204 nil {"UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "NotFoundException" :portkey.aws.apigateway/not-found-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception, "ConflictException" :portkey.aws.apigateway/conflict-exception})))
 (clojure.spec.alpha/fdef delete-integration :args (clojure.spec.alpha/tuple :portkey.aws.apigateway/delete-integration-request) :ret clojure.core/true?)
@@ -1343,6 +1482,9 @@
 (clojure.core/defn update-method-response ([update-method-response-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "PATCH" "/restapis/{restapi_id}/resources/{resource_id}/methods/{http_method}/responses/{status_code}" update-method-response-request :portkey.aws.apigateway/update-method-response-request {:payload nil, :move {}, :headers {}, :uri {"restapi_id" "restApiId", "resource_id" "resourceId", "http_method" "httpMethod", "status_code" "statusCode"}, :querystring {}} 201 :portkey.aws.apigateway/method-response {"UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "NotFoundException" :portkey.aws.apigateway/not-found-exception, "ConflictException" :portkey.aws.apigateway/conflict-exception, "LimitExceededException" :portkey.aws.apigateway/limit-exceeded-exception, "BadRequestException" :portkey.aws.apigateway/bad-request-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception})))
 (clojure.spec.alpha/fdef update-method-response :args (clojure.spec.alpha/tuple :portkey.aws.apigateway/update-method-response-request) :ret (clojure.spec.alpha/and :portkey.aws.apigateway/method-response))
 
+(clojure.core/defn get-vpc-link ([get-vpc-link-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "GET" "/vpclinks/{vpclink_id}" get-vpc-link-request :portkey.aws.apigateway/get-vpc-link-request {:payload nil, :move {}, :headers {}, :uri {"vpclink_id" "vpcLinkId"}, :querystring {}} nil :portkey.aws.apigateway/vpc-link {"UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "NotFoundException" :portkey.aws.apigateway/not-found-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception})))
+(clojure.spec.alpha/fdef get-vpc-link :args (clojure.spec.alpha/tuple :portkey.aws.apigateway/get-vpc-link-request) :ret (clojure.spec.alpha/and :portkey.aws.apigateway/vpc-link))
+
 (clojure.core/defn create-base-path-mapping ([create-base-path-mapping-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "POST" "/domainnames/{domain_name}/basepathmappings" create-base-path-mapping-request :portkey.aws.apigateway/create-base-path-mapping-request {:payload nil, :move {}, :headers {}, :uri {"domain_name" "domainName"}, :querystring {}} 201 :portkey.aws.apigateway/base-path-mapping {"UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "ConflictException" :portkey.aws.apigateway/conflict-exception, "BadRequestException" :portkey.aws.apigateway/bad-request-exception, "NotFoundException" :portkey.aws.apigateway/not-found-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception})))
 (clojure.spec.alpha/fdef create-base-path-mapping :args (clojure.spec.alpha/tuple :portkey.aws.apigateway/create-base-path-mapping-request) :ret (clojure.spec.alpha/and :portkey.aws.apigateway/base-path-mapping))
 
@@ -1397,7 +1539,7 @@
 (clojure.core/defn get-base-path-mappings ([get-base-path-mappings-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "GET" "/domainnames/{domain_name}/basepathmappings" get-base-path-mappings-request :portkey.aws.apigateway/get-base-path-mappings-request {:payload nil, :move {}, :headers {}, :uri {"domain_name" "domainName"}, :querystring {"position" "position", "limit" "limit"}} nil :portkey.aws.apigateway/base-path-mappings {"UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "NotFoundException" :portkey.aws.apigateway/not-found-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception})))
 (clojure.spec.alpha/fdef get-base-path-mappings :args (clojure.spec.alpha/tuple :portkey.aws.apigateway/get-base-path-mappings-request) :ret (clojure.spec.alpha/and :portkey.aws.apigateway/base-path-mappings))
 
-(clojure.core/defn delete-base-path-mapping ([delete-base-path-mapping-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "DELETE" "/domainnames/{domain_name}/basepathmappings/{base_path}" delete-base-path-mapping-request :portkey.aws.apigateway/delete-base-path-mapping-request {:payload nil, :move {}, :headers {}, :uri {"domain_name" "domainName", "base_path" "basePath"}, :querystring {}} 202 nil {"UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "NotFoundException" :portkey.aws.apigateway/not-found-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception})))
+(clojure.core/defn delete-base-path-mapping ([delete-base-path-mapping-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "DELETE" "/domainnames/{domain_name}/basepathmappings/{base_path}" delete-base-path-mapping-request :portkey.aws.apigateway/delete-base-path-mapping-request {:payload nil, :move {}, :headers {}, :uri {"domain_name" "domainName", "base_path" "basePath"}, :querystring {}} 202 nil {"UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "NotFoundException" :portkey.aws.apigateway/not-found-exception, "ConflictException" :portkey.aws.apigateway/conflict-exception, "BadRequestException" :portkey.aws.apigateway/bad-request-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception})))
 (clojure.spec.alpha/fdef delete-base-path-mapping :args (clojure.spec.alpha/tuple :portkey.aws.apigateway/delete-base-path-mapping-request) :ret clojure.core/true?)
 
 (clojure.core/defn get-account ([] (get-account {})) ([get-account-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "GET" "/account" get-account-request :portkey.aws.apigateway/get-account-request {:payload nil, :move {}, :headers {}, :uri {}, :querystring {}} nil :portkey.aws.apigateway/account {"UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "NotFoundException" :portkey.aws.apigateway/not-found-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception})))
@@ -1420,6 +1562,9 @@
 
 (clojure.core/defn delete-documentation-part ([delete-documentation-part-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "DELETE" "/restapis/{restapi_id}/documentation/parts/{part_id}" delete-documentation-part-request :portkey.aws.apigateway/delete-documentation-part-request {:payload nil, :move {}, :headers {}, :uri {"restapi_id" "restApiId", "part_id" "documentationPartId"}, :querystring {}} 202 nil {"UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "NotFoundException" :portkey.aws.apigateway/not-found-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception, "ConflictException" :portkey.aws.apigateway/conflict-exception, "BadRequestException" :portkey.aws.apigateway/bad-request-exception})))
 (clojure.spec.alpha/fdef delete-documentation-part :args (clojure.spec.alpha/tuple :portkey.aws.apigateway/delete-documentation-part-request) :ret clojure.core/true?)
+
+(clojure.core/defn untag-resource ([untag-resource-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "DELETE" "/tags/{resource_arn}" untag-resource-request :portkey.aws.apigateway/untag-resource-request {:payload nil, :move {}, :headers {}, :uri {"resource_arn" "resourceArn"}, :querystring {"tagKeys" "tagKeys"}} 204 nil {"BadRequestException" :portkey.aws.apigateway/bad-request-exception, "UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception, "NotFoundException" :portkey.aws.apigateway/not-found-exception, "ConflictException" :portkey.aws.apigateway/conflict-exception})))
+(clojure.spec.alpha/fdef untag-resource :args (clojure.spec.alpha/tuple :portkey.aws.apigateway/untag-resource-request) :ret clojure.core/true?)
 
 (clojure.core/defn generate-client-certificate ([] (generate-client-certificate {})) ([generate-client-certificate-request] (portkey.aws/-rest-json-call portkey.aws.apigateway/endpoints "POST" "/clientcertificates" generate-client-certificate-request :portkey.aws.apigateway/generate-client-certificate-request {:payload nil, :move {}, :headers {}, :uri {}, :querystring {}} 201 :portkey.aws.apigateway/client-certificate {"UnauthorizedException" :portkey.aws.apigateway/unauthorized-exception, "TooManyRequestsException" :portkey.aws.apigateway/too-many-requests-exception, "LimitExceededException" :portkey.aws.apigateway/limit-exceeded-exception})))
 (clojure.spec.alpha/fdef generate-client-certificate :args (clojure.spec.alpha/? :portkey.aws.apigateway/generate-client-certificate-request) :ret (clojure.spec.alpha/and :portkey.aws.apigateway/client-certificate))

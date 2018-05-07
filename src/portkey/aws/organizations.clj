@@ -37,6 +37,11 @@
     :ssl-common-name "organizations.us-east-1.amazonaws.com",
     :endpoint "https://organizations.us-east-1.amazonaws.com",
     :signature-version :v4},
+   "eu-west-3"
+   {:credential-scope {:service "organizations", :region "us-east-1"},
+    :ssl-common-name "organizations.us-east-1.amazonaws.com",
+    :endpoint "https://organizations.us-east-1.amazonaws.com",
+    :signature-version :v4},
    "ca-central-1"
    {:credential-scope {:service "organizations", :region "us-east-1"},
     :ssl-common-name "organizations.us-east-1.amazonaws.com",

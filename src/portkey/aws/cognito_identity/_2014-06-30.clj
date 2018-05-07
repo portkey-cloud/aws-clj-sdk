@@ -26,6 +26,12 @@
     :ssl-common-name "cognito-identity.ap-southeast-2.amazonaws.com",
     :endpoint "https://cognito-identity.ap-southeast-2.amazonaws.com",
     :signature-version :v4},
+   "cn-north-1"
+   {:credential-scope
+    {:service "cognito-identity", :region "cn-north-1"},
+    :ssl-common-name "cognito-identity.cn-north-1.amazonaws.com.cn",
+    :endpoint "https://cognito-identity.cn-north-1.amazonaws.com.cn",
+    :signature-version :v4},
    "ap-southeast-1"
    {:credential-scope
     {:service "cognito-identity", :region "ap-southeast-1"},
