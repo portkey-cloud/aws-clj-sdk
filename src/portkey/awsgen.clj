@@ -386,11 +386,12 @@
        (defn ~varname ; TODO add deprecated flag 
          ~@(when default-arg `[([] (~varname ~default-arg))])
          ([~input]
-           (-> ~input aws/conform-or-throw 
+          (-> ~input
+              (aws/conform-or-throw 
              (aws/-rest-json-call 
                ~(symbol ns "endpoints") 
                ~method ~requestUri ~input ~input-spec ~(some->> input-shape aws/dashed (str "req<-") symbol)
-               ~responseCode ~output-spec ~error-specs))))
+                ~responseCode ~output-spec ~error-specs)))))
        (spec/fdef ~varname
          :args ~(if input-spec
                   `(~(if default-arg `spec/? `spec/tuple) ~input-spec)
