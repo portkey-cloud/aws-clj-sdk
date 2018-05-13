@@ -407,7 +407,7 @@
             vars (map (comp symbol portkey.aws/dashed)
                    (concat (map #(str "ser-" %) inputs) (map #(str "req<-" %) input-roots)
                      (map #(str "deser-" %) outputs) (map #(str "resp->" %) output-roots)))
-            ops (into [] (map #(gen-operation ns %)) (vals (api "shapes")))]
+            ops (into [] (map #(gen-operation ns (val %) (api "shapes"))) (api "operations"))]
         
         (concat specs
           (cons `(declare ~@vars) nil)
