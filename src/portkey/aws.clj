@@ -163,7 +163,7 @@
 
 (defn move [m from to]
   (if-some [x (get m from)] 
-    (-> m (dissoc from) (assoc to x#))
+    (-> m (dissoc from) (assoc to x))
     m))
 
 (defn query-params [m]

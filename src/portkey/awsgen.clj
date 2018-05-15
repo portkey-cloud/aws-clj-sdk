@@ -15,14 +15,22 @@
        (filter #(= "api-2.json" (.getName ^java.io.File %)))
        (map #(with-open [i (io/reader %)] (json/parse-stream i)))))
 
-(defn- shapes-seq [shape]
+(defn- shapes-seq
+  "Takes a shape and returns a sequences of containing itself and all nested shapes (if any)."
+  [shape]
   (tree-seq #(and (map? %) (#{"structure" "list" "map"} (% "type")))
     #(case (% "type")
        "structure" (vals (% "members"))
        "list" [(% "member")]
        "map" [(% "key") (% "value")]) shape))
 
-(defn- shapes-by-usage [{:strs [shapes operations] :as api}]
+(defn- shapes-by-usage
+  "Takes an api description and returns a map categorigizing shapes on their usage.
+  This map has 4 keys: :inputs, :input-roots, :outputs and :output-roots, all mapping to collections
+  of shapes.
+  Root shapes are shapes that appear as top-level paylod (including errors).
+  A shape may appear in several categories."
+  [{:strs [shapes operations] :as api}]
   (let [nested-shape-names (into #{} (comp (mapcat shapes-seq) (keep #(get % "shape")))
                              (vals shapes))
         input-roots (keep #(get-in % ["input" "shape"]) (vals operations))
@@ -52,7 +60,13 @@
          (spec/def ~(keyword ns (aws/dashed name)) ~(last form)))
       `(spec/def ~(keyword ns (aws/dashed name)) ~form))))
 
-(defmacro ^:private strict-strs [& {:keys [req opt]}]
+(defmacro ^:private strict-strs
+  "req and opt are maps of strings to specs, returns a spec validating that a map is
+   strictly keyed by these strings (and that associated values match associated specs).
+   It's not meant to be used by generated code.
+   It's meant for internal use in this namespace, strictness is a feature to make it fail fast
+   when the json api descriptors evolve."
+  [& {:keys [req opt]}]
   `(spec/and
      (spec/every
        (spec/or 
