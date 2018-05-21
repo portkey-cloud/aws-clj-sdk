@@ -400,11 +400,12 @@
        (defn ~varname ; TODO add deprecated flag 
          ~@(when default-arg `[([] (~varname ~default-arg))])
          ([~input]
-           (-> ~input aws/conform-or-throw 
+          (-> ~input
+              (aws/conform-or-throw 
              (aws/-rest-json-call 
                ~(symbol ns "endpoints") 
                ~method ~requestUri ~input ~input-spec ~(some->> input-shape aws/dashed (str "req<-") symbol)
-               ~responseCode ~output-spec ~error-specs))))
+                ~responseCode ~output-spec ~error-specs)))))
        (spec/fdef ~varname
          :args ~(if input-spec
                   `(~(if default-arg `spec/? `spec/tuple) ~input-spec)
@@ -421,7 +422,7 @@
             vars (map (comp symbol portkey.aws/dashed)
                    (concat (map #(str "ser-" %) inputs) (map #(str "req<-" %) input-roots)
                      (map #(str "deser-" %) outputs) (map #(str "resp->" %) output-roots)))
-            ops (into [] (map #(gen-operation ns %)) (vals (api "shapes")))]
+            ops (into [] (map #(gen-operation ns (val %) (api "shapes"))) (api "operations"))]
         
         (concat specs
           (cons `(declare ~@vars) nil)
