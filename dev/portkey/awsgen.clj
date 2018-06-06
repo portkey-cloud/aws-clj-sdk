@@ -409,8 +409,8 @@
                         req)
         resp-content (cond
                        (and req opt) (let [x (gensym "input")]
-                                                               `(let [~x ~req->resp]
-                                                                  ~(opt->resp-fn x opt)))
+                                       `(let [~x ~req->resp]
+                                          ~(opt->resp-fn x opt)))
                        (not (nil? req)) req->resp
                        (not (nil? opt)) (opt->resp-fn {} opt))]
     `(defn ~(shape-name->resp-name shape-name) [~resp-input] ~resp-content)))
