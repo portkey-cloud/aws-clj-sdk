@@ -145,9 +145,7 @@
           "sensitive" boolean?}))
 
 (defmethod shape-to-spec "list" [ns [name {{:strs [shape]} "member" :strs [min max]}]]
-  `(spec/and
-     (spec/coll-of ~(keyword ns (aws/dashed shape)) ~@(when min `[:min-count ~min]) ~@(when max `[:max-count ~max]))
-     (spec/conformer identity #(if (sequential? %) % [%])))) ; HAL ❤️
+  `(spec/coll-of ~(keyword ns (aws/dashed shape)) ~@(when min `[:min-count ~min]) ~@(when max `[:max-count ~max]))) ; HAL ❤️
 
 (defmethod shape-type-spec "boolean" [_]
   (strict-strs :req {"type" string?}
@@ -180,14 +178,11 @@
 
 (defmethod shape-to-spec "string" [ns [name {:strs [min max sensitive pattern enum]}]] 
   (if enum
-    `(spec/conformer
-       (let [m# ~(into {} (mapcat (fn [s] [[s s] [(keyword (aws/dashed s)) s]])) enum)]
-         (fn [s#] (m# s# ::spec/invalid)))
-       (comp keyword aws/dashed))
+    (into {} (mapcat (fn [s] [[s s] [(keyword (aws/dashed s)) s]])) enum)
     `(spec/and string?
-       ~@(when min [`(fn [s#] (<= ~min (count s#)))])
-       ~@(when max [`(fn [s#] (< (count s#) ~max))])
-       ~@(when pattern [`(fn [s#] (re-matches ~(re-pattern pattern) s#))]))))
+               ~@(when min [`(fn [s#] (<= ~min (count s#)))])
+               ~@(when max [`(fn [s#] (< (count s#) ~max))])
+               ~@(when pattern [`(fn [s#] (re-matches ~(re-pattern pattern) s#))]))))
 
 (defmethod shape-type-spec "blob" [_]
   (strict-strs
@@ -197,8 +192,7 @@
           "min" int?
           "sensitive" boolean?}))
 
-(defmethod shape-to-spec "blob" [ns [name {:strs [streaming sensitive]}]]
-  `(spec/and bytes? (spec/conformer aws/base64-encode aws/base64-decode)))
+(defmethod shape-to-spec "blob" [ns _] `bytes?)
 
 (defmethod shape-type-spec "long" [_]
   (strict-strs
