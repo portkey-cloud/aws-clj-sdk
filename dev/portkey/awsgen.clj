@@ -408,11 +408,11 @@
                                  (x/by-key (x/into {})))
                         req)
         resp-content (cond
-                       (and required-shapes optional-shapes) (let [x (gensym "input")]
+                       (and req opt) (let [x (gensym "input")]
                                                                `(let [~x ~req->resp]
                                                                   ~(opt->resp-fn x opt)))
-                       (not (nil? required-shapes)) req->resp
-                       (not (nil? optional-shapes)) (opt->resp-fn {} opt))]
+                       (not (nil? req)) req->resp
+                       (not (nil? opt)) (opt->resp-fn {} opt))]
     `(defn ~(shape-name->resp-name shape-name) [~resp-input] ~resp-content)))
 
 
