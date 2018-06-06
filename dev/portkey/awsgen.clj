@@ -1,20 +1,57 @@
 (ns portkey.awsgen
   (:require [clojure.spec.alpha :as spec]
-    [cheshire.core :as json]
-    [clojure.java.io :as io]
-    [net.cgrand.xforms :as x]
-    [clojure.string :as str]
-    [portkey.aws :as aws]
-    [clj-http.client :as http]
-    [clojure.string :as str]
-    [clojure.pprint]
-    [clojure.java.classpath :as cp]))
+            [cheshire.core :as json]
+            [clojure.java.io :as io]
+            [net.cgrand.xforms :as x]
+            [clojure.string :as str]
+            [portkey.aws :as aws]
+            [clj-http.client :as http]
+            [clojure.string :as str]
+            [clojure.pprint]
+            [clojure.java.classpath :as cp]
+            [clojure.string :as s]))
 
 #_ (def all-apis 
      (->> (java.io.File. "resources/aws-sdk-core/apis/")
        file-seq
        (filter #(= "api-2.json" (.getName ^java.io.File %)))
        (map #(with-open [i (io/reader %)] (json/parse-stream i)))))
+
+
+(defn- shapes-seq
+  "Takes a shape and returns a sequences of containing itself and all nested shapes (if any)."
+  [shape]
+  (tree-seq #(and (map? %) (#{"structure" "list" "map"} (% "type")))
+    #(case (% "type")
+       "structure" (vals (% "members"))
+       "list" [(% "member")]
+       "map" [(% "key") (% "value")]) shape))
+
+
+(defn- shapes-by-usage
+  "Takes an api description and returns a map categorigizing shapes on their usage.
+  This map has 4 keys: :inputs, :input-roots, :outputs and :output-roots, all mapping to collections
+  of shapes.
+  Root shapes are shapes that appear as top-level paylod (including errors).
+  A shape may appear in several categories."
+  [{:strs [shapes operations] :as api}]
+  (let [nested-shape-names (into #{} (comp (mapcat shapes-seq) (keep #(get % "shape")))
+                             (vals shapes))
+        input-roots (keep #(get-in % ["input" "shape"]) (vals operations))
+        output-roots (for [{:strs [errors output]} (vals operations)
+                           {:strs [shape]} (cons output errors)
+                           :when shape]
+                       shape)
+        inputs (into #{} (comp (map shapes) (mapcat shapes-seq) (keep #(get % "shape")))
+                 input-roots)
+        outputs (into #{} (comp (map shapes) (mapcat shapes-seq) (keep #(get % "shape")))
+                  output-roots)]
+    (when-some [culprit (first (filter #(or (get % "location") (get % "payload")) (mapcat (comp shapes-seq shapes) nested-shape-names)))]
+      (throw (ex-info "Attribute payload or location found on nested shape." {:culprit culprit :api api})))
+    {:inputs inputs
+     :input-roots input-roots
+     :outputs outputs
+     :output-roots output-roots}))
 
 (defmulti ^:private shape-to-spec (fn [ns [name {:strs [type]}]] type))
 
@@ -229,6 +266,160 @@
           "alias" string?
           "authtype" #{"none" "v4-unsigned-body"}
           "deprecated" boolean?}))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; BEGINNING OF PROOF OF CONCEPT FOR SPEC -> SER -> RESP ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(defn shape-name->ser-name
+  "Given a shape name, transorm it to a ser-* name."
+  [shape-name]
+  (->> shape-name (str "ser-") portkey.aws/dashed symbol))
+
+
+(defmulti gen-ser-input (fn [shape-name api _]
+                          [(get-in api ["metadata" "protocol"]) (get-in api ["shapes" shape-name "type"])]))
+
+
+(defmethod gen-ser-input :default [shape-name api _]
+  (let [mess [(get-in api ["metadata" "protocol"]) (get-in api ["shapes" shape-name "type"])]]
+    (throw
+     (ex-info (str "unsupported protocol/type for shape : " shape-name)
+              {:shape mess}))))
+
+
+(defmethod gen-ser-input ["rest-json" "integer"] [shape-name api input] input)
+
+
+(defmethod gen-ser-input ["rest-json" "structure"] [shape-name api input]
+  (let [shape (get-in api ["shapes" shape-name])]
+    (into {}
+          (map (fn [[k# {:strs [shape]}]]
+                 [k# `(~(shape-name->ser-name k#) (~(-> k# aws/dashed keyword) ~input))]))
+          (shape "members"))))
+
+
+(defmethod gen-ser-input ["rest-json" "structure"] [shape-name api input]
+  (let [shape (get-in api ["shapes" shape-name])]
+    (into {}
+          (map (fn [[k# {:strs [shape]}]]
+                 [k# `(~(shape-name->ser-name k#) (~(-> k# aws/dashed keyword) ~input))]))
+          (shape "members"))))
+
+
+(defmethod gen-ser-input ["rest-json" "structure"] [shape-name api input]
+  (let [shape  (get-in api ["shapes" shape-name])
+        x# (into []
+                 (mapcat (fn [[k# {:strs [shape]}]]
+                           (let [test-form# `(~(-> k# aws/dashed keyword) ~input)]
+                             [test-form# `(assoc ~k# (~(shape-name->ser-name k#) ~test-form#))])))
+                 (shape "members"))]
+    `(cond-> {}
+       ~@x#)))
+
+
+(defmethod gen-ser-input ["rest-json" "string"] [shape-name api input]
+  (let [{:strs [enum] :as shape} (get-in api ["shapes" shape-name])]
+    (if enum
+      (let [m (into {} (mapcat #(vector [% %] [(-> % aws/dashed keyword) %])) enum)]
+        (list m input))
+      input)))
+
+
+(defmethod gen-ser-input ["rest-json" "map"] [shape-name api input] input)
+
+
+(defmethod gen-ser-input ["rest-json" "boolean"] [shape-name api input] input)
+
+
+(defmethod gen-ser-input ["rest-json" "timestamp"] [shape-name api input] input)
+
+
+(defmethod gen-ser-input ["rest-json" "list"] [shape-name api input] input)
+
+
+(defmethod gen-ser-input ["rest-json" "blob"] [shape-name api input]
+  `(aws/base64-encode ~input))
+
+
+(defn gen-ser-fns [api shape-name]
+  (let [varname (shape-name->ser-name shape-name)
+        input# (symbol "shape-input")]
+    `(defn- ~varname
+       [~input#]
+       ~(gen-ser-input shape-name api input#))))
+
+
+;;;;;;;;;;;;;;;
+;; RESP PART ;;
+;;;;;;;;;;;;;;;
+
+
+
+(defn shape-name->resp-name
+  "Given a shape name, transorm it to a ser-* name."
+  [shape-name]
+  (->> shape-name (str "resp-") portkey.aws/dashed symbol))
+
+
+(defn input-shape->resp-map
+  "Given an input shape, returns a map of required and optional
+  shapes, sorted by request configuration, e.g. : body, uri,
+  headers..."
+  [input-shape]
+  (let [required-shapes (set (get input-shape "required"))]
+    (into {}
+          (x/by-key (fn [[k v]] (if (contains? required-shapes k) :req :opt))
+                    (comp (map (fn [[k {:strs [shape location locationName]} :as o]]
+                                 (let [ser-name (shape-name->ser-name shape)]
+                                   (condp = location
+                                     "uri" [:uri [k ser-name]]
+                                     "querystring" [:query-string [k ser-name]]
+                                     "header" [:headers [k ser-name]]
+                                     nil [:body [k ser-name]]))))
+                          (x/by-key (x/into {}))
+                          (x/into {})))
+          (get input-shape "members"))))
+
+
+(defn gen-resp-fns
+  "Given an api description and a shape-name, define a defn
+  representing the request that has to be done. Request is defined
+  by/or a body/uri/headers/querystring."
+  [api shape-name]
+  (let [shape (get-in api ["shapes" shape-name])
+        resp-input (gensym "resp-input")
+        {:keys [opt req]} (input-shape->resp-map shape)
+        opt->resp-fn (fn [init input]
+                       (let [in (into []
+                                      (comp (x/for [[b c] %
+                                                    :let [k v] c]
+                                              (let [e# k]
+                                                [`(contains? ~resp-input ~e#) `(assoc-in [~b ~e#] (~v ~resp-input))]))
+                                            cat)
+                                      input)]
+                         `(cond-> ~init
+                            ~@in)))
+        req->resp (into {} (comp (x/for [[loc value] %
+                                         :let [shape-name ser-name] value]
+                                   [loc [shape-name (list ser-name resp-input)]])
+                                 (x/by-key (x/into {})))
+                        req)
+        resp-content (cond
+                       (and required-shapes optional-shapes) (let [x (gensym "input")]
+                                                               `(let [~x ~req->resp]
+                                                                  ~(opt->resp-fn x opt)))
+                       (not (nil? required-shapes)) req->resp
+                       (not (nil? optional-shapes)) (opt->resp-fn {} opt))]
+    `(defn ~(shape-name->resp-name shape-name) [~resp-input] ~resp-content)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; END OF PROOF OF CONCEPT WITH : SPEC -> SER -> RESP ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 
 #_(str/replace uri #"\{(.*)}" (fn [[_ name]]))
 
