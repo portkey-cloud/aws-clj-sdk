@@ -312,7 +312,7 @@
         x# (into []
                  (mapcat (fn [[k# {:strs [shape]}]]
                            (let [test-form# `(~(-> k# aws/dashed keyword) ~input)]
-                             [test-form# `(assoc ~k# (~(shape-name->ser-name k#) ~test-form#))])))
+                             [test-form# `(assoc ~k# (~(shape-name->ser-name shape) ~test-form#))])))
                  (shape "members"))]
     `(cond-> {}
        ~@x#)))
