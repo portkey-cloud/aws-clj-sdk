@@ -22,36 +22,53 @@
   "Takes a shape and returns a sequences of containing itself and all nested shapes (if any)."
   [shape]
   (tree-seq #(and (map? %) (#{"structure" "list" "map"} (% "type")))
-    #(case (% "type")
-       "structure" (vals (% "members"))
-       "list" [(% "member")]
-       "map" [(% "key") (% "value")]) shape))
+            #(case (% "type")
+               "structure" (vals (% "members"))
+               "list" [(% "member")]
+               "map" [(% "key") (% "value")]) shape))
+
+
+(defn- fixpoint [f init]
+  (let [x (f init)]
+    (if (= x init)
+      init
+      (recur f x))))
 
 
 (defn- shapes-by-usage
   "Takes an api description and returns a map categorigizing shapes on their usage.
-  This map has 4 keys: :inputs, :input-roots, :outputs and :output-roots, all mapping to collections
-  of shapes.
-  Root shapes are shapes that appear as top-level paylod (including errors).
-  A shape may appear in several categories."
+  This map has 4 keys: :inputs, :input-roots, :outputs
+  and :output-roots, all mapping to collections of shapes.  Root
+  shapes are shapes that appear as top-level paylod (including
+  errors).  A shape may appear in several categories."
   [{:strs [shapes operations] :as api}]
-  (let [nested-shape-names (into #{} (comp (mapcat shapes-seq) (keep #(get % "shape")))
-                             (vals shapes))
+  (let [shapes-refs (into {}
+                          (x/by-key
+                           (comp (mapcat shapes-seq) (keep #(get % "shape")) (x/into #{})))
+                          shapes)
+        reachable-shapes (fixpoint (fn [reachable-shapes]
+                                     (x/into {}
+                                             (x/for [[shape reachables] %]
+                                               [shape (into reachables (mapcat shapes-refs) reachables)])
+                                             reachable-shapes))
+                                   (x/into {}
+                                           (x/for [[shape _] %] [shape #{shape}])
+                                           shapes-refs))
         input-roots (keep #(get-in % ["input" "shape"]) (vals operations))
         output-roots (for [{:strs [errors output]} (vals operations)
                            {:strs [shape]} (cons output errors)
                            :when shape]
                        shape)
-        inputs (into #{} (comp (map shapes) (mapcat shapes-seq) (keep #(get % "shape")))
-                 input-roots)
-        outputs (into #{} (comp (map shapes) (mapcat shapes-seq) (keep #(get % "shape")))
-                  output-roots)]
+        inputs (into #{} (mapcat reachable-shapes) input-roots)
+        outputs (into #{} (mapcat reachable-shapes) output-roots)
+        nested-shape-names (into #{} (vals shapes-refs))]
     (when-some [culprit (first (filter #(or (get % "location") (get % "payload")) (mapcat (comp shapes-seq shapes) nested-shape-names)))]
       (throw (ex-info "Attribute payload or location found on nested shape." {:culprit culprit :api api})))
     {:inputs inputs
      :input-roots input-roots
      :outputs outputs
      :output-roots output-roots}))
+
 
 (defmulti ^:private shape-to-spec (fn [ns [name {:strs [type]}]] type))
 
