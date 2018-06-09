@@ -380,6 +380,7 @@
           (get input-shape "members"))))
 
 
+;; @TODO: rename this wrongly named fn
 (defn gen-resp-fns
   "Given an api description and a shape-name, define a defn
   representing the request that has to be done. Request is defined
