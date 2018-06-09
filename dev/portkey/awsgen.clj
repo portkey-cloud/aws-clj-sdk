@@ -352,14 +352,15 @@
 ;; RESP PART ;;
 ;;;;;;;;;;;;;;;
 
-
+;; @TODO: rename this wrongly named fn
 
 (defn shape-name->resp-name
   "Given a shape name, transorm it to a ser-* name."
   [shape-name]
-  (->> shape-name (str "resp-") portkey.aws/dashed symbol))
+  (->> shape-name (str "req<-") portkey.aws/dashed symbol))
 
 
+;; @TODO: rename this wrongly named fn
 (defn input-shape->resp-map
   "Given an input shape, returns a map of required and optional
   shapes, sorted by request configuration, e.g. : body, uri,
@@ -393,15 +394,16 @@
                        (let [in (into []
                                       (comp (x/for [[b c] %
                                                     :let [k v] c]
-                                              (let [e# k]
-                                                [`(contains? ~resp-input ~e#) `(assoc-in [~b ~e#] (~v ~resp-input))]))
+                                              (let [e# (-> k aws/dashed keyword)]
+                                                [`(contains? ~resp-input ~e#) `(assoc-in [~b ~k] (~v (~resp-input ~e#)))]))
                                             cat)
                                       input)]
                          `(cond-> ~init
                             ~@in)))
         req->resp (into {} (comp (x/for [[loc value] %
-                                         :let [shape-name ser-name] value]
-                                   [loc [shape-name (list ser-name resp-input)]])
+                                         :let [shape-name ser-name] value
+                                         :let [e# (-> shape-name aws/dashed keyword)]]
+                                   [loc [shape-name `(ser-name (~resp-input ~e#)) ]])
                                  (x/by-key (x/into {})))
                         req)
         resp-content (cond
