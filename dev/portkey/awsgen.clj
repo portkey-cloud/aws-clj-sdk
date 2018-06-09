@@ -304,20 +304,7 @@
 (defmethod gen-ser-input ["rest-json" "integer"] [shape-name api input] input)
 
 
-(defmethod gen-ser-input ["rest-json" "structure"] [shape-name api input]
-  (let [shape (get-in api ["shapes" shape-name])]
-    (into {}
-          (map (fn [[k# {:strs [shape]}]]
-                 [k# `(~(shape-name->ser-name k#) (~(-> k# aws/dashed keyword) ~input))]))
-          (shape "members"))))
-
-
-(defmethod gen-ser-input ["rest-json" "structure"] [shape-name api input]
-  (let [shape (get-in api ["shapes" shape-name])]
-    (into {}
-          (map (fn [[k# {:strs [shape]}]]
-                 [k# `(~(shape-name->ser-name k#) (~(-> k# aws/dashed keyword) ~input))]))
-          (shape "members"))))
+(defmethod gen-ser-input ["rest-json" "double"] [shape-name api input] input)
 
 
 (defmethod gen-ser-input ["rest-json" "structure"] [shape-name api input]
