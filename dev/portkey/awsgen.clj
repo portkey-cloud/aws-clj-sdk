@@ -403,7 +403,7 @@
         req->resp (into {} (comp (x/for [[loc value] %
                                          :let [shape-name ser-name] value
                                          :let [e# (-> shape-name aws/dashed keyword)]]
-                                   [loc [shape-name `(ser-name (~resp-input ~e#)) ]])
+                                   [loc [shape-name `(~ser-name (~resp-input ~e#)) ]])
                                  (x/by-key (x/into {})))
                         req)
         resp-content (cond
