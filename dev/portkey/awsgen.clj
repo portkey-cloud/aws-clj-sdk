@@ -37,10 +37,10 @@
 
 (defn- shapes-by-usage
   "Takes an api description and returns a map categorigizing shapes on their usage.
-  This map has 4 keys: :inputs, :input-roots, :outputs
-  and :output-roots, all mapping to collections of shapes.  Root
-  shapes are shapes that appear as top-level paylod (including
-  errors).  A shape may appear in several categories."
+  This map has 4 keys: :inputs, :input-roots, :outputs and :output-roots, all mapping to collections
+  of shapes.
+  Root shapes are shapes that appear as top-level paylod (including errors).
+  A shape may appear in several categories."
   [{:strs [shapes operations] :as api}]
   (let [shapes-refs (into {}
                           (x/by-key
@@ -51,9 +51,7 @@
                                              (x/for [[shape reachables] %]
                                                [shape (into reachables (mapcat shapes-refs) reachables)])
                                              reachable-shapes))
-                                   (x/into {}
-                                           (x/for [[shape _] %] [shape #{shape}])
-                                           shapes-refs))
+                                   shapes-refs)
         input-roots (keep #(get-in % ["input" "shape"]) (vals operations))
         output-roots (for [{:strs [errors output]} (vals operations)
                            {:strs [shape]} (cons output errors)
