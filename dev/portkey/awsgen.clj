@@ -361,7 +361,7 @@
   [input-shape]
   (let [required-shapes (set (get input-shape "required"))]
     (into {}
-          (x/by-key (fn [[k v]] (if (contains? required-shapes k) :req :opt))
+          (x/by-key (fn [[k v]] (if (contains? required-shapes k) :required :optional))
                     (comp (map (fn [[k {:strs [shape location locationName]} :as o]]
                                  (let [ser-name (shape-name->ser-name shape)]
                                    (condp = location
@@ -380,36 +380,36 @@
   by/or a body/uri/headers/querystring."
   [api shape-name]
   (let [shape (get-in api ["shapes" shape-name])
-        resp-input (gensym "resp-input")
-        {:keys [opt req]} (input-shape->req-map shape)
-        opt->resp-fn (fn [init input]
-                       (let [in (into []
-                                      (comp (x/for [[b c] %
-                                                    :let [k v] c]
-                                              (let [e# (-> k aws/dashed keyword)]
-                                                [`(contains? ~resp-input ~e#) `(assoc-in [~b ~k] (~v (~resp-input ~e#)))]))
-                                            cat)
-                                      input)]
-                         `(cond-> ~init
-                            ~@in)))
-        req->resp (into {}
-                        (comp (x/for [[loc value] %
-                                      :let [shape-name ser-name] value
-                                      :let [e# (-> shape-name aws/dashed keyword)]]
-                                [loc [shape-name `(~ser-name (~resp-input ~e#)) ]])
-                              (x/by-key (x/into {})))
-                        req)
-        resp-content (cond
-                       (and req opt) (let [x (gensym "input")]
-                                       `(let [~x ~req->resp]
-                                          ~(opt->resp-fn x opt)))
-                       (not (nil? req)) req->resp
-                       (not (nil? opt)) (opt->resp-fn {} opt))]
-    `(defn ~(shape-name->req-name shape-name) [~resp-input] ~resp-content)))
+        function-input (gensym "input")
+        {:keys [optional required]} (input-shape->req-map shape)
+        optional-part (fn [required-part input]
+                        (let [in (into []
+                                       (comp (x/for [[request-part value] %
+                                                     :let [shape-name ser-name] value]
+                                               (let [e# (-> shape-name aws/dashed keyword)]
+                                                 `[(contains? ~function-input ~e#) (assoc-in [~request-part ~shape-name] (~ser-name (~function-input ~e#)))]))
+                                             cat)
+                                       input)]
+                          `(cond-> ~required-part
+                             ~@in)))
+        required-part (into {}
+                            (comp (x/for [[loc value] %
+                                          :let [shape-name ser-name] value
+                                          :let [e# (-> shape-name aws/dashed keyword)]]
+                                    [loc [shape-name `(~ser-name (~function-input ~e#)) ]])
+                                  (x/by-key (x/into {})))
+                            required)
+        function-body (cond
+                        (and required optional) (let [x (gensym "input")]
+                                                  `(let [~x ~required-part]
+                                                     ~(optional-part x optional)))
+                        (not (nil? required)) required-part
+                        (not (nil? optional)) (optional-part {} optional))]
+    `(defn ~(shape-name->req-name shape-name) [~function-input] ~function-body)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; END OF PROOF OF CONCEPT WITH : SPEC -> SER -> RESP ;;
+;; END OF PROOF OF CONCEPT WITH : SPEC -> SER -> REQ  ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
@@ -544,12 +544,12 @@
                                                    (shape-name->ser-name shape-name))))
                         ser-fns `(do ~@(for [shape-name inputs]
                                          (gen-ser-fns api shape-name)))
-                        resp-fns `(do ~@(for [shape-name input-roots]
-                                          (gen-req-fns api shape-name)))]
+                        req-fns `(do ~@(for [shape-name input-roots]
+                                         (gen-req-fns api shape-name)))]
                     (concat
                      [ser-vars]
                      [ser-fns]
-                     [resp-fns]
+                     [req-fns]
                      specs+fns))
       (do
         (binding [*out* *err*] (prn 'skipping ns-sym 'protocol (get-in api ["metadata" "protocol"])))
