@@ -11,12 +11,6 @@
             [clojure.java.classpath :as cp]
             [clojure.string :as s]))
 
-#_ (def all-apis 
-     (->> (java.io.File. "resources/aws-sdk-core/apis/")
-       file-seq
-       (filter #(= "api-2.json" (.getName ^java.io.File %)))
-       (map #(with-open [i (io/reader %)] (json/parse-stream i)))))
-
 
 (defn- shapes-seq
   "Takes a shape and returns a sequences of containing itself and all nested shapes (if any)."
@@ -37,9 +31,10 @@
 
 (defn- shapes-by-usage
   "Takes an api description and returns a map categorigizing shapes on their usage.
-  This map has 4 keys: :inputs, :input-roots, :outputs and :output-roots, all mapping to collections
-  of shapes.
-  Root shapes are shapes that appear as top-level paylod (including errors).
+  This map has 4 keys: :inputs, :input-roots, :outputs
+  and :output-roots, all mapping to collections of shapes.
+  Root shapes are shapes that appear as top-level paylod (including
+  errors).
   A shape may appear in several categories."
   [{:strs [shapes operations] :as api}]
   (let [shapes-refs (into {}
@@ -349,19 +344,17 @@
 
 
 ;;;;;;;;;;;;;;;
-;; RESP PART ;;
+;; REQ PART  ;;
 ;;;;;;;;;;;;;;;
 
-;; @TODO: rename this wrongly named fn
 
-(defn shape-name->resp-name
+(defn shape-name->req-name
   "Given a shape name, transorm it to a ser-* name."
   [shape-name]
   (->> shape-name (str "req<-") portkey.aws/dashed symbol))
 
 
-;; @TODO: rename this wrongly named fn
-(defn input-shape->resp-map
+(defn input-shape->req-map
   "Given an input shape, returns a map of required and optional
   shapes, sorted by request configuration, e.g. : body, uri,
   headers..."
@@ -381,15 +374,14 @@
           (get input-shape "members"))))
 
 
-;; @TODO: rename this wrongly named fn
-(defn gen-resp-fns
+(defn gen-req-fns
   "Given an api description and a shape-name, define a defn
   representing the request that has to be done. Request is defined
   by/or a body/uri/headers/querystring."
   [api shape-name]
   (let [shape (get-in api ["shapes" shape-name])
         resp-input (gensym "resp-input")
-        {:keys [opt req]} (input-shape->resp-map shape)
+        {:keys [opt req]} (input-shape->req-map shape)
         opt->resp-fn (fn [init input]
                        (let [in (into []
                                       (comp (x/for [[b c] %
@@ -400,11 +392,12 @@
                                       input)]
                          `(cond-> ~init
                             ~@in)))
-        req->resp (into {} (comp (x/for [[loc value] %
-                                         :let [shape-name ser-name] value
-                                         :let [e# (-> shape-name aws/dashed keyword)]]
-                                   [loc [shape-name `(~ser-name (~resp-input ~e#)) ]])
-                                 (x/by-key (x/into {})))
+        req->resp (into {}
+                        (comp (x/for [[loc value] %
+                                      :let [shape-name ser-name] value
+                                      :let [e# (-> shape-name aws/dashed keyword)]]
+                                [loc [shape-name `(~ser-name (~resp-input ~e#)) ]])
+                              (x/by-key (x/into {})))
                         req)
         resp-content (cond
                        (and req opt) (let [x (gensym "input")]
@@ -412,7 +405,7 @@
                                           ~(opt->resp-fn x opt)))
                        (not (nil? req)) req->resp
                        (not (nil? opt)) (opt->resp-fn {} opt))]
-    `(defn ~(shape-name->resp-name shape-name) [~resp-input] ~resp-content)))
+    `(defn ~(shape-name->req-name shape-name) [~resp-input] ~resp-content)))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -536,21 +529,31 @@
                   `empty?)
          :ret ~(if output-spec `(spec/and ~output-spec) `true?)))))
 
+
+
 (defn gen-api [ns-sym api-resource docs-resource]
   (let [api (json/parse-stream (io/reader api-resource))
         docs (json/parse-stream (io/reader docs-resource))]
     (case (get-in api ["metadata" "protocol"])
-      "rest-json" (for [[k gen] {"shapes" (comp #(doto % eval) gen-shape-spec) ; eval to make specs available right away
-                                 "operations" (fn [ns [_ op]] (gen-operation ns op (api "shapes") docs))}
-                        desc (api k)]
-                    (gen (name ns-sym) desc))
+      "rest-json" (let [specs+fns (for [[k gen] {"shapes" (comp #(doto % eval) gen-shape-spec) ; eval to make specs available right away
+                                                 "operations" (fn [ns [_ op]] (gen-operation ns op (api "shapes") docs))}
+                                        desc (api k)]
+                                    (gen (name ns-sym) desc))
+                        {:keys [inputs input-roots]} (shapes-by-usage api)
+                        ser-vars `(do (declare ~@(for [shape-name inputs]
+                                                   (shape-name->ser-name shape-name))))
+                        ser-fns `(do ~@(for [shape-name inputs]
+                                         (gen-ser-fns api shape-name)))
+                        resp-fns `(do ~@(for [shape-name input-roots]
+                                          (gen-req-fns api shape-name)))]
+                    (concat
+                     [ser-vars]
+                     [ser-fns]
+                     [resp-fns]
+                     specs+fns))
       (do
         (binding [*out* *err*] (prn 'skipping ns-sym 'protocol (get-in api ["metadata" "protocol"])))
-        [(list 'comment 'TODO 'support (get-in api ["metadata" "protocol"]))])
-      #_"json"
-      #_"ec2"
-      #_"query"
-      #_"rest-xml")))
+        [(list 'comment 'TODO 'support (get-in api ["metadata" "protocol"]))]))))
 
 (defn parse-endpoints! [src]
   (let [endpoints (with-open [r (io/reader src)] (json/parse-stream r))]
