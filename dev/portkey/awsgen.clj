@@ -581,7 +581,9 @@
         [[service region] {:credential-scope (x/into {} (x/for [[k v] %] [(keyword k) v]) credentialScope)
                            :ssl-common-name sslCommonName :endpoint endpoint :signature-version signature-version}]))))
 
-(defn generate-files! [& [verbose]]
+(defn generate-files!
+  [& {:keys [verbose api-name protocol]
+      :or {verbose false api-name nil protocol nil}}]
   (let [endpoints (parse-endpoints! "api-resources/aws-sdk-ruby/gems/aws-partitions/partitions.json")
         entries (into []
                       (comp
@@ -596,7 +598,9 @@
                           :let [apifile (str/replace api #"[-.]" "_")
                                 apins (str/replace api #"[.]" "-")
                                 [latest f] (first (rseq versions))]
+                          :when (or (nil? api-name) (= apins api-name))
                           [version api-json] (cons [nil f] versions)
+                          :when (or (nil? protocol) (= protocol (get-in (with-open [r (io/reader api-json)] (json/parse-stream r)) ["metadata" "protocol"])))
                           :let [[file ns] (if version
                                             [(java.io.File. (str "src/portkey/aws/" apifile "/_" version ".clj"))
                                              (symbol (str "portkey.aws." apins ".-" version))]
