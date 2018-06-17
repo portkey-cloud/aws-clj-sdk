@@ -130,36 +130,37 @@
 (defn base64-encode [bytes] (.encodeToString (java.util.Base64/getEncoder) bytes))
 (defn base64-decode [^String s] (.decode (java.util.Base64/getDecoder) s))
 
-(defn- params-to-header [{:as req :keys [body headers]} param-to-headers]
+(defn- params-to-header [{:as req :keys [body header headers]} param-to-headers]
   (-> req
-    (assoc :headers (reduce-kv (fn [headers param [header jsonvalue]]
-                                 (if-some [v (get body param)]
-                                   (assoc headers header 
-                                     (cond-> v
-                                       jsonvalue (-> json/generate-string base64-encode)))
-                                   headers))
-                      headers param-to-headers))
-           (assoc :body (reduce dissoc body (keys param-to-headers)))))
+      (assoc :headers (reduce-kv (fn [headers param [h jsonvalue]]
+                                   (if-some [v (get header param)]
+                                     (assoc headers h
+                                            (cond-> v
+                                              jsonvalue (-> json/generate-string base64-encode)))
+                                     headers))
+                                 headers param-to-headers))
+      (dissoc :header)))
 
-(defn- params-to-uri [{:as req :keys [body url]} uri-to-param]
+(defn- params-to-uri [{:as req :keys [body url uri]} uri-to-param]
   (-> req
-    (assoc :url (str/replace url #"\{([^\}]*)}" (fn [[_ name]]
-                                                  (if-some [v (get body (uri-to-param name))]
-                                                    (http/url-encode-illegal-characters v)
-                                                    (throw (ex-info (str "Missing parameter " name)
-                                                                    {:url url :url-to-param uri-to-param :input body}))))))
-    (assoc :body (reduce dissoc body (vals uri-to-param)))))
+      (assoc :url (str/replace url #"\{([^\}]*)}" (fn [[_ name]]
 
-(defn- params-to-querystring [{:as req :keys [body ^String url]} querystring-to-param]
+                                                    (if-some [v (get uri (uri-to-param name))]
+                                                      (http/url-encode-illegal-characters v)
+                                                      (throw (ex-info (str "Missing parameter " name)
+                                                                      {:url url :url-to-param uri-to-param :input body}))))))
+      (dissoc :uri)))
+
+(defn- params-to-querystring [{:as req :keys [body querystring ^String url]} querystring-to-param]
   (-> req
-    (assoc :url 
-      (apply str url (if (neg? (.indexOf url "?")) "?" "&")
-        (interpose "&"
-          (keep (fn [[qs name]]
-                 (when-some [v (get body name)]
-                   (str (http/url-encode-illegal-characters qs) "=" (http/url-encode-illegal-characters v))))
-           querystring-to-param))))
-    (assoc :body (reduce dissoc body (vals querystring-to-param)))))
+      (assoc :url
+             (apply str url (if (neg? (.indexOf url "?")) "?" "&")
+                    (interpose "&"
+                               (keep (fn [[qs name]]
+                                       (when-some [v (get querystring name)]
+                                         (str (http/url-encode-illegal-characters qs) "=" (http/url-encode-illegal-characters v))))
+                                     querystring-to-param))))
+      (dissoc :querystring)))
 
 (defn- params-to-payload [{:as req :keys [body]} param]
   (if param
@@ -204,31 +205,31 @@
                        ok-code output-spec error-specs]
   (let [{:keys [endpoint credential-scope signature-version]} (endpoints (region))]
     (->
-      {:method method
-       ::credential-scope credential-scope
-       ::signature-version signature-version
-       :url (str endpoint uri)
-       :headers {"content-type" "application/x-amz-json-1.0"}
-       :as :json-string-keys
-       :body (some-> input-spec (conform-or-throw input))}
-      (params-to-header headers-params)
-      (params-to-uri uri-params)
-      (params-to-querystring querystring-params)
-      (move-params move)
-      (params-to-payload payload)
-      (update :body #(cond-> % (coll? %) json/generate-string))
-      (*http-client*
-        (fn [{:as response {content-type "Content-Type"} :headers}]
-          (if (if ok-code (= ok-code (:status response)) (<= 200 (:status response) 299))
-            [:result (if output-spec
-                       (spec/unform output-spec (coerce-body content-type (:body response)))
-                       true)]
-            (if-some [[type spec] (find error-specs (get-in response [:headers "x-amzn-ErrorType"]))]
-              [:exception (let [m (spec/unform spec (json/parse-string (coerce-body content-type (:body response))))]
-                            (ex-info (str type ": " (:message m)) m))]
-              (case (:status response)
-                404 [:result nil]
-                [:exception (ex-info "Unexpected response" {:response response})]))))))))
+     (merge {:method method
+             ::credential-scope credential-scope
+             ::signature-version signature-version
+             :url (str endpoint uri)
+             :headers {"content-type" "application/x-amz-json-1.0"}
+             :as :json-string-keys}
+            input)
+     (params-to-header headers-params)
+     (params-to-uri uri-params)
+     (params-to-querystring querystring-params)
+     (move-params move)
+     (params-to-payload payload)
+     (update :body #(cond-> % (coll? %) json/generate-string))
+     (*http-client*
+      (fn [{:as response {content-type "Content-Type"} :headers}]
+        (if (if ok-code (= ok-code (:status response)) (<= 200 (:status response) 299))
+          [:result (if output-spec
+                     (spec/unform output-spec (coerce-body content-type (:body response)))
+                     true)]
+          (if-some [[type spec] (find error-specs (get-in response [:headers "x-amzn-ErrorType"]))]
+            [:exception (let [m (spec/unform spec (json/parse-string (coerce-body content-type (:body response))))]
+                          (ex-info (str type ": " (:message m)) m))]
+            (case (:status response)
+              404 [:result nil]
+              [:exception (ex-info "Unexpected response" {:response response})]))))))))
 
 ;; spec utils
 (defn keep-keys [f]
@@ -252,7 +253,7 @@
         to-keys (-> {} (into (map (fn [[k v]] [v k])) to-string) (into (map (fn [[from to]] [from (keyword (dashed to))]))  locations))]
     `(spec/and
        (spec/keys :req-un ~(dash-keys req-un) :opt-un ~(dash-keys opt-un))
-       (spec/conformer (keep-keys ~to-string) (keep-keys ~to-keys)))))
+       #_(spec/conformer (keep-keys ~to-string) (keep-keys ~to-keys)))))
 
 (defmacro doc [docstring spec]
   `(doc-impl ~docstring '~spec (delay (spec/spec ~spec))))
