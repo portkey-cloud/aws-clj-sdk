@@ -379,7 +379,7 @@
   "Given an input-root shape map, returns a map of SubShapeName / ser-name-fn.
   Map is sorted by optional/required type and by HTTP configuration, e.g. body/uri/querystring/header.
 
-  For example, calling (input-root-shape->req-map (get-in api [shapes CreateFunctionRequest]))
+  For example calling (input-root-shape->req-map (get-in api [shapes CreateFunctionRequest]))
 
   Will return :
 
@@ -419,9 +419,20 @@
 
 
 (defn gen-req-fns
-  "Given an api description and a shape-name, define a defn
-  representing the request that has to be done. Request is defined
-  by/or a body/uri/headers/querystring."
+  "Given an api description and a shape-name, returns a list representing
+  the request function. Request function is split into HTTP configuration
+  type as define by the ring request specification and calls
+  serialization functions.
+
+  For example calling (gen-req-fns api TagResourceRequest)
+
+  Will return :
+
+  (clojure.core/defn
+   req<-tag-resource-request
+   [input240922]
+   {:uri {Resource (ser-function-arn (input240922 :resource))},
+    :body {Tags (ser-tags (input240922 :tags))}})"
   [api shape-name]
   (let [shape (get-in api ["shapes" shape-name])
         function-input (gensym "input")
