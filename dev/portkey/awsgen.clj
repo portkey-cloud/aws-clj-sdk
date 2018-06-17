@@ -375,10 +375,33 @@
   (->> shape-name (str "req<-") portkey.aws/dashed symbol))
 
 
-(defn input-shape->req-map
-  "Given an input shape, returns a map of required and optional
-  shapes, sorted by request configuration, e.g. : body, uri,
-  headers..."
+(defn- input-root-shape->req-map
+  "Given an input-root shape map, returns a map of SubShapeName / ser-name-fn.
+  Map is sorted by optional/required type and by HTTP configuration, e.g. body/uri/querystring/header.
+
+  For example, calling (input-root-shape->req-map (get-in api [shapes CreateFunctionRequest]))
+
+  Will return :
+
+  {:optional
+   {:body
+    {MemorySize ser-memory-size,
+     Environment ser-environment,
+     Timeout ser-timeout,
+     KMSKeyArn ser-kmskey-arn,
+     VpcConfig ser-vpc-config,
+     DeadLetterConfig ser-dead-letter-config,
+     Tags ser-tags,
+     Publish ser-boolean,
+     TracingConfig ser-tracing-config,
+     Description ser-description}},
+   :required
+   {:body
+    {FunctionName ser-function-name,
+     Handler ser-handler,
+     Runtime ser-runtime,
+     Role ser-role-arn,
+     Code ser-function-code}}}"
   [input-shape]
   (let [required-shapes (set (get input-shape "required"))]
     (into {}
@@ -402,7 +425,7 @@
   [api shape-name]
   (let [shape (get-in api ["shapes" shape-name])
         function-input (gensym "input")
-        {:keys [optional required]} (input-shape->req-map shape)
+        {:keys [optional required]} (input-root-shape->req-map shape)
         optional-part (fn [required-part input]
                         (let [in (into []
                                        (comp (x/for [[request-part value] %
