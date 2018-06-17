@@ -335,7 +335,28 @@
   `(aws/base64-encode ~input))
 
 
-(defn gen-ser-fns [api shape-name]
+(defn gen-ser-fns
+  "Given an api description map and a shape name, returns a list
+  representing it's serialization function.
+
+  - gen-ser-fns calls a multimethod which dispatch on [protocol type] value.
+
+  For example, the shape TracingConfig from the lambda api is describe
+  by the map :
+
+  {type structure, members {Mode {shape TracingMode}}}
+
+  Calling (gen-ser-fns api TracingConfig) will generate this list :
+
+  (clojure.core/defn-
+   ser-tracing-config
+   [shape-input]
+   (clojure.core/cond->
+    {}
+    (:mode shape-input)
+    (clojure.core/assoc Mode (ser-tracing-mode (:mode shape-input)))))"
+
+  [api shape-name]
   (let [varname (shape-name->ser-name shape-name)
         input# (symbol "shape-input")]
     `(defn- ~varname
