@@ -513,9 +513,9 @@
                      shapes
                      {:as docs :strs [operations]}]
   (let [error-specs (into {}
-                      (map (fn [{:strs [shape] {:strs [httpStatusCode]} "error"}]
-                             [shape (keyword ns (aws/dashed shape))]))
-                      errors)
+                          (map (fn [{:strs [shape] {:strs [httpStatusCode]} "error"}]
+                                 [shape (keyword ns (aws/dashed shape))]))
+                          errors)
         varname (symbol (aws/dashed name))
         input-spec (some->> input-shape aws/dashed (keyword ns))
         output-spec (some->> output-shape aws/dashed (keyword ns))
@@ -524,45 +524,46 @@
         documentation (operations name)]
     (when input-shape
       (aws/conform-or-throw
-        (strict-strs ; validate only what we knows how to map
-          :req {"type" #{"structure"}
-                "members" (spec/map-of string? 
-                            (spec/or
-                              :atomic
-                              (spec/and
-                                (strict-strs
-                                  :req {"shape" string?}
-                                  :opt {"location" #{"uri" "querystring" "header" #_#_"headers" "statusCode"}
-                                        "locationName" string?
-                                        "deprecated" boolean?})
-                                #(= (contains? % "location") (contains? % "locationName")))
-                              :querystringmap
-                              (strict-strs
-                                :req {"shape" string?}
-                                :opt {"location" #{"querystring"}})
-                              :move
-                              (strict-strs
-                                :req {"shape" string?}
-                                :opt {"locationName" string?})
-                              :json-value
-                              (strict-strs
-                                :req {"shape" string?
-                                    "location" #{"header"}
-                                    "locationName" string?
-                                    "jsonvalue" true?})))}
-         :opt {"required" (spec/coll-of string?)
-               "payload" string?
-               "deprecated" boolean?})
-        (shapes input-shape)))
+       (strict-strs           ; validate only what we knows how to map
+        :req {"type" #{"structure"}
+              "members" (spec/map-of string?
+                                     (spec/or
+                                      :atomic
+                                      (spec/and
+                                       (strict-strs
+                                        :req {"shape" string?}
+                                        :opt {"location" #{"uri" "querystring" "header" #_#_"headers" "statusCode"}
+                                              "locationName" string?
+                                              "deprecated" boolean?})
+                                       #(= (contains? % "location") (contains? % "locationName")))
+                                      :querystringmap
+                                      (strict-strs
+                                       :req {"shape" string?}
+                                       :opt {"location" #{"querystring"}})
+                                      :move
+                                      (strict-strs
+                                       :req {"shape" string?}
+                                       :opt {"locationName" string?})
+                                      :json-value
+                                      (strict-strs
+                                       :req {"shape" string?
+                                             "location" #{"header"}
+                                             "locationName" string?
+                                             "jsonvalue" true?})))}
+        :opt {"required" (spec/coll-of string?)
+              "payload" string?
+              "deprecated" boolean?})
+       (shapes input-shape)))
     `(do
-       (defn ~varname ; TODO add deprecated flag
+       (defn ~varname                   ; TODO add deprecated flag
          ~@(when documentation
              [(format-documentation documentation)])
          ~@(when default-arg `[([] (~varname ~default-arg))])
          ([~input]
-           (aws/-rest-json-call 
+          (let [req<-input# (~(shape-name->req-name input-shape) ~input)]
+            (aws/-rest-json-call
              ~(symbol ns "endpoints") 
-             ~method ~requestUri ~input ~input-spec
+             ~method ~requestUri req<-input# ~input-spec
              {:headers ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
                                        :when (= "header" (member "location"))]
                                    [name [(member "locationName") (member "jsonvalue")]]))
@@ -577,12 +578,12 @@
                                     :let [locationName (member "locationName")]
                                     :when (when-not (member "location") locationName)]
                                 [locationName name]))}
-             ~responseCode ~output-spec ~error-specs)))
+             ~responseCode ~output-spec ~error-specs))))
        (spec/fdef ~varname
-         :args ~(if input-spec
-                  `(~(if default-arg `spec/? `spec/tuple) ~input-spec)
-                  `empty?)
-         :ret ~(if output-spec `(spec/and ~output-spec) `true?)))))
+                  :args ~(if input-spec
+                           `(~(if default-arg `spec/? `spec/tuple) ~input-spec)
+                           `empty?)
+                  :ret ~(if output-spec `(spec/and ~output-spec) `true?)))))
 
 
 
