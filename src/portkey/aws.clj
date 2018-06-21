@@ -13,6 +13,9 @@
 (def ^:dynamic *credentials*
   "A map with keys :access-key, :secret-key and optionally :token"
   nil)
+(def ^:dynamic *endpoint-override*
+  "A bindable endpoint override for SAM local, localstack, ddb-local, etc"
+  nil)
 
 (defmacro cond
   ([] nil)
@@ -207,13 +210,46 @@
       {:method method
        ::credential-scope credential-scope
        ::signature-version signature-version
-       :url (str endpoint uri)
+       :url (str (or *endpoint-override* endpoint) uri)
        :headers {"content-type" "application/x-amz-json-1.0"}
        :as :json-string-keys
        :body (some-> input-spec (conform-or-throw input))}
       (params-to-header headers-params)
       (params-to-uri uri-params)
       (params-to-querystring querystring-params)
+      (move-params move)
+      (params-to-payload payload)
+      (update :body #(cond-> % (coll? %) json/generate-string))
+      (*http-client*
+        (fn [{:as response {content-type "Content-Type"} :headers}]
+          (if (if ok-code (= ok-code (:status response)) (<= 200 (:status response) 299))
+            [:result (if output-spec
+                       (spec/unform output-spec (coerce-body content-type (:body response)))
+                       true)]
+            (if-some [[type spec] (find error-specs (get-in response [:headers "x-amzn-ErrorType"]))]
+              [:exception (let [m (spec/unform spec (json/parse-string (coerce-body content-type (:body response))))]
+                            (ex-info (str type ": " (:message m)) m))]
+              (case (:status response)
+                404 [:result nil]
+                [:exception (ex-info "Unexpected response" {:response response})]))))))))
+
+(defn -json-call [endpoints method operation input input-spec
+                  {headers-params :headers uri-params :uri querystring-params :querystring payload :payload move :move}
+                  ok-code output-spec error-specs
+                  ]
+  (let [{:keys [endpoint credential-scope signature-version]} (endpoints (region))]
+    (->
+      {:request-method method
+       ::credential-scope credential-scope
+       ::signature-version signature-version
+       :url (or *endpoint-override* endpoint)
+       :headers {"content-type" "application/x-amz-json-1.0"
+                 "X-Amz-Target" operation} ;; like "DynamoDB_20120810.GetItem"
+       :as :json-string-keys
+       :body (some-> input-spec (conform-or-throw input))}
+      (params-to-header headers-params)
+      (params-to-uri uri-params)
+      ;; (params-to-querystring querystring-params)
       (move-params move)
       (params-to-payload payload)
       (update :body #(cond-> % (coll? %) json/generate-string))
