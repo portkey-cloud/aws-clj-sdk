@@ -255,12 +255,16 @@
       (params-to-payload payload)
       (update :body #(cond-> % (coll? %) json/generate-string))
       (*http-client*
-        (fn [{:as response {content-type "Content-Type"} :headers}]
+        (fn [{:as response {content-type "Content-Type"} :headers :keys [body]}]
           (if (if ok-code (= ok-code (:status response)) (<= 200 (:status response) 299))
             [:result (if output-spec
-                       (spec/unform output-spec (coerce-body content-type (:body response)))
+                       (spec/unform output-spec (coerce-body content-type body))
                        true)]
-            (if-some [[type spec] (find error-specs (get-in response [:headers "x-amzn-ErrorType"]))]
+            (if-some [[type spec] (find error-specs (get-in response [:headers "x-amzn-ErrorType"]
+                                                            (some-> body
+                                                                    json/parse-string
+                                                                    (get "__type")
+                                                                    (->> (re-find #"(?<=#).*$")))))]
               [:exception (let [m (spec/unform spec (json/parse-string (coerce-body content-type (:body response))))]
                             (ex-info (str type ": " (:message m)) m))]
               (case (:status response)
