@@ -33,7 +33,7 @@
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo.tags-per-resource-exceeded-limit-exception/message (clojure.spec.alpha/and :portkey.aws.kinesisvideo/error-message))
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo/tags-per-resource-exceeded-limit-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.kinesisvideo.tags-per-resource-exceeded-limit-exception/Message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisvideo/stream-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 256)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_.-]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.kinesisvideo/stream-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 256)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_.-]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo.untag-stream-input/streamarn (clojure.spec.alpha/and :portkey.aws.kinesisvideo/resourcearn))
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo/untag-stream-input (portkey.aws/json-keys :req-un [:portkey.aws.kinesisvideo/TagKeyList] :opt-un [:portkey.aws.kinesisvideo.untag-stream-input/StreamARN :portkey.aws.kinesisvideo/StreamName] :locations {}))
@@ -45,11 +45,11 @@
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo.version-mismatch-exception/message (clojure.spec.alpha/and :portkey.aws.kinesisvideo/error-message))
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo/version-mismatch-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.kinesisvideo.version-mismatch-exception/Message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisvideo/media-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[\w\-\.\+]+/[\w\-\.\+]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.kinesisvideo/media-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[\w\-\.\+]+/[\w\-\.\+]+" s__13770__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisvideo/data-retention-in-hours (clojure.spec.alpha/and clojure.core/int? (fn* [p1__16202__16203__auto__] (clojure.core/<= 0 p1__16202__16203__auto__))))
+(clojure.spec.alpha/def :portkey.aws.kinesisvideo/data-retention-in-hours (clojure.spec.alpha/and clojure.core/int? (fn* [p1__13828__13829__auto__] (clojure.core/<= 0 p1__13828__13829__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisvideo/update-data-retention-operation (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"INCREASE_DATA_RETENTION" "INCREASE_DATA_RETENTION", :increase-data-retention "INCREASE_DATA_RETENTION", "DECREASE_DATA_RETENTION" "DECREASE_DATA_RETENTION", :decrease-data-retention "DECREASE_DATA_RETENTION"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.kinesisvideo/update-data-retention-operation (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"INCREASE_DATA_RETENTION" "INCREASE_DATA_RETENTION", :increase-data-retention "INCREASE_DATA_RETENTION", "DECREASE_DATA_RETENTION" "DECREASE_DATA_RETENTION", :decrease-data-retention "DECREASE_DATA_RETENTION"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo.tag-stream-input/streamarn (clojure.spec.alpha/and :portkey.aws.kinesisvideo/resourcearn))
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo.tag-stream-input/tags (clojure.spec.alpha/and :portkey.aws.kinesisvideo/resource-tags))
@@ -65,37 +65,37 @@
 
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo/resource-tags (clojure.spec.alpha/map-of :portkey.aws.kinesisvideo/tag-key :portkey.aws.kinesisvideo/tag-value))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisvideo/tag-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128))))
+(clojure.spec.alpha/def :portkey.aws.kinesisvideo/tag-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128))))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo.resource-in-use-exception/message (clojure.spec.alpha/and :portkey.aws.kinesisvideo/error-message))
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo/resource-in-use-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.kinesisvideo.resource-in-use-exception/Message] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo/describe-stream-output (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.kinesisvideo/StreamInfo] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisvideo/stream-info-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.kinesisvideo/stream-info) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.kinesisvideo/stream-info-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.kinesisvideo/stream-info) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisvideo/comparison-operator (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"BEGINS_WITH" "BEGINS_WITH", :begins-with "BEGINS_WITH"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.kinesisvideo/comparison-operator (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"BEGINS_WITH" "BEGINS_WITH", :begins-with "BEGINS_WITH"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo.not-authorized-exception/message (clojure.spec.alpha/and :portkey.aws.kinesisvideo/error-message))
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo/not-authorized-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.kinesisvideo.not-authorized-exception/Message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisvideo/apiname (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"PUT_MEDIA" "PUT_MEDIA", :put-media "PUT_MEDIA", "GET_MEDIA" "GET_MEDIA", :get-media "GET_MEDIA", "LIST_FRAGMENTS" "LIST_FRAGMENTS", :list-fragments "LIST_FRAGMENTS", "GET_MEDIA_FOR_FRAGMENT_LIST" "GET_MEDIA_FOR_FRAGMENT_LIST", :get-media-for-fragment-list "GET_MEDIA_FOR_FRAGMENT_LIST"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.kinesisvideo/apiname (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"PUT_MEDIA" "PUT_MEDIA", :put-media "PUT_MEDIA", "GET_MEDIA" "GET_MEDIA", :get-media "GET_MEDIA", "LIST_FRAGMENTS" "LIST_FRAGMENTS", :list-fragments "LIST_FRAGMENTS", "GET_MEDIA_FOR_FRAGMENT_LIST" "GET_MEDIA_FOR_FRAGMENT_LIST", :get-media-for-fragment-list "GET_MEDIA_FOR_FRAGMENT_LIST"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisvideo/status (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"CREATING" "CREATING", :creating "CREATING", "ACTIVE" "ACTIVE", :active "ACTIVE", "UPDATING" "UPDATING", :updating "UPDATING", "DELETING" "DELETING", :deleting "DELETING"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.kinesisvideo/status (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"CREATING" "CREATING", :creating "CREATING", "ACTIVE" "ACTIVE", :active "ACTIVE", "UPDATING" "UPDATING", :updating "UPDATING", "DELETING" "DELETING", :deleting "DELETING"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisvideo/next-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 0 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 512))))
+(clojure.spec.alpha/def :portkey.aws.kinesisvideo/next-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 0 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 512))))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo/error-message (clojure.spec.alpha/and clojure.core/string?))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo/create-stream-input (portkey.aws/json-keys :req-un [:portkey.aws.kinesisvideo/StreamName] :opt-un [:portkey.aws.kinesisvideo/DeviceName :portkey.aws.kinesisvideo/MediaType :portkey.aws.kinesisvideo/KmsKeyId :portkey.aws.kinesisvideo/DataRetentionInHours] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisvideo/list-streams-input-limit (clojure.spec.alpha/and clojure.core/int? (fn* [p1__16202__16203__auto__] (clojure.core/<= 1 p1__16202__16203__auto__)) (fn* [p1__16204__16205__auto__] (clojure.core/<= p1__16204__16205__auto__ 10000))))
+(clojure.spec.alpha/def :portkey.aws.kinesisvideo/list-streams-input-limit (clojure.spec.alpha/and clojure.core/int? (fn* [p1__13828__13829__auto__] (clojure.core/<= 1 p1__13828__13829__auto__)) (fn* [p1__13830__13831__auto__] (clojure.core/<= p1__13830__13831__auto__ 10000))))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo/tag-stream-output (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo/delete-stream-output (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisvideo/tag-key-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.kinesisvideo/tag-key :min-count 1 :max-count 50) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.kinesisvideo/tag-key-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.kinesisvideo/tag-key :min-count 1 :max-count 50) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo/untag-stream-output (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
@@ -104,12 +104,12 @@
 
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo/list-streams-output (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.kinesisvideo/StreamInfoList :portkey.aws.kinesisvideo/NextToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisvideo/tag-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 0 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 256))))
+(clojure.spec.alpha/def :portkey.aws.kinesisvideo/tag-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 0 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 256))))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo.invalid-device-exception/message (clojure.spec.alpha/and :portkey.aws.kinesisvideo/error-message))
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo/invalid-device-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.kinesisvideo.invalid-device-exception/Message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisvideo/kms-key-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 2048))))
+(clojure.spec.alpha/def :portkey.aws.kinesisvideo/kms-key-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 2048))))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo.client-limit-exceeded-exception/message (clojure.spec.alpha/and :portkey.aws.kinesisvideo/error-message))
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo/client-limit-exceeded-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.kinesisvideo.client-limit-exceeded-exception/Message] :locations {}))
@@ -124,7 +124,7 @@
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo.device-stream-limit-exceeded-exception/message (clojure.spec.alpha/and :portkey.aws.kinesisvideo/error-message))
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo/device-stream-limit-exceeded-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.kinesisvideo.device-stream-limit-exceeded-exception/Message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisvideo/device-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_.-]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.kinesisvideo/device-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_.-]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo.list-tags-for-stream-input/streamarn (clojure.spec.alpha/and :portkey.aws.kinesisvideo/resourcearn))
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo/list-tags-for-stream-input (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.kinesisvideo/NextToken :portkey.aws.kinesisvideo.list-tags-for-stream-input/StreamARN :portkey.aws.kinesisvideo/StreamName] :locations {}))
@@ -133,7 +133,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo/get-data-endpoint-output (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.kinesisvideo/DataEndpoint] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisvideo/version (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 64)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[a-zA-Z0-9]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.kinesisvideo/version (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 64)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[a-zA-Z0-9]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo.list-streams-input/max-results (clojure.spec.alpha/and :portkey.aws.kinesisvideo/list-streams-input-limit))
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo/list-streams-input (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.kinesisvideo.list-streams-input/MaxResults :portkey.aws.kinesisvideo/NextToken :portkey.aws.kinesisvideo/StreamNameCondition] :locations {}))
@@ -146,7 +146,7 @@
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo.invalid-resource-format-exception/message (clojure.spec.alpha/and :portkey.aws.kinesisvideo/error-message))
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo/invalid-resource-format-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.kinesisvideo.invalid-resource-format-exception/Message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisvideo/data-retention-change-in-hours (clojure.spec.alpha/and clojure.core/int? (fn* [p1__16202__16203__auto__] (clojure.core/<= 1 p1__16202__16203__auto__))))
+(clojure.spec.alpha/def :portkey.aws.kinesisvideo/data-retention-change-in-hours (clojure.spec.alpha/and clojure.core/int? (fn* [p1__13828__13829__auto__] (clojure.core/<= 1 p1__13828__13829__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo.delete-stream-input/streamarn (clojure.spec.alpha/and :portkey.aws.kinesisvideo/resourcearn))
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo.delete-stream-input/current-version (clojure.spec.alpha/and :portkey.aws.kinesisvideo/version))
@@ -160,7 +160,7 @@
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo.account-stream-limit-exceeded-exception/message (clojure.spec.alpha/and :portkey.aws.kinesisvideo/error-message))
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo/account-stream-limit-exceeded-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.kinesisvideo.account-stream-limit-exceeded-exception/Message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisvideo/resourcearn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 1024)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.kinesisvideo/resourcearn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 1024)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"arn:aws:kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisvideo/update-stream-output (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 

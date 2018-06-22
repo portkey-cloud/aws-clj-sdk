@@ -20,7 +20,7 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.export-jobs-response/next-token (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/export-jobs-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.export-jobs-response/Item :portkey.aws.pinpoint.export-jobs-response/NextToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/attribute-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"INCLUSIVE" "INCLUSIVE", :inclusive "INCLUSIVE", "EXCLUSIVE" "EXCLUSIVE", :exclusive "EXCLUSIVE"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/attribute-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"INCLUSIVE" "INCLUSIVE", :inclusive "INCLUSIVE", "EXCLUSIVE" "EXCLUSIVE", :exclusive "EXCLUSIVE"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.import-job-request/define-segment (clojure.spec.alpha/and :portkey.aws.pinpoint/--boolean))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.import-job-request/external-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
@@ -114,7 +114,7 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.create-export-job-request/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/create-export-job-request (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint.create-export-job-request/ApplicationId :portkey.aws.pinpoint/ExportJobRequest] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-segment-response (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/segment-response) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-segment-response (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/segment-response) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.message-request/addresses (clojure.spec.alpha/and :portkey.aws.pinpoint/map-of-address-configuration))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.message-request/context (clojure.spec.alpha/and :portkey.aws.pinpoint/map-of--string))
@@ -185,7 +185,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/get-campaigns-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/CampaignsResponse] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-export-job-response (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/export-job-response) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-export-job-response (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/export-job-response) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.activity-response/total-endpoint-count (clojure.spec.alpha/and :portkey.aws.pinpoint/--integer))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.activity-response/timezones-completed-count (clojure.spec.alpha/and :portkey.aws.pinpoint/--integer))
@@ -202,7 +202,7 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.activity-response/treatment-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/activity-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.activity-response/TotalEndpointCount :portkey.aws.pinpoint.activity-response/TimezonesCompletedCount :portkey.aws.pinpoint.activity-response/Start :portkey.aws.pinpoint.activity-response/End :portkey.aws.pinpoint.activity-response/Result :portkey.aws.pinpoint.activity-response/ApplicationId :portkey.aws.pinpoint.activity-response/SuccessfulEndpointCount :portkey.aws.pinpoint.activity-response/State :portkey.aws.pinpoint.activity-response/ScheduledStart :portkey.aws.pinpoint.activity-response/TimezonesTotalCount :portkey.aws.pinpoint.activity-response/CampaignId :portkey.aws.pinpoint.activity-response/Id :portkey.aws.pinpoint.activity-response/TreatmentId] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/job-status (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"COMPLETED" "COMPLETED", :initializing "INITIALIZING", "FAILING" "FAILING", :processing "PROCESSING", :completed "COMPLETED", :created "CREATED", "COMPLETING" "COMPLETING", :failing "FAILING", "FAILED" "FAILED", :completing "COMPLETING", "INITIALIZING" "INITIALIZING", "PROCESSING" "PROCESSING", :failed "FAILED", "CREATED" "CREATED"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/job-status (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"COMPLETED" "COMPLETED", :initializing "INITIALIZING", "FAILING" "FAILING", :processing "PROCESSING", :completed "COMPLETED", :created "CREATED", "COMPLETING" "COMPLETING", :failing "FAILING", "FAILED" "FAILED", :completing "COMPLETING", "INITIALIZING" "INITIALIZING", "PROCESSING" "PROCESSING", :failed "FAILED", "CREATED" "CREATED"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/create-app-request (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/CreateApplicationRequest] :opt-un [] :locations {}))
 
@@ -246,7 +246,7 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.create-application-request/name (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/create-application-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.create-application-request/Name] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/segment-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"DIMENSIONAL" "DIMENSIONAL", :dimensional "DIMENSIONAL", "IMPORT" "IMPORT", :import "IMPORT"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/segment-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"DIMENSIONAL" "DIMENSIONAL", :dimensional "DIMENSIONAL", "IMPORT" "IMPORT", :import "IMPORT"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.delete-apns-sandbox-channel-request/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/delete-apns-sandbox-channel-request (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint.delete-apns-sandbox-channel-request/ApplicationId] :opt-un [] :locations {}))
@@ -278,7 +278,7 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.send-users-message-response/result (clojure.spec.alpha/and :portkey.aws.pinpoint/map-of-map-of-endpoint-message-result))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/send-users-message-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.send-users-message-response/ApplicationId :portkey.aws.pinpoint.send-users-message-response/RequestId :portkey.aws.pinpoint.send-users-message-response/Result] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/recency-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"ACTIVE" "ACTIVE", :active "ACTIVE", "INACTIVE" "INACTIVE", :inactive "INACTIVE"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/recency-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"ACTIVE" "ACTIVE", :active "ACTIVE", "INACTIVE" "INACTIVE", :inactive "INACTIVE"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.application-response/id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.application-response/name (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
@@ -292,7 +292,7 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.get-adm-channel-request/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/get-adm-channel-request (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint.get-adm-channel-request/ApplicationId] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-treatment-resource (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/treatment-resource) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-treatment-resource (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/treatment-resource) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/delete-apns-channel-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/APNSChannelResponse] :opt-un [] :locations {}))
 
@@ -340,7 +340,7 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.get-apns-voip-sandbox-channel-request/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/get-apns-voip-sandbox-channel-request (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint.get-apns-voip-sandbox-channel-request/ApplicationId] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/delivery-status (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {:permanent-failure "PERMANENT_FAILURE", :duplicate "DUPLICATE", "PERMANENT_FAILURE" "PERMANENT_FAILURE", :unknown-failure "UNKNOWN_FAILURE", :opt-out "OPT_OUT", :successful "SUCCESSFUL", "OPT_OUT" "OPT_OUT", "TEMPORARY_FAILURE" "TEMPORARY_FAILURE", "UNKNOWN_FAILURE" "UNKNOWN_FAILURE", :throttled "THROTTLED", :temporary-failure "TEMPORARY_FAILURE", "DUPLICATE" "DUPLICATE", "THROTTLED" "THROTTLED", "SUCCESSFUL" "SUCCESSFUL"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/delivery-status (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {:permanent-failure "PERMANENT_FAILURE", :duplicate "DUPLICATE", "PERMANENT_FAILURE" "PERMANENT_FAILURE", :unknown-failure "UNKNOWN_FAILURE", :opt-out "OPT_OUT", :successful "SUCCESSFUL", "OPT_OUT" "OPT_OUT", "TEMPORARY_FAILURE" "TEMPORARY_FAILURE", "UNKNOWN_FAILURE" "UNKNOWN_FAILURE", :throttled "THROTTLED", :temporary-failure "TEMPORARY_FAILURE", "DUPLICATE" "DUPLICATE", "THROTTLED" "THROTTLED", "SUCCESSFUL" "SUCCESSFUL"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/update-segment-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/SegmentResponse] :opt-un [] :locations {}))
 
@@ -385,9 +385,9 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.delete-apns-channel-request/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/delete-apns-channel-request (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint.delete-apns-channel-request/ApplicationId] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/format (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"CSV" "CSV", :csv "CSV", "JSON" "JSON", :json "JSON"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/format (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"CSV" "CSV", :csv "CSV", "JSON" "JSON", :json "JSON"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/mode (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"DELIVERY" "DELIVERY", :delivery "DELIVERY", "FILTER" "FILTER", :filter "FILTER"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/mode (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"DELIVERY" "DELIVERY", :delivery "DELIVERY", "FILTER" "FILTER", :filter "FILTER"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.import-jobs-response/item (clojure.spec.alpha/and :portkey.aws.pinpoint/list-of-import-job-response))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.import-jobs-response/next-token (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
@@ -433,7 +433,7 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.import-job-resource/segment-name (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/import-job-resource (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.import-job-resource/DefineSegment :portkey.aws.pinpoint.import-job-resource/ExternalId :portkey.aws.pinpoint/Format :portkey.aws.pinpoint.import-job-resource/RegisterEndpoints :portkey.aws.pinpoint.import-job-resource/RoleArn :portkey.aws.pinpoint.import-job-resource/S3Url :portkey.aws.pinpoint.import-job-resource/SegmentId :portkey.aws.pinpoint.import-job-resource/SegmentName] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of--string (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/--string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of--string (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/--string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.smschannel-response/has-credential (clojure.spec.alpha/and :portkey.aws.pinpoint/--boolean))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.smschannel-response/platform (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
@@ -453,7 +453,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/update-baidu-channel-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/BaiduChannelResponse] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-endpoint-batch-item (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/endpoint-batch-item) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-endpoint-batch-item (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/endpoint-batch-item) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/get-segment-versions-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/SegmentsResponse] :opt-un [] :locations {}))
 
@@ -653,7 +653,7 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.apnschannel-request/token-key-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/apnschannel-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.apnschannel-request/BundleId :portkey.aws.pinpoint.apnschannel-request/Certificate :portkey.aws.pinpoint.apnschannel-request/DefaultAuthenticationMethod :portkey.aws.pinpoint.apnschannel-request/Enabled :portkey.aws.pinpoint.apnschannel-request/PrivateKey :portkey.aws.pinpoint.apnschannel-request/TeamId :portkey.aws.pinpoint.apnschannel-request/TokenKey :portkey.aws.pinpoint.apnschannel-request/TokenKeyId] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/dimension-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"INCLUSIVE" "INCLUSIVE", :inclusive "INCLUSIVE", "EXCLUSIVE" "EXCLUSIVE", :exclusive "EXCLUSIVE"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/dimension-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"INCLUSIVE" "INCLUSIVE", :inclusive "INCLUSIVE", "EXCLUSIVE" "EXCLUSIVE", :exclusive "EXCLUSIVE"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.application-settings-resource/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.application-settings-resource/last-modified-date (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
@@ -680,7 +680,7 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.get-campaign-versions-request/token (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/get-campaign-versions-request (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint.get-campaign-versions-request/ApplicationId :portkey.aws.pinpoint.get-campaign-versions-request/CampaignId] :opt-un [:portkey.aws.pinpoint.get-campaign-versions-request/PageSize :portkey.aws.pinpoint.get-campaign-versions-request/Token] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/duration (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"HR_24" "HR_24", :hr-24 "HR_24", "DAY_7" "DAY_7", :day-7 "DAY_7", "DAY_14" "DAY_14", :day-14 "DAY_14", "DAY_30" "DAY_30", :day-30 "DAY_30"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/duration (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"HR_24" "HR_24", :hr-24 "HR_24", "DAY_7" "DAY_7", :day-7 "DAY_7", "DAY_14" "DAY_14", :day-14 "DAY_14", "DAY_30" "DAY_30", :day-30 "DAY_30"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/update-gcm-channel-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/GCMChannelResponse] :opt-un [] :locations {}))
 
@@ -772,7 +772,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/create-import-job-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/ImportJobResponse] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-write-treatment-resource (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/write-treatment-resource) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-write-treatment-resource (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/write-treatment-resource) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.write-treatment-resource/size-percent (clojure.spec.alpha/and :portkey.aws.pinpoint/--integer))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.write-treatment-resource/treatment-description (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
@@ -821,7 +821,7 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.campaign-email-message/title (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/campaign-email-message (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.campaign-email-message/Body :portkey.aws.pinpoint.campaign-email-message/FromAddress :portkey.aws.pinpoint.campaign-email-message/HtmlBody :portkey.aws.pinpoint.campaign-email-message/Title] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-import-job-response (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/import-job-response) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-import-job-response (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/import-job-response) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.message-configuration/admmessage (clojure.spec.alpha/and :portkey.aws.pinpoint/message))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.message-configuration/apnsmessage (clojure.spec.alpha/and :portkey.aws.pinpoint/message))
@@ -843,11 +843,11 @@
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/get-segment-import-jobs-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/ImportJobsResponse] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/message-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"TRANSACTIONAL" "TRANSACTIONAL", :transactional "TRANSACTIONAL", "PROMOTIONAL" "PROMOTIONAL", :promotional "PROMOTIONAL"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/message-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"TRANSACTIONAL" "TRANSACTIONAL", :transactional "TRANSACTIONAL", "PROMOTIONAL" "PROMOTIONAL", :promotional "PROMOTIONAL"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/update-campaign-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/CampaignResponse] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/frequency (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {:daily "DAILY", "ONCE" "ONCE", :monthly "MONTHLY", "MONTHLY" "MONTHLY", "WEEKLY" "WEEKLY", :hourly "HOURLY", :once "ONCE", "DAILY" "DAILY", :weekly "WEEKLY", "HOURLY" "HOURLY"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/frequency (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {:daily "DAILY", "ONCE" "ONCE", :monthly "MONTHLY", "MONTHLY" "MONTHLY", "WEEKLY" "WEEKLY", :hourly "HOURLY", :once "ONCE", "DAILY" "DAILY", :weekly "WEEKLY", "HOURLY" "HOURLY"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.segment-response/last-modified-date (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.segment-response/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
@@ -865,7 +865,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/delete-segment-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/SegmentResponse] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-campaign-response (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/campaign-response) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-campaign-response (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/campaign-response) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/get-apns-voip-sandbox-channel-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/APNSVoipSandboxChannelResponse] :opt-un [] :locations {}))
 
@@ -890,7 +890,7 @@
 (clojure.spec.alpha/def :portkey.aws.pinpoint.admchannel-request/enabled (clojure.spec.alpha/and :portkey.aws.pinpoint/--boolean))
 (clojure.spec.alpha/def :portkey.aws.pinpoint/admchannel-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint.admchannel-request/ClientId :portkey.aws.pinpoint.admchannel-request/ClientSecret :portkey.aws.pinpoint.admchannel-request/Enabled] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/campaign-status (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"COMPLETED" "COMPLETED", :paused "PAUSED", :completed "COMPLETED", "EXECUTING" "EXECUTING", "SCHEDULED" "SCHEDULED", :executing "EXECUTING", :pending-next-run "PENDING_NEXT_RUN", :scheduled "SCHEDULED", "PAUSED" "PAUSED", "PENDING_NEXT_RUN" "PENDING_NEXT_RUN"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/campaign-status (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"COMPLETED" "COMPLETED", :paused "PAUSED", :completed "COMPLETED", "EXECUTING" "EXECUTING", "SCHEDULED" "SCHEDULED", :executing "EXECUTING", :pending-next-run "PENDING_NEXT_RUN", :scheduled "SCHEDULED", "PAUSED" "PAUSED", "PENDING_NEXT_RUN" "PENDING_NEXT_RUN"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.update-segment-request/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.update-segment-request/segment-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
@@ -995,7 +995,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/direct-message-configuration (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.pinpoint/ADMMessage :portkey.aws.pinpoint/APNSMessage :portkey.aws.pinpoint/BaiduMessage :portkey.aws.pinpoint/DefaultMessage :portkey.aws.pinpoint/DefaultPushNotificationMessage :portkey.aws.pinpoint/GCMMessage :portkey.aws.pinpoint/SMSMessage] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-application-response (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/application-response) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-application-response (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/application-response) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.apnssandbox-channel-request/bundle-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.apnssandbox-channel-request/certificate (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
@@ -1050,9 +1050,9 @@
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/update-apns-sandbox-channel-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/APNSSandboxChannelResponse] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/action (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"OPEN_APP" "OPEN_APP", :open-app "OPEN_APP", "DEEP_LINK" "DEEP_LINK", :deep-link "DEEP_LINK", "URL" "URL", :url "URL"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/action (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"OPEN_APP" "OPEN_APP", :open-app "OPEN_APP", "DEEP_LINK" "DEEP_LINK", :deep-link "DEEP_LINK", "URL" "URL", :url "URL"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-activity-response (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/activity-response) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/list-of-activity-response (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.pinpoint/activity-response) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/get-sms-channel-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/SMSChannelResponse] :opt-un [] :locations {}))
 
@@ -1112,7 +1112,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint/get-email-channel-response (portkey.aws/json-keys :req-un [:portkey.aws.pinpoint/EmailChannelResponse] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.pinpoint/channel-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {:email "EMAIL", "CUSTOM" "CUSTOM", "SMS" "SMS", "APNS_VOIP" "APNS_VOIP", "ADM" "ADM", "BAIDU" "BAIDU", "GCM" "GCM", "APNS" "APNS", :custom "CUSTOM", :apns-voip "APNS_VOIP", :apns-sandbox "APNS_SANDBOX", "APNS_VOIP_SANDBOX" "APNS_VOIP_SANDBOX", :gcm "GCM", :sms "SMS", :adm "ADM", "APNS_SANDBOX" "APNS_SANDBOX", "EMAIL" "EMAIL", :baidu "BAIDU", :apns-voip-sandbox "APNS_VOIP_SANDBOX", :apns "APNS"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.pinpoint/channel-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {:email "EMAIL", "CUSTOM" "CUSTOM", "SMS" "SMS", "APNS_VOIP" "APNS_VOIP", "ADM" "ADM", "BAIDU" "BAIDU", "GCM" "GCM", "APNS" "APNS", :custom "CUSTOM", :apns-voip "APNS_VOIP", :apns-sandbox "APNS_SANDBOX", "APNS_VOIP_SANDBOX" "APNS_VOIP_SANDBOX", :gcm "GCM", :sms "SMS", :adm "ADM", "APNS_SANDBOX" "APNS_SANDBOX", "EMAIL" "EMAIL", :baidu "BAIDU", :apns-voip-sandbox "APNS_VOIP_SANDBOX", :apns "APNS"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.pinpoint.get-import-jobs-request/application-id (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))
 (clojure.spec.alpha/def :portkey.aws.pinpoint.get-import-jobs-request/page-size (clojure.spec.alpha/and :portkey.aws.pinpoint/--string))

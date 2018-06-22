@@ -51,9 +51,9 @@
 
 (clojure.spec.alpha/def :portkey.aws.workdocs/document-source-url-map (clojure.spec.alpha/map-of :portkey.aws.workdocs/document-source-type :portkey.aws.workdocs/url-type))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/resource-id-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[\w+-.@]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/resource-id-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[\w+-.@]+" s__13770__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/principal-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"USER" "USER", "ORGANIZATION" "ORGANIZATION", :group "GROUP", :organization "ORGANIZATION", "INVITE" "INVITE", :anonymous "ANONYMOUS", :invite "INVITE", "ANONYMOUS" "ANONYMOUS", :user "USER", "GROUP" "GROUP"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.workdocs/principal-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"USER" "USER", "ORGANIZATION" "ORGANIZATION", :group "GROUP", :organization "ORGANIZATION", "INVITE" "INVITE", :anonymous "ANONYMOUS", :invite "INVITE", "ANONYMOUS" "ANONYMOUS", :user "USER", "GROUP" "GROUP"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.folder-metadata/created-timestamp (clojure.spec.alpha/and :portkey.aws.workdocs/timestamp-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs.folder-metadata/parent-folder-id (clojure.spec.alpha/and :portkey.aws.workdocs/resource-id-type))
@@ -76,9 +76,9 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.resource-path-component/name (clojure.spec.alpha/and :portkey.aws.workdocs/resource-name-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/resource-path-component (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.resource-path-component/Id :portkey.aws.workdocs.resource-path-component/Name] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/role-permission-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"DIRECT" "DIRECT", :direct "DIRECT", "INHERITED" "INHERITED", :inherited "INHERITED"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.workdocs/role-permission-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"DIRECT" "DIRECT", :direct "DIRECT", "INHERITED" "INHERITED", :inherited "INHERITED"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/group-metadata-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/group-metadata) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/group-metadata-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/group-metadata) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs/deactivating-last-system-user-exception (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
@@ -93,7 +93,7 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.update-user-request/authentication-token (clojure.spec.alpha/and :portkey.aws.workdocs/authentication-header-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/update-user-request (portkey.aws/json-keys :req-un [:portkey.aws.workdocs.update-user-request/UserId] :opt-un [:portkey.aws.workdocs.update-user-request/TimeZoneId :portkey.aws.workdocs.update-user-request/Type :portkey.aws.workdocs.update-user-request/Locale :portkey.aws.workdocs.update-user-request/Surname :portkey.aws.workdocs.update-user-request/GrantPoweruserPrivileges :portkey.aws.workdocs.update-user-request/GivenName :portkey.aws.workdocs.update-user-request/StorageRule :portkey.aws.workdocs.update-user-request/AuthenticationToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/document-status-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"INITIALIZED" "INITIALIZED", :initialized "INITIALIZED", "ACTIVE" "ACTIVE", :active "ACTIVE"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.workdocs/document-status-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"INITIALIZED" "INITIALIZED", :initialized "INITIALIZED", "ACTIVE" "ACTIVE", :active "ACTIVE"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.document-metadata/id (clojure.spec.alpha/and :portkey.aws.workdocs/resource-id-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs.document-metadata/creator-id (clojure.spec.alpha/and :portkey.aws.workdocs/id-type))
@@ -127,7 +127,7 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.describe-groups-request/limit (clojure.spec.alpha/and :portkey.aws.workdocs/positive-integer-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/describe-groups-request (portkey.aws/json-keys :req-un [:portkey.aws.workdocs.describe-groups-request/SearchQuery] :opt-un [:portkey.aws.workdocs.describe-groups-request/AuthenticationToken :portkey.aws.workdocs.describe-groups-request/OrganizationId :portkey.aws.workdocs.describe-groups-request/Marker :portkey.aws.workdocs.describe-groups-request/Limit] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/search-query-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 512)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[\u0020-\uFFFF]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/search-query-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 512)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[\u0020-\uFFFF]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.get-folder-request/authentication-token (clojure.spec.alpha/and :portkey.aws.workdocs/authentication-header-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs.get-folder-request/folder-id (clojure.spec.alpha/and :portkey.aws.workdocs/resource-id-type))
@@ -156,7 +156,7 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.comment/contributor (clojure.spec.alpha/and :portkey.aws.workdocs/user))
 (clojure.spec.alpha/def :portkey.aws.workdocs/comment (portkey.aws/json-keys :req-un [:portkey.aws.workdocs.comment/CommentId] :opt-un [:portkey.aws.workdocs.comment/RecipientId :portkey.aws.workdocs.comment/CreatedTimestamp :portkey.aws.workdocs.comment/Visibility :portkey.aws.workdocs.comment/ParentId :portkey.aws.workdocs.comment/Status :portkey.aws.workdocs.comment/ThreadId :portkey.aws.workdocs.comment/Text :portkey.aws.workdocs.comment/Contributor] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/marker-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 2048)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[\u0000-\u00FF]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/marker-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 2048)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[\u0000-\u00FF]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs/create-custom-metadata-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
@@ -173,7 +173,7 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.describe-activities-request/marker (clojure.spec.alpha/and :portkey.aws.workdocs/marker-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/describe-activities-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.describe-activities-request/AuthenticationToken :portkey.aws.workdocs.describe-activities-request/StartTime :portkey.aws.workdocs.describe-activities-request/EndTime :portkey.aws.workdocs.describe-activities-request/OrganizationId :portkey.aws.workdocs.describe-activities-request/UserId :portkey.aws.workdocs.describe-activities-request/Limit :portkey.aws.workdocs.describe-activities-request/Marker] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/resource-path-component-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/resource-path-component) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/resource-path-component-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/resource-path-component) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs/positive-size-type clojure.core/int?)
 
@@ -185,7 +185,7 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.remove-all-resource-permissions-request/resource-id (clojure.spec.alpha/and :portkey.aws.workdocs/resource-id-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/remove-all-resource-permissions-request (portkey.aws/json-keys :req-un [:portkey.aws.workdocs.remove-all-resource-permissions-request/ResourceId] :opt-un [:portkey.aws.workdocs.remove-all-resource-permissions-request/AuthenticationToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/document-content-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/document-content-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.get-document-path-request/authentication-token (clojure.spec.alpha/and :portkey.aws.workdocs/authentication-header-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs.get-document-path-request/document-id (clojure.spec.alpha/and :portkey.aws.workdocs/id-type))
@@ -200,7 +200,7 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.delete-comment-request/comment-id (clojure.spec.alpha/and :portkey.aws.workdocs/comment-id-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/delete-comment-request (portkey.aws/json-keys :req-un [:portkey.aws.workdocs.delete-comment-request/DocumentId :portkey.aws.workdocs.delete-comment-request/VersionId :portkey.aws.workdocs.delete-comment-request/CommentId] :opt-un [:portkey.aws.workdocs.delete-comment-request/AuthenticationToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/locale-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {:fr "fr", :ja "ja", "en" "en", :es "es", "zh_CN" "zh_CN", :default "default", "zh_TW" "zh_TW", :ko "ko", :zh-tw "zh_TW", "fr" "fr", :pt-br "pt_BR", "de" "de", :en "en", "ru" "ru", "es" "es", :de "de", "ja" "ja", :ru "ru", :zh-cn "zh_CN", "ko" "ko", "default" "default", "pt_BR" "pt_BR"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.workdocs/locale-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {:fr "fr", :ja "ja", "en" "en", :es "es", "zh_CN" "zh_CN", :default "default", "zh_TW" "zh_TW", :ko "ko", :zh-tw "zh_TW", "fr" "fr", :pt-br "pt_BR", "de" "de", :en "en", "ru" "ru", "es" "es", :de "de", "ja" "ja", :ru "ru", :zh-cn "zh_CN", "ko" "ko", "default" "default", "pt_BR" "pt_BR"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.delete-custom-metadata-request/authentication-token (clojure.spec.alpha/and :portkey.aws.workdocs/authentication-header-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs.delete-custom-metadata-request/resource-id (clojure.spec.alpha/and :portkey.aws.workdocs/resource-id-type))
@@ -213,9 +213,9 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.describe-comments-response/marker (clojure.spec.alpha/and :portkey.aws.workdocs/marker-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/describe-comments-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.describe-comments-response/Comments :portkey.aws.workdocs.describe-comments-response/Marker] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/user-metadata-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/user-metadata) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/user-metadata-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/user-metadata) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/custom-metadata-value-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 256)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/custom-metadata-value-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 256)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.describe-groups-response/groups (clojure.spec.alpha/and :portkey.aws.workdocs/group-metadata-list))
 (clojure.spec.alpha/def :portkey.aws.workdocs.describe-groups-response/marker (clojure.spec.alpha/and :portkey.aws.workdocs/marker-type))
@@ -235,7 +235,7 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.resource-metadata/parent-id (clojure.spec.alpha/and :portkey.aws.workdocs/resource-id-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/resource-metadata (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.resource-metadata/Type :portkey.aws.workdocs.resource-metadata/Name :portkey.aws.workdocs.resource-metadata/OriginalName :portkey.aws.workdocs.resource-metadata/Id :portkey.aws.workdocs.resource-metadata/VersionId :portkey.aws.workdocs.resource-metadata/Owner :portkey.aws.workdocs.resource-metadata/ParentId] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/user-activities (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/activity) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/user-activities (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/activity) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.describe-comments-request/authentication-token (clojure.spec.alpha/and :portkey.aws.workdocs/authentication-header-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs.describe-comments-request/document-id (clojure.spec.alpha/and :portkey.aws.workdocs/resource-id-type))
@@ -244,17 +244,17 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.describe-comments-request/marker (clojure.spec.alpha/and :portkey.aws.workdocs/marker-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/describe-comments-request (portkey.aws/json-keys :req-un [:portkey.aws.workdocs.describe-comments-request/DocumentId :portkey.aws.workdocs.describe-comments-request/VersionId] :opt-un [:portkey.aws.workdocs.describe-comments-request/AuthenticationToken :portkey.aws.workdocs.describe-comments-request/Limit :portkey.aws.workdocs.describe-comments-request/Marker] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/email-address-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 256)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/email-address-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 256)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs/signed-header-map (clojure.spec.alpha/map-of :portkey.aws.workdocs/header-name-type :portkey.aws.workdocs/header-value-type))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/user-ids-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 2000)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[&\w+-.@, ]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/user-ids-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 2000)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[&\w+-.@, ]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.entity-not-exists-exception/message (clojure.spec.alpha/and :portkey.aws.workdocs/error-message-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs.entity-not-exists-exception/entity-ids (clojure.spec.alpha/and :portkey.aws.workdocs/entity-id-list))
 (clojure.spec.alpha/def :portkey.aws.workdocs/entity-not-exists-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.entity-not-exists-exception/Message :portkey.aws.workdocs.entity-not-exists-exception/EntityIds] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/share-principal-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/share-principal) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/share-principal-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/share-principal) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.limit-exceeded-exception/message (clojure.spec.alpha/and :portkey.aws.workdocs/error-message-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/limit-exceeded-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.limit-exceeded-exception/Message] :locations {}))
@@ -262,12 +262,12 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.failed-dependency-exception/message (clojure.spec.alpha/and :portkey.aws.workdocs/error-message-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/failed-dependency-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.failed-dependency-exception/Message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/user-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"MINIMALUSER" "MINIMALUSER", "USER" "USER", :admin "ADMIN", :poweruser "POWERUSER", "POWERUSER" "POWERUSER", :workspacesuser "WORKSPACESUSER", "ADMIN" "ADMIN", :minimaluser "MINIMALUSER", "WORKSPACESUSER" "WORKSPACESUSER", :user "USER"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.workdocs/user-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"MINIMALUSER" "MINIMALUSER", "USER" "USER", :admin "ADMIN", :poweruser "POWERUSER", "POWERUSER" "POWERUSER", :workspacesuser "WORKSPACESUSER", "ADMIN" "ADMIN", :minimaluser "MINIMALUSER", "WORKSPACESUSER" "WORKSPACESUSER", :user "USER"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.too-many-labels-exception/message (clojure.spec.alpha/and :portkey.aws.workdocs/error-message-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/too-many-labels-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.too-many-labels-exception/Message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/comment-status-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"DRAFT" "DRAFT", :draft "DRAFT", "PUBLISHED" "PUBLISHED", :published "PUBLISHED", "DELETED" "DELETED", :deleted "DELETED"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.workdocs/comment-status-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"DRAFT" "DRAFT", :draft "DRAFT", "PUBLISHED" "PUBLISHED", :published "PUBLISHED", "DELETED" "DELETED", :deleted "DELETED"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.activity/type (clojure.spec.alpha/and :portkey.aws.workdocs/activity-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs.activity/time-stamp (clojure.spec.alpha/and :portkey.aws.workdocs/timestamp-type))
@@ -298,9 +298,9 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.create-notification-subscription-request/protocol (clojure.spec.alpha/and :portkey.aws.workdocs/subscription-protocol-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/create-notification-subscription-request (portkey.aws/json-keys :req-un [:portkey.aws.workdocs.create-notification-subscription-request/OrganizationId :portkey.aws.workdocs.create-notification-subscription-request/Endpoint :portkey.aws.workdocs.create-notification-subscription-request/Protocol :portkey.aws.workdocs/SubscriptionType] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/comment-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/comment) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/comment-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/comment) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/document-source-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"ORIGINAL" "ORIGINAL", :original "ORIGINAL", "WITH_COMMENTS" "WITH_COMMENTS", :with-comments "WITH_COMMENTS"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.workdocs/document-source-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"ORIGINAL" "ORIGINAL", :original "ORIGINAL", "WITH_COMMENTS" "WITH_COMMENTS", :with-comments "WITH_COMMENTS"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.service-unavailable-exception/message (clojure.spec.alpha/and :portkey.aws.workdocs/error-message-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/service-unavailable-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.service-unavailable-exception/Message] :locations {}))
@@ -308,11 +308,11 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.invalid-password-exception/message (clojure.spec.alpha/and :portkey.aws.workdocs/error-message-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/invalid-password-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.invalid-password-exception/Message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/username-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 256)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[\w\-+.]+(@[a-zA-Z0-9.\-]+\.[a-zA-Z]+)?" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/username-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 256)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[\w\-+.]+(@[a-zA-Z0-9.\-]+\.[a-zA-Z]+)?" s__13770__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/folder-metadata-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/folder-metadata) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/folder-metadata-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/folder-metadata) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/subscription-protocol-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"HTTPS" "HTTPS", :https "HTTPS"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.workdocs/subscription-protocol-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"HTTPS" "HTTPS", :https "HTTPS"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.document-version-metadata/created-timestamp (clojure.spec.alpha/and :portkey.aws.workdocs/timestamp-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs.document-version-metadata/source (clojure.spec.alpha/and :portkey.aws.workdocs/document-source-url-map))
@@ -329,7 +329,7 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.document-version-metadata/id (clojure.spec.alpha/and :portkey.aws.workdocs/document-version-id-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/document-version-metadata (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.document-version-metadata/CreatedTimestamp :portkey.aws.workdocs.document-version-metadata/Source :portkey.aws.workdocs.document-version-metadata/ContentModifiedTimestamp :portkey.aws.workdocs.document-version-metadata/Status :portkey.aws.workdocs.document-version-metadata/ModifiedTimestamp :portkey.aws.workdocs.document-version-metadata/ContentType :portkey.aws.workdocs.document-version-metadata/Signature :portkey.aws.workdocs.document-version-metadata/ContentCreatedTimestamp :portkey.aws.workdocs.document-version-metadata/Thumbnail :portkey.aws.workdocs.document-version-metadata/Size :portkey.aws.workdocs.document-version-metadata/CreatorId :portkey.aws.workdocs.document-version-metadata/Name :portkey.aws.workdocs.document-version-metadata/Id] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/share-status-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"SUCCESS" "SUCCESS", :success "SUCCESS", "FAILURE" "FAILURE", :failure "FAILURE"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.workdocs/share-status-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"SUCCESS" "SUCCESS", :success "SUCCESS", "FAILURE" "FAILURE", :failure "FAILURE"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs/size-type clojure.core/int?)
 
@@ -347,7 +347,7 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.custom-metadata-limit-exceeded-exception/message (clojure.spec.alpha/and :portkey.aws.workdocs/error-message-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/custom-metadata-limit-exceeded-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.custom-metadata-limit-exceeded-exception/Message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/comment-visibility-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"PUBLIC" "PUBLIC", :public "PUBLIC", "PRIVATE" "PRIVATE", :private "PRIVATE"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.workdocs/comment-visibility-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"PUBLIC" "PUBLIC", :public "PUBLIC", "PRIVATE" "PRIVATE", :private "PRIVATE"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.describe-notification-subscriptions-response/subscriptions (clojure.spec.alpha/and :portkey.aws.workdocs/subscription-list))
 (clojure.spec.alpha/def :portkey.aws.workdocs.describe-notification-subscriptions-response/marker (clojure.spec.alpha/and :portkey.aws.workdocs/page-marker-type))
@@ -370,9 +370,9 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.entity-already-exists-exception/message (clojure.spec.alpha/and :portkey.aws.workdocs/error-message-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/entity-already-exists-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.entity-already-exists-exception/Message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/principal-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/principal) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/principal-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/principal) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/url-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 1024))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/url-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 1024))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.invalid-operation-exception/message (clojure.spec.alpha/and :portkey.aws.workdocs/error-message-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/invalid-operation-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.invalid-operation-exception/Message] :locations {}))
@@ -380,21 +380,21 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.too-many-subscriptions-exception/message (clojure.spec.alpha/and :portkey.aws.workdocs/error-message-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/too-many-subscriptions-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.too-many-subscriptions-exception/Message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/organization-user-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/user) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/organization-user-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/user) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.unauthorized-resource-access-exception/message (clojure.spec.alpha/and :portkey.aws.workdocs/error-message-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/unauthorized-resource-access-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.unauthorized-resource-access-exception/Message] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs/activate-user-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs/User] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/shared-label (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 32)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/shared-label (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 32)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*" s__13770__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/password-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 4 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 32)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[\u0020-\u00FF]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/password-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 4 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 32)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[\u0020-\u00FF]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.describe-activities-response/marker (clojure.spec.alpha/and :portkey.aws.workdocs/marker-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/describe-activities-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs/UserActivities :portkey.aws.workdocs.describe-activities-response/Marker] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/user-sort-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"STORAGE_LIMIT" "STORAGE_LIMIT", :user-status "USER_STATUS", :storage-limit "STORAGE_LIMIT", :user-name "USER_NAME", "USER_STATUS" "USER_STATUS", :storage-used "STORAGE_USED", :full-name "FULL_NAME", "FULL_NAME" "FULL_NAME", "STORAGE_USED" "STORAGE_USED", "USER_NAME" "USER_NAME"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.workdocs/user-sort-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"STORAGE_LIMIT" "STORAGE_LIMIT", :user-status "USER_STATUS", :storage-limit "STORAGE_LIMIT", :user-name "USER_NAME", "USER_STATUS" "USER_STATUS", :storage-used "STORAGE_USED", :full-name "FULL_NAME", "FULL_NAME" "FULL_NAME", "STORAGE_USED" "STORAGE_USED", "USER_NAME" "USER_NAME"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.upload-metadata/upload-url (clojure.spec.alpha/and :portkey.aws.workdocs/url-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs.upload-metadata/signed-headers (clojure.spec.alpha/and :portkey.aws.workdocs/signed-header-map))
@@ -403,11 +403,11 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.prohibited-state-exception/message (clojure.spec.alpha/and :portkey.aws.workdocs/error-message-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/prohibited-state-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.prohibited-state-exception/Message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/activity-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"DOCUMENT_REVERTED" "DOCUMENT_REVERTED", :document-comment-added "DOCUMENT_COMMENT_ADDED", :folder-share-permission-changed "FOLDER_SHARE_PERMISSION_CHANGED", "FOLDER_SHAREABLE_LINK_CREATED" "FOLDER_SHAREABLE_LINK_CREATED", "DOCUMENT_SHARE_PERMISSION_CHANGED" "DOCUMENT_SHARE_PERMISSION_CHANGED", :folder-shareable-link-permission-changed "FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED", :folder-recycled "FOLDER_RECYCLED", "DOCUMENT_SHAREABLE_LINK_REMOVED" "DOCUMENT_SHAREABLE_LINK_REMOVED", "FOLDER_RESTORED" "FOLDER_RESTORED", "FOLDER_SHAREABLE_LINK_REMOVED" "FOLDER_SHAREABLE_LINK_REMOVED", "DOCUMENT_COMMENT_DELETED" "DOCUMENT_COMMENT_DELETED", "FOLDER_RECYCLED" "FOLDER_RECYCLED", :document-annotation-deleted "DOCUMENT_ANNOTATION_DELETED", :document-unshared "DOCUMENT_UNSHARED", :document-share-permission-changed "DOCUMENT_SHARE_PERMISSION_CHANGED", "DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED" "DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED", :folder-moved "FOLDER_MOVED", :folder-shared "FOLDER_SHARED", :folder-renamed "FOLDER_RENAMED", "DOCUMENT_RESTORED" "DOCUMENT_RESTORED", "DOCUMENT_UNSHARED" "DOCUMENT_UNSHARED", :document-comment-deleted "DOCUMENT_COMMENT_DELETED", :document-annotation-added "DOCUMENT_ANNOTATION_ADDED", :folder-deleted "FOLDER_DELETED", :folder-unshared "FOLDER_UNSHARED", "DOCUMENT_ANNOTATION_DELETED" "DOCUMENT_ANNOTATION_DELETED", "DOCUMENT_RENAMED" "DOCUMENT_RENAMED", :document-shared "DOCUMENT_SHARED", "FOLDER_CREATED" "FOLDER_CREATED", "FOLDER_MOVED" "FOLDER_MOVED", :document-version-uploaded "DOCUMENT_VERSION_UPLOADED", "FOLDER_DELETED" "FOLDER_DELETED", :folder-shareable-link-removed "FOLDER_SHAREABLE_LINK_REMOVED", "FOLDER_RENAMED" "FOLDER_RENAMED", "DOCUMENT_SHARED" "DOCUMENT_SHARED", :document-version-deleted "DOCUMENT_VERSION_DELETED", "FOLDER_SHARE_PERMISSION_CHANGED" "FOLDER_SHARE_PERMISSION_CHANGED", :document-restored "DOCUMENT_RESTORED", :document-shareable-link-permission-changed "DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED", :folder-shareable-link-created "FOLDER_SHAREABLE_LINK_CREATED", :document-reverted "DOCUMENT_REVERTED", "DOCUMENT_ANNOTATION_ADDED" "DOCUMENT_ANNOTATION_ADDED", "DOCUMENT_VERSION_UPLOADED" "DOCUMENT_VERSION_UPLOADED", "DOCUMENT_COMMENT_ADDED" "DOCUMENT_COMMENT_ADDED", "DOCUMENT_SHAREABLE_LINK_CREATED" "DOCUMENT_SHAREABLE_LINK_CREATED", :document-moved "DOCUMENT_MOVED", "FOLDER_SHARED" "FOLDER_SHARED", :document-shareable-link-created "DOCUMENT_SHAREABLE_LINK_CREATED", "DOCUMENT_VERSION_DELETED" "DOCUMENT_VERSION_DELETED", "FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED" "FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED", :document-renamed "DOCUMENT_RENAMED", :folder-created "FOLDER_CREATED", "DOCUMENT_CHECKED_IN" "DOCUMENT_CHECKED_IN", :document-checked-in "DOCUMENT_CHECKED_IN", "FOLDER_UNSHARED" "FOLDER_UNSHARED", "DOCUMENT_RECYCLED" "DOCUMENT_RECYCLED", "DOCUMENT_MOVED" "DOCUMENT_MOVED", "DOCUMENT_CHECKED_OUT" "DOCUMENT_CHECKED_OUT", :folder-restored "FOLDER_RESTORED", :document-shareable-link-removed "DOCUMENT_SHAREABLE_LINK_REMOVED", :document-recycled "DOCUMENT_RECYCLED", :document-checked-out "DOCUMENT_CHECKED_OUT"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.workdocs/activity-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"DOCUMENT_REVERTED" "DOCUMENT_REVERTED", :document-comment-added "DOCUMENT_COMMENT_ADDED", :folder-share-permission-changed "FOLDER_SHARE_PERMISSION_CHANGED", "FOLDER_SHAREABLE_LINK_CREATED" "FOLDER_SHAREABLE_LINK_CREATED", "DOCUMENT_SHARE_PERMISSION_CHANGED" "DOCUMENT_SHARE_PERMISSION_CHANGED", :folder-shareable-link-permission-changed "FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED", :folder-recycled "FOLDER_RECYCLED", "DOCUMENT_SHAREABLE_LINK_REMOVED" "DOCUMENT_SHAREABLE_LINK_REMOVED", "FOLDER_RESTORED" "FOLDER_RESTORED", "FOLDER_SHAREABLE_LINK_REMOVED" "FOLDER_SHAREABLE_LINK_REMOVED", "DOCUMENT_COMMENT_DELETED" "DOCUMENT_COMMENT_DELETED", "FOLDER_RECYCLED" "FOLDER_RECYCLED", :document-annotation-deleted "DOCUMENT_ANNOTATION_DELETED", :document-unshared "DOCUMENT_UNSHARED", :document-share-permission-changed "DOCUMENT_SHARE_PERMISSION_CHANGED", "DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED" "DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED", :folder-moved "FOLDER_MOVED", :folder-shared "FOLDER_SHARED", :folder-renamed "FOLDER_RENAMED", "DOCUMENT_RESTORED" "DOCUMENT_RESTORED", "DOCUMENT_UNSHARED" "DOCUMENT_UNSHARED", :document-comment-deleted "DOCUMENT_COMMENT_DELETED", :document-annotation-added "DOCUMENT_ANNOTATION_ADDED", :folder-deleted "FOLDER_DELETED", :folder-unshared "FOLDER_UNSHARED", "DOCUMENT_ANNOTATION_DELETED" "DOCUMENT_ANNOTATION_DELETED", "DOCUMENT_RENAMED" "DOCUMENT_RENAMED", :document-shared "DOCUMENT_SHARED", "FOLDER_CREATED" "FOLDER_CREATED", "FOLDER_MOVED" "FOLDER_MOVED", :document-version-uploaded "DOCUMENT_VERSION_UPLOADED", "FOLDER_DELETED" "FOLDER_DELETED", :folder-shareable-link-removed "FOLDER_SHAREABLE_LINK_REMOVED", "FOLDER_RENAMED" "FOLDER_RENAMED", "DOCUMENT_SHARED" "DOCUMENT_SHARED", :document-version-deleted "DOCUMENT_VERSION_DELETED", "FOLDER_SHARE_PERMISSION_CHANGED" "FOLDER_SHARE_PERMISSION_CHANGED", :document-restored "DOCUMENT_RESTORED", :document-shareable-link-permission-changed "DOCUMENT_SHAREABLE_LINK_PERMISSION_CHANGED", :folder-shareable-link-created "FOLDER_SHAREABLE_LINK_CREATED", :document-reverted "DOCUMENT_REVERTED", "DOCUMENT_ANNOTATION_ADDED" "DOCUMENT_ANNOTATION_ADDED", "DOCUMENT_VERSION_UPLOADED" "DOCUMENT_VERSION_UPLOADED", "DOCUMENT_COMMENT_ADDED" "DOCUMENT_COMMENT_ADDED", "DOCUMENT_SHAREABLE_LINK_CREATED" "DOCUMENT_SHAREABLE_LINK_CREATED", :document-moved "DOCUMENT_MOVED", "FOLDER_SHARED" "FOLDER_SHARED", :document-shareable-link-created "DOCUMENT_SHAREABLE_LINK_CREATED", "DOCUMENT_VERSION_DELETED" "DOCUMENT_VERSION_DELETED", "FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED" "FOLDER_SHAREABLE_LINK_PERMISSION_CHANGED", :document-renamed "DOCUMENT_RENAMED", :folder-created "FOLDER_CREATED", "DOCUMENT_CHECKED_IN" "DOCUMENT_CHECKED_IN", :document-checked-in "DOCUMENT_CHECKED_IN", "FOLDER_UNSHARED" "FOLDER_UNSHARED", "DOCUMENT_RECYCLED" "DOCUMENT_RECYCLED", "DOCUMENT_MOVED" "DOCUMENT_MOVED", "DOCUMENT_CHECKED_OUT" "DOCUMENT_CHECKED_OUT", :folder-restored "FOLDER_RESTORED", :document-shareable-link-removed "DOCUMENT_SHAREABLE_LINK_REMOVED", :document-recycled "DOCUMENT_RECYCLED", :document-checked-out "DOCUMENT_CHECKED_OUT"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/user-status-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"ACTIVE" "ACTIVE", :active "ACTIVE", "INACTIVE" "INACTIVE", :inactive "INACTIVE", "PENDING" "PENDING", :pending "PENDING"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.workdocs/user-status-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"ACTIVE" "ACTIVE", :active "ACTIVE", "INACTIVE" "INACTIVE", :inactive "INACTIVE", "PENDING" "PENDING", :pending "PENDING"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/page-marker-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 2048))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/page-marker-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 2048))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.describe-resource-permissions-response/principals (clojure.spec.alpha/and :portkey.aws.workdocs/principal-list))
 (clojure.spec.alpha/def :portkey.aws.workdocs.describe-resource-permissions-response/marker (clojure.spec.alpha/and :portkey.aws.workdocs/page-marker-type))
@@ -422,7 +422,7 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.update-document-request/resource-state (clojure.spec.alpha/and :portkey.aws.workdocs/resource-state-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/update-document-request (portkey.aws/json-keys :req-un [:portkey.aws.workdocs.update-document-request/DocumentId] :opt-un [:portkey.aws.workdocs.update-document-request/AuthenticationToken :portkey.aws.workdocs.update-document-request/Name :portkey.aws.workdocs.update-document-request/ParentFolderId :portkey.aws.workdocs.update-document-request/ResourceState] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/subscription-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/subscription :max-count 256) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/subscription-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/subscription :max-count 256) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs/create-notification-subscription-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs/Subscription] :locations {}))
 
@@ -440,9 +440,9 @@
 
 (clojure.spec.alpha/def :portkey.aws.workdocs/unauthorized-operation-exception (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/subscription-end-point-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 256))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/subscription-end-point-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 256))))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/authentication-header-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 8199))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/authentication-header-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 8199))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.get-folder-path-request/authentication-token (clojure.spec.alpha/and :portkey.aws.workdocs/authentication-header-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs.get-folder-path-request/folder-id (clojure.spec.alpha/and :portkey.aws.workdocs/id-type))
@@ -451,27 +451,27 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.get-folder-path-request/marker (clojure.spec.alpha/and :portkey.aws.workdocs/page-marker-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/get-folder-path-request (portkey.aws/json-keys :req-un [:portkey.aws.workdocs.get-folder-path-request/FolderId] :opt-un [:portkey.aws.workdocs.get-folder-path-request/AuthenticationToken :portkey.aws.workdocs.get-folder-path-request/Limit :portkey.aws.workdocs.get-folder-path-request/Fields :portkey.aws.workdocs.get-folder-path-request/Marker] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/document-thumbnail-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"SMALL" "SMALL", :small "SMALL", "SMALL_HQ" "SMALL_HQ", :small-hq "SMALL_HQ", "LARGE" "LARGE", :large "LARGE"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.workdocs/document-thumbnail-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"SMALL" "SMALL", :small "SMALL", "SMALL_HQ" "SMALL_HQ", :small-hq "SMALL_HQ", "LARGE" "LARGE", :large "LARGE"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.participants/users (clojure.spec.alpha/and :portkey.aws.workdocs/user-metadata-list))
 (clojure.spec.alpha/def :portkey.aws.workdocs.participants/groups (clojure.spec.alpha/and :portkey.aws.workdocs/group-metadata-list))
 (clojure.spec.alpha/def :portkey.aws.workdocs/participants (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.participants/Users :portkey.aws.workdocs.participants/Groups] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/custom-metadata-key-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 56)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/custom-metadata-key-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 56)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[a-zA-Z0-9._+-/=][a-zA-Z0-9 ._+-/=]*" s__13770__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/resource-name-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 255)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[\u0020-\u202D\u202F-\uFFFF]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/resource-name-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 255)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[\u0020-\u202D\u202F-\uFFFF]+" s__13770__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/resource-sort-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"DATE" "DATE", :date "DATE", "NAME" "NAME", :name "NAME"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.workdocs/resource-sort-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"DATE" "DATE", :date "DATE", "NAME" "NAME", :name "NAME"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs/create-labels-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/time-zone-id-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 256))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/time-zone-id-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 256))))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/user-filter-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"ALL" "ALL", :all "ALL", "ACTIVE_PENDING" "ACTIVE_PENDING", :active-pending "ACTIVE_PENDING"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.workdocs/user-filter-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"ALL" "ALL", :all "ALL", "ACTIVE_PENDING" "ACTIVE_PENDING", :active-pending "ACTIVE_PENDING"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/id-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 256)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[&\w+-.@]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/id-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 256)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[&\w+-.@]+" s__13770__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/subscription-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"ALL" "ALL", :all "ALL"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.workdocs/subscription-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"ALL" "ALL", :all "ALL"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs/create-comment-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs/Comment] :locations {}))
 
@@ -485,7 +485,7 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.storage-rule-type/storage-allocated-in-bytes (clojure.spec.alpha/and :portkey.aws.workdocs/positive-size-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/storage-rule-type (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.storage-rule-type/StorageAllocatedInBytes :portkey.aws.workdocs/StorageType] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/resource-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"FOLDER" "FOLDER", :folder "FOLDER", "DOCUMENT" "DOCUMENT", :document "DOCUMENT"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.workdocs/resource-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"FOLDER" "FOLDER", :folder "FOLDER", "DOCUMENT" "DOCUMENT", :document "DOCUMENT"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.invalid-argument-exception/message (clojure.spec.alpha/and :portkey.aws.workdocs/error-message-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/invalid-argument-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.invalid-argument-exception/Message] :locations {}))
@@ -494,12 +494,12 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.delete-folder-contents-request/folder-id (clojure.spec.alpha/and :portkey.aws.workdocs/resource-id-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/delete-folder-contents-request (portkey.aws/json-keys :req-un [:portkey.aws.workdocs.delete-folder-contents-request/FolderId] :opt-un [:portkey.aws.workdocs.delete-folder-contents-request/AuthenticationToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/comment-id-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[\w+-.@]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/comment-id-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[\w+-.@]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.get-current-user-request/authentication-token (clojure.spec.alpha/and :portkey.aws.workdocs/authentication-header-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/get-current-user-request (portkey.aws/json-keys :req-un [:portkey.aws.workdocs.get-current-user-request/AuthenticationToken] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/resource-state-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"ACTIVE" "ACTIVE", :active "ACTIVE", "RESTORING" "RESTORING", :restoring "RESTORING", "RECYCLING" "RECYCLING", :recycling "RECYCLING", "RECYCLED" "RECYCLED", :recycled "RECYCLED"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.workdocs/resource-state-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"ACTIVE" "ACTIVE", :active "ACTIVE", "RESTORING" "RESTORING", :restoring "RESTORING", "RECYCLING" "RECYCLING", :recycling "RECYCLING", "RECYCLED" "RECYCLED", :recycled "RECYCLED"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.delete-document-request/authentication-token (clojure.spec.alpha/and :portkey.aws.workdocs/authentication-header-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs.delete-document-request/document-id (clojure.spec.alpha/and :portkey.aws.workdocs/resource-id-type))
@@ -508,7 +508,7 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.resource-path/components (clojure.spec.alpha/and :portkey.aws.workdocs/resource-path-component-list))
 (clojure.spec.alpha/def :portkey.aws.workdocs/resource-path (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.resource-path/Components] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/storage-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"UNLIMITED" "UNLIMITED", :unlimited "UNLIMITED", "QUOTA" "QUOTA", :quota "QUOTA"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.workdocs/storage-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"UNLIMITED" "UNLIMITED", :unlimited "UNLIMITED", "QUOTA" "QUOTA", :quota "QUOTA"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.update-document-version-request/authentication-token (clojure.spec.alpha/and :portkey.aws.workdocs/authentication-header-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs.update-document-version-request/document-id (clojure.spec.alpha/and :portkey.aws.workdocs/resource-id-type))
@@ -522,9 +522,9 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.delete-folder-request/folder-id (clojure.spec.alpha/and :portkey.aws.workdocs/resource-id-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/delete-folder-request (portkey.aws/json-keys :req-un [:portkey.aws.workdocs.delete-folder-request/FolderId] :opt-un [:portkey.aws.workdocs.delete-folder-request/AuthenticationToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/document-version-metadata-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/document-version-metadata) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/document-version-metadata-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/document-version-metadata) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/message-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 0 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 2048))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/message-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 0 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 2048))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.create-user-request/username (clojure.spec.alpha/and :portkey.aws.workdocs/username-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs.create-user-request/time-zone-id (clojure.spec.alpha/and :portkey.aws.workdocs/time-zone-id-type))
@@ -537,9 +537,9 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.create-user-request/authentication-token (clojure.spec.alpha/and :portkey.aws.workdocs/authentication-header-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/create-user-request (portkey.aws/json-keys :req-un [:portkey.aws.workdocs.create-user-request/Username :portkey.aws.workdocs.create-user-request/GivenName :portkey.aws.workdocs.create-user-request/Surname :portkey.aws.workdocs.create-user-request/Password] :opt-un [:portkey.aws.workdocs.create-user-request/TimeZoneId :portkey.aws.workdocs.create-user-request/OrganizationId :portkey.aws.workdocs.create-user-request/StorageRule :portkey.aws.workdocs.create-user-request/EmailAddress :portkey.aws.workdocs.create-user-request/AuthenticationToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/document-metadata-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/document-metadata) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/document-metadata-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/document-metadata) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/document-version-id-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[\w+-.@]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/document-version-id-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[\w+-.@]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.describe-root-folders-request/authentication-token (clojure.spec.alpha/and :portkey.aws.workdocs/authentication-header-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs.describe-root-folders-request/limit (clojure.spec.alpha/and :portkey.aws.workdocs/limit-type))
@@ -551,7 +551,7 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.describe-folder-contents-response/marker (clojure.spec.alpha/and :portkey.aws.workdocs/page-marker-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/describe-folder-contents-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.describe-folder-contents-response/Folders :portkey.aws.workdocs.describe-folder-contents-response/Documents :portkey.aws.workdocs.describe-folder-contents-response/Marker] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/positive-integer-type (clojure.spec.alpha/and clojure.core/int? (fn* [p1__16202__16203__auto__] (clojure.core/<= 1 p1__16202__16203__auto__))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/positive-integer-type (clojure.spec.alpha/and clojure.core/int? (fn* [p1__13828__13829__auto__] (clojure.core/<= 1 p1__13828__13829__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.storage-limit-exceeded-exception/message (clojure.spec.alpha/and :portkey.aws.workdocs/error-message-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/storage-limit-exceeded-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.storage-limit-exceeded-exception/Message] :locations {}))
@@ -566,7 +566,7 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.subscription/protocol (clojure.spec.alpha/and :portkey.aws.workdocs/subscription-protocol-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/subscription (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.subscription/SubscriptionId :portkey.aws.workdocs.subscription/EndPoint :portkey.aws.workdocs.subscription/Protocol] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/hash-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 0 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[&\w+-.@]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/hash-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 0 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[&\w+-.@]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.delete-user-request/authentication-token (clojure.spec.alpha/and :portkey.aws.workdocs/authentication-header-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs.delete-user-request/user-id (clojure.spec.alpha/and :portkey.aws.workdocs/id-type))
@@ -576,17 +576,17 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.permission-info/type (clojure.spec.alpha/and :portkey.aws.workdocs/role-permission-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/permission-info (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.permission-info/Role :portkey.aws.workdocs.permission-info/Type] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/folder-content-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"ALL" "ALL", :all "ALL", "DOCUMENT" "DOCUMENT", :document "DOCUMENT", "FOLDER" "FOLDER", :folder "FOLDER"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.workdocs/folder-content-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"ALL" "ALL", :all "ALL", "DOCUMENT" "DOCUMENT", :document "DOCUMENT", "FOLDER" "FOLDER", :folder "FOLDER"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs/document-thumbnail-url-map (clojure.spec.alpha/map-of :portkey.aws.workdocs/document-thumbnail-type :portkey.aws.workdocs/url-type))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/permission-info-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/permission-info) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/permission-info-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/permission-info) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/limit-type (clojure.spec.alpha/and clojure.core/int? (fn* [p1__16202__16203__auto__] (clojure.core/<= 1 p1__16202__16203__auto__)) (fn* [p1__16204__16205__auto__] (clojure.core/<= p1__16204__16205__auto__ 999))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/limit-type (clojure.spec.alpha/and clojure.core/int? (fn* [p1__13828__13829__auto__] (clojure.core/<= 1 p1__13828__13829__auto__)) (fn* [p1__13830__13831__auto__] (clojure.core/<= p1__13830__13831__auto__ 999))))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/field-names-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 256)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[\w,]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/field-names-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 256)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[\w,]+" s__13770__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/header-name-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 256)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[\w-]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/header-name-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 256)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[\w-]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.initiate-document-version-upload-response/metadata (clojure.spec.alpha/and :portkey.aws.workdocs/document-metadata))
 (clojure.spec.alpha/def :portkey.aws.workdocs/initiate-document-version-upload-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.initiate-document-version-upload-response/Metadata :portkey.aws.workdocs/UploadMetadata] :locations {}))
@@ -595,18 +595,18 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.get-document-response/custom-metadata (clojure.spec.alpha/and :portkey.aws.workdocs/custom-metadata-map))
 (clojure.spec.alpha/def :portkey.aws.workdocs/get-document-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.get-document-response/Metadata :portkey.aws.workdocs.get-document-response/CustomMetadata] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/document-version-status (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"ACTIVE" "ACTIVE", :active "ACTIVE"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.workdocs/document-version-status (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"ACTIVE" "ACTIVE", :active "ACTIVE"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/order-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"ASCENDING" "ASCENDING", :ascending "ASCENDING", "DESCENDING" "DESCENDING", :descending "DESCENDING"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.workdocs/order-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"ASCENDING" "ASCENDING", :ascending "ASCENDING", "DESCENDING" "DESCENDING", :descending "DESCENDING"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/entity-id-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/id-type) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/entity-id-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/id-type) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.share-principal/id (clojure.spec.alpha/and :portkey.aws.workdocs/id-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs.share-principal/type (clojure.spec.alpha/and :portkey.aws.workdocs/principal-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs.share-principal/role (clojure.spec.alpha/and :portkey.aws.workdocs/role-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/share-principal (portkey.aws/json-keys :req-un [:portkey.aws.workdocs.share-principal/Id :portkey.aws.workdocs.share-principal/Type :portkey.aws.workdocs.share-principal/Role] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/boolean-enum-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"TRUE" "TRUE", :true "TRUE", "FALSE" "FALSE", :false "FALSE"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.workdocs/boolean-enum-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"TRUE" "TRUE", :true "TRUE", "FALSE" "FALSE", :false "FALSE"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.concurrent-modification-exception/message (clojure.spec.alpha/and :portkey.aws.workdocs/error-message-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/concurrent-modification-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.concurrent-modification-exception/Message] :locations {}))
@@ -639,27 +639,27 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.principal/roles (clojure.spec.alpha/and :portkey.aws.workdocs/permission-info-list))
 (clojure.spec.alpha/def :portkey.aws.workdocs/principal (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.principal/Id :portkey.aws.workdocs.principal/Type :portkey.aws.workdocs.principal/Roles] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/comment-text-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 2048))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/comment-text-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 2048))))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/user-attribute-value-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 64))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/user-attribute-value-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 64))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.describe-root-folders-response/folders (clojure.spec.alpha/and :portkey.aws.workdocs/folder-metadata-list))
 (clojure.spec.alpha/def :portkey.aws.workdocs.describe-root-folders-response/marker (clojure.spec.alpha/and :portkey.aws.workdocs/page-marker-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/describe-root-folders-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.describe-root-folders-response/Folders :portkey.aws.workdocs.describe-root-folders-response/Marker] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/custom-metadata-key-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/custom-metadata-key-type :max-count 8) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/custom-metadata-key-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/custom-metadata-key-type :max-count 8) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.describe-document-versions-response/document-versions (clojure.spec.alpha/and :portkey.aws.workdocs/document-version-metadata-list))
 (clojure.spec.alpha/def :portkey.aws.workdocs.describe-document-versions-response/marker (clojure.spec.alpha/and :portkey.aws.workdocs/page-marker-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/describe-document-versions-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.describe-document-versions-response/DocumentVersions :portkey.aws.workdocs.describe-document-versions-response/Marker] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/shared-labels (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/shared-label :max-count 20) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/shared-labels (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/shared-label :max-count 20) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.delete-notification-subscription-request/subscription-id (clojure.spec.alpha/and :portkey.aws.workdocs/id-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs.delete-notification-subscription-request/organization-id (clojure.spec.alpha/and :portkey.aws.workdocs/id-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/delete-notification-subscription-request (portkey.aws/json-keys :req-un [:portkey.aws.workdocs.delete-notification-subscription-request/SubscriptionId :portkey.aws.workdocs.delete-notification-subscription-request/OrganizationId] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/share-results-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/share-result) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/share-results-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.workdocs/share-result) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.user-storage-metadata/storage-utilized-in-bytes (clojure.spec.alpha/and :portkey.aws.workdocs/size-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs.user-storage-metadata/storage-rule (clojure.spec.alpha/and :portkey.aws.workdocs/storage-rule-type))
@@ -730,14 +730,14 @@
 (clojure.spec.alpha/def :portkey.aws.workdocs.comment-metadata/recipient-id (clojure.spec.alpha/and :portkey.aws.workdocs/id-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/comment-metadata (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.comment-metadata/CommentId :portkey.aws.workdocs.comment-metadata/Contributor :portkey.aws.workdocs.comment-metadata/CreatedTimestamp :portkey.aws.workdocs.comment-metadata/CommentStatus :portkey.aws.workdocs.comment-metadata/RecipientId] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/role-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"VIEWER" "VIEWER", :viewer "VIEWER", "CONTRIBUTOR" "CONTRIBUTOR", :contributor "CONTRIBUTOR", "OWNER" "OWNER", :owner "OWNER", "COOWNER" "COOWNER", :coowner "COOWNER"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.workdocs/role-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"VIEWER" "VIEWER", :viewer "VIEWER", "CONTRIBUTOR" "CONTRIBUTOR", :contributor "CONTRIBUTOR", "OWNER" "OWNER", :owner "OWNER", "COOWNER" "COOWNER", :coowner "COOWNER"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.abort-document-version-upload-request/authentication-token (clojure.spec.alpha/and :portkey.aws.workdocs/authentication-header-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs.abort-document-version-upload-request/document-id (clojure.spec.alpha/and :portkey.aws.workdocs/resource-id-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs.abort-document-version-upload-request/version-id (clojure.spec.alpha/and :portkey.aws.workdocs/document-version-id-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/abort-document-version-upload-request (portkey.aws/json-keys :req-un [:portkey.aws.workdocs.abort-document-version-upload-request/DocumentId :portkey.aws.workdocs.abort-document-version-upload-request/VersionId] :opt-un [:portkey.aws.workdocs.abort-document-version-upload-request/AuthenticationToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.workdocs/header-value-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 1024))))
+(clojure.spec.alpha/def :portkey.aws.workdocs/header-value-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 1024))))
 
 (clojure.spec.alpha/def :portkey.aws.workdocs.illegal-user-state-exception/message (clojure.spec.alpha/and :portkey.aws.workdocs/error-message-type))
 (clojure.spec.alpha/def :portkey.aws.workdocs/illegal-user-state-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.workdocs.illegal-user-state-exception/Message] :locations {}))

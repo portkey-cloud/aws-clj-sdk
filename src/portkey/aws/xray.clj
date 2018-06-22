@@ -73,16 +73,16 @@
     :endpoint "https://xray.ap-south-1.amazonaws.com",
     :signature-version :v4}})
 
-(clojure.spec.alpha/def :portkey.aws.xray/trace-summary-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/trace-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.xray/trace-summary-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/trace-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.xray/service-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/service) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.xray/service-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/service) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.xray.error-statistics/throttle-count (clojure.spec.alpha/and :portkey.aws.xray/nullable-long))
 (clojure.spec.alpha/def :portkey.aws.xray.error-statistics/other-count (clojure.spec.alpha/and :portkey.aws.xray/nullable-long))
 (clojure.spec.alpha/def :portkey.aws.xray.error-statistics/total-count (clojure.spec.alpha/and :portkey.aws.xray/nullable-long))
 (clojure.spec.alpha/def :portkey.aws.xray/error-statistics (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.xray.error-statistics/ThrottleCount :portkey.aws.xray.error-statistics/OtherCount :portkey.aws.xray.error-statistics/TotalCount] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.xray/segment-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/segment) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.xray/segment-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/segment) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.xray.trace-summary/has-throttle (clojure.spec.alpha/and :portkey.aws.xray/nullable-boolean))
 (clojure.spec.alpha/def :portkey.aws.xray.trace-summary/has-error (clojure.spec.alpha/and :portkey.aws.xray/nullable-boolean))
@@ -109,9 +109,9 @@
 (clojure.spec.alpha/def :portkey.aws.xray.edge/aliases (clojure.spec.alpha/and :portkey.aws.xray/alias-list))
 (clojure.spec.alpha/def :portkey.aws.xray/edge (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.xray.edge/ReferenceId :portkey.aws.xray.edge/StartTime :portkey.aws.xray.edge/EndTime :portkey.aws.xray.edge/SummaryStatistics :portkey.aws.xray.edge/ResponseTimeHistogram :portkey.aws.xray.edge/Aliases] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.xray/histogram (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/histogram-entry) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.xray/histogram (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/histogram-entry) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.xray/trace-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/trace) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.xray/trace-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/trace) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.xray.get-trace-summaries-request/start-time (clojure.spec.alpha/and :portkey.aws.xray/timestamp))
 (clojure.spec.alpha/def :portkey.aws.xray.get-trace-summaries-request/end-time (clojure.spec.alpha/and :portkey.aws.xray/timestamp))
@@ -119,12 +119,12 @@
 (clojure.spec.alpha/def :portkey.aws.xray.get-trace-summaries-request/next-token (clojure.spec.alpha/and :portkey.aws.xray/string))
 (clojure.spec.alpha/def :portkey.aws.xray/get-trace-summaries-request (portkey.aws/json-keys :req-un [:portkey.aws.xray.get-trace-summaries-request/StartTime :portkey.aws.xray.get-trace-summaries-request/EndTime] :opt-un [:portkey.aws.xray.get-trace-summaries-request/Sampling :portkey.aws.xray/FilterExpression :portkey.aws.xray.get-trace-summaries-request/NextToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.xray/edge-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/edge) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.xray/edge-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/edge) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.xray.invalid-request-exception/message (clojure.spec.alpha/and :portkey.aws.xray/error-message))
 (clojure.spec.alpha/def :portkey.aws.xray/invalid-request-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.xray.invalid-request-exception/Message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.xray/encryption-key-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 3000))))
+(clojure.spec.alpha/def :portkey.aws.xray/encryption-key-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 3000))))
 
 (clojure.spec.alpha/def :portkey.aws.xray.trace/id (clojure.spec.alpha/and :portkey.aws.xray/trace-id))
 (clojure.spec.alpha/def :portkey.aws.xray.trace/duration (clojure.spec.alpha/and :portkey.aws.xray/nullable-double))
@@ -138,9 +138,9 @@
 (clojure.spec.alpha/def :portkey.aws.xray.trace-user/user-name (clojure.spec.alpha/and :portkey.aws.xray/string))
 (clojure.spec.alpha/def :portkey.aws.xray/trace-user (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.xray.trace-user/UserName :portkey.aws.xray/ServiceIds] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.xray/unprocessed-trace-segment-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/unprocessed-trace-segment) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.xray/unprocessed-trace-segment-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/unprocessed-trace-segment) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.xray/trace-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 35))))
+(clojure.spec.alpha/def :portkey.aws.xray/trace-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 35))))
 
 (clojure.spec.alpha/def :portkey.aws.xray/annotations (clojure.spec.alpha/map-of :portkey.aws.xray/annotation-key :portkey.aws.xray/values-with-service-ids))
 
@@ -149,7 +149,7 @@
 (clojure.spec.alpha/def :portkey.aws.xray.alias/type (clojure.spec.alpha/and :portkey.aws.xray/string))
 (clojure.spec.alpha/def :portkey.aws.xray/alias (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.xray.alias/Name :portkey.aws.xray.alias/Names :portkey.aws.xray.alias/Type] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.xray/encryption-status (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"UPDATING" "UPDATING", :updating "UPDATING", "ACTIVE" "ACTIVE", :active "ACTIVE"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.xray/encryption-status (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"UPDATING" "UPDATING", :updating "UPDATING", "ACTIVE" "ACTIVE", :active "ACTIVE"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.xray/nullable-boolean clojure.core/boolean?)
 
@@ -163,9 +163,9 @@
 (clojure.spec.alpha/def :portkey.aws.xray.unprocessed-trace-segment/message (clojure.spec.alpha/and :portkey.aws.xray/string))
 (clojure.spec.alpha/def :portkey.aws.xray/unprocessed-trace-segment (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.xray.unprocessed-trace-segment/Id :portkey.aws.xray.unprocessed-trace-segment/ErrorCode :portkey.aws.xray.unprocessed-trace-segment/Message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.xray/service-ids (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/service-id) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.xray/service-ids (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/service-id) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.xray/telemetry-record-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/telemetry-record) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.xray/telemetry-record-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/telemetry-record) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.xray.get-trace-summaries-result/trace-summaries (clojure.spec.alpha/and :portkey.aws.xray/trace-summary-list))
 (clojure.spec.alpha/def :portkey.aws.xray.get-trace-summaries-result/approximate-time (clojure.spec.alpha/and :portkey.aws.xray/timestamp))
@@ -173,18 +173,18 @@
 (clojure.spec.alpha/def :portkey.aws.xray.get-trace-summaries-result/next-token (clojure.spec.alpha/and :portkey.aws.xray/string))
 (clojure.spec.alpha/def :portkey.aws.xray/get-trace-summaries-result (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.xray.get-trace-summaries-result/TraceSummaries :portkey.aws.xray.get-trace-summaries-result/ApproximateTime :portkey.aws.xray.get-trace-summaries-result/TracesProcessedCount :portkey.aws.xray.get-trace-summaries-result/NextToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.xray/hostname (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 255))))
+(clojure.spec.alpha/def :portkey.aws.xray/hostname (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 255))))
 
 (clojure.spec.alpha/def :portkey.aws.xray/error-message (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.xray/encryption-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"NONE" "NONE", :none "NONE", "KMS" "KMS", :kms "KMS"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.xray/encryption-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"NONE" "NONE", :none "NONE", "KMS" "KMS", :kms "KMS"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.xray.service-statistics/ok-count (clojure.spec.alpha/and :portkey.aws.xray/nullable-long))
 (clojure.spec.alpha/def :portkey.aws.xray.service-statistics/total-count (clojure.spec.alpha/and :portkey.aws.xray/nullable-long))
 (clojure.spec.alpha/def :portkey.aws.xray.service-statistics/total-response-time (clojure.spec.alpha/and :portkey.aws.xray/nullable-double))
 (clojure.spec.alpha/def :portkey.aws.xray/service-statistics (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.xray.service-statistics/OkCount :portkey.aws.xray/ErrorStatistics :portkey.aws.xray/FaultStatistics :portkey.aws.xray.service-statistics/TotalCount :portkey.aws.xray.service-statistics/TotalResponseTime] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.xray/alias-names (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.xray/alias-names (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.xray.backend-connection-errors/timeout-count (clojure.spec.alpha/and :portkey.aws.xray/nullable-integer))
 (clojure.spec.alpha/def :portkey.aws.xray.backend-connection-errors/connection-refused-count (clojure.spec.alpha/and :portkey.aws.xray/nullable-integer))
@@ -194,9 +194,9 @@
 (clojure.spec.alpha/def :portkey.aws.xray.backend-connection-errors/other-count (clojure.spec.alpha/and :portkey.aws.xray/nullable-integer))
 (clojure.spec.alpha/def :portkey.aws.xray/backend-connection-errors (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.xray.backend-connection-errors/TimeoutCount :portkey.aws.xray.backend-connection-errors/ConnectionRefusedCount :portkey.aws.xray.backend-connection-errors/HTTPCode4XXCount :portkey.aws.xray.backend-connection-errors/HTTPCode5XXCount :portkey.aws.xray.backend-connection-errors/UnknownHostCount :portkey.aws.xray.backend-connection-errors/OtherCount] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.xray/values-with-service-ids (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/value-with-service-ids) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.xray/values-with-service-ids (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/value-with-service-ids) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.xray/filter-expression (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 2000))))
+(clojure.spec.alpha/def :portkey.aws.xray/filter-expression (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 2000))))
 
 (clojure.spec.alpha/def :portkey.aws.xray.segment/id (clojure.spec.alpha/and :portkey.aws.xray/segment-id))
 (clojure.spec.alpha/def :portkey.aws.xray.segment/document (clojure.spec.alpha/and :portkey.aws.xray/segment-document))
@@ -226,7 +226,7 @@
 (clojure.spec.alpha/def :portkey.aws.xray.http/client-ip (clojure.spec.alpha/and :portkey.aws.xray/string))
 (clojure.spec.alpha/def :portkey.aws.xray/http (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.xray.http/HttpURL :portkey.aws.xray.http/HttpStatus :portkey.aws.xray.http/HttpMethod :portkey.aws.xray.http/UserAgent :portkey.aws.xray.http/ClientIp] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.xray/service-names (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.xray/service-names (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.xray/put-encryption-config-result (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.xray/EncryptionConfig] :locations {}))
 
@@ -236,11 +236,11 @@
 
 (clojure.spec.alpha/def :portkey.aws.xray/trace-segment-document (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.xray/alias-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/alias) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.xray/alias-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/alias) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.xray/annotation-key (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.xray/ec2-instance-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 20))))
+(clojure.spec.alpha/def :portkey.aws.xray/ec2-instance-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 20))))
 
 (clojure.spec.alpha/def :portkey.aws.xray.put-trace-segments-result/unprocessed-trace-segments (clojure.spec.alpha/and :portkey.aws.xray/unprocessed-trace-segment-list))
 (clojure.spec.alpha/def :portkey.aws.xray/put-trace-segments-result (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.xray.put-trace-segments-result/UnprocessedTraceSegments] :locations {}))
@@ -256,7 +256,7 @@
 (clojure.spec.alpha/def :portkey.aws.xray.get-trace-graph-result/next-token (clojure.spec.alpha/and :portkey.aws.xray/string))
 (clojure.spec.alpha/def :portkey.aws.xray/get-trace-graph-result (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.xray.get-trace-graph-result/Services :portkey.aws.xray.get-trace-graph-result/NextToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.xray/unprocessed-trace-id-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/trace-id) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.xray/unprocessed-trace-id-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/trace-id) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.xray/segment-id (clojure.spec.alpha/and clojure.core/string?))
 
@@ -264,11 +264,11 @@
 (clojure.spec.alpha/def :portkey.aws.xray.put-encryption-config-request/type (clojure.spec.alpha/and :portkey.aws.xray/encryption-type))
 (clojure.spec.alpha/def :portkey.aws.xray/put-encryption-config-request (portkey.aws/json-keys :req-un [:portkey.aws.xray.put-encryption-config-request/Type] :opt-un [:portkey.aws.xray.put-encryption-config-request/KeyId] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.xray/trace-users (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/trace-user) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.xray/trace-users (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/trace-user) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.xray/timestamp clojure.core/inst?)
 
-(clojure.spec.alpha/def :portkey.aws.xray/trace-segment-document-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/trace-segment-document) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.xray/trace-segment-document-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/trace-segment-document) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.xray.telemetry-record/segments-received-count (clojure.spec.alpha/and :portkey.aws.xray/nullable-integer))
 (clojure.spec.alpha/def :portkey.aws.xray.telemetry-record/segments-sent-count (clojure.spec.alpha/and :portkey.aws.xray/nullable-integer))
@@ -316,16 +316,16 @@
 (clojure.spec.alpha/def :portkey.aws.xray.edge-statistics/total-response-time (clojure.spec.alpha/and :portkey.aws.xray/nullable-double))
 (clojure.spec.alpha/def :portkey.aws.xray/edge-statistics (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.xray.edge-statistics/OkCount :portkey.aws.xray/ErrorStatistics :portkey.aws.xray/FaultStatistics :portkey.aws.xray.edge-statistics/TotalCount :portkey.aws.xray.edge-statistics/TotalResponseTime] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.xray/trace-id-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/trace-id) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.xray/trace-id-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.xray/trace-id) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.xray/resourcearn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 500))))
+(clojure.spec.alpha/def :portkey.aws.xray/resourcearn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 500))))
 
 (clojure.spec.alpha/def :portkey.aws.xray.throttled-exception/message (clojure.spec.alpha/and :portkey.aws.xray/error-message))
 (clojure.spec.alpha/def :portkey.aws.xray/throttled-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.xray.throttled-exception/Message] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.xray/get-encryption-config-request (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.xray/segment-document (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__)))))
+(clojure.spec.alpha/def :portkey.aws.xray/segment-document (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__)))))
 
 (clojure.spec.alpha/def :portkey.aws.xray.get-trace-graph-request/trace-ids (clojure.spec.alpha/and :portkey.aws.xray/trace-id-list))
 (clojure.spec.alpha/def :portkey.aws.xray.get-trace-graph-request/next-token (clojure.spec.alpha/and :portkey.aws.xray/string))

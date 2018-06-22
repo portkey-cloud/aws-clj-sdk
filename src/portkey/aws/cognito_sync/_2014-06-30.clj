@@ -66,12 +66,12 @@
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30.register-device-request/token (clojure.spec.alpha/and :portkey.aws.cognito-sync.-2014-06-30/push-token))
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/register-device-request (portkey.aws/json-keys :req-un [:portkey.aws.cognito-sync.-2014-06-30/IdentityPoolId :portkey.aws.cognito-sync.-2014-06-30/IdentityId :portkey.aws.cognito-sync.-2014-06-30/Platform :portkey.aws.cognito-sync.-2014-06-30.register-device-request/Token] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/record-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 1024))))
+(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/record-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 1024))))
 
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30.duplicate-request-exception/message (clojure.spec.alpha/and :portkey.aws.cognito-sync.-2014-06-30/exception-message))
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/duplicate-request-exception (portkey.aws/json-keys :req-un [:portkey.aws.cognito-sync.-2014-06-30.duplicate-request-exception/message] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/stream-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128))))
+(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/stream-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128))))
 
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30.dataset/creation-date (clojure.spec.alpha/and :portkey.aws.cognito-sync.-2014-06-30/date))
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30.dataset/last-modified-date (clojure.spec.alpha/and :portkey.aws.cognito-sync.-2014-06-30/date))
@@ -80,11 +80,11 @@
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30.dataset/num-records (clojure.spec.alpha/and :portkey.aws.cognito-sync.-2014-06-30/long))
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/dataset (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.cognito-sync.-2014-06-30/IdentityId :portkey.aws.cognito-sync.-2014-06-30/DatasetName :portkey.aws.cognito-sync.-2014-06-30.dataset/CreationDate :portkey.aws.cognito-sync.-2014-06-30.dataset/LastModifiedDate :portkey.aws.cognito-sync.-2014-06-30.dataset/LastModifiedBy :portkey.aws.cognito-sync.-2014-06-30.dataset/DataStorage :portkey.aws.cognito-sync.-2014-06-30.dataset/NumRecords] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/assume-role-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 20 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 2048)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"arn:aws:iam::\d+:role/.*" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/assume-role-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 20 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 2048)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"arn:aws:iam::\d+:role/.*" s__13770__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/platform (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"APNS" "APNS", :apns "APNS", "APNS_SANDBOX" "APNS_SANDBOX", :apns-sandbox "APNS_SANDBOX", "GCM" "GCM", :gcm "GCM", "ADM" "ADM", :adm "ADM"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/platform (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"APNS" "APNS", :apns "APNS", "APNS_SANDBOX" "APNS_SANDBOX", :apns-sandbox "APNS_SANDBOX", "GCM" "GCM", :gcm "GCM", "ADM" "ADM", :adm "ADM"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/merged-dataset-name-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.cognito-sync.-2014-06-30/string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/merged-dataset-name-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.cognito-sync.-2014-06-30/string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/describe-identity-pool-usage-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.cognito-sync.-2014-06-30/IdentityPoolUsage] :locations {}))
 
@@ -98,11 +98,11 @@
 
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/unsubscribe-from-dataset-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/application-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"arn:aws:sns:[-0-9a-z]+:\d+:app/[A-Z_]+/[a-zA-Z0-9_.-]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/application-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"arn:aws:sns:[-0-9a-z]+:\d+:app/[A-Z_]+/[a-zA-Z0-9_.-]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/sync-session-token (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/dataset-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_.:-]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/dataset-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_.:-]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/describe-identity-usage-request (portkey.aws/json-keys :req-un [:portkey.aws.cognito-sync.-2014-06-30/IdentityPoolId :portkey.aws.cognito-sync.-2014-06-30/IdentityId] :opt-un [] :locations {}))
 
@@ -135,7 +135,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/push-token (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/application-arn-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.cognito-sync.-2014-06-30/application-arn) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/application-arn-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.cognito-sync.-2014-06-30/application-arn) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/get-cognito-events-request (portkey.aws/json-keys :req-un [:portkey.aws.cognito-sync.-2014-06-30/IdentityPoolId] :opt-un [] :locations {}))
 
@@ -148,9 +148,9 @@
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30.not-authorized-exception/message (clojure.spec.alpha/and :portkey.aws.cognito-sync.-2014-06-30/exception-message))
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/not-authorized-exception (portkey.aws/json-keys :req-un [:portkey.aws.cognito-sync.-2014-06-30.not-authorized-exception/message] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/operation (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"replace" "replace", :replace "replace", "remove" "remove", :remove "remove"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/operation (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"replace" "replace", :replace "replace", "remove" "remove", :remove "remove"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/identity-pool-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 55)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[\w-]+:[0-9a-f-]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/identity-pool-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 55)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[\w-]+:[0-9a-f-]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/events (clojure.spec.alpha/map-of :portkey.aws.cognito-sync.-2014-06-30/cognito-event-type :portkey.aws.cognito-sync.-2014-06-30/lambda-function-arn))
 
@@ -161,11 +161,11 @@
 
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/delete-dataset-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.cognito-sync.-2014-06-30/Dataset] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/bulk-publish-status (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"NOT_STARTED" "NOT_STARTED", :not-started "NOT_STARTED", "IN_PROGRESS" "IN_PROGRESS", :in-progress "IN_PROGRESS", "FAILED" "FAILED", :failed "FAILED", "SUCCEEDED" "SUCCEEDED", :succeeded "SUCCEEDED"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/bulk-publish-status (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"NOT_STARTED" "NOT_STARTED", :not-started "NOT_STARTED", "IN_PROGRESS" "IN_PROGRESS", :in-progress "IN_PROGRESS", "FAILED" "FAILED", :failed "FAILED", "SUCCEEDED" "SUCCEEDED", :succeeded "SUCCEEDED"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/date clojure.core/inst?)
 
-(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/identity-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 55)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[\w-]+:[0-9a-f-]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/identity-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 55)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[\w-]+:[0-9a-f-]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30.get-bulk-publish-details-response/bulk-publish-start-time (clojure.spec.alpha/and :portkey.aws.cognito-sync.-2014-06-30/date))
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30.get-bulk-publish-details-response/bulk-publish-complete-time (clojure.spec.alpha/and :portkey.aws.cognito-sync.-2014-06-30/date))
@@ -189,7 +189,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/client-context (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/streaming-status (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"ENABLED" "ENABLED", :enabled "ENABLED", "DISABLED" "DISABLED", :disabled "DISABLED"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/streaming-status (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"ENABLED" "ENABLED", :enabled "ENABLED", "DISABLED" "DISABLED", :disabled "DISABLED"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/get-cognito-events-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.cognito-sync.-2014-06-30/Events] :locations {}))
 
@@ -210,7 +210,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/string (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/record-patch-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.cognito-sync.-2014-06-30/record-patch) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/record-patch-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.cognito-sync.-2014-06-30/record-patch) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/bulk-publish-request (portkey.aws/json-keys :req-un [:portkey.aws.cognito-sync.-2014-06-30/IdentityPoolId] :opt-un [] :locations {}))
 
@@ -222,14 +222,14 @@
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30.record/device-last-modified-date (clojure.spec.alpha/and :portkey.aws.cognito-sync.-2014-06-30/date))
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/record (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.cognito-sync.-2014-06-30.record/Key :portkey.aws.cognito-sync.-2014-06-30.record/Value :portkey.aws.cognito-sync.-2014-06-30.record/SyncCount :portkey.aws.cognito-sync.-2014-06-30.record/LastModifiedDate :portkey.aws.cognito-sync.-2014-06-30.record/LastModifiedBy :portkey.aws.cognito-sync.-2014-06-30.record/DeviceLastModifiedDate] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/record-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.cognito-sync.-2014-06-30/record) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/record-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.cognito-sync.-2014-06-30/record) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30.resource-conflict-exception/message (clojure.spec.alpha/and :portkey.aws.cognito-sync.-2014-06-30/exception-message))
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/resource-conflict-exception (portkey.aws/json-keys :req-un [:portkey.aws.cognito-sync.-2014-06-30.resource-conflict-exception/message] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/device-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 256))))
+(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/device-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 256))))
 
-(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/identity-pool-usage-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.cognito-sync.-2014-06-30/identity-pool-usage) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/identity-pool-usage-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.cognito-sync.-2014-06-30/identity-pool-usage) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30.invalid-lambda-function-output-exception/message (clojure.spec.alpha/and :portkey.aws.cognito-sync.-2014-06-30/exception-message))
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/invalid-lambda-function-output-exception (portkey.aws/json-keys :req-un [:portkey.aws.cognito-sync.-2014-06-30.invalid-lambda-function-output-exception/message] :opt-un [] :locations {}))
@@ -251,7 +251,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/subscribe-to-dataset-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/record-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 1048575))))
+(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/record-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 1048575))))
 
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/bulk-publish-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.cognito-sync.-2014-06-30/IdentityPoolId] :locations {}))
 
@@ -260,7 +260,7 @@
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30.concurrent-modification-exception/message (clojure.spec.alpha/and :portkey.aws.cognito-sync.-2014-06-30/string))
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/concurrent-modification-exception (portkey.aws/json-keys :req-un [:portkey.aws.cognito-sync.-2014-06-30.concurrent-modification-exception/message] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/dataset-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.cognito-sync.-2014-06-30/dataset) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30/dataset-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.cognito-sync.-2014-06-30/dataset) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30.list-identity-pool-usage-response/identity-pool-usages (clojure.spec.alpha/and :portkey.aws.cognito-sync.-2014-06-30/identity-pool-usage-list))
 (clojure.spec.alpha/def :portkey.aws.cognito-sync.-2014-06-30.list-identity-pool-usage-response/max-results (clojure.spec.alpha/and :portkey.aws.cognito-sync.-2014-06-30/integer))

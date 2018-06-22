@@ -71,7 +71,7 @@
 (clojure.spec.alpha/def :portkey.aws.mediapackage.update-channel-request/id (clojure.spec.alpha/and :portkey.aws.mediapackage/--string))
 (clojure.spec.alpha/def :portkey.aws.mediapackage/update-channel-request (portkey.aws/json-keys :req-un [:portkey.aws.mediapackage.update-channel-request/Id] :opt-un [:portkey.aws.mediapackage.update-channel-request/Description] :locations {"description" "Description"}))
 
-(clojure.spec.alpha/def :portkey.aws.mediapackage/--list-of-ingest-endpoint (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.mediapackage/ingest-endpoint) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.mediapackage/--list-of-ingest-endpoint (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.mediapackage/ingest-endpoint) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.mediapackage.create-origin-endpoint-response/channel-id (clojure.spec.alpha/and :portkey.aws.mediapackage/--string))
 (clojure.spec.alpha/def :portkey.aws.mediapackage.create-origin-endpoint-response/time-delay-seconds (clojure.spec.alpha/and :portkey.aws.mediapackage/--integer))
@@ -87,7 +87,7 @@
 (clojure.spec.alpha/def :portkey.aws.mediapackage.delete-origin-endpoint-request/id (clojure.spec.alpha/and :portkey.aws.mediapackage/--string))
 (clojure.spec.alpha/def :portkey.aws.mediapackage/delete-origin-endpoint-request (portkey.aws/json-keys :req-un [:portkey.aws.mediapackage.delete-origin-endpoint-request/Id] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.mediapackage/ad-markers (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"NONE" "NONE", :none "NONE", "SCTE35_ENHANCED" "SCTE35_ENHANCED", :scte35-enhanced "SCTE35_ENHANCED", "PASSTHROUGH" "PASSTHROUGH", :passthrough "PASSTHROUGH"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.mediapackage/ad-markers (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"NONE" "NONE", :none "NONE", "SCTE35_ENHANCED" "SCTE35_ENHANCED", :scte35-enhanced "SCTE35_ENHANCED", "PASSTHROUGH" "PASSTHROUGH", :passthrough "PASSTHROUGH"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.mediapackage.list-origin-endpoints-request/channel-id (clojure.spec.alpha/and :portkey.aws.mediapackage/--string))
 (clojure.spec.alpha/def :portkey.aws.mediapackage.list-origin-endpoints-request/next-token (clojure.spec.alpha/and :portkey.aws.mediapackage/--string))
@@ -215,9 +215,9 @@
 (clojure.spec.alpha/def :portkey.aws.mediapackage.create-channel-request/id (clojure.spec.alpha/and :portkey.aws.mediapackage/--string))
 (clojure.spec.alpha/def :portkey.aws.mediapackage/create-channel-request (portkey.aws/json-keys :req-un [:portkey.aws.mediapackage.create-channel-request/Id] :opt-un [:portkey.aws.mediapackage.create-channel-request/Description] :locations {"description" "Description", "id" "Id"}))
 
-(clojure.spec.alpha/def :portkey.aws.mediapackage/--list-of-hls-manifest-create-or-update-parameters (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.mediapackage/hls-manifest-create-or-update-parameters) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.mediapackage/--list-of-hls-manifest-create-or-update-parameters (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.mediapackage/hls-manifest-create-or-update-parameters) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.mediapackage/--list-of-hls-manifest (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.mediapackage/hls-manifest) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.mediapackage/--list-of-hls-manifest (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.mediapackage/hls-manifest) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.mediapackage.hls-manifest/id (clojure.spec.alpha/and :portkey.aws.mediapackage/--string))
 (clojure.spec.alpha/def :portkey.aws.mediapackage.hls-manifest/include-iframe-only-stream (clojure.spec.alpha/and :portkey.aws.mediapackage/--boolean))
@@ -231,18 +231,18 @@
 (clojure.spec.alpha/def :portkey.aws.mediapackage.list-channels-response/next-token (clojure.spec.alpha/and :portkey.aws.mediapackage/--string))
 (clojure.spec.alpha/def :portkey.aws.mediapackage/list-channels-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.mediapackage.list-channels-response/Channels :portkey.aws.mediapackage.list-channels-response/NextToken] :locations {"channels" "Channels", "nextToken" "NextToken"}))
 
-(clojure.spec.alpha/def :portkey.aws.mediapackage/--list-of--string (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.mediapackage/--string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.mediapackage/--list-of--string (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.mediapackage/--string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.mediapackage/--boolean clojure.core/boolean?)
 
-(clojure.spec.alpha/def :portkey.aws.mediapackage/profile (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"NONE" "NONE", :none "NONE", "HBBTV_1_5" "HBBTV_1_5", :hbbtv-1-5 "HBBTV_1_5"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.mediapackage/profile (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"NONE" "NONE", :none "NONE", "HBBTV_1_5" "HBBTV_1_5", :hbbtv-1-5 "HBBTV_1_5"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.mediapackage.hls-encryption/constant-initialization-vector (clojure.spec.alpha/and :portkey.aws.mediapackage/--string))
 (clojure.spec.alpha/def :portkey.aws.mediapackage.hls-encryption/key-rotation-interval-seconds (clojure.spec.alpha/and :portkey.aws.mediapackage/--integer))
 (clojure.spec.alpha/def :portkey.aws.mediapackage.hls-encryption/repeat-extxkey (clojure.spec.alpha/and :portkey.aws.mediapackage/--boolean))
 (clojure.spec.alpha/def :portkey.aws.mediapackage/hls-encryption (portkey.aws/json-keys :req-un [:portkey.aws.mediapackage/SpekeKeyProvider] :opt-un [:portkey.aws.mediapackage.hls-encryption/ConstantInitializationVector :portkey.aws.mediapackage/EncryptionMethod :portkey.aws.mediapackage.hls-encryption/KeyRotationIntervalSeconds :portkey.aws.mediapackage.hls-encryption/RepeatExtXKey] :locations {"constantInitializationVector" "ConstantInitializationVector", "encryptionMethod" "EncryptionMethod", "keyRotationIntervalSeconds" "KeyRotationIntervalSeconds", "repeatExtXKey" "RepeatExtXKey", "spekeKeyProvider" "SpekeKeyProvider"}))
 
-(clojure.spec.alpha/def :portkey.aws.mediapackage/--list-of-channel (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.mediapackage/channel) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.mediapackage/--list-of-channel (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.mediapackage/channel) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.mediapackage.create-origin-endpoint-request/channel-id (clojure.spec.alpha/and :portkey.aws.mediapackage/--string))
 (clojure.spec.alpha/def :portkey.aws.mediapackage.create-origin-endpoint-request/cmaf-package (clojure.spec.alpha/and :portkey.aws.mediapackage/cmaf-package-create-or-update-parameters))
@@ -263,7 +263,7 @@
 (clojure.spec.alpha/def :portkey.aws.mediapackage.describe-channel-request/id (clojure.spec.alpha/and :portkey.aws.mediapackage/--string))
 (clojure.spec.alpha/def :portkey.aws.mediapackage/describe-channel-request (portkey.aws/json-keys :req-un [:portkey.aws.mediapackage.describe-channel-request/Id] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.mediapackage/--list-of-origin-endpoint (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.mediapackage/origin-endpoint) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.mediapackage/--list-of-origin-endpoint (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.mediapackage/origin-endpoint) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.mediapackage.rotate-channel-credentials-response/arn (clojure.spec.alpha/and :portkey.aws.mediapackage/--string))
 (clojure.spec.alpha/def :portkey.aws.mediapackage.rotate-channel-credentials-response/description (clojure.spec.alpha/and :portkey.aws.mediapackage/--string))
@@ -279,7 +279,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.mediapackage/--double clojure.core/double?)
 
-(clojure.spec.alpha/def :portkey.aws.mediapackage/stream-order (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"ORIGINAL" "ORIGINAL", :original "ORIGINAL", "VIDEO_BITRATE_ASCENDING" "VIDEO_BITRATE_ASCENDING", :video-bitrate-ascending "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING" "VIDEO_BITRATE_DESCENDING", :video-bitrate-descending "VIDEO_BITRATE_DESCENDING"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.mediapackage/stream-order (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"ORIGINAL" "ORIGINAL", :original "ORIGINAL", "VIDEO_BITRATE_ASCENDING" "VIDEO_BITRATE_ASCENDING", :video-bitrate-ascending "VIDEO_BITRATE_ASCENDING", "VIDEO_BITRATE_DESCENDING" "VIDEO_BITRATE_DESCENDING", :video-bitrate-descending "VIDEO_BITRATE_DESCENDING"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.mediapackage.dash-package/encryption (clojure.spec.alpha/and :portkey.aws.mediapackage/dash-encryption))
 (clojure.spec.alpha/def :portkey.aws.mediapackage.dash-package/manifest-window-seconds (clojure.spec.alpha/and :portkey.aws.mediapackage/--integer))
@@ -298,12 +298,12 @@
 (clojure.spec.alpha/def :portkey.aws.mediapackage.channel/id (clojure.spec.alpha/and :portkey.aws.mediapackage/--string))
 (clojure.spec.alpha/def :portkey.aws.mediapackage/channel (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.mediapackage.channel/Arn :portkey.aws.mediapackage.channel/Description :portkey.aws.mediapackage/HlsIngest :portkey.aws.mediapackage.channel/Id] :locations {"arn" "Arn", "description" "Description", "hlsIngest" "HlsIngest", "id" "Id"}))
 
-(clojure.spec.alpha/def :portkey.aws.mediapackage/max-results (clojure.spec.alpha/and clojure.core/int? (fn* [p1__16202__16203__auto__] (clojure.core/<= 1 p1__16202__16203__auto__)) (fn* [p1__16204__16205__auto__] (clojure.core/<= p1__16204__16205__auto__ 1000))))
+(clojure.spec.alpha/def :portkey.aws.mediapackage/max-results (clojure.spec.alpha/and clojure.core/int? (fn* [p1__13828__13829__auto__] (clojure.core/<= 1 p1__13828__13829__auto__)) (fn* [p1__13830__13831__auto__] (clojure.core/<= p1__13830__13831__auto__ 1000))))
 
 (clojure.spec.alpha/def :portkey.aws.mediapackage.rotate-channel-credentials-request/id (clojure.spec.alpha/and :portkey.aws.mediapackage/--string))
 (clojure.spec.alpha/def :portkey.aws.mediapackage/rotate-channel-credentials-request (portkey.aws/json-keys :req-un [:portkey.aws.mediapackage.rotate-channel-credentials-request/Id] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.mediapackage/encryption-method (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"AES_128" "AES_128", :aes-128 "AES_128", "SAMPLE_AES" "SAMPLE_AES", :sample-aes "SAMPLE_AES"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.mediapackage/encryption-method (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"AES_128" "AES_128", :aes-128 "AES_128", "SAMPLE_AES" "SAMPLE_AES", :sample-aes "SAMPLE_AES"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.mediapackage/delete-origin-endpoint-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
@@ -350,7 +350,7 @@
 (clojure.spec.alpha/def :portkey.aws.mediapackage.update-origin-endpoint-request/id (clojure.spec.alpha/and :portkey.aws.mediapackage/--string))
 (clojure.spec.alpha/def :portkey.aws.mediapackage/update-origin-endpoint-request (portkey.aws/json-keys :req-un [:portkey.aws.mediapackage.update-origin-endpoint-request/Id] :opt-un [:portkey.aws.mediapackage/HlsPackage :portkey.aws.mediapackage/MssPackage :portkey.aws.mediapackage.update-origin-endpoint-request/CmafPackage :portkey.aws.mediapackage.update-origin-endpoint-request/TimeDelaySeconds :portkey.aws.mediapackage.update-origin-endpoint-request/Description :portkey.aws.mediapackage.update-origin-endpoint-request/Whitelist :portkey.aws.mediapackage/DashPackage :portkey.aws.mediapackage.update-origin-endpoint-request/ManifestName :portkey.aws.mediapackage.update-origin-endpoint-request/StartoverWindowSeconds] :locations {"cmafPackage" "CmafPackage", "manifestName" "ManifestName", "whitelist" "Whitelist", "timeDelaySeconds" "TimeDelaySeconds", "dashPackage" "DashPackage", "startoverWindowSeconds" "StartoverWindowSeconds", "hlsPackage" "HlsPackage", "mssPackage" "MssPackage", "description" "Description"}))
 
-(clojure.spec.alpha/def :portkey.aws.mediapackage/playlist-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"NONE" "NONE", :none "NONE", "EVENT" "EVENT", :event "EVENT", "VOD" "VOD", :vod "VOD"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.mediapackage/playlist-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"NONE" "NONE", :none "NONE", "EVENT" "EVENT", :event "EVENT", "VOD" "VOD", :vod "VOD"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.core/defn delete-channel "Deletes an existing Channel." ([delete-channel-request] (portkey.aws/-rest-json-call portkey.aws.mediapackage/endpoints "DELETE" "/channels/{id}" delete-channel-request :portkey.aws.mediapackage/delete-channel-request {:payload nil, :move {}, :headers {}, :uri {"id" "Id"}, :querystring {}} 202 :portkey.aws.mediapackage/delete-channel-response {"UnprocessableEntityException" :portkey.aws.mediapackage/unprocessable-entity-exception, "InternalServerErrorException" :portkey.aws.mediapackage/internal-server-error-exception, "ForbiddenException" :portkey.aws.mediapackage/forbidden-exception, "NotFoundException" :portkey.aws.mediapackage/not-found-exception, "ServiceUnavailableException" :portkey.aws.mediapackage/service-unavailable-exception, "TooManyRequestsException" :portkey.aws.mediapackage/too-many-requests-exception})))
 (clojure.spec.alpha/fdef delete-channel :args (clojure.spec.alpha/tuple :portkey.aws.mediapackage/delete-channel-request) :ret (clojure.spec.alpha/and :portkey.aws.mediapackage/delete-channel-response))
