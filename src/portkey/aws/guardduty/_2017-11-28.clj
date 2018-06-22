@@ -138,7 +138,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/email (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/ip-set-ids (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/ip-set-id) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/ip-set-ids (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/ip-set-id) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.listipsets-request/detector-id (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/--string))
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.listipsets-request/next-token (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/--string))
@@ -156,7 +156,7 @@
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.unprocessed-account/result (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/--string))
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/unprocessed-account (portkey.aws/json-keys :req-un [:portkey.aws.guardduty.-2017-11-28.unprocessed-account/AccountId :portkey.aws.guardduty.-2017-11-28.unprocessed-account/Result] :opt-un [] :locations {"accountId" "AccountId", "result" "Result"}))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/ipv6-addresses (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/ipv6-address) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/ipv6-addresses (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/ipv6-address) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.delete-detector-request/detector-id (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/--string))
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/delete-detector-request (portkey.aws/json-keys :req-un [:portkey.aws.guardduty.-2017-11-28.delete-detector-request/DetectorId] :opt-un [] :locations {}))
@@ -187,7 +187,7 @@
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.create-sample-findings-request/detector-id (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/--string))
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/create-sample-findings-request (portkey.aws/json-keys :req-un [:portkey.aws.guardduty.-2017-11-28.create-sample-findings-request/DetectorId] :opt-un [:portkey.aws.guardduty.-2017-11-28/FindingTypes] :locations {"findingTypes" "FindingTypes"}))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/ip-set-format (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"STIX" "STIX", "PROOF_POINT" "PROOF_POINT", :txt "TXT", :stix "STIX", :alien-vault "ALIEN_VAULT", "TXT" "TXT", :fire-eye "FIRE_EYE", "ALIEN_VAULT" "ALIEN_VAULT", :proof-point "PROOF_POINT", :otx-csv "OTX_CSV", "OTX_CSV" "OTX_CSV", "FIRE_EYE" "FIRE_EYE"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/ip-set-format (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"STIX" "STIX", "PROOF_POINT" "PROOF_POINT", :txt "TXT", :stix "STIX", :alien-vault "ALIEN_VAULT", "TXT" "TXT", :fire-eye "FIRE_EYE", "ALIEN_VAULT" "ALIEN_VAULT", :proof-point "PROOF_POINT", :otx-csv "OTX_CSV", "OTX_CSV" "OTX_CSV", "FIRE_EYE" "FIRE_EYE"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/private-ip-address-details (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.guardduty.-2017-11-28/PrivateDnsName :portkey.aws.guardduty.-2017-11-28/PrivateIpAddress] :locations {"privateDnsName" "PrivateDnsName", "privateIpAddress" "PrivateIpAddress"}))
 
@@ -200,13 +200,13 @@
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.disassociate-from-master-account-request/detector-id (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/--string))
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/disassociate-from-master-account-request (portkey.aws/json-keys :req-un [:portkey.aws.guardduty.-2017-11-28.disassociate-from-master-account-request/DetectorId] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/security-groups (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/security-group) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/security-groups (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/security-group) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/threat-intel-set-ids (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/threat-intel-set-id) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/threat-intel-set-ids (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/threat-intel-set-id) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/threat-intel-set-format (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"STIX" "STIX", "PROOF_POINT" "PROOF_POINT", :txt "TXT", :stix "STIX", :alien-vault "ALIEN_VAULT", "TXT" "TXT", :fire-eye "FIRE_EYE", "ALIEN_VAULT" "ALIEN_VAULT", :proof-point "PROOF_POINT", :otx-csv "OTX_CSV", "OTX_CSV" "OTX_CSV", "FIRE_EYE" "FIRE_EYE"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/threat-intel-set-format (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"STIX" "STIX", "PROOF_POINT" "PROOF_POINT", :txt "TXT", :stix "STIX", :alien-vault "ALIEN_VAULT", "TXT" "TXT", :fire-eye "FIRE_EYE", "ALIEN_VAULT" "ALIEN_VAULT", :proof-point "PROOF_POINT", :otx-csv "OTX_CSV", "OTX_CSV" "OTX_CSV", "FIRE_EYE" "FIRE_EYE"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/detector-status (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"ENABLED" "ENABLED", :enabled "ENABLED", "DISABLED" "DISABLED", :disabled "DISABLED"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/detector-status (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"ENABLED" "ENABLED", :enabled "ENABLED", "DISABLED" "DISABLED", :disabled "DISABLED"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.createipset-request/detector-id (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/--string))
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.createipset-request/format (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/ip-set-format))
@@ -238,12 +238,12 @@
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.get-threat-intel-set-response/status (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/threat-intel-set-status))
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/get-threat-intel-set-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.guardduty.-2017-11-28.get-threat-intel-set-response/Format :portkey.aws.guardduty.-2017-11-28/Location :portkey.aws.guardduty.-2017-11-28/Name :portkey.aws.guardduty.-2017-11-28.get-threat-intel-set-response/Status] :locations {"format" "Format", "location" "Location", "name" "Name", "status" "Status"}))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/neq (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/--string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/neq (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/--string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.list-detectors-request/next-token (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/--string))
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/list-detectors-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.guardduty.-2017-11-28/MaxResults :portkey.aws.guardduty.-2017-11-28.list-detectors-request/NextToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/tags (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/tag) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/tags (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/tag) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/archive-findings-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
@@ -254,9 +254,9 @@
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.get-members-request/detector-id (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/--string))
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/get-members-request (portkey.aws/json-keys :req-un [:portkey.aws.guardduty.-2017-11-28.get-members-request/DetectorId] :opt-un [:portkey.aws.guardduty.-2017-11-28/AccountIds] :locations {"accountIds" "AccountIds"}))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/members (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/member) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/members (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/member) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/finding-ids (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/finding-id) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/finding-ids (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/finding-id) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/updateipset-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
@@ -274,7 +274,7 @@
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.update-threat-intel-set-request/threat-intel-set-id (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/--string))
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/update-threat-intel-set-request (portkey.aws/json-keys :req-un [:portkey.aws.guardduty.-2017-11-28.update-threat-intel-set-request/ThreatIntelSetId :portkey.aws.guardduty.-2017-11-28.update-threat-intel-set-request/DetectorId] :opt-un [:portkey.aws.guardduty.-2017-11-28/Activate :portkey.aws.guardduty.-2017-11-28/Location :portkey.aws.guardduty.-2017-11-28/Name] :locations {"activate" "Activate", "location" "Location", "name" "Name"}))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/finding-types (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/finding-type) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/finding-types (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/finding-type) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/next-token (clojure.spec.alpha/and clojure.core/string?))
 
@@ -289,7 +289,7 @@
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.getipset-response/status (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/ip-set-status))
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/getipset-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.guardduty.-2017-11-28.getipset-response/Format :portkey.aws.guardduty.-2017-11-28/Location :portkey.aws.guardduty.-2017-11-28/Name :portkey.aws.guardduty.-2017-11-28.getipset-response/Status] :locations {"format" "Format", "location" "Location", "name" "Name", "status" "Status"}))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/--list-of-port-probe-detail (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/port-probe-detail) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/--list-of-port-probe-detail (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/port-probe-detail) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.get-master-account-request/detector-id (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/--string))
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/get-master-account-request (portkey.aws/json-keys :req-un [:portkey.aws.guardduty.-2017-11-28.get-master-account-request/DetectorId] :opt-un [] :locations {}))
@@ -308,13 +308,13 @@
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.remote-ip-details/ip-addressv4 (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/--string))
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/remote-ip-details (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.guardduty.-2017-11-28/City :portkey.aws.guardduty.-2017-11-28/Country :portkey.aws.guardduty.-2017-11-28/GeoLocation :portkey.aws.guardduty.-2017-11-28.remote-ip-details/IpAddressV4 :portkey.aws.guardduty.-2017-11-28/Organization] :locations {"city" "City", "country" "Country", "geoLocation" "GeoLocation", "ipAddressV4" "IpAddressV4", "organization" "Organization"}))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/ip-set-status (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {:inactive "INACTIVE", :deleted "DELETED", "DEACTIVATING" "DEACTIVATING", "ACTIVATING" "ACTIVATING", :delete-pending "DELETE_PENDING", "ERROR" "ERROR", :active "ACTIVE", "INACTIVE" "INACTIVE", "ACTIVE" "ACTIVE", "DELETE_PENDING" "DELETE_PENDING", :error "ERROR", "DELETED" "DELETED", :deactivating "DEACTIVATING", :activating "ACTIVATING"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/ip-set-status (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {:inactive "INACTIVE", :deleted "DELETED", "DEACTIVATING" "DEACTIVATING", "ACTIVATING" "ACTIVATING", :delete-pending "DELETE_PENDING", "ERROR" "ERROR", :active "ACTIVE", "INACTIVE" "INACTIVE", "ACTIVE" "ACTIVE", "DELETE_PENDING" "DELETE_PENDING", :error "ERROR", "DELETED" "DELETED", :deactivating "DEACTIVATING", :activating "ACTIVATING"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/deleteipset-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/--boolean clojure.core/boolean?)
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/threat-intel-set-status (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {:inactive "INACTIVE", :deleted "DELETED", "DEACTIVATING" "DEACTIVATING", "ACTIVATING" "ACTIVATING", :delete-pending "DELETE_PENDING", "ERROR" "ERROR", :active "ACTIVE", "INACTIVE" "INACTIVE", "ACTIVE" "ACTIVE", "DELETE_PENDING" "DELETE_PENDING", :error "ERROR", "DELETED" "DELETED", :deactivating "DEACTIVATING", :activating "ACTIVATING"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/threat-intel-set-status (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {:inactive "INACTIVE", :deleted "DELETED", "DEACTIVATING" "DEACTIVATING", "ACTIVATING" "ACTIVATING", :delete-pending "DELETE_PENDING", "ERROR" "ERROR", :active "ACTIVE", "INACTIVE" "INACTIVE", "ACTIVE" "ACTIVE", "DELETE_PENDING" "DELETE_PENDING", :error "ERROR", "DELETED" "DELETED", :deactivating "DEACTIVATING", :activating "ACTIVATING"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/domain-details (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
@@ -354,7 +354,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/master-id (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/eq (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/--string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/eq (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/--string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.network-interface/public-dns-name (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/--string))
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.network-interface/public-ip (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/--string))
@@ -378,7 +378,7 @@
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.invitation/relationship-status (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/--string))
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/invitation (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.guardduty.-2017-11-28.invitation/AccountId :portkey.aws.guardduty.-2017-11-28/InvitationId :portkey.aws.guardduty.-2017-11-28/InvitedAt :portkey.aws.guardduty.-2017-11-28.invitation/RelationshipStatus] :locations {"accountId" "AccountId", "invitationId" "InvitationId", "invitedAt" "InvitedAt", "relationshipStatus" "RelationshipStatus"}))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/unprocessed-accounts (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/unprocessed-account) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/unprocessed-accounts (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/unprocessed-account) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/--map-of-count-by-severity-finding-statistic (clojure.spec.alpha/map-of :portkey.aws.guardduty.-2017-11-28/--string :portkey.aws.guardduty.-2017-11-28/count-by-severity-finding-statistic))
 
@@ -394,7 +394,7 @@
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.get-detector-response/status (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/detector-status))
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/get-detector-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.guardduty.-2017-11-28/CreatedAt :portkey.aws.guardduty.-2017-11-28/ServiceRole :portkey.aws.guardduty.-2017-11-28.get-detector-response/Status :portkey.aws.guardduty.-2017-11-28/UpdatedAt] :locations {"createdAt" "CreatedAt", "serviceRole" "ServiceRole", "status" "Status", "updatedAt" "UpdatedAt"}))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/findings (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/finding) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/findings (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/finding) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/created-at (clojure.spec.alpha/and clojure.core/string?))
 
@@ -402,7 +402,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/get-invitations-count-request (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/private-ip-addresses (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/private-ip-address-details) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/private-ip-addresses (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/private-ip-address-details) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/--double clojure.core/double?)
 
@@ -415,9 +415,9 @@
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.update-findings-feedback-request/detector-id (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/--string))
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/update-findings-feedback-request (portkey.aws/json-keys :req-un [:portkey.aws.guardduty.-2017-11-28.update-findings-feedback-request/DetectorId] :opt-un [:portkey.aws.guardduty.-2017-11-28/Comments :portkey.aws.guardduty.-2017-11-28/Feedback :portkey.aws.guardduty.-2017-11-28/FindingIds] :locations {"comments" "Comments", "feedback" "Feedback", "findingIds" "FindingIds"}))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/order-by (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"ASC" "ASC", :asc "ASC", "DESC" "DESC", :desc "DESC"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/order-by (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"ASC" "ASC", :asc "ASC", "DESC" "DESC", :desc "DESC"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/account-details (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/account-detail) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/account-details (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/account-detail) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/create-threat-intel-set-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.guardduty.-2017-11-28/ThreatIntelSetId] :locations {"threatIntelSetId" "ThreatIntelSetId"}))
 
@@ -425,7 +425,7 @@
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.deleteipset-request/ip-set-id (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/--string))
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/deleteipset-request (portkey.aws/json-keys :req-un [:portkey.aws.guardduty.-2017-11-28.deleteipset-request/DetectorId :portkey.aws.guardduty.-2017-11-28.deleteipset-request/IpSetId] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/product-codes (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/product-code) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/product-codes (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/product-code) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/list-findings-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.guardduty.-2017-11-28/FindingIds :portkey.aws.guardduty.-2017-11-28/NextToken] :locations {"findingIds" "FindingIds", "nextToken" "NextToken"}))
 
@@ -434,19 +434,19 @@
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.city/city-name (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/--string))
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/city (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.guardduty.-2017-11-28.city/CityName] :locations {"cityName" "CityName"}))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/detector-ids (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/detector-id) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/detector-ids (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/detector-id) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/updated-at (clojure.spec.alpha/and clojure.core/string?))
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/get-findings-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.guardduty.-2017-11-28/Findings] :locations {"findings" "Findings"}))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/max-results (clojure.spec.alpha/and clojure.core/int? (fn* [p1__16202__16203__auto__] (clojure.core/<= 1 p1__16202__16203__auto__)) (fn* [p1__16204__16205__auto__] (clojure.core/<= p1__16204__16205__auto__ 50))))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/max-results (clojure.spec.alpha/and clojure.core/int? (fn* [p1__13828__13829__auto__] (clojure.core/<= 1 p1__13828__13829__auto__)) (fn* [p1__13830__13831__auto__] (clojure.core/<= p1__13830__13831__auto__ 50))))
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.tag/key (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/--string))
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.tag/value (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/--string))
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/tag (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.guardduty.-2017-11-28.tag/Key :portkey.aws.guardduty.-2017-11-28.tag/Value] :locations {"key" "Key", "value" "Value"}))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/finding-statistic-types (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/finding-statistic-type) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/finding-statistic-types (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/finding-statistic-type) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.resource/resource-type (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/--string))
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/resource (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.guardduty.-2017-11-28/AccessKeyDetails :portkey.aws.guardduty.-2017-11-28/InstanceDetails :portkey.aws.guardduty.-2017-11-28.resource/ResourceType] :locations {"accessKeyDetails" "AccessKeyDetails", "instanceDetails" "InstanceDetails", "resourceType" "ResourceType"}))
@@ -489,9 +489,9 @@
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.remote-port-details/port-name (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/--string))
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/remote-port-details (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.guardduty.-2017-11-28.remote-port-details/Port :portkey.aws.guardduty.-2017-11-28.remote-port-details/PortName] :locations {"port" "Port", "portName" "PortName"}))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/feedback (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"USEFUL" "USEFUL", :useful "USEFUL", "NOT_USEFUL" "NOT_USEFUL", :not-useful "NOT_USEFUL"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/feedback (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"USEFUL" "USEFUL", :useful "USEFUL", "NOT_USEFUL" "NOT_USEFUL", :not-useful "NOT_USEFUL"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/account-ids (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/--string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/account-ids (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/--string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/invite-members-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.guardduty.-2017-11-28/UnprocessedAccounts] :locations {"unprocessedAccounts" "UnprocessedAccounts"}))
 
@@ -511,7 +511,7 @@
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.sort-criteria/attribute-name (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/--string))
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/sort-criteria (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.guardduty.-2017-11-28.sort-criteria/AttributeName :portkey.aws.guardduty.-2017-11-28/OrderBy] :locations {"attributeName" "AttributeName", "orderBy" "OrderBy"}))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/invitations (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/invitation) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/invitations (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/invitation) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/create-sample-findings-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
@@ -550,11 +550,11 @@
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28.list-members-request/only-associated (clojure.spec.alpha/and :portkey.aws.guardduty.-2017-11-28/--string))
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/list-members-request (portkey.aws/json-keys :req-un [:portkey.aws.guardduty.-2017-11-28.list-members-request/DetectorId] :opt-un [:portkey.aws.guardduty.-2017-11-28/MaxResults :portkey.aws.guardduty.-2017-11-28.list-members-request/NextToken :portkey.aws.guardduty.-2017-11-28.list-members-request/OnlyAssociated] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/finding-statistic-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"COUNT_BY_SEVERITY" "COUNT_BY_SEVERITY", :count-by-severity "COUNT_BY_SEVERITY"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/finding-statistic-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"COUNT_BY_SEVERITY" "COUNT_BY_SEVERITY", :count-by-severity "COUNT_BY_SEVERITY"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/private-ip-address (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/network-interfaces (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/network-interface) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/network-interfaces (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.guardduty.-2017-11-28/network-interface) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.guardduty.-2017-11-28/listipsets-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.guardduty.-2017-11-28/IpSetIds :portkey.aws.guardduty.-2017-11-28/NextToken] :locations {"ipSetIds" "IpSetIds", "nextToken" "NextToken"}))
 

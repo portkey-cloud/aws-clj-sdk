@@ -267,13 +267,27 @@
     (org.jsoup.select.NodeTraversor/traverse visitor (org.jsoup.Jsoup/parseBodyFragment doc))
     (split-to-length 80 (.toString acc))))
 
-(defn gen-operation [ns {:as operation
-                         :strs [name errors]
-                         {input-shape "shape"} "input"
-                         {output-shape "shape"} "output"
-                         {:strs [method requestUri responseCode]} "http"}
-                     shapes
-                     {:as docs :strs [operations]}]
+(defmulti gen-operation (fn [_
+                             {:strs [protocol
+                                     jsonVersion]}
+                             _
+                             _
+                             _]
+                          (cond-> [protocol]
+                            (and
+                             (= protocol "json")
+                             jsonVersion) (conj jsonVersion))))
+
+(defmethod gen-operation ["rest-json"]
+  [ns
+   metadata
+   {:as operation
+    :strs [name errors]
+    {input-shape "shape"} "input"
+    {output-shape "shape"} "output"
+    {:strs [method requestUri responseCode]} "http"}
+   shapes
+   {:as docs :strs [operations]}]
   (let [error-specs (into {}
                       (map (fn [{:strs [shape] {:strs [httpStatusCode]} "error"}]
                              [shape (keyword ns (aws/dashed shape))]))
@@ -346,18 +360,114 @@
                   `empty?)
          :ret ~(if output-spec `(spec/and ~output-spec) `true?)))))
 
+(defmethod gen-operation ["json" "1.0"]
+  [ns
+   {:strs [targetPrefix] :as metadata}
+   {:as operation
+    :strs [name errors]
+    {input-shape "shape"} "input"
+    {output-shape "shape"} "output"
+    {:strs [method requestUri responseCode]} "http"}
+   shapes
+   {:as docs :strs [operations]}]
+  (let [error-specs (into {}
+                      (map (fn [{:strs [shape] {:strs [httpStatusCode]} "error"}]
+                             [shape (keyword ns (aws/dashed shape))]))
+                      errors)
+        varname (symbol (aws/dashed name))
+        input-spec (some->> input-shape aws/dashed (keyword ns))
+        output-spec (some->> output-shape aws/dashed (keyword ns))
+        input (or (some-> input-shape aws/dashed symbol) '_)
+        default-arg (if input-spec (some #(when (spec/valid? input-spec %) %) [[] {}]) {})
+        documentation (operations name)
+        x-amz-target (str targetPrefix "." name)]
+    (when input-shape
+      (aws/conform-or-throw
+        (strict-strs ; validate only what we knows how to map
+          :req {"type" #{"structure"}
+                "members" (spec/map-of string?
+                            (spec/or
+                              :atomic
+                              (spec/and
+                                (strict-strs
+                                  :req {"shape" string?}
+                                  :opt {"location" #{"uri" "querystring" "header" #_#_"headers" "statusCode"}
+                                        "locationName" string?
+                                        "deprecated" boolean?})
+                                #(= (contains? % "location") (contains? % "locationName")))
+                              :querystringmap
+                              (strict-strs
+                                :req {"shape" string?}
+                                :opt {"location" #{"querystring"}})
+                              :move
+                              (strict-strs
+                                :req {"shape" string?}
+                                :opt {"locationName" string?})
+                              :json-value
+                              (strict-strs
+                                :req {"shape" string?
+                                    "location" #{"header"}
+                                    "locationName" string?
+                                    "jsonvalue" true?})))}
+         :opt {"required" (spec/coll-of string?)
+               "payload" string?
+               "deprecated" boolean?})
+        (shapes input-shape)))
+    `(do
+       (defn ~varname ; TODO add deprecated flag
+         ~@(when documentation
+             [(format-documentation documentation)])
+         ~@(when default-arg `[([] (~varname ~default-arg))])
+         ([~input]
+           (aws/-json-call
+             ~(symbol ns "endpoints")
+             ~method ~x-amz-target ~input ~input-spec
+             {:headers ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
+                                       :when (= "header" (member "location"))]
+                                   [name [(member "locationName") (member "jsonvalue")]]))
+              :uri ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
+                                   :when (= "uri" (member "location"))]
+                               [(member "locationName") name]))
+              :querystring ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
+                                           :when (= "querystring" (member "location"))]
+                                       [(member "locationName") name]))
+              :payload ~(get-in shapes [input-shape "payload"])
+              :move ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
+                                    :let [locationName (member "locationName")]
+                                    :when (when-not (member "location") locationName)]
+                                [locationName name]))}
+             ~responseCode ~output-spec ~error-specs)))
+       (spec/fdef ~varname
+         :args ~(if input-spec
+                  `(~(if default-arg `spec/? `spec/tuple) ~input-spec)
+                  `empty?)
+         :ret ~(if output-spec `(spec/and ~output-spec) `true?)))))
+
 (defn gen-api [ns-sym api-resource docs-resource]
   (let [api (json/parse-stream (io/reader api-resource))
-        docs (json/parse-stream (io/reader docs-resource))]
-    (case (get-in api ["metadata" "protocol"])
+        docs (json/parse-stream (io/reader docs-resource))
+        {:strs [protocol]
+         :as metadata} (get api "metadata")]
+    (case protocol
       "rest-json" (for [[k gen] {"shapes" (comp #(doto % eval) gen-shape-spec) ; eval to make specs available right away
-                                 "operations" (fn [ns [_ op]] (gen-operation ns op (api "shapes") docs))}
+                                 "operations" (fn [ns [_ op]] (gen-operation
+                                                               ns metadata op (api "shapes") docs))}
                         desc (api k)]
                     (gen (name ns-sym) desc))
+      "json" (let [json-version (get metadata "jsonVersion")]
+               (case json-version
+                 "1.0"
+                 (for [[k gen] {"shapes" (comp #(doto % eval) gen-shape-spec) ; eval to make specs available right away
+                                "operations" (fn [ns [_ op]] (gen-operation ns metadata op (api "shapes") docs))}
+                       desc (api k)]
+                   (gen (name ns-sym) desc))
+                 (do
+                   (binding [*out* *err*] (prn 'skipping ns-sym 'protocol "json" 'protocol-version json-version))
+                   [(list 'comment 'TODO 'support "json" 'protocol-version json-version)])))
       (do
-        (binding [*out* *err*] (prn 'skipping ns-sym 'protocol (get-in api ["metadata" "protocol"])))
-        [(list 'comment 'TODO 'support (get-in api ["metadata" "protocol"]))])
-      #_"json"
+        (binding [*out* *err*] (prn 'skipping ns-sym 'protocol protocol))
+        [(list 'comment 'TODO 'support protocol)])
+      #_"json" ;; 1.1+
       #_"ec2"
       #_"query"
       #_"rest-xml")))
@@ -417,7 +527,14 @@
                           (binding [*out* w]
                             (prn (list 'ns ns '(:require [portkey.aws])))
                             (newline)
-                            (clojure.pprint/pprint (list 'def 'endpoints (list 'quote (get endpoints apins))))
+                            (clojure.pprint/pprint
+                             (list 'def 'endpoints
+                                   (list 'quote
+                                         (or (get endpoints apins
+                                                  (get endpoints api))
+                                             (throw (ex-info "Cannot find Endpoints!"
+                                                             {:api api
+                                                              :apins apins}))))))
                             (doseq [form (gen-api ns api-json docs-json)]
                               (newline)
                               (if (and (seq? form) (= 'do (first form)))

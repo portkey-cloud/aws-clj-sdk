@@ -13,6 +13,9 @@
 (def ^:dynamic *credentials*
   "A map with keys :access-key, :secret-key and optionally :token"
   nil)
+(def ^:dynamic *endpoint-override*
+  "A bindable endpoint override for SAM local, localstack, ddb-local, etc"
+  nil)
 
 (defmacro cond
   ([] nil)
@@ -151,15 +154,16 @@
     (assoc :body (reduce dissoc body (vals uri-to-param)))))
 
 (defn- params-to-querystring [{:as req :keys [body ^String url]} querystring-to-param]
-  (-> req
-    (assoc :url 
-      (apply str url (if (neg? (.indexOf url "?")) "?" "&")
-        (interpose "&"
-          (keep (fn [[qs name]]
-                 (when-some [v (get body name)]
-                   (str (http/url-encode-illegal-characters qs) "=" (http/url-encode-illegal-characters v))))
-           querystring-to-param))))
-    (assoc :body (reduce dissoc body (vals querystring-to-param)))))
+  (cond-> req
+    (not-empty querystring-to-param)
+    (-> (assoc :url
+               (apply str url (if (neg? (.indexOf url "?")) "?" "&")
+                      (interpose "&"
+                                 (keep (fn [[qs name]]
+                                         (when-some [v (get body name)]
+                                           (str (http/url-encode-illegal-characters qs) "=" (http/url-encode-illegal-characters v))))
+                                       querystring-to-param))))
+        (assoc :body (reduce dissoc body (vals querystring-to-param))))))
 
 (defn- params-to-payload [{:as req :keys [body]} param]
   (if param
@@ -207,7 +211,7 @@
       {:method method
        ::credential-scope credential-scope
        ::signature-version signature-version
-       :url (str endpoint uri)
+       :url (str (or *endpoint-override* endpoint) uri)
        :headers {"content-type" "application/x-amz-json-1.0"}
        :as :json-string-keys
        :body (some-> input-spec (conform-or-throw input))}
@@ -225,7 +229,48 @@
                        true)]
             (if-some [[type spec] (find error-specs (get-in response [:headers "x-amzn-ErrorType"]))]
               [:exception (let [m (spec/unform spec (json/parse-string (coerce-body content-type (:body response))))]
-                            (ex-info (str type ": " (:message m)) m))]
+                            (ex-info (str type ": " (:message m))
+                                     {:type spec
+                                      :body m}))]
+              (case (:status response)
+                404 [:result nil]
+                [:exception (ex-info "Unexpected response" {:response response})]))))))))
+
+(defn -json-call [endpoints method operation input input-spec
+                  {headers-params :headers uri-params :uri querystring-params :querystring payload :payload move :move}
+                  ok-code output-spec error-specs
+                  ]
+  (let [{:keys [endpoint credential-scope signature-version]} (endpoints (region))]
+    (->
+      {:request-method method
+       ::credential-scope credential-scope
+       ::signature-version signature-version
+       :url (or *endpoint-override* endpoint)
+       :headers {"content-type" "application/x-amz-json-1.0"
+                 "X-Amz-Target" operation} ;; like "DynamoDB_20120810.GetItem"
+       :as :json-string-keys
+       :body (some-> input-spec (conform-or-throw input))}
+      (params-to-header headers-params)
+      (params-to-uri uri-params)
+      (params-to-querystring querystring-params)
+      (move-params move)
+      (params-to-payload payload)
+      (update :body #(cond-> % (coll? %) json/generate-string))
+      (*http-client*
+        (fn [{:as response {content-type "Content-Type"} :headers :keys [body]}]
+          (if (if ok-code (= ok-code (:status response)) (<= 200 (:status response) 299))
+            [:result (if output-spec
+                       (spec/unform output-spec (coerce-body content-type body))
+                       true)]
+            (if-some [[type spec] (find error-specs (get-in response [:headers "x-amzn-ErrorType"]
+                                                            (some-> body
+                                                                    json/parse-string
+                                                                    (get "__type")
+                                                                    (->> (re-find #"(?<=#).*$")))))]
+              [:exception (let [m (spec/unform spec (json/parse-string (coerce-body content-type (:body response))))]
+                            (ex-info (str type ": " (:message m))
+                                     {:type spec
+                                      :body m}))]
               (case (:status response)
                 404 [:result nil]
                 [:exception (ex-info "Unexpected response" {:response response})]))))))))

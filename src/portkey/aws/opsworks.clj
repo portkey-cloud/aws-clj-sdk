@@ -78,4 +78,4 @@
     :endpoint "https://opsworks.ap-south-1.amazonaws.com",
     :signature-version :v4}})
 
-(comment TODO support "json")
+(comment TODO support "json" protocol-version "1.1")

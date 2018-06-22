@@ -70,9 +70,9 @@
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.describe-compute-environments-request/next-token (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/describe-compute-environments-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.batch.-2016-08-10.describe-compute-environments-request/computeEnvironments :portkey.aws.batch.-2016-08-10.describe-compute-environments-request/maxResults :portkey.aws.batch.-2016-08-10.describe-compute-environments-request/nextToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/string-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.batch.-2016-08-10/string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/string-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.batch.-2016-08-10/string) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/job-definition-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"container" "container", :container "container"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/job-definition-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"container" "container", :container "container"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.create-job-queue-response/job-queue-name (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.create-job-queue-response/job-queue-arn (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
@@ -99,7 +99,7 @@
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.update-compute-environment-request/service-role (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/update-compute-environment-request (portkey.aws/json-keys :req-un [:portkey.aws.batch.-2016-08-10.update-compute-environment-request/computeEnvironment] :opt-un [:portkey.aws.batch.-2016-08-10.update-compute-environment-request/state :portkey.aws.batch.-2016-08-10.update-compute-environment-request/computeResources :portkey.aws.batch.-2016-08-10.update-compute-environment-request/serviceRole] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/jqstate (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"ENABLED" "ENABLED", :enabled "ENABLED", "DISABLED" "DISABLED", :disabled "DISABLED"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/jqstate (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"ENABLED" "ENABLED", :enabled "ENABLED", "DISABLED" "DISABLED", :disabled "DISABLED"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.mount-point/container-path (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.mount-point/read-only (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/boolean))
@@ -114,9 +114,9 @@
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.client-exception/message (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/client-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.batch.-2016-08-10.client-exception/message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/job-status (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"RUNNABLE" "RUNNABLE", :starting "STARTING", :pending "PENDING", "PENDING" "PENDING", :submitted "SUBMITTED", "SUBMITTED" "SUBMITTED", :running "RUNNING", "SUCCEEDED" "SUCCEEDED", "STARTING" "STARTING", :runnable "RUNNABLE", "FAILED" "FAILED", :failed "FAILED", "RUNNING" "RUNNING", :succeeded "SUCCEEDED"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/job-status (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"RUNNABLE" "RUNNABLE", :starting "STARTING", :pending "PENDING", "PENDING" "PENDING", :submitted "SUBMITTED", "SUBMITTED" "SUBMITTED", :running "RUNNING", "SUCCEEDED" "SUCCEEDED", "STARTING" "STARTING", :runnable "RUNNABLE", "FAILED" "FAILED", :failed "FAILED", "RUNNING" "RUNNING", :succeeded "SUCCEEDED"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/compute-environment-detail-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.batch.-2016-08-10/compute-environment-detail) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/compute-environment-detail-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.batch.-2016-08-10/compute-environment-detail) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.describe-compute-environments-response/compute-environments (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/compute-environment-detail-list))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.describe-compute-environments-response/next-token (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
@@ -140,9 +140,9 @@
 
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/tags-map (clojure.spec.alpha/map-of :portkey.aws.batch.-2016-08-10/string :portkey.aws.batch.-2016-08-10/string))
 
-(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/attempt-details (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.batch.-2016-08-10/attempt-detail) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/attempt-details (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.batch.-2016-08-10/attempt-detail) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/environment-variables (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.batch.-2016-08-10/key-value-pair) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/environment-variables (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.batch.-2016-08-10/key-value-pair) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.list-jobs-request/job-queue (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.list-jobs-request/array-job-id (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
@@ -189,7 +189,7 @@
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.deregister-job-definition-request/job-definition (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/deregister-job-definition-request (portkey.aws/json-keys :req-un [:portkey.aws.batch.-2016-08-10.deregister-job-definition-request/jobDefinition] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/jqstatus (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {:valid "VALID", :deleted "DELETED", :creating "CREATING", "UPDATING" "UPDATING", :invalid "INVALID", :deleting "DELETING", "INVALID" "INVALID", "DELETING" "DELETING", "CREATING" "CREATING", :updating "UPDATING", "DELETED" "DELETED", "VALID" "VALID"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/jqstatus (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {:valid "VALID", :deleted "DELETED", :creating "CREATING", "UPDATING" "UPDATING", :invalid "INVALID", :deleting "DELETING", "INVALID" "INVALID", "DELETING" "DELETING", "CREATING" "CREATING", :updating "UPDATING", "DELETED" "DELETED", "VALID" "VALID"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.describe-job-queues-request/job-queues (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string-list))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.describe-job-queues-request/max-results (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/integer))
@@ -203,7 +203,7 @@
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.create-compute-environment-request/service-role (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/create-compute-environment-request (portkey.aws/json-keys :req-un [:portkey.aws.batch.-2016-08-10.create-compute-environment-request/computeEnvironmentName :portkey.aws.batch.-2016-08-10.create-compute-environment-request/type :portkey.aws.batch.-2016-08-10.create-compute-environment-request/serviceRole] :opt-un [:portkey.aws.batch.-2016-08-10.create-compute-environment-request/state :portkey.aws.batch.-2016-08-10.create-compute-environment-request/computeResources] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/array-job-dependency (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"N_TO_N" "N_TO_N", :n-to-n "N_TO_N", "SEQUENTIAL" "SEQUENTIAL", :sequential "SEQUENTIAL"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/array-job-dependency (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"N_TO_N" "N_TO_N", :n-to-n "N_TO_N", "SEQUENTIAL" "SEQUENTIAL", :sequential "SEQUENTIAL"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/terminate-job-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
@@ -242,15 +242,15 @@
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.compute-resource/instance-role (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/compute-resource (portkey.aws/json-keys :req-un [:portkey.aws.batch.-2016-08-10.compute-resource/type :portkey.aws.batch.-2016-08-10.compute-resource/minvCpus :portkey.aws.batch.-2016-08-10.compute-resource/maxvCpus :portkey.aws.batch.-2016-08-10.compute-resource/instanceTypes :portkey.aws.batch.-2016-08-10.compute-resource/subnets :portkey.aws.batch.-2016-08-10.compute-resource/securityGroupIds :portkey.aws.batch.-2016-08-10.compute-resource/instanceRole] :opt-un [:portkey.aws.batch.-2016-08-10.compute-resource/ec2KeyPair :portkey.aws.batch.-2016-08-10.compute-resource/spotIamFleetRole :portkey.aws.batch.-2016-08-10.compute-resource/bidPercentage :portkey.aws.batch.-2016-08-10.compute-resource/tags :portkey.aws.batch.-2016-08-10.compute-resource/imageId :portkey.aws.batch.-2016-08-10.compute-resource/desiredvCpus] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/job-queue-detail-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.batch.-2016-08-10/job-queue-detail) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/job-queue-detail-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.batch.-2016-08-10/job-queue-detail) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.terminate-job-request/job-id (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.terminate-job-request/reason (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/terminate-job-request (portkey.aws/json-keys :req-un [:portkey.aws.batch.-2016-08-10.terminate-job-request/jobId :portkey.aws.batch.-2016-08-10.terminate-job-request/reason] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/job-definition-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.batch.-2016-08-10/job-definition) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/job-definition-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.batch.-2016-08-10/job-definition) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/crtype (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"EC2" "EC2", :ec2 "EC2", "SPOT" "SPOT", :spot "SPOT"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/crtype (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"EC2" "EC2", :ec2 "EC2", "SPOT" "SPOT", :spot "SPOT"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.create-job-queue-request/job-queue-name (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.create-job-queue-request/state (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/jqstate))
@@ -258,7 +258,7 @@
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.create-job-queue-request/compute-environment-order (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/compute-environment-orders))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/create-job-queue-request (portkey.aws/json-keys :req-un [:portkey.aws.batch.-2016-08-10.create-job-queue-request/jobQueueName :portkey.aws.batch.-2016-08-10.create-job-queue-request/priority :portkey.aws.batch.-2016-08-10.create-job-queue-request/computeEnvironmentOrder] :opt-un [:portkey.aws.batch.-2016-08-10.create-job-queue-request/state] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/job-detail-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.batch.-2016-08-10/job-detail) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/job-detail-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.batch.-2016-08-10/job-detail) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.delete-job-queue-request/job-queue (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/delete-job-queue-request (portkey.aws/json-keys :req-un [:portkey.aws.batch.-2016-08-10.delete-job-queue-request/jobQueue] :opt-un [] :locations {}))
@@ -267,7 +267,7 @@
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.container-summary/reason (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/container-summary (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.batch.-2016-08-10.container-summary/exitCode :portkey.aws.batch.-2016-08-10.container-summary/reason] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/job-summary-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.batch.-2016-08-10/job-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/job-summary-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.batch.-2016-08-10/job-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.update-compute-environment-response/compute-environment-name (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.update-compute-environment-response/compute-environment-arn (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
@@ -306,7 +306,7 @@
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.compute-environment-detail/status-reason (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/compute-environment-detail (portkey.aws/json-keys :req-un [:portkey.aws.batch.-2016-08-10.compute-environment-detail/computeEnvironmentName :portkey.aws.batch.-2016-08-10.compute-environment-detail/computeEnvironmentArn :portkey.aws.batch.-2016-08-10.compute-environment-detail/ecsClusterArn] :opt-un [:portkey.aws.batch.-2016-08-10.compute-environment-detail/serviceRole :portkey.aws.batch.-2016-08-10.compute-environment-detail/status :portkey.aws.batch.-2016-08-10.compute-environment-detail/computeResources :portkey.aws.batch.-2016-08-10.compute-environment-detail/type :portkey.aws.batch.-2016-08-10.compute-environment-detail/state :portkey.aws.batch.-2016-08-10.compute-environment-detail/statusReason] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/cestatus (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {:valid "VALID", :deleted "DELETED", :creating "CREATING", "UPDATING" "UPDATING", :invalid "INVALID", :deleting "DELETING", "INVALID" "INVALID", "DELETING" "DELETING", "CREATING" "CREATING", :updating "UPDATING", "DELETED" "DELETED", "VALID" "VALID"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/cestatus (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {:valid "VALID", :deleted "DELETED", :creating "CREATING", "UPDATING" "UPDATING", :invalid "INVALID", :deleting "DELETING", "INVALID" "INVALID", "DELETING" "DELETING", "CREATING" "CREATING", :updating "UPDATING", "DELETED" "DELETED", "VALID" "VALID"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/integer (clojure.spec.alpha/and clojure.core/int?))
 
@@ -335,7 +335,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/long clojure.core/int?)
 
-(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/job-dependency-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.batch.-2016-08-10/job-dependency) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/job-dependency-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.batch.-2016-08-10/job-dependency) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.job-queue-detail/job-queue-name (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.job-queue-detail/job-queue-arn (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
@@ -346,12 +346,12 @@
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.job-queue-detail/compute-environment-order (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/compute-environment-orders))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/job-queue-detail (portkey.aws/json-keys :req-un [:portkey.aws.batch.-2016-08-10.job-queue-detail/jobQueueName :portkey.aws.batch.-2016-08-10.job-queue-detail/jobQueueArn :portkey.aws.batch.-2016-08-10.job-queue-detail/state :portkey.aws.batch.-2016-08-10.job-queue-detail/priority :portkey.aws.batch.-2016-08-10.job-queue-detail/computeEnvironmentOrder] :opt-un [:portkey.aws.batch.-2016-08-10.job-queue-detail/status :portkey.aws.batch.-2016-08-10.job-queue-detail/statusReason] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/ulimits (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.batch.-2016-08-10/ulimit) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/ulimits (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.batch.-2016-08-10/ulimit) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.job-timeout/attempt-duration-seconds (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/integer))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/job-timeout (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.batch.-2016-08-10.job-timeout/attemptDurationSeconds] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/cetype (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"MANAGED" "MANAGED", :managed "MANAGED", "UNMANAGED" "UNMANAGED", :unmanaged "UNMANAGED"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/cetype (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"MANAGED" "MANAGED", :managed "MANAGED", "UNMANAGED" "UNMANAGED", :unmanaged "UNMANAGED"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.container-properties/ulimits (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/ulimits))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.container-properties/command (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string-list))
@@ -390,7 +390,7 @@
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.job-detail/job-name (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/job-detail (portkey.aws/json-keys :req-un [:portkey.aws.batch.-2016-08-10.job-detail/jobName :portkey.aws.batch.-2016-08-10.job-detail/jobId :portkey.aws.batch.-2016-08-10.job-detail/jobQueue :portkey.aws.batch.-2016-08-10.job-detail/status :portkey.aws.batch.-2016-08-10.job-detail/startedAt :portkey.aws.batch.-2016-08-10.job-detail/jobDefinition] :opt-un [:portkey.aws.batch.-2016-08-10.job-detail/retryStrategy :portkey.aws.batch.-2016-08-10.job-detail/createdAt :portkey.aws.batch.-2016-08-10.job-detail/stoppedAt :portkey.aws.batch.-2016-08-10.job-detail/timeout :portkey.aws.batch.-2016-08-10.job-detail/attempts :portkey.aws.batch.-2016-08-10.job-detail/statusReason :portkey.aws.batch.-2016-08-10.job-detail/dependsOn :portkey.aws.batch.-2016-08-10.job-detail/parameters :portkey.aws.batch.-2016-08-10.job-detail/arrayProperties :portkey.aws.batch.-2016-08-10.job-detail/container] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/cestate (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"ENABLED" "ENABLED", :enabled "ENABLED", "DISABLED" "DISABLED", :disabled "DISABLED"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/cestate (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"ENABLED" "ENABLED", :enabled "ENABLED", "DISABLED" "DISABLED", :disabled "DISABLED"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.attempt-container-detail/container-instance-arn (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.attempt-container-detail/task-arn (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
@@ -406,13 +406,13 @@
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.describe-job-definitions-request/next-token (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/describe-job-definitions-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.batch.-2016-08-10.describe-job-definitions-request/jobDefinitions :portkey.aws.batch.-2016-08-10.describe-job-definitions-request/maxResults :portkey.aws.batch.-2016-08-10.describe-job-definitions-request/jobDefinitionName :portkey.aws.batch.-2016-08-10.describe-job-definitions-request/status :portkey.aws.batch.-2016-08-10.describe-job-definitions-request/nextToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/volumes (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.batch.-2016-08-10/volume) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/volumes (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.batch.-2016-08-10/volume) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.list-jobs-response/job-summary-list (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/job-summary-list))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.list-jobs-response/next-token (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/list-jobs-response (portkey.aws/json-keys :req-un [:portkey.aws.batch.-2016-08-10.list-jobs-response/jobSummaryList] :opt-un [:portkey.aws.batch.-2016-08-10.list-jobs-response/nextToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/mount-points (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.batch.-2016-08-10/mount-point) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/mount-points (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.batch.-2016-08-10/mount-point) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.job-summary/created-at (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/long))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.job-summary/started-at (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/long))
@@ -435,7 +435,7 @@
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.delete-compute-environment-request/compute-environment (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/delete-compute-environment-request (portkey.aws/json-keys :req-un [:portkey.aws.batch.-2016-08-10.delete-compute-environment-request/computeEnvironment] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/compute-environment-orders (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.batch.-2016-08-10/compute-environment-order) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10/compute-environment-orders (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.batch.-2016-08-10/compute-environment-order) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.update-job-queue-request/job-queue (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/string))
 (clojure.spec.alpha/def :portkey.aws.batch.-2016-08-10.update-job-queue-request/state (clojure.spec.alpha/and :portkey.aws.batch.-2016-08-10/jqstate))

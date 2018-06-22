@@ -45,7 +45,7 @@
     :endpoint "https://elasticfilesystem.us-west-1.amazonaws.com",
     :signature-version :v4}})
 
-(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/tag-keys (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.elasticfilesystem/tag-key) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/tag-keys (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.elasticfilesystem/tag-key) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.elasticfilesystem/create-file-system-request (portkey.aws/json-keys :req-un [:portkey.aws.elasticfilesystem/CreationToken] :opt-un [:portkey.aws.elasticfilesystem/PerformanceMode :portkey.aws.elasticfilesystem/Encrypted :portkey.aws.elasticfilesystem/KmsKeyId] :locations {}))
 
@@ -60,7 +60,7 @@
 (clojure.spec.alpha/def :portkey.aws.elasticfilesystem.bad-request/message (clojure.spec.alpha/and :portkey.aws.elasticfilesystem/error-message))
 (clojure.spec.alpha/def :portkey.aws.elasticfilesystem/bad-request (portkey.aws/json-keys :req-un [:portkey.aws.elasticfilesystem/ErrorCode] :opt-un [:portkey.aws.elasticfilesystem.bad-request/Message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/mount-target-count (clojure.spec.alpha/and clojure.core/int? (fn* [p1__16202__16203__auto__] (clojure.core/<= 0 p1__16202__16203__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/mount-target-count (clojure.spec.alpha/and clojure.core/int? (fn* [p1__13828__13829__auto__] (clojure.core/<= 0 p1__13828__13829__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elasticfilesystem/security-group (clojure.spec.alpha/and clojure.core/string?))
 
@@ -73,9 +73,9 @@
 (clojure.spec.alpha/def :portkey.aws.elasticfilesystem.ip-address-in-use/message (clojure.spec.alpha/and :portkey.aws.elasticfilesystem/error-message))
 (clojure.spec.alpha/def :portkey.aws.elasticfilesystem/ip-address-in-use (portkey.aws/json-keys :req-un [:portkey.aws.elasticfilesystem/ErrorCode] :opt-un [:portkey.aws.elasticfilesystem.ip-address-in-use/Message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/security-groups (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.elasticfilesystem/security-group :max-count 5) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/security-groups (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.elasticfilesystem/security-group :max-count 5) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/life-cycle-state (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"creating" "creating", :creating "creating", "available" "available", :available "available", "deleting" "deleting", :deleting "deleting", "deleted" "deleted", :deleted "deleted"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/life-cycle-state (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"creating" "creating", :creating "creating", "available" "available", :available "available", "deleting" "deleting", :deleting "deleting", "deleted" "deleted", :deleted "deleted"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.elasticfilesystem/encrypted clojure.core/boolean?)
 
@@ -95,9 +95,9 @@
 
 (clojure.spec.alpha/def :portkey.aws.elasticfilesystem/marker (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/tag-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128))))
+(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/tag-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128))))
 
-(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/tags (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.elasticfilesystem/tag) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/tags (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.elasticfilesystem/tag) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.elasticfilesystem/network-interface-id (clojure.spec.alpha/and clojure.core/string?))
 
@@ -122,7 +122,7 @@
 (clojure.spec.alpha/def :portkey.aws.elasticfilesystem.subnet-not-found/message (clojure.spec.alpha/and :portkey.aws.elasticfilesystem/error-message))
 (clojure.spec.alpha/def :portkey.aws.elasticfilesystem/subnet-not-found (portkey.aws/json-keys :req-un [:portkey.aws.elasticfilesystem/ErrorCode] :opt-un [:portkey.aws.elasticfilesystem.subnet-not-found/Message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/error-code (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__)))))
+(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/error-code (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__)))))
 
 (clojure.spec.alpha/def :portkey.aws.elasticfilesystem.describe-mount-targets-response/mount-targets (clojure.spec.alpha/and :portkey.aws.elasticfilesystem/mount-target-descriptions))
 (clojure.spec.alpha/def :portkey.aws.elasticfilesystem.describe-mount-targets-response/next-marker (clojure.spec.alpha/and :portkey.aws.elasticfilesystem/marker))
@@ -141,7 +141,7 @@
 (clojure.spec.alpha/def :portkey.aws.elasticfilesystem.file-system-in-use/message (clojure.spec.alpha/and :portkey.aws.elasticfilesystem/error-message))
 (clojure.spec.alpha/def :portkey.aws.elasticfilesystem/file-system-in-use (portkey.aws/json-keys :req-un [:portkey.aws.elasticfilesystem/ErrorCode] :opt-un [:portkey.aws.elasticfilesystem.file-system-in-use/Message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/tag-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 256))))
+(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/tag-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 256))))
 
 (clojure.spec.alpha/def :portkey.aws.elasticfilesystem/file-system-id (clojure.spec.alpha/and clojure.core/string?))
 
@@ -150,7 +150,7 @@
 (clojure.spec.alpha/def :portkey.aws.elasticfilesystem.file-system-size/value (clojure.spec.alpha/and :portkey.aws.elasticfilesystem/file-system-size-value))
 (clojure.spec.alpha/def :portkey.aws.elasticfilesystem/file-system-size (portkey.aws/json-keys :req-un [:portkey.aws.elasticfilesystem.file-system-size/Value] :opt-un [:portkey.aws.elasticfilesystem/Timestamp] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/kms-key-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 2048))))
+(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/kms-key-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 2048))))
 
 (clojure.spec.alpha/def :portkey.aws.elasticfilesystem/describe-tags-request (portkey.aws/json-keys :req-un [:portkey.aws.elasticfilesystem/FileSystemId] :opt-un [:portkey.aws.elasticfilesystem/MaxItems :portkey.aws.elasticfilesystem/Marker] :locations {}))
 
@@ -160,14 +160,14 @@
 (clojure.spec.alpha/def :portkey.aws.elasticfilesystem.file-system-already-exists/message (clojure.spec.alpha/and :portkey.aws.elasticfilesystem/error-message))
 (clojure.spec.alpha/def :portkey.aws.elasticfilesystem/file-system-already-exists (portkey.aws/json-keys :req-un [:portkey.aws.elasticfilesystem/ErrorCode :portkey.aws.elasticfilesystem/FileSystemId] :opt-un [:portkey.aws.elasticfilesystem.file-system-already-exists/Message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/file-system-descriptions (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.elasticfilesystem/file-system-description) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/file-system-descriptions (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.elasticfilesystem/file-system-description) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.elasticfilesystem.incorrect-file-system-life-cycle-state/message (clojure.spec.alpha/and :portkey.aws.elasticfilesystem/error-message))
 (clojure.spec.alpha/def :portkey.aws.elasticfilesystem/incorrect-file-system-life-cycle-state (portkey.aws/json-keys :req-un [:portkey.aws.elasticfilesystem/ErrorCode] :opt-un [:portkey.aws.elasticfilesystem.incorrect-file-system-life-cycle-state/Message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/mount-target-descriptions (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.elasticfilesystem/mount-target-description) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/mount-target-descriptions (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.elasticfilesystem/mount-target-description) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/max-items (clojure.spec.alpha/and clojure.core/int? (fn* [p1__16202__16203__auto__] (clojure.core/<= 1 p1__16202__16203__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/max-items (clojure.spec.alpha/and clojure.core/int? (fn* [p1__13828__13829__auto__] (clojure.core/<= 1 p1__13828__13829__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elasticfilesystem/delete-mount-target-request (portkey.aws/json-keys :req-un [:portkey.aws.elasticfilesystem/MountTargetId] :opt-un [] :locations {}))
 
@@ -192,9 +192,9 @@
 
 (clojure.spec.alpha/def :portkey.aws.elasticfilesystem/mount-target-id (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/creation-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 64))))
+(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/creation-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 64))))
 
-(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/performance-mode (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"generalPurpose" "generalPurpose", :general-purpose "generalPurpose", "maxIO" "maxIO", :maxio "maxIO"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.elasticfilesystem/performance-mode (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"generalPurpose" "generalPurpose", :general-purpose "generalPurpose", "maxIO" "maxIO", :maxio "maxIO"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.elasticfilesystem.no-free-addresses-in-subnet/message (clojure.spec.alpha/and :portkey.aws.elasticfilesystem/error-message))
 (clojure.spec.alpha/def :portkey.aws.elasticfilesystem/no-free-addresses-in-subnet (portkey.aws/json-keys :req-un [:portkey.aws.elasticfilesystem/ErrorCode] :opt-un [:portkey.aws.elasticfilesystem.no-free-addresses-in-subnet/Message] :locations {}))

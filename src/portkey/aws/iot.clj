@@ -68,9 +68,9 @@
 (clojure.spec.alpha/def :portkey.aws.iot.accept-certificate-transfer-request/set-as-active (clojure.spec.alpha/and :portkey.aws.iot/set-as-active))
 (clojure.spec.alpha/def :portkey.aws.iot/accept-certificate-transfer-request (portkey.aws/json-keys :req-un [:portkey.aws.iot.accept-certificate-transfer-request/certificateId] :opt-un [:portkey.aws.iot.accept-certificate-transfer-request/setAsActive] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/registry-max-results (clojure.spec.alpha/and clojure.core/int? (fn* [p1__16202__16203__auto__] (clojure.core/<= 1 p1__16202__16203__auto__)) (fn* [p1__16204__16205__auto__] (clojure.core/<= p1__16204__16205__auto__ 250))))
+(clojure.spec.alpha/def :portkey.aws.iot/registry-max-results (clojure.spec.alpha/and clojure.core/int? (fn* [p1__13828__13829__auto__] (clojure.core/<= 1 p1__13828__13829__auto__)) (fn* [p1__13830__13831__auto__] (clojure.core/<= p1__13830__13831__auto__ 250))))
 
-(clojure.spec.alpha/def :portkey.aws.iot/stream-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_-]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/stream-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_-]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.get-effective-policies-response/effective-policies (clojure.spec.alpha/and :portkey.aws.iot/effective-policies))
 (clojure.spec.alpha/def :portkey.aws.iot/get-effective-policies-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.get-effective-policies-response/effectivePolicies] :locations {}))
@@ -78,18 +78,18 @@
 (clojure.spec.alpha/def :portkey.aws.iot.list-policy-versions-response/policy-versions (clojure.spec.alpha/and :portkey.aws.iot/policy-versions))
 (clojure.spec.alpha/def :portkey.aws.iot/list-policy-versions-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.list-policy-versions-response/policyVersions] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/auto-registration-status (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"ENABLE" "ENABLE", :enable "ENABLE", "DISABLE" "DISABLE", :disable "DISABLE"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.iot/auto-registration-status (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"ENABLE" "ENABLE", :enable "ENABLE", "DISABLE" "DISABLE", :disable "DISABLE"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.iot/thing-indexing-mode (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"OFF" "OFF", :off "OFF", "REGISTRY" "REGISTRY", :registry "REGISTRY", "REGISTRY_AND_SHADOW" "REGISTRY_AND_SHADOW", :registry-and-shadow "REGISTRY_AND_SHADOW"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.iot/thing-indexing-mode (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"OFF" "OFF", :off "OFF", "REGISTRY" "REGISTRY", :registry "REGISTRY", "REGISTRY_AND_SHADOW" "REGISTRY_AND_SHADOW", :registry-and-shadow "REGISTRY_AND_SHADOW"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.iot.describe-event-configurations-response/event-configurations (clojure.spec.alpha/and :portkey.aws.iot/event-configurations))
 (clojure.spec.alpha/def :portkey.aws.iot.describe-event-configurations-response/creation-date (clojure.spec.alpha/and :portkey.aws.iot/creation-date))
 (clojure.spec.alpha/def :portkey.aws.iot.describe-event-configurations-response/last-modified-date (clojure.spec.alpha/and :portkey.aws.iot/last-modified-date))
 (clojure.spec.alpha/def :portkey.aws.iot/describe-event-configurations-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.describe-event-configurations-response/eventConfigurations :portkey.aws.iot.describe-event-configurations-response/creationDate :portkey.aws.iot.describe-event-configurations-response/lastModifiedDate] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/skyfall-max-results (clojure.spec.alpha/and clojure.core/int? (fn* [p1__16202__16203__auto__] (clojure.core/<= 1 p1__16202__16203__auto__)) (fn* [p1__16204__16205__auto__] (clojure.core/<= p1__16204__16205__auto__ 250))))
+(clojure.spec.alpha/def :portkey.aws.iot/skyfall-max-results (clojure.spec.alpha/and clojure.core/int? (fn* [p1__13828__13829__auto__] (clojure.core/<= 1 p1__13828__13829__auto__)) (fn* [p1__13830__13831__auto__] (clojure.core/<= p1__13830__13831__auto__ 250))))
 
-(clojure.spec.alpha/def :portkey.aws.iot/thing-group-description (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 2028)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[\p{Graph}\x20]*" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/thing-group-description (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 2028)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[\p{Graph}\x20]*" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.list-authorizers-request/page-size (clojure.spec.alpha/and :portkey.aws.iot/page-size))
 (clojure.spec.alpha/def :portkey.aws.iot.list-authorizers-request/marker (clojure.spec.alpha/and :portkey.aws.iot/marker))
@@ -104,7 +104,7 @@
 (clojure.spec.alpha/def :portkey.aws.iot.unauthorized-exception/message (clojure.spec.alpha/and :portkey.aws.iot/error-message))
 (clojure.spec.alpha/def :portkey.aws.iot/unauthorized-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.unauthorized-exception/message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/outgoing-certificates (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/outgoing-certificate) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/outgoing-certificates (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/outgoing-certificate) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.detach-principal-policy-request/policy-name (clojure.spec.alpha/and :portkey.aws.iot/policy-name))
 (clojure.spec.alpha/def :portkey.aws.iot.detach-principal-policy-request/principal (clojure.spec.alpha/and :portkey.aws.iot/principal))
@@ -116,7 +116,7 @@
 (clojure.spec.alpha/def :portkey.aws.iot.list-targets-for-policy-response/next-marker (clojure.spec.alpha/and :portkey.aws.iot/marker))
 (clojure.spec.alpha/def :portkey.aws.iot/list-targets-for-policy-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.list-targets-for-policy-response/targets :portkey.aws.iot.list-targets-for-policy-response/nextMarker] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/thing-attribute-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/thing-attribute) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/thing-attribute-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/thing-attribute) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.test-invoke-authorizer-request/authorizer-name (clojure.spec.alpha/and :portkey.aws.iot/authorizer-name))
 (clojure.spec.alpha/def :portkey.aws.iot.test-invoke-authorizer-request/token (clojure.spec.alpha/and :portkey.aws.iot/token))
@@ -125,7 +125,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.iot/otaupdate-arn (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.iot/log-target-configurations (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/log-target-configuration) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/log-target-configurations (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/log-target-configuration) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.thing-type-properties/thing-type-description (clojure.spec.alpha/and :portkey.aws.iot/thing-type-description))
 (clojure.spec.alpha/def :portkey.aws.iot.thing-type-properties/searchable-attributes (clojure.spec.alpha/and :portkey.aws.iot/searchable-attributes))
@@ -146,7 +146,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.iot/stream-name (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.iot/token-signature (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 2560)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[A-Za-z0-9+/]+={0,2}" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/token-signature (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 2560)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[A-Za-z0-9+/]+={0,2}" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.start-thing-registration-task-response/task-id (clojure.spec.alpha/and :portkey.aws.iot/task-id))
 (clojure.spec.alpha/def :portkey.aws.iot/start-thing-registration-task-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.start-thing-registration-task-response/taskId] :locations {}))
@@ -196,7 +196,7 @@
 (clojure.spec.alpha/def :portkey.aws.iot.stream-info/role-arn (clojure.spec.alpha/and :portkey.aws.iot/role-arn))
 (clojure.spec.alpha/def :portkey.aws.iot/stream-info (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.stream-info/streamId :portkey.aws.iot.stream-info/streamArn :portkey.aws.iot.stream-info/streamVersion :portkey.aws.iot.stream-info/description :portkey.aws.iot.stream-info/files :portkey.aws.iot.stream-info/createdAt :portkey.aws.iot.stream-info/lastUpdatedAt :portkey.aws.iot.stream-info/roleArn] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/private-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__)))))
+(clojure.spec.alpha/def :portkey.aws.iot/private-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__)))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.createotaupdate-response/ota-update-id (clojure.spec.alpha/and :portkey.aws.iot/otaupdate-id))
 (clojure.spec.alpha/def :portkey.aws.iot.createotaupdate-response/aws-iot-job-id (clojure.spec.alpha/and :portkey.aws.iot/aws-iot-job-id))
@@ -248,13 +248,13 @@
 
 (clojure.spec.alpha/def :portkey.aws.iot/signature-algorithm (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.iot/index-status (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"ACTIVE" "ACTIVE", :active "ACTIVE", "BUILDING" "BUILDING", :building "BUILDING", "REBUILDING" "REBUILDING", :rebuilding "REBUILDING"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.iot/index-status (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"ACTIVE" "ACTIVE", :active "ACTIVE", "BUILDING" "BUILDING", :building "BUILDING", "REBUILDING" "REBUILDING", :rebuilding "REBUILDING"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.iot/query-version (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.iot/rule-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9_]+$" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/rule-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9_]+$" s__13770__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.iot/s3-file-url-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/s3-file-url) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/s3-file-url-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/s3-file-url) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.describe-thing-response/default-client-id (clojure.spec.alpha/and :portkey.aws.iot/client-id))
 (clojure.spec.alpha/def :portkey.aws.iot.describe-thing-response/thing-name (clojure.spec.alpha/and :portkey.aws.iot/thing-name))
@@ -265,7 +265,7 @@
 (clojure.spec.alpha/def :portkey.aws.iot.describe-thing-response/version (clojure.spec.alpha/and :portkey.aws.iot/version))
 (clojure.spec.alpha/def :portkey.aws.iot/describe-thing-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.describe-thing-response/defaultClientId :portkey.aws.iot.describe-thing-response/thingName :portkey.aws.iot.describe-thing-response/thingId :portkey.aws.iot.describe-thing-response/thingArn :portkey.aws.iot.describe-thing-response/thingTypeName :portkey.aws.iot.describe-thing-response/attributes :portkey.aws.iot.describe-thing-response/version] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/job-status (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"IN_PROGRESS" "IN_PROGRESS", :in-progress "IN_PROGRESS", "CANCELED" "CANCELED", :canceled "CANCELED", "COMPLETED" "COMPLETED", :completed "COMPLETED"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.iot/job-status (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"IN_PROGRESS" "IN_PROGRESS", :in-progress "IN_PROGRESS", "CANCELED" "CANCELED", :canceled "CANCELED", "COMPLETED" "COMPLETED", :completed "COMPLETED"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.iot/failed-things (clojure.spec.alpha/and clojure.core/int?))
 
@@ -291,16 +291,16 @@
 (clojure.spec.alpha/def :portkey.aws.iot.search-index-request/query-version (clojure.spec.alpha/and :portkey.aws.iot/query-version))
 (clojure.spec.alpha/def :portkey.aws.iot/search-index-request (portkey.aws/json-keys :req-un [:portkey.aws.iot.search-index-request/queryString] :opt-un [:portkey.aws.iot.search-index-request/indexName :portkey.aws.iot.search-index-request/nextToken :portkey.aws.iot.search-index-request/maxResults :portkey.aws.iot.search-index-request/queryVersion] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/comment (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 2028)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[^\p{C}]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/comment (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 2028)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[^\p{C}]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.certificate-state-exception/message (clojure.spec.alpha/and :portkey.aws.iot/error-message))
 (clojure.spec.alpha/def :portkey.aws.iot/certificate-state-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.certificate-state-exception/message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/certificate-signing-request (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__)))))
+(clojure.spec.alpha/def :portkey.aws.iot/certificate-signing-request (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__)))))
 
-(clojure.spec.alpha/def :portkey.aws.iot/missing-context-values (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/missing-context-value) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/missing-context-values (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/missing-context-value) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.iot/parameter-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[a-zA-Z0-9:_-]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/parameter-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[a-zA-Z0-9:_-]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.test-invoke-authorizer-response/is-authenticated (clojure.spec.alpha/and :portkey.aws.iot/is-authenticated))
 (clojure.spec.alpha/def :portkey.aws.iot.test-invoke-authorizer-response/principal-id (clojure.spec.alpha/and :portkey.aws.iot/principal-id))
@@ -309,17 +309,17 @@
 (clojure.spec.alpha/def :portkey.aws.iot.test-invoke-authorizer-response/disconnect-after-in-seconds (clojure.spec.alpha/and :portkey.aws.iot/seconds))
 (clojure.spec.alpha/def :portkey.aws.iot/test-invoke-authorizer-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.test-invoke-authorizer-response/isAuthenticated :portkey.aws.iot.test-invoke-authorizer-response/principalId :portkey.aws.iot.test-invoke-authorizer-response/policyDocuments :portkey.aws.iot.test-invoke-authorizer-response/refreshAfterInSeconds :portkey.aws.iot.test-invoke-authorizer-response/disconnectAfterInSeconds] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/page-size (clojure.spec.alpha/and clojure.core/int? (fn* [p1__16202__16203__auto__] (clojure.core/<= 1 p1__16202__16203__auto__)) (fn* [p1__16204__16205__auto__] (clojure.core/<= p1__16204__16205__auto__ 250))))
+(clojure.spec.alpha/def :portkey.aws.iot/page-size (clojure.spec.alpha/and clojure.core/int? (fn* [p1__13828__13829__auto__] (clojure.core/<= 1 p1__13828__13829__auto__)) (fn* [p1__13830__13831__auto__] (clojure.core/<= p1__13830__13831__auto__ 250))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.invalid-request-exception/message (clojure.spec.alpha/and :portkey.aws.iot/error-message))
 (clojure.spec.alpha/def :portkey.aws.iot/invalid-request-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.invalid-request-exception/message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/thing-type-description (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 2028)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[\p{Graph}\x20]*" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/thing-type-description (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 2028)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[\p{Graph}\x20]*" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.certificate-validation-exception/message (clojure.spec.alpha/and :portkey.aws.iot/error-message))
 (clojure.spec.alpha/def :portkey.aws.iot/certificate-validation-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.certificate-validation-exception/message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/streams-summary (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/stream-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/streams-summary (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/stream-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.thing-attribute/thing-name (clojure.spec.alpha/and :portkey.aws.iot/thing-name))
 (clojure.spec.alpha/def :portkey.aws.iot.thing-attribute/thing-type-name (clojure.spec.alpha/and :portkey.aws.iot/thing-type-name))
@@ -328,7 +328,7 @@
 (clojure.spec.alpha/def :portkey.aws.iot.thing-attribute/version (clojure.spec.alpha/and :portkey.aws.iot/version))
 (clojure.spec.alpha/def :portkey.aws.iot/thing-attribute (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.thing-attribute/thingName :portkey.aws.iot.thing-attribute/thingTypeName :portkey.aws.iot.thing-attribute/thingArn :portkey.aws.iot.thing-attribute/attributes :portkey.aws.iot.thing-attribute/version] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/index-names-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/index-name) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/index-names-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/index-name) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.update-thing-group-response/version (clojure.spec.alpha/and :portkey.aws.iot/version))
 (clojure.spec.alpha/def :portkey.aws.iot/update-thing-group-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.update-thing-group-response/version] :locations {}))
@@ -339,16 +339,16 @@
 (clojure.spec.alpha/def :portkey.aws.iot.list-topic-rules-request/rule-disabled (clojure.spec.alpha/and :portkey.aws.iot/is-disabled))
 (clojure.spec.alpha/def :portkey.aws.iot/list-topic-rules-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.list-topic-rules-request/topic :portkey.aws.iot.list-topic-rules-request/maxResults :portkey.aws.iot.list-topic-rules-request/nextToken :portkey.aws.iot.list-topic-rules-request/ruleDisabled] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/canned-access-control-list (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"authenticated-read" "authenticated-read", "public-read-write" "public-read-write", :bucket-owner-full-control "bucket-owner-full-control", :private "private", "bucket-owner-full-control" "bucket-owner-full-control", "private" "private", :log-delivery-write "log-delivery-write", :authenticated-read "authenticated-read", "aws-exec-read" "aws-exec-read", :aws-exec-read "aws-exec-read", :bucket-owner-read "bucket-owner-read", "bucket-owner-read" "bucket-owner-read", "public-read" "public-read", "log-delivery-write" "log-delivery-write", :public-read-write "public-read-write", :public-read "public-read"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.iot/canned-access-control-list (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"authenticated-read" "authenticated-read", "public-read-write" "public-read-write", :bucket-owner-full-control "bucket-owner-full-control", :private "private", "bucket-owner-full-control" "bucket-owner-full-control", "private" "private", :log-delivery-write "log-delivery-write", :authenticated-read "authenticated-read", "aws-exec-read" "aws-exec-read", :aws-exec-read "aws-exec-read", :bucket-owner-read "bucket-owner-read", "bucket-owner-read" "bucket-owner-read", "public-read" "public-read", "log-delivery-write" "log-delivery-write", :public-read-write "public-read-write", :public-read "public-read"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.iot/thing-group-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[a-zA-Z0-9\-]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/thing-group-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[a-zA-Z0-9\-]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.list-outgoing-certificates-request/page-size (clojure.spec.alpha/and :portkey.aws.iot/page-size))
 (clojure.spec.alpha/def :portkey.aws.iot.list-outgoing-certificates-request/marker (clojure.spec.alpha/and :portkey.aws.iot/marker))
 (clojure.spec.alpha/def :portkey.aws.iot.list-outgoing-certificates-request/ascending-order (clojure.spec.alpha/and :portkey.aws.iot/ascending-order))
 (clojure.spec.alpha/def :portkey.aws.iot/list-outgoing-certificates-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.list-outgoing-certificates-request/pageSize :portkey.aws.iot.list-outgoing-certificates-request/marker :portkey.aws.iot.list-outgoing-certificates-request/ascendingOrder] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/thing-type-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[a-zA-Z0-9:_-]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/thing-type-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[a-zA-Z0-9:_-]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot/execution-number clojure.core/int?)
 
@@ -360,7 +360,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.iot/resource-id (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.iot/key-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 5120))))
+(clojure.spec.alpha/def :portkey.aws.iot/key-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 5120))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.get-logging-options-response/role-arn (clojure.spec.alpha/and :portkey.aws.iot/aws-arn))
 (clojure.spec.alpha/def :portkey.aws.iot.get-logging-options-response/log-level (clojure.spec.alpha/and :portkey.aws.iot/log-level))
@@ -377,7 +377,7 @@
 (clojure.spec.alpha/def :portkey.aws.iot.list-thing-groups-for-thing-response/next-token (clojure.spec.alpha/and :portkey.aws.iot/next-token))
 (clojure.spec.alpha/def :portkey.aws.iot/list-thing-groups-for-thing-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.list-thing-groups-for-thing-response/thingGroups :portkey.aws.iot.list-thing-groups-for-thing-response/nextToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/attribute-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_.,@/:#-]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/attribute-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_.,@/:#-]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.outgoing-certificate/certificate-arn (clojure.spec.alpha/and :portkey.aws.iot/certificate-arn))
 (clojure.spec.alpha/def :portkey.aws.iot.outgoing-certificate/certificate-id (clojure.spec.alpha/and :portkey.aws.iot/certificate-id))
@@ -409,9 +409,9 @@
 (clojure.spec.alpha/def :portkey.aws.iot.enable-topic-rule-request/rule-name (clojure.spec.alpha/and :portkey.aws.iot/rule-name))
 (clojure.spec.alpha/def :portkey.aws.iot/enable-topic-rule-request (portkey.aws/json-keys :req-un [:portkey.aws.iot.enable-topic-rule-request/ruleName] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/log-level (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"DISABLED" "DISABLED", :disabled "DISABLED", :warn "WARN", "WARN" "WARN", :debug "DEBUG", "ERROR" "ERROR", "DEBUG" "DEBUG", :info "INFO", :error "ERROR", "INFO" "INFO"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.iot/log-level (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"DISABLED" "DISABLED", :disabled "DISABLED", :warn "WARN", "WARN" "WARN", :debug "DEBUG", "ERROR" "ERROR", "DEBUG" "DEBUG", :info "INFO", :error "ERROR", "INFO" "INFO"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.iot/effective-policies (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/effective-policy) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/effective-policies (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/effective-policy) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.create-stream-request/stream-id (clojure.spec.alpha/and :portkey.aws.iot/stream-id))
 (clojure.spec.alpha/def :portkey.aws.iot.create-stream-request/description (clojure.spec.alpha/and :portkey.aws.iot/stream-description))
@@ -419,13 +419,13 @@
 (clojure.spec.alpha/def :portkey.aws.iot.create-stream-request/role-arn (clojure.spec.alpha/and :portkey.aws.iot/role-arn))
 (clojure.spec.alpha/def :portkey.aws.iot/create-stream-request (portkey.aws/json-keys :req-un [:portkey.aws.iot.create-stream-request/streamId :portkey.aws.iot.create-stream-request/files :portkey.aws.iot.create-stream-request/roleArn] :opt-un [:portkey.aws.iot.create-stream-request/description] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/policy-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[\w+=,.@-]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/policy-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[\w+=,.@-]+" s__13770__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.iot/cacertificates (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/cacertificate) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/cacertificates (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/cacertificate) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot/error-message (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.iot/action-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/action :min-count 0 :max-count 10) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/action-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/action :min-count 0 :max-count 10) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.reject-certificate-transfer-request/certificate-id (clojure.spec.alpha/and :portkey.aws.iot/certificate-id))
 (clojure.spec.alpha/def :portkey.aws.iot.reject-certificate-transfer-request/reject-reason (clojure.spec.alpha/and :portkey.aws.iot/message))
@@ -444,7 +444,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.iot/json-document (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.iot/laser-max-results (clojure.spec.alpha/and clojure.core/int? (fn* [p1__16202__16203__auto__] (clojure.core/<= 1 p1__16202__16203__auto__)) (fn* [p1__16204__16205__auto__] (clojure.core/<= p1__16204__16205__auto__ 250))))
+(clojure.spec.alpha/def :portkey.aws.iot/laser-max-results (clojure.spec.alpha/and clojure.core/int? (fn* [p1__13828__13829__auto__] (clojure.core/<= 1 p1__13828__13829__auto__)) (fn* [p1__13830__13831__auto__] (clojure.core/<= p1__13830__13831__auto__ 250))))
 
 (clojure.spec.alpha/def :portkey.aws.iot/expires-in-sec clojure.core/int?)
 
@@ -463,13 +463,13 @@
 (clojure.spec.alpha/def :portkey.aws.iot.list-jobs-request/thing-group-id (clojure.spec.alpha/and :portkey.aws.iot/thing-group-id))
 (clojure.spec.alpha/def :portkey.aws.iot/list-jobs-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.list-jobs-request/status :portkey.aws.iot.list-jobs-request/targetSelection :portkey.aws.iot.list-jobs-request/maxResults :portkey.aws.iot.list-jobs-request/nextToken :portkey.aws.iot.list-jobs-request/thingGroupName :portkey.aws.iot.list-jobs-request/thingGroupId] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/index-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[a-zA-Z0-9:_-]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/index-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[a-zA-Z0-9:_-]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.get-topic-rule-response/rule-arn (clojure.spec.alpha/and :portkey.aws.iot/rule-arn))
 (clojure.spec.alpha/def :portkey.aws.iot.get-topic-rule-response/rule (clojure.spec.alpha/and :portkey.aws.iot/topic-rule))
 (clojure.spec.alpha/def :portkey.aws.iot/get-topic-rule-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.get-topic-rule-response/ruleArn :portkey.aws.iot.get-topic-rule-response/rule] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/certificates (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/certificate) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/certificates (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/certificate) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot/endpoint-type (clojure.spec.alpha/and clojure.core/string?))
 
@@ -551,11 +551,11 @@
 (clojure.spec.alpha/def :portkey.aws.iot.list-thing-types-request/thing-type-name (clojure.spec.alpha/and :portkey.aws.iot/thing-type-name))
 (clojure.spec.alpha/def :portkey.aws.iot/list-thing-types-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.list-thing-types-request/nextToken :portkey.aws.iot.list-thing-types-request/maxResults :portkey.aws.iot.list-thing-types-request/thingTypeName] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/max-job-executions-per-min (clojure.spec.alpha/and clojure.core/int? (fn* [p1__16202__16203__auto__] (clojure.core/<= 1 p1__16202__16203__auto__)) (fn* [p1__16204__16205__auto__] (clojure.core/<= p1__16204__16205__auto__ 1000))))
+(clojure.spec.alpha/def :portkey.aws.iot/max-job-executions-per-min (clojure.spec.alpha/and clojure.core/int? (fn* [p1__13828__13829__auto__] (clojure.core/<= 1 p1__13828__13829__auto__)) (fn* [p1__13830__13831__auto__] (clojure.core/<= p1__13830__13831__auto__ 1000))))
 
-(clojure.spec.alpha/def :portkey.aws.iot/cacertificate-status (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"ACTIVE" "ACTIVE", :active "ACTIVE", "INACTIVE" "INACTIVE", :inactive "INACTIVE"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.iot/cacertificate-status (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"ACTIVE" "ACTIVE", :active "ACTIVE", "INACTIVE" "INACTIVE", :inactive "INACTIVE"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.iot/role-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 20 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 2048))))
+(clojure.spec.alpha/def :portkey.aws.iot/role-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 20 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 2048))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.invalid-query-exception/message (clojure.spec.alpha/and :portkey.aws.iot/error-message))
 (clojure.spec.alpha/def :portkey.aws.iot/invalid-query-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.invalid-query-exception/message] :locations {}))
@@ -578,7 +578,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.iot/disable-all-logs clojure.core/boolean?)
 
-(clojure.spec.alpha/def :portkey.aws.iot/registrys3-key-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 1024)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[a-zA-Z0-9!_.*'()-\/]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/registrys3-key-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 1024)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[a-zA-Z0-9!_.*'()-\/]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot/partition-key (clojure.spec.alpha/and clojure.core/string?))
 
@@ -628,12 +628,12 @@
 (clojure.spec.alpha/def :portkey.aws.iot.update-stream-response/stream-version (clojure.spec.alpha/and :portkey.aws.iot/stream-version))
 (clojure.spec.alpha/def :portkey.aws.iot/update-stream-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.update-stream-response/streamId :portkey.aws.iot.update-stream-response/streamArn :portkey.aws.iot.update-stream-response/description :portkey.aws.iot.update-stream-response/streamVersion] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/principal-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[a-zA-Z0-9]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/principal-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[a-zA-Z0-9]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.delete-conflict-exception/message (clojure.spec.alpha/and :portkey.aws.iot/error-message))
 (clojure.spec.alpha/def :portkey.aws.iot/delete-conflict-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.delete-conflict-exception/message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/marker (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[A-Za-z0-9+/]+={0,2}" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/marker (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[A-Za-z0-9+/]+={0,2}" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.update-stream-request/stream-id (clojure.spec.alpha/and :portkey.aws.iot/stream-id))
 (clojure.spec.alpha/def :portkey.aws.iot.update-stream-request/description (clojure.spec.alpha/and :portkey.aws.iot/stream-description))
@@ -647,11 +647,11 @@
 (clojure.spec.alpha/def :portkey.aws.iot.list-thing-registration-tasks-response/next-token (clojure.spec.alpha/and :portkey.aws.iot/next-token))
 (clojure.spec.alpha/def :portkey.aws.iot/list-thing-registration-tasks-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.list-thing-registration-tasks-response/taskIds :portkey.aws.iot.list-thing-registration-tasks-response/nextToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/otaupdate-files (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/otaupdate-file :min-count 1 :max-count 10) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/otaupdate-files (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/otaupdate-file :min-count 1 :max-count 10) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.iot/thing-document-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/thing-document) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/thing-document-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/thing-document) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.iot/task-id-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/task-id) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/task-id-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/task-id) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.detach-thing-principal-request/thing-name (clojure.spec.alpha/and :portkey.aws.iot/thing-name))
 (clojure.spec.alpha/def :portkey.aws.iot.detach-thing-principal-request/principal (clojure.spec.alpha/and :portkey.aws.iot/principal))
@@ -673,7 +673,7 @@
 (clojure.spec.alpha/def :portkey.aws.iot.list-thing-groups-for-thing-request/max-results (clojure.spec.alpha/and :portkey.aws.iot/registry-max-results))
 (clojure.spec.alpha/def :portkey.aws.iot/list-thing-groups-for-thing-request (portkey.aws/json-keys :req-un [:portkey.aws.iot.list-thing-groups-for-thing-request/thingName] :opt-un [:portkey.aws.iot.list-thing-groups-for-thing-request/nextToken :portkey.aws.iot.list-thing-groups-for-thing-request/maxResults] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/task-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 40))))
+(clojure.spec.alpha/def :portkey.aws.iot/task-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 40))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.limit-exceeded-exception/message (clojure.spec.alpha/and :portkey.aws.iot/error-message))
 (clojure.spec.alpha/def :portkey.aws.iot/limit-exceeded-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.limit-exceeded-exception/message] :locations {}))
@@ -686,13 +686,13 @@
 
 (clojure.spec.alpha/def :portkey.aws.iot/deprecate-thing-type-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/policy-names (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/policy-name) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/policy-names (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/policy-name) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.list-topic-rules-response/rules (clojure.spec.alpha/and :portkey.aws.iot/topic-rule-list))
 (clojure.spec.alpha/def :portkey.aws.iot.list-topic-rules-response/next-token (clojure.spec.alpha/and :portkey.aws.iot/next-token))
 (clojure.spec.alpha/def :portkey.aws.iot/list-topic-rules-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.list-topic-rules-response/rules :portkey.aws.iot.list-topic-rules-response/nextToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/thing-name-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/thing-name) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/thing-name-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/thing-name) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.cancel-job-request/job-id (clojure.spec.alpha/and :portkey.aws.iot/job-id))
 (clojure.spec.alpha/def :portkey.aws.iot.cancel-job-request/comment (clojure.spec.alpha/and :portkey.aws.iot/comment))
@@ -702,7 +702,7 @@
 (clojure.spec.alpha/def :portkey.aws.iot.create-certificate-from-csr-request/set-as-active (clojure.spec.alpha/and :portkey.aws.iot/set-as-active))
 (clojure.spec.alpha/def :portkey.aws.iot/create-certificate-from-csr-request (portkey.aws/json-keys :req-un [:portkey.aws.iot.create-certificate-from-csr-request/certificateSigningRequest] :opt-un [:portkey.aws.iot.create-certificate-from-csr-request/setAsActive] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/policy-targets (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/policy-target) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/policy-targets (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/policy-target) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot/resource-arns (clojure.spec.alpha/map-of :portkey.aws.iot/resource-logical-id :portkey.aws.iot/resource-arn))
 
@@ -725,7 +725,7 @@
 (clojure.spec.alpha/def :portkey.aws.iot.delete-topic-rule-request/rule-name (clojure.spec.alpha/and :portkey.aws.iot/rule-name))
 (clojure.spec.alpha/def :portkey.aws.iot/delete-topic-rule-request (portkey.aws/json-keys :req-un [:portkey.aws.iot.delete-topic-rule-request/ruleName] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/thing-group-name-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/thing-group-name) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/thing-group-name-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/thing-group-name) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot/set-as-active-flag clojure.core/boolean?)
 
@@ -764,36 +764,36 @@
 
 (clojure.spec.alpha/def :portkey.aws.iot/aws-arn (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.iot/stream-files (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/stream-file :min-count 1 :max-count 10) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/stream-files (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/stream-file :min-count 1 :max-count 10) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot/delete-registration-code-request (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/key-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[a-zA-Z0-9:_-]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/key-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[a-zA-Z0-9:_-]+" s__13770__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.iot/log-target-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"DEFAULT" "DEFAULT", :default "DEFAULT", "THING_GROUP" "THING_GROUP", :thing-group "THING_GROUP"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.iot/log-target-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"DEFAULT" "DEFAULT", :default "DEFAULT", "THING_GROUP" "THING_GROUP", :thing-group "THING_GROUP"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.iot/enabled clojure.core/boolean?)
 
-(clojure.spec.alpha/def :portkey.aws.iot/query-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 1000))))
+(clojure.spec.alpha/def :portkey.aws.iot/query-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 1000))))
 
 (clojure.spec.alpha/def :portkey.aws.iot/metric-unit (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.iot/status (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"Failed" "Failed", "Cancelled" "Cancelled", :in-progress "InProgress", "Cancelling" "Cancelling", :completed "Completed", :cancelled "Cancelled", "InProgress" "InProgress", "Completed" "Completed", :cancelling "Cancelling", :failed "Failed"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.iot/status (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"Failed" "Failed", "Cancelled" "Cancelled", :in-progress "InProgress", "Cancelling" "Cancelling", :completed "Completed", :cancelled "Cancelled", "InProgress" "InProgress", "Completed" "Completed", :cancelling "Cancelling", :failed "Failed"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.iot/allow-auto-registration clojure.core/boolean?)
 
-(clojure.spec.alpha/def :portkey.aws.iot/auth-results (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/auth-result) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/auth-results (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/auth-result) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.policy-version/version-id (clojure.spec.alpha/and :portkey.aws.iot/policy-version-id))
 (clojure.spec.alpha/def :portkey.aws.iot.policy-version/is-default-version (clojure.spec.alpha/and :portkey.aws.iot/is-default-version))
 (clojure.spec.alpha/def :portkey.aws.iot.policy-version/create-date (clojure.spec.alpha/and :portkey.aws.iot/date-type))
 (clojure.spec.alpha/def :portkey.aws.iot/policy-version (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.policy-version/versionId :portkey.aws.iot.policy-version/isDefaultVersion :portkey.aws.iot.policy-version/createDate] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/event-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {:thing-group "THING_GROUP", "THING_TYPE" "THING_TYPE", "THING_GROUP_HIERARCHY" "THING_GROUP_HIERARCHY", "JOB_EXECUTION" "JOB_EXECUTION", :thing-group-membership "THING_GROUP_MEMBERSHIP", :job-execution "JOB_EXECUTION", "THING_TYPE_ASSOCIATION" "THING_TYPE_ASSOCIATION", "JOB" "JOB", :thing-group-hierarchy "THING_GROUP_HIERARCHY", :thing "THING", :thing-type "THING_TYPE", "THING_GROUP" "THING_GROUP", "THING_GROUP_MEMBERSHIP" "THING_GROUP_MEMBERSHIP", "THING" "THING", :job "JOB", :thing-type-association "THING_TYPE_ASSOCIATION"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.iot/event-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {:thing-group "THING_GROUP", "THING_TYPE" "THING_TYPE", "THING_GROUP_HIERARCHY" "THING_GROUP_HIERARCHY", "JOB_EXECUTION" "JOB_EXECUTION", :thing-group-membership "THING_GROUP_MEMBERSHIP", :job-execution "JOB_EXECUTION", "THING_TYPE_ASSOCIATION" "THING_TYPE_ASSOCIATION", "JOB" "JOB", :thing-group-hierarchy "THING_GROUP_HIERARCHY", :thing "THING", :thing-type "THING_TYPE", "THING_GROUP" "THING_GROUP", "THING_GROUP_MEMBERSHIP" "THING_GROUP_MEMBERSHIP", "THING" "THING", :job "JOB", :thing-type-association "THING_TYPE_ASSOCIATION"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.iot/update-thing-groups-for-thing-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/role-alias (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[\w=,@-]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/role-alias (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[\w=,@-]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.log-target-configuration/log-target (clojure.spec.alpha/and :portkey.aws.iot/log-target))
 (clojure.spec.alpha/def :portkey.aws.iot.log-target-configuration/log-level (clojure.spec.alpha/and :portkey.aws.iot/log-level))
@@ -836,7 +836,7 @@
 (clojure.spec.alpha/def :portkey.aws.iot.describe-default-authorizer-response/authorizer-description (clojure.spec.alpha/and :portkey.aws.iot/authorizer-description))
 (clojure.spec.alpha/def :portkey.aws.iot/describe-default-authorizer-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.describe-default-authorizer-response/authorizerDescription] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/error-message (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 2048))))
+(clojure.spec.alpha/def :portkey.aws.iot/error-message (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 2048))))
 
 (clojure.spec.alpha/def :portkey.aws.iot/metric-timestamp (clojure.spec.alpha/and clojure.core/string?))
 
@@ -853,7 +853,7 @@
 (clojure.spec.alpha/def :portkey.aws.iot.describe-index-request/index-name (clojure.spec.alpha/and :portkey.aws.iot/index-name))
 (clojure.spec.alpha/def :portkey.aws.iot/describe-index-request (portkey.aws/json-keys :req-un [:portkey.aws.iot.describe-index-request/indexName] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/job-document (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 32768))))
+(clojure.spec.alpha/def :portkey.aws.iot/job-document (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 32768))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.get-topic-rule-request/rule-name (clojure.spec.alpha/and :portkey.aws.iot/rule-name))
 (clojure.spec.alpha/def :portkey.aws.iot/get-topic-rule-request (portkey.aws/json-keys :req-un [:portkey.aws.iot.get-topic-rule-request/ruleName] :opt-un [] :locations {}))
@@ -870,9 +870,9 @@
 
 (clojure.spec.alpha/def :portkey.aws.iot/recursive-without-default clojure.core/boolean?)
 
-(clojure.spec.alpha/def :portkey.aws.iot/stream-description (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 2028)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[^\p{C}]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/stream-description (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 2028)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[^\p{C}]+" s__13770__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.iot/salesforce-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 40 (clojure.core/count s__16142__auto__)))))
+(clojure.spec.alpha/def :portkey.aws.iot/salesforce-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 40 (clojure.core/count s__13768__auto__)))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.list-attached-policies-response/policies (clojure.spec.alpha/and :portkey.aws.iot/policies))
 (clojure.spec.alpha/def :portkey.aws.iot.list-attached-policies-response/next-marker (clojure.spec.alpha/and :portkey.aws.iot/marker))
@@ -888,7 +888,7 @@
 (clojure.spec.alpha/def :portkey.aws.iot.thing-group-metadata/creation-date (clojure.spec.alpha/and :portkey.aws.iot/creation-date))
 (clojure.spec.alpha/def :portkey.aws.iot/thing-group-metadata (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.thing-group-metadata/parentGroupName :portkey.aws.iot.thing-group-metadata/rootToParentThingGroups :portkey.aws.iot.thing-group-metadata/creationDate] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/target-selection (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"CONTINUOUS" "CONTINUOUS", :continuous "CONTINUOUS", "SNAPSHOT" "SNAPSHOT", :snapshot "SNAPSHOT"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.iot/target-selection (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"CONTINUOUS" "CONTINUOUS", :continuous "CONTINUOUS", "SNAPSHOT" "SNAPSHOT", :snapshot "SNAPSHOT"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.iot.deleteotaupdate-request/ota-update-id (clojure.spec.alpha/and :portkey.aws.iot/otaupdate-id))
 (clojure.spec.alpha/def :portkey.aws.iot/deleteotaupdate-request (portkey.aws/json-keys :req-un [:portkey.aws.iot.deleteotaupdate-request/otaUpdateId] :opt-un [] :locations {}))
@@ -919,7 +919,7 @@
 (clojure.spec.alpha/def :portkey.aws.iot.register-thing-request/parameters (clojure.spec.alpha/and :portkey.aws.iot/parameters))
 (clojure.spec.alpha/def :portkey.aws.iot/register-thing-request (portkey.aws/json-keys :req-un [:portkey.aws.iot.register-thing-request/templateBody] :opt-un [:portkey.aws.iot.register-thing-request/parameters] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/role-aliases (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/role-alias) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/role-aliases (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/role-alias) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.list-targets-for-policy-request/policy-name (clojure.spec.alpha/and :portkey.aws.iot/policy-name))
 (clojure.spec.alpha/def :portkey.aws.iot.list-targets-for-policy-request/marker (clojure.spec.alpha/and :portkey.aws.iot/marker))
@@ -968,11 +968,11 @@
 (clojure.spec.alpha/def :portkey.aws.iot.describe-thing-group-request/thing-group-name (clojure.spec.alpha/and :portkey.aws.iot/thing-group-name))
 (clojure.spec.alpha/def :portkey.aws.iot/describe-thing-group-request (portkey.aws/json-keys :req-un [:portkey.aws.iot.describe-thing-group-request/thingGroupName] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/searchable-attributes (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/attribute-name) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/searchable-attributes (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/attribute-name) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.iot/job-summary-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/job-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/job-summary-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/job-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.iot/message-format (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"RAW" "RAW", :raw "RAW", "JSON" "JSON", :json "JSON"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.iot/message-format (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"RAW" "RAW", :raw "RAW", "JSON" "JSON", :json "JSON"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.iot/date-type clojure.core/inst?)
 
@@ -1001,7 +1001,7 @@
 (clojure.spec.alpha/def :portkey.aws.iot.deletev2-logging-level-request/target-name (clojure.spec.alpha/and :portkey.aws.iot/log-target-name))
 (clojure.spec.alpha/def :portkey.aws.iot/deletev2-logging-level-request (portkey.aws/json-keys :req-un [:portkey.aws.iot.deletev2-logging-level-request/targetType :portkey.aws.iot.deletev2-logging-level-request/targetName] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/attribute-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 800)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_.,@/:#-]*" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/attribute-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 800)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_.,@/:#-]*" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.listcacertificates-request/page-size (clojure.spec.alpha/and :portkey.aws.iot/page-size))
 (clojure.spec.alpha/def :portkey.aws.iot.listcacertificates-request/marker (clojure.spec.alpha/and :portkey.aws.iot/marker))
@@ -1014,7 +1014,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.iot/aws-iot-job-arn (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.iot/dynamo-key-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"STRING" "STRING", :string "STRING", "NUMBER" "NUMBER", :number "NUMBER"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.iot/dynamo-key-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"STRING" "STRING", :string "STRING", "NUMBER" "NUMBER", :number "NUMBER"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.iot/thing-id (clojure.spec.alpha/and clojure.core/string?))
 
@@ -1098,12 +1098,12 @@
 (clojure.spec.alpha/def :portkey.aws.iot.delete-thing-type-request/thing-type-name (clojure.spec.alpha/and :portkey.aws.iot/thing-type-name))
 (clojure.spec.alpha/def :portkey.aws.iot/delete-thing-type-request (portkey.aws/json-keys :req-un [:portkey.aws.iot.delete-thing-type-request/thingTypeName] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/credential-duration-seconds (clojure.spec.alpha/and clojure.core/int? (fn* [p1__16202__16203__auto__] (clojure.core/<= 900 p1__16202__16203__auto__)) (fn* [p1__16204__16205__auto__] (clojure.core/<= p1__16204__16205__auto__ 3600))))
+(clojure.spec.alpha/def :portkey.aws.iot/credential-duration-seconds (clojure.spec.alpha/and clojure.core/int? (fn* [p1__13828__13829__auto__] (clojure.core/<= 900 p1__13828__13829__auto__)) (fn* [p1__13830__13831__auto__] (clojure.core/<= p1__13830__13831__auto__ 3600))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.index-not-ready-exception/message (clojure.spec.alpha/and :portkey.aws.iot/error-message))
 (clojure.spec.alpha/def :portkey.aws.iot/index-not-ready-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.index-not-ready-exception/message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/job-execution-summary-for-job-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/job-execution-summary-for-job) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/job-execution-summary-for-job-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/job-execution-summary-for-job) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.delete-policy-request/policy-name (clojure.spec.alpha/and :portkey.aws.iot/policy-name))
 (clojure.spec.alpha/def :portkey.aws.iot/delete-policy-request (portkey.aws/json-keys :req-un [:portkey.aws.iot.delete-policy-request/policyName] :opt-un [] :locations {}))
@@ -1115,12 +1115,12 @@
 (clojure.spec.alpha/def :portkey.aws.iot.associate-targets-with-job-response/description (clojure.spec.alpha/and :portkey.aws.iot/job-description))
 (clojure.spec.alpha/def :portkey.aws.iot/associate-targets-with-job-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.associate-targets-with-job-response/jobArn :portkey.aws.iot.associate-targets-with-job-response/jobId :portkey.aws.iot.associate-targets-with-job-response/description] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/otaupdate-description (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 2028)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[^\p{C}]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/otaupdate-description (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 2028)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[^\p{C}]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.describe-job-execution-response/execution (clojure.spec.alpha/and :portkey.aws.iot/job-execution))
 (clojure.spec.alpha/def :portkey.aws.iot/describe-job-execution-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.describe-job-execution-response/execution] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/token-key-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_-]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/token-key-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_-]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.delete-policy-version-request/policy-name (clojure.spec.alpha/and :portkey.aws.iot/policy-name))
 (clojure.spec.alpha/def :portkey.aws.iot.delete-policy-version-request/policy-version-id (clojure.spec.alpha/and :portkey.aws.iot/policy-version-id))
@@ -1134,15 +1134,15 @@
 (clojure.spec.alpha/def :portkey.aws.iot.list-attached-policies-request/page-size (clojure.spec.alpha/and :portkey.aws.iot/page-size))
 (clojure.spec.alpha/def :portkey.aws.iot/list-attached-policies-request (portkey.aws/json-keys :req-un [:portkey.aws.iot.list-attached-policies-request/target] :opt-un [:portkey.aws.iot.list-attached-policies-request/recursive :portkey.aws.iot.list-attached-policies-request/marker :portkey.aws.iot.list-attached-policies-request/pageSize] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/authorizer-status (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"ACTIVE" "ACTIVE", :active "ACTIVE", "INACTIVE" "INACTIVE", :inactive "INACTIVE"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.iot/authorizer-status (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"ACTIVE" "ACTIVE", :active "ACTIVE", "INACTIVE" "INACTIVE", :inactive "INACTIVE"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.iot.group-name-and-arn/group-name (clojure.spec.alpha/and :portkey.aws.iot/thing-group-name))
 (clojure.spec.alpha/def :portkey.aws.iot.group-name-and-arn/group-arn (clojure.spec.alpha/and :portkey.aws.iot/thing-group-arn))
 (clojure.spec.alpha/def :portkey.aws.iot/group-name-and-arn (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.group-name-and-arn/groupName :portkey.aws.iot.group-name-and-arn/groupArn] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/aws-account-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[0-9]{12}" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/aws-account-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[0-9]{12}" s__13770__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.iot/message (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128))))
+(clojure.spec.alpha/def :portkey.aws.iot/message (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128))))
 
 (clojure.spec.alpha/def :portkey.aws.iot/is-disabled clojure.core/boolean?)
 
@@ -1153,14 +1153,14 @@
 (clojure.spec.alpha/def :portkey.aws.iot.update-authorizer-response/authorizer-arn (clojure.spec.alpha/and :portkey.aws.iot/authorizer-arn))
 (clojure.spec.alpha/def :portkey.aws.iot/update-authorizer-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.update-authorizer-response/authorizerName :portkey.aws.iot.update-authorizer-response/authorizerArn] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/resources (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/resource) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/resources (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/resource) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.iot/policy-documents (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/policy-document) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/policy-documents (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/policy-document) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.get-indexing-configuration-response/thing-indexing-configuration (clojure.spec.alpha/and :portkey.aws.iot/thing-indexing-configuration))
 (clojure.spec.alpha/def :portkey.aws.iot/get-indexing-configuration-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.get-indexing-configuration-response/thingIndexingConfiguration] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/auth-decision (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"ALLOWED" "ALLOWED", :allowed "ALLOWED", "EXPLICIT_DENY" "EXPLICIT_DENY", :explicit-deny "EXPLICIT_DENY", "IMPLICIT_DENY" "IMPLICIT_DENY", :implicit-deny "IMPLICIT_DENY"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.iot/auth-decision (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"ALLOWED" "ALLOWED", :allowed "ALLOWED", "EXPLICIT_DENY" "EXPLICIT_DENY", :explicit-deny "EXPLICIT_DENY", "IMPLICIT_DENY" "IMPLICIT_DENY", :implicit-deny "IMPLICIT_DENY"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.iot.list-authorizers-response/authorizers (clojure.spec.alpha/and :portkey.aws.iot/authorizers))
 (clojure.spec.alpha/def :portkey.aws.iot.list-authorizers-response/next-marker (clojure.spec.alpha/and :portkey.aws.iot/marker))
@@ -1223,7 +1223,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.iot/attributes-map (clojure.spec.alpha/map-of :portkey.aws.iot/key :portkey.aws.iot/value))
 
-(clojure.spec.alpha/def :portkey.aws.iot/job-document-source (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 1350))))
+(clojure.spec.alpha/def :portkey.aws.iot/job-document-source (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 1350))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.list-thing-groups-request/next-token (clojure.spec.alpha/and :portkey.aws.iot/next-token))
 (clojure.spec.alpha/def :portkey.aws.iot.list-thing-groups-request/max-results (clojure.spec.alpha/and :portkey.aws.iot/registry-max-results))
@@ -1267,7 +1267,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.iot/parameter (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.iot/details-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 1024)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[^\p{C}]*+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/details-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 1024)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[^\p{C}]*+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.get-policy-version-request/policy-name (clojure.spec.alpha/and :portkey.aws.iot/policy-name))
 (clojure.spec.alpha/def :portkey.aws.iot.get-policy-version-request/policy-version-id (clojure.spec.alpha/and :portkey.aws.iot/policy-version-id))
@@ -1276,9 +1276,9 @@
 (clojure.spec.alpha/def :portkey.aws.iot.allowed/policies (clojure.spec.alpha/and :portkey.aws.iot/policies))
 (clojure.spec.alpha/def :portkey.aws.iot/allowed (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.allowed/policies] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/percentage (clojure.spec.alpha/and clojure.core/int? (fn* [p1__16202__16203__auto__] (clojure.core/<= 0 p1__16202__16203__auto__)) (fn* [p1__16204__16205__auto__] (clojure.core/<= p1__16204__16205__auto__ 100))))
+(clojure.spec.alpha/def :portkey.aws.iot/percentage (clojure.spec.alpha/and clojure.core/int? (fn* [p1__13828__13829__auto__] (clojure.core/<= 0 p1__13828__13829__auto__)) (fn* [p1__13830__13831__auto__] (clojure.core/<= p1__13830__13831__auto__ 100))))
 
-(clojure.spec.alpha/def :portkey.aws.iot/job-targets (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/target-arn :min-count 1) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/job-targets (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/target-arn :min-count 1) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot/missing-context-value (clojure.spec.alpha/and clojure.core/string?))
 
@@ -1314,9 +1314,9 @@
 (clojure.spec.alpha/def :portkey.aws.iot.list-certificates-bycarequest/ascending-order (clojure.spec.alpha/and :portkey.aws.iot/ascending-order))
 (clojure.spec.alpha/def :portkey.aws.iot/list-certificates-bycarequest (portkey.aws/json-keys :req-un [:portkey.aws.iot.list-certificates-bycarequest/caCertificateId] :opt-un [:portkey.aws.iot.list-certificates-bycarequest/pageSize :portkey.aws.iot.list-certificates-bycarequest/marker :portkey.aws.iot.list-certificates-bycarequest/ascendingOrder] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/s3-file-url (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 65535))))
+(clojure.spec.alpha/def :portkey.aws.iot/s3-file-url (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 65535))))
 
-(clojure.spec.alpha/def :portkey.aws.iot/report-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"ERRORS" "ERRORS", :errors "ERRORS", "RESULTS" "RESULTS", :results "RESULTS"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.iot/report-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"ERRORS" "ERRORS", :errors "ERRORS", "RESULTS" "RESULTS", :results "RESULTS"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.iot.describe-role-alias-response/role-alias-description (clojure.spec.alpha/and :portkey.aws.iot/role-alias-description))
 (clojure.spec.alpha/def :portkey.aws.iot/describe-role-alias-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.describe-role-alias-response/roleAliasDescription] :locations {}))
@@ -1333,9 +1333,9 @@
 
 (clojure.spec.alpha/def :portkey.aws.iot/hash-key-field (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.iot/targets (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/target :min-count 1) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/targets (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/target :min-count 1) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.iot/thing-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[a-zA-Z0-9:_-]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/thing-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[a-zA-Z0-9:_-]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.republish-action/role-arn (clojure.spec.alpha/and :portkey.aws.iot/aws-arn))
 (clojure.spec.alpha/def :portkey.aws.iot.republish-action/topic (clojure.spec.alpha/and :portkey.aws.iot/topic-pattern))
@@ -1345,7 +1345,7 @@
 (clojure.spec.alpha/def :portkey.aws.iot.describe-job-response/job (clojure.spec.alpha/and :portkey.aws.iot/job))
 (clojure.spec.alpha/def :portkey.aws.iot/describe-job-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.describe-job-response/documentSource :portkey.aws.iot.describe-job-response/job] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/s3-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__)))))
+(clojure.spec.alpha/def :portkey.aws.iot/s3-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__)))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.listv2-logging-levels-response/log-target-configurations (clojure.spec.alpha/and :portkey.aws.iot/log-target-configurations))
 (clojure.spec.alpha/def :portkey.aws.iot.listv2-logging-levels-response/next-token (clojure.spec.alpha/and :portkey.aws.iot/next-token))
@@ -1370,9 +1370,9 @@
 (clojure.spec.alpha/def :portkey.aws.iot.list-policies-request/ascending-order (clojure.spec.alpha/and :portkey.aws.iot/ascending-order))
 (clojure.spec.alpha/def :portkey.aws.iot/list-policies-request (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.list-policies-request/marker :portkey.aws.iot.list-policies-request/pageSize :portkey.aws.iot.list-policies-request/ascendingOrder] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/stream-version (clojure.spec.alpha/and clojure.core/int? (fn* [p1__16202__16203__auto__] (clojure.core/<= 0 p1__16202__16203__auto__)) (fn* [p1__16204__16205__auto__] (clojure.core/<= p1__16204__16205__auto__ 65535))))
+(clojure.spec.alpha/def :portkey.aws.iot/stream-version (clojure.spec.alpha/and clojure.core/int? (fn* [p1__13828__13829__auto__] (clojure.core/<= 0 p1__13828__13829__auto__)) (fn* [p1__13830__13831__auto__] (clojure.core/<= p1__13830__13831__auto__ 65535))))
 
-(clojure.spec.alpha/def :portkey.aws.iot/job-execution-status (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"CANCELED" "CANCELED", "IN_PROGRESS" "IN_PROGRESS", :in-progress "IN_PROGRESS", :rejected "REJECTED", "REMOVED" "REMOVED", :queued "QUEUED", :canceled "CANCELED", "SUCCEEDED" "SUCCEEDED", "REJECTED" "REJECTED", "QUEUED" "QUEUED", "FAILED" "FAILED", :removed "REMOVED", :failed "FAILED", :succeeded "SUCCEEDED"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.iot/job-execution-status (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"CANCELED" "CANCELED", "IN_PROGRESS" "IN_PROGRESS", :in-progress "IN_PROGRESS", :rejected "REJECTED", "REMOVED" "REMOVED", :queued "QUEUED", :canceled "CANCELED", "SUCCEEDED" "SUCCEEDED", "REJECTED" "REJECTED", "QUEUED" "QUEUED", "FAILED" "FAILED", :removed "REMOVED", :failed "FAILED", :succeeded "SUCCEEDED"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.iot.register-certificate-response/certificate-arn (clojure.spec.alpha/and :portkey.aws.iot/certificate-arn))
 (clojure.spec.alpha/def :portkey.aws.iot.register-certificate-response/certificate-id (clojure.spec.alpha/and :portkey.aws.iot/certificate-id))
@@ -1426,7 +1426,7 @@
 (clojure.spec.alpha/def :portkey.aws.iot.get-job-document-request/job-id (clojure.spec.alpha/and :portkey.aws.iot/job-id))
 (clojure.spec.alpha/def :portkey.aws.iot/get-job-document-request (portkey.aws/json-keys :req-un [:portkey.aws.iot.get-job-document-request/jobId] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/policies (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/policy) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/policies (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/policy) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.create-thing-group-response/thing-group-name (clojure.spec.alpha/and :portkey.aws.iot/thing-group-name))
 (clojure.spec.alpha/def :portkey.aws.iot.create-thing-group-response/thing-group-arn (clojure.spec.alpha/and :portkey.aws.iot/thing-group-arn))
@@ -1447,7 +1447,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.iot/stop-thing-registration-task-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/s3-bucket (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__)))))
+(clojure.spec.alpha/def :portkey.aws.iot/s3-bucket (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__)))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.describe-stream-request/stream-id (clojure.spec.alpha/and :portkey.aws.iot/stream-id))
 (clojure.spec.alpha/def :portkey.aws.iot/describe-stream-request (portkey.aws/json-keys :req-un [:portkey.aws.iot.describe-stream-request/streamId] :opt-un [] :locations {}))
@@ -1457,7 +1457,7 @@
 (clojure.spec.alpha/def :portkey.aws.iot.disable-topic-rule-request/rule-name (clojure.spec.alpha/and :portkey.aws.iot/rule-name))
 (clojure.spec.alpha/def :portkey.aws.iot/disable-topic-rule-request (portkey.aws/json-keys :req-un [:portkey.aws.iot.disable-topic-rule-request/ruleName] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/auth-infos (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/auth-info :min-count 1 :max-count 10) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/auth-infos (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/auth-info :min-count 1 :max-count 10) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.stream/stream-id (clojure.spec.alpha/and :portkey.aws.iot/stream-id))
 (clojure.spec.alpha/def :portkey.aws.iot.stream/file-id (clojure.spec.alpha/and :portkey.aws.iot/file-id))
@@ -1465,9 +1465,9 @@
 
 (clojure.spec.alpha/def :portkey.aws.iot/sql (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.iot/details-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[a-zA-Z0-9:_-]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/details-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[a-zA-Z0-9:_-]+" s__13770__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.iot/registrys3-bucket-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 3 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 256)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[a-zA-Z0-9._-]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/registrys3-bucket-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 3 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 256)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[a-zA-Z0-9._-]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.list-job-executions-for-job-request/job-id (clojure.spec.alpha/and :portkey.aws.iot/job-id))
 (clojure.spec.alpha/def :portkey.aws.iot.list-job-executions-for-job-request/status (clojure.spec.alpha/and :portkey.aws.iot/job-execution-status))
@@ -1500,7 +1500,7 @@
 (clojure.spec.alpha/def :portkey.aws.iot.list-policy-principals-response/next-marker (clojure.spec.alpha/and :portkey.aws.iot/marker))
 (clojure.spec.alpha/def :portkey.aws.iot/list-policy-principals-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.list-policy-principals-response/principals :portkey.aws.iot.list-policy-principals-response/nextMarker] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/topic-rule-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/topic-rule-list-item) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/topic-rule-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/topic-rule-list-item) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.update-thing-request/thing-name (clojure.spec.alpha/and :portkey.aws.iot/thing-name))
 (clojure.spec.alpha/def :portkey.aws.iot.update-thing-request/thing-type-name (clojure.spec.alpha/and :portkey.aws.iot/thing-type-name))
@@ -1509,7 +1509,7 @@
 (clojure.spec.alpha/def :portkey.aws.iot.update-thing-request/remove-thing-type (clojure.spec.alpha/and :portkey.aws.iot/remove-thing-type))
 (clojure.spec.alpha/def :portkey.aws.iot/update-thing-request (portkey.aws/json-keys :req-un [:portkey.aws.iot.update-thing-request/thingName] :opt-un [:portkey.aws.iot.update-thing-request/thingTypeName :portkey.aws.iot.update-thing-request/attributePayload :portkey.aws.iot.update-thing-request/expectedVersion :portkey.aws.iot.update-thing-request/removeThingType] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/policy-version-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[0-9]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/policy-version-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[0-9]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.list-thing-types-response/thing-types (clojure.spec.alpha/and :portkey.aws.iot/thing-type-list))
 (clojure.spec.alpha/def :portkey.aws.iot.list-thing-types-response/next-token (clojure.spec.alpha/and :portkey.aws.iot/next-token))
@@ -1522,9 +1522,9 @@
 
 (clojure.spec.alpha/def :portkey.aws.iot/resource-arn (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.iot/authorizers (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/authorizer-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/authorizers (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/authorizer-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.iot/processing-target-name-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/processing-target-name) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/processing-target-name-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/processing-target-name) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.list-job-executions-for-thing-response/execution-summaries (clojure.spec.alpha/and :portkey.aws.iot/job-execution-summary-for-thing-list))
 (clojure.spec.alpha/def :portkey.aws.iot.list-job-executions-for-thing-response/next-token (clojure.spec.alpha/and :portkey.aws.iot/next-token))
@@ -1553,20 +1553,20 @@
 (clojure.spec.alpha/def :portkey.aws.iot.list-policy-principals-request/ascending-order (clojure.spec.alpha/and :portkey.aws.iot/ascending-order))
 (clojure.spec.alpha/def :portkey.aws.iot/list-policy-principals-request (portkey.aws/json-keys :req-un [:portkey.aws.iot.list-policy-principals-request/policyName] :opt-un [:portkey.aws.iot.list-policy-principals-request/marker :portkey.aws.iot.list-policy-principals-request/pageSize :portkey.aws.iot.list-policy-principals-request/ascendingOrder] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/certificate-status (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {:inactive "INACTIVE", "REGISTER_INACTIVE" "REGISTER_INACTIVE", "REVOKED" "REVOKED", :revoked "REVOKED", :pending-activation "PENDING_ACTIVATION", :register-inactive "REGISTER_INACTIVE", :pending-transfer "PENDING_TRANSFER", :active "ACTIVE", "INACTIVE" "INACTIVE", "PENDING_ACTIVATION" "PENDING_ACTIVATION", "ACTIVE" "ACTIVE", "PENDING_TRANSFER" "PENDING_TRANSFER"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.iot/certificate-status (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {:inactive "INACTIVE", "REGISTER_INACTIVE" "REGISTER_INACTIVE", "REVOKED" "REVOKED", :revoked "REVOKED", :pending-activation "PENDING_ACTIVATION", :register-inactive "REGISTER_INACTIVE", :pending-transfer "PENDING_TRANSFER", :active "ACTIVE", "INACTIVE" "INACTIVE", "PENDING_ACTIVATION" "PENDING_ACTIVATION", "ACTIVE" "ACTIVE", "PENDING_TRANSFER" "PENDING_TRANSFER"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.iot.describe-authorizer-response/authorizer-description (clojure.spec.alpha/and :portkey.aws.iot/authorizer-description))
 (clojure.spec.alpha/def :portkey.aws.iot/describe-authorizer-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.describe-authorizer-response/authorizerDescription] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/thing-group-name-and-arn-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/group-name-and-arn) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/thing-group-name-and-arn-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/group-name-and-arn) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.create-authorizer-response/authorizer-name (clojure.spec.alpha/and :portkey.aws.iot/authorizer-name))
 (clojure.spec.alpha/def :portkey.aws.iot.create-authorizer-response/authorizer-arn (clojure.spec.alpha/and :portkey.aws.iot/authorizer-arn))
 (clojure.spec.alpha/def :portkey.aws.iot/create-authorizer-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.create-authorizer-response/authorizerName :portkey.aws.iot.create-authorizer-response/authorizerArn] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/customer-version (clojure.spec.alpha/and clojure.core/int? (fn* [p1__16202__16203__auto__] (clojure.core/<= 1 p1__16202__16203__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/customer-version (clojure.spec.alpha/and clojure.core/int? (fn* [p1__13828__13829__auto__] (clojure.core/<= 1 p1__13828__13829__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.iot/authorizer-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[\w=,@-]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/authorizer-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[\w=,@-]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.policy/policy-name (clojure.spec.alpha/and :portkey.aws.iot/policy-name))
 (clojure.spec.alpha/def :portkey.aws.iot.policy/policy-arn (clojure.spec.alpha/and :portkey.aws.iot/policy-arn))
@@ -1576,7 +1576,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.iot/delete-authorizer-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/max-results (clojure.spec.alpha/and clojure.core/int? (fn* [p1__16202__16203__auto__] (clojure.core/<= 1 p1__16202__16203__auto__)) (fn* [p1__16204__16205__auto__] (clojure.core/<= p1__16204__16205__auto__ 250))))
+(clojure.spec.alpha/def :portkey.aws.iot/max-results (clojure.spec.alpha/and clojure.core/int? (fn* [p1__13828__13829__auto__] (clojure.core/<= 1 p1__13828__13829__auto__)) (fn* [p1__13830__13831__auto__] (clojure.core/<= p1__13830__13831__auto__ 250))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.detach-policy-request/policy-name (clojure.spec.alpha/and :portkey.aws.iot/policy-name))
 (clojure.spec.alpha/def :portkey.aws.iot.detach-policy-request/target (clojure.spec.alpha/and :portkey.aws.iot/policy-target))
@@ -1621,7 +1621,7 @@
 (clojure.spec.alpha/def :portkey.aws.iot.throttling-exception/message (clojure.spec.alpha/and :portkey.aws.iot/error-message))
 (clojure.spec.alpha/def :portkey.aws.iot/throttling-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.throttling-exception/message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/file-id (clojure.spec.alpha/and clojure.core/int? (fn* [p1__16202__16203__auto__] (clojure.core/<= 0 p1__16202__16203__auto__)) (fn* [p1__16204__16205__auto__] (clojure.core/<= p1__16204__16205__auto__ 255))))
+(clojure.spec.alpha/def :portkey.aws.iot/file-id (clojure.spec.alpha/and clojure.core/int? (fn* [p1__13828__13829__auto__] (clojure.core/<= 0 p1__13828__13829__auto__)) (fn* [p1__13830__13831__auto__] (clojure.core/<= p1__13830__13831__auto__ 255))))
 
 (clojure.spec.alpha/def :portkey.aws.iot/processing-target-name (clojure.spec.alpha/and clojure.core/string?))
 
@@ -1639,7 +1639,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.iot/event-configurations (clojure.spec.alpha/map-of :portkey.aws.iot/event-type :portkey.aws.iot/configuration))
 
-(clojure.spec.alpha/def :portkey.aws.iot/salesforce-endpoint (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 2000)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"https://ingestion-[a-zA-Z0-9]{1,12}\.[a-zA-Z0-9]+\.((sfdc-matrix\.net)|(sfdcnow\.com))/streams/\w{1,20}/\w{1,20}/event" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/salesforce-endpoint (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 2000)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"https://ingestion-[a-zA-Z0-9]{1,12}\.[a-zA-Z0-9]+\.((sfdc-matrix\.net)|(sfdcnow\.com))/streams/\w{1,20}/\w{1,20}/event" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot/metric-namespace (clojure.spec.alpha/and clojure.core/string?))
 
@@ -1676,17 +1676,17 @@
 (clojure.spec.alpha/def :portkey.aws.iot.transfer-conflict-exception/message (clojure.spec.alpha/and :portkey.aws.iot/error-message))
 (clojure.spec.alpha/def :portkey.aws.iot/transfer-conflict-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.transfer-conflict-exception/message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/gemax-results (clojure.spec.alpha/and clojure.core/int? (fn* [p1__16202__16203__auto__] (clojure.core/<= 1 p1__16202__16203__auto__)) (fn* [p1__16204__16205__auto__] (clojure.core/<= p1__16204__16205__auto__ 10000))))
+(clojure.spec.alpha/def :portkey.aws.iot/gemax-results (clojure.spec.alpha/and clojure.core/int? (fn* [p1__13828__13829__auto__] (clojure.core/<= 1 p1__13828__13829__auto__)) (fn* [p1__13830__13831__auto__] (clojure.core/<= p1__13830__13831__auto__ 10000))))
 
 (clojure.spec.alpha/def :portkey.aws.iot/code (clojure.spec.alpha/and clojure.core/string?))
 
 (clojure.spec.alpha/def :portkey.aws.iot/optional-version clojure.core/int?)
 
-(clojure.spec.alpha/def :portkey.aws.iot/action-type (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"PUBLISH" "PUBLISH", :publish "PUBLISH", "SUBSCRIBE" "SUBSCRIBE", :subscribe "SUBSCRIBE", "RECEIVE" "RECEIVE", :receive "RECEIVE", "CONNECT" "CONNECT", :connect "CONNECT"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.iot/action-type (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"PUBLISH" "PUBLISH", :publish "PUBLISH", "SUBSCRIBE" "SUBSCRIBE", :subscribe "SUBSCRIBE", "RECEIVE" "RECEIVE", :receive "RECEIVE", "CONNECT" "CONNECT", :connect "CONNECT"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
-(clojure.spec.alpha/def :portkey.aws.iot/job-execution-summary-for-thing-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/job-execution-summary-for-thing) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/job-execution-summary-for-thing-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/job-execution-summary-for-thing) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.iot/thing-group-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[a-zA-Z0-9:_-]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/thing-group-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[a-zA-Z0-9:_-]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot/principal (clojure.spec.alpha/and clojure.core/string?))
 
@@ -1725,7 +1725,7 @@
 (clojure.spec.alpha/def :portkey.aws.iot.registration-code-validation-exception/message (clojure.spec.alpha/and :portkey.aws.iot/error-message))
 (clojure.spec.alpha/def :portkey.aws.iot/registration-code-validation-exception (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.registration-code-validation-exception/message] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/policy-versions (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/policy-version) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/policy-versions (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/policy-version) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.cloudwatch-alarm-action/role-arn (clojure.spec.alpha/and :portkey.aws.iot/aws-arn))
 (clojure.spec.alpha/def :portkey.aws.iot.cloudwatch-alarm-action/alarm-name (clojure.spec.alpha/and :portkey.aws.iot/alarm-name))
@@ -1756,11 +1756,11 @@
 
 (clojure.spec.alpha/def :portkey.aws.iot/bucket-name (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.iot/certificate-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 64 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 64)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"(0x)?[a-fA-F0-9]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/certificate-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 64 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 64)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"(0x)?[a-fA-F0-9]+" s__13770__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.iot/otaupdates-summary (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/otaupdate-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/otaupdates-summary (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/otaupdate-summary) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
-(clojure.spec.alpha/def :portkey.aws.iot/otaupdate-status (clojure.spec.alpha/conformer (clojure.core/let [m__16140__auto__ {"CREATE_PENDING" "CREATE_PENDING", :create-pending "CREATE_PENDING", "CREATE_IN_PROGRESS" "CREATE_IN_PROGRESS", :create-in-progress "CREATE_IN_PROGRESS", "CREATE_COMPLETE" "CREATE_COMPLETE", :create-complete "CREATE_COMPLETE", "CREATE_FAILED" "CREATE_FAILED", :create-failed "CREATE_FAILED"}] (clojure.core/fn [s__16141__auto__] (m__16140__auto__ s__16141__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
+(clojure.spec.alpha/def :portkey.aws.iot/otaupdate-status (clojure.spec.alpha/conformer (clojure.core/let [m__13766__auto__ {"CREATE_PENDING" "CREATE_PENDING", :create-pending "CREATE_PENDING", "CREATE_IN_PROGRESS" "CREATE_IN_PROGRESS", :create-in-progress "CREATE_IN_PROGRESS", "CREATE_COMPLETE" "CREATE_COMPLETE", :create-complete "CREATE_COMPLETE", "CREATE_FAILED" "CREATE_FAILED", :create-failed "CREATE_FAILED"}] (clojure.core/fn [s__13767__auto__] (m__13766__auto__ s__13767__auto__ :clojure.spec.alpha/invalid))) (clojure.core/comp clojure.core/keyword portkey.aws/dashed)))
 
 (clojure.spec.alpha/def :portkey.aws.iot/attach-thing-principal-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
@@ -1773,7 +1773,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.iot/in-progress-things (clojure.spec.alpha/and clojure.core/int?))
 
-(clojure.spec.alpha/def :portkey.aws.iot/certificate-pem (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 65536))))
+(clojure.spec.alpha/def :portkey.aws.iot/certificate-pem (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 65536))))
 
 (clojure.spec.alpha/def :portkey.aws.iot/file-name (clojure.spec.alpha/and clojure.core/string?))
 
@@ -1795,7 +1795,7 @@
 (clojure.spec.alpha/def :portkey.aws.iot.thing-document/shadow (clojure.spec.alpha/and :portkey.aws.iot/json-document))
 (clojure.spec.alpha/def :portkey.aws.iot/thing-document (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.thing-document/thingName :portkey.aws.iot.thing-document/thingId :portkey.aws.iot.thing-document/thingTypeName :portkey.aws.iot.thing-document/thingGroupNames :portkey.aws.iot.thing-document/attributes :portkey.aws.iot.thing-document/shadow] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/otaupdate-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 128)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_-]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/otaupdate-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 128)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_-]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.create-thing-type-request/thing-type-name (clojure.spec.alpha/and :portkey.aws.iot/thing-type-name))
 (clojure.spec.alpha/def :portkey.aws.iot.create-thing-type-request/thing-type-properties (clojure.spec.alpha/and :portkey.aws.iot/thing-type-properties))
@@ -1819,7 +1819,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.iot/configuration (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot/Enabled] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/thing-type-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/thing-type-definition) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/thing-type-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/thing-type-definition) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.create-topic-rule-request/rule-name (clojure.spec.alpha/and :portkey.aws.iot/rule-name))
 (clojure.spec.alpha/def :portkey.aws.iot.create-topic-rule-request/topic-rule-payload (clojure.spec.alpha/and :portkey.aws.iot/topic-rule-payload))
@@ -1831,7 +1831,7 @@
 (clojure.spec.alpha/def :portkey.aws.iot.job-execution-summary-for-thing/job-execution-summary (clojure.spec.alpha/and :portkey.aws.iot/job-execution-summary))
 (clojure.spec.alpha/def :portkey.aws.iot/job-execution-summary-for-thing (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.job-execution-summary-for-thing/jobId :portkey.aws.iot.job-execution-summary-for-thing/jobExecutionSummary] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 1024))))
+(clojure.spec.alpha/def :portkey.aws.iot/token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 1024))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.certificate/certificate-arn (clojure.spec.alpha/and :portkey.aws.iot/certificate-arn))
 (clojure.spec.alpha/def :portkey.aws.iot.certificate/certificate-id (clojure.spec.alpha/and :portkey.aws.iot/certificate-id))
@@ -1847,7 +1847,7 @@
 (clojure.spec.alpha/def :portkey.aws.iot.update-role-alias-request/credential-duration-seconds (clojure.spec.alpha/and :portkey.aws.iot/credential-duration-seconds))
 (clojure.spec.alpha/def :portkey.aws.iot/update-role-alias-request (portkey.aws/json-keys :req-un [:portkey.aws.iot.update-role-alias-request/roleAlias] :opt-un [:portkey.aws.iot.update-role-alias-request/roleArn :portkey.aws.iot.update-role-alias-request/credentialDurationSeconds] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/job-description (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 2028)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[^\p{C}]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/job-description (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 2028)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[^\p{C}]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.create-policy-version-response/policy-arn (clojure.spec.alpha/and :portkey.aws.iot/policy-arn))
 (clojure.spec.alpha/def :portkey.aws.iot.create-policy-version-response/policy-document (clojure.spec.alpha/and :portkey.aws.iot/policy-document))
@@ -1862,7 +1862,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.iot/aws-iot-job-id (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.iot/elasticsearch-endpoint (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"https?://.*" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/elasticsearch-endpoint (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"https?://.*" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.otaupdate-info/creation-date (clojure.spec.alpha/and :portkey.aws.iot/date-type))
 (clojure.spec.alpha/def :portkey.aws.iot.otaupdate-info/target-selection (clojure.spec.alpha/and :portkey.aws.iot/target-selection))
@@ -1966,11 +1966,11 @@
 (clojure.spec.alpha/def :portkey.aws.iot.cacertificate/creation-date (clojure.spec.alpha/and :portkey.aws.iot/date-type))
 (clojure.spec.alpha/def :portkey.aws.iot/cacertificate (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.cacertificate/certificateArn :portkey.aws.iot.cacertificate/certificateId :portkey.aws.iot.cacertificate/status :portkey.aws.iot.cacertificate/creationDate] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/query-max-results (clojure.spec.alpha/and clojure.core/int? (fn* [p1__16202__16203__auto__] (clojure.core/<= 1 p1__16202__16203__auto__)) (fn* [p1__16204__16205__auto__] (clojure.core/<= p1__16204__16205__auto__ 500))))
+(clojure.spec.alpha/def :portkey.aws.iot/query-max-results (clojure.spec.alpha/and clojure.core/int? (fn* [p1__13828__13829__auto__] (clojure.core/<= 1 p1__13828__13829__auto__)) (fn* [p1__13830__13831__auto__] (clojure.core/<= p1__13830__13831__auto__ 500))))
 
 (clojure.spec.alpha/def :portkey.aws.iot/update-indexing-configuration-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/public-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__)))))
+(clojure.spec.alpha/def :portkey.aws.iot/public-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__)))))
 
 (clojure.spec.alpha/def :portkey.aws.iot/job-arn (clojure.spec.alpha/and clojure.core/string?))
 
@@ -1995,7 +1995,7 @@
 (clojure.spec.alpha/def :portkey.aws.iot.list-outgoing-certificates-response/next-marker (clojure.spec.alpha/and :portkey.aws.iot/marker))
 (clojure.spec.alpha/def :portkey.aws.iot/list-outgoing-certificates-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.list-outgoing-certificates-response/outgoingCertificates :portkey.aws.iot.list-outgoing-certificates-response/nextMarker] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/thing-group-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/thing-group-name) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/thing-group-list (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/thing-group-name) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot/payload-field (clojure.spec.alpha/and clojure.core/string?))
 
@@ -2008,13 +2008,13 @@
 (clojure.spec.alpha/def :portkey.aws.iot.topic-rule-list-item/rule-disabled (clojure.spec.alpha/and :portkey.aws.iot/is-disabled))
 (clojure.spec.alpha/def :portkey.aws.iot/topic-rule-list-item (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.topic-rule-list-item/ruleArn :portkey.aws.iot.topic-rule-list-item/ruleName :portkey.aws.iot.topic-rule-list-item/topicPattern :portkey.aws.iot.topic-rule-list-item/createdAt :portkey.aws.iot.topic-rule-list-item/ruleDisabled] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/parameter-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 1024)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[^\p{C}]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/parameter-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 1024)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[^\p{C}]+" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot/delete-role-alias-response (portkey.aws/json-keys :req-un [] :opt-un [] :locations {}))
 
 (clojure.spec.alpha/def :portkey.aws.iot/is-authenticated clojure.core/boolean?)
 
-(clojure.spec.alpha/def :portkey.aws.iot/firehose-separator (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"([\n\t])|(\r\n)|(,)" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/firehose-separator (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"([\n\t])|(\r\n)|(,)" s__13770__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.iot.delete-role-alias-request/role-alias (clojure.spec.alpha/and :portkey.aws.iot/role-alias))
 (clojure.spec.alpha/def :portkey.aws.iot/delete-role-alias-request (portkey.aws/json-keys :req-un [:portkey.aws.iot.delete-role-alias-request/roleAlias] :opt-un [] :locations {}))
@@ -2048,7 +2048,7 @@
 (clojure.spec.alpha/def :portkey.aws.iot.listotaupdates-response/next-token (clojure.spec.alpha/and :portkey.aws.iot/next-token))
 (clojure.spec.alpha/def :portkey.aws.iot/listotaupdates-response (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.listotaupdates-response/otaUpdates :portkey.aws.iot.listotaupdates-response/nextToken] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/principals (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/principal-arn) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__16061__16062__auto__] (if (clojure.core/sequential? p1__16061__16062__auto__) p1__16061__16062__auto__ [p1__16061__16062__auto__])))))
+(clojure.spec.alpha/def :portkey.aws.iot/principals (clojure.spec.alpha/and (clojure.spec.alpha/coll-of :portkey.aws.iot/principal-arn) (clojure.spec.alpha/conformer clojure.core/identity (fn* [p1__13687__13688__auto__] (if (clojure.core/sequential? p1__13687__13688__auto__) p1__13687__13688__auto__ [p1__13687__13688__auto__])))))
 
 (clojure.spec.alpha/def :portkey.aws.iot/boolean clojure.core/boolean?)
 
@@ -2062,9 +2062,9 @@
 (clojure.spec.alpha/def :portkey.aws.iot.topic-rule/error-action (clojure.spec.alpha/and :portkey.aws.iot/action))
 (clojure.spec.alpha/def :portkey.aws.iot/topic-rule (portkey.aws/json-keys :req-un [] :opt-un [:portkey.aws.iot.topic-rule/ruleName :portkey.aws.iot.topic-rule/sql :portkey.aws.iot.topic-rule/description :portkey.aws.iot.topic-rule/createdAt :portkey.aws.iot.topic-rule/actions :portkey.aws.iot.topic-rule/ruleDisabled :portkey.aws.iot.topic-rule/awsIotSqlVersion :portkey.aws.iot.topic-rule/errorAction] :locations {}))
 
-(clojure.spec.alpha/def :portkey.aws.iot/registration-code (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 64 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 64)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"(0x)?[a-fA-F0-9]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/registration-code (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 64 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 64)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"(0x)?[a-fA-F0-9]+" s__13770__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.iot/job-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__16142__auto__] (clojure.core/<= 1 (clojure.core/count s__16142__auto__))) (clojure.core/fn [s__16143__auto__] (clojure.core/< (clojure.core/count s__16143__auto__) 64)) (clojure.core/fn [s__16144__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_-]+" s__16144__auto__))))
+(clojure.spec.alpha/def :portkey.aws.iot/job-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__13768__auto__] (clojure.core/<= 1 (clojure.core/count s__13768__auto__))) (clojure.core/fn [s__13769__auto__] (clojure.core/< (clojure.core/count s__13769__auto__) 64)) (clojure.core/fn [s__13770__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_-]+" s__13770__auto__))))
 
 (clojure.core/defn update-role-alias "Updates a role alias." ([update-role-alias-request] (portkey.aws/-rest-json-call portkey.aws.iot/endpoints "PUT" "/role-aliases/{roleAlias}" update-role-alias-request :portkey.aws.iot/update-role-alias-request {:payload nil, :move {}, :headers {}, :uri {"roleAlias" "roleAlias"}, :querystring {}} nil :portkey.aws.iot/update-role-alias-response {"ResourceNotFoundException" :portkey.aws.iot/resource-not-found-exception, "InvalidRequestException" :portkey.aws.iot/invalid-request-exception, "ThrottlingException" :portkey.aws.iot/throttling-exception, "UnauthorizedException" :portkey.aws.iot/unauthorized-exception, "ServiceUnavailableException" :portkey.aws.iot/service-unavailable-exception, "InternalFailureException" :portkey.aws.iot/internal-failure-exception})))
 (clojure.spec.alpha/fdef update-role-alias :args (clojure.spec.alpha/tuple :portkey.aws.iot/update-role-alias-request) :ret (clojure.spec.alpha/and :portkey.aws.iot/update-role-alias-response))
