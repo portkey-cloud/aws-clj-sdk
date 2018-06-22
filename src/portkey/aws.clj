@@ -229,7 +229,9 @@
                        true)]
             (if-some [[type spec] (find error-specs (get-in response [:headers "x-amzn-ErrorType"]))]
               [:exception (let [m (spec/unform spec (json/parse-string (coerce-body content-type (:body response))))]
-                            (ex-info (str type ": " (:message m)) m))]
+                            (ex-info (str type ": " (:message m))
+                                     {:type spec
+                                      :body m}))]
               (case (:status response)
                 404 [:result nil]
                 [:exception (ex-info "Unexpected response" {:response response})]))))))))
@@ -266,7 +268,9 @@
                                                                     (get "__type")
                                                                     (->> (re-find #"(?<=#).*$")))))]
               [:exception (let [m (spec/unform spec (json/parse-string (coerce-body content-type (:body response))))]
-                            (ex-info (str type ": " (:message m)) m))]
+                            (ex-info (str type ": " (:message m))
+                                     {:type spec
+                                      :body m}))]
               (case (:status response)
                 404 [:result nil]
                 [:exception (ex-info "Unexpected response" {:response response})]))))))))
