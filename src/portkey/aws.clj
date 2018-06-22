@@ -154,15 +154,16 @@
     (assoc :body (reduce dissoc body (vals uri-to-param)))))
 
 (defn- params-to-querystring [{:as req :keys [body ^String url]} querystring-to-param]
-  (-> req
-    (assoc :url 
-      (apply str url (if (neg? (.indexOf url "?")) "?" "&")
-        (interpose "&"
-          (keep (fn [[qs name]]
-                 (when-some [v (get body name)]
-                   (str (http/url-encode-illegal-characters qs) "=" (http/url-encode-illegal-characters v))))
-           querystring-to-param))))
-    (assoc :body (reduce dissoc body (vals querystring-to-param)))))
+  (cond-> req
+    (not-empty querystring-to-param)
+    (-> (assoc :url
+               (apply str url (if (neg? (.indexOf url "?")) "?" "&")
+                      (interpose "&"
+                                 (keep (fn [[qs name]]
+                                         (when-some [v (get body name)]
+                                           (str (http/url-encode-illegal-characters qs) "=" (http/url-encode-illegal-characters v))))
+                                       querystring-to-param))))
+        (assoc :body (reduce dissoc body (vals querystring-to-param))))))
 
 (defn- params-to-payload [{:as req :keys [body]} param]
   (if param
@@ -249,7 +250,7 @@
        :body (some-> input-spec (conform-or-throw input))}
       (params-to-header headers-params)
       (params-to-uri uri-params)
-      ;; (params-to-querystring querystring-params)
+      (params-to-querystring querystring-params)
       (move-params move)
       (params-to-payload payload)
       (update :body #(cond-> % (coll? %) json/generate-string))
