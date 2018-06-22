@@ -267,13 +267,27 @@
     (org.jsoup.select.NodeTraversor/traverse visitor (org.jsoup.Jsoup/parseBodyFragment doc))
     (split-to-length 80 (.toString acc))))
 
-(defn gen-operation [ns {:as operation
-                         :strs [name errors]
-                         {input-shape "shape"} "input"
-                         {output-shape "shape"} "output"
-                         {:strs [method requestUri responseCode]} "http"}
-                     shapes
-                     {:as docs :strs [operations]}]
+(defmulti gen-operation (fn [_
+                             {:strs [protocol
+                                     jsonVersion]}
+                             _
+                             _
+                             _]
+                          (cond-> [protocol]
+                            (and
+                             (= protocol "json")
+                             jsonVersion) (conj jsonVersion))))
+
+(defmethod gen-operation ["rest-json"]
+  [ns
+   metadata
+   {:as operation
+    :strs [name errors]
+    {input-shape "shape"} "input"
+    {output-shape "shape"} "output"
+    {:strs [method requestUri responseCode]} "http"}
+   shapes
+   {:as docs :strs [operations]}]
   (let [error-specs (into {}
                       (map (fn [{:strs [shape] {:strs [httpStatusCode]} "error"}]
                              [shape (keyword ns (aws/dashed shape))]))
@@ -346,14 +360,16 @@
                   `empty?)
          :ret ~(if output-spec `(spec/and ~output-spec) `true?)))))
 
-(defn gen-operation-json [ns {:as operation
-                              :strs [name errors]
-                              {input-shape "shape"} "input"
-                              {output-shape "shape"} "output"
-                              {:strs [method requestUri responseCode]} "http"}
-                          shapes
-                          {:as docs :strs [operations]}
-                          target-prefix]
+(defmethod gen-operation ["json" "1.0"]
+  [ns
+   {:strs [targetPrefix] :as metadata}
+   {:as operation
+    :strs [name errors]
+    {input-shape "shape"} "input"
+    {output-shape "shape"} "output"
+    {:strs [method requestUri responseCode]} "http"}
+   shapes
+   {:as docs :strs [operations]}]
   (let [error-specs (into {}
                       (map (fn [{:strs [shape] {:strs [httpStatusCode]} "error"}]
                              [shape (keyword ns (aws/dashed shape))]))
@@ -364,7 +380,7 @@
         input (or (some-> input-shape aws/dashed symbol) '_)
         default-arg (if input-spec (some #(when (spec/valid? input-spec %) %) [[] {}]) {})
         documentation (operations name)
-        x-amz-target (str target-prefix "." name)]
+        x-amz-target (str targetPrefix "." name)]
     (when input-shape
       (aws/conform-or-throw
         (strict-strs ; validate only what we knows how to map
@@ -429,21 +445,29 @@
 
 (defn gen-api [ns-sym api-resource docs-resource]
   (let [api (json/parse-stream (io/reader api-resource))
-        docs (json/parse-stream (io/reader docs-resource))]
-    (case (get-in api ["metadata" "protocol"])
+        docs (json/parse-stream (io/reader docs-resource))
+        {:strs [protocol]
+         :as metadata} (get api "metadata")]
+    (case protocol
       "rest-json" (for [[k gen] {"shapes" (comp #(doto % eval) gen-shape-spec) ; eval to make specs available right away
-                                 "operations" (fn [ns [_ op]] (gen-operation ns op (api "shapes") docs))}
+                                 "operations" (fn [ns [_ op]] (gen-operation
+                                                               ns metadata op (api "shapes") docs))}
                         desc (api k)]
                     (gen (name ns-sym) desc))
-      "json" (let [target-prefix (get-in api ["metadata" "targetPrefix"])]
-               (for [[k gen] {"shapes" (comp #(doto % eval) gen-shape-spec) ; eval to make specs available right away
-                              "operations" (fn [ns [_ op]] (gen-operation-json ns op (api "shapes") docs target-prefix))}
-                     desc (api k)]
-                 (gen (name ns-sym) desc)))
+      "json" (let [json-version (get metadata "jsonVersion")]
+               (case json-version
+                 "1.0"
+                 (for [[k gen] {"shapes" (comp #(doto % eval) gen-shape-spec) ; eval to make specs available right away
+                                "operations" (fn [ns [_ op]] (gen-operation ns metadata op (api "shapes") docs))}
+                       desc (api k)]
+                   (gen (name ns-sym) desc))
+                 (do
+                   (binding [*out* *err*] (prn 'skipping ns-sym 'protocol "json" 'protocol-version json-version))
+                   [(list 'comment 'TODO 'support "json" 'protocol-version json-version)])))
       (do
-        (binding [*out* *err*] (prn 'skipping ns-sym 'protocol (get-in api ["metadata" "protocol"])))
-        [(list 'comment 'TODO 'support (get-in api ["metadata" "protocol"]))])
-      #_"json"
+        (binding [*out* *err*] (prn 'skipping ns-sym 'protocol protocol))
+        [(list 'comment 'TODO 'support protocol)])
+      #_"json" ;; 1.1+
       #_"ec2"
       #_"query"
       #_"rest-xml")))
