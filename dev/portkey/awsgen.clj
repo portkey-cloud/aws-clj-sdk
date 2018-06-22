@@ -503,7 +503,14 @@
                           (binding [*out* w]
                             (prn (list 'ns ns '(:require [portkey.aws])))
                             (newline)
-                            (clojure.pprint/pprint (list 'def 'endpoints (list 'quote (get endpoints apins))))
+                            (clojure.pprint/pprint
+                             (list 'def 'endpoints
+                                   (list 'quote
+                                         (or (get endpoints apins
+                                                  (get endpoints api))
+                                             (throw (ex-info "Cannot find Endpoints!"
+                                                             {:api api
+                                                              :apins apins}))))))
                             (doseq [form (gen-api ns api-json docs-json)]
                               (newline)
                               (if (and (seq? form) (= 'do (first form)))
