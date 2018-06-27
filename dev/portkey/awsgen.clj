@@ -13,7 +13,7 @@
 
 
 (defn- shapes-seq
-  "Takes a shape and returns a sequences of containing itself and all nested shapes (if any)."
+  "Takes a shape and returns a sequence of itself and all its nested shapes."
   [shape]
   (tree-seq #(and (map? %) (#{"structure" "list" "map"} (% "type")))
             #(case (% "type")
@@ -28,12 +28,11 @@
       init
       (recur f x))))
 
-
 (defn- shapes-by-usage
-  "Takes an api description and returns a map categorigizing shapes on their usage.
+  "Takes an api description and returns a map categoriizing shapes by their usage.
   This map has 4 keys: :inputs, :input-roots, :outputs
   and :output-roots, all mapping to collections of shapes.
-  Root shapes are shapes that appear as top-level paylod (including
+  Root shapes are shapes that appear as top-level paylods (including
   errors).
   A shape may appear in several categories."
   [{:strs [shapes operations] :as api}]
@@ -55,6 +54,8 @@
         inputs (into #{} (mapcat reachable-shapes) input-roots)
         outputs (into #{} (mapcat reachable-shapes) output-roots)
         nested-shape-names (into #{} (vals shapes-refs))]
+    ; How likely it is that this assertion will break in the future?
+    ; I (cgrand) believe this assertion was mostly useful before the req/deser/ser/resp unbundling
     (when-some [culprit (first (filter #(or (get % "location") (get % "payload")) (mapcat (comp shapes-seq shapes) nested-shape-names)))]
       (throw (ex-info "Attribute payload or location found on nested shape." {:culprit culprit :api api})))
     {:inputs inputs
@@ -62,17 +63,26 @@
      :outputs outputs
      :output-roots output-roots}))
 
-
-(defmulti ^:private shape-to-spec (fn [ns [name {:strs [type]}]] type))
+(defmulti ^:private shape-to-spec
+  "Takes a shape and retuns a spec (as unevaluated code)."
+  (fn [ns [name {:strs [type]}]] type))
 
 (defn- gen-shape-spec [ns [name shape :as e]]
+  (spec/assert ::shape shape )
   (let [form (shape-to-spec ns e)]
-    (if (and (seq? form) (= 'do (first form)))
-      `(~@(butlast form) ; includes do
+    (if (and (seq? form) (= `with-prerequisites (first form)))
+      `(do
+         ~@(butlast (next form)) ; includes do
          (spec/def ~(keyword ns (aws/dashed name)) ~(last form)))
       `(spec/def ~(keyword ns (aws/dashed name)) ~form))))
 
-(defmacro strict-strs [& {:keys [req opt]}]
+(defmacro ^:private strict-strs
+  "Allows to specify a string-keyed map in a strict manner (any unknown key
+   triggers a validation error).
+   This brittle behavior is on purpose: strict-strs is meant to be used to
+   validate the API json files and we want to know when something new appears
+   in a json file."
+  [& {:keys [req opt]}]
   `(spec/and
      (spec/every
        (spec/or 
@@ -134,7 +144,7 @@
         (into {} (for [[k {:strs [locationName location]}] members
                        :when (and locationName (nil? location))]
                    [locationName k]))]
-    `(do
+    `(with-prerequisites
        ~@(for [[k {:strs [shape] :as v}] members
                :when (not= shape k)]
            `(spec/def ~(keyword (str ns "." (aws/dashed name)) (aws/dashed k)) (spec/and ~(keyword ns (aws/dashed shape))))) ; spec/and is a hack to delay resolution
@@ -207,8 +217,8 @@
 (defmethod shape-type-spec "long" [_]
   (strict-strs
     :req {"type" string?}
-    :opt {"max" int?
-          "min" int?}))
+    #_#_:opt {"max" int?
+              "min" int?}))
 
 (defmethod shape-to-spec "long" [ns _] `int?)
 
@@ -221,7 +231,9 @@
           "deprecated" boolean?}))
 
 (defmethod shape-to-spec "integer" [ns [name {:strs [min max]}]]
-  `(spec/and int? ~@(when min [`#(<= ~min %)]) ~@(when max [`#(<= % ~max)])))
+  (if (or min max)
+    `(spec/int-in ~(or min 'Long/MIN_VALUE) ~(or max 'Long/MAX_VALUE))
+    `int?))
 
 (defmethod shape-type-spec "timestamp" [_]
   (strict-strs :req {"type" string?}
@@ -295,6 +307,7 @@
 
 
 (defmethod gen-ser-input ["rest-json" "integer"] [shape-name api input] input)
+(defmethod gen-ser-input ["rest-json" "long"] [shape-name api input] input)
 
 
 (defmethod gen-ser-input ["query" "integer"] [shape-name api input] input)
@@ -583,6 +596,7 @@
                                         :req {"shape" string?}
                                         :opt {"location" #{"uri" "querystring" "header" #_#_"headers" "statusCode"}
                                               "locationName" string?
+                                              "idempotencyToken" boolean? ; see https://docs.aws.amazon.com/connect/latest/APIReference/API_StartOutboundVoiceContact.html
                                               "deprecated" boolean?})
                                        #(= (contains? % "location") (contains? % "locationName")))
                                       :querystringmap
@@ -603,7 +617,7 @@
               "payload" string?
               "deprecated" boolean?})
        (shapes input-shape)))
-    `(do
+    `(with-prerequisites
        (defn ~varname                   ; TODO add deprecated flag
          ~@(when documentation
              [(format-documentation documentation)])
@@ -789,14 +803,14 @@
       :or {verbose false api-name nil protocol nil}}]
   (let [endpoints (parse-endpoints! "api-resources/aws-sdk-ruby/gems/aws-partitions/partitions.json")
         entries (into []
-                      (comp
-                       (filter #(re-find #"api-2.json" (.getName ^java.io.File  %)))
-                       (x/by-key (fn [^java.io.File f] (-> f .getParentFile .getParentFile .getName))
-                                 (comp (x/for [^java.io.File f %]
-                                         [(-> f .getParentFile .getName) (.getPath f)])
-                                       (x/into (sorted-map))))
-                       (x/sort))
-                      (file-seq (java.io.File. "api-resources/aws-sdk-ruby/apis/")))
+                  (comp
+                    (x/for [^java.io.File f %
+                            :when (-> f .getName (.endsWith "api-2.json"))]
+                      [(-> f .getParentFile .getParentFile .getName)
+                       [(-> f .getParentFile .getName) (.getPath f)]])
+                    (x/by-key (x/into (sorted-map)))
+                    (x/sort))
+                  (file-seq (java.io.File. "api-resources/aws-sdk-ruby/apis/")))
         gen-results (for [[api versions] entries
                           :let [apifile (str/replace api #"[-.]" "_")
                                 apins (str/replace api #"[.]" "-")
@@ -825,9 +839,8 @@
                                 (prn form)))))
                         {:gen-status :ok}
                         (catch Throwable t
-                          (println "Failed to generate" api)
-                          (when verbose
-                            (println t))
+                          (println "Failed to generate" api (.getMessage t))
+                          (when verbose (println t))
                           {:gen-status :fail :api api :file file})))
         gen-failures (filter #(-> % :gen-status (= :fail)) gen-results)]
     (if (seq gen-failures)
