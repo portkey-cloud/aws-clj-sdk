@@ -6,6 +6,7 @@
     [cheshire.core :as json]
     [clojure.spec.alpha :as spec]
     [clojure.core.async :as async]
+    [ring.util.codec :as codec]
     [net.cgrand.xforms :as x]
     [portkey.awssig :as sig]))
 
@@ -142,12 +143,13 @@
                                  headers param-to-headers))
       (dissoc :header)))
 
+
 (defn- params-to-uri [{:as req :keys [body url uri]} uri-to-param]
   (-> req
       (assoc :url (str/replace url #"\{([^\}]*)}" (fn [[_ name]]
 
                                                     (if-some [v (get uri (uri-to-param name))]
-                                                      (http/url-encode-illegal-characters v)
+                                                      (codec/url-encode v)
                                                       (throw (ex-info (str "Missing parameter " name)
                                                                       {:url url :url-to-param uri-to-param :input body}))))))
       (dissoc :uri)))
@@ -212,6 +214,39 @@
              :url (str endpoint uri)
              :headers {"content-type" "application/x-amz-json-1.0"
                        "x-amz-security-token" (:token (credentials))}
+             :as :json-string-keys}
+            input)
+     (params-to-header headers-params)
+     (params-to-uri uri-params)
+     (params-to-querystring querystring-params)
+     (move-params move)
+     (params-to-payload payload)
+     (update :body #(cond-> % (coll? %) json/generate-string))
+     (*http-client*
+      (fn [{:as response {content-type "Content-Type"} :headers}]
+        (if (if ok-code (= ok-code (:status response)) (<= 200 (:status response) 299))
+          [:result (if output-spec
+                     (spec/unform output-spec (coerce-body content-type (:body response)))
+                     true)]
+          (if-some [[type spec] (find error-specs (get-in response [:headers "x-amzn-ErrorType"]))]
+            [:exception (let [m (spec/unform spec (json/parse-string (coerce-body content-type (:body response))))]
+                          (ex-info (str type ": " (:message m)) m))]
+            (case (:status response)
+              404 [:result nil]
+              [:exception (ex-info "Unexpected response" {:response response})]))))))))
+
+
+
+(defn -query-call [endpoints method uri input input-spec
+                   {headers-params :headers uri-params :uri querystring-params :querystring payload :payload move :move}
+                   ok-code output-spec error-specs]
+  (let [{:keys [endpoint credential-scope signature-version]} (endpoints (region))]
+    (->
+     (merge {:method method
+             ::credential-scope credential-scope
+             ::signature-version signature-version
+             :url (str endpoint uri)
+             :headers {"content-type" "application/x-amz-json-1.0"}
              :as :json-string-keys}
             input)
      (params-to-header headers-params)
