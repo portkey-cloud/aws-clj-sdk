@@ -307,6 +307,8 @@
 
 
 (defmethod gen-ser-input ["rest-json" "integer"] [shape-name api input] input)
+
+
 (defmethod gen-ser-input ["rest-json" "long"] [shape-name api input] input)
 
 
@@ -335,13 +337,14 @@
 
 (defmethod gen-ser-input ["query" "structure"] [shape-name api input]
   (let [shape  (get-in api ["shapes" shape-name])
-          x# (into []
-                   (mapcat (fn [[k# {:strs [shape]}]]
-                             (let [test-form# `(~(-> k# aws/dashed keyword) ~input)]
-                               [test-form# `(assoc ~(str shape-name "." k#) (~(shape-name->ser-name shape) ~test-form#))])))
-                   (shape "members"))]
-      `(cond-> {}
-         ~@x#)))
+        x# (into []
+                 (mapcat (fn [[k# {:strs [shape]}]]
+                           (let [test-form# `(~(-> k# aws/dashed keyword) ~input)]
+                             [test-form# `(assoc ~(str shape-name "." k#) (~(shape-name->ser-name shape) ~test-form#))])))
+                 (shape "members"))]
+    `(cond-> {}
+       ~@x#)))
+
 
 (defmethod gen-ser-input ["query" "string"] [shape-name api input]
   (let [{:strs [enum] :as shape} (get-in api ["shapes" shape-name])]
@@ -374,6 +377,7 @@
 
 
 (defmethod gen-ser-input ["rest-json" "list"] [shape-name api input] input)
+
 
 (defmethod gen-ser-input ["query" "list"] [shape-name _ input]
   `(into {} (map-indexed (fn [idx# item#] [(str "member." (inc idx#)) item#]) ~input)))
@@ -656,78 +660,79 @@
                                {:strs [method requestUri responseCode]} "http"}
                            shapes
                            {:as docs :strs [operations]}]
-  (let [error-specs (into {}
-                          (map (fn [{:strs [shape] {:strs [httpStatusCode]} "error"}]
-                                 [shape (keyword ns (aws/dashed shape))]))
-                          errors)
-        varname (symbol (aws/dashed name))
-        input-spec (some->> input-shape aws/dashed (keyword ns))
-        output-spec (some->> output-shape aws/dashed (keyword ns))
-        input (or (some-> input-shape aws/dashed symbol) '_)
-        default-arg (if input-spec (some #(when (spec/valid? input-spec %) %) [[] {}]) {})
-        documentation (operations name)]
-    (when input-shape
-      (aws/conform-or-throw
-       (strict-strs           ; validate only what we knows how to map
-        :req {"type" #{"structure"}
-              "members" (spec/map-of string?
-                                     (spec/or
-                                      :atomic
-                                      (spec/and
-                                       (strict-strs
-                                        :req {"shape" string?}
-                                        :opt {"location" #{"uri" "querystring" "header" #_#_"headers" "statusCode"}
-                                              "locationName" string?
-                                              "deprecated" boolean?})
-                                       #(= (contains? % "location") (contains? % "locationName")))
-                                      :querystringmap
-                                      (strict-strs
-                                       :req {"shape" string?}
-                                       :opt {"location" #{"querystring"}})
-                                      :move
-                                      (strict-strs
-                                       :req {"shape" string?}
-                                       :opt {"locationName" string?})
-                                      :json-value
-                                      (strict-strs
-                                       :req {"shape" string?
-                                             "location" #{"header"}
-                                             "locationName" string?
-                                             "jsonvalue" true?})))}
-        :opt {"required" (spec/coll-of string?)
-              "payload" string?
-              "deprecated" boolean?})
-       (shapes input-shape)))
-    `(do
-       (defn ~varname                   ; TODO add deprecated flag
-         ~@(when documentation
-             [(format-documentation documentation)])
-         ~@(when default-arg `[([] (~varname ~default-arg))])
-         ([~input]
-          (let [req<-input# (~(shape-name->req-name input-shape) ~name ~input)]
-            (aws/-query-call
-             ~(symbol ns "endpoints") 
-             ~method ~requestUri req<-input# ~input-spec
-             {:headers ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
-                                       :when (= "header" (member "location"))]
-                                   [name [(member "locationName") (member "jsonvalue")]]))
-              :uri ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
-                                   :when (= "uri" (member "location"))]
-                               [(member "locationName") name]))
-              :querystring ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
-                                           :when (= "querystring" (member "location"))]
-                                       [(member "locationName") name]))
-              :payload ~(get-in shapes [input-shape "payload"])
-              :move ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
-                                    :let [locationName (member "locationName")]
-                                    :when (when-not (member "location") locationName)]
-                                [locationName name]))}
-             ~responseCode ~output-spec ~error-specs))))
-       (spec/fdef ~varname
-                  :args ~(if input-spec
-                           `(~(if default-arg `spec/? `spec/tuple) ~input-spec)
-                           `empty?)
-                  :ret ~(if output-spec `(spec/and ~output-spec) `true?)))))
+  (when input-shape
+    (let [error-specs (into {}
+                            (map (fn [{:strs [shape] {:strs [httpStatusCode]} "error"}]
+                                   [shape (keyword ns (aws/dashed shape))]))
+                            errors)
+          varname (symbol (aws/dashed name))
+          input-spec (some->> input-shape aws/dashed (keyword ns))
+          output-spec (some->> output-shape aws/dashed (keyword ns))
+          input (or (some-> input-shape aws/dashed symbol) '_)
+          default-arg (if input-spec (some #(when (spec/valid? input-spec %) %) [[] {}]) {})
+          documentation (operations name)]
+      (when input-shape
+        (aws/conform-or-throw
+         (strict-strs           ; validate only what we knows how to map
+          :req {"type" #{"structure"}
+                "members" (spec/map-of string?
+                                       (spec/or
+                                        :atomic
+                                        (spec/and
+                                         (strict-strs
+                                          :req {"shape" string?}
+                                          :opt {"location" #{"uri" "querystring" "header" #_#_"headers" "statusCode"}
+                                                "locationName" string?
+                                                "deprecated" boolean?})
+                                         #(= (contains? % "location") (contains? % "locationName")))
+                                        :querystringmap
+                                        (strict-strs
+                                         :req {"shape" string?}
+                                         :opt {"location" #{"querystring"}})
+                                        :move
+                                        (strict-strs
+                                         :req {"shape" string?}
+                                         :opt {"locationName" string?})
+                                        :json-value
+                                        (strict-strs
+                                         :req {"shape" string?
+                                               "location" #{"header"}
+                                               "locationName" string?
+                                               "jsonvalue" true?})))}
+          :opt {"required" (spec/coll-of string?)
+                "payload" string?
+                "deprecated" boolean?})
+         (shapes input-shape)))
+      `(do
+         (defn ~varname                   ; TODO add deprecated flag
+           ~@(when documentation
+               [(format-documentation documentation)])
+           ~@(when default-arg `[([] (~varname ~default-arg))])
+           ([~input]
+            (let [req<-input# (~(shape-name->req-name input-shape) ~name ~input)]
+              (aws/-query-call
+               ~(symbol ns "endpoints")
+               ~method ~requestUri req<-input# ~input-spec
+               {:headers ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
+                                         :when (= "header" (member "location"))]
+                                     [name [(member "locationName") (member "jsonvalue")]]))
+                :uri ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
+                                     :when (= "uri" (member "location"))]
+                                 [(member "locationName") name]))
+                :querystring ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
+                                             :when (= "querystring" (member "location"))]
+                                         [(member "locationName") name]))
+                :payload ~(get-in shapes [input-shape "payload"])
+                :move ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
+                                      :let [locationName (member "locationName")]
+                                      :when (when-not (member "location") locationName)]
+                                  [locationName name]))}
+               ~responseCode ~output-spec ~error-specs))))
+         (spec/fdef ~varname
+                    :args ~(if input-spec
+                             `(~(if default-arg `spec/? `spec/tuple) ~input-spec)
+                             `empty?)
+                    :ret ~(if output-spec `(spec/and ~output-spec) `true?))))))
 
 
 

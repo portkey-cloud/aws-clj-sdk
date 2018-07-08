@@ -142,6 +142,25 @@
                                  headers param-to-headers))
       (dissoc :header)))
 
+(defn- flatten-form-input
+  "Given a form input composed of possibly nested map, flatten the input and concatenate
+  keys when there is nested maps.
+
+  For example, (flatten-form-input {a b c {d e} e {t {f p}}}) returns
+  {a b c.d e e.t.f p}"
+  [form-input]
+  (let [flattened-input (tree-seq map?
+                                  #(for [[k v] %]
+                                     (if (map? v)
+                                       (into {} (map (fn [[k1 v1]] [(str k "." k1) v1])) v)
+                                       v))
+                                  form-input)]
+    (into {} (comp (filter map?)
+                   (x/for [entry %
+                           :let [k v] entry
+                           :when (not (map? v))]
+                     [k v]))
+          flattened-input)))
 
 (defn- params-to-uri [{:as req :keys [body url uri]} uri-to-param]
   (-> req
@@ -154,15 +173,15 @@
       (dissoc :uri)))
 
 (defn- params-to-querystring [{:as req :keys [body querystring ^String url]} querystring-to-param]
-  (-> req
-      (assoc :url
-             (apply str url (if (neg? (.indexOf url "?")) "?" "&")
-                    (interpose "&"
-                               (keep (fn [[qs name]]
-                                       (when-some [v (get querystring name)]
-                                         (str (http/url-encode-illegal-characters qs) "=" (http/url-encode-illegal-characters v))))
-                                     querystring-to-param))))
-      (dissoc :querystring)))
+  (cond-> req
+    (not-empty querystring-to-param) (assoc :url
+                                            (apply str url (if (neg? (.indexOf url "?")) "?" "&")
+                                                   (interpose "&"
+                                                              (keep (fn [[qs name]]
+                                                                      (when-some [v (get querystring name)]
+                                                                        (str (http/url-encode-illegal-characters qs) "=" (http/url-encode-illegal-characters v))))
+                                                                    querystring-to-param))))
+    true (dissoc :querystring)))
 
 (defn- params-to-payload [{:as req :keys [body]} param]
   (if param
@@ -244,21 +263,18 @@
              ::credential-scope credential-scope
              ::signature-version signature-version
              :url (str endpoint uri)
-             :headers {"content-type" "application/x-amz-json-1.0"}
-             :as :json-string-keys}
+             :headers {"content-type" "application/x-www-form-urlencoded; charset=utf-8"}}
             input)
      (params-to-header headers-params)
      (params-to-uri uri-params)
      (params-to-querystring querystring-params)
      (move-params move)
      (params-to-payload payload)
-     (update :body #(cond-> % (coll? %) json/generate-string))
+     (update :body #(cond-> (flatten-form-input %) (coll? %) codec/form-encode))
      (*http-client*
       (fn [{:as response {content-type "Content-Type"} :headers}]
         (if (if ok-code (= ok-code (:status response)) (<= 200 (:status response) 299))
-          [:result (if output-spec
-                     (spec/unform output-spec (coerce-body content-type (:body response)))
-                     true)]
+          [:result response]
           (if-some [[type spec] (find error-specs (get-in response [:headers "x-amzn-ErrorType"]))]
             [:exception (let [m (spec/unform spec (json/parse-string (coerce-body content-type (:body response))))]
                           (ex-info (str type ": " (:message m)) m))]
