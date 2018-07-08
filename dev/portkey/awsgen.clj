@@ -297,7 +297,16 @@
 (defmethod gen-ser-input ["rest-json" "integer"] [shape-name api input] input)
 
 
+(defmethod gen-ser-input ["query" "integer"] [shape-name api input] input)
+
+
 (defmethod gen-ser-input ["rest-json" "double"] [shape-name api input] input)
+
+
+(defmethod gen-ser-input ["query" "double"] [shape-name api input] input)
+
+
+(defmethod gen-ser-input ["query" "long"] [shape-name api input] input)
 
 
 (defmethod gen-ser-input ["rest-json" "structure"] [shape-name api input]
@@ -311,7 +320,17 @@
        ~@x#)))
 
 
-(defmethod gen-ser-input ["rest-json" "string"] [shape-name api input]
+(defmethod gen-ser-input ["query" "structure"] [shape-name api input]
+  (let [shape  (get-in api ["shapes" shape-name])
+          x# (into []
+                   (mapcat (fn [[k# {:strs [shape]}]]
+                             (let [test-form# `(~(-> k# aws/dashed keyword) ~input)]
+                               [test-form# `(assoc ~(str shape-name "." k#) (~(shape-name->ser-name shape) ~test-form#))])))
+                   (shape "members"))]
+      `(cond-> {}
+         ~@x#)))
+
+(defmethod gen-ser-input ["query" "string"] [shape-name api input]
   (let [{:strs [enum] :as shape} (get-in api ["shapes" shape-name])]
     (if enum
       (let [m (into {} (mapcat #(vector [% %] [(-> % aws/dashed keyword) %])) enum)]
@@ -322,16 +341,36 @@
 (defmethod gen-ser-input ["rest-json" "map"] [shape-name api input] input)
 
 
+(defmethod gen-ser-input ["query" "map"] [shape-name api input]
+  `(into {} (comp (map-indexed (fn [idx# [k# v#]]
+                                [[(str "entry." (inc idx#) ".key") k#]
+                                 [(str "entry." (inc idx#) ".value") v#]]))
+                 cat)
+        ~input))
+
 (defmethod gen-ser-input ["rest-json" "boolean"] [shape-name api input] input)
+
+
+(defmethod gen-ser-input ["query" "boolean"] [shape-name api input] input)
 
 
 (defmethod gen-ser-input ["rest-json" "timestamp"] [shape-name api input] input)
 
 
+(defmethod gen-ser-input ["query" "timestamp"] [shape-name api input] input)
+
+
 (defmethod gen-ser-input ["rest-json" "list"] [shape-name api input] input)
+
+(defmethod gen-ser-input ["query" "list"] [shape-name _ input]
+  `(into {} (map-indexed (fn [idx# item#] [(str "member." (inc idx#)) item#]) ~input)))
 
 
 (defmethod gen-ser-input ["rest-json" "blob"] [shape-name api input]
+  `(aws/base64-encode ~input))
+
+
+(defmethod gen-ser-input ["query" "blob"] [shape-name api input]
   `(aws/base64-encode ~input))
 
 
@@ -433,7 +472,7 @@
    [input240922]
    {:uri {Resource (ser-function-arn (input240922 :resource))},
     :body {Tags (ser-tags (input240922 :tags))}})"
-  [api shape-name]
+  [api shape-name & {:keys [version]}]
   (let [shape (get-in api ["shapes" shape-name])
         function-input (gensym "input")
         {:keys [optional required]} (input-root-shape->req-map shape)
@@ -454,13 +493,23 @@
                                     [loc [shape-name `(~ser-name (~function-input ~e#)) ]])
                                   (x/by-key (x/into {})))
                             required)
+        ;; Because we can't be sure that an input-root is bound to exactly one operation, we pass action-name in the query request for only this protocol
+        action-name-input (gensym "action-name")
+        init (if version
+               (merge-with merge required-part {:body {"Version" version "Action" action-name-input}})
+               required-part)
         function-body (cond
                         (and required optional) (let [x (gensym "input")]
-                                                  `(let [~x ~required-part]
+                                                  `(let [~x ~init]
                                                      ~(optional-part x optional)))
-                        (not (nil? required)) required-part
-                        (not (nil? optional)) (optional-part {} optional))]
-    `(defn ~(shape-name->req-name shape-name) [~function-input] ~function-body)))
+                        (not (nil? required)) init
+                        (not (nil? optional)) (optional-part init optional))
+        fn-inputs (if version
+                    `[[~action-name-input ~function-input] ~function-body]
+                    `[[~function-input] ~function-body])]
+    `(defn ~(shape-name->req-name shape-name)
+       ~@fn-inputs)))
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -562,6 +611,87 @@
          ([~input]
           (let [req<-input# (~(shape-name->req-name input-shape) ~input)]
             (aws/-rest-json-call
+             ~(symbol ns "endpoints")
+             ~method ~requestUri req<-input# ~input-spec
+             {:headers ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
+                                       :when (= "header" (member "location"))]
+                                   [name [(member "locationName") (member "jsonvalue")]]))
+              :uri ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
+                                   :when (= "uri" (member "location"))]
+                               [(member "locationName") name]))
+              :querystring ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
+                                           :when (= "querystring" (member "location"))]
+                                       [(member "locationName") name]))
+              :payload ~(get-in shapes [input-shape "payload"])
+              :move ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
+                                    :let [locationName (member "locationName")]
+                                    :when (when-not (member "location") locationName)]
+                                [locationName name]))}
+             ~responseCode ~output-spec ~error-specs))))
+       (spec/fdef ~varname
+                  :args ~(if input-spec
+                           `(~(if default-arg `spec/? `spec/tuple) ~input-spec)
+                           `empty?)
+                  :ret ~(if output-spec `(spec/and ~output-spec) `true?)))))
+
+
+(defn gen-operation-query [ns {:as operation
+                               :strs [name errors]
+                               {input-shape "shape"} "input"
+                               {output-shape "shape"} "output"
+                               {:strs [method requestUri responseCode]} "http"}
+                           shapes
+                           {:as docs :strs [operations]}]
+  (let [error-specs (into {}
+                          (map (fn [{:strs [shape] {:strs [httpStatusCode]} "error"}]
+                                 [shape (keyword ns (aws/dashed shape))]))
+                          errors)
+        varname (symbol (aws/dashed name))
+        input-spec (some->> input-shape aws/dashed (keyword ns))
+        output-spec (some->> output-shape aws/dashed (keyword ns))
+        input (or (some-> input-shape aws/dashed symbol) '_)
+        default-arg (if input-spec (some #(when (spec/valid? input-spec %) %) [[] {}]) {})
+        documentation (operations name)]
+    (when input-shape
+      (aws/conform-or-throw
+       (strict-strs           ; validate only what we knows how to map
+        :req {"type" #{"structure"}
+              "members" (spec/map-of string?
+                                     (spec/or
+                                      :atomic
+                                      (spec/and
+                                       (strict-strs
+                                        :req {"shape" string?}
+                                        :opt {"location" #{"uri" "querystring" "header" #_#_"headers" "statusCode"}
+                                              "locationName" string?
+                                              "deprecated" boolean?})
+                                       #(= (contains? % "location") (contains? % "locationName")))
+                                      :querystringmap
+                                      (strict-strs
+                                       :req {"shape" string?}
+                                       :opt {"location" #{"querystring"}})
+                                      :move
+                                      (strict-strs
+                                       :req {"shape" string?}
+                                       :opt {"locationName" string?})
+                                      :json-value
+                                      (strict-strs
+                                       :req {"shape" string?
+                                             "location" #{"header"}
+                                             "locationName" string?
+                                             "jsonvalue" true?})))}
+        :opt {"required" (spec/coll-of string?)
+              "payload" string?
+              "deprecated" boolean?})
+       (shapes input-shape)))
+    `(do
+       (defn ~varname                   ; TODO add deprecated flag
+         ~@(when documentation
+             [(format-documentation documentation)])
+         ~@(when default-arg `[([] (~varname ~default-arg))])
+         ([~input]
+          (let [req<-input# (~(shape-name->req-name input-shape) ~name ~input)]
+            (aws/-query-call
              ~(symbol ns "endpoints") 
              ~method ~requestUri req<-input# ~input-spec
              {:headers ~(into {} (for [[name member] (get-in shapes [input-shape "members"])
@@ -607,6 +737,23 @@
                      [ser-fns]
                      [req-fns]
                      specs+fns))
+      "query" (let [specs+fns (for [[k gen] {"shapes" (comp #(doto % eval) gen-shape-spec) ; eval to make specs available right away
+                                             "operations" (fn [ns [_ op]] (gen-operation-query ns op (api "shapes") docs))}
+                                    desc (api k)]
+                                (gen (name ns-sym) desc))
+                    {:keys [inputs input-roots]} (shapes-by-usage api)
+                    ser-vars `(do (declare ~@(for [shape-name inputs]
+                                               (shape-name->ser-name shape-name))))
+                    ser-fns `(do ~@(for [shape-name inputs]
+                                     (gen-ser-fns api shape-name)))
+                    req-fns `(do ~@(for [shape-name input-roots
+                                         :let [version (get-in api ["metadata" "apiVersion"])]]
+                                     (gen-req-fns api shape-name :version version)))]
+                (concat
+                 [ser-vars]
+                 [ser-fns]
+                 [req-fns]
+                 specs+fns))
       (do
         (binding [*out* *err*] (prn 'skipping ns-sym 'protocol (get-in api ["metadata" "protocol"])))
         [(list 'comment 'TODO 'support (get-in api ["metadata" "protocol"]))]))))
