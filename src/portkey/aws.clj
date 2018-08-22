@@ -42,10 +42,10 @@
 (defn- guess-credentials!
   "Returns a map with keys :access-key :secret-key or nil."
   []
-  (when-some [[a s]
+  (when-some [[a s t]
               (cond
                ^:some [id (System/getenv "AWS_ACCESS_KEY_ID")]
-               [id (System/getenv "AWS_SECRET_ACCESS_KEY")]
+               [id (System/getenv "AWS_SECRET_ACCESS_KEY") (System/getenv "AWS_SECURITY_TOKEN")]
 
                ^:some [id (System/getProperty "aws.accessKeyId")]
                [id (System/getProperty "aws.secretKey")]
@@ -53,10 +53,10 @@
                :let [file (or (some-> (System/getenv "AWS_CREDENTIAL_PROFILES_FILE") java.io.File.)
                             (java.io.File. (System/getProperty "user.home") ".aws/credentials"))
                      profile (or (System/getenv "AWS_PROFILE") (System/getProperty "aws.profile") "default")
-                     {:strs [aws_access_key_id aws_secret_access_key]}
+                     {:strs [aws_access_key_id aws_secret_access_key aws_session_token]}
                      (parse-profile file profile)]
                (some? aws_access_key_id)
-               [aws_access_key_id aws_secret_access_key]
+               [aws_access_key_id aws_secret_access_key aws_session_token]
     
                #_(TODO
                    curl "169.254.170.2$AWS_CONTAINER_CREDENTIALS_RELATIVE_URI"
@@ -67,7 +67,8 @@
                     "SecretAccessKey" "SECRET_ACCESS_KEY",
                     "Token" "SECURITY_TOKEN_STRING"
                     }))]
-    {:access-key a :secret-key s}))
+    (cond-> {:access-key a :secret-key s}
+      t (assoc :token t))))
 
 (defn- guess-region!
   "Returns a map with keys :access-key :secret-key or nil."
@@ -208,7 +209,8 @@
        ::credential-scope credential-scope
        ::signature-version signature-version
        :url (str endpoint uri)
-       :headers {"content-type" "application/x-amz-json-1.0"}
+       :headers {"content-type" "application/x-amz-json-1.0"
+                 "x-amz-security-token" (:token (credentials))}
        :as :json-string-keys
        :body (some-> input-spec (conform-or-throw input))}
       (params-to-header headers-params)
