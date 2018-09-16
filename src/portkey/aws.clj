@@ -205,8 +205,8 @@
        ::credential-scope credential-scope
        ::signature-version signature-version
        :url (str endpoint uri)
-       :headers {"content-type" "application/x-amz-json-1.0"
-                 "x-amz-security-token" (:token (credentials))}
+       :headers (cond-> {"content-type" "application/x-amz-json-1.0"}
+                  (:token (credentials)) (assoc :token (:token (credentials))))
        :as :json-string-keys
        :body (some-> input-spec (conform-or-throw input))}
       (params-to-header headers-params)
