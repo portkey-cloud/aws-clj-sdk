@@ -57,16 +57,12 @@
                      (parse-profile file profile)]
                (some? aws_access_key_id)
                [aws_access_key_id aws_secret_access_key aws_session_token]
-    
-               #_(TODO
-                   curl "169.254.170.2$AWS_CONTAINER_CREDENTIALS_RELATIVE_URI"
-                   {
-                    "AccessKeyId" "ACCESS_KEY_ID",
-                    "Expiration" "EXPIRATION_DATE",
-                    "RoleArn" "TASK_ROLE_ARN",
-                    "SecretAccessKey" "SECRET_ACCESS_KEY",
-                    "Token" "SECURITY_TOKEN_STRING"
-                    }))]
+
+               (System/getenv "AWS_CONTAINER_CREDENTIALS_RELATIVE_URI")
+               (let [{{:keys [AccessKeyId SecretAccessKey Token]} :body}
+                     (http/get (str "http://169.254.170.2" (System/getenv "AWS_CONTAINER_CREDENTIALS_RELATIVE_URI"))
+                               {:as :json})]
+                 [AccessKeyId SecretAccessKey Token]))]
     (cond-> {:access-key a :secret-key s}
       t (assoc :token t))))
 
