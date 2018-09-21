@@ -1,8 +1,12 @@
 (ns portkey.awsgen
-  (:require [clojure.java.io :as io]
+  (:require [cheshire.core :as json]
+
+            [clojure.java.io :as io]
+            [clojure.spec.alpha :as spec]
+
             [net.cgrand.xforms :as x]
-            [cheshire.core :as json]
-            [clojure.spec.alpha :as spec]))
+
+            [portkey.aws :as aws]))
 
 ;;;;;;;;;;;;;;;;;;
 ;; SPEC HELPERS ;;
@@ -27,9 +31,9 @@
       (every? #(contains? m# %) [~@(keys req)]))))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; SHAPES SPEC VALIDATION ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; COMPILE TIME SHAPE SPECS ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 (defmulti shape-type-compile-time-spec #(get % "type"))
@@ -153,19 +157,106 @@
                       :opt {"prefix" string?})}))
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; SHAPE TYPE RUNTIME SPEC ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn spec-name
+  "Returns name spec given it's ns and shape name"
+  [ns name]
+  (keyword ns (aws/dashed name)))
+
+
+(defmulti ^:private shape-type-runtime-spec
+  "Takes a shape and retuns a spec (as unevaluated code)."
+  (fn [ns [name {:strs [type]}]] type))
+
+
+(defmethod shape-type-runtime-spec :default [ns [name {:strs [type]} :as kv]]
+  (throw (ex-info (str "shape-type-runtime-spec exception : unsupported type " type " for shape with name : " name) {:shape kv})))
+
+
+(defmethod shape-type-runtime-spec "string" [ns [name {:strs [min max sensitive pattern enum]}]]
+  (if enum
+    `(spec/def ~(spec-name ns name) ~(into {} (mapcat (fn [s] [[s s] [(keyword (aws/dashed s)) s]])) enum))
+    `(spec/def ~(spec-name ns name)
+       (spec/and string?
+                 ~@(when min [`(fn [s#] (<= ~min (count s#)))])
+                 ~@(when max [`(fn [s#] (< (count s#) ~max))])
+                 ~@(when pattern [`(fn [s#] (re-matches ~(re-pattern pattern) s#))])))))
+
+
+(defmethod shape-type-runtime-spec "integer" [ns [name {:strs [min max]}]]
+  (if (or min max)
+    `(spec/def ~(spec-name ns name) (spec/int-in ~(or min 'Long/MIN_VALUE) ~(or max 'Long/MAX_VALUE)))
+    `(spec/def ~(spec-name ns name) int?)))
+
+
+(defmethod shape-type-runtime-spec "long" [ns [name _]]
+  `(spec/def ~(spec-name ns name) int?))
+
+
+(defmethod shape-type-runtime-spec "double" [ns [name _]]
+  `(spec/def ~(spec-name ns name) double?))
+
+
+(defmethod shape-type-runtime-spec "boolean" [ns [name _]]
+  `(spec/def ~(spec-name ns name) boolean?))
+
+
+;; @TODO : pattern matching
+(defmethod shape-type-runtime-spec "timestamp" [ns [name _]]
+  `(spec/def ~(spec-name ns name) inst?))
+
+
+(defmethod shape-type-runtime-spec "structure" [ns [name {:strs [members required payload deprecated error exception]}]]
+  (let [spec-names (into {} (for [[k {:strs [shape]}] members]
+                              ;; when key name and shape name for
+                              ;; some reasons are different, we need
+                              ;; prerequisites
+                              [k (keyword (if (not= shape k) (str ns "." (aws/dashed name)) ns) k)]))]
+    `(do
+       ;; we specialy create spec that reference the right spec when
+       ;; key and shape name are different. Offcourse, prerequisites
+       ;; are only necessary for compound types
+       ~@(for [[k {:strs [shape] :as v}] members
+               :when                     (not= shape k)]
+           `(spec/def ~(keyword (str ns "." (aws/dashed name)) (aws/dashed k)) (spec/and ~(keyword ns (aws/dashed shape))))) ; spec/and is a hack to delay resolution
+       (spec/def ~(spec-name ns name)
+         (spec/keys :req-un ~(into [] (map spec-names) required)
+                    :opt-un ~(into [] (comp (remove (set required)) (map spec-names)) (keys members)))))))
+
+
+(defmethod shape-type-runtime-spec "list" [ns [name {{:strs [shape]} "member" :strs [min max]}]]
+  `(spec/def ~(spec-name ns name)
+     (spec/coll-of ~(keyword ns (aws/dashed shape)) ~@(when min `[:min-count ~min]) ~@(when max `[:max-count ~max]))))
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; IMPORTANT - UNCATEGORIZED FUNCTIONS ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(defn gen-shape-spec [ns [name shape]]
+(defn assert-shape-spec
+  "Assert a shape. This function is here to fail when AWS introduce new
+  element into it's description api-2.json that we don't know yet"
+  [[name shape :as element]]
   (spec/check-asserts true)
-  (spec/assert ::shape shape))
+  (spec/assert ::shape shape)
+  element)
+
+
+;; @TODO : to be renames
+(defn aaa
+  [ns [name shape :as e]]
+  (let [form (shape-type-runtime-spec ns e)]
+    form))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; API DESCRIPTION VARS - DEV HELPER ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 
 (defmacro def-api-2-json
   "Define a private variable reading the latest api-description file of a
@@ -191,15 +282,18 @@
 
 (comment
 
+
   (use 'clojure.repl)
-  (dir json)
+
 
   (let [api rest-xml-protocol-route53-api-2-json]
     
-    (for [[k gen] {"shapes"     (comp #(doto % eval) gen-shape-spec) ; eval to make specs available right away
+    (for [[k gen] {"shapes"     (comp (partial aaa (name "monnamespece")) assert-shape-spec) ; eval to make specs available right away
                    "operations" (fn [& args])}
           desc    (api k)]
-      (gen (name "monnamespece") desc)))
+      (gen desc)))
+
+
     
   )
 
