@@ -36,13 +36,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(defmulti shape-type-compile-time-spec #(get % "type"))
+(defmulti compile-time-shape-spec #(get % "type"))
 
 
-(spec/def ::shape (spec/multi-spec shape-type-compile-time-spec #(assoc %1 "type" %2)))
+(spec/def ::shape (spec/multi-spec compile-time-shape-spec #(assoc %1 "type" %2)))
 
 
-(defmethod shape-type-compile-time-spec "string" [_]
+(defmethod compile-time-shape-spec "string" [_]
   (strict-strs
    :req {"type" string?}
    :opt {"max"       int?
@@ -52,7 +52,7 @@
          "sensitive" boolean?}))
 
 
-(defmethod shape-type-compile-time-spec "integer" [_]
+(defmethod compile-time-shape-spec "integer" [_]
   (strict-strs
    :req {"type" string?}
    :opt {"max"        int?
@@ -61,17 +61,17 @@
          "deprecated" boolean?}))
 
 
-(defmethod shape-type-compile-time-spec "boolean" [_]
+(defmethod compile-time-shape-spec "boolean" [_]
   (strict-strs :req {"type" string?}
                :opt {"box" boolean?}))
 
 
-(defmethod shape-type-compile-time-spec "timestamp" [_]
+(defmethod compile-time-shape-spec "timestamp" [_]
   (strict-strs :req {"type" string?}
                :opt {"timestampFormat" #{"iso8601"}}))
 
 
-(defmethod shape-type-compile-time-spec "blob" [_]
+(defmethod compile-time-shape-spec "blob" [_]
   (strict-strs
    :req {"type" string?}
    :opt {"streaming" boolean?
@@ -80,21 +80,21 @@
          "sensitive" boolean?}))
 
 
-(defmethod shape-type-compile-time-spec "long" [_]
+(defmethod compile-time-shape-spec "long" [_]
   (strict-strs
    :req {"type" string?}
    :opt {"min" #(or (pos-int? %) (zero? %))
          "max" int?}))
 
 
-(defmethod shape-type-compile-time-spec "double" [_]
+(defmethod compile-time-shape-spec "double" [_]
   (strict-strs :req {"type" string?}
                :opt {"min" number?
                      "max" number?
                      "box" boolean?}))
 
 
-(defmethod shape-type-compile-time-spec "list" [_]
+(defmethod compile-time-shape-spec "list" [_]
   (strict-strs
    :req {"type"   string?
          "member" (strict-strs :req {"shape" string?}
@@ -106,7 +106,7 @@
          "sensitive"  boolean?}))
 
 
-(defmethod shape-type-compile-time-spec "map" [_]
+(defmethod compile-time-shape-spec "map" [_]
   (strict-strs
    :req {"type"  string?
          "key"   (strict-strs :req {"shape" string?} :opt {"locationName" string?})
@@ -118,7 +118,7 @@
          "locationName" string?}))
 
 
-(defmethod shape-type-compile-time-spec "structure" [_]
+(defmethod compile-time-shape-spec "structure" [_]
   (strict-strs
    :req {"type"    string?
          "members" (spec/map-of string? 
@@ -161,55 +161,55 @@
 ;; SHAPE TYPE RUNTIME SPEC ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn spec-name
+(defn runtime-spec-name
   "Returns name spec given it's ns and shape name"
   [ns name]
   (keyword ns (aws/dashed name)))
 
 
-(defmulti ^:private shape-type-runtime-spec
+(defmulti ^:private runtime-shape-type-spec
   "Takes a shape and retuns a spec (as unevaluated code)."
   (fn [ns [name {:strs [type]}]] type))
 
 
-(defmethod shape-type-runtime-spec :default [ns [name {:strs [type]} :as kv]]
-  (throw (ex-info (str "shape-type-runtime-spec exception : unsupported type " type " for shape with name : " name) {:shape kv})))
+(defmethod runtime-shape-type-spec :default [ns [name {:strs [type]} :as kv]]
+  (throw (ex-info (str "runtime-shape-type-spec exception : unsupported type " type " for shape with name : " name) {:shape kv})))
 
 
-(defmethod shape-type-runtime-spec "string" [ns [name {:strs [min max sensitive pattern enum]}]]
+(defmethod runtime-shape-type-spec "string" [ns [name {:strs [min max sensitive pattern enum]}]]
   (if enum
-    `(spec/def ~(spec-name ns name) ~(into {} (mapcat (fn [s] [[s s] [(keyword (aws/dashed s)) s]])) enum))
-    `(spec/def ~(spec-name ns name)
+    `(spec/def ~(runtime-spec-name ns name) ~(into {} (mapcat (fn [s] [[s s] [(keyword (aws/dashed s)) s]])) enum))
+    `(spec/def ~(runtime-spec-name ns name)
        (spec/and string?
                  ~@(when min [`(fn [s#] (<= ~min (count s#)))])
                  ~@(when max [`(fn [s#] (< (count s#) ~max))])
                  ~@(when pattern [`(fn [s#] (re-matches ~(re-pattern pattern) s#))])))))
 
 
-(defmethod shape-type-runtime-spec "integer" [ns [name {:strs [min max]}]]
+(defmethod runtime-shape-type-spec "integer" [ns [name {:strs [min max]}]]
   (if (or min max)
-    `(spec/def ~(spec-name ns name) (spec/int-in ~(or min 'Long/MIN_VALUE) ~(or max 'Long/MAX_VALUE)))
-    `(spec/def ~(spec-name ns name) int?)))
+    `(spec/def ~(runtime-spec-name ns name) (spec/int-in ~(or min 'Long/MIN_VALUE) ~(or max 'Long/MAX_VALUE)))
+    `(spec/def ~(runtime-spec-name ns name) int?)))
 
 
-(defmethod shape-type-runtime-spec "long" [ns [name _]]
-  `(spec/def ~(spec-name ns name) int?))
+(defmethod runtime-shape-type-spec "long" [ns [name _]]
+  `(spec/def ~(runtime-spec-name ns name) int?))
 
 
-(defmethod shape-type-runtime-spec "double" [ns [name _]]
-  `(spec/def ~(spec-name ns name) double?))
+(defmethod runtime-shape-type-spec "double" [ns [name _]]
+  `(spec/def ~(runtime-spec-name ns name) double?))
 
 
-(defmethod shape-type-runtime-spec "boolean" [ns [name _]]
-  `(spec/def ~(spec-name ns name) boolean?))
+(defmethod runtime-shape-type-spec "boolean" [ns [name _]]
+  `(spec/def ~(runtime-spec-name ns name) boolean?))
 
 
 ;; @TODO : pattern matching
-(defmethod shape-type-runtime-spec "timestamp" [ns [name _]]
-  `(spec/def ~(spec-name ns name) inst?))
+(defmethod runtime-shape-type-spec "timestamp" [ns [name _]]
+  `(spec/def ~(runtime-spec-name ns name) inst?))
 
 
-(defmethod shape-type-runtime-spec "structure" [ns [name {:strs [members required payload deprecated error exception]}]]
+(defmethod runtime-shape-type-spec "structure" [ns [name {:strs [members required payload deprecated error exception]}]]
   (let [spec-names (into {} (for [[k {:strs [shape]}] members]
                               ;; when key name and shape name for
                               ;; some reasons are different, we need
@@ -222,13 +222,13 @@
        ~@(for [[k {:strs [shape] :as v}] members
                :when                     (not= shape k)]
            `(spec/def ~(keyword (str ns "." (aws/dashed name)) (aws/dashed k)) (spec/and ~(keyword ns (aws/dashed shape))))) ; spec/and is a hack to delay resolution
-       (spec/def ~(spec-name ns name)
+       (spec/def ~(runtime-spec-name ns name)
          (spec/keys :req-un ~(into [] (map spec-names) required)
                     :opt-un ~(into [] (comp (remove (set required)) (map spec-names)) (keys members)))))))
 
 
-(defmethod shape-type-runtime-spec "list" [ns [name {{:strs [shape]} "member" :strs [min max]}]]
-  `(spec/def ~(spec-name ns name)
+(defmethod runtime-shape-type-spec "list" [ns [name {{:strs [shape]} "member" :strs [min max]}]]
+  `(spec/def ~(runtime-spec-name ns name)
      (spec/coll-of ~(keyword ns (aws/dashed shape)) ~@(when min `[:min-count ~min]) ~@(when max `[:max-count ~max]))))
 
 
@@ -249,7 +249,7 @@
 ;; @TODO : to be renames
 (defn aaa
   [ns [name shape :as e]]
-  (let [form (shape-type-runtime-spec ns e)]
+  (let [form (runtime-shape-type-spec ns e)]
     form))
 
 
@@ -282,10 +282,10 @@
 
 (comment
 
-
+  
   (use 'clojure.repl)
-
-
+  
+  
   (let [api rest-xml-protocol-route53-api-2-json]
     
     (for [[k gen] {"shapes"     (comp (partial aaa (name "monnamespece")) assert-shape-spec) ; eval to make specs available right away
@@ -293,7 +293,7 @@
           desc    (api k)]
       (gen desc)))
 
-
+  
     
   )
 
