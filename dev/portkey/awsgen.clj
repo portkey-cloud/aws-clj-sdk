@@ -32,13 +32,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(defmulti shape-type-spec #(get % "type"))
+(defmulti shape-type-compile-time-spec #(get % "type"))
 
 
-(spec/def ::shape (spec/multi-spec shape-type-spec #(assoc %1 "type" %2)))
+(spec/def ::shape (spec/multi-spec shape-type-compile-time-spec #(assoc %1 "type" %2)))
 
 
-(defmethod shape-type-spec "string" [_]
+(defmethod shape-type-compile-time-spec "string" [_]
   (strict-strs
    :req {"type" string?}
    :opt {"max"       int?
@@ -48,7 +48,7 @@
          "sensitive" boolean?}))
 
 
-(defmethod shape-type-spec "integer" [_]
+(defmethod shape-type-compile-time-spec "integer" [_]
   (strict-strs
    :req {"type" string?}
    :opt {"max"        int?
@@ -57,17 +57,17 @@
          "deprecated" boolean?}))
 
 
-(defmethod shape-type-spec "boolean" [_]
+(defmethod shape-type-compile-time-spec "boolean" [_]
   (strict-strs :req {"type" string?}
                :opt {"box" boolean?}))
 
 
-(defmethod shape-type-spec "timestamp" [_]
+(defmethod shape-type-compile-time-spec "timestamp" [_]
   (strict-strs :req {"type" string?}
                :opt {"timestampFormat" #{"iso8601"}}))
 
 
-(defmethod shape-type-spec "blob" [_]
+(defmethod shape-type-compile-time-spec "blob" [_]
   (strict-strs
    :req {"type" string?}
    :opt {"streaming" boolean?
@@ -76,21 +76,21 @@
          "sensitive" boolean?}))
 
 
-(defmethod shape-type-spec "long" [_]
+(defmethod shape-type-compile-time-spec "long" [_]
   (strict-strs
    :req {"type" string?}
    :opt {"min" #(or (pos-int? %) (zero? %))
          "max" int?}))
 
 
-(defmethod shape-type-spec "double" [_]
+(defmethod shape-type-compile-time-spec "double" [_]
   (strict-strs :req {"type" string?}
                :opt {"min" number?
                      "max" number?
                      "box" boolean?}))
 
 
-(defmethod shape-type-spec "list" [_]
+(defmethod shape-type-compile-time-spec "list" [_]
   (strict-strs
    :req {"type"   string?
          "member" (strict-strs :req {"shape" string?}
@@ -102,7 +102,7 @@
          "sensitive"  boolean?}))
 
 
-(defmethod shape-type-spec "map" [_]
+(defmethod shape-type-compile-time-spec "map" [_]
   (strict-strs
    :req {"type"  string?
          "key"   (strict-strs :req {"shape" string?} :opt {"locationName" string?})
@@ -114,7 +114,7 @@
          "locationName" string?}))
 
 
-(defmethod shape-type-spec "structure" [_]
+(defmethod shape-type-compile-time-spec "structure" [_]
   (strict-strs
    :req {"type"    string?
          "members" (spec/map-of string? 
