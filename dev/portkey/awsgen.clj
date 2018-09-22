@@ -267,22 +267,6 @@
 ;; SERIALIZATION HELPERS ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defn- shapes-seq
-    "Takes a shape and returns a sequence of itself and all its nested shapes."
-    [shape]
-    (tree-seq #(and (map? %) (#{"structure" "list" "map"} (% "type")))
-              #(case (% "type")
-                 "structure" (vals (% "members"))
-                 "list"      [(% "member")]
-                 "map"       [(% "key") (% "value")]) shape))
-
-
-  (defn- fixpoint [f init]
-    (let [x (f init)]
-      (if (= x init)
-        init
-        (recur f x))))
-
 
 (defn- shapes-by-usage
   "Takes an api description and returns a map categoriizing shapes by their usage.
@@ -291,16 +275,27 @@
   shapes are shapes that appear as top-level paylods (including
   errors).  A shape may appear in several categories."
   [{:strs [shapes operations] :as api}]
-  (let [shapes-refs        (into {}
+  (let [shapes-seq-fn      (fn [shape]
+                             (tree-seq #(and (map? %) (#{"structure" "list" "map"} (% "type")))
+                                       #(case (% "type")
+                                          "structure" (vals (% "members"))
+                                          "list"      [(% "member")]
+                                          "map"       [(% "key") (% "value")]) shape))
+        shapes-refs        (into {}
                                  (x/by-key
-                                  (comp (mapcat shapes-seq) (keep #(get % "shape")) (x/into #{})))
+                                  (comp (mapcat shapes-seq-fn) (keep #(get % "shape")) (x/into #{})))
                                  shapes)
-        reachable-shapes   (fixpoint (fn [reachable-shapes]
-                                       (x/into {}
-                                               (x/for [[shape reachables] %]
-                                                 [shape (into reachables (mapcat shapes-refs) reachables)])
-                                               reachable-shapes))
-                                     shapes-refs)
+        fixpoint-fn        (fn [f init]
+                             (let [x (f init)]
+                               (if (= x init)
+                                 init
+                                 (recur f x))))
+        reachable-shapes   (fixpoint-fn (fn [reachable-shapes]
+                                          (x/into {}
+                                                  (x/for [[shape reachables] %]
+                                                    [shape (into reachables (mapcat shapes-refs) reachables)])
+                                                  reachable-shapes))
+                                        shapes-refs)
         input-roots        (into #{} (keep #(get-in % ["input" "shape"]) (vals operations)))
         output-roots       (into #{} (for [{:strs [errors output]} (vals operations)
                                            {:strs [shape]}         (cons output errors)
@@ -312,12 +307,18 @@
     ;; @NOTE (@dupuchba) : figure out what master @cgrand did with this culprit stuff 
                                         ; How likely it is that this assertion will break in the future?
                                         ; I (cgrand) believe this assertion was mostly useful before the req/deser/ser/resp unbundling
-    (when-some [culprit (first (filter #(or (get % "location") (get % "payload")) (mapcat (comp shapes-seq shapes) nested-shape-names)))]
+    (when-some [culprit (first (filter #(or (get % "location") (get % "payload")) (mapcat (comp shapes-seq-fn shapes) nested-shape-names)))]
       (throw (ex-info "Attribute payload or location found on nested shape." {:culprit culprit :api api})))
     {:inputs       inputs
      :input-roots  input-roots
      :outputs      outputs
      :output-roots output-roots}))
+
+
+(defn shape-name->ser-name
+  "Given a shape name, transorm it to a ser-* name."
+  [shape-name]
+  (->> shape-name (str "ser-") portkey.aws/dashed symbol))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -368,19 +369,29 @@
   
   
   (let [api rest-xml-protocol-route53-api-2-json]
-    
-    (for [[k gen] {"shapes"     (comp (partial runtime-shape-type-spec (name "monnamespece")) assert-shape-spec) ; eval to make specs available right away
-                   "operations" (fn [& args])}
-          desc    (api k)]
-      (gen desc)))
+    (let [runtime-specs (for [[k gen] {"shapes"     (comp (partial runtime-shape-type-spec (name "monnamespece")) assert-shape-spec) ; eval to make specs available right away
+                                       "operations" (fn [& args])}
+                              desc    (api k)]
+                          (gen desc))]
+      ))
 
+  (let [inputs+inputs-root (shapes-by-usage rest-xml-protocol-route53-api-2-json)]
 
+    (for [[k gen]          {:inputs      [(fn [shape-name]
+                                            `(declare ~(shape-name->ser-name shape-name)))
+                                          (fn [& args] `(println "b"))]
+                            :input-roots [(fn [& args] `(println "c"))]}
+          gen              gen
+          input-shape-name (inputs+inputs-root k)]
 
-  
+      (gen input-shape-name)))
 
-  
-  
-    
+  {#{"query" "rest-xml"} {#{"string" "integer"} identity}
+
+   "query"    {"map"  (fn [])
+               "list" (fn [])}
+
+   "rest-xml" {"map" (fn [])}}
   )
 
 
