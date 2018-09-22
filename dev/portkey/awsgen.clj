@@ -8,6 +8,21 @@
 
             [portkey.aws :as aws]))
 
+
+;; ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;; ┃                 ___                      ___          _     _                ┃
+;; ┃                / __|_ __  ___ __   ___  | _ \__ _ _ _| |_  / |               ┃
+;; ┃                \__ \ '_ \/ -_) _| |___| |  _/ _` | '_|  _| | |               ┃
+;; ┃                |___/ .__/\___\__|       |_| \__,_|_|  \__| |_|               ┃
+;; ┃                    |_|                                                       ┃
+;; ┃     There are two blocks of code related to spec, the first one is used      ┃
+;; ┃      at compile time. It let us validate that we know all description        ┃
+;; ┃                      format from aws api-2.json files.                       ┃
+;; ┃     The second block of specs is used at runtime to validate user input.     ┃
+;; ┃      We generate spec/def that will be part of the final lib.clj file.       ┃
+;; ┃                                                                              ┃
+;; ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
 ;;;;;;;;;;;;;;;;;;
 ;; SPEC HELPERS ;;
 ;;;;;;;;;;;;;;;;;;
@@ -232,6 +247,79 @@
      (spec/coll-of ~(keyword ns (aws/dashed shape)) ~@(when min `[:min-count ~min]) ~@(when max `[:max-count ~max]))))
 
 
+
+;; ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;; ┃          ___           _____                  ___          _     ___         ┃
+;; ┃         / __| ___ _ _ / / _ \___ __ _   ___  | _ \__ _ _ _| |_  |_  )        ┃
+;; ┃         \__ \/ -_) '_/ /|   / -_) _` | |___| |  _/ _` | '_|  _|  / /         ┃
+;; ┃         |___/\___|_|/_/ |_|_\___\__, |       |_| \__,_|_|  \__| /___|        ┃
+;; ┃                                    |_|                                       ┃
+;; ┃                                                                              ┃
+;; ┃                                                                              ┃
+;; ┃                                To be defined                                 ┃
+;; ┃                                                                              ┃
+;; ┃                                                                              ┃
+;; ┃                                                                              ┃
+;; ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; SERIALIZATION HELPERS ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn- shapes-seq
+    "Takes a shape and returns a sequence of itself and all its nested shapes."
+    [shape]
+    (tree-seq #(and (map? %) (#{"structure" "list" "map"} (% "type")))
+              #(case (% "type")
+                 "structure" (vals (% "members"))
+                 "list"      [(% "member")]
+                 "map"       [(% "key") (% "value")]) shape))
+
+
+  (defn- fixpoint [f init]
+    (let [x (f init)]
+      (if (= x init)
+        init
+        (recur f x))))
+
+
+(defn- shapes-by-usage
+  "Takes an api description and returns a map categoriizing shapes by their usage.
+  This map has 4 keys: :inputs, :input-roots, :outputs
+  and :output-roots, all mapping to collections of shapes.  Root
+  shapes are shapes that appear as top-level paylods (including
+  errors).  A shape may appear in several categories."
+  [{:strs [shapes operations] :as api}]
+  (let [shapes-refs        (into {}
+                                 (x/by-key
+                                  (comp (mapcat shapes-seq) (keep #(get % "shape")) (x/into #{})))
+                                 shapes)
+        reachable-shapes   (fixpoint (fn [reachable-shapes]
+                                       (x/into {}
+                                               (x/for [[shape reachables] %]
+                                                 [shape (into reachables (mapcat shapes-refs) reachables)])
+                                               reachable-shapes))
+                                     shapes-refs)
+        input-roots        (into #{} (keep #(get-in % ["input" "shape"]) (vals operations)))
+        output-roots       (into #{} (for [{:strs [errors output]} (vals operations)
+                                           {:strs [shape]}         (cons output errors)
+                                           :when                   shape]
+                                       shape))
+        inputs             (into #{} (mapcat reachable-shapes) input-roots)
+        outputs            (into #{} (mapcat reachable-shapes) output-roots)
+        nested-shape-names (into #{} (vals shapes-refs))]
+    ;; @NOTE (@dupuchba) : figure out what master @cgrand did with this culprit stuff 
+                                        ; How likely it is that this assertion will break in the future?
+                                        ; I (cgrand) believe this assertion was mostly useful before the req/deser/ser/resp unbundling
+    (when-some [culprit (first (filter #(or (get % "location") (get % "payload")) (mapcat (comp shapes-seq shapes) nested-shape-names)))]
+      (throw (ex-info "Attribute payload or location found on nested shape." {:culprit culprit :api api})))
+    {:inputs       inputs
+     :input-roots  input-roots
+     :outputs      outputs
+     :output-roots output-roots}))
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; IMPORTANT - UNCATEGORIZED FUNCTIONS ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -286,6 +374,11 @@
           desc    (api k)]
       (gen desc)))
 
+
+
+  
+
+  
   
     
   )
