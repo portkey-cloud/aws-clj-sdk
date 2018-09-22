@@ -246,13 +246,6 @@
   element)
 
 
-;; @TODO : to be renames
-(defn aaa
-  [ns [name shape :as e]]
-  (let [form (runtime-shape-type-spec ns e)]
-    form))
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; API DESCRIPTION VARS - DEV HELPER ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -288,7 +281,7 @@
   
   (let [api rest-xml-protocol-route53-api-2-json]
     
-    (for [[k gen] {"shapes"     (comp (partial aaa (name "monnamespece")) assert-shape-spec) ; eval to make specs available right away
+    (for [[k gen] {"shapes"     (comp (partial runtime-shape-type-spec (name "monnamespece")) assert-shape-spec) ; eval to make specs available right away
                    "operations" (fn [& args])}
           desc    (api k)]
       (gen desc)))
