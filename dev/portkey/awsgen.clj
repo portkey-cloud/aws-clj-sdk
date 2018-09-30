@@ -321,6 +321,12 @@
   (->> shape-name (str "ser-") portkey.aws/dashed symbol))
 
 
+(defn shape-name->req-name
+  "Given a shape name, transorm it to a ser-* name."
+  [shape-name]
+  (->> shape-name (str "req<-") portkey.aws/dashed symbol))
+
+
 ;; @NOTE : Needs way more documentation /cc @dupuchbba
 (defmacro defserialization
   "Helper macro that defines a private var named name with a map of {protocol {type fn}}.
@@ -398,6 +404,58 @@
                                                                                                 :type     type})))))
 
 
+(defn generate-request-function
+  "Given an api description and a shape-name, returns a list representing
+  the request function. Request function is split into HTTP configuration
+  type as define by the ring request specification and calls
+  serialization functions.
+
+  For example calling (gen-req-fns api TagResourceRequest)
+
+  Will return :
+
+  (clojure.core/defn
+   req<-tag-resource-request
+   [input240922]
+   (cond->
+    {:uri {Resource {:http.request.field/value (ser-function-arn (input240922 :resource))
+                     :http.request.field/locationName Body}
+  ...(optional part)))"
+  [api shape-name]
+  (let [required                      (get-in api ["shapes" shape-name "required"])
+        request-function-input-symbol (symbol "input")
+        required-function-body-part   (into {} (comp (x/for [required-name %
+                                                             :let [shape                                         (get-in api ["shapes" shape-name "members" required-name])
+                                                                   {:strs [shape location locationName] :as sh}  shape
+                                                                   ser-name                                      (shape-name->ser-name shape)
+                                                                   dashed-name                                   (-> required-name aws/dashed keyword)
+                                                                   ;;usefull because body don't have location / locationName attrs
+                                                                   location                                      (or (and (nil? location)
+                                                                                                                          (= required-name (get-in api ["shapes" shape-name "payload"]))
+                                                                                                                          :body)
+                                                                                                                     location)]]
+                                                       [location {required-name {:http.request.field/value         `(~ser-name (~request-function-input-symbol ~dashed-name))
+                                                                                 :http.request.field/location-name locationName}}])
+                                                     (x/by-key (x/into {})))
+                                            required)
+        optional-function-body-part   (into [] (comp (x/for [[optional-name {:strs [shape location locationName]} :as member] %
+                                                             :when (not (contains? (set required) optional-name))
+                                                             :let [ser-name    (shape-name->ser-name shape)
+                                                                   dashed-name (-> optional-name aws/dashed keyword)
+                                                                   location    (or (and (nil? location)
+                                                                                        (= optional-name (get-in api ["shapes" shape-name "payload"]))
+                                                                                        :body)
+                                                                                   location)]]
+                                                       `[(contains? ~request-function-input-symbol ~dashed-name)
+                                                         (assoc-in [~location ~optional-name] {:http.request.field/value         (~ser-name (~request-function-input-symbol ~dashed-name))
+                                                                                               :http.request.field/location-name ~locationName})])
+                                                     cat)
+                                            (get-in api ["shapes" shape-name "members"]))]
+    `(defn ~(shape-name->req-name shape-name)
+       (cond-> ~required-function-body-part
+         ~@optional-function-body-part))))
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; IMPORTANT - UNCATEGORIZED FUNCTIONS ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -459,15 +517,14 @@
 
     (for [[k gen]          {:inputs      [generate-serialization-declare
                                           (partial generate-serialization-function api)]
-                            :input-roots [(fn [& args] `(println "c"))]}
+                            :input-roots [(partial generate-request-function api)]}
           gen              gen
           input-shape-name (inputs+inputs-root k)]
       
       (gen input-shape-name)))
 
-
-
-
+  ;@ TODO : gérer les xmlNamespace
+  (get-in rest-xml-protocol-s3-api-2-json ["shapes" "PutBucketWebsiteRequest"])
   )
 
 
