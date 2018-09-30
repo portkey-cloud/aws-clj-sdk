@@ -363,11 +363,39 @@
 ;; SERIALIZATION PART ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defserialization aws-serialization-functions
+  (QUERY REST-XML "string" "long" "integer" "boolean" "timestamp" [api shape-name input] input)
+
+  (REST-XML "structure" [api shape-name input] (let [shape (get-in api ["shapes" shape-name])]
+                                                 (into {}
+                                                       (mapcat (fn [[k# {:strs [shape]}]]
+                                                                 (let [test-form# `(~(-> k# aws/dashed keyword) ~input)]
+                                                                   [[k# (list (shape-name->ser-name shape) test-form#)]])))
+                                                       (shape "members"))))
+
+  (REST-XML "list" [api shape-name input] `(into {} (map-indexed (fn [idx# item#] [(str "member." (inc idx#)) item#]) ~input)))
+
+  (REST-XML "blob" [api shape-name input] `(to-implement))
+
+  (REST-XML "map" [api shape-name input] `(to-implement)))
+
 
 (defn generate-serialization-declare
   "Generate declare statement for input shape (other than input-roots)."
   [shape-name]
   `(declare ~(shape-name->ser-name shape-name)))
+
+
+(defn generate-serialization-function
+  "Given an api description file and a shape-name, find and return the
+  call of it's serialization function previously defined by the macro
+  defserialization."
+  [{{:strs [protocol]} "metadata" :as api} shape-name]
+  (let [{:strs [type] :as shape} (get-in api ["shapes" shape-name])]
+    (if-let [serialization-function (get-in aws-serialization-functions [protocol type])]
+      (serialization-function api shape-name)
+      (throw (ex-info "There is no serialization function implementing this protocol or type." {:protocol protocol
+                                                                                                :type     type})))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -417,23 +445,27 @@
   (use 'clojure.repl)
   (def-api-2-json "rest-xml")
   
-  
+  ;; @NOTE : 1 - runtime specs part
   (let [api rest-xml-protocol-route53-api-2-json]
     (let [runtime-specs (for [[k gen] {"shapes"     (comp (partial runtime-shape-type-spec (name "monnamespece")) assert-shape-spec) ; eval to make specs available right away
                                        "operations" (fn [& args])}
                               desc    (api k)]
                           (gen desc))]
-      ))
+      runtime-specs))
 
-  (let [inputs+inputs-root (shapes-by-usage rest-xml-protocol-route53-api-2-json)]
+  ;; @NOTE : 2 - decalations
+  (let [inputs+inputs-root (shapes-by-usage rest-xml-protocol-s3-api-2-json)
+        api                rest-xml-protocol-s3-api-2-json]
 
     (for [[k gen]          {:inputs      [generate-serialization-declare
-                                          (fn [& args] `(println "b"))]
+                                          (partial generate-serialization-function api)]
                             :input-roots [(fn [& args] `(println "c"))]}
           gen              gen
           input-shape-name (inputs+inputs-root k)]
       
       (gen input-shape-name)))
+
+
 
 
   )
