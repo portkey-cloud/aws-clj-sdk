@@ -321,6 +321,55 @@
   (->> shape-name (str "ser-") portkey.aws/dashed symbol))
 
 
+;; @NOTE : Needs way more documentation /cc @dupuchbba
+(defmacro defserialization
+  "Helper macro that defines a private var named name with a map of {protocol {type fn}}.
+
+  To use it, call like that :
+
+  (QUERY REST-XML integer string [api shape-name input] (string input))"
+
+  [name & args]
+  (let [serialization-map-fns (into {}
+                                    (comp (x/for [expr %
+                                                  :let [[protocols types+args+fn-body]              (split-with symbol? expr)
+                                                        [types args+fn-body]                        (split-with string? types+args+fn-body)
+                                                        args+fn-body                                (vec args+fn-body)
+                                                        [api-sym shape-name-sym input-sym :as args] (if (= 2 (count args+fn-body)) (first args+fn-body) '[api shape-name input])
+                                                        fn-body                                     (peek args+fn-body)]
+                                                  protocol protocols
+                                                  type     types]
+                                            [(clojure.string/lower-case (clojure.core/name protocol))
+                                             {type `(fn [~api-sym ~shape-name-sym]
+                                                      (let [serialization-function-name# (shape-name->ser-name ~shape-name-sym)
+                                                            input-symbol#                '~input-sym
+                                                            body#                        '~fn-body]
+                                                        
+                                                        ;; @NOTE : necessary because of the 'method call too large' exception
+                                                        (def ^:dynamic *api-description-map* nil)
+                                                        
+                                                        (binding [*api-description-map* ~api-sym]
+                                                          `(defn ~serialization-function-name# [~input-symbol#]
+                                                             ~(eval (list 'let
+                                                                          ['~api-sym (symbol "*api-description-map*") '~shape-name-sym ~shape-name-sym input-symbol# '(symbol (name '~input-sym))]
+                                                                          body#))))))}])
+                                          (x/by-key (x/into {})))
+                                    args)]
+    `(def ^:private ~name ~serialization-map-fns)))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;; SERIALIZATION PART ;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(defn generate-serialization-declare
+  "Generate declare statement for input shape (other than input-roots)."
+  [shape-name]
+  `(declare ~(shape-name->ser-name shape-name)))
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; IMPORTANT - UNCATEGORIZED FUNCTIONS ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -366,6 +415,7 @@
 
   
   (use 'clojure.repl)
+  (def-api-2-json "rest-xml")
   
   
   (let [api rest-xml-protocol-route53-api-2-json]
@@ -377,21 +427,15 @@
 
   (let [inputs+inputs-root (shapes-by-usage rest-xml-protocol-route53-api-2-json)]
 
-    (for [[k gen]          {:inputs      [(fn [shape-name]
-                                            `(declare ~(shape-name->ser-name shape-name)))
+    (for [[k gen]          {:inputs      [generate-serialization-declare
                                           (fn [& args] `(println "b"))]
                             :input-roots [(fn [& args] `(println "c"))]}
           gen              gen
           input-shape-name (inputs+inputs-root k)]
-
+      
       (gen input-shape-name)))
 
-  {#{"query" "rest-xml"} {#{"string" "integer"} identity}
 
-   "query"    {"map"  (fn [])
-               "list" (fn [])}
-
-   "rest-xml" {"map" (fn [])}}
   )
 
 
