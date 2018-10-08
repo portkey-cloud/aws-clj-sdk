@@ -224,6 +224,10 @@
   `(spec/def ~(runtime-spec-name ns name) inst?))
 
 
+(defmethod runtime-shape-type-spec "blob" [ns [name _]]
+  `(spec/def ~(runtime-spec-name ns name) bytes?))
+
+
 (defmethod runtime-shape-type-spec "structure" [ns [name {:strs [members required payload deprecated error exception]}]]
   (let [spec-names (into {} (for [[k {:strs [shape]}] members]
                               ;; when key name and shape name for
@@ -245,6 +249,14 @@
 (defmethod runtime-shape-type-spec "list" [ns [name {{:strs [shape]} "member" :strs [min max]}]]
   `(spec/def ~(runtime-spec-name ns name)
      (spec/coll-of ~(keyword ns (aws/dashed shape)) ~@(when min `[:min-count ~min]) ~@(when max `[:max-count ~max]))))
+
+
+;; @TODO : figure out what sensitive means
+(defmethod runtime-shape-type-spec "map" [ns [name {:strs [key value sensitive]}]]
+  `(spec/def ~(runtime-spec-name ns name)
+     (spec/map-of ~(keyword ns (aws/dashed (key "shape"))) ~(keyword ns (aws/dashed (value "shape"))))))
+
+
 
 
 
@@ -381,9 +393,9 @@
 
   (REST-XML "list" [api shape-name input] `(into {} (map-indexed (fn [idx# item#] [(str "member." (inc idx#)) item#]) ~input)))
 
-  (REST-XML "blob" [api shape-name input] `(to-implement))
+  (REST-XML "blob" [api shape-name input] input) ;; @TODO : to implement blob
 
-  (REST-XML "map" [api shape-name input] `(to-implement)))
+  (REST-XML "map" [api shape-name input] input)) ;; @TODO : to implement map
 
 
 (defn generate-serialization-declare
@@ -402,6 +414,10 @@
       (serialization-function api shape-name)
       (throw (ex-info "There is no serialization function implementing this protocol or type." {:protocol protocol
                                                                                                 :type     type})))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;; REQUEST GENERATION ;;
+;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 (defn generate-request-function
@@ -430,6 +446,7 @@
                                                                    ser-name                                      (shape-name->ser-name shape)
                                                                    dashed-name                                   (-> required-name aws/dashed keyword)
                                                                    ;;usefull because body don't have location / locationName attrs
+                                                                   ;; @TODO : but all the other possible options
                                                                    location                                      (or (and (nil? location)
                                                                                                                           (= required-name (get-in api ["shapes" shape-name "payload"]))
                                                                                                                           :body)
@@ -451,9 +468,100 @@
                                                                                                :http.request.field/location-name ~locationName})])
                                                      cat)
                                             (get-in api ["shapes" shape-name "members"]))]
-    `(defn ~(shape-name->req-name shape-name)
+    `(defn ~(shape-name->req-name shape-name) [~request-function-input-symbol]
        (cond-> ~required-function-body-part
          ~@optional-function-body-part))))
+
+
+
+
+;; ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;; ┃     ___                     _   _                  ___          _     ____   ┃
+;; ┃    / _ \ _ __  ___ _ _ __ _| |_(_)___ _ _    ___  | _ \__ _ _ _| |_  |__ /   ┃
+;; ┃   | (_) | '_ \/ -_) '_/ _` |  _| / _ \ ' \  |___| |  _/ _` | '_|  _|  |_ \   ┃
+;; ┃    \___/| .__/\___|_| \__,_|\__|_\___/_||_|       |_| \__,_|_|  \__| |___/   ┃
+;; ┃         |_|                                                                  ┃
+;; ┃                                                                              ┃
+;; ┃                                                                              ┃
+;; ┃                                                                              ┃
+;; ┃                                To be defined                                 ┃
+;; ┃                                                                              ┃
+;; ┃                                                                              ┃
+;; ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+(spec/def ::operation
+  (strict-strs
+    :req {"name" string?
+          "http" (strict-strs
+                   :req {"method" #{"POST" "DELETE" "GET" "PATCH" "PUT" "HEAD"}
+                         "requestUri" string?}
+                   :opt {"responseCode" int?})}
+    :opt {"input" (strict-strs :req {"shape" string?}
+                    :opt {"xmlNamespace"
+                          (strict-strs :req {"uri" string?})
+                          "locationName" string?}) ; TODO validate
+          "output" (strict-strs :req {"shape" string?}
+                     :opt {"resultWrapper" string?})
+          "idempotent" boolean?
+          "errors"
+          (spec/coll-of
+            (strict-strs :req {"shape" string?}
+              :opt {"exception" boolean?
+                    "fault" true?
+                    "error" (strict-strs
+                              :req {"httpStatusCode" int?}
+                              :opt {"code" string?, "senderFault" boolean?})}))
+          "documentationUrl" string? ; TODO
+          "alias" string?
+          "authtype" #{"none" "v4-unsigned-body"}
+          "deprecated" boolean?}))
+
+
+(defn generate-operation-function
+  "This function generates the final defn that the user is going to use.
+  The request has been made to build a map representing the http
+  request configuration needed to make the request at runtime.
+
+  It calls the req<-* function which is then merged with other http
+  request informations from the operation shape."
+
+  ;; @TODO : add the unused informations to the request map => e.g. : xmlNamespace / locationName / documentationUrl / alias / authtype / deprecated
+  [ns [n {{:strs [method requestUri responseCode]} "http"
+          {input-shape-name "shape"}               "input"
+          {output-shape-name "shape"}              "output"
+          :strs                                    [name errors]
+          :as                                      operation}]]
+  (spec/check-asserts true)
+  (spec/assert ::operation operation)
+  (let [varname                     (symbol (aws/dashed name))
+        input-spec                  (some->> input-shape-name aws/dashed (keyword ns))
+        output-spec                 (some->> output-shape-name aws/dashed (keyword ns))
+        operation-input             (or (some-> input-shape-name aws/dashed symbol) '_)
+        operation-default-arguments (if input-shape-name (some #(when (spec/valid? input-spec %) %) [[] {}]) {})
+        error-specs                 (into {}
+                                          (map (fn [{:strs [shape] {:strs [httpStatusCode]} "error"}]
+                                                 [shape (keyword ns (aws/dashed shape))]))
+                                          errors)]
+    `(do
+       (defn ~varname
+         ~@(when operation-default-arguments `[([] ~(varname operation-default-arguments))])
+         ([~operation-input]
+          (let [request-function-result# (~(shape-name->req-name input-shape-name) ~operation-input)]
+            ;; @TODO : call-to-be-implemented-function needs to be implemented
+            (call-to-be-implemented-function
+             (merge request-function-result#
+                    {:http.request.configuration/method        ~method
+                     :http.request.configuration/request-uri   ~requestUri
+                     :http.request.configuration/response-code ~responseCode
+                     :http.request.spec/input-spec             ~input-spec
+                     :http.request.spec/output-spec            ~output-spec
+                     :http.request.spec/error-spec             ~error-specs})))))
+
+       (spec/fdef ~varname
+         :args ~(if input-spec
+                  `(~(if operation-default-arguments `spec/? `spec/tuple) ~input-spec)
+                  `empty?)
+         :ret ~(if output-spec `(spec/and ~output-spec) `true?)))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -504,11 +612,11 @@
   (def-api-2-json "rest-xml")
   
   ;; @NOTE : 1 - runtime specs part
-  (let [api rest-xml-protocol-route53-api-2-json]
+  (let [api rest-xml-protocol-s3-api-2-json]
     (let [runtime-specs (for [[k gen] {"shapes"     (comp (partial runtime-shape-type-spec (name "monnamespece")) assert-shape-spec) ; eval to make specs available right away
                                        "operations" (fn [& args])}
                               desc    (api k)]
-                          (gen desc))]
+                          (eval (gen desc)))]
       runtime-specs))
 
   ;; @NOTE : 2 - decalations
@@ -521,10 +629,22 @@
           gen              gen
           input-shape-name (inputs+inputs-root k)]
       
-      (gen input-shape-name)))
+      (eval (gen input-shape-name))))
 
-  ;@ TODO : gérer les xmlNamespace
-  (get-in rest-xml-protocol-s3-api-2-json ["shapes" "PutBucketWebsiteRequest"])
+
+  ;; @NOTE : 3 - generate operations from s3
+  (let [{:strs [operations] :as api} rest-xml-protocol-s3-api-2-json
+        ns                           "monnamespece"]
+    (for [operation operations]
+      (generate-operation-function ns operation)))
+
+  ;; @TODO : spec http.request.configuration
+  ;; @TODO : make the call-functions
+
+
+
+
+
   )
 
 
