@@ -3,6 +3,7 @@
   (:require [clj-http.client :as http]
             [clojure.core.async :as async]
             [clojure.java.io :as io]
+            [clojure.spec.alpha :as spec]
             [clojure.string :as str]
             [portkey.awssig :as sig]))
 
@@ -161,14 +162,92 @@
 
 (def ^:dynamic *http-client* sync-http-client)
 
+
+;; ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;; ┃                                                                              ┃
+;; ┃                                                                              ┃
+;; ┃                                                                              ┃
+;; ┃      ___          _   _             _  _ _____ _____ ___    ___      _ _     ┃
+;; ┃     | _ \_  _ _ _| |_(_)_ __  ___  | || |_   _|_   _| _ \  / __|__ _| | |    ┃
+;; ┃     |   / || | ' \  _| | '  \/ -_) | __ | | |   | | |  _/ | (__/ _` | | |    ┃
+;; ┃     |_|_\\_,_|_||_\__|_|_|_|_\___| |_||_| |_|   |_| |_|    \___\__,_|_|_|    ┃
+;; ┃                                                                              ┃
+;; ┃                                                                              ┃
+;; ┃                                                                              ┃
+;; ┃                                                                              ┃
+;; ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+
+(spec/def :http.request.field/key string?)
+(spec/def :http.request.field/location-name string?)
+(spec/def :http.request.field/value any?)
+
+(spec/def :http.request.field/field (spec/keys :req [:http.request.field/key
+                                                     :http.request.field/value
+                                                     :http.request.field/location-name]))
+  
+(spec/def :http.request.configuration/values (spec/coll-of :http.request.field/field :kind vector?))
+  
+(spec/def :http.request.configuration/uri :http.request.configuration/values)
+(spec/def :http.request.configuration/header :http.request.configuration/values)
+(spec/def :http.request.configuration/querystring :http.request.configuration/values)
+
+  
+(spec/def :http.request.configuration/generate-request-function-part
+  (spec/keys :opt [:http.request.configuration/uri
+                   :http.request.configuration/header
+                   :http.request.configuration/querystring]))
+
+
+(spec/def :http.request.configuration/method #{:get})
+(spec/def :http.request.configuration/request-uri string?)
+(spec/def :http.request.configuration/endpoints map?)
+(spec/def :http.request.configuration/mime-type (spec/map-of #(= "content-type" %) string?))
+;; @TODO - @dupuchba : might be more precise
+(spec/def :http.request.configuration/response-code (spec/nilable int?))
+(spec/def :http.request.spec/input-spec (spec/nilable keyword?))
+(spec/def :http.request.spec/output-spec (spec/nilable keyword?))
+;; @TODO - @dupuchba : specifie something usefull as spec for this
+;; one
+(spec/def :http.request.spec/error-spec (spec/nilable any?))
+
+(spec/def :http.request.configuration/generate-operation-function-part
+  (spec/keys :req [:http.request.configuration/method
+                   :http.request.configuration/endpoints
+                   :http.request.configuration/request-uri
+                   :http.request.configuration/mime-type
+                   :http.request.configuration/response-code
+                   :http.request.spec/input-spec
+                   :http.request.spec/output-spec
+                   :http.request.spec/error-spec]))
+
+  
+(spec/def :http.request.configuration/configuration
+  (spec/merge :http.request.configuration/generate-request-function-part
+              :http.request.configuration/generate-operation-function-part))
+
+
 (defn -call-http [{:keys [:http.request.configuration/endpoints
                           :http.request.configuration/method
-                          :http.request.configuration/request-uri]}]
+                          :http.request.configuration/request-uri
+                          :http.request.configuration/mime-type] :as in}]
+  (spec/assert :http.request.configuration/configuration in)
   (let [{:keys [endpoint credential-scope signature-version]} (endpoints (region))]
-    (-> {:method             (-> method clojure.string/lower-case keyword)
+    (-> {:method             method
          ::credential-scope  credential-scope
          ::signature-version signature-version
          :url                (str endpoint request-uri)
-         :headers            {"content-type" "application/x-www-form-urlencoded; charset=utf-8"}}
+         :headers            mime-type}
         (*http-client* (fn [resp]
                          [:result resp])))))
+
+
+(comment
+
+  (case 1
+    0 true)
+
+
+  (sc.api/letsc 2
+                (spec/explain :http.request.configuration/configuration in))
+  )

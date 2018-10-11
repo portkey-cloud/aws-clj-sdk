@@ -537,6 +537,13 @@
           "deprecated" boolean?}))
 
 
+(defn mime-type
+  "Retourne the request mime type given it's protocol."
+  [protocol]
+  (case protocol
+    "rest-xml" {"content-type" "application/x-www-form-urlencoded; charset=utf-8"}))
+
+
 (defn generate-operation-function
   "This function generates the final defn that the user is going to use.
   The request has been made to build a map representing the http
@@ -546,11 +553,11 @@
   request informations from the operation shape."
 
   ;; @TODO : add the unused informations to the request map => e.g. : xmlNamespace / locationName / documentationUrl / alias / authtype / deprecated
-  [ns [n {{:strs [method requestUri responseCode]} "http"
-          {input-shape-name "shape"}               "input"
-          {output-shape-name "shape"}              "output"
-          :strs                                    [name errors]
-          :as                                      operation}]]
+  [api ns [n {{:strs [method requestUri responseCode]} "http"
+              {input-shape-name "shape"}               "input"
+              {output-shape-name "shape"}              "output"
+              :strs                                    [name errors]
+              :as                                      operation}]]
   (spec/check-asserts true)
   (spec/assert ::operation operation)
   (let [varname                     (symbol (aws/dashed name))
@@ -570,10 +577,11 @@
             ;; @TODO : call-to-be-implemented-function needs to be implemented
             (aws/-call-http
              (merge request-function-result#
-                    {:http.request.configuration/method        ~method
+                    {:http.request.configuration/method        ~(-> method str/lower-case keyword)
                      :http.request.configuration/request-uri   ~requestUri
                      :http.request.configuration/response-code ~responseCode
                      :http.request.configuration/endpoints     ~(symbol ns "endpoints")
+                     :http.request.configuration/mime-type     ~(mime-type (get-in api ["metadata" "protocol"]))
                      :http.request.spec/input-spec             ~input-spec
                      :http.request.spec/output-spec            ~output-spec
                      :http.request.spec/error-spec             ~error-specs})))))
@@ -623,7 +631,7 @@
                                                      (gen input-shape-name))
                      runtime-specs+operation-defns (for [[k gen] {"shapes"     (comp #(doto % eval) (partial runtime-shape-type-spec (name ns-sym)) assert-shape-spec)
                                                                   ;; @NOTE : eval to make specs available right away
-                                                                  "operations" (partial generate-operation-function (name ns-sym))}
+                                                                  "operations" (partial generate-operation-function api (name ns-sym))}
                                                          desc    (api k)]
                                                      (gen desc))]
                  (concat serialization+request-defns
@@ -773,66 +781,6 @@
 
   (get-in rest-xml-protocol-s3-api-2-json ["shapes" "SelectObjectContentRequest"])
 
-
-  (spec/def :http.request.field/key string?)
-  (spec/def :http.request.field/location-name string?)
-  (spec/def :http.request.field/value any?)
-
-  (spec/def :http.request.field/field (spec/keys :req [:http.request.field/key
-                                                       :http.request.field/value
-                                                       :http.request.field/location-name]))
-  
-  (spec/def :http.request.configuration/values (spec/coll-of :http.request.field/field :kind vector?))
-  
-  (spec/def :http.request.configuration/uri :http.request.configuration/values)
-  (spec/def :http.request.configuration/header :http.request.configuration/values)
-  (spec/def :http.request.configuration/querystring :http.request.configuration/values)
-
-  
-  (spec/def :http.request.configuration/generate-request-function-part
-    (spec/keys :opt [:http.request.configuration/uri
-                     :http.request.configuration/header
-                     :http.request.configuration/querystring]))
-
-
-  (spec/def :http.request.configuration/method #{"GET" "POST"})
-  (spec/def :http.request.configuration/request-uri string?)
-  (spec/def :http.request.configuration/endpoints symbol?)
-  ;; @TODO - @dupuchba : might be more precise
-  (spec/def :http.request.configuration/response-code int?)
-  (spec/def :http.request.spec/input-spec keyword?)
-  (spec/def :http.request.spec/output-spec keyword?)
-  ;; @TODO - @dupuchba : specifie something usefull as spec for this
-  ;; one
-  (spec/def :http.request.spec/error-spec any?)
-
-  (spec/def :http.request.configuration/generate-operation-function-part
-    (spec/keys :req [:http.request.configuration/method
-                     :http.request.configuration/endoints
-                     :http.request.configuration/request-uri
-                     :http.request.configuration/response-code
-                     :http.request.spec/input-spec
-                     :http.request.spec/output-spec
-                     :http.request.spec/error-spec]))
-
-  
-  (spec/def :http.request.configuration/configuration
-    (spec/merge :http.request.configuration/generate-request-function-part
-                :http.request.configuration/generate-operation-function-part))
-
-
-  (spec/exercise :http.request.configuration/configuration)
-
-  (spec/explain :http.request.configuration/configuration
-                {:http.request.configuration/method        "GET"
-                 :http.request.configuration/request-uri   "/uri"
-                 :http.request.configuration/response-code 400
-                 :http.request.spec/input-spec             :input-spec
-                 :http.request.spec/output-spec            :ouptut-spec
-                 :http.request.spec/error-spec             "cac"
-                 :http.request.configuration/uri                 [{:http.request.field/key           "a"
-                                                                   :http.request.field/value         "value"
-                                                                   :http.request.field/location-name "location-name"}]})
 
   
   )
