@@ -6,7 +6,9 @@
                  [net.cgrand/xforms "0.16.0"]
                  [cheshire "5.8.0"]]
   :profiles {:dev {:dependencies [[org.clojure/java.classpath "0.2.3"]
-                                  [org.jsoup/jsoup "1.11.2"]]
+                                  [org.jsoup/jsoup "1.11.2"]
+
+                                  [org.clojure/test.check "0.10.0-alpha3"]]
                    :source-paths ["dev"]
   ;;                 :resource-paths ["test-resources"]
 ;;                   :aliases {"gen-aws-api" ["run" "-m" "portkey.awsgen/generate-files!"]}

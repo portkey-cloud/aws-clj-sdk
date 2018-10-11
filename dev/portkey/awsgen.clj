@@ -173,6 +173,15 @@
                       :opt {"prefix" string?})}))
 
 
+(defn assert-shape-spec
+  "Assert a shape. This function is here to fail when AWS introduce new
+  element into it's description api-2.json that we don't know yet"
+  [[name shape :as element]]
+  (spec/check-asserts true)
+  (spec/assert ::shape shape)
+  element)
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; SHAPE TYPE RUNTIME SPEC ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -448,25 +457,30 @@
                                                                    dashed-name                                   (-> required-name aws/dashed keyword)
                                                                    ;;usefull because body don't have location / locationName attrs
                                                                    ;; @TODO : but all the other possible options
-                                                                   location                                      (or (and (nil? location)
-                                                                                                                          (= required-name (get-in api ["shapes" shape-name "payload"]))
-                                                                                                                          :body)
-                                                                                                                     location)]]
-                                                       [location {required-name {:http.request.field/value         `(~ser-name (~request-function-input-symbol ~dashed-name))
-                                                                                 :http.request.field/location-name locationName}}])
-                                                     (x/by-key (x/into {})))
+                                                                   location                                      (if (nil? location)
+                                                                                                                   (keyword "http.request.configuration" "body")
+                                                                                                                   (keyword "http.request.configuration" location))]]
+                                                       [location {:http.request.field/value         `(~ser-name (~request-function-input-symbol ~dashed-name))
+                                                                  :http.request.field/location-name locationName
+                                                                  :http.request.field/key           required-name}])
+                                                     (x/by-key (x/into [])))
                                             required)
         optional-function-body-part   (into [] (comp (x/for [[optional-name {:strs [shape location locationName]} :as member] %
                                                              :when (not (contains? (set required) optional-name))
                                                              :let [ser-name    (shape-name->ser-name shape)
                                                                    dashed-name (-> optional-name aws/dashed keyword)
-                                                                   location    (or (and (nil? location)
-                                                                                        (= optional-name (get-in api ["shapes" shape-name "payload"]))
-                                                                                        :body)
-                                                                                   location)]]
+                                                                   location    (if (nil? location)
+                                                                                 (keyword "http.request.configuration" "body")
+                                                                                 (keyword "http.request.configuration" location))
+                                                                   ;; @NOTE : keep this until I am sure payload check is not necessary
+                                                                   #_(or (and (nil? location)
+                                                                              (= optional-name (get-in api ["shapes" shape-name "payload"]))
+                                                                              :body)
+                                                                         location)]]
                                                        `[(contains? ~request-function-input-symbol ~dashed-name)
-                                                         (assoc-in [~location ~optional-name] {:http.request.field/value         (~ser-name (~request-function-input-symbol ~dashed-name))
-                                                                                               :http.request.field/location-name ~locationName})])
+                                                         (update-in [~location] (fnil conj []) {:http.request.field/value         (~ser-name (~request-function-input-symbol ~dashed-name))
+                                                                                                :http.request.field/location-name ~locationName
+                                                                                                :http.request.field/key           ~optional-name})])
                                                      cat)
                                             (get-in api ["shapes" shape-name "members"]))]
     `(defn ~(shape-name->req-name shape-name) [~request-function-input-symbol]
@@ -474,7 +488,12 @@
          ~@optional-function-body-part))))
 
 
+(comment
 
+  
+
+
+  )
 
 ;; ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;; ┃     ___                     _   _                  ___          _     ____   ┃
@@ -537,7 +556,7 @@
   (let [varname                     (symbol (aws/dashed name))
         input-spec                  (some->> input-shape-name aws/dashed (keyword ns))
         output-spec                 (some->> output-shape-name aws/dashed (keyword ns))
-        operation-input             (or (some-> input-shape-name aws/dashed symbol) '_)
+        operation-input             (or (some-> (str input-shape-name "-input") aws/dashed symbol) '_)
         operation-default-arguments (if input-shape-name (some #(when (spec/valid? input-spec %) %) [[] {}]) {})
         error-specs                 (into {}
                                           (map (fn [{:strs [shape] {:strs [httpStatusCode]} "error"}]
@@ -565,18 +584,142 @@
          :ret ~(if output-spec `(spec/and ~output-spec) `true?)))))
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; IMPORTANT - UNCATEGORIZED FUNCTIONS ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(defn assert-shape-spec
-  "Assert a shape. This function is here to fail when AWS introduce new
-  element into it's description api-2.json that we don't know yet"
-  [[name shape :as element]]
-  (spec/check-asserts true)
-  (spec/assert ::shape shape)
-  element)
+;; ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;; ┃       _   ___ ___    ___ ___ _  _ ___ ___    _ _____ ___ ___  _  _           ┃
+;; ┃      /_\ | _ \_ _|  / __| __| \| | __| _ \  /_\_   _|_ _/ _ \| \| |  ___     ┃
+;; ┃     / _ \|  _/| |  | (_ | _|| .` | _||   / / _ \| |  | | (_) | .` | |___|    ┃
+;; ┃    /_/ \_\_| |___|  \___|___|_|\_|___|_|_\/_/ \_\_| |___\___/|_|\_|          ┃
+;; ┃                                                                              ┃
+;; ┃                           ___  _   ___ _____   _ _                           ┃
+;; ┃                          | _ \/_\ | _ \_   _| | | |                          ┃
+;; ┃                          |  _/ _ \|   / | |   |_  _|                         ┃
+;; ┃                          |_|/_/ \_\_|_\ |_|     |_|                          ┃
+;; ┃                                                                              ┃
+;; ┃                                                                              ┃
+;; ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; GENERATE API CLJ FILES ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn generate-api-forms
+  "This is the root function where you can generate all forms that an
+  sdk is going to need namespaced by ns-sym.
+
+  It gather specs + serialization + declares + request + operation
+  functions."
+  [ns-sym {:strs [operations] :as api}]
+  (case (get-in api ["metadata" "protocol"])
+    "rest-xml" (let [inputs+inputs-root            (shapes-by-usage api)
+                     serialization+request-defns   (for [[k gen]          {:inputs      [generate-serialization-declare
+                                                                                         (partial generate-serialization-function api)]
+                                                                           :input-roots [(partial generate-request-function api)]}
+                                                         gen              gen
+                                                         input-shape-name (inputs+inputs-root k)]
+                                                     (gen input-shape-name))
+                     runtime-specs+operation-defns (for [[k gen] {"shapes"     (comp #(doto % eval) (partial runtime-shape-type-spec (name ns-sym)) assert-shape-spec)
+                                                                  ;; @NOTE : eval to make specs available right away
+                                                                  "operations" (partial generate-operation-function (name ns-sym))}
+                                                         desc    (api k)]
+                                                     (gen desc))]
+                 (concat serialization+request-defns
+                         runtime-specs+operation-defns))
+    (do
+      (binding [*out* *err*] (prn 'skipping ns-sym 'protocol (get-in api ["metadata" "protocol"])))
+      [(list 'comment 'TODO 'support (get-in api ["metadata" "protocol"]))])))
+
+
+(defn parse-endpoints! [src]
+  (let [endpoints (with-open [r (io/reader src)] (json/parse-stream r))]
+    (reduce (fn [m [p v]] (assoc-in m p v)) {}
+            (for [{:as   partition
+                   :strs [defaults services regions dnsSuffix]}                        (endpoints "partitions")
+                  :let                                                                 [regions (set (keys regions))]
+                  [service {defaults' "defaults" :strs [endpoints partitionEndpoint]}] services
+                  :let                                                                 [defaults (into defaults defaults')]
+                  region                                                               (into regions (keys endpoints))
+                  :let                                                                 [desc (or (endpoints region) (endpoints partitionEndpoint))]
+                  :when                                                                desc
+                  :let                                                                 [{:strs [hostname sslCommonName protocols credentialScope signatureVersions]} (into defaults desc)
+                                                                                        protocol (or (some #{"https"} protocols) (first protocols)) ; prefer https
+                                                                                        credentialScope (into {"service" service "region" region} credentialScope)
+                                                                                        sslCommonName (or sslCommonName hostname) 
+                                                                                        env #(case % "{region}" region "{service}" service "{dnsSuffix}" dnsSuffix)
+                                                                                        hostname (str/replace hostname #"\{(?:region|service|dnsSuffix)}" env)
+                                                                                        sslCommonName (str/replace sslCommonName #"\{(?:region|service|dnsSuffix)}" env)
+                                                                                        endpoint (str protocol "://" hostname)
+                                                                                        signature-version (some->
+                                                                                                           (or (some (set signatureVersions) ["v4" "s3v4" "v2" "s3"]) ; most recent first
+                                                                                                               (first signatureVersions))
+                                                                                                           keyword)]]
+              [[service region] {:credential-scope (x/into {} (x/for [[k v] %] [(keyword k) v]) credentialScope)
+                                 :ssl-common-name  sslCommonName :endpoint endpoint :signature-version signature-version}]))))
+
+
+(defn generate-files!
+  "This function generates all the sdk files (clj) from the api-2.json
+  files.
+
+  It's the entry-point of the generation part."
+  [& {:keys [verbose api-name protocol]
+      :or   {verbose false api-name nil protocol nil}}]
+  (let [endpoints    (parse-endpoints! "api-resources/aws-sdk-ruby/gems/aws-partitions/partitions.json")
+        entries      (into []
+                           (comp
+                            (x/for [^java.io.File f %
+                                    :when (-> f .getName (.endsWith "api-2.json"))]
+                              [(-> f .getParentFile .getParentFile .getName)
+                               [(-> f .getParentFile .getName) (.getPath f)]])
+                            (x/by-key (x/into (sorted-map)))
+                            (x/sort))
+                           (file-seq (java.io.File. "api-resources/aws-sdk-ruby/apis/")))
+        gen-results  (for [[api versions]     entries
+                           :let               [apifile (str/replace api #"[-.]" "_")
+                                               apins (str/replace api #"[.]" "-")
+                                               [latest f] (first (rseq versions))]
+                           :when              (or (nil? api-name) (= apins api-name))
+                           [version api-json] (cons [nil f] versions)
+                           :when              (or (nil? protocol) (= protocol (get-in (with-open [r (io/reader api-json)] (json/parse-stream r)) ["metadata" "protocol"])))
+                           :let               [[file ns] (if version
+                                                           [(java.io.File. (str "src/portkey/aws/" apifile "/_" version ".clj"))
+                                                            (symbol (str "portkey.aws." apins ".-" version))]
+                                                           [(java.io.File. (str "src/portkey/aws/" apifile ".clj"))
+                                                            (symbol (str "portkey.aws." apins))])]]
+                       (try
+                         (prn 'generating api (or version 'LATEST))
+                         (with-open [w         (io/writer (doto file (-> .getParentFile .mkdirs)))
+                                     ;; @TODO : rework on documentation
+                                     ;;docs-json (-> api-json io/file .getParentFile (io/file "docs-2.json") java.io.FileInputStream.)
+                                     ]
+                           (let [api-json' (json/parse-stream (io/reader (java.io.FileInputStream. api-json)))]
+                             (binding [*out* w]
+                               (prn (list 'ns ns '(:require [portkey.aws])))
+                               (newline)
+                               (clojure.pprint/pprint (list 'def 'endpoints (list 'quote (get endpoints apins))))
+                               ;; @TODO : rework on documentation.
+                               (doseq [form (generate-api-forms ns api-json' #_docs-json)]
+                                 (newline)
+                                 (if (and (seq? form) (= 'do (first form)))
+                                   (run! prn (next form))
+                                   (prn form))))))
+                         {:gen-status :ok}
+                         (catch Throwable t
+                           (println "Failed to generate" api (.getMessage t))
+                           #_(when verbose (println t))
+                           (println t)
+                           {:gen-status :fail :api api :file file})))
+        gen-failures (filter #(-> % :gen-status (= :fail)) gen-results)]
+    (if (seq gen-failures)
+      (do
+        (printf "Encountered %d errors while generating, failed for APIs: %s\n"
+                (count gen-failures)
+                (str/join ", " (map :api gen-failures)))
+        (doseq [failure gen-failures]
+          (-> failure :file (.delete))))
+      (println "Generation OK!"))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -612,40 +755,81 @@
   (use 'clojure.repl)
   (def-api-2-json "rest-xml")
   
-  ;; @NOTE : 1 - runtime specs part
-  (let [api rest-xml-protocol-s3-api-2-json]
-    (let [runtime-specs (for [[k gen] {"shapes"     (comp (partial runtime-shape-type-spec (name "monnamespece")) assert-shape-spec) ; eval to make specs available right away
-                                       "operations" (fn [& args])}
-                              desc    (api k)]
-                          (eval (gen desc)))]
-      runtime-specs))
-
-  ;; @NOTE : 2 - decalations
-  (let [inputs+inputs-root (shapes-by-usage rest-xml-protocol-s3-api-2-json)
-        api                rest-xml-protocol-s3-api-2-json]
-
-    (for [[k gen]          {:inputs      [generate-serialization-declare
-                                          (partial generate-serialization-function api)]
-                            :input-roots [(partial generate-request-function api)]}
-          gen              gen
-          input-shape-name (inputs+inputs-root k)]
-      
-      (eval (gen input-shape-name))))
-
-
-  ;; @NOTE : 3 - generate operations from s3
-  (let [{:strs [operations] :as api} rest-xml-protocol-s3-api-2-json
-        ns                           "monnamespece"]
-    (for [operation operations]
-      (generate-operation-function ns operation)))
-
   ;; @TODO : spec http.request.configuration
   ;; @TODO : make the call-functions
 
 
+  ;; go to aws call après
+
+  
+  (generate-files! :api-name "s3")
+  (generate-request-function rest-xml-protocol-s3-api-2-json "DeleteObjectRequest")
+
+                                        ; @TODO : locatioName on root with the object
+                                        ; SelectObjectContentRequest, don't know what to do with this one
+
+  (get-in rest-xml-protocol-s3-api-2-json ["shapes" "SelectObjectContentRequest"])
 
 
+  (spec/def :http.request.field/key string?)
+  (spec/def :http.request.field/location-name string?)
+  (spec/def :http.request.field/value any?)
 
+  (spec/def :http.request.field/field (spec/keys :req [:http.request.field/key
+                                                       :http.request.field/value
+                                                       :http.request.field/location-name]))
+  
+  (spec/def :http.request.configuration/values (spec/coll-of :http.request.field/field :kind vector?))
+  
+  (spec/def :http.request.configuration/uri :http.request.configuration/values)
+  (spec/def :http.request.configuration/header :http.request.configuration/values)
+  (spec/def :http.request.configuration/querystring :http.request.configuration/values)
+
+  
+  (spec/def :http.request.configuration/generate-request-function-part
+    (spec/keys :opt [:http.request.configuration/uri
+                     :http.request.configuration/header
+                     :http.request.configuration/querystring]))
+
+
+  (spec/def :http.request.configuration/method #{"GET" "POST"})
+  (spec/def :http.request.configuration/request-uri string?)
+  ;; @TODO - @dupuchba : might be more precise
+  (spec/def :http.request.configuration/response-code int?)
+  (spec/def :http.request.spec/input-spec keyword?)
+  (spec/def :http.request.spec/output-spec keyword?)
+  ;; @TODO - @dupuchba : specifie something usefull as spec for this
+  ;; one
+  (spec/def :http.request.spec/error-spec any?)
+
+  (spec/def :http.request.configuration/generate-operation-function-part
+    (spec/keys :req [:http.request.configuration/method
+                     :http.request.configuration/request-uri
+                     :http.request.configuration/response-code
+                     :http.request.spec/input-spec
+                     :http.request.spec/output-spec
+                     :http.request.spec/error-spec]))
+
+  
+  (spec/def :http.request.configuration/configuration
+    (spec/merge :http.request.configuration/generate-request-function-part
+                :http.request.configuration/generate-operation-function-part))
+
+
+  (spec/exercise :http.request.configuration/configuration)
+
+  (spec/explain :http.request.configuration/configuration
+                {:http.request.configuration/method        "GET"
+                 :http.request.configuration/request-uri   "/uri"
+                 :http.request.configuration/response-code 400
+                 :http.request.spec/input-spec             :input-spec
+                 :http.request.spec/output-spec            :ouptut-spec
+                 :http.request.spec/error-spec             "cac"
+                 :http.request.configuration/uri                 [{:http.request.field/key           "a"
+                                                                   :http.request.field/value         "value"
+                                                                   :http.request.field/location-name "location-name"}]})
+
+  
   )
 
 
