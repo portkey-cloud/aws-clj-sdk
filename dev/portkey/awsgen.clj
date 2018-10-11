@@ -556,23 +556,24 @@
   (let [varname                     (symbol (aws/dashed name))
         input-spec                  (some->> input-shape-name aws/dashed (keyword ns))
         output-spec                 (some->> output-shape-name aws/dashed (keyword ns))
-        operation-input             (or (some-> (str input-shape-name "-input") aws/dashed symbol) '_)
-        operation-default-arguments (if input-shape-name (some #(when (spec/valid? input-spec %) %) [[] {}]) {})
+        operation-input             (or (some-> input-shape-name (str "-input") aws/dashed symbol) '_)
+        operation-default-arguments (if input-spec (some #(when (spec/valid? input-spec %) %) [[] {}]) {})
         error-specs                 (into {}
                                           (map (fn [{:strs [shape] {:strs [httpStatusCode]} "error"}]
                                                  [shape (keyword ns (aws/dashed shape))]))
                                           errors)]
     `(do
        (defn ~varname
-         ~@(when operation-default-arguments `[([] ~(varname operation-default-arguments))])
+         ~@(when operation-default-arguments `[([] ~(list varname operation-default-arguments))])
          ([~operation-input]
-          (let [request-function-result# (~(shape-name->req-name input-shape-name) ~operation-input)]
+          (let [request-function-result# ~(if input-shape-name (list (shape-name->req-name input-shape-name) operation-input) {})]
             ;; @TODO : call-to-be-implemented-function needs to be implemented
-            (call-to-be-implemented-function
+            (aws/-call-http
              (merge request-function-result#
                     {:http.request.configuration/method        ~method
                      :http.request.configuration/request-uri   ~requestUri
                      :http.request.configuration/response-code ~responseCode
+                     :http.request.configuration/endpoints     ~(symbol ns "endpoints")
                      :http.request.spec/input-spec             ~input-spec
                      :http.request.spec/output-spec            ~output-spec
                      :http.request.spec/error-spec             ~error-specs})))))
@@ -760,11 +761,13 @@
 
 
   ;; go to aws call après
+   
 
   
   (generate-files! :api-name "s3")
-  (generate-request-function rest-xml-protocol-s3-api-2-json "DeleteObjectRequest")
-
+  (get-in rest-xml-protocol-s3-api-2-json ["operations" "ListBuckets"])
+  
+  
                                         ; @TODO : locatioName on root with the object
                                         ; SelectObjectContentRequest, don't know what to do with this one
 
@@ -794,6 +797,7 @@
 
   (spec/def :http.request.configuration/method #{"GET" "POST"})
   (spec/def :http.request.configuration/request-uri string?)
+  (spec/def :http.request.configuration/endpoints symbol?)
   ;; @TODO - @dupuchba : might be more precise
   (spec/def :http.request.configuration/response-code int?)
   (spec/def :http.request.spec/input-spec keyword?)
@@ -804,6 +808,7 @@
 
   (spec/def :http.request.configuration/generate-operation-function-part
     (spec/keys :req [:http.request.configuration/method
+                     :http.request.configuration/endoints
                      :http.request.configuration/request-uri
                      :http.request.configuration/response-code
                      :http.request.spec/input-spec
