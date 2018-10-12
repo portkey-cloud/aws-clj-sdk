@@ -163,6 +163,28 @@
 (def ^:dynamic *http-client* sync-http-client)
 
 
+
+
+
+
+(defn- params-to-uri
+  "Given the url of the form '/{Bucket}/delete' and
+  the :http.request.configuration/uri vector of user values, returns
+  the final url in the request."
+  [{:as req
+    {url :url} :ring.request
+    :keys [:http.request.configuration/uri]}]
+  (assoc-in req
+            [:ring.request :url]
+            (str/replace url
+                         #"\{([^\}]*)}"
+                         (fn [[_ name]]
+                           (if-some [v (some #(and (= name (:http.request.field/location-name %)) (:http.request.field/value %)) uri)]
+                             v
+                             (throw (ex-info (str "Missing parameter " name)
+                                             {:url url :uri uri})))))))
+
+
 ;; ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;; ┃                                                                              ┃
 ;; ┃                                                                              ┃
@@ -230,24 +252,32 @@
 (defn -call-http [{:keys [:http.request.configuration/endpoints
                           :http.request.configuration/method
                           :http.request.configuration/request-uri
-                          :http.request.configuration/mime-type] :as in}]
-  (spec/assert :http.request.configuration/configuration in)
+                          :http.request.configuration/mime-type] :as req}]
+  (spec/assert :http.request.configuration/configuration req)
   (let [{:keys [endpoint credential-scope signature-version]} (endpoints (region))]
-    (-> {:method             method
-         ::credential-scope  credential-scope
-         ::signature-version signature-version
-         :url                (str endpoint request-uri)
-         :headers            mime-type}
-        (*http-client* (fn [resp]
-                         [:result resp])))))
+    (->
+     (into req
+           {:ring.request {:method             method
+                           ::credential-scope  credential-scope
+                           ::signature-version signature-version
+                           :url                (str endpoint request-uri)
+                           :headers            mime-type}})
+     params-to-uri
+     :ring.request
+     (*http-client* (fn [resp]
+                      [:result resp])))))
 
 
 (comment
 
-  (case 1
-    0 true)
 
+  
+  (require '[portkey.aws.s3 :as s3])
+  (use 'clojure.repl)
+  
+  (s3/list-buckets)
+  
+  (s3/list-objects {:bucket "aa"})
 
-  (sc.api/letsc 2
-                (spec/explain :http.request.configuration/configuration in))
+  
   )

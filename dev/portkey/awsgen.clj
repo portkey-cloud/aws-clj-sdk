@@ -576,15 +576,15 @@
           (let [request-function-result# ~(if input-shape-name (list (shape-name->req-name input-shape-name) operation-input) {})]
             ;; @TODO : call-to-be-implemented-function needs to be implemented
             (aws/-call-http
-             (merge request-function-result#
-                    {:http.request.configuration/method        ~(-> method str/lower-case keyword)
-                     :http.request.configuration/request-uri   ~requestUri
-                     :http.request.configuration/response-code ~responseCode
-                     :http.request.configuration/endpoints     ~(symbol ns "endpoints")
-                     :http.request.configuration/mime-type     ~(mime-type (get-in api ["metadata" "protocol"]))
-                     :http.request.spec/input-spec             ~input-spec
-                     :http.request.spec/output-spec            ~output-spec
-                     :http.request.spec/error-spec             ~error-specs})))))
+             (into request-function-result#
+                   {:http.request.configuration/method        ~(-> method str/lower-case keyword)
+                    :http.request.configuration/request-uri   ~requestUri
+                    :http.request.configuration/response-code ~responseCode
+                    :http.request.configuration/endpoints     ~(symbol ns "endpoints")
+                    :http.request.configuration/mime-type     ~(mime-type (get-in api ["metadata" "protocol"]))
+                    :http.request.spec/input-spec             ~input-spec
+                    :http.request.spec/output-spec            ~output-spec
+                    :http.request.spec/error-spec             ~error-specs})))))
 
        (spec/fdef ~varname
          :args ~(if input-spec
