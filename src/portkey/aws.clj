@@ -163,8 +163,9 @@
 (def ^:dynamic *http-client* sync-http-client)
 
 
-
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; RUNTIME REQUEST TRANSFORMATION ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 (defn- params-to-uri
@@ -253,10 +254,14 @@
               :http.request.configuration/generate-operation-function-part))
 
 
-(defn -call-http [{:keys [:http.request.configuration/endpoints
-                          :http.request.configuration/method
-                          :http.request.configuration/request-uri
-                          :http.request.configuration/mime-type] :as req}]
+(defn -call-http
+  "The HTTP Call function.
+  Takes a map of inputs / configuration and compute a ring-request to
+  make the HTTP call."
+  [{:keys [:http.request.configuration/endpoints
+           :http.request.configuration/method
+           :http.request.configuration/request-uri
+           :http.request.configuration/mime-type] :as req}]
   (spec/assert :http.request.configuration/configuration req)
   (let [{:keys [endpoint credential-scope signature-version]} (endpoints (region))]
     (->
@@ -289,6 +294,7 @@
 
   ;; 1) Encoding body part => each VERB POST/PUT/DELETE/GET/PATCH
   ;; 2) compound type of serialization input shape : list/map/structure
+  ;; 3) needs a function that sdk's function by request part e.g : header/headers/body/uri & co
 
   ;; @TODO : need some serialization helpers to facilitate this process, given an input shape (not input-root) and a compound type, returns a set of function name group by verb
   
