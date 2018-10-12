@@ -377,7 +377,7 @@
                                                         (def ^:dynamic *api-description-map* nil)
                                                         
                                                         (binding [*api-description-map* ~api-sym]
-                                                          `(defn ~serialization-function-name# [~input-symbol#]
+                                                          `(defn- ~serialization-function-name# [~input-symbol#]
                                                              ~(eval (list 'let
                                                                           ['~api-sym (symbol "*api-description-map*") '~shape-name-sym ~shape-name-sym input-symbol# '(symbol (name '~input-sym))]
                                                                           body#))))))}])
@@ -483,7 +483,7 @@
                                                                                                 :http.request.field/key           ~optional-name})])
                                                      cat)
                                             (get-in api ["shapes" shape-name "members"]))]
-    `(defn ~(shape-name->req-name shape-name) [~request-function-input-symbol]
+    `(defn- ~(shape-name->req-name shape-name) [~request-function-input-symbol]
        (cond-> ~required-function-body-part
          ~@optional-function-body-part))))
 
@@ -568,7 +568,8 @@
         error-specs                 (into {}
                                           (map (fn [{:strs [shape] {:strs [httpStatusCode]} "error"}]
                                                  [shape (keyword ns (aws/dashed shape))]))
-                                          errors)]
+                                          errors)
+        protocol                    (get-in api ["metadata" "protocol"])]
     `(do
        (defn ~varname
          ~@(when operation-default-arguments `[([] ~(list varname operation-default-arguments))])
@@ -581,7 +582,8 @@
                     :http.request.configuration/request-uri   ~requestUri
                     :http.request.configuration/response-code ~responseCode
                     :http.request.configuration/endpoints     ~(symbol ns "endpoints")
-                    :http.request.configuration/mime-type     ~(mime-type (get-in api ["metadata" "protocol"]))
+                    :http.request.configuration/mime-type     ~(mime-type protocol)
+                    :http.request.configuration/protocol      ~protocol
                     :http.request.spec/input-spec             ~input-spec
                     :http.request.spec/output-spec            ~output-spec
                     :http.request.spec/error-spec             ~error-specs})))))
@@ -780,6 +782,10 @@
                                         ; SelectObjectContentRequest, don't know what to do with this one
 
   (get-in rest-xml-protocol-s3-api-2-json ["shapes" "SelectObjectContentRequest"])
+
+  (require '[portkey.aws.s3 :as s3])
+
+
 
 
   

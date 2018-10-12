@@ -180,6 +180,8 @@
                          #"\{([^\}]*)}"
                          (fn [[_ name]]
                            (if-some [v (some #(and (= name (:http.request.field/location-name %)) (:http.request.field/value %)) uri)]
+                             ;; @TODO : verify if url encoding is
+                             ;; automatic with clj-http
                              v
                              (throw (ex-info (str "Missing parameter " name)
                                              {:url url :uri uri})))))))
@@ -225,6 +227,7 @@
 (spec/def :http.request.configuration/request-uri string?)
 (spec/def :http.request.configuration/endpoints map?)
 (spec/def :http.request.configuration/mime-type (spec/map-of #(= "content-type" %) string?))
+(spec/def :http.request.configuration/protocol #{"rest-xml"})
 ;; @TODO - @dupuchba : might be more precise
 (spec/def :http.request.configuration/response-code (spec/nilable int?))
 (spec/def :http.request.spec/input-spec (spec/nilable keyword?))
@@ -239,6 +242,7 @@
                    :http.request.configuration/request-uri
                    :http.request.configuration/mime-type
                    :http.request.configuration/response-code
+                   :http.request.configuration/protocol
                    :http.request.spec/input-spec
                    :http.request.spec/output-spec
                    :http.request.spec/error-spec]))
@@ -274,10 +278,20 @@
   
   (require '[portkey.aws.s3 :as s3])
   (use 'clojure.repl)
+
+  (dir s3)
   
   (s3/list-buckets)
   
   (s3/list-objects {:bucket "aa"})
+
+  ;; what to check when discovering a new protocol
+
+  ;; 1) Encoding body part => each VERB POST/PUT/DELETE/GET/PATCH
+  ;; 2) compound type of serialization input shape : list/map/structure
+
+  ;; @TODO : need some serialization helpers to facilitate this process, given an input shape (not input-root) and a compound type, returns a set of function name group by verb
+  
 
   
   )
