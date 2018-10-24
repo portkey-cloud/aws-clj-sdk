@@ -403,7 +403,7 @@
 
   (REST-XML "list" [api shape-name input] `(into {} (map-indexed (fn [idx# item#] [(str "member." (inc idx#)) item#]) ~input)))
 
-  (REST-XML "blob" [api shape-name input] input) ;; @TODO : to implement blob
+  (REST-XML "blob" [api shape-name input] `(aws/base64-encode ~input)) ;; @TODO : to implement blob
 
   (REST-XML "map" [api shape-name input] input)) ;; @TODO : to implement map
 

@@ -13,6 +13,11 @@
   (-> s (.replaceAll "(?<=[a-z0-9])(?=[A-Z]([a-z]|$))|_" "-") .toLowerCase))
 
 
+; Java 8
+(defn base64-encode [bytes] (.encodeToString (java.util.Base64/getEncoder) bytes))
+(defn base64-decode [^String s] (.decode (java.util.Base64/getDecoder) s))
+
+
 ;; ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;; ┃                                                                              ┃
 ;; ┃                                                                              ┃
@@ -179,7 +184,7 @@
   (assoc-in req
             [:ring.request :url]
             (str/replace url
-                         #"\{([^\}]*)}"
+                         #"\{([^\}\+]*)[+]*}"
                          (fn [[_ name]]
                            (if-some [v (some #(and (= name (:http.request.field/location-name %)) (:http.request.field/value %)) uri)]
                              ;; @TODO : verify if url encoding is
@@ -195,21 +200,25 @@
   ;; @TODO - @dupuchba : body should be a map and not a collection of field, to check
   (let [{{xmlns "uri"} :http.request.field/xml-namespace
          :keys         [:http.request.field/key
-                        :http.request.field/value]}
+                        :http.request.field/value
+                        :http.request.field/streaming]}
         (-> req :http.request.configuration/body first)
         map->xml (fn map->xml [m]
                    (into [] (map (fn [[k v]]
                                    {:tag k :content (cond
                                                       (map? v)    (map->xml v)
                                                       (string? v) [v]
-                                                      :else       (throw (ex-info "Type not known for xml conversion." {:type (type v)})))}))
+                                                      :else       (throw (ex-info "Type not known for xml conversion." {:type (type v)
+                                                                                                                        :req req})))}))
                          m))]
     (assoc-in req
               [:ring.request :body]
-              (when (contains? #{:put :post} method)
+              ;; @NOTE : streaming doesn't need to be xmlfied
+              (if (and (contains? #{:put :post} method) (not (true? streaming)))
                 (xml/emit-str {:tag     key
                                :attrs   {:xmlns xmlns}
-                               :content (map->xml value)})))))
+                               :content (map->xml value)})
+                value))))
 
 
 
