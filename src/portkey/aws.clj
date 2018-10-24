@@ -2,6 +2,7 @@
   (:refer-clojure :exclude [cond])
   (:require [clj-http.client :as http]
             [clojure.core.async :as async]
+            [clojure.data.xml :as xml]
             [clojure.java.io :as io]
             [clojure.spec.alpha :as spec]
             [clojure.string :as str]
@@ -188,6 +189,30 @@
                                              {:url url :uri uri})))))))
 
 
+(defn- params-to-body
+  "to complete"
+  [req]
+  ;; @TODO - @dupuchba : body should be a map and not a collection of field, to check
+  (let [{{xmlns "uri"} :http.request.field/xml-namespace
+         :keys         [:http.request.field/key
+                        :http.request.field/value]}
+        (-> req :http.request.configuration/body first)
+        map->xml (fn map->xml [m]
+                   (into [] (map (fn [[k v]]
+                                   {:tag k :content (cond
+                                                      (map? v)    (map->xml v)
+                                                      (string? v) [v]
+                                                      :else       (throw (ex-info "Type not known for xml conversion." {:type (type v)})))}))
+                         m))]
+    (assoc-in req
+              [:ring.request :body]
+              (xml/emit-str {:tag     key
+                             :attrs   {:xmlns xmlns}
+                             :content (map->xml value)}))))
+
+
+
+
 ;; ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;; ┃                                                                              ┃
 ;; ┃                                                                              ┃
@@ -272,6 +297,7 @@
                            :url                (str endpoint request-uri)
                            :headers            mime-type}})
      params-to-uri
+     params-to-body
      :ring.request
      (*http-client* (fn [resp]
                       [:result resp])))))

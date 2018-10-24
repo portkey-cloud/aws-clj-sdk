@@ -290,7 +290,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(defn- shapes-by-usage
+(defn shapes-by-usage
   "Takes an api description and returns a map categoriizing shapes by their usage.
   This map has 4 keys: :inputs, :input-roots, :outputs
   and :output-roots, all mapping to collections of shapes.  Root
@@ -452,7 +452,8 @@
         request-function-input-symbol (symbol "input")
         required-function-body-part   (into {} (comp (x/for [required-name %
                                                              :let [shape                                         (get-in api ["shapes" shape-name "members" required-name])
-                                                                   {:strs [shape location locationName] :as sh}  shape
+                                                                   {:strs                [shape location locationName
+                                                                                          xmlNamespace] :as sh}                 shape
                                                                    ser-name                                      (shape-name->ser-name shape)
                                                                    dashed-name                                   (-> required-name aws/dashed keyword)
                                                                    ;;usefull because body don't have location / locationName attrs
@@ -462,10 +463,11 @@
                                                                                                                    (keyword "http.request.configuration" location))]]
                                                        [location {:http.request.field/value         `(~ser-name (~request-function-input-symbol ~dashed-name))
                                                                   :http.request.field/location-name locationName
-                                                                  :http.request.field/key           required-name}])
+                                                                  :http.request.field/key           required-name
+                                                                  :http.request.field/xml-namespace xmlNamespace}])
                                                      (x/by-key (x/into [])))
                                             required)
-        optional-function-body-part   (into [] (comp (x/for [[optional-name {:strs [shape location locationName]} :as member] %
+        optional-function-body-part   (into [] (comp (x/for [[optional-name {:strs [shape location locationName xmlNamespace]} :as member] %
                                                              :when (not (contains? (set required) optional-name))
                                                              :let [ser-name    (shape-name->ser-name shape)
                                                                    dashed-name (-> optional-name aws/dashed keyword)
@@ -480,7 +482,8 @@
                                                        `[(contains? ~request-function-input-symbol ~dashed-name)
                                                          (update-in [~location] (fnil conj []) {:http.request.field/value         (~ser-name (~request-function-input-symbol ~dashed-name))
                                                                                                 :http.request.field/location-name ~locationName
-                                                                                                :http.request.field/key           ~optional-name})])
+                                                                                                :http.request.field/key           ~optional-name
+                                                                                                :http.request.field/xml-namespace ~xmlNamespace})])
                                                      cat)
                                             (get-in api ["shapes" shape-name "members"]))]
     `(defn- ~(shape-name->req-name shape-name) [~request-function-input-symbol]
@@ -488,12 +491,7 @@
          ~@optional-function-body-part))))
 
 
-(comment
 
-  
-
-
-  )
 
 ;; ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;; ┃     ___                     _   _                  ___          _     ____   ┃
