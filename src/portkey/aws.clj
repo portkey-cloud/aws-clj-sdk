@@ -191,7 +191,7 @@
 
 (defn- params-to-body
   "to complete"
-  [req]
+  [{:keys [:http.request.configuration/method] :as req}]
   ;; @TODO - @dupuchba : body should be a map and not a collection of field, to check
   (let [{{xmlns "uri"} :http.request.field/xml-namespace
          :keys         [:http.request.field/key
@@ -206,9 +206,10 @@
                          m))]
     (assoc-in req
               [:ring.request :body]
-              (xml/emit-str {:tag     key
-                             :attrs   {:xmlns xmlns}
-                             :content (map->xml value)}))))
+              (when (contains? #{:put :post} method)
+                (xml/emit-str {:tag     key
+                               :attrs   {:xmlns xmlns}
+                               :content (map->xml value)})))))
 
 
 
