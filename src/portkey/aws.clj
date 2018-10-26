@@ -208,8 +208,9 @@
                                    {:tag k :content (cond
                                                       (map? v)    (map->xml v)
                                                       (string? v) [v]
+                                                      (vector? v) (into [] (map map->xml) v)
                                                       :else       (throw (ex-info "Type not known for xml conversion." {:type (type v)
-                                                                                                                        :req req})))}))
+                                                                                                                        :req  req})))}))
                          m))]
     (assoc-in req
               [:ring.request :body]

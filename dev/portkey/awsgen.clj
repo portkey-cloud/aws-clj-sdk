@@ -203,7 +203,7 @@
 
 (defmethod runtime-shape-type-spec "string" [ns [name {:strs [min max sensitive pattern enum]}]]
   (if enum
-    `(spec/def ~(runtime-spec-name ns name) ~(into {} (mapcat (fn [s] [[s s] [(keyword (aws/dashed s)) s]])) enum))
+    `(spec/def ~(runtime-spec-name ns name) ~(into #{} (mapcat (fn [s] [[s s] [(keyword (aws/dashed s)) s]])) enum))
     `(spec/def ~(runtime-spec-name ns name)
        (spec/and string?
                  ~@(when min [`(fn [s#] (<= ~min (count s#)))])
@@ -243,7 +243,7 @@
                               ;; when key name and shape name for
                               ;; some reasons are different, we need
                               ;; prerequisites
-                              [k (keyword (if (not= shape k) (str ns "." (aws/dashed name)) ns) k)]))]
+                              [k (keyword (if (not= shape k) (str ns "." (aws/dashed name)) ns) (aws/dashed k))]))]
     `(do
        ;; we specialy create spec that reference the right spec when
        ;; key and shape name are different. Offcourse, prerequisites
@@ -400,6 +400,8 @@
                                                                  (let [test-form# `(~(-> k# aws/dashed keyword) ~input)]
                                                                    [[k# (list (shape-name->ser-name shape) test-form#)]])))
                                                        (shape "members"))))
+
+  (QUERY "list" [api shape-name input] `(into {} (map-indexed (fn [idx# item#] [(str "member." (inc idx#)) item#]) ~input)))
 
   (REST-XML "list" [api shape-name input] `(into {} (map-indexed (fn [idx# item#] [(str "member." (inc idx#)) item#]) ~input)))
 
