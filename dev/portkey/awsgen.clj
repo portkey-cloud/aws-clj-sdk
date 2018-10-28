@@ -398,16 +398,51 @@
 (defserialization aws-serialization-functions
   (QUERY REST-XML "string" "long" "integer" "boolean" "timestamp" [api shape-name input] input)
 
-  (REST-XML "structure" [api shape-name input] (let [shape (get-in api ["shapes" shape-name])]
-                                                 (into {}
-                                                       (mapcat (fn [[k# {:strs [shape]}]]
-                                                                 (let [test-form# `(~(-> k# aws/dashed keyword) ~input)]
-                                                                   [[k# (list (shape-name->ser-name shape) test-form#)]])))
-                                                       (shape "members"))))
+  (REST-XML "structure" [api shape-name input] (let [shape                       (get-in api ["shapes" shape-name])
+                                                     required                    (get-in api ["shapes" shape-name "required"])
+                                                     required-function-body-part (into {} (comp (x/for [required-name %
+                                                                                                        :let [shape                               (get-in api ["shapes" shape-name "members" required-name])
+                                                                                                              {:strs [shape locationName] :as sh} shape
+                                                                                                              ser-name                            (shape-name->ser-name shape)
+                                                                                                              dashed-name                         (-> required-name aws/dashed keyword)
+                                                                                                              test-form#                          `(~dashed-name ~input)]]
+                                                                                                  [(or locationName required-name) (list ser-name test-form#)]))
+                                                                                       required)
+                                                     optional-function-body-part (into [] (comp (x/for [[optional-name {:strs [shape locationName] :as sh}] %
+                                                                                                        :when (not (contains? (set required) optional-name))
+                                                                                                        :let [ser-name    (shape-name->ser-name shape)
+                                                                                                              dashed-name (-> optional-name aws/dashed keyword)
+                                                                                                              test-form#  `(~dashed-name ~input)]]
+                                                                                                  `[(contains? ~input ~dashed-name)
+                                                                                                    (assoc ~(or locationName optional-name) ~(list ser-name test-form#))])
+                                                                                                cat)
+                                                                                       (get-in api ["shapes" shape-name "members"]))]
+                                                 `(cond-> ~required-function-body-part
+                                                    ~@optional-function-body-part)
+                                                 #_(into {}
+                                                         (mapcat (fn [[k# {:strs [shape locationName] :as sh} :as o]]
+                                                                   ;; @NOTE - @dupuchba : we throw an exception if we don't handle a field for serialization.
+                                                                   #_(when-not (or (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
+                                                                                                                   #{"shape" "locationName"})))
+                                                                       (throw (ex-info (str "Field don't handled for shape : " shape) {:shape-name shape-name})))
+                                                                   (let [test-form# `(~(-> shape aws/dashed keyword) ~input)]
+                                                                     ;; @NOTE - @dupuchba : locationName > shape when exists #xmlPOWER :'(
+                                                                     [[(or locationName shape) (list (shape-name->ser-name shape) test-form#)]])))
+                                                         (shape "members"))))
 
   (QUERY "list" [api shape-name input] `(into {} (map-indexed (fn [idx# item#] [(str "member." (inc idx#)) item#]) ~input)))
 
-  (REST-XML "list" [api shape-name input] `(into {} (map-indexed (fn [idx# item#] [(str "member." (inc idx#)) item#]) ~input)))
+  (REST-XML "list" [api shape-name input] (let [{{:strs [shape locationName]} "member" :as sh
+                                                 flattened                    "flattened"
+                                                 sensitive                    "sensitive"
+                                                 deprecated                   "deprecated"} (get-in api ["shapes" shape-name])]
+                                            (when (or sensitive deprecated) (throw (ex-info "Sensitive or deprecated found " {:sh sh})))
+                                            `(into []
+                                                   (map (fn [~'coll]
+                                                          ~(list (shape-name->ser-name shape) 'coll)))
+                                                   ~(if flattened
+                                                      input
+                                                      (list (-> shape-name aws/dashed keyword) input)))))
 
   (REST-XML "blob" [api shape-name input] `(aws/base64-encode ~input)) ;; @TODO : to implement blob
 

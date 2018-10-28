@@ -205,12 +205,13 @@
         (-> req :http.request.configuration/body first)
         map->xml (fn map->xml [m]
                    (into [] (map (fn [[k v]]
-                                   {:tag k :content (cond
-                                                      (map? v)    (map->xml v)
-                                                      (string? v) [v]
-                                                      (vector? v) (into [] (map map->xml) v)
-                                                      :else       (throw (ex-info "Type not known for xml conversion." {:type (type v)
-                                                                                                                        :req  req})))}))
+                                   (if (vector? v)
+                                     (into [] (map (fn [val'] (map->xml {k val'}))) v)
+                                     {:tag k :content (cond
+                                                        (map? v)    (map->xml v)
+                                                        (string? v) [v]
+                                                        :else (throw (ex-info "Type not known for xml conversion." {:type (type v)
+                                                                                                                    :req  req})))})))
                          m))]
     (assoc-in req
               [:ring.request :body]
@@ -220,7 +221,6 @@
                                :attrs   {:xmlns xmlns}
                                :content (map->xml value)})
                 value))))
-
 
 
 
