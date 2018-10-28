@@ -199,7 +199,7 @@
   [{:keys [:http.request.configuration/method] :as req}]
   ;; @TODO - @dupuchba : body should be a map and not a collection of field, to check
   (let [{{xmlns "uri"} :http.request.field/xml-namespace
-         :keys         [:http.request.field/key
+         :keys         [:http.request.field/shape-name
                         :http.request.field/value
                         :http.request.field/streaming]}
         (-> req :http.request.configuration/body first)
@@ -216,7 +216,7 @@
               [:ring.request :body]
               ;; @NOTE : streaming doesn't need to be xmlfied
               (if (and (contains? #{:put :post} method) (not (true? streaming)))
-                (xml/emit-str {:tag     key
+                (xml/emit-str {:tag     shape-name
                                :attrs   {:xmlns xmlns}
                                :content (map->xml value)})
                 value))))
@@ -239,11 +239,11 @@
 ;; ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 
-(spec/def :http.request.field/key string?)
+(spec/def :http.request.field/shape-name string?)
 (spec/def :http.request.field/location-name string?)
 (spec/def :http.request.field/value any?)
 
-(spec/def :http.request.field/field (spec/keys :req [:http.request.field/key
+(spec/def :http.request.field/field (spec/keys :req [:http.request.field/shape-name
                                                      :http.request.field/value
                                                      :http.request.field/location-name]))
   
@@ -260,7 +260,7 @@
                    :http.request.configuration/querystring]))
 
 
-(spec/def :http.request.configuration/method #{:get})
+(spec/def :http.request.configuration/method #{:get :put})
 (spec/def :http.request.configuration/request-uri string?)
 (spec/def :http.request.configuration/endpoints map?)
 (spec/def :http.request.configuration/mime-type (spec/map-of #(= "content-type" %) string?))

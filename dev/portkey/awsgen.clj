@@ -391,6 +391,8 @@
 ;; SERIALIZATION PART ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
 
+;; @NOTE - @dupuchba : all compound optionals arguments should be
+;; managed here and in the generate-request-function - e.g. : locationName, deprecated, flattened & co
 (defserialization aws-serialization-functions
   (QUERY REST-XML "string" "long" "integer" "boolean" "timestamp" [api shape-name input] input)
 
@@ -436,41 +438,27 @@
   "Given an api description and a shape-name, returns a list representing
   the request function. Request function is split into HTTP configuration
   type as define by the ring request specification and calls
-  serialization functions.
-
-  For example calling (gen-req-fns api TagResourceRequest)
-
-  Will return :
-
-  (clojure.core/defn
-   req<-tag-resource-request
-   [input240922]
-   (cond->
-    {:uri {Resource {:http.request.field/value (ser-function-arn (input240922 :resource))
-                     :http.request.field/locationName Body}
-  ...(optional part)))"
+  serialization functions."
   [api shape-name]
   (let [required                      (get-in api ["shapes" shape-name "required"])
         request-function-input-symbol (symbol "input")
         required-function-body-part   (into {} (comp (x/for [required-name %
-                                                             :let [shape                                         (get-in api ["shapes" shape-name "members" required-name])
-                                                                   {:strs                               [shape location locationName
-                                                                                                         xmlNamespace streaming] :as sh}                 shape
-                                                                   ser-name                                      (shape-name->ser-name shape)
-                                                                   dashed-name                                   (-> required-name aws/dashed keyword)
-                                                                   ;;usefull because body don't have location / locationName attrs
-                                                                   ;; @TODO : but all the other possible options
-                                                                   location                                      (if (nil? location)
-                                                                                                                   (keyword "http.request.configuration" "body")
-                                                                                                                   (keyword "http.request.configuration" location))]]
-                                                       [location {:http.request.field/value         `(~ser-name (~request-function-input-symbol ~dashed-name))
-                                                                  :http.request.field/location-name locationName
-                                                                  :http.request.field/key           required-name
-                                                                  :http.request.field/xml-namespace xmlNamespace
-                                                                  :http.request.field/streaming     streaming}])
+                                                             :let [shape                           (get-in api ["shapes" shape-name "members" required-name])
+                                                                   {:strs [shape location] :as sh} shape
+                                                                   ser-name                        (shape-name->ser-name shape)
+                                                                   dashed-name                     (-> required-name aws/dashed keyword)
+                                                                   location                        (if (nil? location)
+                                                                                                     (keyword "http.request.configuration" "body")
+                                                                                                     (keyword "http.request.configuration" location))]]
+                                                       [location (into {:http.request.field/value      `(~ser-name (~request-function-input-symbol ~dashed-name))
+                                                                        :http.request.field/shape-name required-name}
+                                                                       (into {}
+                                                                             (map (fn [[k v]]
+                                                                                    [(keyword "http.request.field" (aws/dashed k)) v]))
+                                                                             (dissoc sh "shape" "location")))])
                                                      (x/by-key (x/into [])))
                                             required)
-        optional-function-body-part   (into [] (comp (x/for [[optional-name {:strs [shape location locationName xmlNamespace streaming]} :as member] %
+        optional-function-body-part   (into [] (comp (x/for [[optional-name {:strs [shape location] :as sh}] %
                                                              :when (not (contains? (set required) optional-name))
                                                              :let [ser-name    (shape-name->ser-name shape)
                                                                    dashed-name (-> optional-name aws/dashed keyword)
@@ -483,11 +471,13 @@
                                                                               :body)
                                                                          location)]]
                                                        `[(contains? ~request-function-input-symbol ~dashed-name)
-                                                         (update-in [~location] (fnil conj []) {:http.request.field/value         (~ser-name (~request-function-input-symbol ~dashed-name))
-                                                                                                :http.request.field/location-name ~locationName
-                                                                                                :http.request.field/key           ~optional-name
-                                                                                                :http.request.field/xml-namespace ~xmlNamespace
-                                                                                                :http.request.field/streaming     ~streaming})])
+                                                         (update-in [~location] (fnil conj []) ~(into {:http.request.field/value      (list ser-name
+                                                                                                                                            (list request-function-input-symbol dashed-name))
+                                                                                                       :http.request.field/shape-name optional-name}
+                                                                                                      (into {}
+                                                                                                            (map (fn [[k v]]
+                                                                                                                   [(keyword "http.request.field" (aws/dashed k)) v]))
+                                                                                                            (dissoc sh "shape" "location"))))])
                                                      cat)
                                             (get-in api ["shapes" shape-name "members"]))]
     `(defn- ~(shape-name->req-name shape-name) [~request-function-input-symbol]
