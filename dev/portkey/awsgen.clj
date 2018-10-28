@@ -134,6 +134,8 @@
          "locationName" string?}))
 
 
+;;@NOTE - @dupuchba : the structure aws type is always at the root of
+;;a payload if present
 (defmethod compile-time-shape-spec "structure" [_]
   (strict-strs
    :req {"type"    string?

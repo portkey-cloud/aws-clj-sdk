@@ -239,25 +239,45 @@
 ;; ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
 
-(spec/def :http.request.field/shape-name string?)
-(spec/def :http.request.field/location-name string?)
-(spec/def :http.request.field/value any?)
+;; @TODO - @dupuchba : remove this as it's only god is to break on
+;; un-supported fields when developping the sdks. Already exist in
+;; awsgen
+(defmacro ^:private strict-strs
+  "Allows to specify a string-keyed map in a strict manner (any unknown key
+   triggers a validation error).
+   This brittle behavior is on purpose: strict-strs is meant to be used to
+   validate the API json files and we want to know when something new appears
+   in a json file."
+  [& {:keys [req opt]}]
+  `(spec/and
+    (spec/every
+     (spec/or
+      ~@(mapcat (fn [[field spec]]
+                  [(keyword field)
+                   `(spec/tuple #{~field} ~spec)]) (concat req opt)))
+     :kind map?)
+    (fn [m#]
+      (every? #(contains? m# %) [~@(keys req)]))))
 
-(spec/def :http.request.field/field (spec/keys :req [:http.request.field/shape-name
-                                                     :http.request.field/value
-                                                     :http.request.field/location-name]))
-  
+
+(spec/def :http.request.field/field (strict-strs :req {:http.request.field/shape-name    string?
+                                                       :http.request.field/value         any?}
+                                                 :opt {:http.request.field/streaming boolean?
+                                                       :http.request.field/location-name string?}))
+
 (spec/def :http.request.configuration/values (spec/coll-of :http.request.field/field :kind vector?))
   
 (spec/def :http.request.configuration/uri :http.request.configuration/values)
 (spec/def :http.request.configuration/header :http.request.configuration/values)
 (spec/def :http.request.configuration/querystring :http.request.configuration/values)
+(spec/def :http.request.configuration/body :http.request.configuration/values)
 
   
 (spec/def :http.request.configuration/generate-request-function-part
   (spec/keys :opt [:http.request.configuration/uri
                    :http.request.configuration/header
-                   :http.request.configuration/querystring]))
+                   :http.request.configuration/querystring
+                   :http.request.configuration/body]))
 
 
 (spec/def :http.request.configuration/method #{:get :put})
@@ -314,27 +334,3 @@
                       [:result resp])))))
 
 
-(comment
-
-
-  
-  (require '[portkey.aws.s3 :as s3])
-  (use 'clojure.repl)
-
-  (dir s3)
-  
-  (s3/list-buckets)
-  
-  (s3/list-objects {:bucket "aa"})
-
-  ;; what to check when discovering a new protocol
-
-  ;; 1) Encoding body part => each VERB POST/PUT/DELETE/GET/PATCH
-  ;; 2) compound type of serialization input shape : list/map/structure
-  ;; 3) needs a function that sdk's function by request part e.g : header/headers/body/uri & co
-
-  ;; @TODO : need some serialization helpers to facilitate this process, given an input shape (not input-root) and a compound type, returns a set of function name group by verb
-  
-
-  
-  )
