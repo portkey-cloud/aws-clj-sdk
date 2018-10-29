@@ -194,6 +194,18 @@
                                              {:url url :uri uri})))))))
 
 
+(defn- params-to-header
+  "Compute all headers for the ring request."
+  [{:as req
+    :keys [:http.request.configuration/header]}]
+  (assoc-in req
+            [:ring.request :headers]
+            (into {}
+                  (map (fn [{:http.request.field/keys [value shape-name location-name]}]
+                         [(or location-name shape-name) value]))
+                  header)))
+
+
 (defn- params-to-body
   "to complete"
   [{:keys [:http.request.configuration/method] :as req}]
@@ -329,6 +341,7 @@
                            :headers            mime-type}})
      params-to-uri
      params-to-body
+     params-to-header
      :ring.request
      (*http-client* (fn [resp]
                       [:result resp])))))
