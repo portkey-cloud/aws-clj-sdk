@@ -205,7 +205,7 @@
 
 (defmethod runtime-shape-type-spec "string" [ns [name {:strs [min max sensitive pattern enum]}]]
   (if enum
-    `(spec/def ~(runtime-spec-name ns name) ~(into #{} (mapcat (fn [s] [[s s] [(keyword (aws/dashed s)) s]])) enum))
+    `(spec/def ~(runtime-spec-name ns name) ~(into #{} (mapcat (fn [s] [s s] [(keyword (aws/dashed s)) s])) enum))
     `(spec/def ~(runtime-spec-name ns name)
        (spec/and string?
                  ~@(when min [`(fn [s#] (<= ~min (count s#)))])
