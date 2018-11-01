@@ -236,7 +236,6 @@
 
 
 (defn- content-md5 [{{:keys [body]} :ring.request :as req}]
-  (sc.api/spy 1)
   (let [message-digest (java.security.MessageDigest/getInstance "MD5")
         _              (.update message-digest (.getBytes body))
         bytes'         (.digest message-digest)]
