@@ -412,7 +412,7 @@
                                                                                                   (if (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
                                                                                                                                       #{"shape" "locationName" "deprecated" "flattened" "xmlAttribute"}))
                                                                                                     [(or locationName required-name) (list ser-name test-form#)]
-                                                                                                    (throw (ex-info "aws-serialization-functions, field not recognized" {:sh sh
+                                                                                                    (throw (ex-info "aws-serialization-functions, field not recognized" {:sh         sh
                                                                                                                                                                          :shape-name required-name})))))
                                                                                        required)
                                                      optional-function-body-part (into [] (comp (x/for [[optional-name {:strs [shape locationName] :as sh}] %
@@ -424,7 +424,7 @@
                                                                                                                                       #{"shape" "locationName" "deprecated" "flattened" "xmlAttribute"}))
                                                                                                     `[(contains? ~input ~dashed-name)
                                                                                                       (assoc ~(or locationName optional-name) ~(list ser-name test-form#))]
-                                                                                                    (throw (ex-info "aws-serialization-functions, field not recognized" {:sh sh
+                                                                                                    (throw (ex-info "aws-serialization-functions, field not recognized" {:sh         sh
                                                                                                                                                                          :shape-name optional-name})))
                                                                                                   )
                                                                                                 cat)
@@ -434,17 +434,18 @@
 
   (QUERY "list" [api shape-name input] `(into {} (map-indexed (fn [idx# item#] [(str "member." (inc idx#)) item#]) ~input)))
 
-  (REST-XML "list" [api shape-name input] (let [{{:strs [shape locationName]} "member" :as sh
-                                                 flattened                    "flattened"
+  (REST-XML "list" [api shape-name input] (let [{{:strs [shape locationName]} "member"    :as sh
+                                                 flattened                    "flattened" ;;@NOTE : flattened is not really handled
                                                  sensitive                    "sensitive"
                                                  deprecated                   "deprecated"} (get-in api ["shapes" shape-name])]
                                             (when (or sensitive deprecated) (throw (ex-info "Sensitive or deprecated found " {:sh sh})))
-                                            `(into []
-                                                   (map (fn [~'coll]
-                                                          ~(list (shape-name->ser-name shape) 'coll)))
-                                                   ~(if flattened
-                                                      input
-                                                      (list (-> shape-name aws/dashed keyword) input)))))
+                                            (let [body `(into []
+                                                              (map (fn [~'coll]
+                                                                     ~(list (shape-name->ser-name shape) 'coll)))
+                                                              ~input)]
+                                              (if-not flattened
+                                                (hash-map (or locationName shape) body)
+                                                body))))
 
   (REST-XML "blob" [api shape-name input] `(aws/base64-encode ~input)) ;; @TODO : to implement blob
 
