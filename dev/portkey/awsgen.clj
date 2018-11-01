@@ -609,7 +609,8 @@
                                           (map (fn [{:strs [shape] {:strs [httpStatusCode]} "error"}]
                                                  [shape (keyword ns (aws/dashed shape))]))
                                           errors)
-        protocol                    (get-in api ["metadata" "protocol"])]
+        protocol                    (get-in api ["metadata" "protocol"])
+        service-id                  (get-in api ["metadata" "serviceId"])]
     `(do
        (defn ~varname
          ~@(when operation-default-arguments `[([] ~(list varname operation-default-arguments))])
@@ -624,6 +625,7 @@
                     :http.request.configuration/endpoints     ~(symbol ns "endpoints")
                     :http.request.configuration/mime-type     ~(mime-type protocol)
                     :http.request.configuration/protocol      ~protocol
+                    :http.request.configuration/service-id    ~service-id
                     :http.request.spec/input-spec             ~input-spec
                     :http.request.spec/output-spec            ~output-spec
                     :http.request.spec/error-spec             ~error-specs})))))

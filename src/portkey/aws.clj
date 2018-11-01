@@ -235,6 +235,24 @@
                 value))))
 
 
+(defn- content-md5 [{{:keys [body]} :ring.request :as req}]
+  (sc.api/spy 1)
+  (let [message-digest (java.security.MessageDigest/getInstance "MD5")
+        _              (.update message-digest (.getBytes body))
+        bytes'         (.digest message-digest)]
+    (base64-encode bytes')))
+
+
+(defn- params-to-content-md5-header
+  [{:as req :http.request.configuration/keys [protocol method service-id]}]
+  (when (and (= protocol "rest-xml") (= service-id "S3") (contains? #{:put :post :patch} method))
+    (-> req
+        (update :http.request.configuration/header
+                (fnil conj [])
+                #:http.request.field{:value         (content-md5 req)
+                                     :shape-name    "ContentMD5"
+                                     :location-name "Content-MD5"}))))
+
 
 ;; ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;; ┃                                                                              ┃
@@ -297,6 +315,7 @@
 (spec/def :http.request.configuration/endpoints map?)
 (spec/def :http.request.configuration/mime-type (spec/map-of #(= "content-type" %) string?))
 (spec/def :http.request.configuration/protocol #{"rest-xml"})
+(spec/def :http.request.configuration/service-id string?)
 ;; @TODO - @dupuchba : might be more precise
 (spec/def :http.request.configuration/response-code (spec/nilable int?))
 (spec/def :http.request.spec/input-spec (spec/nilable keyword?))
@@ -312,6 +331,7 @@
                    :http.request.configuration/mime-type
                    :http.request.configuration/response-code
                    :http.request.configuration/protocol
+                   :http.request.configuration/service-id
                    :http.request.spec/input-spec
                    :http.request.spec/output-spec
                    :http.request.spec/error-spec]))
@@ -326,11 +346,13 @@
   "The HTTP Call function.
   Takes a map of inputs / configuration and compute a ring-request to
   make the HTTP call."
-  [{:keys [:http.request.configuration/endpoints
-           :http.request.configuration/method
-           :http.request.configuration/request-uri
-           :http.request.configuration/mime-type] :as req}]
-  (spec/assert :http.request.configuration/configuration req)
+  [{:keys                                         [:http.request.configuration/endpoints
+                                                   :http.request.configuration/method
+                                                   :http.request.configuration/request-uri
+                                                   :http.request.configuration/mime-type] :as req}]
+  #_(spec/check-asserts true)
+  (binding [spec/*compile-asserts* true]
+    (spec/assert :http.request.configuration/configuration req))
   (let [{:keys [endpoint credential-scope signature-version]} (endpoints (region))]
     (->
      (into req
@@ -341,6 +363,10 @@
                            :headers            mime-type}})
      params-to-uri
      params-to-body
+     ;; @NOTE - @dupucba : must be placed before params-to-header and
+     ;; after params-to-body as it rely on both to compute content-md5
+     ;; value
+     params-to-content-md5-header
      params-to-header
      :ring.request
      (*http-client* (fn [resp]
