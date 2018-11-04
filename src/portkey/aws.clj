@@ -185,12 +185,14 @@
             [:ring.request :url]
             (str/replace url
                          #"\{([^\}\+]*)[+]*}"
-                         (fn [[_ name]]
-                           (if-some [v (some #(and (= name (:http.request.field/location-name %)) (:http.request.field/value %)) uri)]
+                         (fn [[_ n]]
+                           (if-some [v (some #(and (= n (:http.request.field/location-name %))
+                                                   (:http.request.field/value %))
+                                             uri)]
                              ;; @TODO : verify if url encoding is
                              ;; automatic with clj-http
                              v
-                             (throw (ex-info (str "Missing parameter " name)
+                             (throw (ex-info (str "Missing parameter " n)
                                              {:url url :uri uri})))))))
 
 
@@ -201,38 +203,61 @@
   (assoc-in req
             [:ring.request :headers]
             (into {}
-                  (map (fn [{:http.request.field/keys [value shape-name location-name]}]
-                         [(or location-name shape-name) value]))
+                  (map (fn [{:http.request.field/keys [value name location-name]}]
+                         [(or location-name name) value]))
                   header)))
 
 
 (defn- params-to-body
   "to complete"
   [{:keys [:http.request.configuration/method] :as req}]
-  ;; @TODO - @dupuchba : body should be a map and not a collection of field, to check
-  (let [{{xmlns "uri"} :http.request.field/xml-namespace
-         :keys         [:http.request.field/shape-name
-                        :http.request.field/value
-                        :http.request.field/streaming]}
-        (-> req :http.request.configuration/body first)
-        map->xml (fn map->xml [m]
-                   (into [] (map (fn [[k v]]
-                                   (if (vector? v)
-                                     (into [] (map (fn [val'] (map->xml {k val'}))) v)
-                                     {:tag k :content (cond
-                                                        (map? v)    (map->xml v)
-                                                        (string? v) [v]
-                                                        :else (throw (ex-info "Type not known for xml conversion." {:type (type v)
-                                                                                                                    :req  req})))})))
-                         m))]
-    (assoc-in req
-              [:ring.request :body]
-              ;; @NOTE : streaming doesn't need to be xmlfied
-              (if (and (contains? #{:put :post} method) (not (true? streaming)))
-                (xml/emit-str {:tag     shape-name
-                               :attrs   {:xmlns xmlns}
-                               :content (map->xml value)})
-                value))))
+  (if (contains? #{:put :post :patch} method)
+    ;; @TODO - @dupuchba : body should be a map and not a collection of field, to check
+    (let [{:http.request.field/keys [streaming value] :as body} (-> req :http.request.configuration/body first)
+          map->xml                                              (fn map->xml
+                                                                  ([all]
+                                                                   (map->xml all nil))
+                                                                  ([{:http.request.field/keys [name shape value type location-name flattened xml-namespace xml-attribute] :as all} pre]
+                                                                   (let [template-fn (fn template-fn
+                                                                                       ([content]
+                                                                                        (template-fn content nil))
+                                                                                       ([content xml-attrs]
+                                                                                        (let [{prefix "prefix" uri "uri"} xml-namespace]
+                                                                                          (cond-> {:tag     (or pre location-name name shape)
+                                                                                                   :content content}
+                                                                                            xml-namespace (assoc :attrs (into {(if prefix (str "xmlns:" prefix) "xmlns") uri}
+                                                                                                                              (when-let [attrs (seq xml-attrs)]
+                                                                                                                                (into {}
+                                                                                                                                      (map (fn [{:http.request.field/keys [location-name value]}]
+                                                                                                                                             [location-name value]))
+                                                                                                                                      attrs))))))))]
+                                                                     (cond
+                                                                       (= type "structure") (template-fn (into []
+                                                                                                               (comp (remove #(:http.request.field/xml-attribute %))
+                                                                                                                     (map map->xml)) value)
+                                                                                                         ;; @NOTE -  @dupuchba : used to fill xml-attribute on it's direct parent
+                                                                                                         (sequence (keep (fn [{:http.request.field/keys [xml-attribute] :as val}]
+                                                                                                                           (and xml-attribute val)))
+                                                                                                                   value))
+                                                                       (= type "list")      (if flattened
+                                                                                              (into [] (map #(map->xml % location-name) value))
+                                                                                              (template-fn (into [] (map map->xml) value)))
+                                                                       :else                (template-fn value)))))]
+      (assoc-in req
+                [:ring.request :body]
+                ;; @NOTE : streaming doesn't need to be xmlfied
+                (if (not (true? streaming))
+                  (xml/emit-str (map->xml body))
+                  value)))
+    req))
+
+(comment
+
+
+
+  )
+
+
 
 
 (defn- content-md5 [{{:keys [body]} :ring.request :as req}]
@@ -243,14 +268,16 @@
 
 
 (defn- params-to-content-md5-header
+  "Add the Contente-MD5 header to the request for S3 service."
   [{:as req :http.request.configuration/keys [protocol method service-id]}]
-  (when (and (= protocol "rest-xml") (= service-id "S3") (contains? #{:put :post :patch} method))
+  (if (and (= protocol "rest-xml") (= service-id "S3") (contains? #{:put :post :patch} method))
     (-> req
         (update :http.request.configuration/header
                 (fnil conj [])
                 #:http.request.field{:value         (content-md5 req)
                                      :shape-name    "ContentMD5"
-                                     :location-name "Content-MD5"}))))
+                                     :location-name "Content-MD5"}))
+    req))
 
 
 ;; ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
@@ -345,10 +372,10 @@
   "The HTTP Call function.
   Takes a map of inputs / configuration and compute a ring-request to
   make the HTTP call."
-  [{:keys                                         [:http.request.configuration/endpoints
-                                                   :http.request.configuration/method
-                                                   :http.request.configuration/request-uri
-                                                   :http.request.configuration/mime-type] :as req}]
+  [{:keys [:http.request.configuration/endpoints
+           :http.request.configuration/method
+           :http.request.configuration/request-uri
+           :http.request.configuration/mime-type] :as req}]
   #_(spec/check-asserts true)
   (binding [spec/*compile-asserts* true]
     (spec/assert :http.request.configuration/configuration req))
