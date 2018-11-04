@@ -452,7 +452,7 @@
                                                                                                    (map (fn [[k v]]
                                                                                                           [(keyword "http.request.field" (aws/dashed k)) v])))
                                                 {{:strs [shape] :as member} "member" :as sh} (get-in api ["shapes" shape-name])]
-                                            (when-not (or (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"type" "member" "deprecated" "flattened"}))
+                                            (when-not (or (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"type" "member" "deprecated" "flattened" "min" "max"}))
                                                           (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) member) #{"shape"})))
                                               (throw (ex-info "List Type / REST-XML : Sensitive not handled" {:sh sh})))
                                             (into #:http.request.field{:value `(into []
