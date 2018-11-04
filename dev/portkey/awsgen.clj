@@ -396,8 +396,16 @@
 ;; @NOTE - @dupuchba : all compound optionals arguments should be
 ;; managed here and in the generate-request-function - e.g. : locationName, deprecated, flattened & co
 (defserialization aws-serialization-functions
-  (QUERY REST-XML "string" "long" "integer" "boolean" "timestamp" [api shape-name input] {:http.request.field/value input
-                                                                                          :http.request.field/shape shape-name})
+
+  (QUERY REST-XML "string" [api shape-name input] {:http.request.field/value  (if-let [enums (get-in api ["shapes" shape-name "enum"])]
+                                                                                `(get ~(into {}
+                                                                                             (mapcat (fn [s] [[s s] [(keyword (aws/dashed s)) s]]))
+                                                                                             enums) ~input)
+                                                                                input)
+                                                   :http.request.field/shape shape-name})
+
+  (QUERY REST-XML "long" "integer" "boolean" "timestamp" [api shape-name input] {:http.request.field/value input
+                                                                                 :http.request.field/shape shape-name})
 
   (REST-XML "structure" [api shape-name input] (let [required                      (get-in api ["shapes" shape-name "required"])
                                                      request-function-input-symbol (symbol "input")
