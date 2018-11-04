@@ -198,14 +198,38 @@
 
 (defn- params-to-header
   "Compute all headers for the ring request."
-  [{:as req
+  [{:as   req
     :keys [:http.request.configuration/header]}]
-  (assoc-in req
-            [:ring.request :headers]
-            (into {}
-                  (map (fn [{:http.request.field/keys [value name location-name]}]
-                         [(or location-name name) value]))
-                  header)))
+  (update-in req
+             [:ring.request :headers]
+             (fnil into {})
+             (into {}
+                   (map (fn [{:http.request.field/keys [value name location-name]}]
+                          [(or location-name name) value]))
+                   header)))
+
+
+(defn- params-to-headers
+  "Compute all headers for the ring request. Comes from map type where
+  we have to generate several headers."
+  [{:as   req
+    :keys [:http.request.configuration/headers]}]
+  (update-in req
+             [:ring.request :headers]
+             (fnil into {})
+             (into {}
+                   (comp (mapcat (fn [{:http.request.field/keys [type location-name] :as v}]
+                                   ;; @NOTE - @dupuchba : in case of map, we have to duplicate location-name with it's key name and value
+                                   (if (= "map" type)
+                                     (into []
+                                           (map (fn [[k v]]
+                                                  #:http.request.field{:location-name (str location-name (:http.request.field/value k))
+                                                                       :value         (:http.request.field/value v)})
+                                                (v :http.request.field/value)))
+                                     [v])))
+                         (map (fn [{:http.request.field/keys [value name location-name]}]
+                                [(or location-name name) value])))
+                   headers)))
 
 
 (defn- params-to-body
@@ -250,14 +274,6 @@
                   (xml/emit-str (map->xml body))
                   value)))
     req))
-
-(comment
-
-
-
-  )
-
-
 
 
 (defn- content-md5 [{{:keys [body]} :ring.request :as req}]
@@ -394,6 +410,7 @@
      ;; value
      params-to-content-md5-header
      params-to-header
+     params-to-headers
      :ring.request
      (*http-client* (fn [resp]
                       [:result resp])))))

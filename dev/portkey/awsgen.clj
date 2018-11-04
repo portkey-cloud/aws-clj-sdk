@@ -397,11 +397,11 @@
 ;; managed here and in the generate-request-function - e.g. : locationName, deprecated, flattened & co
 (defserialization aws-serialization-functions
 
-  (QUERY REST-XML "string" [api shape-name input] {:http.request.field/value  (if-let [enums (get-in api ["shapes" shape-name "enum"])]
-                                                                                `(get ~(into {}
-                                                                                             (mapcat (fn [s] [[s s] [(keyword (aws/dashed s)) s]]))
-                                                                                             enums) ~input)
-                                                                                input)
+  (QUERY REST-XML "string" [api shape-name input] {:http.request.field/value (if-let [enums (get-in api ["shapes" shape-name "enum"])]
+                                                                               `(get ~(into {}
+                                                                                            (mapcat (fn [s] [[s s] [(keyword (aws/dashed s)) s]]))
+                                                                                            enums) ~input)
+                                                                               input)
                                                    :http.request.field/shape shape-name})
 
   (QUERY REST-XML "long" "integer" "boolean" "timestamp" [api shape-name input] {:http.request.field/value input
@@ -455,10 +455,10 @@
 
   (QUERY "list" [api shape-name input] `(into {} (map-indexed (fn [idx# item#] [(str "member." (inc idx#)) item#]) ~input)))
 
-  (REST-XML "list" [api shape-name input] (let [x-filter (comp (filter (fn [[k v]]
-                                                                         (not (contains? #{"member"} k))))
-                                                               (map (fn [[k v]]
-                                                                      [(keyword "http.request.field" (aws/dashed k)) v])))
+  (REST-XML "list" [api shape-name input] (let [x-filter                                  (comp (filter (fn [[k v]]
+                                                                                                          (not (contains? #{"member"} k))))
+                                                                                                (map (fn [[k v]]
+                                                                                                       [(keyword "http.request.field" (aws/dashed k)) v])))
                                                 {{:strs [shape] :as member} "member" :as sh
                                                  flattened                  "flattened"
                                                  sensitive                  "sensitive"
@@ -475,7 +475,22 @@
   (REST-XML "blob" [api shape-name input] {:http.request.field/value `(aws/base64-encode ~input)
                                            :http.request.field/shape shape-name}) ;; @TODO : to implement blob
 
-  (REST-XML "map" [api shape-name input] input)) ;; @TODO : to implement map
+  (REST-XML "map" [api shape-name input] (let [x-filter                   (comp (filter (fn [[k v]]
+                                                                                          (not (contains? #{"key" "value"} k))))
+                                                                                (map (fn [[k v]]
+                                                                                       [(keyword "http.request.field" (aws/dashed k)) v])))
+                                               {:strs [key value] :as sh} (get-in api ["shapes" shape-name])
+                                               key-shape-name             (key "shape")
+                                               value-shape-name           (value "shape")]
+                                           (into #:http.request.field{:value `(into []
+                                                                                    (map (fn [[~'k ~'v]]
+                                                                                           [(into ~(list (shape-name->ser-name key-shape-name) 'k)
+                                                                                                  ~(into {:http.request.field/map-info "key"} x-filter (get-in api ["shapes" key-shape-name])))
+                                                                                            (into ~(list (shape-name->ser-name value-shape-name) 'v)
+                                                                                                  ~(into {:http.request.field/map-info "value"} x-filter (get-in api ["shapes" value-shape-name])))]))
+                                                                                    ~'input)
+                                                                      :shape shape-name}
+                                                 (into {} x-filter sh))))) ;; @TODO : to implement map
 
 
 (defn generate-serialization-declare
