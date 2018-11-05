@@ -1,16 +1,20 @@
 (ns portkey.aws
   (:refer-clojure :exclude [cond])
-  (:require [clj-http.client :as http]
+  (:require [camel-snake-kebab.core :as kebab]
+            [clj-http.client :as http]
             [clojure.core.async :as async]
             [clojure.data.xml :as xml]
             [clojure.java.io :as io]
             [clojure.spec.alpha :as spec]
             [clojure.string :as str]
-            [portkey.awssig :as sig]))
+            [portkey.awssig :as sig]
+            [ring.util.codec :as codec]))
 
 
 (defn dashed [^String s]
-  (-> s (.replaceAll "(?<=[a-z0-9])(?=[A-Z]([a-z]|$))|_" "-") .toLowerCase))
+  (-> s
+      (str/replace #"[\W]*" "")
+      kebab/->kebab-case-string))
 
 
 ; Java 8
@@ -232,7 +236,7 @@
                    headers)))
 
 
-(defn- params-to-body
+(defn- params-to-body-rest-xml
   "to complete"
   [{:keys [:http.request.configuration/method] :as req}]
   (if (contains? #{:put :post :patch} method)
@@ -274,6 +278,28 @@
                   (xml/emit-str (map->xml body))
                   value)))
     req))
+
+
+(defn- params-to-body-ec2
+  "to complete"
+  [{:keys [:http.request.configuration/method
+           :http.request.configuration/action
+           :http.request.configuration/version] :as req}]
+  (if (contains? #{:put :post :patch} method)
+    (assoc-in req
+              [:ring.request :body]
+              (-> {"Action"  action
+                   "Version" version}
+                  codec/form-encode))
+    req))
+
+
+(defn- params-to-body
+  "to complete"
+  [{:keys [:http.request.configuration/protocol] :as req}]
+  (case protocol
+    "rest-xml" (params-to-body-rest-xml req)
+    "ec2"      (params-to-body-ec2 req)))
 
 
 (defn- content-md5 [{{:keys [body]} :ring.request :as req}]
@@ -352,11 +378,13 @@
                    :http.request.configuration/body]))
 
 
-(spec/def :http.request.configuration/method #{:get :put})
+(spec/def :http.request.configuration/method #{:get :put :patch})
+(spec/def :http.request.configuration/version string?)
+(spec/def :http.request.configuration/action string?)
 (spec/def :http.request.configuration/request-uri string?)
 (spec/def :http.request.configuration/endpoints map?)
 (spec/def :http.request.configuration/mime-type (spec/map-of #(= "content-type" %) string?))
-(spec/def :http.request.configuration/protocol #{"rest-xml"})
+(spec/def :http.request.configuration/protocol #{"rest-xml" "ec2"})
 (spec/def :http.request.configuration/service-id string?)
 ;; @TODO - @dupuchba : might be more precise
 (spec/def :http.request.configuration/response-code (spec/nilable int?))
@@ -373,6 +401,8 @@
                    :http.request.configuration/mime-type
                    :http.request.configuration/response-code
                    :http.request.configuration/protocol
+                   :http.request.configuration/action
+                   :http.request.configuration/version
                    :http.request.configuration/service-id
                    :http.request.spec/input-spec
                    :http.request.spec/output-spec

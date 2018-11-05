@@ -96,6 +96,13 @@
          "sensitive" boolean?}))
 
 
+(defmethod compile-time-shape-spec "float" [_]
+  (strict-strs
+   :req {"type" string?}
+   :opt {"min" #(or (pos-int? %) (zero? %))
+         "max" int?}))
+
+
 (defmethod compile-time-shape-spec "long" [_]
   (strict-strs
    :req {"type" string?}
@@ -225,6 +232,10 @@
 
 (defmethod runtime-shape-type-spec "double" [ns [name _]]
   `(spec/def ~(runtime-spec-name ns name) double?))
+
+
+(defmethod runtime-shape-type-spec "float" [ns [name _]]
+  `(spec/def ~(runtime-spec-name ns name) float?))
 
 
 (defmethod runtime-shape-type-spec "boolean" [ns [name _]]
@@ -397,93 +408,107 @@
 ;; managed here and in the generate-request-function - e.g. : locationName, deprecated, flattened & co
 (defserialization aws-serialization-functions
 
-  (QUERY REST-XML "string" [api shape-name input] {:http.request.field/value (if-let [enums (get-in api ["shapes" shape-name "enum"])]
-                                                                               `(get ~(into {}
-                                                                                            (mapcat (fn [s] [[s s] [(keyword (aws/dashed s)) s]]))
-                                                                                            enums) ~input)
-                                                                               input)
-                                                   :http.request.field/shape shape-name})
+  (EC2 QUERY REST-XML "string"
+       [api shape-name input]
+       {:http.request.field/value (if-let [enums (get-in api ["shapes" shape-name "enum"])]
+                                    `(get ~(into {}
+                                                 (mapcat (fn [s] [[s s] [(keyword (aws/dashed s)) s]]))
+                                                 enums) ~input)
+                                    input)
+        :http.request.field/shape shape-name})
 
-  (QUERY REST-XML "long" "integer" "boolean" "timestamp" [api shape-name input] {:http.request.field/value input
-                                                                                 :http.request.field/shape shape-name})
+  (EC2 QUERY REST-XML "long" "integer" "boolean" "timestamp" "double"
+       [api shape-name input]
+       {:http.request.field/value input
+        :http.request.field/shape shape-name})
 
-  (REST-XML "structure" [api shape-name input] (let [required                      (get-in api ["shapes" shape-name "required"])
-                                                     request-function-input-symbol (symbol "input")
-                                                     x-filter                      (comp (filter (fn [[k v]]
-                                                                                                   (not (contains? #{"members" "required"} k))))
-                                                                                         (map (fn [[k v]]
-                                                                                                [(keyword "http.request.field" (aws/dashed k)) v])))
-                                                     required-function-body-part   (into [] (comp (x/for [required-name %
-                                                                                                          :let [{:strs [shape] :as sh} (get-in api ["shapes" shape-name "members" required-name])
-                                                                                                                ser-name               (shape-name->ser-name shape)
-                                                                                                                dashed-name            (-> required-name aws/dashed keyword)
-                                                                                                                test-form#             `(~dashed-name ~request-function-input-symbol)]]
-                                                                                                    (if-not  (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
-                                                                                                                                             #{"shape" "locationName" "flattened" "deprecated" "xmlAttribute"}))
-                                                                                                      (throw (ex-info "Structure Type / REST-XML : Field not handled" {:sh sh}))
-                                                                                                      `(into ~(list ser-name test-form#)
-                                                                                                             ~(into {:http.request.field/name required-name}
-                                                                                                                    x-filter sh)))))
-                                                                                         required)
-                                                     optional-function-body-part   (into [] (comp (x/for [[optional-name {:strs [shape] :as sh}] %
-                                                                                                          :when (not (contains? (set required) optional-name))
-                                                                                                          :let [ser-name    (shape-name->ser-name shape)
-                                                                                                                dashed-name (-> optional-name aws/dashed keyword)]]
-                                                                                                    (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
-                                                                                                                                            #{"shape" "locationName" "flattened" "deprecated" "xmlAttribute"}))
-                                                                                                      (throw (ex-info "Structure Type / REST-XML : Field not handled" {:sh sh}))
-                                                                                                      `[(contains? ~request-function-input-symbol ~dashed-name)
-                                                                                                        (update-in [:http.request.field/value]
-                                                                                                                   (fnil conj [])
-                                                                                                                   (into ~(list ser-name
-                                                                                                                                (list request-function-input-symbol dashed-name))
-                                                                                                                         ~(into {:http.request.field/name optional-name} x-filter sh)))]))
-                                                                                                  cat)
-                                                                                         (get-in api ["shapes" shape-name "members"]))]
-                                                 `(cond-> ~(into {:http.request.field/value required-function-body-part
-                                                                  :http.request.field/shape shape-name}
-                                                                 (into {} x-filter (get-in api ["shapes" shape-name])))
-                                                    ~@optional-function-body-part)))
+  (EC2 REST-XML "structure"
+       [api shape-name input]
+       (let [required                      (get-in api ["shapes" shape-name "required"])
+             request-function-input-symbol (symbol "input")
+             x-filter                      (comp (filter (fn [[k v]]
+                                                           (not (contains? #{"members" "required"} k))))
+                                                 (map (fn [[k v]]
+                                                        [(keyword "http.request.field" (aws/dashed k)) v])))
+             required-function-body-part   (into [] (comp (x/for [required-name %
+                                                                  :let [{:strs [shape] :as sh} (get-in api ["shapes" shape-name "members" required-name])
+                                                                        ser-name               (shape-name->ser-name shape)
+                                                                        dashed-name            (-> required-name aws/dashed keyword)
+                                                                        test-form#             `(~dashed-name ~request-function-input-symbol)]]
+                                                            (if-not  (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
+                                                                                                     #{"shape" "locationName" "flattened" "deprecated" "xmlAttribute" "queryName"}))
+                                                              (throw (ex-info "Structure Type / REST-XML : Field not handled" {:sh sh}))
+                                                              `(into ~(list ser-name test-form#)
+                                                                     ~(into {:http.request.field/name required-name}
+                                                                            x-filter sh)))))
+                                                 required)
+             optional-function-body-part   (into [] (comp (x/for [[optional-name {:strs [shape] :as sh}] %
+                                                                  :when (not (contains? (set required) optional-name))
+                                                                  :let [ser-name    (shape-name->ser-name shape)
+                                                                        dashed-name (-> optional-name aws/dashed keyword)]]
+                                                            (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
+                                                                                                    #{"shape" "locationName" "flattened" "deprecated" "xmlAttribute" "queryName"}))
+                                                              (throw (ex-info "Structure Type / REST-XML : Field not handled" {:sh sh}))
+                                                              `[(contains? ~request-function-input-symbol ~dashed-name)
+                                                                (update-in [:http.request.field/value]
+                                                                           (fnil conj [])
+                                                                           (into ~(list ser-name
+                                                                                        (list request-function-input-symbol dashed-name))
+                                                                                 ~(into {:http.request.field/name optional-name} x-filter sh)))]))
+                                                          cat)
+                                                 (get-in api ["shapes" shape-name "members"]))]
+         `(cond-> ~(into {:http.request.field/value required-function-body-part
+                          :http.request.field/shape shape-name}
+                         (into {} x-filter (get-in api ["shapes" shape-name])))
+            ~@optional-function-body-part)))
 
-  (QUERY "list" [api shape-name input] `(into {} (map-indexed (fn [idx# item#] [(str "member." (inc idx#)) item#]) ~input)))
+  (QUERY "list"
+         [api shape-name input]
+         `(into {} (map-indexed (fn [idx# item#] [(str "member." (inc idx#)) item#]) ~input)))
 
-  (REST-XML "list" [api shape-name input] (let [x-filter                                     (comp (filter (fn [[k v]]
-                                                                                                             (not (contains? #{"member"} k))))
-                                                                                                   (map (fn [[k v]]
-                                                                                                          [(keyword "http.request.field" (aws/dashed k)) v])))
-                                                {{:strs [shape] :as member} "member" :as sh} (get-in api ["shapes" shape-name])]
-                                            (when-not (or (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"type" "member" "deprecated" "flattened" "min" "max"}))
-                                                          (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) member) #{"shape"})))
-                                              (throw (ex-info "List Type / REST-XML : Sensitive not handled" {:sh sh})))
-                                            (into #:http.request.field{:value `(into []
-                                                                                     (map (fn [~'coll]
-                                                                                            (merge ~(list (shape-name->ser-name shape) 'coll)
-                                                                                                   ~(into {} x-filter member))))
-                                                                                     ~'input)
-                                                                       :shape shape-name}
-                                                  (into {} x-filter sh))))
+  (EC2 REST-XML "list"
+       [api shape-name input]
+       (let [x-filter                                     (comp (filter (fn [[k v]]
+                                                                          (not (contains? #{"member"} k))))
+                                                                (map (fn [[k v]]
+                                                                       [(keyword "http.request.field" (aws/dashed k)) v])))
+             {{:strs [shape] :as member} "member" :as sh} (get-in api ["shapes" shape-name])]
+         (when-not (or (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"type" "member" "deprecated" "flattened" "min" "max"}))
+                       (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) member) #{"shape"})))
+           (throw (ex-info "List Type / REST-XML : Sensitive not handled" {:sh sh})))
+         (into #:http.request.field{:value `(into []
+                                                  (map (fn [~'coll]
+                                                         (merge ~(list (shape-name->ser-name shape) 'coll)
+                                                                ~(into {} x-filter member))))
+                                                  ~'input)
+                                    :shape shape-name}
+               (into {} x-filter sh))))
 
-  (REST-XML "blob" [api shape-name input] {:http.request.field/value `(aws/base64-encode ~input)
-                                           :http.request.field/shape shape-name}) ;; @TODO : to implement blob
+  (EC2 REST-XML "blob"
+       [api shape-name input]
+       {:http.request.field/value `(aws/base64-encode ~input)
+        :http.request.field/shape shape-name}) ;; @TODO : to implement blob
 
-  (REST-XML "map" [api shape-name input] (let [x-filter                   (comp (filter (fn [[k v]]
-                                                                                          (not (contains? #{"key" "value"} k))))
-                                                                                (map (fn [[k v]]
-                                                                                       [(keyword "http.request.field" (aws/dashed k)) v])))
-                                               {:strs [key value] :as sh} (get-in api ["shapes" shape-name])
-                                               key-shape-name             (key "shape")
-                                               value-shape-name           (value "shape")]
-                                           (when-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"shape" "key" "value" "type"}))
-                                             (throw (ex-info "Map type / REST-XML : Sensitive/flattened/locatioonName not handled" {:sh sh})))
-                                           (into #:http.request.field{:value `(into []
-                                                                                    (map (fn [[~'k ~'v]]
-                                                                                           [(into ~(list (shape-name->ser-name key-shape-name) 'k)
-                                                                                                  ~(into {:http.request.field/map-info "key"} x-filter (get-in api ["shapes" key-shape-name])))
-                                                                                            (into ~(list (shape-name->ser-name value-shape-name) 'v)
-                                                                                                  ~(into {:http.request.field/map-info "value"} x-filter (get-in api ["shapes" value-shape-name])))]))
-                                                                                    ~'input)
-                                                                      :shape shape-name}
-                                                 (into {} x-filter sh))))) ;; @TODO : to implement map
+  (EC2 REST-XML "map"
+       [api shape-name input]
+       (let [x-filter                   (comp (filter (fn [[k v]]
+                                                        (not (contains? #{"key" "value"} k))))
+                                              (map (fn [[k v]]
+                                                     [(keyword "http.request.field" (aws/dashed k)) v])))
+             {:strs [key value] :as sh} (get-in api ["shapes" shape-name])
+             key-shape-name             (key "shape")
+             value-shape-name           (value "shape")]
+         (when-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"shape" "key" "value" "type"}))
+           (throw (ex-info "Map type / REST-XML : Sensitive/flattened/locatioonName not handled" {:sh sh})))
+         (into #:http.request.field{:value `(into []
+                                                  (map (fn [[~'k ~'v]]
+                                                         [(into ~(list (shape-name->ser-name key-shape-name) 'k)
+                                                                ~(into {:http.request.field/map-info "key"} x-filter (get-in api ["shapes" key-shape-name])))
+                                                          (into ~(list (shape-name->ser-name value-shape-name) 'v)
+                                                                ~(into {:http.request.field/map-info "value"} x-filter (get-in api ["shapes" value-shape-name])))]))
+                                                  ~'input)
+                                    :shape shape-name}
+               (into {} x-filter sh))))) ;; @TODO : to implement map
 
 
 (defn generate-serialization-declare
@@ -529,7 +554,7 @@
                                                                                                      (keyword "http.request.configuration" "body")
                                                                                                      (keyword "http.request.configuration" location))]]
                                                        (if (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
-                                                                                           #{"shape" "location" "locationName" "streaming" "xmlNamespace" "deprecated"}))
+                                                                                           #{"shape" "location" "locationName" "streaming" "xmlNamespace" "deprecated" "idempotencyToken"}))
                                                          ;; @NOTE : locationName is handled at runtime on params-to-body on a per protocol basis
                                                          ;; @NOTE : streaming is handled at runtime on params-to-body for the rest-xml protocol
                                                          ;; @NOTE : xmlNamespace is handled at runtime on params-to-body for the rest-xml protocol
@@ -552,7 +577,7 @@
                                                                               :body)
                                                                          location)]]
                                                        (if (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
-                                                                                           #{"shape" "location" "locationName" "streaming" "xmlNamespace" "deprecated"}))
+                                                                                           #{"shape" "location" "locationName" "streaming" "xmlNamespace" "deprecated" "idempotencyToken"}))
                                                          `[(contains? ~request-function-input-symbol ~dashed-name)
                                                            (update-in [~location]
                                                                       (fnil conj [])
@@ -614,7 +639,7 @@
   "Retourne the request mime type given it's protocol."
   [protocol]
   (case protocol
-    "rest-xml" {"content-type" "application/x-www-form-urlencoded; charset=utf-8"}))
+    ("rest-xml" "ec2") {"content-type" "application/x-www-form-urlencoded; charset=utf-8"}))
 
 
 (defn generate-operation-function
@@ -643,7 +668,8 @@
                                                  [shape (keyword ns (aws/dashed shape))]))
                                           errors)
         protocol                    (get-in api ["metadata" "protocol"])
-        service-id                  (get-in api ["metadata" "serviceId"])]
+        service-id                  (get-in api ["metadata" "serviceId"])
+        version                     (get-in api ["metadata" "apiVersion"])]
     `(do
        (defn ~varname
          ~@(when operation-default-arguments `[([] ~(list varname operation-default-arguments))])
@@ -659,6 +685,8 @@
                     :http.request.configuration/mime-type     ~(mime-type protocol)
                     :http.request.configuration/protocol      ~protocol
                     :http.request.configuration/service-id    ~service-id
+                    :http.request.configuration/version       ~version
+                    :http.request.configuration/action        ~name
                     :http.request.spec/input-spec             ~input-spec
                     :http.request.spec/output-spec            ~output-spec
                     :http.request.spec/error-spec             ~error-specs})))))
@@ -699,20 +727,21 @@
   functions."
   [ns-sym {:strs [operations] :as api}]
   (case (get-in api ["metadata" "protocol"])
-    "rest-xml" (let [inputs+inputs-root            (shapes-by-usage api)
-                     serialization+request-defns   (for [[k gen]          {:inputs      [generate-serialization-declare
-                                                                                         (partial generate-serialization-function api)]
-                                                                           :input-roots [(partial generate-request-function api)]}
-                                                         gen              gen
-                                                         input-shape-name (inputs+inputs-root k)]
-                                                     (gen input-shape-name))
-                     runtime-specs+operation-defns (for [[k gen] {"shapes"     (comp #(doto % eval) (partial runtime-shape-type-spec (name ns-sym)) assert-shape-spec)
-                                                                  ;; @NOTE : eval to make specs available right away
-                                                                  "operations" (partial generate-operation-function api (name ns-sym))}
-                                                         desc    (api k)]
-                                                     (gen desc))]
-                 (concat serialization+request-defns
-                         runtime-specs+operation-defns))
+    ("rest-xml" "ec2") (let [inputs+inputs-root (shapes-by-usage api)
+                             serialization+request-defns (for [[k gen]
+                                                               {:inputs [generate-serialization-declare
+                                                                         (partial generate-serialization-function api)]
+                                                                :input-roots [(partial generate-request-function api)]}
+                                                               gen              gen
+                                                               input-shape-name (inputs+inputs-root k)]
+                                                           (gen input-shape-name))
+                             runtime-specs+operation-defns (for [[k gen] {"shapes"     (comp #(doto % eval) (partial runtime-shape-type-spec (name ns-sym)) assert-shape-spec)
+                                                                          ;; @NOTE : eval to make specs available right away
+                                                                          "operations" (partial generate-operation-function api (name ns-sym))}
+                                                                 desc    (api k)]
+                                                             (gen desc))]
+                         (concat serialization+request-defns
+                                 runtime-specs+operation-defns))
     (do
       (binding [*out* *err*] (prn 'skipping ns-sym 'protocol (get-in api ["metadata" "protocol"])))
       [(list 'comment 'TODO 'support (get-in api ["metadata" "protocol"]))])))
