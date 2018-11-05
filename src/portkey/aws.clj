@@ -284,12 +284,21 @@
   "to complete"
   [{:keys [:http.request.configuration/method
            :http.request.configuration/action
-           :http.request.configuration/version] :as req}]
+           :http.request.configuration/version
+           :http.request.configuration/body] :as req}]
   (if (contains? #{:put :post :patch} method)
     (assoc-in req
               [:ring.request :body]
-              (-> {"Action"  action
-                   "Version" version}
+              (-> (into {"Action"  action
+                         "Version" version}
+                        (comp (mapcat (fn [{:http.request.field/keys [type value location-name name] :as field}]
+                                        (if (= type "list")
+                                          (into []
+                                                (map-indexed (fn [idx item]
+                                                               [(str location-name "." (inc idx)) (:http.request.field/value item)]))
+                                                value)
+                                          [[(or location-name name) value]]))))
+                        body)
                   codec/form-encode))
     req))
 
