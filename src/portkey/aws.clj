@@ -289,18 +289,72 @@
   (if (contains? #{:put :post :patch} method)
     (assoc-in req
               [:ring.request :body]
-              (-> (into {"Action"  action
-                         "Version" version}
-                        (comp (mapcat (fn [{:http.request.field/keys [type value location-name name] :as field}]
-                                        (if (= type "list")
-                                          (into []
-                                                (map-indexed (fn [idx item]
-                                                               [(str location-name "." (inc idx)) (:http.request.field/value item)]))
-                                                value)
-                                          [[(or location-name name) value]]))))
-                        body)
+              (-> (let [template-fn      (fn template-fn
+                                           ([field]
+                                            (template-fn nil nil field))
+                                           ([parent-type prefix {:http.request.field/keys [name value location-name type] :as field}]
+                                            [(str (or (when (= parent-type "structure") (str prefix "."))
+                                                      prefix
+                                                      "")
+                                                  (when-not (= parent-type "list") name))
+                                             value]))
+                        map->flatten-map (fn map->flatten-map
+                                           ([field]
+                                            (map->flatten-map nil nil field))
+                                           ([parent-type prefix {:http.request.field/keys [name value location-name type] :as field}]
+                                            (cond
+                                              (= type "list")      (into {} (map-indexed (fn [idx item]
+                                                                                           (map->flatten-map "list" (if prefix
+                                                                                                                      (str prefix "." location-name "." (inc idx))
+                                                                                                                      (str location-name "." (inc idx))) item))) value)
+                                              (= type "structure") (into {} (map (partial map->flatten-map "structure" prefix)) value)
+                                              :else                (template-fn parent-type prefix field))))]
+                    (into {"Action"  action
+                           "Version" version}
+                          (map map->flatten-map) body))
                   codec/form-encode))
     req))
+
+(comment
+
+  (sc.api/last-ep-id)
+
+  (sc.api/letsc
+   25
+   (let [body
+         (-> req
+             (dissoc :http.request.configuration/endpoints)
+             :http.request.configuration/body)]
+
+     (let [template-fn      (fn template-fn
+                              ([field]
+                               (template-fn nil nil field))
+                              ([parent-type prefix {:http.request.field/keys [name value location-name type] :as field}]
+                               [(str (or (when (= parent-type "structure") (str prefix "."))
+                                         prefix
+                                         "")
+                                     (when-not (= parent-type "list") name))
+                                value]))
+           map->flatten-map (fn map->flatten-map
+                              ([field]
+                               (map->flatten-map nil nil field))
+                              ([parent-type prefix {:http.request.field/keys [name value location-name type] :as field}]
+                               (cond
+                                 (= type "list")      (into {} (map-indexed (fn [idx item]
+                                                                              (map->flatten-map "list" (if prefix
+                                                                                                         (str prefix "." location-name "." (inc idx))
+                                                                                                         (str location-name "." (inc idx))) item))) value)
+                                 (= type "structure") (into {} (map (partial map->flatten-map "structure" prefix)) value)
+                                 :else                (template-fn parent-type prefix field))))]
+       (into {}
+             (map map->flatten-map) body))))
+
+  ;; {Name state Value.1 available
+
+  ;; => {Filter.1.Name architecture Filter.1.Value.1 i386 Filter.1.Value.2 x86_64}
+  )
+
+
 
 
 (defn- params-to-body
