@@ -282,6 +282,7 @@
 
 (defn- params-to-body-ec2
   "to complete"
+  ;; @TODO - @dupuchba: flatten from sdb is not handled yet.
   [{:keys [:http.request.configuration/method
            :http.request.configuration/action
            :http.request.configuration/version
@@ -293,11 +294,17 @@
                                            ([field]
                                             (template-fn nil nil field))
                                            ([parent-type prefix {:http.request.field/keys [name value location-name type] :as field}]
-                                            [(str (or (when (= parent-type "structure") (str prefix "."))
-                                                      prefix
-                                                      "")
-                                                  (when-not (= parent-type "list") name))
-                                             value]))
+                                            (if (= parent-type "map")
+                                              (let [[k v] field]
+                                                {(str (or prefix "") "." (:http.request.field/map-info k))
+                                                 (:http.request.field/value k)
+                                                 (str (or prefix "") "." (:http.request.field/map-info v))
+                                                 (:http.request.field/value v)})
+                                              [(str (or (when (= parent-type "structure") (str prefix "."))
+                                                        prefix
+                                                        "")
+                                                    (when-not (= parent-type "list") name))
+                                               value])))
                         map->flatten-map (fn map->flatten-map
                                            ([field]
                                             (map->flatten-map nil nil field))
@@ -305,8 +312,12 @@
                                             (cond
                                               (= type "list")      (into {} (map-indexed (fn [idx item]
                                                                                            (map->flatten-map "list" (if prefix
-                                                                                                                      (str prefix "." location-name "." (inc idx))
-                                                                                                                      (str location-name "." (inc idx))) item))) value)
+                                                                                                                      (str prefix "." (or location-name name) "." (inc idx))
+                                                                                                                      (str (or location-name name) "." (inc idx))) item))) value)
+                                              (= type "map")       (into {} (map-indexed (fn [idx item]
+                                                                                           (map->flatten-map "map" (if prefix
+                                                                                                                     (str prefix "." (or location-name name) ".entry." (inc idx))
+                                                                                                                     (str (or location-name name) ".entry." (inc idx))) item))) value)
                                               (= type "structure") (into {} (map (partial map->flatten-map "structure" prefix)) value)
                                               :else                (template-fn parent-type prefix field))))]
                     (into {"Action"  action
@@ -315,54 +326,14 @@
                   codec/form-encode))
     req))
 
-(comment
-
-  (sc.api/last-ep-id)
-
-  (sc.api/letsc
-   25
-   (let [body
-         (-> req
-             (dissoc :http.request.configuration/endpoints)
-             :http.request.configuration/body)]
-
-     (let [template-fn      (fn template-fn
-                              ([field]
-                               (template-fn nil nil field))
-                              ([parent-type prefix {:http.request.field/keys [name value location-name type] :as field}]
-                               [(str (or (when (= parent-type "structure") (str prefix "."))
-                                         prefix
-                                         "")
-                                     (when-not (= parent-type "list") name))
-                                value]))
-           map->flatten-map (fn map->flatten-map
-                              ([field]
-                               (map->flatten-map nil nil field))
-                              ([parent-type prefix {:http.request.field/keys [name value location-name type] :as field}]
-                               (cond
-                                 (= type "list")      (into {} (map-indexed (fn [idx item]
-                                                                              (map->flatten-map "list" (if prefix
-                                                                                                         (str prefix "." location-name "." (inc idx))
-                                                                                                         (str location-name "." (inc idx))) item))) value)
-                                 (= type "structure") (into {} (map (partial map->flatten-map "structure" prefix)) value)
-                                 :else                (template-fn parent-type prefix field))))]
-       (into {}
-             (map map->flatten-map) body))))
-
-  ;; {Name state Value.1 available
-
-  ;; => {Filter.1.Name architecture Filter.1.Value.1 i386 Filter.1.Value.2 x86_64}
-  )
-
-
-
 
 (defn- params-to-body
   "to complete"
   [{:keys [:http.request.configuration/protocol] :as req}]
   (case protocol
     "rest-xml" (params-to-body-rest-xml req)
-    "ec2"      (params-to-body-ec2 req)))
+    "ec2"      (params-to-body-ec2 req)
+    "query"    (params-to-body-ec2 req)))
 
 
 (defn- content-md5 [{{:keys [body]} :ring.request :as req}]
