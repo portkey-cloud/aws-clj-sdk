@@ -259,7 +259,7 @@
                                                                                                                                       (map (fn [{:http.request.field/keys [location-name value]}]
                                                                                                                                              [location-name value]))
                                                                                                                                       attrs))))))))]
-                                                                     (cond
+                                                                     (clojure.core/cond 
                                                                        (= type "structure") (template-fn (into []
                                                                                                                (comp (remove #(:http.request.field/xml-attribute %))
                                                                                                                      (map map->xml)) value)
@@ -274,7 +274,7 @@
       (assoc-in req
                 [:ring.request :body]
                 ;; @NOTE : streaming doesn't need to be xmlfied
-                (if (not (true? streaming))
+                (if (not (true? streaming)) 
                   (xml/emit-str (map->xml body))
                   value)))
     req))
@@ -293,31 +293,44 @@
               (-> (let [template-fn      (fn template-fn
                                            ([field]
                                             (template-fn nil nil field))
-                                           ([parent-type prefix {:http.request.field/keys [name value location-name type] :as field}]
-                                            (if (= parent-type "map")
-                                              (let [[k v] field]
-                                                {(str (or prefix "") "." (:http.request.field/map-info k))
-                                                 (:http.request.field/value k)
-                                                 (str (or prefix "") "." (:http.request.field/map-info v))
-                                                 (:http.request.field/value v)})
-                                              [(str (or (when (= parent-type "structure") (str prefix "."))
-                                                        prefix
-                                                        "")
-                                                    (when-not (= parent-type "list") name))
-                                               value])))
+                                           ([parent-type prefix {:http.request.field/keys [name value location-name shape type flattened] :as field}]
+                                            (clojure.core/cond
+                                              (and (= parent-type "list") flattened) [(str (or location-name name shape)
+                                                                                           "."
+                                                                                           (or 
+                                                                                            prefix
+                                                                                            ""))
+                                                                                      value]
+                                              (= parent-type "map")                  (let [[k v] field]
+                                                                                       {(str (or prefix "") "." (:http.request.field/map-info k))
+                                                                                        (:http.request.field/value k)
+                                                                                        (str (or prefix "") "." (:http.request.field/map-info v))
+                                                                                        (:http.request.field/value v)})
+                                              :else                                  [(str (or (when (= parent-type "structure") (str prefix "."))
+                                                                                               prefix
+                                                                                               "")
+                                                                                           (when-not (= parent-type "list") name))
+                                                                                      value])))
                         map->flatten-map (fn map->flatten-map
                                            ([field]
                                             (map->flatten-map nil nil field))
-                                           ([parent-type prefix {:http.request.field/keys [name value location-name type] :as field}]
+                                           ([parent-type prefix {:http.request.field/keys [name value location-name type flattened] :as field}]
                                             (cond
-                                              (= type "list")      (into {} (map-indexed (fn [idx item]
-                                                                                           (map->flatten-map "list" (if prefix
-                                                                                                                      (str prefix "." (or location-name name) "." (inc idx))
-                                                                                                                      (str (or location-name name) "." (inc idx))) item))) value)
-                                              (= type "map")       (into {} (map-indexed (fn [idx item]
-                                                                                           (map->flatten-map "map" (if prefix
-                                                                                                                     (str prefix "." (or location-name name) ".entry." (inc idx))
-                                                                                                                     (str (or location-name name) ".entry." (inc idx))) item))) value)
+                                              (= type "list")      (into {}
+                                                                         (map-indexed (fn [idx item]
+                                                                                        (map->flatten-map "list"
+                                                                                                          (cond
+                                                                                                            (true? flattened) (inc idx)
+                                                                                                            prefix            (str prefix "." (or location-name name) "." (inc idx))
+                                                                                                            :else             (str (or location-name name) "." (inc idx)))
+                                                                                                          (cond-> item
+                                                                                                            flattened (assoc :http.request.field/flattened true)))))
+                                                                         value)
+                                              (= type "map")       (into {}
+                                                                         (map-indexed (fn [idx item]
+                                                                                        (map->flatten-map "map" (if prefix
+                                                                                                                  (str prefix "." (or location-name name) ".entry." (inc idx))
+                                                                                                                  (str (or location-name name) ".entry." (inc idx))) item))) value)
                                               (= type "structure") (into {} (map (partial map->flatten-map "structure" prefix)) value)
                                               :else                (template-fn parent-type prefix field))))]
                     (into {"Action"  action
@@ -325,6 +338,162 @@
                           (map map->flatten-map) body))
                   codec/form-encode))
     req))
+
+
+(comment
+
+
+  (declare map->flatten-map)
+
+  (sc.api/letsc
+   1
+   (-> req params-to-body))
+
+  (xml/parse-str "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<ListAllMyBucketsResult xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\"><Owner><ID>2dffe649db8c484ba0c1ba118f090cacc78c0cd90a05515723be21038964cb42</ID><DisplayName>baptiste.dupuch</DisplayName></Owner><Buckets><Bucket><Name>baptistedupuchtest</Name><CreationDate>2018-08-30T18:48:27.000Z</CreationDate></Bucket><Bucket><Name>cf-templates-wrikh2g1easj-eu-west-1</Name><CreationDate>2018-11-06T08:45:01.000Z</CreationDate></Bucket><Bucket><Name>elasticbeanstalk-eu-west-1-239519826177</Name><CreationDate>2017-10-17T09:48:41.000Z</CreationDate></Bucket><Bucket><Name>fdksfdsfjfdsofjsdf</Name><CreationDate>2018-10-24T15:01:46.000Z</CreationDate></Bucket><Bucket><Name>legacy-to-epiphany-test-my-little</Name><CreationDate>2018-06-22T13:30:09.000Z</CreationDate></Bucket><Bucket><Name>pegase-appdeve</Name><CreationDate>2017-05-29T15:15:29.000Z</CreationDate></Bucket><Bucket><Name>pegase-appprode</Name><CreationDate>2017-11-09T10:07:28.000Z</CreationDate></Bucket><Bucket><Name>sdfdsfojojjsfdt</Name><CreationDate>2018-10-24T14:22:07.000Z</CreationDate></Bucket><Bucket><Name>terraform_getting_started_guide_baptiste</Name><CreationDate>2017-11-28T14:54:11.000Z</CreationDate></Bucket><Bucket><Name>testbucketforawsclj</Name><CreationDate>2018-10-24T16:57:21.000Z</CreationDate></Bucket><Bucket><Name>testbucketforawsclj1</Name><CreationDate>2018-10-28T10:40:25.000Z</CreationDate></Bucket><Bucket><Name>testbucketforawsclj2</Name><CreationDate>2018-10-28T10:54:52.000Z</CreationDate></Bucket><Bucket><Name>testbucketforawsclj34</Name><CreationDate>2018-10-28T11:04:09.000Z</CreationDate></Bucket><Bucket><Name>testbucketforawsclj345</Name><CreationDate>2018-10-28T21:41:45.000Z</CreationDate></Bucket><Bucket><Name>testbucketforawsclj346</Name><CreationDate>2018-11-04T11:29:12.000Z</CreationDate></Bucket><Bucket><Name>testbucketforawsclj3461</Name><CreationDate>2018-11-04T10:59:06.000Z</CreationDate></Bucket><Bucket><Name>testbucketforawsclj3462</Name><CreationDate>2018-11-04T11:10:35.000Z</CreationDate></Bucket><Bucket><Name>testbucketforawsclj34621</Name><CreationDate>2018-11-04T11:20:52.000Z</CreationDate></Bucket><Bucket><Name>testbucketforawsclj34622</Name><CreationDate>2018-11-04T19:59:00.000Z</CreationDate></Bucket><Bucket><Name>testbucketforawsclj346221</Name><CreationDate>2018-11-04T20:41:00.000Z</CreationDate></Bucket><Bucket><Name>testbucketforawsclj346223</Name><CreationDate>2018-11-07T15:37:19.000Z</CreationDate></Bucket></Buckets></ListAllMyBucketsResult>")
+
+
+  (sc.api/letsc
+   2
+   (-> req params-to-body))
+
+
+  ;; Si structure pas flattened alors location-name du members mais pas de l'enfant
+  ;; Si list pas flattened alors location-name du parent mais pas de l'enfant direct
+  (sc.api/letsc
+   1
+   (let [body (-> req :http.request.configuration/body)]
+     
+     (let [a (fn a [prefix suffix type1 flattened1 {:http.request.field/keys [value shape name location-name type flattened] :as field}]
+               (let [conj (fnil conj [])]
+                 (cond
+                   (= type "structure") (into {}
+                                              (map (fn [item]
+                                                     (let [prefix (conj prefix (when-not flattened (or location-name name)))]                                                       
+                                                       (a prefix suffix type flattened item))))
+                                              value)
+                   (= type "map")       (into {}
+                                              (map-indexed (fn [idx item]
+                                                             (let [prefix (conj prefix
+                                                                                (when-not flattened  (or location-name name))
+                                                                                (when-not flattened  "entry")
+                                                                                (inc idx))]
+                                                               (into {}
+                                                                     (map #(a prefix suffix type flattened %))
+                                                                     item))))
+                                              value)
+                   (= type "list")      (into {}
+                                              (map-indexed (fn [idx item]
+                                                             (let [prefix (if-not flattened
+                                                                            (conj prefix (or location-name name) "member" (inc idx))
+                                                                            prefix)
+                                                                   suffix (if-not flattened
+                                                                            suffix
+                                                                            (inc idx))]
+                                                               (a prefix suffix type flattened item))))
+                                              value)
+                   :else                (let [prefix (conj prefix (when-not (and (= type1 "list") (nil? flattened1)) (or location-name name)) suffix)
+                                              prefix (x/str (comp (remove nil?)
+                                                                  (map str)
+                                                                  (remove #(str/blank? %))
+                                                                  (interpose "."))
+                                                            prefix)]
+                                          (hash-map prefix value)))))]
+       (into {}
+             (map (partial a nil nil nil nil))
+             body))))
+
+
+
+  (require '[net.cgrand.xforms :as x])
+  (dir x)
+  (x/str)
+  (let [prefix ["" "a" "b" "c" "" "a" 1]]
+    (x/str (comp (remove nil?)
+                 (map str)
+                 (remove #(str/blank? %))
+                 (interpose "."))
+           prefix))
+  (conj [1 2] 3 4)
+  
+  (sc.api/letsc
+   1
+   (let [body (-> req :http.request.configuration/body)]
+
+
+     (let [a (fn a [prefix flattened1 {:http.request.field/keys [value shape name location-name type flattened] :as field}]
+               (let [template-fn (fn template-fn [prefix value]
+                                   (hash-map prefix value))]
+                 (cond
+                   (= type "structure") (into {}
+                                              (map (fn [item]
+                                                     (let [prefix (str (or (and prefix (str prefix ".")) "")
+                                                                       (when-not flattened (or location-name name)))]
+                                                       (a prefix flattened item))))
+                                              value)
+                   (= type "map")       (into {}
+                                              (map-indexed (fn [idx item]
+                                                             (let [prefix (str (or (and prefix (str prefix ".")) "")
+                                                                               (str (or location-name name) ".")
+                                                                               (inc idx))]
+                                                               (into {}
+                                                                     (map #(a prefix flattened %))
+                                                                     item))))
+                                              value)
+                   (= type "list")      (into {}
+                                              (map-indexed (fn [idx item]
+                                                             (let [prefix (str (or (and prefix (str prefix ".")) "")
+                                                                               (when-not flattened (str (or location-name name) "."))
+                                                                               (inc idx))]
+                                                               (a prefix flattened item))))
+                                              value)
+                   :else                (template-fn (str (or (and prefix (str prefix ".")) "")
+                                                          (when-not flattened1 (or location-name name)))
+                                                     value))))]
+       (into {}
+             (map (partial a nil nil))
+             body))))
+
+  {"DelaySeconds"                               0,
+   "MessageAttribute.1.Value.DataType"          "String",
+   "MessageAttribute.1.Value.2.StringListValue" "B"
+   "MessageBody"                                "body"
+   "QueueUrl"                                   "http://google.fr"
+   "MessageAttribute.1.Name"                    "KeyNameCACA"
+   "MessageAttribute.1.Value.StringValue"       "StringValueCACA"
+   "MessageAttribute.1.Value.1.StringListValue" "A"
+   "MessageAttribute.1.Value.3.StringListValue" "C"}
+  
+  
+
+  ;; flattened ou pas
+  ;; tous les compound types peuvent être récursif
+
+  "Action=SendMessage
+Version=2012-11-05
+QueueUrl=http%3A%2F%2Fgoogle.fr
+MessageBody=body
+DelaySeconds=0
+MessageAttribute.entry.1.key=KeyNameCACA
+MessageAttribute.entry.1.value=value=String
+shape=String
+name=DataType
+MessageAttribute.entry.1.value=value=StringValueCACA
+shape=String
+name=StringValue
+MessageAttribute.entry.1.value=value=value=A
+shape=String
+location-name=StringListValue
+value=value=B
+shape=String
+location-name=StringListValue
+value=value=C
+shape=String
+location-name=StringListValue
+shape=StringList
+type=list
+name=StringListValues
+flattened=true
+location-name=StringListValue")
 
 
 (defn- params-to-body
@@ -383,7 +552,7 @@
   [& {:keys [req opt]}]
   `(spec/and
     (spec/every
-     (spec/or
+     (spec/or 
       ~@(mapcat (fn [[field spec]]
                   [(keyword field)
                    `(spec/tuple #{~field} ~spec)]) (concat req opt)))
@@ -456,8 +625,9 @@
            :http.request.configuration/method
            :http.request.configuration/request-uri
            :http.request.configuration/mime-type] :as req}]
+  (sc.api/spy 1)
   #_(spec/check-asserts true)
-  (binding [spec/*compile-asserts* true]
+  #_(binding [spec/*compile-asserts* true]
     (spec/assert :http.request.configuration/configuration req))
   (let [{:keys [endpoint credential-scope signature-version]} (endpoints (region))]
     (->

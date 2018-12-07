@@ -29,14 +29,11 @@
 
   (require '[portkey.awsgen :as gen])
   (require '[portkey.aws :as aws])
+  (def-api-2-json "query")
+
   
-  (def-api-2-json "rest-xml")
 
-  rest-xml-protocol-s3-api-2-json
-
-  (gen/shapes-by-usage rest-xml-protocol-s3-api-2-json)
-
-  (let [{:strs [shapes operations] :as api}                  rest-xml-protocol-s3-api-2-json
+  (let [{:strs [shapes operations] :as api}                  query-protocol-iam-api-2-json
         {{:strs [method requestUri responseCode]} "http"
          {input-shape-name "shape"
           xmlNamespace     "xmlNamespace"
@@ -103,9 +100,9 @@
               "event" "eventstream" "wrapper"
               "xmlOrder" "xmlNamespace"})))
 
-  
 
-)
+  )
+
 
 
 
@@ -155,31 +152,200 @@
 (comment
 
   (use 'clojure.repl)
-  (require '[portkey.aws.s3 :as s3 :refer :all])
+  (require '[portkey.aws.s3 :as s3 :refer :all]) ;; load all to handle spec/describe & co while working
   (require '[clojure.spec.alpha :as spec])
-  (require '[clojure.data.xml :as xml])
-  
+  (def-api-2-json "ec2")
 
-  (source s3/create-bucket)
-  (dir xml)
-  (xml/emit-str (xml/element :a {:b :c} "a"))
-
-  (spec/describe :portkey.aws.s3/create-bucket-request)
-
-  ;; 2018-10-24 16:22:05,549 - MainThread - botocore.endpoint - DEBUG - Making request for OperationModel(name=CreateBucket) (verify_ssl=True) with params: {'body': '<CreateBucketConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><LocationConstraint>eu-west-1</LocationConstraint></CreateBucketConfiguration>', 'url': u'https://s3.eu-west-1.amazonaws.com/sdfdsfojojjsfdt', 'headers': {'User-Agent': 'aws-cli/1.15.45 Python/2.7.14 Darwin/16.7.0 botocore/1.10.45'}, 'context': {'auth_type': None, 'client_region': 'eu-west-1', 'signing': {'bucket': u'sdfdsfojojjsfdt'}, 'has_streaming_input': False, 'client_config': <botocore.config.Config object at 0x10bc81850>}, 'query_string': {}, 'url_path': u'/sdfdsfojojjsfdt', 'method': u'PUT'}
-
-  ;; bucket : "bucket-name"
-  ;; :create-bucket-configuration {:location-constraint "eu-west1"}
-
-  (get-in rest-xml-protocol-s3-api-2-json ["shapes" "CreateBucketConfiguration"])
-  (get-in rest-xml-protocol-s3-api-2-json ["shapes" "CreateBucketRequest"])
-
-  (s3/create-bucket {:bucket                      "baptistedupuchisawesomeyeahh5"
-                     :create-bucket-configuration {:location-constraint "eu-west-1"
-                                                   :caca                "pipi"}})
-
-  (sc.api/letsc 1
-                (dissoc  req :http.request.configuration/endpoints))
+  (dir s3)
 
   
+  (s3/list-buckets) ;; working get
+
+  
+  
+  (s3/list-objects {:bucket "testbucketforawsclj34"})
+
+  (s3/create-bucket {:bucket                      "testbucketforawsclj346223"
+                     :create-bucket-configuration {:location-constraint "eu-west-1"}})
+
+  ()
+
+  ;; created a bucket
+
+    
+  "testbucketforawsclj"
+
+  (s3/put-object {:bucket        "testbucketforawsclj346223"
+                  :key           "myobjkey2"
+                  :body          (let [f   (io/file "src/portkey/aws.clj")
+                                       ary (byte-array (.length f))
+                                       is  (java.io.FileInputStream. f)]
+                                   (.read is ary)
+                                   (.close is)
+                                   ary)
+                  :metadata      {"a" "b" "baptiste" "dupuch"}
+                  :storage-class "ONEZONE_IA"})
+
+
+  
+  (s3/put-object-tagging {:bucket        "testbucketforawsclj34622"
+                          :key           "myobjkey2"
+                          :tagging
+                          {:tag-set
+                           [{:key "i", :value "1"}
+                            {:key "a", :value "2"}
+                            {:key "e", :value "3"}
+                            
+                            {:key "Y", :value ""}]},}) ;; => automaticaly set the content-md5 header
+
+  
+  (s3/get-object-acl {:bucket "testbucketforawsclj346"
+                      :key    "myobjkey"})  
+  
+  (s3/put-bucket-cors {:bucket "testbucketforawsclj346",
+                       ;;:contentmd5 "FRSAvvoSmLCNUwBvmSUDRw=="
+                       :corsconfiguration
+                       {:corsrules
+                        [{:allowed-methods
+                          ["POST" "GET"]
+                          :allowed-origins ["http://google.f"]}]},})
+
+
+  ;; 2dffe649db8c484ba0c1ba118f090cacc78c0cd90a05515723be21038964cb42
+
+  (s3/put-object-acl {:bucket                "testbucketforawsclj346"
+                      :key                   "myobjkey"
+                      ;;:acl                   "private"
+                      :access-control-policy {:grants
+                                              [{:grantee    {:type         "CanonicalUser",
+                                                             :display-name "baptiste.dupuche"
+                                                             :id           "2dffe649db8c484ba0c1ba118f090cacc78c0cd90a05515723be21038964cb42"},
+                                                :permission :full-control}]
+                                              :owner {:id "2dffe649db8c484ba0c1ba118f090cacc78c0cd90a05515723be21038964cb42"}}})
+
+  (s3/put-object-acl {:bucket                "testbucketforawsclj346"
+                      :key                   "myobjkey"
+                      :access-control-policy {:grants
+                                              [{:grantee    {:type "CanonicalUser", :email-address "baptiste.dupuch@gmail.com", :display-name "Baptiste Le Boss"},
+                                                :permission "FULL_CONTROL"}]
+                                              :owner {:id "2dffe649db8c484ba0c1ba118f090cacc78c0cd90a05515723be21038964cb42"}}})
+
+
+
+
+  
+  )
+
+
+
+(comment
+
+  (require '[portkey.aws.ec2 :as ec2])
+  (require '[clojure.spec.alpha :as spec])
+  (use 'clojure.repl)
+
+  (get-in ec2-protocol-ec2-api-2-json ["shapes" "Filter"])
+
+  ;; si pas flatten alors ne pas utilisr le location-name
+
+  (dir ec2)
+  
+  
+  (ec2/describe-instances {:instance-ids ["i-016d3bd595243ab32"]
+                           :filters
+                           [{:values ["i386" "x86_64"], :name "architecture"}
+                            {:values ["t2.nano" "t2.micro"], :name "instance-type"}]})
+
+  (ec2/describe-availability-zones
+   {:filters
+    [{:name "state", :values ["available"]}
+     {:name "region-name", :values ["us-east-1"]}]
+    #_#_:zone-names ["eu-west-1a" "eu-west-1b"]})
+
+
+  
+  (ec2/create-tags {:resources ["i-016d3bd595243ab32"],
+                    :tags
+                    [{:key "Helen", :value "Marie-Amiot"}]})
+  
+
+
+
+  
+  )
+
+(comment
+
+  (require '[portkey.aws.sqs :as sqs :refer :all])
+  (require '[clojure.spec.alpha :as spec])
+  (use 'clojure.repl)
+
+  (dir sqs)
+
+  
+
+  (sqs/untag-queue {:queue-url "http://google.fr"
+                    :tag-keys [ "R" "" ""]})
+
+  (sqs/send-message {:queue-url "http://google.fr",
+                     :message-body "body",
+                     :message-attributes {"KeyNameCACA" {:data-type "String"
+                                                         :string-value "StringValueCACA"
+                                                         :string-list-values ["A" "B" "C"]}},
+                     :delay-seconds 0,})
+
+  )
+
+
+
+(comment
+
+
+  (require '[portkey.aws.monitoring :as cl :refer :all])
+  (require '[clojure.spec.alpha :as spec])
+  (use 'clojure.repl)
+
+
+
+  (dir cl)
+  
+
+  (cl/list-metrics {:metric-name "312",
+                    :namespace "r",
+                    :dimensions
+                    [{:name "aa", :value "11"}
+                     {:name "bb", :value "22"}],
+                    :next-token "S4"})
+
+
+  )
+
+(comment
+
+
+  (require '[portkey.aws.elasticloadbalancingv2 :as el :refer :all])
+  (require '[clojure.spec.alpha :as spec])
+  (use 'clojure.repl)
+
+
+
+  (dir el)
+
+    
+  (el/create-listener {:load-balancer-arn "",
+                       :protocol          :https,
+                       :port              2,
+                       :default-actions
+                       [{:type :authenticateoidc,
+                         :authenticate-cognito-config
+                         {:user-pool-arn       "",
+                          :user-pool-client-id "",
+                          :user-pool-domain    "",
+                          :session-cookie-name ""
+                          :authentication-request-extra-params  {"keyname1" "valuename1"
+                                                                 "keyname2" "valuename2"}}}],
+                       :ssl-policy        "",
+                       :certificates      [{} {} {:certificate-arn ""} {}]})
+
+
   )
