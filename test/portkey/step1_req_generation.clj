@@ -88,16 +88,17 @@
   We have to make
   sure that location-name is assoced on it's http.request.field when
   present in order to be taken into account at runtime when generating
-  body input."  {:description-schema {"shapes" {"TagSet"
-  {"type" "list", "member" {"shape" "Tag", "locationName" "Tag"}}
-                         "Tag"
-                         {"type" "structure", "required" ["Key" "Value"], "members" {"Key" {"shape" "ObjectKey"}, "Value" {"shape" "Value"}}}
-                         "ObjectKey"
-                         {"type" "string", "min" 1}
-                         "Value"
-                         {"type" "string"}
-                         "BucketName"
-                         {"type" "string"}}}
+  body input."
+  {:description-schema {"shapes" {"TagSet"
+                                  {"type" "list", "member" {"shape" "Tag", "locationName" "Tag"}}
+                                  "Tag"
+                                  {"type" "structure", "required" ["Key" "Value"], "members" {"Key" {"shape" "ObjectKey"}, "Value" {"shape" "Value"}}}
+                                  "ObjectKey"
+                                  {"type" "string", "min" 1}
+                                  "Value"
+                                  {"type" "string"}
+                                  "BucketName"
+                                  {"type" "string"}}}
    :shape-to-test      "TagSet"
    :apply-on-protocols ["rest-xml"]
    :inputs             [[{:key   "cle1"
@@ -126,16 +127,130 @@
    usual shape name.
    
   {\"TagSet\" {\"type\" \"list\", \"member\" {\"shape\" \"Tag\",\"locationName\" \"Tag\"}}}"
-  {:method          :post
-   :user-input      {:bucket "monbucket",
-                     :tagging
-                     {:tag-set
-                      [{:key "cle1", :value "valeur1"}
-                       {:key "cle2", :value "valeur2"}]}}
-   :request-fn      req-put-bucket-tagging-request
-   :body-fun        aws/params-to-body-rest-xml
-   :lib-ns          portkey.aws.s3
-   :expected-result "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Tagging xmlns:a=\"http://s3.amazonaws.com/doc/2006-03-01/\"><TagSet><Tag><Key>cle1</Key><Value>valeur1</Value></Tag><Tag><Key>cle2</Key><Value>valeur2</Value></Tag></TagSet></Tagging>"})
+  {:method                    :post
+   :user-input                {:bucket "monbucket",
+                               :tagging
+                               {:tag-set
+                                [{:key "cle1", :value "valeur1"}
+                                 {:key "cle2", :value "valeur2"}]}}
+   :request-fn                req-put-bucket-tagging-request
+   :body-fun                  aws/params-to-body-rest-xml
+   :lib-ns                    portkey.aws.s3
+   :expected-result           "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Tagging xmlns:a=\"http://s3.amazonaws.com/doc/2006-03-01/\"><TagSet><Tag><Key>cle1</Key><Value>valeur1</Value></Tag><Tag><Key>cle2</Key><Value>valeur2</Value></Tag></TagSet></Tagging>"
+   :expected-result-formatted "
+<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<Tagging xmlns:a=\"http://s3.amazonaws.com/doc/2006-03-01/\">
+  <TagSet>
+    <Tag>
+      <Key>cle1</Key>
+      <Value>valeur1</Value>
+    </Tag>
+    <Tag>
+      <Key>cle2</Key>
+      <Value>valeur2</Value>
+    </Tag>
+  </TagSet>
+</Tagging>"})
+
+
+(deftest-aws-ser  rest-xml-s3-put-bucket-notification-configuration-list-with-flatten-ser
+  "TEST LIST 2 : list with flatten attribute.
+
+   When list is flattened, we have to propagate flattened value.
+   The value is then used at runtime for generating proper xml
+   e.g : ignoring the parent tag for flattened lists."
+  {:description-schema {"shapes" {"TopicConfigurationList"
+                                  {"type" "list", "member" {"shape" "TopicConfiguration"}, "flattened" true}
+                                  "TopicConfiguration"
+                                  {"type"     "structure"
+                                   "required" ["TopicArn" "Events"]
+                                   "members"  {"Id"       {"shape" "NotificationId"},
+                                               "TopicArn" {"shape" "TopicArn", "locationName" "Topic"},
+                                               "Events"   {"shape" "EventList", "locationName" "Event"}}}
+                                  "NotificationId"
+                                  {"type" "string"}
+                                  "TopicArn"
+                                  {"type" "string"}
+                                  "EventList"
+                                  {"type" "list", "member" {"shape" "Event"}, "flattened" true}
+                                  "Event"
+                                  {"type" "string",
+                                   "enum" ["s3:ReducedRedundancyLostObject"
+                                           "s3:ObjectCreated:*"
+                                           "s3:ObjectCreated:Put"
+                                           "s3:ObjectCreated:Post"
+                                           "s3:ObjectCreated:Copy"
+                                           "s3:ObjectCreated:CompleteMultipartUpload"
+                                           "s3:ObjectRemoved:*"
+                                           "s3:ObjectRemoved:Delete"
+                                           "s3:ObjectRemoved:DeleteMarkerCreated"]}}}
+   :shape-to-test      "TopicConfigurationList"
+   :apply-on-protocols ["rest-xml"]
+   :inputs             [[{:topic-arn "arn1",
+                          :id        "id1"
+                          :events    ["s3:ObjectRemoved:Delete"]}
+                         {:topic-arn "arn2",
+                          :id        "id2"
+                          :events    ["s3:ObjectCreated:CompleteMultipartUpload"
+                                      "s3:ObjectRemoved:Delete"]}]]
+   :expected-result    #:http.request.field {:value     [#:http.request.field{:value [#:http.request.field{:value "arn1", :shape "TopicArn", :name "TopicArn", :location-name "Topic"}
+                                                                                      #:http.request.field{:value         [#:http.request.field{:value "s3:ObjectRemoved:Delete", :shape "Event"}],
+                                                                                                           :shape         "EventList",
+                                                                                                           :type          "list",
+                                                                                                           :flattened     true,
+                                                                                                           :name          "Events",
+                                                                                                           :location-name "Event"}
+                                                                                      #:http.request.field{:value "id1", :shape "NotificationId", :name "Id"}],
+                                                                              :shape "TopicConfiguration",
+                                                                              :type  "structure"}
+                                                         #:http.request.field{:value [#:http.request.field{:value "arn2", :shape "TopicArn", :name "TopicArn", :location-name "Topic"}
+                                                                                      #:http.request.field{:value [#:http.request.field{:value "s3:ObjectCreated:CompleteMultipartUpload", :shape "Event"}
+                                                                                                                   #:http.request.field{:value "s3:ObjectRemoved:Delete", :shape "Event"}],
+                                                                                                           :shape "EventList",
+                                                                                                           :type "list",
+                                                                                                           :flattened true,
+                                                                                                           :name "Events",
+                                                                                                           :location-name "Event"}
+                                                                                      #:http.request.field{:value "id2", :shape "NotificationId", :name "Id"}],
+                                                                              :shape "TopicConfiguration",
+                                                                              :type  "structure"}]
+                                             :shape     "TopicConfigurationList",
+                                             :type      "list",
+                                             :flattened true}})
+
+
+(deftest-aws-request rest-xml-s3-put-bucket-notification-configuration-list-with-flatten-req
+  "TEST LIST 2 : list with flatten attribute"
+  {:method                    :post
+   :user-input                {:bucket "monbucket",
+                               :notification-configuration
+                               {:topic-configurations
+                                [{:topic-arn "arn1",
+                                  :id        "id1"
+                                  :events    ["s3:ObjectRemoved:Delete"]}
+                                 {:topic-arn "arn2",
+                                  :id        "id2"
+                                  :events    ["s3:ObjectCreated:CompleteMultipartUpload"
+                                              "s3:ObjectRemoved:Delete"]}]}}
+   :request-fn                req-put-bucket-notification-configuration-request
+   :body-fun                  aws/params-to-body-rest-xml
+   :lib-ns                    portkey.aws.s3
+   :expected-result           "<?xml version=\"1.0\" encoding=\"UTF-8\"?><NotificationConfiguration xmlns:a=\"http://s3.amazonaws.com/doc/2006-03-01/\"><TopicConfiguration><Topic>arn1</Topic><Event>s3:ObjectRemoved:Delete</Event><Id>id1</Id></TopicConfiguration><TopicConfiguration><Topic>arn2</Topic><Event>s3:ObjectCreated:CompleteMultipartUpload</Event><Event>s3:ObjectRemoved:Delete</Event><Id>id2</Id></TopicConfiguration></NotificationConfiguration>"
+   :expected-result-formatted "
+<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<NotificationConfiguration xmlns:a=\"http://s3.amazonaws.com/doc/2006-03-01/\">
+  <TopicConfiguration>
+    <Topic>arn1</Topic>
+    <Event>s3:ObjectRemoved:Delete</Event>
+    <Id>id1</Id>
+  </TopicConfiguration>
+  <TopicConfiguration>
+    <Topic>arn2</Topic>
+    <Event>s3:ObjectCreated:CompleteMultipartUpload</Event>
+    <Event>s3:ObjectRemoved:Delete</Event>
+    <Id>id2</Id>
+  </TopicConfiguration>
+</NotificationConfiguration>"})
 
 
 
@@ -145,7 +260,28 @@
   (require '[portkey.helpers :as h])
   (h/def-api-2-json "rest-xml")
 
-  (get-in rest-xml-protocol-s3-api-2-json ["shapes" "BucketName"])
+  (get-in rest-xml-protocol-s3-api-2-json ["shapes"  "NotificationId"])
+  (get-in rest-xml-protocol-s3-api-2-json ["shapes" "NotificationConfiguration"])
+  (get-in rest-xml-protocol-s3-api-2-json ["shapes""NotificationConfigurationFilter"])
+  
+
+  (spec/exercise ::s3/put-bucket-notification-configuration-request)
+
+  "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<NotificationConfiguration xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">
+   <TopicConfiguration>
+      <Id>id1</Id>
+      <Topic>arn1</Topic>
+      <Event>s3:ReducedRedundancyLostObject</Event>
+      <Event>s3:ObjectCreated:CompleteMultipartUpload</Event>
+   </TopicConfiguration>
+   <TopicConfiguration>
+      <Id>id2</Id>
+      <Topic>arn2</Topic>
+      <Event>s3:ReducedRedundancyLostObject</Event>
+   </TopicConfiguration>
+</NotificationConfiguration>"
+  
 
 
   )
