@@ -59,9 +59,9 @@
 
 ;; REST-XML protocol :
 ;; we should look at how this types generates xml considering all options (flattened, xml-attribute, xml-order...) :
-;; - list
-;; - map
-;; - structure
+;; - list : flattened & locationName handled, min & max not handled as it is validated by specs, deprecated and sensitive not found for rest-xml protocol
+;; - map : map only in headers for the rest-xml protocol. locationName, sensitive, max, min, flattened, locationName not found for rest-xml
+;; - structure : xmlAttribute, xmlNamespace, locationName, streaming are handled
 
     
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -244,31 +244,13 @@
 ;; END LIST TYPE TESTING ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+
 ;;;;;;;;;;;;;;;;;;;;;;
 ;; TESTING MAP TYPE ;;
 ;;;;;;;;;;;;;;;;;;;;;;
 
 
 
-
-(deftest-aws-ser  rest-xml-s3-put-object-request-map-ser
-  "TEST MAP 1 : map type should generate a vector of [key value] http.request.field."
-  {:description-schema {"shapes" {"Metadata"
-                                  {"type" "map", "key" {"shape" "MetadataKey"}, "value" {"shape" "MetadataValue"}}
-                                  "MetadataKey"
-                                  {"type" "string"}
-                                  "MetadataValue"
-                                  {"type" "string"}}}
-   :shape-to-test      "Metadata"
-   :apply-on-protocols ["rest-xml"]
-   :inputs             [{"map-key1" "map-value1"
-                         "map-key2" "map-value2"}]
-   :expected-result    #:http.request.field{:value [[#:http.request.field{:value "map-key1", :shape "MetadataKey", :map-info "key"}
-                                                     #:http.request.field{:value "map-value1", :shape "MetadataValue", :map-info "value"}]
-                                                    [#:http.request.field{:value "map-key2", :shape "MetadataKey", :map-info "key"}
-                                                     #:http.request.field{:value "map-value2", :shape "MetadataValue", :map-info "value"}]],
-                                            :shape "Metadata",
-                                            :type "map"}})
 
 
 (deftest-aws-request  rest-xml-s3-put-object-request-map-request
@@ -290,45 +272,86 @@
    :lib-ns          portkey.aws.s3
    :expected-result "Ym9keQ=="})
 
-(comment
 
-  `(defmethod compile-time-shape-spec "map" [_]
-     (strict-strs
-      :req {"type"  string?
-            "key"   (strict-strs :req {"shape" string?} :opt {"locationName" string?})
-            "value" (strict-strs :req {"shape" string?} :opt {"locationName" string?})}
-      :opt {"sensitive"    boolean?
-            "max"          int?
-            "min"          int?
-            "flattened"    boolean?
-            "locationName" string?}))
-
-  
-
-  (s3/put-object {:bucket        "testbucketforawsclj346223"
-                  :key           "myobjkey2"
-                  :body          (let [f   (io/file "src/portkey/aws.clj")
-                                       ary (byte-array (.length f))
-                                       is  (java.io.FileInputStream. f)]
-                                   (.read is ary)
-                                   (.close is)
-                                   ary)
-                  :metadata      {"a" "b" "baptiste" "dupuch"}
-                  :storage-class "ONEZONE_IA"})
-
-  (require '[portkey.helpers :as h])
-  (use 'clojure.repl)
-  (dir s3)
-  (h/def-api-2-json "rest-xml")
-
-  (get-in rest-xml-protocol-s3-api-2-json ["shapes"  "MetadataValue"])
-  (get-in rest-xml-protocol-s3-api-2-json ["shapes" "NotificationConfiguration"])
-  (get-in rest-xml-protocol-s3-api-2-json ["shapes""NotificationConfigurationFilter"])
-  
-
-  (spec/exercise ::s3/put-bucket-notification-configuration-request)
-  
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; END TESTING MAP TYPE ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-  )
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; TESTING STRUCTURE TYPE ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+
+(deftest-aws-ser   rest-xml-s3-put-object-request-structure-with-xmlAttribute-ser
+  "TEST STRUCTURE 1 : xmlAttribute should be assoced into field."
+  {:description-schema {"shapes" {"Grantee"
+                                  {"type"         "structure",
+                                   "required"     ["Type"],
+                                   "members"      {"DisplayName"  {"shape" "DisplayName"},
+                                                   "EmailAddress" {"shape" "EmailAddress"},
+                                                   "ID"           {"shape" "ID"},
+                                                   "Type"         {"shape" "Type", "locationName" "xsi:type", "xmlAttribute" true},
+                                                   "URI"          {"shape" "URI"}},
+                                   "xmlNamespace" {"prefix" "xsi", "uri" "http://www.w3.org/2001/XMLSchema-instance"}}
+                                  "DisplayName"
+                                  {"type" "string"}
+                                  "EmailAddress"
+                                  {"type" "string"}
+                                  "ID"
+                                  {"type" "string"}
+                                  "URI"
+                                  {"type" "string"}
+                                  "Type"
+                                  {"type" "string", "enum" ["CanonicalUser" "AmazonCustomerByEmail" "Group"]}}}
+   :shape-to-test      "Grantee"
+   :apply-on-protocols ["rest-xml"]
+   :inputs             [{:type :canonical-user, :display-name "Baptiste Dupuch", :uri "myuri"}]
+   :expected-result    #:http.request.field {:value         [#:http.request.field{:value         "CanonicalUser",
+                                                                                  :shape         "Type",
+                                                                                  :name          "Type",
+                                                                                  :location-name "xsi:type",
+                                                                                  :xml-attribute true}
+                                                             #:http.request.field{:value "Baptiste Dupuch", :shape "DisplayName", :name "DisplayName"}
+                                                             #:http.request.field{:value "myuri", :shape "URI", :name "URI"}],
+                                             :shape         "Grantee",
+                                             :type          "structure",
+                                             :xml-namespace {"prefix" "xsi", "uri" "http://www.w3.org/2001/XMLSchema-instance"}}})
+
+
+(deftest-aws-request  rest-xml-s3-put-object-request-structure-with-xmlAttribute-request
+  "TEST STRUCTURE 1 : xmlAttribute should generate a new xmlns in parent tag.
+
+   When xmlAttribute is set, the xsi namespace must be set on partent, in this case, Grantee."
+  {:method          :post
+   :user-input      {:bucket        "monbucket",
+                     :key           "key-not-in-payload",
+                     :request-payer :requester,
+                     :acl           "authenticated-read",
+                     :access-control-policy
+                     {:grants [{:grantee
+                                {:type :canonical-user, :display-name "Baptiste Dupuch", :uri "myuri"}
+                                :permission :read}],
+                      :owner  {:display-name "Owner name", :id "owner-id"}}}
+   :request-fn      req-put-object-acl-request
+   :body-fun        aws/params-to-body-rest-xml
+   :lib-ns          portkey.aws.s3
+   :expected-result "<?xml version=\"1.0\" encoding=\"UTF-8\"?><AccessControlPolicy xmlns:a=\"http://s3.amazonaws.com/doc/2006-03-01/\"><AccessControlList><Grant><Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\"><DisplayName>Baptiste Dupuch</DisplayName><URI>myuri</URI></Grantee><Permission>READ</Permission></Grant></AccessControlList><Owner><DisplayName>Owner name</DisplayName><ID>owner-id</ID></Owner></AccessControlPolicy>"
+   :expected-result-formatted
+   "
+<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+<AccessControlPolicy xmlns:a=\"http://s3.amazonaws.com/doc/2006-03-01/\">
+  <AccessControlList>
+    <Grant>
+      <Grantee xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:type=\"CanonicalUser\">
+        <DisplayName>Baptiste Dupuch</DisplayName>
+        <URI>myuri</URI>
+      </Grantee>
+      <Permission>READ</Permission>
+    </Grant>
+  </AccessControlList>
+  <Owner>
+    <DisplayName>Owner name</DisplayName>
+    <ID>owner-id</ID>
+  </Owner>
+</AccessControlPolicy>"})
