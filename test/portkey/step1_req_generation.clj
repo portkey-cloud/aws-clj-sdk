@@ -1,26 +1,34 @@
 (ns portkey.step1-req-generation
   (:require [cheshire.core :as json]
             [clojure.java.io :as io]
+            [clojure.spec.alpha :as spec]
+            [clojure.string :as s]
             [clojure.test :refer :all]
             [net.cgrand.xforms :as x]
             [portkey.aws :as aws]
+            [portkey.aws.s3 :as s3]
             [portkey.awsgen :as gen :refer :all]))
 
 ;; Keep it here but no longer in used
 ;; Used it to validate ser-fns but it seems too complex on the long run
-(defmacro deftest-aws-ser [name {:keys [description-schema shape-to-test apply-on-protocols inputs expected-result]}]  
-  `(deftest ~name
-     (doseq [protocol# ~apply-on-protocols
-             input#    ~inputs
-             :let      [description-schema# (assoc-in ~description-schema ["metadata" "protocol"] protocol#)
-                        _#                  (doseq [shape# (keys (description-schema# "shapes"))]
-                                              (eval (gen/generate-serialization-declare shape#)))
-                        ser-fns#            (into {}
-                                                  (map (fn [[sh#]]
-                                                         [sh# (eval (gen/generate-serialization-function description-schema# sh#))]))
-                                                  (get description-schema# "shapes"))
-                        serialization-fun#  (ser-fns# ~shape-to-test)]]
-       (is (= ~expected-result (serialization-fun# input#))))))
+(defmacro deftest-aws-ser
+  ([name {:keys [description-schema shape-to-test apply-on-protocols inputs expected-result] :as test-input}]
+   `(deftest-aws-ser ~name nil ~test-input))
+  ([name doc-string? {:keys [description-schema shape-to-test apply-on-protocols inputs expected-result]}]
+   (assert (-> doc-string? (some-fn string? nil?)) "doc-string? must be a string or nil")
+   `(deftest ~name
+      ~doc-string?
+      (doseq [protocol# ~apply-on-protocols
+              input#    ~inputs
+              :let      [description-schema# (assoc-in ~description-schema ["metadata" "protocol"] protocol#)
+                         _#                  (doseq [shape# (keys (description-schema# "shapes"))]
+                                               (eval (gen/generate-serialization-declare shape#)))
+                         ser-fns#            (into {}
+                                                   (map (fn [[sh#]]
+                                                          [sh# (eval (gen/generate-serialization-function description-schema# sh#))]))
+                                                   (get description-schema# "shapes"))
+                         serialization-fun#  (ser-fns# ~shape-to-test)]]
+        (is (= ~expected-result (serialization-fun# input#)))))))
 
 
 (defmacro deftest-aws-request
@@ -44,6 +52,19 @@
                    :body)))))))
 
 
+(comment
+  ;; locationName exists in member for REST-XML type
+  `(defmethod compile-time-shape-spec "list" [_]
+     (strict-strs
+      :req {"type"   string?
+            "member" (strict-strs :req {"shape" string?}
+                                  :opt {"locationName" string?})}
+      :opt {"max"        int?
+            "min"        int?
+            "deprecated" boolean?
+            "flattened"  boolean?
+            "sensitive"  boolean?})))
+
 ;;;;;;;;;;;;;;;;
 ;; TEST BEGIN ;;
 ;;;;;;;;;;;;;;;;
@@ -56,12 +77,76 @@
 ;; - structure
 
     
-(deftest-aws-request simple-s3-request
-  "Simple s3 request on create-bucket-configuration with structured
-  type."
+;;;;;;;;;;;;;;;;;;;;;;;
+;; TESTING LIST TYPE ;;
+;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(deftest-aws-ser rest-xml-s3-put-bucket-tagging-list-with-locationName-ser
+  "TEST LIST 1 : list with location-name set.
+
+  We have to make
+  sure that location-name is assoced on it's http.request.field when
+  present in order to be taken into account at runtime when generating
+  body input."  {:description-schema {"shapes" {"TagSet"
+  {"type" "list", "member" {"shape" "Tag", "locationName" "Tag"}}
+                         "Tag"
+                         {"type" "structure", "required" ["Key" "Value"], "members" {"Key" {"shape" "ObjectKey"}, "Value" {"shape" "Value"}}}
+                         "ObjectKey"
+                         {"type" "string", "min" 1}
+                         "Value"
+                         {"type" "string"}
+                         "BucketName"
+                         {"type" "string"}}}
+   :shape-to-test      "TagSet"
+   :apply-on-protocols ["rest-xml"]
+   :inputs             [[{:key   "cle1"
+                          :value "value1"}
+                         {:key   "cle2"
+                          :value "value2"}]]
+   :expected-result    #:http.request.field {:value [#:http.request.field{:value         [#:http.request.field{:value "cle1", :shape "ObjectKey", :name "Key"}
+                                                                                          #:http.request.field{:value "value1", :shape "Value", :name "Value"}]
+                                                                          :shape         "Tag"
+                                                                          :type          "structure"
+                                                                          :location-name "Tag"}
+                                                     #:http.request.field{:value         [#:http.request.field{:value "cle2", :shape "ObjectKey", :name "Key"}
+                                                                                          #:http.request.field{:value "value2", :shape "Value", :name "Value"}]
+                                                                          :shape         "Tag"
+                                                                          :type          "structure"
+                                                                          :location-name "Tag"}]
+                                             :shape "TagSet"
+                                             :type  "list"}})
+
+
+(deftest-aws-request rest-xml-s3-put-bucket-tagging-list-with-locationName-req
+  "TEST LIST 1 : list with location-name set.
+
+   With shape TagSet which is a type list with a locationName.
+   LocationName should be used as key in the xml ouput instead of
+   usual shape name.
+   
+  {\"TagSet\" {\"type\" \"list\", \"member\" {\"shape\" \"Tag\",\"locationName\" \"Tag\"}}}"
   {:method          :post
-   :user-input      {:create-bucket-configuration {:location-constraint "eu-west-1"}}
-   :request-fn      req-create-bucket-request
+   :user-input      {:bucket "monbucket",
+                     :tagging
+                     {:tag-set
+                      [{:key "cle1", :value "valeur1"}
+                       {:key "cle2", :value "valeur2"}]}}
+   :request-fn      req-put-bucket-tagging-request
    :body-fun        aws/params-to-body-rest-xml
    :lib-ns          portkey.aws.s3
-   :expected-result "<?xml version=\"1.0\" encoding=\"UTF-8\"?><CreateBucketConfiguration xmlns:a=\"http://s3.amazonaws.com/doc/2006-03-01/\"><LocationConstraint>eu-west-1</LocationConstraint></CreateBucketConfiguration>"} )
+   :expected-result "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Tagging xmlns:a=\"http://s3.amazonaws.com/doc/2006-03-01/\"><TagSet><Tag><Key>cle1</Key><Value>valeur1</Value></Tag><Tag><Key>cle2</Key><Value>valeur2</Value></Tag></TagSet></Tagging>"})
+
+
+
+
+(comment
+
+  (require '[portkey.helpers :as h])
+  (h/def-api-2-json "rest-xml")
+
+  (get-in rest-xml-protocol-s3-api-2-json ["shapes" "BucketName"])
+
+
+  )
+
