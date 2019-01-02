@@ -236,7 +236,7 @@
                    headers)))
 
 
-(defn- params-to-body-rest-xml
+(defn params-to-body-rest-xml
   "to complete"
   [{:keys [:http.request.configuration/method] :as req}]
   (if (contains? #{:put :post :patch} method)

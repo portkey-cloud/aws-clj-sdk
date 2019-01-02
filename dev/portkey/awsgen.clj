@@ -388,13 +388,13 @@
                                                             body#                        '~fn-body]
                                                         
                                                         ;; @NOTE : necessary because of the 'method call too large' exception
-                                                        (def ^:dynamic *api-description-map* nil)
+                                                        (def api-description-map ~api-sym)
                                                         
-                                                        (binding [*api-description-map* ~api-sym]
-                                                          `(defn- ~serialization-function-name# [~input-symbol#]
-                                                             ~(eval (list 'let
-                                                                          ['~api-sym (symbol "*api-description-map*") '~shape-name-sym ~shape-name-sym input-symbol# '(symbol (name '~input-sym))]
-                                                                          body#))))))}])
+                                                        
+                                                        `(defn- ~serialization-function-name# [~input-symbol#]
+                                                           ~(eval (list 'let
+                                                                        ['~api-sym (symbol "api-description-map") '~shape-name-sym ~shape-name-sym input-symbol# '(symbol (name '~input-sym))]
+                                                                        body#)))))}])
                                           (x/by-key (x/into {})))
                                     args)]
     `(def ^:private ~name ~serialization-map-fns)))
@@ -437,7 +437,7 @@
                                                                         dashed-name            (-> required-name aws/dashed keyword)
                                                                         test-form#             `(~dashed-name ~request-function-input-symbol)]]
                                                             (if-not  (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
-                                                                                                     #{"shape" "locationName" }))
+                                                                                                     #{"shape" "locationName" "deprecated" "flattened" "xmlAttribute" "streaming"}))
                                                               (throw (ex-info "Structure Type / REST-XML : Field not handled" {:sh sh}))
                                                               `(into ~(list ser-name test-form#)
                                                                      ~(into {:http.request.field/name required-name}
@@ -448,7 +448,7 @@
                                                                   :let [ser-name    (shape-name->ser-name shape)
                                                                         dashed-name (-> optional-name aws/dashed keyword)]]
                                                             (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
-                                                                                                    #{"shape" "locationName"}))
+                                                                                                    #{"shape" "locationName" "deprecated" "flattened" "xmlAttribute" "streaming"}))
                                                               (throw (ex-info "Structure Type / REST-XML : Field not handled" {:sh sh}))
                                                               `[(contains? ~request-function-input-symbol ~dashed-name)
                                                                 (update-in [:http.request.field/value]
@@ -551,7 +551,7 @@
                                                                                                      (keyword "http.request.configuration" "body")
                                                                                                      (keyword "http.request.configuration" location))]]
                                                        (if (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
-                                                                                           #{"shape" "location" "locationName" "deprecated" "idempotencyToken"}))
+                                                                                           #{"shape" "location" "locationName" "deprecated" "idempotencyToken" "streaming" "xmlNamespace"}))
                                                          ;; @NOTE : locationName is handled at runtime on params-to-body on a per protocol basis
                                                          ;; @NOTE : streaming is handled at runtime on params-to-body for the rest-xml protocol
                                                          ;; @NOTE : xmlNamespace is handled at runtime on params-to-body for the rest-xml protocol
@@ -574,7 +574,7 @@
                                                                               :body)
                                                                          location)]]
                                                        (if (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
-                                                                                           #{"shape" "location" "locationName" "deprecated" "idempotencyToken" }))
+                                                                                           #{"shape" "location" "locationName" "deprecated" "idempotencyToken" "streaming" "xmlNamespace"}))
                                                          `[(contains? ~request-function-input-symbol ~dashed-name)
                                                            (update-in [~location]
                                                                       (fnil conj [])
@@ -840,7 +840,7 @@
   
   (use 'clojure.repl)
   (require '[portkey.helpers :as helpers])
-  (helpers/def-api-2-json "query")
+  (helpers/def-api-2-json "rest-xml")
   
   ;; @TODO : spec http.request.configuration
   ;; @TODO : make the call-functions
@@ -851,11 +851,14 @@
 
   
   (generate-files! :protocol "elat")
-  (generate-files! :api-name "elasticloadbalancingv2")
+  (generate-files! :api-name "s3")
+
+  rest-xml-protocol-s3-api-2-json
 
   query-protocol-email-api-2-json
   
   query-protocol-monitoring-api-2-json
+  query-protocol-cloudsearch-api-2-json
   query-protocol-neptune-api-2-json
   query-protocol-rds-api-2-json
   query-protocol-redshift-api-2-json
