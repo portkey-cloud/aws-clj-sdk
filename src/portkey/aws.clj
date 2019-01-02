@@ -267,7 +267,9 @@
                                                                                                          (sequence (keep (fn [{:http.request.field/keys [xml-attribute] :as val}]
                                                                                                                            (and xml-attribute val)))
                                                                                                                    value))
+                                                                       (= type "map" (throw (Exception. "AWS map type is not handled as we never saw any cases in xml body from rest-xml protocol.")))
                                                                        (= type "list")      (if flattened
+                                                                                              ;; if list is flattened, then we ignore root tag
                                                                                               (into [] (map #(map->xml % location-name) value))
                                                                                               (template-fn (into [] (map map->xml) value)))
                                                                        :else                (template-fn value)))))]

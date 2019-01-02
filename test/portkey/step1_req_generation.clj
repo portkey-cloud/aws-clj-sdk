@@ -52,19 +52,6 @@
                    :body)))))))
 
 
-(comment
-  ;; locationName exists in member for REST-XML type
-  `(defmethod compile-time-shape-spec "list" [_]
-     (strict-strs
-      :req {"type"   string?
-            "member" (strict-strs :req {"shape" string?}
-                                  :opt {"locationName" string?})}
-      :opt {"max"        int?
-            "min"        int?
-            "deprecated" boolean?
-            "flattened"  boolean?
-            "sensitive"  boolean?})))
-
 ;;;;;;;;;;;;;;;;
 ;; TEST BEGIN ;;
 ;;;;;;;;;;;;;;;;
@@ -253,34 +240,93 @@
 </NotificationConfiguration>"})
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; END LIST TYPE TESTING ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;;;;;;;;;;;;;;;;;;;;;
+;; TESTING MAP TYPE ;;
+;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+
+(deftest-aws-ser  rest-xml-s3-put-object-request-map-ser
+  "TEST MAP 1 : map type should generate a vector of [key value] http.request.field."
+  {:description-schema {"shapes" {"Metadata"
+                                  {"type" "map", "key" {"shape" "MetadataKey"}, "value" {"shape" "MetadataValue"}}
+                                  "MetadataKey"
+                                  {"type" "string"}
+                                  "MetadataValue"
+                                  {"type" "string"}}}
+   :shape-to-test      "Metadata"
+   :apply-on-protocols ["rest-xml"]
+   :inputs             [{"map-key1" "map-value1"
+                         "map-key2" "map-value2"}]
+   :expected-result    #:http.request.field{:value [[#:http.request.field{:value "map-key1", :shape "MetadataKey", :map-info "key"}
+                                                     #:http.request.field{:value "map-value1", :shape "MetadataValue", :map-info "value"}]
+                                                    [#:http.request.field{:value "map-key2", :shape "MetadataKey", :map-info "key"}
+                                                     #:http.request.field{:value "map-value2", :shape "MetadataValue", :map-info "value"}]],
+                                            :shape "Metadata",
+                                            :type "map"}})
+
+
+(deftest-aws-request  rest-xml-s3-put-object-request-map-request
+  "TEST MAP 1 :
+
+   Map are only applied on headers for the rest-xml protocol.  Here is
+   an example when updating an object to s3.  The streaming attribute
+   is set to true which take bytes as input body and bypass XML
+   generation."
+  {:method          :post
+   :user-input      {:bucket        "monbucket"
+                     :key           "macle"
+                     :body          (bytes (byte-array (map (comp byte int) "body")))
+                     :metadata      {"map-key1" "map-value1"
+                                     "map-key2" "map-value2"}
+                     :storage-class "ONEZONE_IA"}
+   :request-fn      req-put-object-request
+   :body-fun        aws/params-to-body-rest-xml
+   :lib-ns          portkey.aws.s3
+   :expected-result "Ym9keQ=="})
 
 (comment
 
+  `(defmethod compile-time-shape-spec "map" [_]
+     (strict-strs
+      :req {"type"  string?
+            "key"   (strict-strs :req {"shape" string?} :opt {"locationName" string?})
+            "value" (strict-strs :req {"shape" string?} :opt {"locationName" string?})}
+      :opt {"sensitive"    boolean?
+            "max"          int?
+            "min"          int?
+            "flattened"    boolean?
+            "locationName" string?}))
+
+  
+
+  (s3/put-object {:bucket        "testbucketforawsclj346223"
+                  :key           "myobjkey2"
+                  :body          (let [f   (io/file "src/portkey/aws.clj")
+                                       ary (byte-array (.length f))
+                                       is  (java.io.FileInputStream. f)]
+                                   (.read is ary)
+                                   (.close is)
+                                   ary)
+                  :metadata      {"a" "b" "baptiste" "dupuch"}
+                  :storage-class "ONEZONE_IA"})
+
   (require '[portkey.helpers :as h])
+  (use 'clojure.repl)
+  (dir s3)
   (h/def-api-2-json "rest-xml")
 
-  (get-in rest-xml-protocol-s3-api-2-json ["shapes"  "NotificationId"])
+  (get-in rest-xml-protocol-s3-api-2-json ["shapes"  "MetadataValue"])
   (get-in rest-xml-protocol-s3-api-2-json ["shapes" "NotificationConfiguration"])
   (get-in rest-xml-protocol-s3-api-2-json ["shapes""NotificationConfigurationFilter"])
   
 
   (spec/exercise ::s3/put-bucket-notification-configuration-request)
-
-  "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-<NotificationConfiguration xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">
-   <TopicConfiguration>
-      <Id>id1</Id>
-      <Topic>arn1</Topic>
-      <Event>s3:ReducedRedundancyLostObject</Event>
-      <Event>s3:ObjectCreated:CompleteMultipartUpload</Event>
-   </TopicConfiguration>
-   <TopicConfiguration>
-      <Id>id2</Id>
-      <Topic>arn2</Topic>
-      <Event>s3:ReducedRedundancyLostObject</Event>
-   </TopicConfiguration>
-</NotificationConfiguration>"
   
 
 

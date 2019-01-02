@@ -463,16 +463,17 @@
                          (into {} x-filter (get-in api ["shapes" shape-name])))
             ~@optional-function-body-part)))
 
-  (EC2 REST-XML QUERY "list"
+  (EC2 QUERY "list"
        [api shape-name input]
        (let [x-filter                                     (comp (filter (fn [[k v]]
                                                                           (not (contains? #{"member" "members"} k))))
                                                                 (map (fn [[k v]]
                                                                        [(keyword "http.request.field" (aws/dashed k)) v])))
              {{:strs [shape] :as member} "member" :as sh} (get-in api ["shapes" shape-name])]
-         (when-not (or (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"type" "member" "min" "max"}))
-                       (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) member) #{"shape"})))
-           (throw (ex-info "List Type / REST-XML : Sensitive not handled" {:sh sh})))
+         (when-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"type" "member"}))
+                        (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) member) #{"shape" "locationName"})))
+           (throw (ex-info "Type : list, aws-serialization-functions macro with sh and member : " {:sh     sh
+                                                                                                   :member member})))
          (into #:http.request.field{:value `(into []
                                                   (map (fn [~'coll]
                                                          (merge ~(list (shape-name->ser-name shape) 'coll)
@@ -481,12 +482,61 @@
                                     :shape shape-name}
                (into {} x-filter sh))))
 
+  ;; @NOTE : flattened & locationName handled
+  ;; @NOTE : min & max not handled (should it be as it can be checked by specs
+  ;; @NOTE : deprecated & sensitive not found for rest-xml protocol
+  (REST-XML "list"
+            [api shape-name input]
+            (let [x-filter                                     (comp (filter (fn [[k v]]
+                                                                               (not (contains? #{"member" "members"} k))))
+                                                                     (map (fn [[k v]]
+                                                                            [(keyword "http.request.field" (aws/dashed k)) v])))
+                  {{:strs [shape] :as member} "member" :as sh} (get-in api ["shapes" shape-name])]
+              (when-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"type" "member" "flattened" "min" "max"}))
+                             (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) member) #{"shape" "locationName"})))
+                (throw (ex-info "Type : list, aws-serialization-functions macro with sh and member : " {:sh     sh
+                                                                                                        :member member})))
+              (into #:http.request.field{:value `(into []
+                                                       (map (fn [~'coll]
+                                                              (merge ~(list (shape-name->ser-name shape) 'coll)
+                                                                     ~(into {} x-filter member))))
+                                                       ~'input)
+                                         :shape shape-name}
+                    (into {} x-filter sh))))
+
   (EC2 REST-XML QUERY "blob"
        [api shape-name input]
        {:http.request.field/value `(aws/base64-encode ~input)
         :http.request.field/shape shape-name}) ;; @TODO : to implement blob
 
-  (REST-XML QUERY "map"
+  (QUERY "map"
+         [api shape-name input]
+         (let [x-filter                   (comp (filter (fn [[k v]]
+                                                          (not (contains? #{"key" "value" "required" "members"} k))))
+                                                (map (fn [[k v]]
+                                                       [(keyword "http.request.field" (aws/dashed k)) v])))
+               {:strs [key value] :as sh} (get-in api ["shapes" shape-name])
+               key-shape-name             (key "shape")
+               value-shape-name           (value "shape")]
+           (when-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"shape" "type" "key" "value"}))
+                          (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) key) #{"shape"}))
+                          (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) value) #{"shape"})))
+             (throw (ex-info "Map type / QUERY : Sensitive/flattened not handled" {:sh sh})))
+           (into #:http.request.field{:value `(into []
+                                                    (map (fn [[~'k ~'v]]
+                                                           [(into ~(list (shape-name->ser-name key-shape-name) 'k)
+                                                                  ~(into {:http.request.field/map-info "key"} x-filter key))
+                                                            (into ~(list (shape-name->ser-name value-shape-name) 'v)
+                                                                  ~(into {:http.request.field/map-info "value"} x-filter value))]))
+                                                    ~'input)
+                                      :shape shape-name}
+                 (into {} x-filter sh))))
+
+
+  ;; @NOTE : key & value handled for the rest-xml protocol
+  ;; @NOTE : only used in headers for rest-xml
+  ;; @NOTE : others attributes not found for rest-xml
+  (REST-XML "map"
             [api shape-name input]
             (let [x-filter                   (comp (filter (fn [[k v]]
                                                              (not (contains? #{"key" "value" "required" "members"} k))))
@@ -495,7 +545,9 @@
                   {:strs [key value] :as sh} (get-in api ["shapes" shape-name])
                   key-shape-name             (key "shape")
                   value-shape-name           (value "shape")]
-              (when-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"shape" "type" "key" "value" "locationName"}))
+              (when-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"shape" "type" "key" "value"}))
+                             (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) key) #{"shape"}))
+                             (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) value) #{"shape"})))
                 (throw (ex-info "Map type / REST-XML : Sensitive/flattened not handled" {:sh sh})))
               (into #:http.request.field{:value `(into []
                                                        (map (fn [[~'k ~'v]]
@@ -505,7 +557,7 @@
                                                                      ~(into {:http.request.field/map-info "value"} x-filter value))]))
                                                        ~'input)
                                          :shape shape-name}
-                    (into {} x-filter sh))))) ;; @TODO : to implement map
+                    (into {} x-filter sh))))) 
 
 
 (defn generate-serialization-declare
@@ -528,6 +580,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;
 ;; REQUEST GENERATION ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;
+
 
 
 (defn generate-request-function
@@ -850,7 +903,7 @@
    
 
   
-  (generate-files! :protocol "elat")
+  (generate-files! :protocol "rest-xml")
   (generate-files! :api-name "s3")
 
   rest-xml-protocol-s3-api-2-json
