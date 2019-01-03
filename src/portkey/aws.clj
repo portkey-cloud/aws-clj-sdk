@@ -259,7 +259,7 @@
                                                                                                                                       (map (fn [{:http.request.field/keys [location-name value]}]
                                                                                                                                              [location-name value]))
                                                                                                                                       attrs))))))))]
-                                                                     (clojure.core/cond 
+                                                                     (clojure.core/cond
                                                                        (= type "structure") (template-fn (into []
                                                                                                                (comp (remove #(:http.request.field/xml-attribute %))
                                                                                                                      (map map->xml)) value)
@@ -276,13 +276,13 @@
       (assoc-in req
                 [:ring.request :body]
                 ;; @NOTE : streaming doesn't need to be xmlfied
-                (if (not (true? streaming)) 
+                (if (not (true? streaming))
                   (xml/emit-str (map->xml body))
                   value)))
     req))
 
 
-(defn- params-to-body-ec2
+(defn params-to-body-ec2
   "to complete"
   ;; @TODO - @dupuchba: flatten from sdb is not handled yet.
   [{:keys [:http.request.configuration/method
@@ -299,7 +299,7 @@
                                             (clojure.core/cond
                                               (and (= parent-type "list") flattened) [(str (or location-name name shape)
                                                                                            "."
-                                                                                           (or 
+                                                                                           (or
                                                                                             prefix
                                                                                             ""))
                                                                                       value]
@@ -364,13 +364,13 @@
   (sc.api/letsc
    1
    (let [body (-> req :http.request.configuration/body)]
-     
+
      (let [a (fn a [prefix suffix type1 flattened1 {:http.request.field/keys [value shape name location-name type flattened] :as field}]
                (let [conj (fnil conj [])]
                  (cond
                    (= type "structure") (into {}
                                               (map (fn [item]
-                                                     (let [prefix (conj prefix (when-not flattened (or location-name name)))]                                                       
+                                                     (let [prefix (conj prefix (when-not flattened (or location-name name)))]
                                                        (a prefix suffix type flattened item))))
                                               value)
                    (= type "map")       (into {}
@@ -416,7 +416,7 @@
                  (interpose "."))
            prefix))
   (conj [1 2] 3 4)
-  
+
   (sc.api/letsc
    1
    (let [body (-> req :http.request.configuration/body)]
@@ -464,8 +464,8 @@
    "MessageAttribute.1.Value.StringValue"       "StringValueCACA"
    "MessageAttribute.1.Value.1.StringListValue" "A"
    "MessageAttribute.1.Value.3.StringListValue" "C"}
-  
-  
+
+
 
   ;; flattened ou pas
   ;; tous les compound types peuvent être récursif
@@ -554,7 +554,7 @@ location-name=StringListValue")
   [& {:keys [req opt]}]
   `(spec/and
     (spec/every
-     (spec/or 
+     (spec/or
       ~@(mapcat (fn [[field spec]]
                   [(keyword field)
                    `(spec/tuple #{~field} ~spec)]) (concat req opt)))
@@ -569,13 +569,13 @@ location-name=StringListValue")
                                                        :http.request.field/location-name string?}))
 
 (spec/def :http.request.configuration/values (spec/coll-of :http.request.field/field :kind vector?))
-  
+
 (spec/def :http.request.configuration/uri :http.request.configuration/values)
 (spec/def :http.request.configuration/header :http.request.configuration/values)
 (spec/def :http.request.configuration/querystring :http.request.configuration/values)
 (spec/def :http.request.configuration/body :http.request.configuration/values)
 
-  
+
 (spec/def :http.request.configuration/generate-request-function-part
   (spec/keys :opt [:http.request.configuration/uri
                    :http.request.configuration/header
@@ -613,7 +613,7 @@ location-name=StringListValue")
                    :http.request.spec/output-spec
                    :http.request.spec/error-spec]))
 
-  
+
 (spec/def :http.request.configuration/configuration
   (spec/merge :http.request.configuration/generate-request-function-part
               :http.request.configuration/generate-operation-function-part))
@@ -650,5 +650,3 @@ location-name=StringListValue")
      :ring.request
      (*http-client* (fn [resp]
                       [:result resp])))))
-
-

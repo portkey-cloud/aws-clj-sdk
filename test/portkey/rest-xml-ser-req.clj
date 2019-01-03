@@ -2,8 +2,8 @@
   (:require [clojure.spec.alpha :as spec]
             [clojure.string :as s]
             [clojure.test :refer :all]
-            ;; Code smell, I should not load x & gen but for some reasons it can't find it during macro-expansion
-            [net.cgrand.xforms :as x]            
+            ;; Code smell, I should not load x & gen but for some reasons it can't find it during macro-expansionc
+            [net.cgrand.xforms :as x]
             [portkey.aws :as aws]
             [portkey.aws.s3 :as s3]
             [portkey.awsgen :as gen :refer :all]
@@ -21,7 +21,7 @@
 ;; - map : map only in headers for the rest-xml protocol. locationName, sensitive, max, min, flattened, locationName not found for rest-xml
 ;; - structure : xmlAttribute, xmlNamespace, locationName, streaming are handled
 
-    
+
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;; TESTING LIST TYPE ;;
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -70,7 +70,7 @@
    With shape TagSet which is a type list with a locationName.
    LocationName should be used as key in the xml ouput instead of
    usual shape name.
-   
+
   {\"TagSet\" {\"type\" \"list\", \"member\" {\"shape\" \"Tag\",\"locationName\" \"Tag\"}}}"
   {:method                    :post
    :user-input                {:bucket "monbucket",
