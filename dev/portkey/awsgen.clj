@@ -600,21 +600,22 @@
                                             (map (fn [[k v]]
                                                    [(keyword "http.request.field" (aws/dashed k)) v])))
         handled-attributes            #{"shape" "location" "locationName" "deprecated" "idempotencyToken" "streaming" "xmlNamespace"}
-        required-function-body-part   (into {} (comp (x/for [required-name %
-                                                             :let [shape                           (get-in api ["shapes" shape-name "members" required-name])
-                                                                   {:strs [shape location] :as sh} shape
-                                                                   ser-name                        (shape-name->ser-name shape)
-                                                                   dashed-name                     (-> required-name aws/dashed keyword)
-                                                                   location                        (if (nil? location)
-                                                                                                     (keyword "http.request.configuration" "body")
-                                                                                                     (keyword "http.request.configuration" location))]]
-                                                       (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
-                                                                                               handled-attributes))
-                                                         (throw (ex-info "generate-request-function, field not recognized" {:sh sh}))
-                                                         [location
-                                                          `(into ~(list ser-name (list request-function-input-symbol dashed-name))
-                                                                 ~(into {:http.request.field/name required-name} x-filter sh))]))
-                                                     (x/by-key (x/into [])))
+        required-function-body-part   (into {}
+                                            (comp (x/for [required-name %
+                                                          :let [shape                           (get-in api ["shapes" shape-name "members" required-name])
+                                                                {:strs [shape location] :as sh} shape
+                                                                ser-name                        (shape-name->ser-name shape)
+                                                                dashed-name                     (-> required-name aws/dashed keyword)
+                                                                location                        (if (nil? location)
+                                                                                                  (keyword "http.request.configuration" "body")
+                                                                                                  (keyword "http.request.configuration" location))]]
+                                                    (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
+                                                                                            handled-attributes))
+                                                      (throw (ex-info "generate-request-function, field not recognized" {:sh sh}))
+                                                      [location
+                                                       `(into ~(list ser-name (list request-function-input-symbol dashed-name))
+                                                              ~(into {:http.request.field/name required-name} x-filter sh))]))
+                                                  (x/by-key (x/into [])))
                                             required)
         optional-function-body-part   (into [] (comp (x/for [[optional-name {:strs [shape location] :as sh}] %
                                                              :when (not (contains? (set required) optional-name))

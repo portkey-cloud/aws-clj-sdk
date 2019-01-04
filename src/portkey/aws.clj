@@ -7,6 +7,7 @@
             [clojure.java.io :as io]
             [clojure.spec.alpha :as spec]
             [clojure.string :as str]
+            [net.cgrand.xforms :as x]
             [portkey.awssig :as sig]
             [ring.util.codec :as codec]))
 
@@ -240,7 +241,6 @@
   "to complete"
   [{:keys [:http.request.configuration/method] :as req}]
   (if (contains? #{:put :post :patch} method)
-    ;; @TODO - @dupuchba : body should be a map and not a collection of field, to check
     (let [{:http.request.field/keys [streaming value] :as body} (-> req :http.request.configuration/body first)
           map->xml                                              (fn map->xml
                                                                   ([all]
@@ -283,6 +283,49 @@
 
 
 (defn params-to-body-ec2
+  [{:keys [:http.request.configuration/method
+           :http.request.configuration/action
+           :http.request.configuration/version
+           :http.request.configuration/body] :as req}]
+  (sc.api/spy 1)
+  (if (contains? #{:put :post :patch} method)
+    (assoc-in req
+              [:ring.request :body]
+              (let [format-fn              (fn [{:http.request.field/keys [prefix type] :as field}]
+                                             (if (= type "structure")
+                                               (assoc field :http.request.field/prefix (str prefix "."))
+                                               field))
+                    body->form-url-encoded (fn body->form-url-encoded [{:http.request.field/keys [type prefix value]}]
+                                             (condp = type
+                                               "structure" (x/str (comp (map #(-> %
+                                                                                  (assoc :http.request.field/prefix
+                                                                                         (str prefix (or (:http.request.field/query-name %)
+                                                                                                         (let [ln (:http.request.field/location-name %)]
+                                                                                                           (and ln
+                                                                                                                (str (str/capitalize (subs ln 0 1))
+                                                                                                                     (subs ln 1))))
+                                                                                                         (:http.request.field/name %))))
+                                                                                  format-fn
+                                                                                  body->form-url-encoded))
+                                                                        (interpose "&"))
+                                                                  value)
+                                               "list"      (x/str (comp (map-indexed #(-> %2
+                                                                                          (assoc :http.request.field/prefix (str prefix "." (inc %1)))
+                                                                                          format-fn
+                                                                                          body->form-url-encoded))
+                                                                        (interpose "&"))
+                                                                  value)
+                                               (str prefix "=" value)))
+                    result                 (body->form-url-encoded {:http.request.field/value body
+                                                                    :http.request.field/type  "structure"})]
+
+                (str "Action=" action
+                     "&Version="version
+                     (and result (str "&" result)))))
+    req))
+
+
+(defn params-to-body-query
   "to complete"
   ;; @TODO - @dupuchba: flatten from sdb is not handled yet.
   [{:keys [:http.request.configuration/method
@@ -340,162 +383,6 @@
                           (map map->flatten-map) body))
                   codec/form-encode))
     req))
-
-
-(comment
-
-
-  (declare map->flatten-map)
-
-  (sc.api/letsc
-   1
-   (-> req params-to-body))
-
-  (xml/parse-str "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<ListAllMyBucketsResult xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\"><Owner><ID>2dffe649db8c484ba0c1ba118f090cacc78c0cd90a05515723be21038964cb42</ID><DisplayName>baptiste.dupuch</DisplayName></Owner><Buckets><Bucket><Name>baptistedupuchtest</Name><CreationDate>2018-08-30T18:48:27.000Z</CreationDate></Bucket><Bucket><Name>cf-templates-wrikh2g1easj-eu-west-1</Name><CreationDate>2018-11-06T08:45:01.000Z</CreationDate></Bucket><Bucket><Name>elasticbeanstalk-eu-west-1-239519826177</Name><CreationDate>2017-10-17T09:48:41.000Z</CreationDate></Bucket><Bucket><Name>fdksfdsfjfdsofjsdf</Name><CreationDate>2018-10-24T15:01:46.000Z</CreationDate></Bucket><Bucket><Name>legacy-to-epiphany-test-my-little</Name><CreationDate>2018-06-22T13:30:09.000Z</CreationDate></Bucket><Bucket><Name>pegase-appdeve</Name><CreationDate>2017-05-29T15:15:29.000Z</CreationDate></Bucket><Bucket><Name>pegase-appprode</Name><CreationDate>2017-11-09T10:07:28.000Z</CreationDate></Bucket><Bucket><Name>sdfdsfojojjsfdt</Name><CreationDate>2018-10-24T14:22:07.000Z</CreationDate></Bucket><Bucket><Name>terraform_getting_started_guide_baptiste</Name><CreationDate>2017-11-28T14:54:11.000Z</CreationDate></Bucket><Bucket><Name>testbucketforawsclj</Name><CreationDate>2018-10-24T16:57:21.000Z</CreationDate></Bucket><Bucket><Name>testbucketforawsclj1</Name><CreationDate>2018-10-28T10:40:25.000Z</CreationDate></Bucket><Bucket><Name>testbucketforawsclj2</Name><CreationDate>2018-10-28T10:54:52.000Z</CreationDate></Bucket><Bucket><Name>testbucketforawsclj34</Name><CreationDate>2018-10-28T11:04:09.000Z</CreationDate></Bucket><Bucket><Name>testbucketforawsclj345</Name><CreationDate>2018-10-28T21:41:45.000Z</CreationDate></Bucket><Bucket><Name>testbucketforawsclj346</Name><CreationDate>2018-11-04T11:29:12.000Z</CreationDate></Bucket><Bucket><Name>testbucketforawsclj3461</Name><CreationDate>2018-11-04T10:59:06.000Z</CreationDate></Bucket><Bucket><Name>testbucketforawsclj3462</Name><CreationDate>2018-11-04T11:10:35.000Z</CreationDate></Bucket><Bucket><Name>testbucketforawsclj34621</Name><CreationDate>2018-11-04T11:20:52.000Z</CreationDate></Bucket><Bucket><Name>testbucketforawsclj34622</Name><CreationDate>2018-11-04T19:59:00.000Z</CreationDate></Bucket><Bucket><Name>testbucketforawsclj346221</Name><CreationDate>2018-11-04T20:41:00.000Z</CreationDate></Bucket><Bucket><Name>testbucketforawsclj346223</Name><CreationDate>2018-11-07T15:37:19.000Z</CreationDate></Bucket></Buckets></ListAllMyBucketsResult>")
-
-
-  (sc.api/letsc
-   2
-   (-> req params-to-body))
-
-
-  ;; Si structure pas flattened alors location-name du members mais pas de l'enfant
-  ;; Si list pas flattened alors location-name du parent mais pas de l'enfant direct
-  (sc.api/letsc
-   1
-   (let [body (-> req :http.request.configuration/body)]
-
-     (let [a (fn a [prefix suffix type1 flattened1 {:http.request.field/keys [value shape name location-name type flattened] :as field}]
-               (let [conj (fnil conj [])]
-                 (cond
-                   (= type "structure") (into {}
-                                              (map (fn [item]
-                                                     (let [prefix (conj prefix (when-not flattened (or location-name name)))]
-                                                       (a prefix suffix type flattened item))))
-                                              value)
-                   (= type "map")       (into {}
-                                              (map-indexed (fn [idx item]
-                                                             (let [prefix (conj prefix
-                                                                                (when-not flattened  (or location-name name))
-                                                                                (when-not flattened  "entry")
-                                                                                (inc idx))]
-                                                               (into {}
-                                                                     (map #(a prefix suffix type flattened %))
-                                                                     item))))
-                                              value)
-                   (= type "list")      (into {}
-                                              (map-indexed (fn [idx item]
-                                                             (let [prefix (if-not flattened
-                                                                            (conj prefix (or location-name name) "member" (inc idx))
-                                                                            prefix)
-                                                                   suffix (if-not flattened
-                                                                            suffix
-                                                                            (inc idx))]
-                                                               (a prefix suffix type flattened item))))
-                                              value)
-                   :else                (let [prefix (conj prefix (when-not (and (= type1 "list") (nil? flattened1)) (or location-name name)) suffix)
-                                              prefix (x/str (comp (remove nil?)
-                                                                  (map str)
-                                                                  (remove #(str/blank? %))
-                                                                  (interpose "."))
-                                                            prefix)]
-                                          (hash-map prefix value)))))]
-       (into {}
-             (map (partial a nil nil nil nil))
-             body))))
-
-
-
-  (require '[net.cgrand.xforms :as x])
-  (dir x)
-  (x/str)
-  (let [prefix ["" "a" "b" "c" "" "a" 1]]
-    (x/str (comp (remove nil?)
-                 (map str)
-                 (remove #(str/blank? %))
-                 (interpose "."))
-           prefix))
-  (conj [1 2] 3 4)
-
-  (sc.api/letsc
-   1
-   (let [body (-> req :http.request.configuration/body)]
-
-
-     (let [a (fn a [prefix flattened1 {:http.request.field/keys [value shape name location-name type flattened] :as field}]
-               (let [template-fn (fn template-fn [prefix value]
-                                   (hash-map prefix value))]
-                 (cond
-                   (= type "structure") (into {}
-                                              (map (fn [item]
-                                                     (let [prefix (str (or (and prefix (str prefix ".")) "")
-                                                                       (when-not flattened (or location-name name)))]
-                                                       (a prefix flattened item))))
-                                              value)
-                   (= type "map")       (into {}
-                                              (map-indexed (fn [idx item]
-                                                             (let [prefix (str (or (and prefix (str prefix ".")) "")
-                                                                               (str (or location-name name) ".")
-                                                                               (inc idx))]
-                                                               (into {}
-                                                                     (map #(a prefix flattened %))
-                                                                     item))))
-                                              value)
-                   (= type "list")      (into {}
-                                              (map-indexed (fn [idx item]
-                                                             (let [prefix (str (or (and prefix (str prefix ".")) "")
-                                                                               (when-not flattened (str (or location-name name) "."))
-                                                                               (inc idx))]
-                                                               (a prefix flattened item))))
-                                              value)
-                   :else                (template-fn (str (or (and prefix (str prefix ".")) "")
-                                                          (when-not flattened1 (or location-name name)))
-                                                     value))))]
-       (into {}
-             (map (partial a nil nil))
-             body))))
-
-  {"DelaySeconds"                               0,
-   "MessageAttribute.1.Value.DataType"          "String",
-   "MessageAttribute.1.Value.2.StringListValue" "B"
-   "MessageBody"                                "body"
-   "QueueUrl"                                   "http://google.fr"
-   "MessageAttribute.1.Name"                    "KeyNameCACA"
-   "MessageAttribute.1.Value.StringValue"       "StringValueCACA"
-   "MessageAttribute.1.Value.1.StringListValue" "A"
-   "MessageAttribute.1.Value.3.StringListValue" "C"}
-
-
-
-  ;; flattened ou pas
-  ;; tous les compound types peuvent être récursif
-
-  "Action=SendMessage
-Version=2012-11-05
-QueueUrl=http%3A%2F%2Fgoogle.fr
-MessageBody=body
-DelaySeconds=0
-MessageAttribute.entry.1.key=KeyNameCACA
-MessageAttribute.entry.1.value=value=String
-shape=String
-name=DataType
-MessageAttribute.entry.1.value=value=StringValueCACA
-shape=String
-name=StringValue
-MessageAttribute.entry.1.value=value=value=A
-shape=String
-location-name=StringListValue
-value=value=B
-shape=String
-location-name=StringListValue
-value=value=C
-shape=String
-location-name=StringListValue
-shape=StringList
-type=list
-name=StringListValues
-flattened=true
-location-name=StringListValue")
 
 
 (defn- params-to-body

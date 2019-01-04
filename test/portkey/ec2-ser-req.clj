@@ -17,9 +17,9 @@
 
 ;; EC2 protocol :
 ;;
-;; - list :
-;; - map :
-;; - structure :
+;; - list : only non flatten lists found, queryName is handled for old apis
+;; - map : no map found for ec2 type
+;; - structure : all are well handled
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -27,7 +27,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;
 
 
-(deftest-aws-ser ec2-ec2-describe-availability-zones
+(deftest-aws-ser ec2-ec2-describe-availability-zones-ser
   "TEST LIST 1 : list with location-name set.
 
   When a non flatten list is set, the final map has to be flatten by
@@ -80,7 +80,7 @@
                                              :shape "DescribeAvailabilityZonesRequest",
                                              :type  "structure"}})
 
-(deftest-aws-request rest-xml-s3-put-bucket-tagging-list-with-locationName-req
+(deftest-aws-request ec2-ec2-describe-availability-zones-request
   "TEST LIST 1 : list with location-name set.
 
    See how Filter.1.Value.1 is set.
@@ -108,28 +108,68 @@
                                  'Filter.1.Value.1': 'value1'
                                }"})
 
+
+
 (comment
-  ;; list with locationName set
 
-  ;;ZoneName
-
-  (require '[portkey.helpers :as h])
-  (h/def-api-2-json "ec2")
-
-  ec2-protocol-ec2-api-2-json
-
-  (get-in ec2-protocol-ec2-api-2-json ["shapes" "Boolean"])
-
-  (spec/exercise ::ec2/describe-availability-zones-request)
-
-  (clojure.core/=)
+      ;; def query_name(ref, default = nil)
+      ;;   ref.location_name || default
+      ;; end
 
 
-  `
+     ;; def format(ref, value, prefix)
+     ;;    case ref.shape
+     ;;    when StructureShape then structure(ref, value, prefix + '.')
+     ;;    when ListShape      then list(ref, value, prefix)
+     ;;    when MapShape       then map(ref, value, prefix)
+     ;;    when BlobShape      then set(prefix, blob(value))
+     ;;    when TimestampShape then set(prefix, timestamp(ref, value))
+     ;;    else set(prefix, value.to_s)
+     ;;    end
+  ;;  end
 
 
+  ;; def map(ref, values, prefix)
+  ;;       key_ref = ref.shape.key
+  ;;       value_ref = ref.shape.value
+  ;;       prefix += '.entry' unless flat?(ref)
+  ;;       key_name = "%s.%d.#{query_name(key_ref, 'key')}"
+  ;;       value_name  = "%s.%d.#{query_name(value_ref, 'value')}"
+  ;;       values.each.with_index do |(key, value), n|
+  ;;         format(key_ref, key, key_name % [prefix, n + 1])
+  ;;         format(value_ref, value, value_name % [prefix, n + 1])
+  ;;       end
+  ;;     end
 
+  ;; def structure(ref, values, prefix)
+  ;;       shape = ref.shape
+  ;;       values.each_pair do |name, value|
+  ;;         next if value.nil?
+  ;;         member_ref = shape.member(name)
+  ;;         format(member_ref, value, prefix + query_name(member_ref))
+  ;;       end
+  ;;     end
 
+  ;;     def list(ref, values, prefix)
+  ;;       member_ref = ref.shape.member
+  ;;       if values.empty?
+  ;;         set(prefix, '')
+  ;;         return
+  ;;       end
+  ;;       if flat?(ref)
+  ;;         if name = query_name(member_ref)
+  ;;           parts = prefix.split('.')
+  ;;           parts.pop
+  ;;           parts.push(name)
+  ;;           prefix = parts.join('.')
+  ;;         end
+  ;;       else
+  ;;         prefix += '.' + (member_ref.location_name || 'member')
+  ;;       end
+  ;;       values.each.with_index do |value, n|
+  ;;         format(member_ref, value, "#{prefix}.#{n+1}")
+  ;;       end
+  ;;     end
 
 
 
