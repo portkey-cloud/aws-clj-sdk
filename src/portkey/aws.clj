@@ -318,16 +318,14 @@
                                                (str prefix "=" value)))
                     result                 (body->form-url-encoded {:http.request.field/value body
                                                                     :http.request.field/type  "structure"})]
-
                 (str "Action=" action
-                     "&Version="version
+                     "&Version=" version
                      (and result (str "&" result)))))
     req))
 
 
 (defn params-to-body-query
   "to complete"
-  ;; @TODO - @dupuchba: flatten from sdb is not handled yet.
   [{:keys [:http.request.configuration/method
            :http.request.configuration/action
            :http.request.configuration/version
@@ -335,53 +333,57 @@
   (if (contains? #{:put :post :patch} method)
     (assoc-in req
               [:ring.request :body]
-              (-> (let [template-fn      (fn template-fn
-                                           ([field]
-                                            (template-fn nil nil field))
-                                           ([parent-type prefix {:http.request.field/keys [name value location-name shape type flattened] :as field}]
-                                            (clojure.core/cond
-                                              (and (= parent-type "list") flattened) [(str (or location-name name shape)
-                                                                                           "."
-                                                                                           (or
-                                                                                            prefix
-                                                                                            ""))
-                                                                                      value]
-                                              (= parent-type "map")                  (let [[k v] field]
-                                                                                       {(str (or prefix "") "." (:http.request.field/map-info k))
-                                                                                        (:http.request.field/value k)
-                                                                                        (str (or prefix "") "." (:http.request.field/map-info v))
-                                                                                        (:http.request.field/value v)})
-                                              :else                                  [(str (or (when (= parent-type "structure") (str prefix "."))
-                                                                                               prefix
-                                                                                               "")
-                                                                                           (when-not (= parent-type "list") name))
-                                                                                      value])))
-                        map->flatten-map (fn map->flatten-map
-                                           ([field]
-                                            (map->flatten-map nil nil field))
-                                           ([parent-type prefix {:http.request.field/keys [name value location-name type flattened] :as field}]
-                                            (cond
-                                              (= type "list")      (into {}
-                                                                         (map-indexed (fn [idx item]
-                                                                                        (map->flatten-map "list"
-                                                                                                          (cond
-                                                                                                            (true? flattened) (inc idx)
-                                                                                                            prefix            (str prefix "." (or location-name name) "." (inc idx))
-                                                                                                            :else             (str (or location-name name) "." (inc idx)))
-                                                                                                          (cond-> item
-                                                                                                            flattened (assoc :http.request.field/flattened true)))))
-                                                                         value)
-                                              (= type "map")       (into {}
-                                                                         (map-indexed (fn [idx item]
-                                                                                        (map->flatten-map "map" (if prefix
-                                                                                                                  (str prefix "." (or location-name name) ".entry." (inc idx))
-                                                                                                                  (str (or location-name name) ".entry." (inc idx))) item))) value)
-                                              (= type "structure") (into {} (map (partial map->flatten-map "structure" prefix)) value)
-                                              :else                (template-fn parent-type prefix field))))]
-                    (into {"Action"  action
-                           "Version" version}
-                          (map map->flatten-map) body))
-                  codec/form-encode))
+              (let [query-name             (fn [{:http.request.field/keys [location-name name]} & default]
+                                             (if default
+                                               (or location-name (first default))
+                                               (or location-name name)))
+                    format-fn              (fn [{:http.request.field/keys [prefix type] :as field}]
+                                             (if (= type "structure")
+                                               (assoc field :http.request.field/prefix (str prefix "."))
+                                               field))
+                    body->form-url-encoded (fn body->form-url-encoded [{:http.request.field/keys [type prefix value flattened location-name]}]
+                                             (condp = type
+                                               "structure" (x/str (comp (map #(-> %
+                                                                                  (assoc :http.request.field/prefix
+                                                                                         (str prefix (query-name %)))
+                                                                                  format-fn
+                                                                                  body->form-url-encoded))
+                                                                        (interpose "&"))
+                                                                  value)
+                                               "map"       (x/str (comp (map-indexed (fn [idx [keyval mapval]]
+                                                                                       (let [prefix (if-not flattened (str prefix ".entry") prefix)]
+                                                                                         [(-> keyval
+                                                                                              (assoc :http.request.field/prefix (str prefix "." (inc idx) "." (query-name keyval "key")))
+                                                                                              format-fn
+                                                                                              body->form-url-encoded)
+                                                                                          (-> mapval
+                                                                                              (assoc :http.request.field/prefix (str prefix "." (inc idx) "." (query-name mapval "value")))
+                                                                                              format-fn
+                                                                                              body->form-url-encoded)])))
+                                                                        cat
+                                                                        (interpose "&"))
+                                                                  value)
+                                               "list"      (x/str (comp (map-indexed (fn [idx item]
+                                                                                       (let [prefix (if flattened
+                                                                                                      (if-let [name (query-name item)]
+                                                                                                        (str/join "." (-> prefix
+                                                                                                                          (str/split #"\.")
+                                                                                                                          pop
+                                                                                                                          (conj name)))
+                                                                                                        prefix)
+                                                                                                      (str prefix "." (or location-name "member")))]
+                                                                                         (-> item
+                                                                                             (assoc :http.request.field/prefix (str prefix "." (inc idx)))
+                                                                                             format-fn
+                                                                                             body->form-url-encoded))))
+                                                                        (interpose "&"))
+                                                                  value)
+                                               (str prefix "=" value)))
+                    result                 (body->form-url-encoded {:http.request.field/value body
+                                                                    :http.request.field/type  "structure"})]
+                (str "Action=" action
+                     "&Version=" version
+                     (and result (str "&" result)))))
     req))
 
 
@@ -391,7 +393,7 @@
   (case protocol
     "rest-xml" (params-to-body-rest-xml req)
     "ec2"      (params-to-body-ec2 req)
-    "query"    (params-to-body-ec2 req)))
+    "query"    (params-to-body-query req)))
 
 
 (defn- content-md5 [{{:keys [body]} :ring.request :as req}]

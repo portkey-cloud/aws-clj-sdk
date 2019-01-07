@@ -21,7 +21,6 @@
 ;; - map : no map found for ec2 type
 ;; - structure : all are well handled
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;; TESTING LIST TYPE ;;
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -107,71 +106,3 @@
                                  'ZoneName.1': 'eu-west-1',
                                  'Filter.1.Value.1': 'value1'
                                }"})
-
-
-
-(comment
-
-      ;; def query_name(ref, default = nil)
-      ;;   ref.location_name || default
-      ;; end
-
-
-     ;; def format(ref, value, prefix)
-     ;;    case ref.shape
-     ;;    when StructureShape then structure(ref, value, prefix + '.')
-     ;;    when ListShape      then list(ref, value, prefix)
-     ;;    when MapShape       then map(ref, value, prefix)
-     ;;    when BlobShape      then set(prefix, blob(value))
-     ;;    when TimestampShape then set(prefix, timestamp(ref, value))
-     ;;    else set(prefix, value.to_s)
-     ;;    end
-  ;;  end
-
-
-  ;; def map(ref, values, prefix)
-  ;;       key_ref = ref.shape.key
-  ;;       value_ref = ref.shape.value
-  ;;       prefix += '.entry' unless flat?(ref)
-  ;;       key_name = "%s.%d.#{query_name(key_ref, 'key')}"
-  ;;       value_name  = "%s.%d.#{query_name(value_ref, 'value')}"
-  ;;       values.each.with_index do |(key, value), n|
-  ;;         format(key_ref, key, key_name % [prefix, n + 1])
-  ;;         format(value_ref, value, value_name % [prefix, n + 1])
-  ;;       end
-  ;;     end
-
-  ;; def structure(ref, values, prefix)
-  ;;       shape = ref.shape
-  ;;       values.each_pair do |name, value|
-  ;;         next if value.nil?
-  ;;         member_ref = shape.member(name)
-  ;;         format(member_ref, value, prefix + query_name(member_ref))
-  ;;       end
-  ;;     end
-
-  ;;     def list(ref, values, prefix)
-  ;;       member_ref = ref.shape.member
-  ;;       if values.empty?
-  ;;         set(prefix, '')
-  ;;         return
-  ;;       end
-  ;;       if flat?(ref)
-  ;;         if name = query_name(member_ref)
-  ;;           parts = prefix.split('.')
-  ;;           parts.pop
-  ;;           parts.push(name)
-  ;;           prefix = parts.join('.')
-  ;;         end
-  ;;       else
-  ;;         prefix += '.' + (member_ref.location_name || 'member')
-  ;;       end
-  ;;       values.each.with_index do |value, n|
-  ;;         format(member_ref, value, "#{prefix}.#{n+1}")
-  ;;       end
-  ;;     end
-
-
-
-
-  )

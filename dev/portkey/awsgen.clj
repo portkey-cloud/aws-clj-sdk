@@ -386,11 +386,11 @@
                                                       (let [serialization-function-name# (shape-name->ser-name ~shape-name-sym)
                                                             input-symbol#                '~input-sym
                                                             body#                        '~fn-body]
-                                                        
+
                                                         ;; @NOTE : necessary because of the 'method call too large' exception
                                                         (def api-description-map ~api-sym)
-                                                        
-                                                        
+
+
                                                         `(defn- ~serialization-function-name# [~input-symbol#]
                                                            ~(eval (list 'let
                                                                         ['~api-sym (symbol "api-description-map") '~shape-name-sym ~shape-name-sym input-symbol# '(symbol (name '~input-sym))]
@@ -417,7 +417,7 @@
                                                  enums) ~input)
                                     input)
         :http.request.field/shape shape-name})
-  
+
   (EC2 QUERY REST-XML "long" "integer" "boolean" "timestamp" "double"
        [api shape-name input]
        {:http.request.field/value input
@@ -431,7 +431,7 @@
                                                            (not (contains? #{"members" "required"} k))))
                                                  (map (fn [[k v]]
                                                         [(keyword "http.request.field" (aws/dashed k)) v])))
-             handled-attributes            #{"shape" "locationName" "deprecated" "flattened" "xmlAttribute" "streaming"}
+             handled-attributes            #{"shape" "locationName" "deprecated" "flattened" "xmlAttribute" "streaming" "queryName"}
              required-function-body-part   (into [] (comp (x/for [required-name %
                                                                   :let [{:strs [shape] :as sh} (get-in api ["shapes" shape-name "members" required-name])
                                                                         ser-name               (shape-name->ser-name shape)
@@ -460,7 +460,7 @@
                                                           cat)
                                                  (get-in api ["shapes" shape-name "members"]))]
          (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) (get-in api ["shapes" shape-name]))
-                                                   #{"type" "members" "required" "locationName" "xmlNamespace"}))
+                                                 #{"type" "members" "required" "locationName" "xmlNamespace" "xmlOrder"}))
            (throw (ex-info "Structure REST-XML protocol does not handle type" {:shape (get-in api ["shapes" shape-name])}))
            `(cond-> ~(into {:http.request.field/value required-function-body-part
                             :http.request.field/shape shape-name}
@@ -474,8 +474,8 @@
                                                                 (map (fn [[k v]]
                                                                        [(keyword "http.request.field" (aws/dashed k)) v])))
              {{:strs [shape] :as member} "member" :as sh} (get-in api ["shapes" shape-name])]
-         (if-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"type" "member"}))
-                        (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) member) #{"shape" "locationName"})))
+         (if-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"type" "member" "max" "min" "flattened"}))
+                      (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) member) #{"shape" "locationName"})))
            (throw (ex-info "Type : list, aws-serialization-functions macro with sh and member : " {:sh     sh
                                                                                                    :member member}))
            (into #:http.request.field{:value `(into []
@@ -497,7 +497,7 @@
                                                                             [(keyword "http.request.field" (aws/dashed k)) v])))
                   {{:strs [shape] :as member} "member" :as sh} (get-in api ["shapes" shape-name])]
               (if-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"type" "member" "flattened" "min" "max"}))
-                             (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) member) #{"shape" "locationName"})))
+                           (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) member) #{"shape" "locationName"})))
                 (throw (ex-info "Type : list, aws-serialization-functions macro with sh and member : " {:sh     sh
                                                                                                         :member member}))
                 (into #:http.request.field{:value `(into []
@@ -522,9 +522,9 @@
                {:strs [key value] :as sh} (get-in api ["shapes" shape-name])
                key-shape-name             (key "shape")
                value-shape-name           (value "shape")]
-           (when-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"shape" "type" "key" "value"}))
-                          (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) key) #{"shape"}))
-                          (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) value) #{"shape"})))
+           (when-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"shape" "type" "key" "value" "flattened" "locationName"}))
+                          (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) key) #{"shape" "locationName"}))
+                          (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) value) #{"shape" "locationName"})))
              (throw (ex-info "Map type / QUERY : Sensitive/flattened not handled" {:sh sh})))
            (into #:http.request.field{:value `(into []
                                                     (map (fn [[~'k ~'v]]
@@ -666,30 +666,30 @@
 
 (spec/def ::operation
   (strict-strs
-    :req {"name" string?
-          "http" (strict-strs
-                   :req {"method" #{"POST" "DELETE" "GET" "PATCH" "PUT" "HEAD"}
-                         "requestUri" string?}
-                   :opt {"responseCode" int?})}
-    :opt {"input" (strict-strs :req {"shape" string?}
-                    :opt {"xmlNamespace"
-                          (strict-strs :req {"uri" string?})
-                          "locationName" string?}) ; TODO validate
-          "output" (strict-strs :req {"shape" string?}
-                     :opt {"resultWrapper" string?})
-          "idempotent" boolean?
-          "errors"
-          (spec/coll-of
-            (strict-strs :req {"shape" string?}
-              :opt {"exception" boolean?
-                    "fault" true?
-                    "error" (strict-strs
-                              :req {"httpStatusCode" int?}
-                              :opt {"code" string?, "senderFault" boolean?})}))
-          "documentationUrl" string? ; TODO
-          "alias" string?
-          "authtype" #{"none" "v4-unsigned-body"}
-          "deprecated" boolean?}))
+   :req {"name" string?
+         "http" (strict-strs
+                 :req {"method" #{"POST" "DELETE" "GET" "PATCH" "PUT" "HEAD"}
+                       "requestUri" string?}
+                 :opt {"responseCode" int?})}
+   :opt {"input" (strict-strs :req {"shape" string?}
+                              :opt {"xmlNamespace"
+                                    (strict-strs :req {"uri" string?})
+                                    "locationName" string?}) ; TODO validate
+         "output" (strict-strs :req {"shape" string?}
+                               :opt {"resultWrapper" string?})
+         "idempotent" boolean?
+         "errors"
+         (spec/coll-of
+          (strict-strs :req {"shape" string?}
+                       :opt {"exception" boolean?
+                             "fault" true?
+                             "error" (strict-strs
+                                      :req {"httpStatusCode" int?}
+                                      :opt {"code" string?, "senderFault" boolean?})}))
+         "documentationUrl" string? ; TODO
+         "alias" string?
+         "authtype" #{"none" "v4-unsigned-body"}
+         "deprecated" boolean?}))
 
 
 (defn mime-type
@@ -798,8 +798,8 @@
                                                                  "operations" (partial generate-operation-function api (name ns-sym))}
                                                         desc    (api k)]
                                                     (gen desc))]
-     (concat serialization+request-defns
-             runtime-specs+operation-defns))
+                (concat serialization+request-defns
+                        runtime-specs+operation-defns))
     (do
       (binding [*out* *err*] (prn 'skipping ns-sym 'protocol (get-in api ["metadata" "protocol"])))
       [(list 'comment 'TODO 'support (get-in api ["metadata" "protocol"]))])))
@@ -819,7 +819,7 @@
                   :let                                                                 [{:strs [hostname sslCommonName protocols credentialScope signatureVersions]} (into defaults desc)
                                                                                         protocol (or (some #{"https"} protocols) (first protocols)) ; prefer https
                                                                                         credentialScope (into {"service" service "region" region} credentialScope)
-                                                                                        sslCommonName (or sslCommonName hostname) 
+                                                                                        sslCommonName (or sslCommonName hostname)
                                                                                         env #(case % "{region}" region "{service}" service "{dnsSuffix}" dnsSuffix)
                                                                                         hostname (str/replace hostname #"\{(?:region|service|dnsSuffix)}" env)
                                                                                         sslCommonName (str/replace sslCommonName #"\{(?:region|service|dnsSuffix)}" env)
