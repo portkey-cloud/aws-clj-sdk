@@ -1,6 +1,7 @@
 (ns portkey.helpers
   (:require [cheshire.core :as json]
             [clojure.java.io :as io]
+            [clojure.string :as str]
             [net.cgrand.xforms :as x]))
 
 
@@ -18,7 +19,8 @@
                                      (x/sort))
                                     (file-seq (io/as-file "api-resources/aws-sdk-ruby/apis/")))
         api-2-description-def (for [[api versions] entries
-                                    :let           [[latest file-path] (first (rseq versions))]
+                                    :let           [api                (str/replace api #"[.]" "-")
+                                                    [latest file-path] (first (rseq versions))]
                                     :when          (= protocol (get-in (-> (slurp file-path) json/parse-string) ["metadata" "protocol"]))]
                                 `(def ^:private ~(symbol (str protocol "-protocol-" api "-api-2-json"))
                                    (-> (slurp ~file-path) json/parse-string)))]
@@ -31,7 +33,7 @@
   (require '[portkey.aws :as aws])
   (def-api-2-json "query")
 
-  
+
 
   (let [{:strs [shapes operations] :as api}                  query-protocol-iam-api-2-json
         {{:strs [method requestUri responseCode]} "http"
@@ -41,7 +43,7 @@
          {output-shape-name "shape"}              "output"
          :strs                                    [name errors]
          :as                                      operation} (get-in api ["operations" "DeleteBucket"])]
-    
+
     (let [shapes-seq-fn                    (fn [shape]
                                              (tree-seq #(and (map? %) (#{"structure" "list" "map"} (% "type")))
                                                        #(case (% "type")

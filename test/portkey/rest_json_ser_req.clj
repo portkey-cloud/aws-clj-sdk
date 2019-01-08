@@ -5,7 +5,8 @@
             ;; Code smell, I should not load x & gen but for some reasons it can't find it during macro-expansionc
             [net.cgrand.xforms :as x]
             [portkey.aws :as aws]
-            [portkey.aws.sqs :as sqs]
+            [portkey.aws.batch :as batch]
+            [portkey.aws.apigateway :as ag]
             [portkey.awsgen :as gen :refer :all]
             [portkey.utils :refer [deftest-aws-ser deftest-aws-request]]))
 
@@ -89,7 +90,8 @@
                                              :shape "CreateComputeEnvironmentRequest",
                                              :type "structure"}})
 
-(deftest-aws-request rest-json-batch-test-list-structure
+
+(deftest-aws-request rest-json-batch-test-list-structure-request
   "Test list & structure with rest-json protocol.
 
    Nothing complex here as the rest-json protocol is almost a mapping
@@ -135,3 +137,95 @@
                                  }
                                }"
    })
+
+
+
+(deftest-aws-ser rest-json-apigateway-map-gemeration-ser
+  {:description-schema {"shapes" {"PutIntegrationRequest"
+                                  {"type"     "structure",
+                                   "required" ["restApiId" "resourceId" "httpMethod" "type"],
+                                   "members"
+                                   {"connectionId"      {"shape" "String"},
+                                    "resourceId"        {"shape" "String"},
+                                    "connectionType"    {"shape" "ConnectionType"},
+                                    "httpMethod"        {"shape" "String"},
+                                    "requestParameters" {"shape" "MapOfStringToString"},
+                                    "restApiId"         {"shape" "String"},
+                                    "type"              {"shape" "IntegrationType"},
+                                    "contentHandling"   {"shape" "ContentHandlingStrategy"}}}
+                                  "String"
+                                  {"type" "string"}
+                                  "ConnectionType"
+                                  {"type" "string", "enum" ["INTERNET" "VPC_LINK"]}
+                                  "MapOfStringToString"
+                                  {"type" "map", "key" {"shape" "String"}, "value" {"shape" "String"}}
+                                  "IntegrationType"
+                                  {"type" "string", "enum" ["HTTP" "AWS" "MOCK" "HTTP_PROXY" "AWS_PROXY"]}
+                                  "ContentHandlingStrategy"
+                                  {"type" "string", "enum" ["CONVERT_TO_BINARY" "CONVERT_TO_TEXT"]}}}
+   :shape-to-test      "PutIntegrationRequest"
+   :apply-on-protocols ["rest-json"]
+   :inputs             [{:rest-api-id        "apiid",
+                         :resource-id        "resourceid",
+                         :http-method        "GET",
+                         :type               :aws,
+                         :connection-type    "VPC_LINK",
+                         :connection-id      "cid",
+                         :content-handling   :convert-to-text,
+                         :request-parameters {"reqkey" "reqval" "reqkey2" "reqval2"}}]
+   :expected-result    #:http.request.field{:value [#:http.request.field{:value "apiid", :shape "String", :name "restApiId"}
+                                                    #:http.request.field{:value "resourceid", :shape "String", :name "resourceId"}
+                                                    #:http.request.field{:value "GET", :shape "String", :name "httpMethod"}
+                                                    #:http.request.field{:value "AWS", :shape "IntegrationType", :name "type"}
+                                                    #:http.request.field{:value "cid", :shape "String", :name "connectionId"}
+                                                    #:http.request.field{:value "VPC_LINK", :shape "ConnectionType", :name "connectionType"}
+                                                    #:http.request.field{:value [[#:http.request.field{:value "reqkey", :shape "String", :map-info "key"}
+                                                                                  #:http.request.field{:value "reqval", :shape "String", :map-info "value"}]
+                                                                                 [#:http.request.field{:value "reqkey2", :shape "String", :map-info "key"}
+                                                                                  #:http.request.field{:value "reqval2", :shape "String", :map-info "value"}]],
+                                                                         :shape "MapOfStringToString",
+                                                                         :type "map",
+                                                                         :name "requestParameters"}
+                                                    #:http.request.field{:value "CONVERT_TO_TEXT", :shape "ContentHandlingStrategy", :name "contentHandling"}],
+                                            :shape "PutIntegrationRequest",
+                                            :type "structure"}})
+
+
+(deftest-aws-ser rest-json-runtime-lex-jsonvalue-ser
+  {:description-schema {"shapes" {"PostContentRequest"
+                                  {"type"     "structure",
+                                   "required" ["botName" "botAlias" "userId" "contentType" "inputStream"],
+                                   "members"  {"userId"            {"shape" "UserId", "location" "uri", "locationName" "userId"},
+                                               "sessionAttributes" {"shape" "AttributesString", "jsonvalue" true},
+                                               "requestAttributes" {"shape" "AttributesString", "jsonvalue" true},}}
+                                  "UserId"
+                                  {"type" "string", "max" 100, "min" 2, "pattern" "[0-9a-zA-Z._:-]+"}
+                                  "AttributesString"
+                                  {"type" "string", "sensitive" true}}}
+   :shape-to-test      ""
+   :apply-on-protocols ["rest-json"]
+   :inputs             []
+   :expected-result    {}})
+
+
+(comment
+
+
+  (require '[portkey.aws.runtime-lex :as lex])
+  (require '[clojure.spec.alpha :as spec])
+  (require '[portkey.helpers :as h])
+
+  (lex/post-content {:bot-name "U",
+                     :bot-alias                  "",
+                     :user-id                    "bbF",
+                     :content-type               "g",
+                     :input-stream               (bytes (byte-array (map (comp byte int) "body"))),
+                     :session-attributes         "",
+                     :request-attributes         "z",
+                     :accept                     "2"})
+
+  (sc.api/last-ep-id)
+
+  (sc.api)
+
+  )

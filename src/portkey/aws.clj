@@ -210,8 +210,8 @@
              [:ring.request :headers]
              (fnil into {})
              (into {}
-                   (map (fn [{:http.request.field/keys [value name location-name]}]
-                          [(or location-name name) value]))
+                   (map (fn [{:http.request.field/keys [value name location-name jsonvalue]}]
+                          [(or location-name name) (if jsonvalue (-> value json/generate-string base64-encode) value)]))
                    header)))
 
 
