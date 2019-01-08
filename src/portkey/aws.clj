@@ -1,6 +1,7 @@
 (ns portkey.aws
   (:refer-clojure :exclude [cond])
   (:require [camel-snake-kebab.core :as kebab]
+            [cheshire.core :as json]
             [clj-http.client :as http]
             [clojure.core.async :as async]
             [clojure.data.xml :as xml]
@@ -287,7 +288,6 @@
            :http.request.configuration/action
            :http.request.configuration/version
            :http.request.configuration/body] :as req}]
-  (sc.api/spy 1)
   (if (contains? #{:put :post :patch} method)
     (assoc-in req
               [:ring.request :body]
@@ -387,13 +387,38 @@
     req))
 
 
+(defn params-to-body-rest-json
+  [{:keys [:http.request.configuration/method
+           :http.request.configuration/body] :as req}]
+  (if (contains? #{:put :post :patch} method)
+    (assoc-in req
+              [:ring.request :body]
+              (-> (let [body->json-encoded (fn body->json-encoded [{:http.request.field/keys [type name shape value location-name parent-type]}]
+                                             (condp = type
+                                               "structure" (into {} (map (fn [item]
+                                                                           [(or location-name name shape) (into {} (map body->json-encoded) value)]))
+                                                                 value)
+                                               "list"      [(or location-name name shape) (into [] (comp (map #(assoc % :http.request.field/parent-type "list"))
+                                                                                                         (map body->json-encoded))
+                                                                                                value)]
+                                               "map"       (let [[key' val'] value]
+                                                             [(:http.request.field/value key') (body->json-encoded val')])
+                                               (if (= parent-type "list")
+                                                 value
+                                                 (hash-map (or location-name name shape) value))))]
+                    (into {} (map body->json-encoded) body))
+                  json/generate-string))
+    req))
+
+
 (defn- params-to-body
   "to complete"
   [{:keys [:http.request.configuration/protocol] :as req}]
   (case protocol
-    "rest-xml" (params-to-body-rest-xml req)
-    "ec2"      (params-to-body-ec2 req)
-    "query"    (params-to-body-query req)))
+    "rest-xml"  (params-to-body-rest-xml req)
+    "ec2"       (params-to-body-ec2 req)
+    "query"     (params-to-body-query req)
+    "rest-json" (params-to-body-rest-json req)))
 
 
 (defn- content-md5 [{{:keys [body]} :ring.request :as req}]
@@ -516,10 +541,9 @@
            :http.request.configuration/method
            :http.request.configuration/request-uri
            :http.request.configuration/mime-type] :as req}]
-  (sc.api/spy 1)
   #_(spec/check-asserts true)
   #_(binding [spec/*compile-asserts* true]
-    (spec/assert :http.request.configuration/configuration req))
+      (spec/assert :http.request.configuration/configuration req))
   (let [{:keys [endpoint credential-scope signature-version]} (endpoints (region))]
     (->
      (into req
