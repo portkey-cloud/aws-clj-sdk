@@ -205,14 +205,21 @@
 (defn- params-to-header
   "Compute all headers for the ring request."
   [{:as   req
-    :keys [:http.request.configuration/header]}]
-  (update-in req
-             [:ring.request :headers]
-             (fnil into {})
-             (into {}
-                   (map (fn [{:http.request.field/keys [value name location-name jsonvalue]}]
-                          [(or location-name name) (if jsonvalue (-> value json/generate-string base64-encode) value)]))
-                   header)))
+    :keys [:http.request.configuration/header
+           :http.request.configuration/action
+           :http.request.configuration/target-prefix
+           :http.request.configuration/protocol]}]
+  (let [header (if (= protocol "json")
+                 (let [conj+ (fnil conj [])]
+                   (conj+ header #:http.request.field{:location-name "x-amz-target"
+                                                      :value         (str target-prefix "." action)}))
+                 header)]
+    (update-in req [:ring.request :headers]
+               (fnil into {})
+               (into {}
+                     (map (fn [{:http.request.field/keys [value name location-name jsonvalue]}]
+                            [(or location-name name) (if jsonvalue (-> value json/generate-string base64-encode) value)]))
+                     header))))
 
 
 (defn- params-to-headers
@@ -411,6 +418,31 @@
     req))
 
 
+(defn params-to-body-json
+  [{:keys [:http.request.configuration/method
+           :http.request.configuration/body] :as req}]
+  (if (contains? #{:put :post :patch} method)
+    (assoc-in req
+              [:ring.request :body]
+              (-> (let [body->json-encoded (fn body->json-encoded [{:http.request.field/keys [type name shape value location-name parent-type]}]
+                                             (condp = type
+                                               "structure" (into {} (map (fn [item]
+                                                                           [(or location-name name shape) (into {} (map body->json-encoded) value)]))
+                                                                 value)
+                                               ;; @TODO: handle jsonvalue at some point for pricing lib.
+                                               "list"      [(or location-name name shape) (into [] (comp (map #(assoc % :http.request.field/parent-type "list"))
+                                                                                                         (map body->json-encoded))
+                                                                                                value)]
+                                               "map"       (let [[key' val'] value]
+                                                             [(:http.request.field/value key') (body->json-encoded val')])
+                                               (if (= parent-type "list")
+                                                 value
+                                                 (hash-map (or location-name name shape) value))))]
+                    (into {} (map body->json-encoded) body))
+                  json/generate-string))
+    req))
+
+
 (defn- params-to-body
   "to complete"
   [{:keys [:http.request.configuration/protocol] :as req}]
@@ -418,7 +450,8 @@
     "rest-xml"  (params-to-body-rest-xml req)
     "ec2"       (params-to-body-ec2 req)
     "query"     (params-to-body-query req)
-    "rest-json" (params-to-body-rest-json req)))
+    "rest-json" (params-to-body-rest-json req)
+    "json"      (params-to-body-json req)))
 
 
 (defn- content-md5 [{{:keys [body]} :ring.request :as req}]
