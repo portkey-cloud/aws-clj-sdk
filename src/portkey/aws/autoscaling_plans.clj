@@ -2,35 +2,101 @@
 
 (def
  endpoints
- '{"eu-west-1"
+ '{"ap-northeast-1"
    {:credential-scope
-    {:service "autoscaling-plans", :region "eu-west-1"},
+    {:service "autoscaling", :region "ap-northeast-1"},
+    :ssl-common-name "autoscaling.ap-northeast-1.amazonaws.com",
+    :endpoint "https://autoscaling.ap-northeast-1.amazonaws.com",
+    :signature-version :v4},
+   "eu-west-1"
+   {:credential-scope {:service "autoscaling", :region "eu-west-1"},
     :ssl-common-name "autoscaling.eu-west-1.amazonaws.com",
     :endpoint "https://autoscaling.eu-west-1.amazonaws.com",
     :signature-version :v4},
    "us-east-2"
-   {:credential-scope
-    {:service "autoscaling-plans", :region "us-east-2"},
+   {:credential-scope {:service "autoscaling", :region "us-east-2"},
     :ssl-common-name "autoscaling.us-east-2.amazonaws.com",
     :endpoint "https://autoscaling.us-east-2.amazonaws.com",
     :signature-version :v4},
+   "ap-southeast-2"
+   {:credential-scope
+    {:service "autoscaling", :region "ap-southeast-2"},
+    :ssl-common-name "autoscaling.ap-southeast-2.amazonaws.com",
+    :endpoint "https://autoscaling.ap-southeast-2.amazonaws.com",
+    :signature-version :v4},
+   "cn-north-1"
+   {:credential-scope {:service "autoscaling", :region "cn-north-1"},
+    :ssl-common-name "autoscaling.cn-north-1.amazonaws.com.cn",
+    :endpoint "https://autoscaling.cn-north-1.amazonaws.com.cn",
+    :signature-version :v4},
+   "sa-east-1"
+   {:credential-scope {:service "autoscaling", :region "sa-east-1"},
+    :ssl-common-name "autoscaling.sa-east-1.amazonaws.com",
+    :endpoint "https://autoscaling.sa-east-1.amazonaws.com",
+    :signature-version :v4},
    "ap-southeast-1"
    {:credential-scope
-    {:service "autoscaling-plans", :region "ap-southeast-1"},
+    {:service "autoscaling", :region "ap-southeast-1"},
     :ssl-common-name "autoscaling.ap-southeast-1.amazonaws.com",
     :endpoint "https://autoscaling.ap-southeast-1.amazonaws.com",
     :signature-version :v4},
-   "us-west-2"
+   "cn-northwest-1"
    {:credential-scope
-    {:service "autoscaling-plans", :region "us-west-2"},
+    {:service "autoscaling", :region "cn-northwest-1"},
+    :ssl-common-name "autoscaling.cn-northwest-1.amazonaws.com.cn",
+    :endpoint "https://autoscaling.cn-northwest-1.amazonaws.com.cn",
+    :signature-version :v4},
+   "ap-northeast-2"
+   {:credential-scope
+    {:service "autoscaling", :region "ap-northeast-2"},
+    :ssl-common-name "autoscaling.ap-northeast-2.amazonaws.com",
+    :endpoint "https://autoscaling.ap-northeast-2.amazonaws.com",
+    :signature-version :v4},
+   "eu-west-3"
+   {:credential-scope {:service "autoscaling", :region "eu-west-3"},
+    :ssl-common-name "autoscaling.eu-west-3.amazonaws.com",
+    :endpoint "https://autoscaling.eu-west-3.amazonaws.com",
+    :signature-version :v4},
+   "ca-central-1"
+   {:credential-scope {:service "autoscaling", :region "ca-central-1"},
+    :ssl-common-name "autoscaling.ca-central-1.amazonaws.com",
+    :endpoint "https://autoscaling.ca-central-1.amazonaws.com",
+    :signature-version :v4},
+   "eu-central-1"
+   {:credential-scope {:service "autoscaling", :region "eu-central-1"},
+    :ssl-common-name "autoscaling.eu-central-1.amazonaws.com",
+    :endpoint "https://autoscaling.eu-central-1.amazonaws.com",
+    :signature-version :v4},
+   "eu-west-2"
+   {:credential-scope {:service "autoscaling", :region "eu-west-2"},
+    :ssl-common-name "autoscaling.eu-west-2.amazonaws.com",
+    :endpoint "https://autoscaling.eu-west-2.amazonaws.com",
+    :signature-version :v4},
+   "us-gov-west-1"
+   {:credential-scope
+    {:service "autoscaling", :region "us-gov-west-1"},
+    :ssl-common-name "autoscaling.us-gov-west-1.amazonaws.com",
+    :endpoint "https://autoscaling.us-gov-west-1.amazonaws.com",
+    :signature-version :v4},
+   "us-west-2"
+   {:credential-scope {:service "autoscaling", :region "us-west-2"},
     :ssl-common-name "autoscaling.us-west-2.amazonaws.com",
     :endpoint "https://autoscaling.us-west-2.amazonaws.com",
     :signature-version :v4},
    "us-east-1"
-   {:credential-scope
-    {:service "autoscaling-plans", :region "us-east-1"},
+   {:credential-scope {:service "autoscaling", :region "us-east-1"},
     :ssl-common-name "autoscaling.us-east-1.amazonaws.com",
     :endpoint "https://autoscaling.us-east-1.amazonaws.com",
+    :signature-version :v4},
+   "us-west-1"
+   {:credential-scope {:service "autoscaling", :region "us-west-1"},
+    :ssl-common-name "autoscaling.us-west-1.amazonaws.com",
+    :endpoint "https://autoscaling.us-west-1.amazonaws.com",
+    :signature-version :v4},
+   "ap-south-1"
+   {:credential-scope {:service "autoscaling", :region "ap-south-1"},
+    :ssl-common-name "autoscaling.ap-south-1.amazonaws.com",
+    :endpoint "https://autoscaling.ap-south-1.amazonaws.com",
     :signature-version :v4}})
 
 (clojure.core/declare ser-predefined-scaling-metric-specification)
@@ -196,22 +262,22 @@
 
 (clojure.spec.alpha/def :portkey.aws.autoscaling-plans/update-scaling-plan-request (clojure.spec.alpha/keys :req-un [:portkey.aws.autoscaling-plans/scaling-plan-name :portkey.aws.autoscaling-plans/scaling-plan-version] :opt-un [:portkey.aws.autoscaling-plans/application-source :portkey.aws.autoscaling-plans/scaling-instructions]))
 
-(clojure.spec.alpha/def :portkey.aws.autoscaling-plans/xml-string-max-len-128 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27965__auto__] (clojure.core/<= 1 (clojure.core/count s__27965__auto__))) (clojure.core/fn [s__27966__auto__] (clojure.core/< (clojure.core/count s__27966__auto__) 128)) (clojure.core/fn [s__27967__auto__] (clojure.core/re-matches #"[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*" s__27967__auto__))))
+(clojure.spec.alpha/def :portkey.aws.autoscaling-plans/xml-string-max-len-128 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 128)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*" s__27882__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.autoscaling-plans/scaling-plan-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27965__auto__] (clojure.core/<= 1 (clojure.core/count s__27965__auto__))) (clojure.core/fn [s__27966__auto__] (clojure.core/< (clojure.core/count s__27966__auto__) 128)) (clojure.core/fn [s__27967__auto__] (clojure.core/re-matches #"[\p{Print}&&[^|:/]]+" s__27967__auto__))))
+(clojure.spec.alpha/def :portkey.aws.autoscaling-plans/scaling-plan-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 128)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[\p{Print}&&[^|:/]]+" s__27882__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.autoscaling-plans/scaling-status-code #{:inactive :partially-active "Active" "Inactive" "PartiallyActive" :active})
 
 (clojure.spec.alpha/def :portkey.aws.autoscaling-plans.validation-exception/message (clojure.spec.alpha/and :portkey.aws.autoscaling-plans/error-message))
 (clojure.spec.alpha/def :portkey.aws.autoscaling-plans/validation-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.autoscaling-plans.validation-exception/message]))
 
-(clojure.spec.alpha/def :portkey.aws.autoscaling-plans/resource-id-max-len-1600 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27965__auto__] (clojure.core/<= 1 (clojure.core/count s__27965__auto__))) (clojure.core/fn [s__27966__auto__] (clojure.core/< (clojure.core/count s__27966__auto__) 1600)) (clojure.core/fn [s__27967__auto__] (clojure.core/re-matches #"[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*" s__27967__auto__))))
+(clojure.spec.alpha/def :portkey.aws.autoscaling-plans/resource-id-max-len-1600 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1600)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*" s__27882__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.autoscaling-plans/resource-capacity clojure.core/int?)
 
 (clojure.spec.alpha/def :portkey.aws.autoscaling-plans/scalable-dimension #{"dynamodb:table:WriteCapacityUnits" :ecsservice-desired-count :dynamodbindex-write-capacity-units "ec2:spot-fleet-request:TargetCapacity" :ec-2spotfleetrequest-target-capacity "dynamodb:table:ReadCapacityUnits" "ecs:service:DesiredCount" "dynamodb:index:WriteCapacityUnits" :rdscluster-read-replica-count :dynamodbtable-write-capacity-units :dynamodbtable-read-capacity-units "rds:cluster:ReadReplicaCount" "autoscaling:autoScalingGroup:DesiredCapacity" :autoscalingauto-scaling-group-desired-capacity :dynamodbindex-read-capacity-units "dynamodb:index:ReadCapacityUnits"})
 
-(clojure.spec.alpha/def :portkey.aws.autoscaling-plans/policy-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27965__auto__] (clojure.core/<= 1 (clojure.core/count s__27965__auto__))) (clojure.core/fn [s__27966__auto__] (clojure.core/< (clojure.core/count s__27966__auto__) 256)) (clojure.core/fn [s__27967__auto__] (clojure.core/re-matches #"\p{Print}+" s__27967__auto__))))
+(clojure.spec.alpha/def :portkey.aws.autoscaling-plans/policy-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"\p{Print}+" s__27882__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.autoscaling-plans/scaling-plan-resources (clojure.spec.alpha/coll-of :portkey.aws.autoscaling-plans/scaling-plan-resource))
 
@@ -223,7 +289,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.autoscaling-plans/metric-dimension-value (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.autoscaling-plans/xml-string-max-len-256 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27965__auto__] (clojure.core/<= 1 (clojure.core/count s__27965__auto__))) (clojure.core/fn [s__27966__auto__] (clojure.core/< (clojure.core/count s__27966__auto__) 256)) (clojure.core/fn [s__27967__auto__] (clojure.core/re-matches #"[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*" s__27967__auto__))))
+(clojure.spec.alpha/def :portkey.aws.autoscaling-plans/xml-string-max-len-256 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*" s__27882__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.autoscaling-plans/describe-scaling-plan-resources-request (clojure.spec.alpha/keys :req-un [:portkey.aws.autoscaling-plans/scaling-plan-name :portkey.aws.autoscaling-plans/scaling-plan-version] :opt-un [:portkey.aws.autoscaling-plans/max-results :portkey.aws.autoscaling-plans/next-token]))
 
@@ -249,7 +315,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.autoscaling-plans/tag-filters (clojure.spec.alpha/coll-of :portkey.aws.autoscaling-plans/tag-filter))
 
-(clojure.spec.alpha/def :portkey.aws.autoscaling-plans/xml-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27967__auto__] (clojure.core/re-matches #"[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*" s__27967__auto__))))
+(clojure.spec.alpha/def :portkey.aws.autoscaling-plans/xml-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*" s__27882__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.autoscaling-plans/describe-scaling-plans-request (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.autoscaling-plans/scaling-plan-names :portkey.aws.autoscaling-plans/scaling-plan-version :portkey.aws.autoscaling-plans/application-sources :portkey.aws.autoscaling-plans/max-results :portkey.aws.autoscaling-plans/next-token]))
 
@@ -262,7 +328,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.autoscaling-plans/describe-scaling-plan-resources-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.autoscaling-plans/scaling-plan-resources :portkey.aws.autoscaling-plans/next-token]))
 
-(clojure.spec.alpha/def :portkey.aws.autoscaling-plans/resource-label (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27965__auto__] (clojure.core/<= 1 (clojure.core/count s__27965__auto__))) (clojure.core/fn [s__27966__auto__] (clojure.core/< (clojure.core/count s__27966__auto__) 1023))))
+(clojure.spec.alpha/def :portkey.aws.autoscaling-plans/resource-label (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1023))))
 
 (clojure.spec.alpha/def :portkey.aws.autoscaling-plans/scaling-plan-status-code #{:active-with-problems "Active" "UpdateFailed" :deletion-failed "DeletionFailed" "UpdateInProgress" :deletion-in-progress "DeletionInProgress" :update-failed :active :update-in-progress "CreationInProgress" "CreationFailed" :creation-in-progress :creation-failed "ActiveWithProblems"})
 
@@ -344,17 +410,17 @@
 
 (clojure.spec.alpha/def :portkey.aws.autoscaling-plans/service-namespace #{"dynamodb" "ec2" :autoscaling :ecs "ecs" :rds :dynamodb :ec-2 "autoscaling" "rds"})
 
-(clojure.core/defn create-scaling-plan ([create-scaling-plan-requestinput] (clojure.core/let [request-function-result__28606__auto__ (req-create-scaling-plan-request create-scaling-plan-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28606__auto__ {:http.request.configuration/endpoints portkey.aws.autoscaling-plans/endpoints, :http.request.spec/output-spec :portkey.aws.autoscaling-plans/create-scaling-plan-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-06", :http.request.configuration/service-id "Auto Scaling Plans", :http.request.spec/input-spec :portkey.aws.autoscaling-plans/create-scaling-plan-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateScalingPlan", :http.request.spec/error-spec {"ValidationException" :portkey.aws.autoscaling-plans/validation-exception, "LimitExceededException" :portkey.aws.autoscaling-plans/limit-exceeded-exception, "ConcurrentUpdateException" :portkey.aws.autoscaling-plans/concurrent-update-exception, "InternalServiceException" :portkey.aws.autoscaling-plans/internal-service-exception}})))))
+(clojure.core/defn create-scaling-plan ([create-scaling-plan-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-scaling-plan-request create-scaling-plan-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.autoscaling-plans/endpoints, :http.request.configuration/target-prefix "AnyScaleScalingPlannerFrontendService", :http.request.spec/output-spec :portkey.aws.autoscaling-plans/create-scaling-plan-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-06", :http.request.configuration/service-id "Auto Scaling Plans", :http.request.spec/input-spec :portkey.aws.autoscaling-plans/create-scaling-plan-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateScalingPlan", :http.request.spec/error-spec {"ValidationException" :portkey.aws.autoscaling-plans/validation-exception, "LimitExceededException" :portkey.aws.autoscaling-plans/limit-exceeded-exception, "ConcurrentUpdateException" :portkey.aws.autoscaling-plans/concurrent-update-exception, "InternalServiceException" :portkey.aws.autoscaling-plans/internal-service-exception}})))))
 (clojure.spec.alpha/fdef create-scaling-plan :args (clojure.spec.alpha/tuple :portkey.aws.autoscaling-plans/create-scaling-plan-request) :ret (clojure.spec.alpha/and :portkey.aws.autoscaling-plans/create-scaling-plan-response))
 
-(clojure.core/defn delete-scaling-plan ([delete-scaling-plan-requestinput] (clojure.core/let [request-function-result__28606__auto__ (req-delete-scaling-plan-request delete-scaling-plan-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28606__auto__ {:http.request.configuration/endpoints portkey.aws.autoscaling-plans/endpoints, :http.request.spec/output-spec :portkey.aws.autoscaling-plans/delete-scaling-plan-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-06", :http.request.configuration/service-id "Auto Scaling Plans", :http.request.spec/input-spec :portkey.aws.autoscaling-plans/delete-scaling-plan-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteScalingPlan", :http.request.spec/error-spec {"ValidationException" :portkey.aws.autoscaling-plans/validation-exception, "ObjectNotFoundException" :portkey.aws.autoscaling-plans/object-not-found-exception, "ConcurrentUpdateException" :portkey.aws.autoscaling-plans/concurrent-update-exception, "InternalServiceException" :portkey.aws.autoscaling-plans/internal-service-exception}})))))
+(clojure.core/defn delete-scaling-plan ([delete-scaling-plan-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-scaling-plan-request delete-scaling-plan-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.autoscaling-plans/endpoints, :http.request.configuration/target-prefix "AnyScaleScalingPlannerFrontendService", :http.request.spec/output-spec :portkey.aws.autoscaling-plans/delete-scaling-plan-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-06", :http.request.configuration/service-id "Auto Scaling Plans", :http.request.spec/input-spec :portkey.aws.autoscaling-plans/delete-scaling-plan-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteScalingPlan", :http.request.spec/error-spec {"ValidationException" :portkey.aws.autoscaling-plans/validation-exception, "ObjectNotFoundException" :portkey.aws.autoscaling-plans/object-not-found-exception, "ConcurrentUpdateException" :portkey.aws.autoscaling-plans/concurrent-update-exception, "InternalServiceException" :portkey.aws.autoscaling-plans/internal-service-exception}})))))
 (clojure.spec.alpha/fdef delete-scaling-plan :args (clojure.spec.alpha/tuple :portkey.aws.autoscaling-plans/delete-scaling-plan-request) :ret (clojure.spec.alpha/and :portkey.aws.autoscaling-plans/delete-scaling-plan-response))
 
-(clojure.core/defn describe-scaling-plan-resources ([describe-scaling-plan-resources-requestinput] (clojure.core/let [request-function-result__28606__auto__ (req-describe-scaling-plan-resources-request describe-scaling-plan-resources-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28606__auto__ {:http.request.configuration/endpoints portkey.aws.autoscaling-plans/endpoints, :http.request.spec/output-spec :portkey.aws.autoscaling-plans/describe-scaling-plan-resources-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-06", :http.request.configuration/service-id "Auto Scaling Plans", :http.request.spec/input-spec :portkey.aws.autoscaling-plans/describe-scaling-plan-resources-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeScalingPlanResources", :http.request.spec/error-spec {"ValidationException" :portkey.aws.autoscaling-plans/validation-exception, "InvalidNextTokenException" :portkey.aws.autoscaling-plans/invalid-next-token-exception, "ConcurrentUpdateException" :portkey.aws.autoscaling-plans/concurrent-update-exception, "InternalServiceException" :portkey.aws.autoscaling-plans/internal-service-exception}})))))
+(clojure.core/defn describe-scaling-plan-resources ([describe-scaling-plan-resources-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-scaling-plan-resources-request describe-scaling-plan-resources-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.autoscaling-plans/endpoints, :http.request.configuration/target-prefix "AnyScaleScalingPlannerFrontendService", :http.request.spec/output-spec :portkey.aws.autoscaling-plans/describe-scaling-plan-resources-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-06", :http.request.configuration/service-id "Auto Scaling Plans", :http.request.spec/input-spec :portkey.aws.autoscaling-plans/describe-scaling-plan-resources-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeScalingPlanResources", :http.request.spec/error-spec {"ValidationException" :portkey.aws.autoscaling-plans/validation-exception, "InvalidNextTokenException" :portkey.aws.autoscaling-plans/invalid-next-token-exception, "ConcurrentUpdateException" :portkey.aws.autoscaling-plans/concurrent-update-exception, "InternalServiceException" :portkey.aws.autoscaling-plans/internal-service-exception}})))))
 (clojure.spec.alpha/fdef describe-scaling-plan-resources :args (clojure.spec.alpha/tuple :portkey.aws.autoscaling-plans/describe-scaling-plan-resources-request) :ret (clojure.spec.alpha/and :portkey.aws.autoscaling-plans/describe-scaling-plan-resources-response))
 
-(clojure.core/defn describe-scaling-plans ([] (describe-scaling-plans {})) ([describe-scaling-plans-requestinput] (clojure.core/let [request-function-result__28606__auto__ (req-describe-scaling-plans-request describe-scaling-plans-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28606__auto__ {:http.request.configuration/endpoints portkey.aws.autoscaling-plans/endpoints, :http.request.spec/output-spec :portkey.aws.autoscaling-plans/describe-scaling-plans-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-06", :http.request.configuration/service-id "Auto Scaling Plans", :http.request.spec/input-spec :portkey.aws.autoscaling-plans/describe-scaling-plans-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeScalingPlans", :http.request.spec/error-spec {"ValidationException" :portkey.aws.autoscaling-plans/validation-exception, "InvalidNextTokenException" :portkey.aws.autoscaling-plans/invalid-next-token-exception, "ConcurrentUpdateException" :portkey.aws.autoscaling-plans/concurrent-update-exception, "InternalServiceException" :portkey.aws.autoscaling-plans/internal-service-exception}})))))
+(clojure.core/defn describe-scaling-plans ([] (describe-scaling-plans {})) ([describe-scaling-plans-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-scaling-plans-request describe-scaling-plans-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.autoscaling-plans/endpoints, :http.request.configuration/target-prefix "AnyScaleScalingPlannerFrontendService", :http.request.spec/output-spec :portkey.aws.autoscaling-plans/describe-scaling-plans-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-06", :http.request.configuration/service-id "Auto Scaling Plans", :http.request.spec/input-spec :portkey.aws.autoscaling-plans/describe-scaling-plans-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeScalingPlans", :http.request.spec/error-spec {"ValidationException" :portkey.aws.autoscaling-plans/validation-exception, "InvalidNextTokenException" :portkey.aws.autoscaling-plans/invalid-next-token-exception, "ConcurrentUpdateException" :portkey.aws.autoscaling-plans/concurrent-update-exception, "InternalServiceException" :portkey.aws.autoscaling-plans/internal-service-exception}})))))
 (clojure.spec.alpha/fdef describe-scaling-plans :args (clojure.spec.alpha/? :portkey.aws.autoscaling-plans/describe-scaling-plans-request) :ret (clojure.spec.alpha/and :portkey.aws.autoscaling-plans/describe-scaling-plans-response))
 
-(clojure.core/defn update-scaling-plan ([update-scaling-plan-requestinput] (clojure.core/let [request-function-result__28606__auto__ (req-update-scaling-plan-request update-scaling-plan-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28606__auto__ {:http.request.configuration/endpoints portkey.aws.autoscaling-plans/endpoints, :http.request.spec/output-spec :portkey.aws.autoscaling-plans/update-scaling-plan-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-06", :http.request.configuration/service-id "Auto Scaling Plans", :http.request.spec/input-spec :portkey.aws.autoscaling-plans/update-scaling-plan-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateScalingPlan", :http.request.spec/error-spec {"ValidationException" :portkey.aws.autoscaling-plans/validation-exception, "ConcurrentUpdateException" :portkey.aws.autoscaling-plans/concurrent-update-exception, "InternalServiceException" :portkey.aws.autoscaling-plans/internal-service-exception, "ObjectNotFoundException" :portkey.aws.autoscaling-plans/object-not-found-exception}})))))
+(clojure.core/defn update-scaling-plan ([update-scaling-plan-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-update-scaling-plan-request update-scaling-plan-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.autoscaling-plans/endpoints, :http.request.configuration/target-prefix "AnyScaleScalingPlannerFrontendService", :http.request.spec/output-spec :portkey.aws.autoscaling-plans/update-scaling-plan-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-06", :http.request.configuration/service-id "Auto Scaling Plans", :http.request.spec/input-spec :portkey.aws.autoscaling-plans/update-scaling-plan-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateScalingPlan", :http.request.spec/error-spec {"ValidationException" :portkey.aws.autoscaling-plans/validation-exception, "ConcurrentUpdateException" :portkey.aws.autoscaling-plans/concurrent-update-exception, "InternalServiceException" :portkey.aws.autoscaling-plans/internal-service-exception, "ObjectNotFoundException" :portkey.aws.autoscaling-plans/object-not-found-exception}})))))
 (clojure.spec.alpha/fdef update-scaling-plan :args (clojure.spec.alpha/tuple :portkey.aws.autoscaling-plans/update-scaling-plan-request) :ret (clojure.spec.alpha/and :portkey.aws.autoscaling-plans/update-scaling-plan-response))

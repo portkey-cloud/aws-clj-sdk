@@ -438,7 +438,7 @@
                                                            (not (contains? #{"members" "required"} k))))
                                                  (map (fn [[k v]]
                                                         [(keyword "http.request.field" (aws/dashed k)) v])))
-             handled-attributes            #{"shape" "box" "locationName" "deprecated" "sensitive" #_"flattened" #_"xmlAttribute" #_"streaming" #_"queryName"}
+             handled-attributes            #{"shape" "box" "locationName" "deprecated" "sensitive" "flattened" "xmlAttribute" "streaming" "queryName"}
              required-function-body-part   (into [] (comp (x/for [required-name %
                                                                   :let [{:strs [shape] :as sh} (get-in api ["shapes" shape-name "members" required-name])
                                                                         ser-name               (shape-name->ser-name shape)
@@ -467,7 +467,7 @@
                                                           cat)
                                                  (get-in api ["shapes" shape-name "members"]))]
          (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) (get-in api ["shapes" shape-name]))
-                                                 #{"type" "members" "required" "deprecated" "sensitive" #_"locationName" #_"xmlNamespace" #_"xmlOrder"}))
+                                                 #{"type" "members" "required" "deprecated" "sensitive" "locationName" "xmlNamespace" "xmlOrder"}))
            (throw (ex-info "Structure REST-XML protocol does not handle type" {:shape (get-in api ["shapes" shape-name])}))
            `(cond-> ~(into {:http.request.field/value required-function-body-part
                             :http.request.field/shape shape-name}
@@ -503,7 +503,7 @@
                                                                      (map (fn [[k v]]
                                                                             [(keyword "http.request.field" (aws/dashed k)) v])))
                   {{:strs [shape] :as member} "member" :as sh} (get-in api ["shapes" shape-name])]
-              (if-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"type" "member" #_"flattened" "min" "sensitive" "max" "deprecated"}))
+              (if-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"type" "member" "flattened" "min" "sensitive" "max" "deprecated"}))
                            (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) member) #{"shape" "locationName"})))
                 (throw (ex-info "Type : list, aws-serialization-functions macro with sh and member : " {:sh     sh
                                                                                                         :member member}))
@@ -881,12 +881,13 @@
                                      ;; @TODO : rework on documentation
                                      ;;docs-json (-> api-json io/file .getParentFile (io/file "docs-2.json") java.io.FileInputStream.)
                                      ]
-                           (let [api-json' (json/parse-stream (io/reader (java.io.FileInputStream. api-json)))]
+                           (let [api-json'       (json/parse-stream (io/reader (java.io.FileInputStream. api-json)))
+                                 endpoint-prefix (get-in api-json'["metadata" "endpointPrefix"])]
                              (binding [*out*          w
                                        *print-length* 1000000]
                                (prn (list 'ns ns '(:require [portkey.aws])))
                                (newline)
-                               (clojure.pprint/pprint (list 'def 'endpoints (list 'quote (get endpoints api))))
+                               (clojure.pprint/pprint (list 'def 'endpoints (list 'quote (get endpoints endpoint-prefix))))
                                ;; @TODO : rework on documentation.
                                (doseq [form (generate-api-forms ns api-json' #_docs-json)]
                                  (newline)
@@ -912,26 +913,26 @@
 
 (comment
 
-  
+
   (use 'clojure.repl)
   (require '[portkey.helpers :as helpers])
   (helpers/def-api-2-json "rest-xml")
-  
+
   ;; @TODO : spec http.request.configuration
   ;; @TODO : make the call-functions
 
 
   ;; go to aws call après
-   
 
-  
+
+
   (generate-files! :protocol "rest-xml")
   (generate-files! :api-name "s3")
 
   rest-xml-protocol-s3-api-2-json
 
   query-protocol-email-api-2-json
-  
+
   query-protocol-monitoring-api-2-json
   query-protocol-cloudsearch-api-2-json
   query-protocol-neptune-api-2-json
@@ -943,12 +944,12 @@
   query-protocol-elasticloadbalancingv2-api-2-json
 
   query-protocol-iam-api-2-json
-  
+
   (get-in query-protocol-monitoring-api-2-json ["shapes" "ListMetricsInput"])
   (get-in query-protocol-monitoring-api-2-json ["shapes" "Dimensions"])
   (get-in query-protocol-monitoring-api-2-json ["shapes" "Dimension"])
   (get-in query-protocol-monitoring-api-2-json ["shapes" "DimensionName"])
-  
+
   )
 
 

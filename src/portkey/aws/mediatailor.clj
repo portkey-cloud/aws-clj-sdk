@@ -1,6 +1,37 @@
 (ns portkey.aws.mediatailor (:require [portkey.aws]))
 
-(def endpoints 'nil)
+(def
+ endpoints
+ '{"ap-northeast-1"
+   {:credential-scope
+    {:service "api.mediatailor", :region "ap-northeast-1"},
+    :ssl-common-name "api.mediatailor.ap-northeast-1.amazonaws.com",
+    :endpoint "https://api.mediatailor.ap-northeast-1.amazonaws.com",
+    :signature-version :v4},
+   "eu-west-1"
+   {:credential-scope
+    {:service "api.mediatailor", :region "eu-west-1"},
+    :ssl-common-name "api.mediatailor.eu-west-1.amazonaws.com",
+    :endpoint "https://api.mediatailor.eu-west-1.amazonaws.com",
+    :signature-version :v4},
+   "ap-southeast-2"
+   {:credential-scope
+    {:service "api.mediatailor", :region "ap-southeast-2"},
+    :ssl-common-name "api.mediatailor.ap-southeast-2.amazonaws.com",
+    :endpoint "https://api.mediatailor.ap-southeast-2.amazonaws.com",
+    :signature-version :v4},
+   "ap-southeast-1"
+   {:credential-scope
+    {:service "api.mediatailor", :region "ap-southeast-1"},
+    :ssl-common-name "api.mediatailor.ap-southeast-1.amazonaws.com",
+    :endpoint "https://api.mediatailor.ap-southeast-1.amazonaws.com",
+    :signature-version :v4},
+   "us-east-1"
+   {:credential-scope
+    {:service "api.mediatailor", :region "us-east-1"},
+    :ssl-common-name "api.mediatailor.us-east-1.amazonaws.com",
+    :endpoint "https://api.mediatailor.us-east-1.amazonaws.com",
+    :signature-version :v4}})
 
 (clojure.core/declare ser-string)
 
@@ -85,14 +116,14 @@
 (clojure.spec.alpha/def :portkey.aws.mediatailor.get-playback-configuration-request/name (clojure.spec.alpha/and :portkey.aws.mediatailor/string))
 (clojure.spec.alpha/def :portkey.aws.mediatailor/get-playback-configuration-request (clojure.spec.alpha/keys :req-un [:portkey.aws.mediatailor.get-playback-configuration-request/name] :opt-un []))
 
-(clojure.core/defn delete-playback-configuration ([delete-playback-configuration-requestinput] (clojure.core/let [request-function-result__43533__auto__ (req-delete-playback-configuration-request delete-playback-configuration-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__43533__auto__ {:http.request.configuration/endpoints portkey.aws.mediatailor/endpoints, :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/playbackConfiguration/{Name}", :http.request.configuration/version "2018-04-23", :http.request.configuration/service-id "MediaTailor", :http.request.spec/input-spec :portkey.aws.mediatailor/delete-playback-configuration-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :delete, :http.request.configuration/response-code 204, :http.request.configuration/action "DeletePlaybackConfiguration", :http.request.spec/error-spec {}})))))
+(clojure.core/defn delete-playback-configuration ([delete-playback-configuration-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-playback-configuration-request delete-playback-configuration-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.mediatailor/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/playbackConfiguration/{Name}", :http.request.configuration/version "2018-04-23", :http.request.configuration/service-id "MediaTailor", :http.request.spec/input-spec :portkey.aws.mediatailor/delete-playback-configuration-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :delete, :http.request.configuration/response-code 204, :http.request.configuration/action "DeletePlaybackConfiguration", :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef delete-playback-configuration :args (clojure.spec.alpha/tuple :portkey.aws.mediatailor/delete-playback-configuration-request) :ret clojure.core/true?)
 
-(clojure.core/defn get-playback-configuration ([get-playback-configuration-requestinput] (clojure.core/let [request-function-result__43533__auto__ (req-get-playback-configuration-request get-playback-configuration-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__43533__auto__ {:http.request.configuration/endpoints portkey.aws.mediatailor/endpoints, :http.request.spec/output-spec :portkey.aws.mediatailor/get-playback-configuration-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/playbackConfiguration/{Name}", :http.request.configuration/version "2018-04-23", :http.request.configuration/service-id "MediaTailor", :http.request.spec/input-spec :portkey.aws.mediatailor/get-playback-configuration-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code 200, :http.request.configuration/action "GetPlaybackConfiguration", :http.request.spec/error-spec {}})))))
+(clojure.core/defn get-playback-configuration ([get-playback-configuration-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-playback-configuration-request get-playback-configuration-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.mediatailor/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.mediatailor/get-playback-configuration-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/playbackConfiguration/{Name}", :http.request.configuration/version "2018-04-23", :http.request.configuration/service-id "MediaTailor", :http.request.spec/input-spec :portkey.aws.mediatailor/get-playback-configuration-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code 200, :http.request.configuration/action "GetPlaybackConfiguration", :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef get-playback-configuration :args (clojure.spec.alpha/tuple :portkey.aws.mediatailor/get-playback-configuration-request) :ret (clojure.spec.alpha/and :portkey.aws.mediatailor/get-playback-configuration-response))
 
-(clojure.core/defn list-playback-configurations ([] (list-playback-configurations {})) ([list-playback-configurations-requestinput] (clojure.core/let [request-function-result__43533__auto__ (req-list-playback-configurations-request list-playback-configurations-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__43533__auto__ {:http.request.configuration/endpoints portkey.aws.mediatailor/endpoints, :http.request.spec/output-spec :portkey.aws.mediatailor/list-playback-configurations-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/playbackConfigurations", :http.request.configuration/version "2018-04-23", :http.request.configuration/service-id "MediaTailor", :http.request.spec/input-spec :portkey.aws.mediatailor/list-playback-configurations-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code 200, :http.request.configuration/action "ListPlaybackConfigurations", :http.request.spec/error-spec {}})))))
+(clojure.core/defn list-playback-configurations ([] (list-playback-configurations {})) ([list-playback-configurations-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-playback-configurations-request list-playback-configurations-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.mediatailor/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.mediatailor/list-playback-configurations-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/playbackConfigurations", :http.request.configuration/version "2018-04-23", :http.request.configuration/service-id "MediaTailor", :http.request.spec/input-spec :portkey.aws.mediatailor/list-playback-configurations-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code 200, :http.request.configuration/action "ListPlaybackConfigurations", :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef list-playback-configurations :args (clojure.spec.alpha/? :portkey.aws.mediatailor/list-playback-configurations-request) :ret (clojure.spec.alpha/and :portkey.aws.mediatailor/list-playback-configurations-response))
 
-(clojure.core/defn put-playback-configuration ([] (put-playback-configuration {})) ([put-playback-configuration-requestinput] (clojure.core/let [request-function-result__43533__auto__ (req-put-playback-configuration-request put-playback-configuration-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__43533__auto__ {:http.request.configuration/endpoints portkey.aws.mediatailor/endpoints, :http.request.spec/output-spec :portkey.aws.mediatailor/put-playback-configuration-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/playbackConfiguration", :http.request.configuration/version "2018-04-23", :http.request.configuration/service-id "MediaTailor", :http.request.spec/input-spec :portkey.aws.mediatailor/put-playback-configuration-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :put, :http.request.configuration/response-code 200, :http.request.configuration/action "PutPlaybackConfiguration", :http.request.spec/error-spec {}})))))
+(clojure.core/defn put-playback-configuration ([] (put-playback-configuration {})) ([put-playback-configuration-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-put-playback-configuration-request put-playback-configuration-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.mediatailor/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.mediatailor/put-playback-configuration-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/playbackConfiguration", :http.request.configuration/version "2018-04-23", :http.request.configuration/service-id "MediaTailor", :http.request.spec/input-spec :portkey.aws.mediatailor/put-playback-configuration-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :put, :http.request.configuration/response-code 200, :http.request.configuration/action "PutPlaybackConfiguration", :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef put-playback-configuration :args (clojure.spec.alpha/? :portkey.aws.mediatailor/put-playback-configuration-request) :ret (clojure.spec.alpha/and :portkey.aws.mediatailor/put-playback-configuration-response))

@@ -1,6 +1,115 @@
 (ns portkey.aws.meteringmarketplace (:require [portkey.aws]))
 
-(def endpoints 'nil)
+(def
+ endpoints
+ '{"ap-northeast-1"
+   {:credential-scope
+    {:service "aws-marketplace", :region "ap-northeast-1"},
+    :ssl-common-name
+    "metering.marketplace.ap-northeast-1.amazonaws.com",
+    :endpoint
+    "https://metering.marketplace.ap-northeast-1.amazonaws.com",
+    :signature-version :v4},
+   "eu-west-1"
+   {:credential-scope
+    {:service "aws-marketplace", :region "eu-west-1"},
+    :ssl-common-name "metering.marketplace.eu-west-1.amazonaws.com",
+    :endpoint "https://metering.marketplace.eu-west-1.amazonaws.com",
+    :signature-version :v4},
+   "us-east-2"
+   {:credential-scope
+    {:service "aws-marketplace", :region "us-east-2"},
+    :ssl-common-name "metering.marketplace.us-east-2.amazonaws.com",
+    :endpoint "https://metering.marketplace.us-east-2.amazonaws.com",
+    :signature-version :v4},
+   "ap-southeast-2"
+   {:credential-scope
+    {:service "aws-marketplace", :region "ap-southeast-2"},
+    :ssl-common-name
+    "metering.marketplace.ap-southeast-2.amazonaws.com",
+    :endpoint
+    "https://metering.marketplace.ap-southeast-2.amazonaws.com",
+    :signature-version :v4},
+   "sa-east-1"
+   {:credential-scope
+    {:service "aws-marketplace", :region "sa-east-1"},
+    :ssl-common-name "metering.marketplace.sa-east-1.amazonaws.com",
+    :endpoint "https://metering.marketplace.sa-east-1.amazonaws.com",
+    :signature-version :v4},
+   "ap-southeast-1"
+   {:credential-scope
+    {:service "aws-marketplace", :region "ap-southeast-1"},
+    :ssl-common-name
+    "metering.marketplace.ap-southeast-1.amazonaws.com",
+    :endpoint
+    "https://metering.marketplace.ap-southeast-1.amazonaws.com",
+    :signature-version :v4},
+   "ap-northeast-2"
+   {:credential-scope
+    {:service "aws-marketplace", :region "ap-northeast-2"},
+    :ssl-common-name
+    "metering.marketplace.ap-northeast-2.amazonaws.com",
+    :endpoint
+    "https://metering.marketplace.ap-northeast-2.amazonaws.com",
+    :signature-version :v4},
+   "eu-west-3"
+   {:credential-scope
+    {:service "aws-marketplace", :region "eu-west-3"},
+    :ssl-common-name "metering.marketplace.eu-west-3.amazonaws.com",
+    :endpoint "https://metering.marketplace.eu-west-3.amazonaws.com",
+    :signature-version :v4},
+   "ca-central-1"
+   {:credential-scope
+    {:service "aws-marketplace", :region "ca-central-1"},
+    :ssl-common-name "metering.marketplace.ca-central-1.amazonaws.com",
+    :endpoint
+    "https://metering.marketplace.ca-central-1.amazonaws.com",
+    :signature-version :v4},
+   "eu-central-1"
+   {:credential-scope
+    {:service "aws-marketplace", :region "eu-central-1"},
+    :ssl-common-name "metering.marketplace.eu-central-1.amazonaws.com",
+    :endpoint
+    "https://metering.marketplace.eu-central-1.amazonaws.com",
+    :signature-version :v4},
+   "eu-west-2"
+   {:credential-scope
+    {:service "aws-marketplace", :region "eu-west-2"},
+    :ssl-common-name "metering.marketplace.eu-west-2.amazonaws.com",
+    :endpoint "https://metering.marketplace.eu-west-2.amazonaws.com",
+    :signature-version :v4},
+   "us-gov-west-1"
+   {:credential-scope
+    {:service "aws-marketplace", :region "us-gov-west-1"},
+    :ssl-common-name
+    "metering.marketplace.us-gov-west-1.amazonaws.com",
+    :endpoint
+    "https://metering.marketplace.us-gov-west-1.amazonaws.com",
+    :signature-version :v4},
+   "us-west-2"
+   {:credential-scope
+    {:service "aws-marketplace", :region "us-west-2"},
+    :ssl-common-name "metering.marketplace.us-west-2.amazonaws.com",
+    :endpoint "https://metering.marketplace.us-west-2.amazonaws.com",
+    :signature-version :v4},
+   "us-east-1"
+   {:credential-scope
+    {:service "aws-marketplace", :region "us-east-1"},
+    :ssl-common-name "metering.marketplace.us-east-1.amazonaws.com",
+    :endpoint "https://metering.marketplace.us-east-1.amazonaws.com",
+    :signature-version :v4},
+   "us-west-1"
+   {:credential-scope
+    {:service "aws-marketplace", :region "us-west-1"},
+    :ssl-common-name "metering.marketplace.us-west-1.amazonaws.com",
+    :endpoint "https://metering.marketplace.us-west-1.amazonaws.com",
+    :signature-version :v4},
+   "ap-south-1"
+   {:credential-scope
+    {:service "aws-marketplace", :region "ap-south-1"},
+    :ssl-common-name "metering.marketplace.ap-south-1.amazonaws.com",
+    :endpoint "https://metering.marketplace.ap-south-1.amazonaws.com",
+    :signature-version :v4}})
 
 (clojure.core/declare ser-usage-record-list)
 
@@ -55,7 +164,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.meteringmarketplace/usage-record-list (clojure.spec.alpha/coll-of :portkey.aws.meteringmarketplace/usage-record :min-count 0 :max-count 25))
 
-(clojure.spec.alpha/def :portkey.aws.meteringmarketplace/non-empty-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27967__auto__] (clojure.core/re-matches #"\S+" s__27967__auto__))))
+(clojure.spec.alpha/def :portkey.aws.meteringmarketplace/non-empty-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"\S+" s__27882__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.meteringmarketplace.usage-record/dimension (clojure.spec.alpha/and :portkey.aws.meteringmarketplace/usage-dimension))
 (clojure.spec.alpha/def :portkey.aws.meteringmarketplace.usage-record/quantity (clojure.spec.alpha/and :portkey.aws.meteringmarketplace/usage-quantity))
@@ -66,9 +175,9 @@
 (clojure.spec.alpha/def :portkey.aws.meteringmarketplace.invalid-product-code-exception/message (clojure.spec.alpha/and :portkey.aws.meteringmarketplace/error-message))
 (clojure.spec.alpha/def :portkey.aws.meteringmarketplace/invalid-product-code-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.meteringmarketplace.invalid-product-code-exception/message]))
 
-(clojure.spec.alpha/def :portkey.aws.meteringmarketplace/usage-dimension (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27965__auto__] (clojure.core/<= 1 (clojure.core/count s__27965__auto__))) (clojure.core/fn [s__27966__auto__] (clojure.core/< (clojure.core/count s__27966__auto__) 255))))
+(clojure.spec.alpha/def :portkey.aws.meteringmarketplace/usage-dimension (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255))))
 
-(clojure.spec.alpha/def :portkey.aws.meteringmarketplace/customer-identifier (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27965__auto__] (clojure.core/<= 1 (clojure.core/count s__27965__auto__))) (clojure.core/fn [s__27966__auto__] (clojure.core/< (clojure.core/count s__27966__auto__) 255))))
+(clojure.spec.alpha/def :portkey.aws.meteringmarketplace/customer-identifier (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255))))
 
 (clojure.spec.alpha/def :portkey.aws.meteringmarketplace/usage-record-result-status #{:duplicate-record "CustomerNotSubscribed" :customer-not-subscribed "Success" "DuplicateRecord" :success})
 
@@ -102,7 +211,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.meteringmarketplace/timestamp clojure.core/inst?)
 
-(clojure.spec.alpha/def :portkey.aws.meteringmarketplace/product-code (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27965__auto__] (clojure.core/<= 1 (clojure.core/count s__27965__auto__))) (clojure.core/fn [s__27966__auto__] (clojure.core/< (clojure.core/count s__27966__auto__) 255))))
+(clojure.spec.alpha/def :portkey.aws.meteringmarketplace/product-code (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255))))
 
 (clojure.spec.alpha/def :portkey.aws.meteringmarketplace.throttling-exception/message (clojure.spec.alpha/and :portkey.aws.meteringmarketplace/error-message))
 (clojure.spec.alpha/def :portkey.aws.meteringmarketplace/throttling-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.meteringmarketplace.throttling-exception/message]))
@@ -124,11 +233,11 @@
 
 (clojure.spec.alpha/def :portkey.aws.meteringmarketplace/boolean clojure.core/boolean?)
 
-(clojure.core/defn batch-meter-usage ([batch-meter-usage-requestinput] (clojure.core/let [request-function-result__28606__auto__ (req-batch-meter-usage-request batch-meter-usage-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28606__auto__ {:http.request.configuration/endpoints portkey.aws.meteringmarketplace/endpoints, :http.request.spec/output-spec :portkey.aws.meteringmarketplace/batch-meter-usage-result, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-01-14", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.meteringmarketplace/batch-meter-usage-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "BatchMeterUsage", :http.request.spec/error-spec {"InternalServiceErrorException" :portkey.aws.meteringmarketplace/internal-service-error-exception, "InvalidProductCodeException" :portkey.aws.meteringmarketplace/invalid-product-code-exception, "InvalidUsageDimensionException" :portkey.aws.meteringmarketplace/invalid-usage-dimension-exception, "InvalidCustomerIdentifierException" :portkey.aws.meteringmarketplace/invalid-customer-identifier-exception, "TimestampOutOfBoundsException" :portkey.aws.meteringmarketplace/timestamp-out-of-bounds-exception, "ThrottlingException" :portkey.aws.meteringmarketplace/throttling-exception}})))))
+(clojure.core/defn batch-meter-usage ([batch-meter-usage-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-batch-meter-usage-request batch-meter-usage-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.meteringmarketplace/endpoints, :http.request.configuration/target-prefix "AWSMPMeteringService", :http.request.spec/output-spec :portkey.aws.meteringmarketplace/batch-meter-usage-result, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-01-14", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.meteringmarketplace/batch-meter-usage-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "BatchMeterUsage", :http.request.spec/error-spec {"InternalServiceErrorException" :portkey.aws.meteringmarketplace/internal-service-error-exception, "InvalidProductCodeException" :portkey.aws.meteringmarketplace/invalid-product-code-exception, "InvalidUsageDimensionException" :portkey.aws.meteringmarketplace/invalid-usage-dimension-exception, "InvalidCustomerIdentifierException" :portkey.aws.meteringmarketplace/invalid-customer-identifier-exception, "TimestampOutOfBoundsException" :portkey.aws.meteringmarketplace/timestamp-out-of-bounds-exception, "ThrottlingException" :portkey.aws.meteringmarketplace/throttling-exception}})))))
 (clojure.spec.alpha/fdef batch-meter-usage :args (clojure.spec.alpha/tuple :portkey.aws.meteringmarketplace/batch-meter-usage-request) :ret (clojure.spec.alpha/and :portkey.aws.meteringmarketplace/batch-meter-usage-result))
 
-(clojure.core/defn meter-usage ([meter-usage-requestinput] (clojure.core/let [request-function-result__28606__auto__ (req-meter-usage-request meter-usage-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28606__auto__ {:http.request.configuration/endpoints portkey.aws.meteringmarketplace/endpoints, :http.request.spec/output-spec :portkey.aws.meteringmarketplace/meter-usage-result, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-01-14", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.meteringmarketplace/meter-usage-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "MeterUsage", :http.request.spec/error-spec {"InternalServiceErrorException" :portkey.aws.meteringmarketplace/internal-service-error-exception, "InvalidProductCodeException" :portkey.aws.meteringmarketplace/invalid-product-code-exception, "InvalidUsageDimensionException" :portkey.aws.meteringmarketplace/invalid-usage-dimension-exception, "InvalidEndpointRegionException" :portkey.aws.meteringmarketplace/invalid-endpoint-region-exception, "TimestampOutOfBoundsException" :portkey.aws.meteringmarketplace/timestamp-out-of-bounds-exception, "DuplicateRequestException" :portkey.aws.meteringmarketplace/duplicate-request-exception, "ThrottlingException" :portkey.aws.meteringmarketplace/throttling-exception}})))))
+(clojure.core/defn meter-usage ([meter-usage-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-meter-usage-request meter-usage-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.meteringmarketplace/endpoints, :http.request.configuration/target-prefix "AWSMPMeteringService", :http.request.spec/output-spec :portkey.aws.meteringmarketplace/meter-usage-result, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-01-14", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.meteringmarketplace/meter-usage-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "MeterUsage", :http.request.spec/error-spec {"InternalServiceErrorException" :portkey.aws.meteringmarketplace/internal-service-error-exception, "InvalidProductCodeException" :portkey.aws.meteringmarketplace/invalid-product-code-exception, "InvalidUsageDimensionException" :portkey.aws.meteringmarketplace/invalid-usage-dimension-exception, "InvalidEndpointRegionException" :portkey.aws.meteringmarketplace/invalid-endpoint-region-exception, "TimestampOutOfBoundsException" :portkey.aws.meteringmarketplace/timestamp-out-of-bounds-exception, "DuplicateRequestException" :portkey.aws.meteringmarketplace/duplicate-request-exception, "ThrottlingException" :portkey.aws.meteringmarketplace/throttling-exception}})))))
 (clojure.spec.alpha/fdef meter-usage :args (clojure.spec.alpha/tuple :portkey.aws.meteringmarketplace/meter-usage-request) :ret (clojure.spec.alpha/and :portkey.aws.meteringmarketplace/meter-usage-result))
 
-(clojure.core/defn resolve-customer ([resolve-customer-requestinput] (clojure.core/let [request-function-result__28606__auto__ (req-resolve-customer-request resolve-customer-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28606__auto__ {:http.request.configuration/endpoints portkey.aws.meteringmarketplace/endpoints, :http.request.spec/output-spec :portkey.aws.meteringmarketplace/resolve-customer-result, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-01-14", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.meteringmarketplace/resolve-customer-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ResolveCustomer", :http.request.spec/error-spec {"InvalidTokenException" :portkey.aws.meteringmarketplace/invalid-token-exception, "ExpiredTokenException" :portkey.aws.meteringmarketplace/expired-token-exception, "ThrottlingException" :portkey.aws.meteringmarketplace/throttling-exception, "InternalServiceErrorException" :portkey.aws.meteringmarketplace/internal-service-error-exception}})))))
+(clojure.core/defn resolve-customer ([resolve-customer-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-resolve-customer-request resolve-customer-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.meteringmarketplace/endpoints, :http.request.configuration/target-prefix "AWSMPMeteringService", :http.request.spec/output-spec :portkey.aws.meteringmarketplace/resolve-customer-result, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-01-14", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.meteringmarketplace/resolve-customer-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ResolveCustomer", :http.request.spec/error-spec {"InvalidTokenException" :portkey.aws.meteringmarketplace/invalid-token-exception, "ExpiredTokenException" :portkey.aws.meteringmarketplace/expired-token-exception, "ThrottlingException" :portkey.aws.meteringmarketplace/throttling-exception, "InternalServiceErrorException" :portkey.aws.meteringmarketplace/internal-service-error-exception}})))))
 (clojure.spec.alpha/fdef resolve-customer :args (clojure.spec.alpha/tuple :portkey.aws.meteringmarketplace/resolve-customer-request) :ret (clojure.spec.alpha/and :portkey.aws.meteringmarketplace/resolve-customer-result))
