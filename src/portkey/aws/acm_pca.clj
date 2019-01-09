@@ -1,0 +1,556 @@
+(ns portkey.aws.acm-pca (:require [portkey.aws]))
+
+(def
+ endpoints
+ '{"ap-northeast-1"
+   {:credential-scope {:service "acm-pca", :region "ap-northeast-1"},
+    :ssl-common-name "acm-pca.ap-northeast-1.amazonaws.com",
+    :endpoint "https://acm-pca.ap-northeast-1.amazonaws.com",
+    :signature-version :v4},
+   "eu-west-1"
+   {:credential-scope {:service "acm-pca", :region "eu-west-1"},
+    :ssl-common-name "acm-pca.eu-west-1.amazonaws.com",
+    :endpoint "https://acm-pca.eu-west-1.amazonaws.com",
+    :signature-version :v4},
+   "us-east-2"
+   {:credential-scope {:service "acm-pca", :region "us-east-2"},
+    :ssl-common-name "acm-pca.us-east-2.amazonaws.com",
+    :endpoint "https://acm-pca.us-east-2.amazonaws.com",
+    :signature-version :v4},
+   "ap-southeast-2"
+   {:credential-scope {:service "acm-pca", :region "ap-southeast-2"},
+    :ssl-common-name "acm-pca.ap-southeast-2.amazonaws.com",
+    :endpoint "https://acm-pca.ap-southeast-2.amazonaws.com",
+    :signature-version :v4},
+   "ap-southeast-1"
+   {:credential-scope {:service "acm-pca", :region "ap-southeast-1"},
+    :ssl-common-name "acm-pca.ap-southeast-1.amazonaws.com",
+    :endpoint "https://acm-pca.ap-southeast-1.amazonaws.com",
+    :signature-version :v4},
+   "ca-central-1"
+   {:credential-scope {:service "acm-pca", :region "ca-central-1"},
+    :ssl-common-name "acm-pca.ca-central-1.amazonaws.com",
+    :endpoint "https://acm-pca.ca-central-1.amazonaws.com",
+    :signature-version :v4},
+   "eu-central-1"
+   {:credential-scope {:service "acm-pca", :region "eu-central-1"},
+    :ssl-common-name "acm-pca.eu-central-1.amazonaws.com",
+    :endpoint "https://acm-pca.eu-central-1.amazonaws.com",
+    :signature-version :v4},
+   "eu-west-2"
+   {:credential-scope {:service "acm-pca", :region "eu-west-2"},
+    :ssl-common-name "acm-pca.eu-west-2.amazonaws.com",
+    :endpoint "https://acm-pca.eu-west-2.amazonaws.com",
+    :signature-version :v4},
+   "us-west-2"
+   {:credential-scope {:service "acm-pca", :region "us-west-2"},
+    :ssl-common-name "acm-pca.us-west-2.amazonaws.com",
+    :endpoint "https://acm-pca.us-west-2.amazonaws.com",
+    :signature-version :v4},
+   "us-east-1"
+   {:credential-scope {:service "acm-pca", :region "us-east-1"},
+    :ssl-common-name "acm-pca.us-east-1.amazonaws.com",
+    :endpoint "https://acm-pca.us-east-1.amazonaws.com",
+    :signature-version :v4}})
+
+(clojure.core/declare ser-validity-period-type)
+
+(clojure.core/declare ser-certificate-chain-blob)
+
+(clojure.core/declare ser-string-3-to-255)
+
+(clojure.core/declare ser-certificate-authority-type)
+
+(clojure.core/declare ser-csr-blob)
+
+(clojure.core/declare ser-audit-report-id)
+
+(clojure.core/declare ser-distinguished-name-qualifier-string)
+
+(clojure.core/declare ser-certificate-authority-configuration)
+
+(clojure.core/declare ser-string-128)
+
+(clojure.core/declare ser-string-3)
+
+(clojure.core/declare ser-tag-key)
+
+(clojure.core/declare ser-string-64)
+
+(clojure.core/declare ser-string-40)
+
+(clojure.core/declare ser-crl-configuration)
+
+(clojure.core/declare ser-next-token)
+
+(clojure.core/declare ser-country-code-string)
+
+(clojure.core/declare ser-tag-list)
+
+(clojure.core/declare ser-string-253)
+
+(clojure.core/declare ser-tag-value)
+
+(clojure.core/declare ser-asn-1-subject)
+
+(clojure.core/declare ser-key-algorithm)
+
+(clojure.core/declare ser-certificate-body-blob)
+
+(clojure.core/declare ser-string)
+
+(clojure.core/declare ser-revocation-configuration)
+
+(clojure.core/declare ser-revocation-reason)
+
+(clojure.core/declare ser-string-5)
+
+(clojure.core/declare ser-arn)
+
+(clojure.core/declare ser-idempotency-token)
+
+(clojure.core/declare ser-permanent-deletion-time-in-days)
+
+(clojure.core/declare ser-validity)
+
+(clojure.core/declare ser-max-results)
+
+(clojure.core/declare ser-tag)
+
+(clojure.core/declare ser-signing-algorithm)
+
+(clojure.core/declare ser-audit-report-response-format)
+
+(clojure.core/declare ser-certificate-authority-status)
+
+(clojure.core/declare ser-positive-long)
+
+(clojure.core/declare ser-string-16)
+
+(clojure.core/declare ser-integer-1-to-5000)
+
+(clojure.core/declare ser-boolean)
+
+(clojure.core/defn- ser-validity-period-type [input] #:http.request.field{:value (clojure.core/get {"ABSOLUTE" "ABSOLUTE", :end-date "END_DATE", "DAYS" "DAYS", "YEARS" "YEARS", :months "MONTHS", :days "DAYS", :absolute "ABSOLUTE", :years "YEARS", "MONTHS" "MONTHS", "END_DATE" "END_DATE"} input), :shape "ValidityPeriodType"})
+
+(clojure.core/defn- ser-certificate-chain-blob [input] #:http.request.field{:value (portkey.aws/base64-encode input), :shape "CertificateChainBlob"})
+
+(clojure.core/defn- ser-string-3-to-255 [input] #:http.request.field{:value input, :shape "String3To255"})
+
+(clojure.core/defn- ser-certificate-authority-type [input] #:http.request.field{:value (clojure.core/get {"SUBORDINATE" "SUBORDINATE", :subordinate "SUBORDINATE"} input), :shape "CertificateAuthorityType"})
+
+(clojure.core/defn- ser-csr-blob [input] #:http.request.field{:value (portkey.aws/base64-encode input), :shape "CsrBlob"})
+
+(clojure.core/defn- ser-audit-report-id [input] #:http.request.field{:value input, :shape "AuditReportId"})
+
+(clojure.core/defn- ser-distinguished-name-qualifier-string [input] #:http.request.field{:value input, :shape "DistinguishedNameQualifierString"})
+
+(clojure.core/defn- ser-certificate-authority-configuration [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-key-algorithm (:key-algorithm input)) #:http.request.field{:name "KeyAlgorithm", :shape "KeyAlgorithm"}) (clojure.core/into (ser-signing-algorithm (:signing-algorithm input)) #:http.request.field{:name "SigningAlgorithm", :shape "SigningAlgorithm"}) (clojure.core/into (ser-asn-1-subject (:subject input)) #:http.request.field{:name "Subject", :shape "ASN1Subject"})], :shape "CertificateAuthorityConfiguration", :type "structure"}))
+
+(clojure.core/defn- ser-string-128 [input] #:http.request.field{:value input, :shape "String128"})
+
+(clojure.core/defn- ser-string-3 [input] #:http.request.field{:value input, :shape "String3"})
+
+(clojure.core/defn- ser-tag-key [input] #:http.request.field{:value input, :shape "TagKey"})
+
+(clojure.core/defn- ser-string-64 [input] #:http.request.field{:value input, :shape "String64"})
+
+(clojure.core/defn- ser-string-40 [input] #:http.request.field{:value input, :shape "String40"})
+
+(clojure.core/defn- ser-crl-configuration [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-boolean (:enabled input)) #:http.request.field{:name "Enabled", :shape "Boolean", :box true})], :shape "CrlConfiguration", :type "structure"} (clojure.core/contains? input :expiration-in-days) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-1-to-5000 (input :expiration-in-days)) #:http.request.field{:name "ExpirationInDays", :shape "Integer1To5000", :box true})) (clojure.core/contains? input :custom-cname) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string-253 (input :custom-cname)) #:http.request.field{:name "CustomCname", :shape "String253"})) (clojure.core/contains? input :s-3-bucket-name) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string-3-to-255 (input :s-3-bucket-name)) #:http.request.field{:name "S3BucketName", :shape "String3To255"}))))
+
+(clojure.core/defn- ser-next-token [input] #:http.request.field{:value input, :shape "NextToken"})
+
+(clojure.core/defn- ser-country-code-string [input] #:http.request.field{:value input, :shape "CountryCodeString"})
+
+(clojure.core/defn- ser-tag-list [input] #:http.request.field{:value (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (clojure.core/merge (ser-tag coll) #:http.request.field{:shape "Tag"}))) input), :shape "TagList", :type "list", :max 50, :min 1})
+
+(clojure.core/defn- ser-string-253 [input] #:http.request.field{:value input, :shape "String253"})
+
+(clojure.core/defn- ser-tag-value [input] #:http.request.field{:value input, :shape "TagValue"})
+
+(clojure.core/defn- ser-asn-1-subject [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "ASN1Subject", :type "structure"} (clojure.core/contains? input :country) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-country-code-string (input :country)) #:http.request.field{:name "Country", :shape "CountryCodeString"})) (clojure.core/contains? input :organization) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string-64 (input :organization)) #:http.request.field{:name "Organization", :shape "String64"})) (clojure.core/contains? input :pseudonym) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string-128 (input :pseudonym)) #:http.request.field{:name "Pseudonym", :shape "String128"})) (clojure.core/contains? input :surname) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string-40 (input :surname)) #:http.request.field{:name "Surname", :shape "String40"})) (clojure.core/contains? input :title) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string-64 (input :title)) #:http.request.field{:name "Title", :shape "String64"})) (clojure.core/contains? input :distinguished-name-qualifier) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-distinguished-name-qualifier-string (input :distinguished-name-qualifier)) #:http.request.field{:name "DistinguishedNameQualifier", :shape "DistinguishedNameQualifierString"})) (clojure.core/contains? input :initials) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string-5 (input :initials)) #:http.request.field{:name "Initials", :shape "String5"})) (clojure.core/contains? input :locality) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string-128 (input :locality)) #:http.request.field{:name "Locality", :shape "String128"})) (clojure.core/contains? input :generation-qualifier) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string-3 (input :generation-qualifier)) #:http.request.field{:name "GenerationQualifier", :shape "String3"})) (clojure.core/contains? input :common-name) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string-64 (input :common-name)) #:http.request.field{:name "CommonName", :shape "String64"})) (clojure.core/contains? input :given-name) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string-16 (input :given-name)) #:http.request.field{:name "GivenName", :shape "String16"})) (clojure.core/contains? input :serial-number) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string-64 (input :serial-number)) #:http.request.field{:name "SerialNumber", :shape "String64"})) (clojure.core/contains? input :state) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string-128 (input :state)) #:http.request.field{:name "State", :shape "String128"})) (clojure.core/contains? input :organizational-unit) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string-64 (input :organizational-unit)) #:http.request.field{:name "OrganizationalUnit", :shape "String64"}))))
+
+(clojure.core/defn- ser-key-algorithm [input] #:http.request.field{:value (clojure.core/get {"RSA_2048" "RSA_2048", :rsa-2048 "RSA_2048", "RSA_4096" "RSA_4096", :rsa-4096 "RSA_4096", "EC_prime256v1" "EC_prime256v1", :ec-prime-256v-1 "EC_prime256v1", "EC_secp384r1" "EC_secp384r1", :ec-secp-384r-1 "EC_secp384r1"} input), :shape "KeyAlgorithm"})
+
+(clojure.core/defn- ser-certificate-body-blob [input] #:http.request.field{:value (portkey.aws/base64-encode input), :shape "CertificateBodyBlob"})
+
+(clojure.core/defn- ser-string [input] #:http.request.field{:value input, :shape "String"})
+
+(clojure.core/defn- ser-revocation-configuration [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "RevocationConfiguration", :type "structure"} (clojure.core/contains? input :crl-configuration) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-crl-configuration (input :crl-configuration)) #:http.request.field{:name "CrlConfiguration", :shape "CrlConfiguration"}))))
+
+(clojure.core/defn- ser-revocation-reason [input] #:http.request.field{:value (clojure.core/get {"PRIVILEGE_WITHDRAWN" "PRIVILEGE_WITHDRAWN", :privilege-withdrawn "PRIVILEGE_WITHDRAWN", :unspecified "UNSPECIFIED", "CERTIFICATE_AUTHORITY_COMPROMISE" "CERTIFICATE_AUTHORITY_COMPROMISE", :certificate-authority-compromise "CERTIFICATE_AUTHORITY_COMPROMISE", "SUPERSEDED" "SUPERSEDED", :superseded "SUPERSEDED", "AFFILIATION_CHANGED" "AFFILIATION_CHANGED", "KEY_COMPROMISE" "KEY_COMPROMISE", :key-compromise "KEY_COMPROMISE", :a-a-compromise "A_A_COMPROMISE", "UNSPECIFIED" "UNSPECIFIED", :cessation-of-operation "CESSATION_OF_OPERATION", "CESSATION_OF_OPERATION" "CESSATION_OF_OPERATION", "A_A_COMPROMISE" "A_A_COMPROMISE", :affiliation-changed "AFFILIATION_CHANGED"} input), :shape "RevocationReason"})
+
+(clojure.core/defn- ser-string-5 [input] #:http.request.field{:value input, :shape "String5"})
+
+(clojure.core/defn- ser-arn [input] #:http.request.field{:value input, :shape "Arn"})
+
+(clojure.core/defn- ser-idempotency-token [input] #:http.request.field{:value input, :shape "IdempotencyToken"})
+
+(clojure.core/defn- ser-permanent-deletion-time-in-days [input] #:http.request.field{:value input, :shape "PermanentDeletionTimeInDays"})
+
+(clojure.core/defn- ser-validity [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-positive-long (:value input)) #:http.request.field{:name "Value", :shape "PositiveLong", :box true}) (clojure.core/into (ser-validity-period-type (:type input)) #:http.request.field{:name "Type", :shape "ValidityPeriodType"})], :shape "Validity", :type "structure"}))
+
+(clojure.core/defn- ser-max-results [input] #:http.request.field{:value input, :shape "MaxResults"})
+
+(clojure.core/defn- ser-tag [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-tag-key (:key input)) #:http.request.field{:name "Key", :shape "TagKey"})], :shape "Tag", :type "structure"} (clojure.core/contains? input :value) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-tag-value (input :value)) #:http.request.field{:name "Value", :shape "TagValue"}))))
+
+(clojure.core/defn- ser-signing-algorithm [input] #:http.request.field{:value (clojure.core/get {:sha-256-withecdsa "SHA256WITHECDSA", "SHA256WITHECDSA" "SHA256WITHECDSA", :sha-512-withrsa "SHA512WITHRSA", :sha-384-withrsa "SHA384WITHRSA", "SHA384WITHECDSA" "SHA384WITHECDSA", "SHA512WITHRSA" "SHA512WITHRSA", "SHA384WITHRSA" "SHA384WITHRSA", "SHA256WITHRSA" "SHA256WITHRSA", "SHA512WITHECDSA" "SHA512WITHECDSA", :sha-512-withecdsa "SHA512WITHECDSA", :sha-256-withrsa "SHA256WITHRSA", :sha-384-withecdsa "SHA384WITHECDSA"} input), :shape "SigningAlgorithm"})
+
+(clojure.core/defn- ser-audit-report-response-format [input] #:http.request.field{:value (clojure.core/get {"JSON" "JSON", :json "JSON", "CSV" "CSV", :csv "CSV"} input), :shape "AuditReportResponseFormat"})
+
+(clojure.core/defn- ser-certificate-authority-status [input] #:http.request.field{:value (clojure.core/get {:deleted "DELETED", "DISABLED" "DISABLED", :disabled "DISABLED", :creating "CREATING", "EXPIRED" "EXPIRED", "PENDING_CERTIFICATE" "PENDING_CERTIFICATE", :active "ACTIVE", :pending-certificate "PENDING_CERTIFICATE", "CREATING" "CREATING", "ACTIVE" "ACTIVE", "FAILED" "FAILED", :expired "EXPIRED", "DELETED" "DELETED", :failed "FAILED"} input), :shape "CertificateAuthorityStatus"})
+
+(clojure.core/defn- ser-positive-long [input] #:http.request.field{:value input, :shape "PositiveLong"})
+
+(clojure.core/defn- ser-string-16 [input] #:http.request.field{:value input, :shape "String16"})
+
+(clojure.core/defn- ser-integer-1-to-5000 [input] #:http.request.field{:value input, :shape "Integer1To5000"})
+
+(clojure.core/defn- ser-boolean [input] #:http.request.field{:value input, :shape "Boolean"})
+
+(clojure.core/defn- req-update-certificate-authority-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-arn (input :certificate-authority-arn)) #:http.request.field{:name "CertificateAuthorityArn", :shape "Arn"})]} (clojure.core/contains? input :revocation-configuration) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-revocation-configuration (input :revocation-configuration)) #:http.request.field{:name "RevocationConfiguration", :shape "RevocationConfiguration"})) (clojure.core/contains? input :status) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-certificate-authority-status (input :status)) #:http.request.field{:name "Status", :shape "CertificateAuthorityStatus"}))))
+
+(clojure.core/defn- req-revoke-certificate-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-arn (input :certificate-authority-arn)) #:http.request.field{:name "CertificateAuthorityArn", :shape "Arn"}) (clojure.core/into (ser-string-128 (input :certificate-serial)) #:http.request.field{:name "CertificateSerial", :shape "String128"}) (clojure.core/into (ser-revocation-reason (input :revocation-reason)) #:http.request.field{:name "RevocationReason", :shape "RevocationReason"})]}))
+
+(clojure.core/defn- req-create-certificate-authority-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-certificate-authority-configuration (input :certificate-authority-configuration)) #:http.request.field{:name "CertificateAuthorityConfiguration", :shape "CertificateAuthorityConfiguration"}) (clojure.core/into (ser-certificate-authority-type (input :certificate-authority-type)) #:http.request.field{:name "CertificateAuthorityType", :shape "CertificateAuthorityType"})]} (clojure.core/contains? input :revocation-configuration) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-revocation-configuration (input :revocation-configuration)) #:http.request.field{:name "RevocationConfiguration", :shape "RevocationConfiguration"})) (clojure.core/contains? input :idempotency-token) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-idempotency-token (input :idempotency-token)) #:http.request.field{:name "IdempotencyToken", :shape "IdempotencyToken"}))))
+
+(clojure.core/defn- req-get-certificate-authority-certificate-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-arn (input :certificate-authority-arn)) #:http.request.field{:name "CertificateAuthorityArn", :shape "Arn"})]}))
+
+(clojure.core/defn- req-tag-certificate-authority-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-arn (input :certificate-authority-arn)) #:http.request.field{:name "CertificateAuthorityArn", :shape "Arn"}) (clojure.core/into (ser-tag-list (input :tags)) #:http.request.field{:name "Tags", :shape "TagList"})]}))
+
+(clojure.core/defn- req-describe-certificate-authority-audit-report-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-arn (input :certificate-authority-arn)) #:http.request.field{:name "CertificateAuthorityArn", :shape "Arn"}) (clojure.core/into (ser-audit-report-id (input :audit-report-id)) #:http.request.field{:name "AuditReportId", :shape "AuditReportId"})]}))
+
+(clojure.core/defn- req-untag-certificate-authority-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-arn (input :certificate-authority-arn)) #:http.request.field{:name "CertificateAuthorityArn", :shape "Arn"}) (clojure.core/into (ser-tag-list (input :tags)) #:http.request.field{:name "Tags", :shape "TagList"})]}))
+
+(clojure.core/defn- req-issue-certificate-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-arn (input :certificate-authority-arn)) #:http.request.field{:name "CertificateAuthorityArn", :shape "Arn"}) (clojure.core/into (ser-csr-blob (input :csr)) #:http.request.field{:name "Csr", :shape "CsrBlob"}) (clojure.core/into (ser-signing-algorithm (input :signing-algorithm)) #:http.request.field{:name "SigningAlgorithm", :shape "SigningAlgorithm"}) (clojure.core/into (ser-validity (input :validity)) #:http.request.field{:name "Validity", :shape "Validity"})]} (clojure.core/contains? input :idempotency-token) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-idempotency-token (input :idempotency-token)) #:http.request.field{:name "IdempotencyToken", :shape "IdempotencyToken"}))))
+
+(clojure.core/defn- req-create-certificate-authority-audit-report-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-arn (input :certificate-authority-arn)) #:http.request.field{:name "CertificateAuthorityArn", :shape "Arn"}) (clojure.core/into (ser-string (input :s-3-bucket-name)) #:http.request.field{:name "S3BucketName", :shape "String"}) (clojure.core/into (ser-audit-report-response-format (input :audit-report-response-format)) #:http.request.field{:name "AuditReportResponseFormat", :shape "AuditReportResponseFormat"})]}))
+
+(clojure.core/defn- req-restore-certificate-authority-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-arn (input :certificate-authority-arn)) #:http.request.field{:name "CertificateAuthorityArn", :shape "Arn"})]}))
+
+(clojure.core/defn- req-delete-certificate-authority-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-arn (input :certificate-authority-arn)) #:http.request.field{:name "CertificateAuthorityArn", :shape "Arn"})]} (clojure.core/contains? input :permanent-deletion-time-in-days) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-permanent-deletion-time-in-days (input :permanent-deletion-time-in-days)) #:http.request.field{:name "PermanentDeletionTimeInDays", :shape "PermanentDeletionTimeInDays"}))))
+
+(clojure.core/defn- req-get-certificate-authority-csr-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-arn (input :certificate-authority-arn)) #:http.request.field{:name "CertificateAuthorityArn", :shape "Arn"})]}))
+
+(clojure.core/defn- req-describe-certificate-authority-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-arn (input :certificate-authority-arn)) #:http.request.field{:name "CertificateAuthorityArn", :shape "Arn"})]}))
+
+(clojure.core/defn- req-import-certificate-authority-certificate-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-arn (input :certificate-authority-arn)) #:http.request.field{:name "CertificateAuthorityArn", :shape "Arn"}) (clojure.core/into (ser-certificate-body-blob (input :certificate)) #:http.request.field{:name "Certificate", :shape "CertificateBodyBlob"}) (clojure.core/into (ser-certificate-chain-blob (input :certificate-chain)) #:http.request.field{:name "CertificateChain", :shape "CertificateChainBlob"})]}))
+
+(clojure.core/defn- req-get-certificate-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-arn (input :certificate-authority-arn)) #:http.request.field{:name "CertificateAuthorityArn", :shape "Arn"}) (clojure.core/into (ser-arn (input :certificate-arn)) #:http.request.field{:name "CertificateArn", :shape "Arn"})]}))
+
+(clojure.core/defn- req-list-certificate-authorities-request [input] (clojure.core/cond-> {} (clojure.core/contains? input :next-token) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-next-token (input :next-token)) #:http.request.field{:name "NextToken", :shape "NextToken"})) (clojure.core/contains? input :max-results) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-max-results (input :max-results)) #:http.request.field{:name "MaxResults", :shape "MaxResults"}))))
+
+(clojure.core/defn- req-list-tags-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-arn (input :certificate-authority-arn)) #:http.request.field{:name "CertificateAuthorityArn", :shape "Arn"})]} (clojure.core/contains? input :next-token) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-next-token (input :next-token)) #:http.request.field{:name "NextToken", :shape "NextToken"})) (clojure.core/contains? input :max-results) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-max-results (input :max-results)) #:http.request.field{:name "MaxResults", :shape "MaxResults"}))))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/validity-period-type #{"ABSOLUTE" :end-date "DAYS" "YEARS" :months :days :absolute :years "MONTHS" "END_DATE"})
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.get-certificate-response/certificate (clojure.spec.alpha/and :portkey.aws.acm-pca/certificate-body))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/get-certificate-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca.get-certificate-response/certificate :portkey.aws.acm-pca/certificate-chain]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.create-certificate-authority-audit-report-response/s-3-key (clojure.spec.alpha/and :portkey.aws.acm-pca/string))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/create-certificate-authority-audit-report-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca/audit-report-id :portkey.aws.acm-pca.create-certificate-authority-audit-report-response/s-3-key]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/certificate-chain-blob clojure.core/bytes?)
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/string-3-to-255 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27965__auto__] (clojure.core/<= 3 (clojure.core/count s__27965__auto__))) (clojure.core/fn [s__27966__auto__] (clojure.core/< (clojure.core/count s__27966__auto__) 255))))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.update-certificate-authority-request/certificate-authority-arn (clojure.spec.alpha/and :portkey.aws.acm-pca/arn))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.update-certificate-authority-request/status (clojure.spec.alpha/and :portkey.aws.acm-pca/certificate-authority-status))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/update-certificate-authority-request (clojure.spec.alpha/keys :req-un [:portkey.aws.acm-pca.update-certificate-authority-request/certificate-authority-arn] :opt-un [:portkey.aws.acm-pca/revocation-configuration :portkey.aws.acm-pca.update-certificate-authority-request/status]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/certificate-authority-type #{"SUBORDINATE" :subordinate})
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/csr-blob clojure.core/bytes?)
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.describe-certificate-authority-audit-report-response/s-3-bucket-name (clojure.spec.alpha/and :portkey.aws.acm-pca/string))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.describe-certificate-authority-audit-report-response/s-3-key (clojure.spec.alpha/and :portkey.aws.acm-pca/string))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.describe-certificate-authority-audit-report-response/created-at (clojure.spec.alpha/and :portkey.aws.acm-pca/t-stamp))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/describe-certificate-authority-audit-report-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca/audit-report-status :portkey.aws.acm-pca.describe-certificate-authority-audit-report-response/s-3-bucket-name :portkey.aws.acm-pca.describe-certificate-authority-audit-report-response/s-3-key :portkey.aws.acm-pca.describe-certificate-authority-audit-report-response/created-at]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.revoke-certificate-request/certificate-authority-arn (clojure.spec.alpha/and :portkey.aws.acm-pca/arn))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.revoke-certificate-request/certificate-serial (clojure.spec.alpha/and :portkey.aws.acm-pca/string-128))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/revoke-certificate-request (clojure.spec.alpha/keys :req-un [:portkey.aws.acm-pca.revoke-certificate-request/certificate-authority-arn :portkey.aws.acm-pca.revoke-certificate-request/certificate-serial :portkey.aws.acm-pca/revocation-reason] :opt-un []))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/create-certificate-authority-request (clojure.spec.alpha/keys :req-un [:portkey.aws.acm-pca/certificate-authority-configuration :portkey.aws.acm-pca/certificate-authority-type] :opt-un [:portkey.aws.acm-pca/revocation-configuration :portkey.aws.acm-pca/idempotency-token]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.malformed-csr-exception/message (clojure.spec.alpha/and :portkey.aws.acm-pca/string))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/malformed-csr-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca.malformed-csr-exception/message]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/audit-report-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27965__auto__] (clojure.core/<= 36 (clojure.core/count s__27965__auto__))) (clojure.core/fn [s__27966__auto__] (clojure.core/< (clojure.core/count s__27966__auto__) 36)) (clojure.core/fn [s__27967__auto__] (clojure.core/re-matches #"[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}" s__27967__auto__))))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.get-certificate-authority-certificate-response/certificate (clojure.spec.alpha/and :portkey.aws.acm-pca/certificate-body))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/get-certificate-authority-certificate-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca.get-certificate-authority-certificate-response/certificate :portkey.aws.acm-pca/certificate-chain]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/distinguished-name-qualifier-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27965__auto__] (clojure.core/<= 0 (clojure.core/count s__27965__auto__))) (clojure.core/fn [s__27966__auto__] (clojure.core/< (clojure.core/count s__27966__auto__) 64)) (clojure.core/fn [s__27967__auto__] (clojure.core/re-matches #"[a-zA-Z0-9'()+-.?:/= ]*" s__27967__auto__))))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.certificate-authority-configuration/subject (clojure.spec.alpha/and :portkey.aws.acm-pca/asn-1-subject))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/certificate-authority-configuration (clojure.spec.alpha/keys :req-un [:portkey.aws.acm-pca/key-algorithm :portkey.aws.acm-pca/signing-algorithm :portkey.aws.acm-pca.certificate-authority-configuration/subject] :opt-un []))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.create-certificate-authority-response/certificate-authority-arn (clojure.spec.alpha/and :portkey.aws.acm-pca/arn))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/create-certificate-authority-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca.create-certificate-authority-response/certificate-authority-arn]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.list-tags-response/tags (clojure.spec.alpha/and :portkey.aws.acm-pca/tag-list))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/list-tags-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca.list-tags-response/tags :portkey.aws.acm-pca/next-token]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/string-128 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27965__auto__] (clojure.core/<= 0 (clojure.core/count s__27965__auto__))) (clojure.core/fn [s__27966__auto__] (clojure.core/< (clojure.core/count s__27966__auto__) 128))))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/string-3 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27965__auto__] (clojure.core/<= 0 (clojure.core/count s__27965__auto__))) (clojure.core/fn [s__27966__auto__] (clojure.core/< (clojure.core/count s__27966__auto__) 3))))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.get-certificate-authority-certificate-request/certificate-authority-arn (clojure.spec.alpha/and :portkey.aws.acm-pca/arn))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/get-certificate-authority-certificate-request (clojure.spec.alpha/keys :req-un [:portkey.aws.acm-pca.get-certificate-authority-certificate-request/certificate-authority-arn] :opt-un []))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.malformed-certificate-exception/message (clojure.spec.alpha/and :portkey.aws.acm-pca/string))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/malformed-certificate-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca.malformed-certificate-exception/message]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.tag-certificate-authority-request/certificate-authority-arn (clojure.spec.alpha/and :portkey.aws.acm-pca/arn))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.tag-certificate-authority-request/tags (clojure.spec.alpha/and :portkey.aws.acm-pca/tag-list))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/tag-certificate-authority-request (clojure.spec.alpha/keys :req-un [:portkey.aws.acm-pca.tag-certificate-authority-request/certificate-authority-arn :portkey.aws.acm-pca.tag-certificate-authority-request/tags] :opt-un []))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/tag-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27965__auto__] (clojure.core/<= 1 (clojure.core/count s__27965__auto__))) (clojure.core/fn [s__27966__auto__] (clojure.core/< (clojure.core/count s__27966__auto__) 128)) (clojure.core/fn [s__27967__auto__] (clojure.core/re-matches #"[\p{L}\p{Z}\p{N}_.:\/=+\-@]*" s__27967__auto__))))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/audit-report-status #{"SUCCESS" :creating :success "CREATING" "FAILED" :failed})
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/list-certificate-authorities-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca/certificate-authorities :portkey.aws.acm-pca/next-token]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.limit-exceeded-exception/message (clojure.spec.alpha/and :portkey.aws.acm-pca/string))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/limit-exceeded-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca.limit-exceeded-exception/message]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/string-64 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27965__auto__] (clojure.core/<= 0 (clojure.core/count s__27965__auto__))) (clojure.core/fn [s__27966__auto__] (clojure.core/< (clojure.core/count s__27966__auto__) 64))))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/string-40 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27965__auto__] (clojure.core/<= 0 (clojure.core/count s__27965__auto__))) (clojure.core/fn [s__27966__auto__] (clojure.core/< (clojure.core/count s__27966__auto__) 40))))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.crl-configuration/enabled (clojure.spec.alpha/and :portkey.aws.acm-pca/boolean))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.crl-configuration/expiration-in-days (clojure.spec.alpha/and :portkey.aws.acm-pca/integer-1-to-5000))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.crl-configuration/custom-cname (clojure.spec.alpha/and :portkey.aws.acm-pca/string-253))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.crl-configuration/s-3-bucket-name (clojure.spec.alpha/and :portkey.aws.acm-pca/string-3-to-255))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/crl-configuration (clojure.spec.alpha/keys :req-un [:portkey.aws.acm-pca.crl-configuration/enabled] :opt-un [:portkey.aws.acm-pca.crl-configuration/expiration-in-days :portkey.aws.acm-pca.crl-configuration/custom-cname :portkey.aws.acm-pca.crl-configuration/s-3-bucket-name]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/next-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27965__auto__] (clojure.core/<= 1 (clojure.core/count s__27965__auto__))) (clojure.core/fn [s__27966__auto__] (clojure.core/< (clojure.core/count s__27966__auto__) 500))))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.invalid-next-token-exception/message (clojure.spec.alpha/and :portkey.aws.acm-pca/string))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/invalid-next-token-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca.invalid-next-token-exception/message]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.certificate-mismatch-exception/message (clojure.spec.alpha/and :portkey.aws.acm-pca/string))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/certificate-mismatch-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca.certificate-mismatch-exception/message]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/country-code-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27967__auto__] (clojure.core/re-matches #"[A-Za-z]{2}" s__27967__auto__))))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.invalid-arn-exception/message (clojure.spec.alpha/and :portkey.aws.acm-pca/string))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/invalid-arn-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca.invalid-arn-exception/message]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/describe-certificate-authority-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca/certificate-authority]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.get-certificate-authority-csr-response/csr (clojure.spec.alpha/and :portkey.aws.acm-pca/csr-body))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/get-certificate-authority-csr-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca.get-certificate-authority-csr-response/csr]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/tag-list (clojure.spec.alpha/coll-of :portkey.aws.acm-pca/tag :min-count 1 :max-count 50))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.invalid-tag-exception/message (clojure.spec.alpha/and :portkey.aws.acm-pca/string))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/invalid-tag-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca.invalid-tag-exception/message]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/string-253 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27965__auto__] (clojure.core/<= 0 (clojure.core/count s__27965__auto__))) (clojure.core/fn [s__27966__auto__] (clojure.core/< (clojure.core/count s__27966__auto__) 253))))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.request-in-progress-exception/message (clojure.spec.alpha/and :portkey.aws.acm-pca/string))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/request-in-progress-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca.request-in-progress-exception/message]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.invalid-args-exception/message (clojure.spec.alpha/and :portkey.aws.acm-pca/string))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/invalid-args-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca.invalid-args-exception/message]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.resource-not-found-exception/message (clojure.spec.alpha/and :portkey.aws.acm-pca/string))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/resource-not-found-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca.resource-not-found-exception/message]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.describe-certificate-authority-audit-report-request/certificate-authority-arn (clojure.spec.alpha/and :portkey.aws.acm-pca/arn))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/describe-certificate-authority-audit-report-request (clojure.spec.alpha/keys :req-un [:portkey.aws.acm-pca.describe-certificate-authority-audit-report-request/certificate-authority-arn :portkey.aws.acm-pca/audit-report-id] :opt-un []))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.issue-certificate-response/certificate-arn (clojure.spec.alpha/and :portkey.aws.acm-pca/arn))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/issue-certificate-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca.issue-certificate-response/certificate-arn]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.untag-certificate-authority-request/certificate-authority-arn (clojure.spec.alpha/and :portkey.aws.acm-pca/arn))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.untag-certificate-authority-request/tags (clojure.spec.alpha/and :portkey.aws.acm-pca/tag-list))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/untag-certificate-authority-request (clojure.spec.alpha/keys :req-un [:portkey.aws.acm-pca.untag-certificate-authority-request/certificate-authority-arn :portkey.aws.acm-pca.untag-certificate-authority-request/tags] :opt-un []))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/tag-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27965__auto__] (clojure.core/<= 0 (clojure.core/count s__27965__auto__))) (clojure.core/fn [s__27966__auto__] (clojure.core/< (clojure.core/count s__27966__auto__) 256)) (clojure.core/fn [s__27967__auto__] (clojure.core/re-matches #"[\p{L}\p{Z}\p{N}_.:\/=+\-@]*" s__27967__auto__))))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/certificate-chain (clojure.spec.alpha/and clojure.core/string?))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.asn-1-subject/country (clojure.spec.alpha/and :portkey.aws.acm-pca/country-code-string))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.asn-1-subject/organization (clojure.spec.alpha/and :portkey.aws.acm-pca/string-64))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.asn-1-subject/pseudonym (clojure.spec.alpha/and :portkey.aws.acm-pca/string-128))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.asn-1-subject/surname (clojure.spec.alpha/and :portkey.aws.acm-pca/string-40))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.asn-1-subject/title (clojure.spec.alpha/and :portkey.aws.acm-pca/string-64))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.asn-1-subject/distinguished-name-qualifier (clojure.spec.alpha/and :portkey.aws.acm-pca/distinguished-name-qualifier-string))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.asn-1-subject/initials (clojure.spec.alpha/and :portkey.aws.acm-pca/string-5))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.asn-1-subject/locality (clojure.spec.alpha/and :portkey.aws.acm-pca/string-128))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.asn-1-subject/generation-qualifier (clojure.spec.alpha/and :portkey.aws.acm-pca/string-3))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.asn-1-subject/common-name (clojure.spec.alpha/and :portkey.aws.acm-pca/string-64))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.asn-1-subject/given-name (clojure.spec.alpha/and :portkey.aws.acm-pca/string-16))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.asn-1-subject/serial-number (clojure.spec.alpha/and :portkey.aws.acm-pca/string-64))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.asn-1-subject/state (clojure.spec.alpha/and :portkey.aws.acm-pca/string-128))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.asn-1-subject/organizational-unit (clojure.spec.alpha/and :portkey.aws.acm-pca/string-64))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/asn-1-subject (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca.asn-1-subject/country :portkey.aws.acm-pca.asn-1-subject/organization :portkey.aws.acm-pca.asn-1-subject/pseudonym :portkey.aws.acm-pca.asn-1-subject/surname :portkey.aws.acm-pca.asn-1-subject/title :portkey.aws.acm-pca.asn-1-subject/distinguished-name-qualifier :portkey.aws.acm-pca.asn-1-subject/initials :portkey.aws.acm-pca.asn-1-subject/locality :portkey.aws.acm-pca.asn-1-subject/generation-qualifier :portkey.aws.acm-pca.asn-1-subject/common-name :portkey.aws.acm-pca.asn-1-subject/given-name :portkey.aws.acm-pca.asn-1-subject/serial-number :portkey.aws.acm-pca.asn-1-subject/state :portkey.aws.acm-pca.asn-1-subject/organizational-unit]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/key-algorithm #{:ec-secp-384r-1 :ec-prime-256v-1 "RSA_4096" "EC_prime256v1" :rsa-4096 "EC_secp384r1" "RSA_2048" :rsa-2048})
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.issue-certificate-request/certificate-authority-arn (clojure.spec.alpha/and :portkey.aws.acm-pca/arn))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.issue-certificate-request/csr (clojure.spec.alpha/and :portkey.aws.acm-pca/csr-blob))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/issue-certificate-request (clojure.spec.alpha/keys :req-un [:portkey.aws.acm-pca.issue-certificate-request/certificate-authority-arn :portkey.aws.acm-pca.issue-certificate-request/csr :portkey.aws.acm-pca/signing-algorithm :portkey.aws.acm-pca/validity] :opt-un [:portkey.aws.acm-pca/idempotency-token]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/failure-reason #{:unsupported-algorithm :request-timed-out :other "REQUEST_TIMED_OUT" "UNSUPPORTED_ALGORITHM" "OTHER"})
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/certificate-body-blob clojure.core/bytes?)
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/string (clojure.spec.alpha/and clojure.core/string?))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.create-certificate-authority-audit-report-request/certificate-authority-arn (clojure.spec.alpha/and :portkey.aws.acm-pca/arn))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.create-certificate-authority-audit-report-request/s-3-bucket-name (clojure.spec.alpha/and :portkey.aws.acm-pca/string))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/create-certificate-authority-audit-report-request (clojure.spec.alpha/keys :req-un [:portkey.aws.acm-pca.create-certificate-authority-audit-report-request/certificate-authority-arn :portkey.aws.acm-pca.create-certificate-authority-audit-report-request/s-3-bucket-name :portkey.aws.acm-pca/audit-report-response-format] :opt-un []))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.too-many-tags-exception/message (clojure.spec.alpha/and :portkey.aws.acm-pca/string))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/too-many-tags-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca.too-many-tags-exception/message]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/revocation-configuration (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca/crl-configuration]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/t-stamp clojure.core/inst?)
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/revocation-reason #{"PRIVILEGE_WITHDRAWN" :privilege-withdrawn :unspecified "CERTIFICATE_AUTHORITY_COMPROMISE" :certificate-authority-compromise "SUPERSEDED" :superseded "AFFILIATION_CHANGED" "KEY_COMPROMISE" :key-compromise :a-a-compromise "UNSPECIFIED" :cessation-of-operation "CESSATION_OF_OPERATION" "A_A_COMPROMISE" :affiliation-changed})
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.restore-certificate-authority-request/certificate-authority-arn (clojure.spec.alpha/and :portkey.aws.acm-pca/arn))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/restore-certificate-authority-request (clojure.spec.alpha/keys :req-un [:portkey.aws.acm-pca.restore-certificate-authority-request/certificate-authority-arn] :opt-un []))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/string-5 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27965__auto__] (clojure.core/<= 0 (clojure.core/count s__27965__auto__))) (clojure.core/fn [s__27966__auto__] (clojure.core/< (clojure.core/count s__27966__auto__) 5))))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27965__auto__] (clojure.core/<= 5 (clojure.core/count s__27965__auto__))) (clojure.core/fn [s__27966__auto__] (clojure.core/< (clojure.core/count s__27966__auto__) 200)) (clojure.core/fn [s__27967__auto__] (clojure.core/re-matches #"arn:[\w+=/,.@-]+:[\w+=/,.@-]+:[\w+=/,.@-]*:[0-9]+:[\w+=,.@-]+(/[\w+=/,.@-]+)*" s__27967__auto__))))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/idempotency-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27965__auto__] (clojure.core/<= 1 (clojure.core/count s__27965__auto__))) (clojure.core/fn [s__27966__auto__] (clojure.core/< (clojure.core/count s__27966__auto__) 36)) (clojure.core/fn [s__27967__auto__] (clojure.core/re-matches #"[\u0009\u000A\u000D\u0020-\u00FF]*" s__27967__auto__))))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/permanent-deletion-time-in-days (clojure.spec.alpha/int-in 7 30))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.delete-certificate-authority-request/certificate-authority-arn (clojure.spec.alpha/and :portkey.aws.acm-pca/arn))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/delete-certificate-authority-request (clojure.spec.alpha/keys :req-un [:portkey.aws.acm-pca.delete-certificate-authority-request/certificate-authority-arn] :opt-un [:portkey.aws.acm-pca/permanent-deletion-time-in-days]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.invalid-policy-exception/message (clojure.spec.alpha/and :portkey.aws.acm-pca/string))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/invalid-policy-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca.invalid-policy-exception/message]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.invalid-state-exception/message (clojure.spec.alpha/and :portkey.aws.acm-pca/string))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/invalid-state-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca.invalid-state-exception/message]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.validity/value (clojure.spec.alpha/and :portkey.aws.acm-pca/positive-long))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.validity/type (clojure.spec.alpha/and :portkey.aws.acm-pca/validity-period-type))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/validity (clojure.spec.alpha/keys :req-un [:portkey.aws.acm-pca.validity/value :portkey.aws.acm-pca.validity/type] :opt-un []))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/max-results (clojure.spec.alpha/int-in 1 1000))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.tag/key (clojure.spec.alpha/and :portkey.aws.acm-pca/tag-key))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.tag/value (clojure.spec.alpha/and :portkey.aws.acm-pca/tag-value))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/tag (clojure.spec.alpha/keys :req-un [:portkey.aws.acm-pca.tag/key] :opt-un [:portkey.aws.acm-pca.tag/value]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.get-certificate-authority-csr-request/certificate-authority-arn (clojure.spec.alpha/and :portkey.aws.acm-pca/arn))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/get-certificate-authority-csr-request (clojure.spec.alpha/keys :req-un [:portkey.aws.acm-pca.get-certificate-authority-csr-request/certificate-authority-arn] :opt-un []))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/signing-algorithm #{:sha-256-withecdsa "SHA256WITHECDSA" :sha-512-withrsa :sha-384-withrsa "SHA384WITHECDSA" "SHA512WITHRSA" "SHA384WITHRSA" "SHA256WITHRSA" "SHA512WITHECDSA" :sha-512-withecdsa :sha-256-withrsa :sha-384-withecdsa})
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/certificate-body (clojure.spec.alpha/and clojure.core/string?))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/audit-report-response-format #{"CSV" :csv "JSON" :json})
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/certificate-authority-status #{:deleted "DISABLED" :disabled :creating "EXPIRED" "PENDING_CERTIFICATE" :active :pending-certificate "CREATING" "ACTIVE" "FAILED" :expired "DELETED" :failed})
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.concurrent-modification-exception/message (clojure.spec.alpha/and :portkey.aws.acm-pca/string))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/concurrent-modification-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca.concurrent-modification-exception/message]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.describe-certificate-authority-request/certificate-authority-arn (clojure.spec.alpha/and :portkey.aws.acm-pca/arn))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/describe-certificate-authority-request (clojure.spec.alpha/keys :req-un [:portkey.aws.acm-pca.describe-certificate-authority-request/certificate-authority-arn] :opt-un []))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.request-failed-exception/message (clojure.spec.alpha/and :portkey.aws.acm-pca/string))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/request-failed-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca.request-failed-exception/message]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/csr-body (clojure.spec.alpha/and clojure.core/string?))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/positive-long clojure.core/int?)
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.request-already-processed-exception/message (clojure.spec.alpha/and :portkey.aws.acm-pca/string))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/request-already-processed-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca.request-already-processed-exception/message]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.import-certificate-authority-certificate-request/certificate-authority-arn (clojure.spec.alpha/and :portkey.aws.acm-pca/arn))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.import-certificate-authority-certificate-request/certificate (clojure.spec.alpha/and :portkey.aws.acm-pca/certificate-body-blob))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.import-certificate-authority-certificate-request/certificate-chain (clojure.spec.alpha/and :portkey.aws.acm-pca/certificate-chain-blob))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/import-certificate-authority-certificate-request (clojure.spec.alpha/keys :req-un [:portkey.aws.acm-pca.import-certificate-authority-certificate-request/certificate-authority-arn :portkey.aws.acm-pca.import-certificate-authority-certificate-request/certificate :portkey.aws.acm-pca.import-certificate-authority-certificate-request/certificate-chain] :opt-un []))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.get-certificate-request/certificate-authority-arn (clojure.spec.alpha/and :portkey.aws.acm-pca/arn))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.get-certificate-request/certificate-arn (clojure.spec.alpha/and :portkey.aws.acm-pca/arn))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/get-certificate-request (clojure.spec.alpha/keys :req-un [:portkey.aws.acm-pca.get-certificate-request/certificate-authority-arn :portkey.aws.acm-pca.get-certificate-request/certificate-arn] :opt-un []))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/certificate-authorities (clojure.spec.alpha/coll-of :portkey.aws.acm-pca/certificate-authority))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/string-16 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27965__auto__] (clojure.core/<= 0 (clojure.core/count s__27965__auto__))) (clojure.core/fn [s__27966__auto__] (clojure.core/< (clojure.core/count s__27966__auto__) 16))))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/integer-1-to-5000 (clojure.spec.alpha/int-in 1 5000))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.certificate-authority/serial (clojure.spec.alpha/and :portkey.aws.acm-pca/string))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.certificate-authority/not-before (clojure.spec.alpha/and :portkey.aws.acm-pca/t-stamp))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.certificate-authority/type (clojure.spec.alpha/and :portkey.aws.acm-pca/certificate-authority-type))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.certificate-authority/status (clojure.spec.alpha/and :portkey.aws.acm-pca/certificate-authority-status))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.certificate-authority/restorable-until (clojure.spec.alpha/and :portkey.aws.acm-pca/t-stamp))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.certificate-authority/not-after (clojure.spec.alpha/and :portkey.aws.acm-pca/t-stamp))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.certificate-authority/created-at (clojure.spec.alpha/and :portkey.aws.acm-pca/t-stamp))
+(clojure.spec.alpha/def :portkey.aws.acm-pca.certificate-authority/last-state-change-at (clojure.spec.alpha/and :portkey.aws.acm-pca/t-stamp))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/certificate-authority (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca.certificate-authority/serial :portkey.aws.acm-pca.certificate-authority/not-before :portkey.aws.acm-pca.certificate-authority/type :portkey.aws.acm-pca/certificate-authority-configuration :portkey.aws.acm-pca.certificate-authority/status :portkey.aws.acm-pca/failure-reason :portkey.aws.acm-pca.certificate-authority/restorable-until :portkey.aws.acm-pca/revocation-configuration :portkey.aws.acm-pca.certificate-authority/not-after :portkey.aws.acm-pca/arn :portkey.aws.acm-pca.certificate-authority/created-at :portkey.aws.acm-pca.certificate-authority/last-state-change-at]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/boolean clojure.core/boolean?)
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca/list-certificate-authorities-request (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.acm-pca/next-token :portkey.aws.acm-pca/max-results]))
+
+(clojure.spec.alpha/def :portkey.aws.acm-pca.list-tags-request/certificate-authority-arn (clojure.spec.alpha/and :portkey.aws.acm-pca/arn))
+(clojure.spec.alpha/def :portkey.aws.acm-pca/list-tags-request (clojure.spec.alpha/keys :req-un [:portkey.aws.acm-pca.list-tags-request/certificate-authority-arn] :opt-un [:portkey.aws.acm-pca/next-token :portkey.aws.acm-pca/max-results]))
+
+(clojure.core/defn list-certificate-authorities ([] (list-certificate-authorities {})) ([list-certificate-authorities-requestinput] (clojure.core/let [request-function-result__28606__auto__ (req-list-certificate-authorities-request list-certificate-authorities-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28606__auto__ {:http.request.configuration/endpoints portkey.aws.acm-pca/endpoints, :http.request.spec/output-spec :portkey.aws.acm-pca/list-certificate-authorities-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-08-22", :http.request.configuration/service-id "ACM PCA", :http.request.spec/input-spec :portkey.aws.acm-pca/list-certificate-authorities-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListCertificateAuthorities", :http.request.spec/error-spec {"InvalidNextTokenException" :portkey.aws.acm-pca/invalid-next-token-exception}})))))
+(clojure.spec.alpha/fdef list-certificate-authorities :args (clojure.spec.alpha/? :portkey.aws.acm-pca/list-certificate-authorities-request) :ret (clojure.spec.alpha/and :portkey.aws.acm-pca/list-certificate-authorities-response))
+
+(clojure.core/defn restore-certificate-authority ([restore-certificate-authority-requestinput] (clojure.core/let [request-function-result__28606__auto__ (req-restore-certificate-authority-request restore-certificate-authority-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28606__auto__ {:http.request.configuration/endpoints portkey.aws.acm-pca/endpoints, :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-08-22", :http.request.configuration/service-id "ACM PCA", :http.request.spec/input-spec :portkey.aws.acm-pca/restore-certificate-authority-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "RestoreCertificateAuthority", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.acm-pca/resource-not-found-exception, "InvalidStateException" :portkey.aws.acm-pca/invalid-state-exception, "InvalidArnException" :portkey.aws.acm-pca/invalid-arn-exception}})))))
+(clojure.spec.alpha/fdef restore-certificate-authority :args (clojure.spec.alpha/tuple :portkey.aws.acm-pca/restore-certificate-authority-request) :ret clojure.core/true?)
+
+(clojure.core/defn list-tags ([list-tags-requestinput] (clojure.core/let [request-function-result__28606__auto__ (req-list-tags-request list-tags-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28606__auto__ {:http.request.configuration/endpoints portkey.aws.acm-pca/endpoints, :http.request.spec/output-spec :portkey.aws.acm-pca/list-tags-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-08-22", :http.request.configuration/service-id "ACM PCA", :http.request.spec/input-spec :portkey.aws.acm-pca/list-tags-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListTags", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.acm-pca/resource-not-found-exception, "InvalidArnException" :portkey.aws.acm-pca/invalid-arn-exception}})))))
+(clojure.spec.alpha/fdef list-tags :args (clojure.spec.alpha/tuple :portkey.aws.acm-pca/list-tags-request) :ret (clojure.spec.alpha/and :portkey.aws.acm-pca/list-tags-response))
+
+(clojure.core/defn update-certificate-authority ([update-certificate-authority-requestinput] (clojure.core/let [request-function-result__28606__auto__ (req-update-certificate-authority-request update-certificate-authority-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28606__auto__ {:http.request.configuration/endpoints portkey.aws.acm-pca/endpoints, :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-08-22", :http.request.configuration/service-id "ACM PCA", :http.request.spec/input-spec :portkey.aws.acm-pca/update-certificate-authority-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateCertificateAuthority", :http.request.spec/error-spec {"ConcurrentModificationException" :portkey.aws.acm-pca/concurrent-modification-exception, "ResourceNotFoundException" :portkey.aws.acm-pca/resource-not-found-exception, "InvalidArgsException" :portkey.aws.acm-pca/invalid-args-exception, "InvalidArnException" :portkey.aws.acm-pca/invalid-arn-exception, "InvalidStateException" :portkey.aws.acm-pca/invalid-state-exception, "InvalidPolicyException" :portkey.aws.acm-pca/invalid-policy-exception}})))))
+(clojure.spec.alpha/fdef update-certificate-authority :args (clojure.spec.alpha/tuple :portkey.aws.acm-pca/update-certificate-authority-request) :ret clojure.core/true?)
+
+(clojure.core/defn get-certificate ([get-certificate-requestinput] (clojure.core/let [request-function-result__28606__auto__ (req-get-certificate-request get-certificate-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28606__auto__ {:http.request.configuration/endpoints portkey.aws.acm-pca/endpoints, :http.request.spec/output-spec :portkey.aws.acm-pca/get-certificate-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-08-22", :http.request.configuration/service-id "ACM PCA", :http.request.spec/input-spec :portkey.aws.acm-pca/get-certificate-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetCertificate", :http.request.spec/error-spec {"RequestInProgressException" :portkey.aws.acm-pca/request-in-progress-exception, "RequestFailedException" :portkey.aws.acm-pca/request-failed-exception, "ResourceNotFoundException" :portkey.aws.acm-pca/resource-not-found-exception, "InvalidArnException" :portkey.aws.acm-pca/invalid-arn-exception, "InvalidStateException" :portkey.aws.acm-pca/invalid-state-exception}})))))
+(clojure.spec.alpha/fdef get-certificate :args (clojure.spec.alpha/tuple :portkey.aws.acm-pca/get-certificate-request) :ret (clojure.spec.alpha/and :portkey.aws.acm-pca/get-certificate-response))
+
+(clojure.core/defn tag-certificate-authority ([tag-certificate-authority-requestinput] (clojure.core/let [request-function-result__28606__auto__ (req-tag-certificate-authority-request tag-certificate-authority-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28606__auto__ {:http.request.configuration/endpoints portkey.aws.acm-pca/endpoints, :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-08-22", :http.request.configuration/service-id "ACM PCA", :http.request.spec/input-spec :portkey.aws.acm-pca/tag-certificate-authority-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "TagCertificateAuthority", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.acm-pca/resource-not-found-exception, "InvalidArnException" :portkey.aws.acm-pca/invalid-arn-exception, "InvalidStateException" :portkey.aws.acm-pca/invalid-state-exception, "InvalidTagException" :portkey.aws.acm-pca/invalid-tag-exception, "TooManyTagsException" :portkey.aws.acm-pca/too-many-tags-exception}})))))
+(clojure.spec.alpha/fdef tag-certificate-authority :args (clojure.spec.alpha/tuple :portkey.aws.acm-pca/tag-certificate-authority-request) :ret clojure.core/true?)
+
+(clojure.core/defn revoke-certificate ([revoke-certificate-requestinput] (clojure.core/let [request-function-result__28606__auto__ (req-revoke-certificate-request revoke-certificate-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28606__auto__ {:http.request.configuration/endpoints portkey.aws.acm-pca/endpoints, :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-08-22", :http.request.configuration/service-id "ACM PCA", :http.request.spec/input-spec :portkey.aws.acm-pca/revoke-certificate-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "RevokeCertificate", :http.request.spec/error-spec {"ConcurrentModificationException" :portkey.aws.acm-pca/concurrent-modification-exception, "InvalidArnException" :portkey.aws.acm-pca/invalid-arn-exception, "InvalidStateException" :portkey.aws.acm-pca/invalid-state-exception, "ResourceNotFoundException" :portkey.aws.acm-pca/resource-not-found-exception, "RequestAlreadyProcessedException" :portkey.aws.acm-pca/request-already-processed-exception, "RequestInProgressException" :portkey.aws.acm-pca/request-in-progress-exception, "RequestFailedException" :portkey.aws.acm-pca/request-failed-exception}})))))
+(clojure.spec.alpha/fdef revoke-certificate :args (clojure.spec.alpha/tuple :portkey.aws.acm-pca/revoke-certificate-request) :ret clojure.core/true?)
+
+(clojure.core/defn describe-certificate-authority-audit-report ([describe-certificate-authority-audit-report-requestinput] (clojure.core/let [request-function-result__28606__auto__ (req-describe-certificate-authority-audit-report-request describe-certificate-authority-audit-report-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28606__auto__ {:http.request.configuration/endpoints portkey.aws.acm-pca/endpoints, :http.request.spec/output-spec :portkey.aws.acm-pca/describe-certificate-authority-audit-report-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-08-22", :http.request.configuration/service-id "ACM PCA", :http.request.spec/input-spec :portkey.aws.acm-pca/describe-certificate-authority-audit-report-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeCertificateAuthorityAuditReport", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.acm-pca/resource-not-found-exception, "InvalidArnException" :portkey.aws.acm-pca/invalid-arn-exception, "InvalidArgsException" :portkey.aws.acm-pca/invalid-args-exception}})))))
+(clojure.spec.alpha/fdef describe-certificate-authority-audit-report :args (clojure.spec.alpha/tuple :portkey.aws.acm-pca/describe-certificate-authority-audit-report-request) :ret (clojure.spec.alpha/and :portkey.aws.acm-pca/describe-certificate-authority-audit-report-response))
+
+(clojure.core/defn get-certificate-authority-csr ([get-certificate-authority-csr-requestinput] (clojure.core/let [request-function-result__28606__auto__ (req-get-certificate-authority-csr-request get-certificate-authority-csr-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28606__auto__ {:http.request.configuration/endpoints portkey.aws.acm-pca/endpoints, :http.request.spec/output-spec :portkey.aws.acm-pca/get-certificate-authority-csr-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-08-22", :http.request.configuration/service-id "ACM PCA", :http.request.spec/input-spec :portkey.aws.acm-pca/get-certificate-authority-csr-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetCertificateAuthorityCsr", :http.request.spec/error-spec {"RequestInProgressException" :portkey.aws.acm-pca/request-in-progress-exception, "RequestFailedException" :portkey.aws.acm-pca/request-failed-exception, "ResourceNotFoundException" :portkey.aws.acm-pca/resource-not-found-exception, "InvalidArnException" :portkey.aws.acm-pca/invalid-arn-exception, "InvalidStateException" :portkey.aws.acm-pca/invalid-state-exception}})))))
+(clojure.spec.alpha/fdef get-certificate-authority-csr :args (clojure.spec.alpha/tuple :portkey.aws.acm-pca/get-certificate-authority-csr-request) :ret (clojure.spec.alpha/and :portkey.aws.acm-pca/get-certificate-authority-csr-response))
+
+(clojure.core/defn create-certificate-authority-audit-report ([create-certificate-authority-audit-report-requestinput] (clojure.core/let [request-function-result__28606__auto__ (req-create-certificate-authority-audit-report-request create-certificate-authority-audit-report-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28606__auto__ {:http.request.configuration/endpoints portkey.aws.acm-pca/endpoints, :http.request.spec/output-spec :portkey.aws.acm-pca/create-certificate-authority-audit-report-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-08-22", :http.request.configuration/service-id "ACM PCA", :http.request.spec/input-spec :portkey.aws.acm-pca/create-certificate-authority-audit-report-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateCertificateAuthorityAuditReport", :http.request.spec/error-spec {"RequestInProgressException" :portkey.aws.acm-pca/request-in-progress-exception, "RequestFailedException" :portkey.aws.acm-pca/request-failed-exception, "ResourceNotFoundException" :portkey.aws.acm-pca/resource-not-found-exception, "InvalidArnException" :portkey.aws.acm-pca/invalid-arn-exception, "InvalidArgsException" :portkey.aws.acm-pca/invalid-args-exception, "InvalidStateException" :portkey.aws.acm-pca/invalid-state-exception}})))))
+(clojure.spec.alpha/fdef create-certificate-authority-audit-report :args (clojure.spec.alpha/tuple :portkey.aws.acm-pca/create-certificate-authority-audit-report-request) :ret (clojure.spec.alpha/and :portkey.aws.acm-pca/create-certificate-authority-audit-report-response))
+
+(clojure.core/defn untag-certificate-authority ([untag-certificate-authority-requestinput] (clojure.core/let [request-function-result__28606__auto__ (req-untag-certificate-authority-request untag-certificate-authority-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28606__auto__ {:http.request.configuration/endpoints portkey.aws.acm-pca/endpoints, :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-08-22", :http.request.configuration/service-id "ACM PCA", :http.request.spec/input-spec :portkey.aws.acm-pca/untag-certificate-authority-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UntagCertificateAuthority", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.acm-pca/resource-not-found-exception, "InvalidArnException" :portkey.aws.acm-pca/invalid-arn-exception, "InvalidStateException" :portkey.aws.acm-pca/invalid-state-exception, "InvalidTagException" :portkey.aws.acm-pca/invalid-tag-exception}})))))
+(clojure.spec.alpha/fdef untag-certificate-authority :args (clojure.spec.alpha/tuple :portkey.aws.acm-pca/untag-certificate-authority-request) :ret clojure.core/true?)
+
+(clojure.core/defn get-certificate-authority-certificate ([get-certificate-authority-certificate-requestinput] (clojure.core/let [request-function-result__28606__auto__ (req-get-certificate-authority-certificate-request get-certificate-authority-certificate-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28606__auto__ {:http.request.configuration/endpoints portkey.aws.acm-pca/endpoints, :http.request.spec/output-spec :portkey.aws.acm-pca/get-certificate-authority-certificate-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-08-22", :http.request.configuration/service-id "ACM PCA", :http.request.spec/input-spec :portkey.aws.acm-pca/get-certificate-authority-certificate-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetCertificateAuthorityCertificate", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.acm-pca/resource-not-found-exception, "InvalidStateException" :portkey.aws.acm-pca/invalid-state-exception, "InvalidArnException" :portkey.aws.acm-pca/invalid-arn-exception}})))))
+(clojure.spec.alpha/fdef get-certificate-authority-certificate :args (clojure.spec.alpha/tuple :portkey.aws.acm-pca/get-certificate-authority-certificate-request) :ret (clojure.spec.alpha/and :portkey.aws.acm-pca/get-certificate-authority-certificate-response))
+
+(clojure.core/defn describe-certificate-authority ([describe-certificate-authority-requestinput] (clojure.core/let [request-function-result__28606__auto__ (req-describe-certificate-authority-request describe-certificate-authority-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28606__auto__ {:http.request.configuration/endpoints portkey.aws.acm-pca/endpoints, :http.request.spec/output-spec :portkey.aws.acm-pca/describe-certificate-authority-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-08-22", :http.request.configuration/service-id "ACM PCA", :http.request.spec/input-spec :portkey.aws.acm-pca/describe-certificate-authority-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeCertificateAuthority", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.acm-pca/resource-not-found-exception, "InvalidArnException" :portkey.aws.acm-pca/invalid-arn-exception}})))))
+(clojure.spec.alpha/fdef describe-certificate-authority :args (clojure.spec.alpha/tuple :portkey.aws.acm-pca/describe-certificate-authority-request) :ret (clojure.spec.alpha/and :portkey.aws.acm-pca/describe-certificate-authority-response))
+
+(clojure.core/defn delete-certificate-authority ([delete-certificate-authority-requestinput] (clojure.core/let [request-function-result__28606__auto__ (req-delete-certificate-authority-request delete-certificate-authority-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28606__auto__ {:http.request.configuration/endpoints portkey.aws.acm-pca/endpoints, :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-08-22", :http.request.configuration/service-id "ACM PCA", :http.request.spec/input-spec :portkey.aws.acm-pca/delete-certificate-authority-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteCertificateAuthority", :http.request.spec/error-spec {"ConcurrentModificationException" :portkey.aws.acm-pca/concurrent-modification-exception, "ResourceNotFoundException" :portkey.aws.acm-pca/resource-not-found-exception, "InvalidArnException" :portkey.aws.acm-pca/invalid-arn-exception, "InvalidStateException" :portkey.aws.acm-pca/invalid-state-exception}})))))
+(clojure.spec.alpha/fdef delete-certificate-authority :args (clojure.spec.alpha/tuple :portkey.aws.acm-pca/delete-certificate-authority-request) :ret clojure.core/true?)
+
+(clojure.core/defn issue-certificate ([issue-certificate-requestinput] (clojure.core/let [request-function-result__28606__auto__ (req-issue-certificate-request issue-certificate-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28606__auto__ {:http.request.configuration/endpoints portkey.aws.acm-pca/endpoints, :http.request.spec/output-spec :portkey.aws.acm-pca/issue-certificate-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-08-22", :http.request.configuration/service-id "ACM PCA", :http.request.spec/input-spec :portkey.aws.acm-pca/issue-certificate-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "IssueCertificate", :http.request.spec/error-spec {"LimitExceededException" :portkey.aws.acm-pca/limit-exceeded-exception, "ResourceNotFoundException" :portkey.aws.acm-pca/resource-not-found-exception, "InvalidStateException" :portkey.aws.acm-pca/invalid-state-exception, "InvalidArnException" :portkey.aws.acm-pca/invalid-arn-exception, "InvalidArgsException" :portkey.aws.acm-pca/invalid-args-exception, "MalformedCSRException" :portkey.aws.acm-pca/malformed-csr-exception}})))))
+(clojure.spec.alpha/fdef issue-certificate :args (clojure.spec.alpha/tuple :portkey.aws.acm-pca/issue-certificate-request) :ret (clojure.spec.alpha/and :portkey.aws.acm-pca/issue-certificate-response))
+
+(clojure.core/defn create-certificate-authority ([create-certificate-authority-requestinput] (clojure.core/let [request-function-result__28606__auto__ (req-create-certificate-authority-request create-certificate-authority-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28606__auto__ {:http.request.configuration/endpoints portkey.aws.acm-pca/endpoints, :http.request.spec/output-spec :portkey.aws.acm-pca/create-certificate-authority-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-08-22", :http.request.configuration/service-id "ACM PCA", :http.request.spec/input-spec :portkey.aws.acm-pca/create-certificate-authority-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateCertificateAuthority", :http.request.spec/error-spec {"InvalidArgsException" :portkey.aws.acm-pca/invalid-args-exception, "InvalidPolicyException" :portkey.aws.acm-pca/invalid-policy-exception, "LimitExceededException" :portkey.aws.acm-pca/limit-exceeded-exception}})))))
+(clojure.spec.alpha/fdef create-certificate-authority :args (clojure.spec.alpha/tuple :portkey.aws.acm-pca/create-certificate-authority-request) :ret (clojure.spec.alpha/and :portkey.aws.acm-pca/create-certificate-authority-response))
+
+(clojure.core/defn import-certificate-authority-certificate ([import-certificate-authority-certificate-requestinput] (clojure.core/let [request-function-result__28606__auto__ (req-import-certificate-authority-certificate-request import-certificate-authority-certificate-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28606__auto__ {:http.request.configuration/endpoints portkey.aws.acm-pca/endpoints, :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-08-22", :http.request.configuration/service-id "ACM PCA", :http.request.spec/input-spec :portkey.aws.acm-pca/import-certificate-authority-certificate-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ImportCertificateAuthorityCertificate", :http.request.spec/error-spec {"ConcurrentModificationException" :portkey.aws.acm-pca/concurrent-modification-exception, "RequestInProgressException" :portkey.aws.acm-pca/request-in-progress-exception, "RequestFailedException" :portkey.aws.acm-pca/request-failed-exception, "ResourceNotFoundException" :portkey.aws.acm-pca/resource-not-found-exception, "InvalidArnException" :portkey.aws.acm-pca/invalid-arn-exception, "InvalidStateException" :portkey.aws.acm-pca/invalid-state-exception, "MalformedCertificateException" :portkey.aws.acm-pca/malformed-certificate-exception, "CertificateMismatchException" :portkey.aws.acm-pca/certificate-mismatch-exception}})))))
+(clojure.spec.alpha/fdef import-certificate-authority-certificate :args (clojure.spec.alpha/tuple :portkey.aws.acm-pca/import-certificate-authority-certificate-request) :ret clojure.core/true?)
