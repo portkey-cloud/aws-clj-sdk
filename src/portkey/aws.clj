@@ -461,6 +461,16 @@
     (base64-encode bytes')))
 
 
+(defn getback-xml-elem-with-tag
+  [looking-for-tag root-xml-element]
+  (if (seq? root-xml-element)
+    (some (partial getback-xml-elem-with-tag looking-for-tag) root-xml-element)
+    (when (xml/element? root-xml-element)
+      (if (= looking-for-tag (name (:tag root-xml-element)))
+        root-xml-element
+        (some (partial getback-xml-elem-with-tag looking-for-tag) (:content root-xml-element))))))
+
+
 (defn- params-to-content-md5-header
   "Add the Contente-MD5 header to the request for S3 service."
   [{:as req :http.request.configuration/keys [protocol method service-id]}]
@@ -573,6 +583,7 @@
   [{:keys [:http.request.configuration/endpoints
            :http.request.configuration/method
            :http.request.configuration/request-uri
+           :http.request.configuration/output-deser-fn
            :http.request.configuration/mime-type] :as req}]
   #_(spec/check-asserts true)
   #_(binding [spec/*compile-asserts* true]
@@ -595,4 +606,79 @@
      params-to-headers
      :ring.request
      (*http-client* (fn [resp]
-                      [:result resp])))))
+                      (let [f (fn f [{:keys [content] :as elem}]
+                                (if-not (xml/element? elem)
+                                  elem
+                                  (assoc elem :content
+                                         (sequence (comp (map (fn [el]
+                                                                (if ((every-pred (complement xml/element?) string? (comp empty? str/trim)) el)
+                                                                  nil
+                                                                  (f el))))
+                                                         (remove nil?))
+                                                   content))))]
+                        [:result #_resp (-> resp
+                                            :body
+                                            xml/parse-str
+                                            f
+                                            output-deser-fn
+                                            (with-meta resp))]))))))
+
+
+(comment
+
+
+
+
+
+
+
+
+  (use 'clojure.repl)
+  (dir xml)
+  (xml/parse-str a)
+
+  (defn different-keys? [content]
+    (when content
+      (let [dkeys (count (filter identity (distinct (map :tag content))))
+            n     (count content)]
+        (= dkeys n))))
+
+  (defn xml->json [element]
+    (cond
+      (nil? element)                        nil
+      (string? element)                     element
+      (sequential? element)                 (if (> (count element) 1)
+                                              (if (different-keys? element)
+                                                (reduce into {} (map (partial xml->json ) element))
+                                                (map xml->json element))
+                                              (xml->json  (first element)))
+      (and (map? element) (empty? element)) {}
+      (map? element)                        (if (:attrs element)
+                                              {(name (:tag element))                                (xml->json (:content element))
+                                               (keyword (str (name (:tag element)) "Attrs")) (:attrs element)}
+                                              {(name (:tag element)) (xml->json  (:content element))})
+      :else                                 nil))
+
+
+  () (str/trim "\n    ")
+
+  (xml->json b)
+
+  (xml/element? "ds")
+
+  (def b (let [{:keys [content] :as elem} (xml/parse-str a)
+               f (fn f [{:keys [content] :as elem}]
+                   (if-not (xml/element? elem)
+                     elem
+                     (assoc elem :content
+                            (sequence (comp (map (fn [el]
+                                                   (if ((every-pred (complement xml/element?) string? (comp empty? str/trim)) el)
+                                                     nil
+                                                     (f el))))
+                                            (remove nil?))
+                                      content))))]
+           (f elem)))
+  (coll? (seq "ds"))
+
+
+  )
