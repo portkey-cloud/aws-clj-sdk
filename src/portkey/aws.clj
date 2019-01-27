@@ -461,14 +461,33 @@
     (base64-encode bytes')))
 
 
-(defn getback-xml-elem-with-tag
-  [looking-for-tag root-xml-element]
-  (if (seq? root-xml-element)
-    (some (partial getback-xml-elem-with-tag looking-for-tag) root-xml-element)
-    (when (xml/element? root-xml-element)
-      (if (= looking-for-tag (name (:tag root-xml-element)))
-        root-xml-element
-        (some (partial getback-xml-elem-with-tag looking-for-tag) (:content root-xml-element))))))
+(defn get-in-tag-from-xml-tree
+  "Look for tag from xml-tree, returns nil if not found."
+  [looking-for-tag xml-tree]
+  (if (seq? xml-tree)
+    (some (partial get-in-tag-from-xml-tree looking-for-tag) xml-tree)
+    (when (xml/element? xml-tree)
+      (if (= looking-for-tag (name (:tag xml-tree)))
+        xml-tree
+        (some (partial get-in-tag-from-xml-tree looking-for-tag) (:content xml-tree))))))
+
+
+(defn parse-xml-body
+  "Given a XML string, returns a map as specified in the
+  clojure.data.spec and clean it's nodes when empty string or nil
+  values are found."
+  [body]
+  (let [clean-xml-tree (fn clean-xml-tree [{:keys [content] :as elem}]
+                         (if-not (xml/element? elem)
+                           elem
+                           (assoc elem :content
+                                  (sequence (comp (map (fn [el]
+                                                         (if ((every-pred (complement xml/element?) string? (comp empty? str/trim)) el)
+                                                           nil
+                                                           (clean-xml-tree el))))
+                                                  (remove nil?))
+                                            content))))]
+    (-> body xml/parse-str clean-xml-tree)))
 
 
 (defn- params-to-content-md5-header
@@ -616,69 +635,18 @@
                                                                   (f el))))
                                                          (remove nil?))
                                                    content))))]
-                        [:result #_resp (-> resp
-                                            :body
-                                            xml/parse-str
-                                            f
-                                            output-deser-fn
-                                            (with-meta resp))]))))))
+                        [:result (-> resp
+                                     output-deser-fn
+                                     (with-meta resp))]))))))
+
 
 
 (comment
 
+  (sc.api/letsc
+   1
+   )
 
-
-
-
-
-
-
-  (use 'clojure.repl)
-  (dir xml)
-  (xml/parse-str a)
-
-  (defn different-keys? [content]
-    (when content
-      (let [dkeys (count (filter identity (distinct (map :tag content))))
-            n     (count content)]
-        (= dkeys n))))
-
-  (defn xml->json [element]
-    (cond
-      (nil? element)                        nil
-      (string? element)                     element
-      (sequential? element)                 (if (> (count element) 1)
-                                              (if (different-keys? element)
-                                                (reduce into {} (map (partial xml->json ) element))
-                                                (map xml->json element))
-                                              (xml->json  (first element)))
-      (and (map? element) (empty? element)) {}
-      (map? element)                        (if (:attrs element)
-                                              {(name (:tag element))                                (xml->json (:content element))
-                                               (keyword (str (name (:tag element)) "Attrs")) (:attrs element)}
-                                              {(name (:tag element)) (xml->json  (:content element))})
-      :else                                 nil))
-
-
-  () (str/trim "\n    ")
-
-  (xml->json b)
-
-  (xml/element? "ds")
-
-  (def b (let [{:keys [content] :as elem} (xml/parse-str a)
-               f (fn f [{:keys [content] :as elem}]
-                   (if-not (xml/element? elem)
-                     elem
-                     (assoc elem :content
-                            (sequence (comp (map (fn [el]
-                                                   (if ((every-pred (complement xml/element?) string? (comp empty? str/trim)) el)
-                                                     nil
-                                                     (f el))))
-                                            (remove nil?))
-                                      content))))]
-           (f elem)))
-  (coll? (seq "ds"))
 
 
   )
