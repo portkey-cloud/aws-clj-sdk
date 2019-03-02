@@ -477,17 +477,18 @@
   clojure.data.spec and clean it's nodes when empty string or nil
   values are found."
   [body]
-  (let [clean-xml-tree (fn clean-xml-tree [{:keys [content] :as elem}]
-                         (if-not (xml/element? elem)
-                           elem
-                           (assoc elem :content
-                                  (sequence (comp (map (fn [el]
-                                                         (if ((every-pred (complement xml/element?) string? (comp empty? str/trim)) el)
-                                                           nil
-                                                           (clean-xml-tree el))))
-                                                  (remove nil?))
-                                            content))))]
-    (-> body xml/parse-str clean-xml-tree)))
+  (when (not (str/blank? body))
+    (let [clean-xml-tree (fn clean-xml-tree [{:keys [content] :as elem}]
+                           (if-not (xml/element? elem)
+                             elem
+                             (assoc elem :content
+                                    (sequence (comp (map (fn [el]
+                                                           (if ((every-pred (complement xml/element?) string? (comp empty? str/trim)) el)
+                                                             nil
+                                                             (clean-xml-tree el))))
+                                                    (remove nil?))
+                                              content))))]
+      (-> body xml/parse-str clean-xml-tree))))
 
 
 (defn- params-to-content-md5-header
@@ -617,7 +618,7 @@
                            :headers            mime-type}})
      params-to-uri
      params-to-body
-     ;; @NOTE - @dupucba : must be placed before params-to-header and
+     ;; @NOTE - @dupuchba : must be placed before params-to-header and
      ;; after params-to-body as it rely on both to compute content-md5
      ;; value
      params-to-content-md5-header
@@ -625,28 +626,6 @@
      params-to-headers
      :ring.request
      (*http-client* (fn [resp]
-                      (let [f (fn f [{:keys [content] :as elem}]
-                                (if-not (xml/element? elem)
-                                  elem
-                                  (assoc elem :content
-                                         (sequence (comp (map (fn [el]
-                                                                (if ((every-pred (complement xml/element?) string? (comp empty? str/trim)) el)
-                                                                  nil
-                                                                  (f el))))
-                                                         (remove nil?))
-                                                   content))))]
-                        [:result (-> resp
-                                     output-deser-fn
-                                     (with-meta resp))]))))))
-
-
-
-(comment
-
-  (sc.api/letsc
-   1
-   )
-
-
-
-  )
+                      [:result (-> resp
+                                   output-deser-fn
+                                   (with-meta resp))])))))
