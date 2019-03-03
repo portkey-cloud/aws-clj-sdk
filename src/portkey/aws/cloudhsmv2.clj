@@ -186,6 +186,182 @@
 
 (clojure.core/defn- req-list-tags-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-cluster-id (input :resource-id)) #:http.request.field{:name "ResourceId", :shape "ClusterId"})]} (clojure.core/contains? input :next-token) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-next-token (input :next-token)) #:http.request.field{:name "NextToken", :shape "NextToken"})) (clojure.core/contains? input :max-results) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-max-size (input :max-results)) #:http.request.field{:name "MaxResults", :shape "MaxSize"}))))
 
+(clojure.core/declare deser-backup-policy)
+
+(clojure.core/declare deser-hsm)
+
+(clojure.core/declare deser-hsms)
+
+(clojure.core/declare deser-security-group)
+
+(clojure.core/declare deser-subnet-id)
+
+(clojure.core/declare desererror-message)
+
+(clojure.core/declare deser-certificates)
+
+(clojure.core/declare deser-state-message)
+
+(clojure.core/declare deser-backup-id)
+
+(clojure.core/declare deser-pre-co-password)
+
+(clojure.core/declare deser-tag-key)
+
+(clojure.core/declare deser-cluster-id)
+
+(clojure.core/declare deser-hsm-id)
+
+(clojure.core/declare deser-backup-state)
+
+(clojure.core/declare deser-next-token)
+
+(clojure.core/declare deser-external-subnet-mapping)
+
+(clojure.core/declare deser-tag-list)
+
+(clojure.core/declare deser-cluster-state)
+
+(clojure.core/declare deser-cert)
+
+(clojure.core/declare deser-cluster)
+
+(clojure.core/declare deser-external-az)
+
+(clojure.core/declare deser-hsm-state)
+
+(clojure.core/declare deser-tag-value)
+
+(clojure.core/declare deser-backup)
+
+(clojure.core/declare deser-vpc-id)
+
+(clojure.core/declare deser-destination-backup)
+
+(clojure.core/declare deser-string)
+
+(clojure.core/declare deser-clusters)
+
+(clojure.core/declare deser-backups)
+
+(clojure.core/declare deser-ip-address)
+
+(clojure.core/declare deser-timestamp)
+
+(clojure.core/declare deser-tag)
+
+(clojure.core/declare deser-hsm-type)
+
+(clojure.core/declare deser-eni-id)
+
+(clojure.core/declare deser-region)
+
+(clojure.core/defn- deser-backup-policy [input] (clojure.core/get {"DEFAULT" :default} input))
+
+(clojure.core/defn- deser-hsm [input] (clojure.core/cond-> {:hsm-id (deser-hsm-id (input "HsmId"))} (clojure.core/contains? input "AvailabilityZone") (clojure.core/assoc :availability-zone (deser-external-az (input "AvailabilityZone"))) (clojure.core/contains? input "ClusterId") (clojure.core/assoc :cluster-id (deser-cluster-id (input "ClusterId"))) (clojure.core/contains? input "SubnetId") (clojure.core/assoc :subnet-id (deser-subnet-id (input "SubnetId"))) (clojure.core/contains? input "EniId") (clojure.core/assoc :eni-id (deser-eni-id (input "EniId"))) (clojure.core/contains? input "EniIp") (clojure.core/assoc :eni-ip (deser-ip-address (input "EniIp"))) (clojure.core/contains? input "State") (clojure.core/assoc :state (deser-hsm-state (input "State"))) (clojure.core/contains? input "StateMessage") (clojure.core/assoc :state-message (deser-string (input "StateMessage")))))
+
+(clojure.core/defn- deser-hsms [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-hsm coll))) input))
+
+(clojure.core/defn- deser-security-group [input] input)
+
+(clojure.core/defn- deser-subnet-id [input] input)
+
+(clojure.core/defn- desererror-message [input] input)
+
+(clojure.core/defn- deser-certificates [input] (clojure.core/cond-> {} (clojure.core/contains? input "ClusterCsr") (clojure.core/assoc :cluster-csr (deser-cert (input "ClusterCsr"))) (clojure.core/contains? input "HsmCertificate") (clojure.core/assoc :hsm-certificate (deser-cert (input "HsmCertificate"))) (clojure.core/contains? input "AwsHardwareCertificate") (clojure.core/assoc :aws-hardware-certificate (deser-cert (input "AwsHardwareCertificate"))) (clojure.core/contains? input "ManufacturerHardwareCertificate") (clojure.core/assoc :manufacturer-hardware-certificate (deser-cert (input "ManufacturerHardwareCertificate"))) (clojure.core/contains? input "ClusterCertificate") (clojure.core/assoc :cluster-certificate (deser-cert (input "ClusterCertificate")))))
+
+(clojure.core/defn- deser-state-message [input] input)
+
+(clojure.core/defn- deser-backup-id [input] input)
+
+(clojure.core/defn- deser-pre-co-password [input] input)
+
+(clojure.core/defn- deser-tag-key [input] input)
+
+(clojure.core/defn- deser-cluster-id [input] input)
+
+(clojure.core/defn- deser-hsm-id [input] input)
+
+(clojure.core/defn- deser-backup-state [input] (clojure.core/get {"CREATE_IN_PROGRESS" :create-in-progress, "READY" :ready, "DELETED" :deleted, "PENDING_DELETION" :pending-deletion} input))
+
+(clojure.core/defn- deser-next-token [input] input)
+
+(clojure.core/defn- deser-external-subnet-mapping [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-external-az k) (deser-subnet-id v)])) input))
+
+(clojure.core/defn- deser-tag-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-tag coll))) input))
+
+(clojure.core/defn- deser-cluster-state [input] (clojure.core/get {"INITIALIZE_IN_PROGRESS" :initialize-in-progress, "DELETE_IN_PROGRESS" :delete-in-progress, "UPDATE_IN_PROGRESS" :update-in-progress, "CREATE_IN_PROGRESS" :create-in-progress, "UNINITIALIZED" :uninitialized, "INITIALIZED" :initialized, "ACTIVE" :active, "DELETED" :deleted, "DEGRADED" :degraded} input))
+
+(clojure.core/defn- deser-cert [input] input)
+
+(clojure.core/defn- deser-cluster [input] (clojure.core/cond-> {} (clojure.core/contains? input "CreateTimestamp") (clojure.core/assoc :create-timestamp (deser-timestamp (input "CreateTimestamp"))) (clojure.core/contains? input "BackupPolicy") (clojure.core/assoc :backup-policy (deser-backup-policy (input "BackupPolicy"))) (clojure.core/contains? input "Hsms") (clojure.core/assoc :hsms (deser-hsms (input "Hsms"))) (clojure.core/contains? input "SecurityGroup") (clojure.core/assoc :security-group (deser-security-group (input "SecurityGroup"))) (clojure.core/contains? input "Certificates") (clojure.core/assoc :certificates (deser-certificates (input "Certificates"))) (clojure.core/contains? input "StateMessage") (clojure.core/assoc :state-message (deser-state-message (input "StateMessage"))) (clojure.core/contains? input "PreCoPassword") (clojure.core/assoc :pre-co-password (deser-pre-co-password (input "PreCoPassword"))) (clojure.core/contains? input "ClusterId") (clojure.core/assoc :cluster-id (deser-cluster-id (input "ClusterId"))) (clojure.core/contains? input "SubnetMapping") (clojure.core/assoc :subnet-mapping (deser-external-subnet-mapping (input "SubnetMapping"))) (clojure.core/contains? input "VpcId") (clojure.core/assoc :vpc-id (deser-vpc-id (input "VpcId"))) (clojure.core/contains? input "State") (clojure.core/assoc :state (deser-cluster-state (input "State"))) (clojure.core/contains? input "HsmType") (clojure.core/assoc :hsm-type (deser-hsm-type (input "HsmType"))) (clojure.core/contains? input "SourceBackupId") (clojure.core/assoc :source-backup-id (deser-backup-id (input "SourceBackupId")))))
+
+(clojure.core/defn- deser-external-az [input] input)
+
+(clojure.core/defn- deser-hsm-state [input] (clojure.core/get {"CREATE_IN_PROGRESS" :create-in-progress, "ACTIVE" :active, "DEGRADED" :degraded, "DELETE_IN_PROGRESS" :delete-in-progress, "DELETED" :deleted} input))
+
+(clojure.core/defn- deser-tag-value [input] input)
+
+(clojure.core/defn- deser-backup [input] (clojure.core/cond-> {:backup-id (deser-backup-id (input "BackupId"))} (clojure.core/contains? input "CreateTimestamp") (clojure.core/assoc :create-timestamp (deser-timestamp (input "CreateTimestamp"))) (clojure.core/contains? input "CopyTimestamp") (clojure.core/assoc :copy-timestamp (deser-timestamp (input "CopyTimestamp"))) (clojure.core/contains? input "SourceRegion") (clojure.core/assoc :source-region (deser-region (input "SourceRegion"))) (clojure.core/contains? input "ClusterId") (clojure.core/assoc :cluster-id (deser-cluster-id (input "ClusterId"))) (clojure.core/contains? input "DeleteTimestamp") (clojure.core/assoc :delete-timestamp (deser-timestamp (input "DeleteTimestamp"))) (clojure.core/contains? input "BackupState") (clojure.core/assoc :backup-state (deser-backup-state (input "BackupState"))) (clojure.core/contains? input "SourceBackup") (clojure.core/assoc :source-backup (deser-backup-id (input "SourceBackup"))) (clojure.core/contains? input "SourceCluster") (clojure.core/assoc :source-cluster (deser-cluster-id (input "SourceCluster")))))
+
+(clojure.core/defn- deser-vpc-id [input] input)
+
+(clojure.core/defn- deser-destination-backup [input] (clojure.core/cond-> {} (clojure.core/contains? input "CreateTimestamp") (clojure.core/assoc :create-timestamp (deser-timestamp (input "CreateTimestamp"))) (clojure.core/contains? input "SourceRegion") (clojure.core/assoc :source-region (deser-region (input "SourceRegion"))) (clojure.core/contains? input "SourceBackup") (clojure.core/assoc :source-backup (deser-backup-id (input "SourceBackup"))) (clojure.core/contains? input "SourceCluster") (clojure.core/assoc :source-cluster (deser-cluster-id (input "SourceCluster")))))
+
+(clojure.core/defn- deser-string [input] input)
+
+(clojure.core/defn- deser-clusters [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-cluster coll))) input))
+
+(clojure.core/defn- deser-backups [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-backup coll))) input))
+
+(clojure.core/defn- deser-ip-address [input] input)
+
+(clojure.core/defn- deser-timestamp [input] input)
+
+(clojure.core/defn- deser-tag [input] (clojure.core/cond-> {:key (deser-tag-key (input "Key")), :value (deser-tag-value (input "Value"))}))
+
+(clojure.core/defn- deser-hsm-type [input] input)
+
+(clojure.core/defn- deser-eni-id [input] input)
+
+(clojure.core/defn- deser-region [input] input)
+
+(clojure.core/defn- deser-cloud-hsm-internal-failure-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (desererror-message (input "Message")))))
+
+(clojure.core/defn- deser-list-tags-response [input] (clojure.core/cond-> {:tag-list (deser-tag-list (input "TagList"))} (clojure.core/contains? input "NextToken") (clojure.core/assoc :next-token (deser-next-token (input "NextToken")))))
+
+(clojure.core/defn- deser-describe-clusters-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "Clusters") (clojure.core/assoc :clusters (deser-clusters (input "Clusters"))) (clojure.core/contains? input "NextToken") (clojure.core/assoc :next-token (deser-next-token (input "NextToken")))))
+
+(clojure.core/defn- deser-cloud-hsm-invalid-request-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (desererror-message (input "Message")))))
+
+(clojure.core/defn- deser-delete-cluster-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "Cluster") (clojure.core/assoc :cluster (deser-cluster (input "Cluster")))))
+
+(clojure.core/defn- deser-delete-backup-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "Backup") (clojure.core/assoc :backup (deser-backup (input "Backup")))))
+
+(clojure.core/defn- deser-tag-resource-response [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-create-cluster-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "Cluster") (clojure.core/assoc :cluster (deser-cluster (input "Cluster")))))
+
+(clojure.core/defn- deser-restore-backup-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "Backup") (clojure.core/assoc :backup (deser-backup (input "Backup")))))
+
+(clojure.core/defn- deser-initialize-cluster-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "State") (clojure.core/assoc :state (deser-cluster-state (input "State"))) (clojure.core/contains? input "StateMessage") (clojure.core/assoc :state-message (deser-state-message (input "StateMessage")))))
+
+(clojure.core/defn- deser-cloud-hsm-service-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (desererror-message (input "Message")))))
+
+(clojure.core/defn- deser-cloud-hsm-resource-not-found-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (desererror-message (input "Message")))))
+
+(clojure.core/defn- deser-create-hsm-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "Hsm") (clojure.core/assoc :hsm (deser-hsm (input "Hsm")))))
+
+(clojure.core/defn- deser-cloud-hsm-access-denied-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (desererror-message (input "Message")))))
+
+(clojure.core/defn- deser-delete-hsm-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "HsmId") (clojure.core/assoc :hsm-id (deser-hsm-id (input "HsmId")))))
+
+(clojure.core/defn- deser-describe-backups-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "Backups") (clojure.core/assoc :backups (deser-backups (input "Backups"))) (clojure.core/contains? input "NextToken") (clojure.core/assoc :next-token (deser-next-token (input "NextToken")))))
+
+(clojure.core/defn- deser-untag-resource-response [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-copy-backup-to-region-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "DestinationBackup") (clojure.core/assoc :destination-backup (deser-destination-backup (input "DestinationBackup")))))
+
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2/backup-policy #{:default "DEFAULT"})
 
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2.hsm/availability-zone (clojure.spec.alpha/and :portkey.aws.cloudhsmv2/external-az))
@@ -203,9 +379,9 @@
 
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2/hsms (clojure.spec.alpha/coll-of :portkey.aws.cloudhsmv2/hsm))
 
-(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/security-group (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"sg-[0-9a-fA-F]" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/security-group (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"sg-[0-9a-fA-F]" s__27881__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/subnet-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"subnet-[0-9a-fA-F]{8,17}" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/subnet-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"subnet-[0-9a-fA-F]{8,17}" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2/error-message (clojure.spec.alpha/and clojure.core/string?))
 
@@ -216,22 +392,22 @@
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2.certificates/cluster-certificate (clojure.spec.alpha/and :portkey.aws.cloudhsmv2/cert))
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2/certificates (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.cloudhsmv2.certificates/cluster-csr :portkey.aws.cloudhsmv2.certificates/hsm-certificate :portkey.aws.cloudhsmv2.certificates/aws-hardware-certificate :portkey.aws.cloudhsmv2.certificates/manufacturer-hardware-certificate :portkey.aws.cloudhsmv2.certificates/cluster-certificate]))
 
-(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/state-message (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 300)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #".*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/state-message (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 300)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #".*" s__27881__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/backup-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"backup-[2-7a-zA-Z]{11,16}" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/backup-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"backup-[2-7a-zA-Z]{11,16}" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2/list-tags-response (clojure.spec.alpha/keys :req-un [:portkey.aws.cloudhsmv2/tag-list] :opt-un [:portkey.aws.cloudhsmv2/next-token]))
 
-(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/pre-co-password (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 7 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 32))))
+(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/pre-co-password (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 7 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 32))))
 
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2/describe-clusters-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.cloudhsmv2/clusters :portkey.aws.cloudhsmv2/next-token]))
 
-(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/tag-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 128)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/tag-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 128)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2.cloud-hsm-invalid-request-exception/message (clojure.spec.alpha/and :portkey.aws.cloudhsmv2/error-message))
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2/cloud-hsm-invalid-request-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.cloudhsmv2.cloud-hsm-invalid-request-exception/message]))
 
-(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/cluster-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"cluster-[2-7a-zA-Z]{11,16}" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/cluster-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"cluster-[2-7a-zA-Z]{11,16}" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2.describe-backups-request/max-results (clojure.spec.alpha/and :portkey.aws.cloudhsmv2/max-size))
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2.describe-backups-request/sort-ascending (clojure.spec.alpha/and :portkey.aws.cloudhsmv2/boolean))
@@ -239,7 +415,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2/delete-cluster-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.cloudhsmv2/cluster]))
 
-(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/hsm-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"hsm-[2-7a-zA-Z]{11,16}" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/hsm-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"hsm-[2-7a-zA-Z]{11,16}" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2/delete-backup-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.cloudhsmv2/backup]))
 
@@ -247,7 +423,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2/strings (clojure.spec.alpha/coll-of :portkey.aws.cloudhsmv2/string))
 
-(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/next-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #".*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/next-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 256)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #".*" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2/delete-backup-request (clojure.spec.alpha/keys :req-un [:portkey.aws.cloudhsmv2/backup-id] :opt-un []))
 
@@ -274,7 +450,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2/tag-key-list (clojure.spec.alpha/coll-of :portkey.aws.cloudhsmv2/tag-key :min-count 1 :max-count 50))
 
-(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/cert (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 5000)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-zA-Z0-9+-/=\s]*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/cert (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 5000)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-zA-Z0-9+-/=\s]*" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2.cloud-hsm-service-exception/message (clojure.spec.alpha/and :portkey.aws.cloudhsmv2/error-message))
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2/cloud-hsm-service-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.cloudhsmv2.cloud-hsm-service-exception/message]))
@@ -285,11 +461,11 @@
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2.cluster/source-backup-id (clojure.spec.alpha/and :portkey.aws.cloudhsmv2/backup-id))
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2/cluster (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.cloudhsmv2.cluster/create-timestamp :portkey.aws.cloudhsmv2/backup-policy :portkey.aws.cloudhsmv2/hsms :portkey.aws.cloudhsmv2/security-group :portkey.aws.cloudhsmv2/certificates :portkey.aws.cloudhsmv2/state-message :portkey.aws.cloudhsmv2/pre-co-password :portkey.aws.cloudhsmv2/cluster-id :portkey.aws.cloudhsmv2.cluster/subnet-mapping :portkey.aws.cloudhsmv2/vpc-id :portkey.aws.cloudhsmv2.cluster/state :portkey.aws.cloudhsmv2/hsm-type :portkey.aws.cloudhsmv2.cluster/source-backup-id]))
 
-(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/external-az (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-z]{2}(-(gov))?-(east|west|north|south|central){1,2}-\d[a-z]" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/external-az (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-z]{2}(-(gov))?-(east|west|north|south|central){1,2}-\d[a-z]" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2/hsm-state #{:deleted "DELETE_IN_PROGRESS" "CREATE_IN_PROGRESS" :delete-in-progress :create-in-progress :active :degraded "ACTIVE" "DELETED" "DEGRADED"})
 
-(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/tag-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 0 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/tag-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 0 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 256)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2.backup/create-timestamp (clojure.spec.alpha/and :portkey.aws.cloudhsmv2/timestamp))
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2.backup/copy-timestamp (clojure.spec.alpha/and :portkey.aws.cloudhsmv2/timestamp))
@@ -299,7 +475,7 @@
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2.backup/source-cluster (clojure.spec.alpha/and :portkey.aws.cloudhsmv2/cluster-id))
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2/backup (clojure.spec.alpha/keys :req-un [:portkey.aws.cloudhsmv2/backup-id] :opt-un [:portkey.aws.cloudhsmv2.backup/create-timestamp :portkey.aws.cloudhsmv2.backup/copy-timestamp :portkey.aws.cloudhsmv2.backup/source-region :portkey.aws.cloudhsmv2/cluster-id :portkey.aws.cloudhsmv2.backup/delete-timestamp :portkey.aws.cloudhsmv2/backup-state :portkey.aws.cloudhsmv2.backup/source-backup :portkey.aws.cloudhsmv2.backup/source-cluster]))
 
-(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/vpc-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"vpc-[0-9a-fA-F]" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/vpc-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"vpc-[0-9a-fA-F]" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2.cloud-hsm-resource-not-found-exception/message (clojure.spec.alpha/and :portkey.aws.cloudhsmv2/error-message))
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2/cloud-hsm-resource-not-found-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.cloudhsmv2.cloud-hsm-resource-not-found-exception/message]))
@@ -331,7 +507,7 @@
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2.create-hsm-request/availability-zone (clojure.spec.alpha/and :portkey.aws.cloudhsmv2/external-az))
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2/create-hsm-request (clojure.spec.alpha/keys :req-un [:portkey.aws.cloudhsmv2/cluster-id :portkey.aws.cloudhsmv2.create-hsm-request/availability-zone] :opt-un [:portkey.aws.cloudhsmv2/ip-address]))
 
-(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/ip-address (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/ip-address (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2/timestamp clojure.core/inst?)
 
@@ -344,11 +520,11 @@
 
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2/delete-hsm-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.cloudhsmv2/hsm-id]))
 
-(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/field (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_-]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/field (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_-]+" s__27881__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/hsm-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(hsm1\.medium)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/hsm-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"(hsm1\.medium)" s__27881__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/eni-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"eni-[0-9a-fA-F]{8,17}" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/eni-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"eni-[0-9a-fA-F]{8,17}" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2/describe-backups-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.cloudhsmv2/backups :portkey.aws.cloudhsmv2/next-token]))
 
@@ -356,7 +532,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2/untag-resource-response (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/region (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-z]{2}(-(gov))?-(east|west|north|south|central){1,2}-\d" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.cloudhsmv2/region (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-z]{2}(-(gov))?-(east|west|north|south|central){1,2}-\d" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2.untag-resource-request/resource-id (clojure.spec.alpha/and :portkey.aws.cloudhsmv2/cluster-id))
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2/untag-resource-request (clojure.spec.alpha/keys :req-un [:portkey.aws.cloudhsmv2.untag-resource-request/resource-id :portkey.aws.cloudhsmv2/tag-key-list] :opt-un []))
@@ -376,41 +552,41 @@
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2.list-tags-request/max-results (clojure.spec.alpha/and :portkey.aws.cloudhsmv2/max-size))
 (clojure.spec.alpha/def :portkey.aws.cloudhsmv2/list-tags-request (clojure.spec.alpha/keys :req-un [:portkey.aws.cloudhsmv2.list-tags-request/resource-id] :opt-un [:portkey.aws.cloudhsmv2/next-token :portkey.aws.cloudhsmv2.list-tags-request/max-results]))
 
-(clojure.core/defn tag-resource ([tag-resource-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-tag-resource-request tag-resource-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.cloudhsmv2/endpoints, :http.request.configuration/target-prefix "BaldrApiService", :http.request.spec/output-spec :portkey.aws.cloudhsmv2/tag-resource-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-04-28", :http.request.configuration/service-id "CloudHSM V2", :http.request.spec/input-spec :portkey.aws.cloudhsmv2/tag-resource-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "TagResource", :http.request.spec/error-spec {"CloudHsmInternalFailureException" :portkey.aws.cloudhsmv2/cloud-hsm-internal-failure-exception, "CloudHsmServiceException" :portkey.aws.cloudhsmv2/cloud-hsm-service-exception, "CloudHsmResourceNotFoundException" :portkey.aws.cloudhsmv2/cloud-hsm-resource-not-found-exception, "CloudHsmInvalidRequestException" :portkey.aws.cloudhsmv2/cloud-hsm-invalid-request-exception, "CloudHsmAccessDeniedException" :portkey.aws.cloudhsmv2/cloud-hsm-access-denied-exception}})))))
+(clojure.core/defn tag-resource ([tag-resource-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-tag-resource-request tag-resource-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.cloudhsmv2/endpoints, :http.request.configuration/target-prefix "BaldrApiService", :http.request.spec/output-spec :portkey.aws.cloudhsmv2/tag-resource-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-04-28", :http.request.configuration/service-id "CloudHSM V2", :http.request.spec/input-spec :portkey.aws.cloudhsmv2/tag-resource-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "TagResource", :http.request.configuration/output-deser-fn deser-tag-resource-response, :http.request.spec/error-spec {"CloudHsmInternalFailureException" :portkey.aws.cloudhsmv2/cloud-hsm-internal-failure-exception, "CloudHsmServiceException" :portkey.aws.cloudhsmv2/cloud-hsm-service-exception, "CloudHsmResourceNotFoundException" :portkey.aws.cloudhsmv2/cloud-hsm-resource-not-found-exception, "CloudHsmInvalidRequestException" :portkey.aws.cloudhsmv2/cloud-hsm-invalid-request-exception, "CloudHsmAccessDeniedException" :portkey.aws.cloudhsmv2/cloud-hsm-access-denied-exception}})))))
 (clojure.spec.alpha/fdef tag-resource :args (clojure.spec.alpha/tuple :portkey.aws.cloudhsmv2/tag-resource-request) :ret (clojure.spec.alpha/and :portkey.aws.cloudhsmv2/tag-resource-response))
 
-(clojure.core/defn restore-backup ([restore-backup-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-restore-backup-request restore-backup-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.cloudhsmv2/endpoints, :http.request.configuration/target-prefix "BaldrApiService", :http.request.spec/output-spec :portkey.aws.cloudhsmv2/restore-backup-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-04-28", :http.request.configuration/service-id "CloudHSM V2", :http.request.spec/input-spec :portkey.aws.cloudhsmv2/restore-backup-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "RestoreBackup", :http.request.spec/error-spec {"CloudHsmInternalFailureException" :portkey.aws.cloudhsmv2/cloud-hsm-internal-failure-exception, "CloudHsmServiceException" :portkey.aws.cloudhsmv2/cloud-hsm-service-exception, "CloudHsmResourceNotFoundException" :portkey.aws.cloudhsmv2/cloud-hsm-resource-not-found-exception, "CloudHsmInvalidRequestException" :portkey.aws.cloudhsmv2/cloud-hsm-invalid-request-exception, "CloudHsmAccessDeniedException" :portkey.aws.cloudhsmv2/cloud-hsm-access-denied-exception}})))))
+(clojure.core/defn restore-backup ([restore-backup-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-restore-backup-request restore-backup-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.cloudhsmv2/endpoints, :http.request.configuration/target-prefix "BaldrApiService", :http.request.spec/output-spec :portkey.aws.cloudhsmv2/restore-backup-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-04-28", :http.request.configuration/service-id "CloudHSM V2", :http.request.spec/input-spec :portkey.aws.cloudhsmv2/restore-backup-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "RestoreBackup", :http.request.configuration/output-deser-fn deser-restore-backup-response, :http.request.spec/error-spec {"CloudHsmInternalFailureException" :portkey.aws.cloudhsmv2/cloud-hsm-internal-failure-exception, "CloudHsmServiceException" :portkey.aws.cloudhsmv2/cloud-hsm-service-exception, "CloudHsmResourceNotFoundException" :portkey.aws.cloudhsmv2/cloud-hsm-resource-not-found-exception, "CloudHsmInvalidRequestException" :portkey.aws.cloudhsmv2/cloud-hsm-invalid-request-exception, "CloudHsmAccessDeniedException" :portkey.aws.cloudhsmv2/cloud-hsm-access-denied-exception}})))))
 (clojure.spec.alpha/fdef restore-backup :args (clojure.spec.alpha/tuple :portkey.aws.cloudhsmv2/restore-backup-request) :ret (clojure.spec.alpha/and :portkey.aws.cloudhsmv2/restore-backup-response))
 
-(clojure.core/defn create-hsm ([create-hsm-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-hsm-request create-hsm-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.cloudhsmv2/endpoints, :http.request.configuration/target-prefix "BaldrApiService", :http.request.spec/output-spec :portkey.aws.cloudhsmv2/create-hsm-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-04-28", :http.request.configuration/service-id "CloudHSM V2", :http.request.spec/input-spec :portkey.aws.cloudhsmv2/create-hsm-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateHsm", :http.request.spec/error-spec {"CloudHsmInternalFailureException" :portkey.aws.cloudhsmv2/cloud-hsm-internal-failure-exception, "CloudHsmServiceException" :portkey.aws.cloudhsmv2/cloud-hsm-service-exception, "CloudHsmInvalidRequestException" :portkey.aws.cloudhsmv2/cloud-hsm-invalid-request-exception, "CloudHsmResourceNotFoundException" :portkey.aws.cloudhsmv2/cloud-hsm-resource-not-found-exception, "CloudHsmAccessDeniedException" :portkey.aws.cloudhsmv2/cloud-hsm-access-denied-exception}})))))
+(clojure.core/defn create-hsm ([create-hsm-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-create-hsm-request create-hsm-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.cloudhsmv2/endpoints, :http.request.configuration/target-prefix "BaldrApiService", :http.request.spec/output-spec :portkey.aws.cloudhsmv2/create-hsm-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-04-28", :http.request.configuration/service-id "CloudHSM V2", :http.request.spec/input-spec :portkey.aws.cloudhsmv2/create-hsm-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateHsm", :http.request.configuration/output-deser-fn deser-create-hsm-response, :http.request.spec/error-spec {"CloudHsmInternalFailureException" :portkey.aws.cloudhsmv2/cloud-hsm-internal-failure-exception, "CloudHsmServiceException" :portkey.aws.cloudhsmv2/cloud-hsm-service-exception, "CloudHsmInvalidRequestException" :portkey.aws.cloudhsmv2/cloud-hsm-invalid-request-exception, "CloudHsmResourceNotFoundException" :portkey.aws.cloudhsmv2/cloud-hsm-resource-not-found-exception, "CloudHsmAccessDeniedException" :portkey.aws.cloudhsmv2/cloud-hsm-access-denied-exception}})))))
 (clojure.spec.alpha/fdef create-hsm :args (clojure.spec.alpha/tuple :portkey.aws.cloudhsmv2/create-hsm-request) :ret (clojure.spec.alpha/and :portkey.aws.cloudhsmv2/create-hsm-response))
 
-(clojure.core/defn create-cluster ([create-cluster-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-cluster-request create-cluster-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.cloudhsmv2/endpoints, :http.request.configuration/target-prefix "BaldrApiService", :http.request.spec/output-spec :portkey.aws.cloudhsmv2/create-cluster-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-04-28", :http.request.configuration/service-id "CloudHSM V2", :http.request.spec/input-spec :portkey.aws.cloudhsmv2/create-cluster-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateCluster", :http.request.spec/error-spec {"CloudHsmInternalFailureException" :portkey.aws.cloudhsmv2/cloud-hsm-internal-failure-exception, "CloudHsmServiceException" :portkey.aws.cloudhsmv2/cloud-hsm-service-exception, "CloudHsmResourceNotFoundException" :portkey.aws.cloudhsmv2/cloud-hsm-resource-not-found-exception, "CloudHsmInvalidRequestException" :portkey.aws.cloudhsmv2/cloud-hsm-invalid-request-exception, "CloudHsmAccessDeniedException" :portkey.aws.cloudhsmv2/cloud-hsm-access-denied-exception}})))))
+(clojure.core/defn create-cluster ([create-cluster-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-create-cluster-request create-cluster-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.cloudhsmv2/endpoints, :http.request.configuration/target-prefix "BaldrApiService", :http.request.spec/output-spec :portkey.aws.cloudhsmv2/create-cluster-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-04-28", :http.request.configuration/service-id "CloudHSM V2", :http.request.spec/input-spec :portkey.aws.cloudhsmv2/create-cluster-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateCluster", :http.request.configuration/output-deser-fn deser-create-cluster-response, :http.request.spec/error-spec {"CloudHsmInternalFailureException" :portkey.aws.cloudhsmv2/cloud-hsm-internal-failure-exception, "CloudHsmServiceException" :portkey.aws.cloudhsmv2/cloud-hsm-service-exception, "CloudHsmResourceNotFoundException" :portkey.aws.cloudhsmv2/cloud-hsm-resource-not-found-exception, "CloudHsmInvalidRequestException" :portkey.aws.cloudhsmv2/cloud-hsm-invalid-request-exception, "CloudHsmAccessDeniedException" :portkey.aws.cloudhsmv2/cloud-hsm-access-denied-exception}})))))
 (clojure.spec.alpha/fdef create-cluster :args (clojure.spec.alpha/tuple :portkey.aws.cloudhsmv2/create-cluster-request) :ret (clojure.spec.alpha/and :portkey.aws.cloudhsmv2/create-cluster-response))
 
-(clojure.core/defn list-tags ([list-tags-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-tags-request list-tags-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.cloudhsmv2/endpoints, :http.request.configuration/target-prefix "BaldrApiService", :http.request.spec/output-spec :portkey.aws.cloudhsmv2/list-tags-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-04-28", :http.request.configuration/service-id "CloudHSM V2", :http.request.spec/input-spec :portkey.aws.cloudhsmv2/list-tags-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListTags", :http.request.spec/error-spec {"CloudHsmInternalFailureException" :portkey.aws.cloudhsmv2/cloud-hsm-internal-failure-exception, "CloudHsmServiceException" :portkey.aws.cloudhsmv2/cloud-hsm-service-exception, "CloudHsmResourceNotFoundException" :portkey.aws.cloudhsmv2/cloud-hsm-resource-not-found-exception, "CloudHsmInvalidRequestException" :portkey.aws.cloudhsmv2/cloud-hsm-invalid-request-exception, "CloudHsmAccessDeniedException" :portkey.aws.cloudhsmv2/cloud-hsm-access-denied-exception}})))))
+(clojure.core/defn list-tags ([list-tags-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-tags-request list-tags-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.cloudhsmv2/endpoints, :http.request.configuration/target-prefix "BaldrApiService", :http.request.spec/output-spec :portkey.aws.cloudhsmv2/list-tags-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-04-28", :http.request.configuration/service-id "CloudHSM V2", :http.request.spec/input-spec :portkey.aws.cloudhsmv2/list-tags-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListTags", :http.request.configuration/output-deser-fn deser-list-tags-response, :http.request.spec/error-spec {"CloudHsmInternalFailureException" :portkey.aws.cloudhsmv2/cloud-hsm-internal-failure-exception, "CloudHsmServiceException" :portkey.aws.cloudhsmv2/cloud-hsm-service-exception, "CloudHsmResourceNotFoundException" :portkey.aws.cloudhsmv2/cloud-hsm-resource-not-found-exception, "CloudHsmInvalidRequestException" :portkey.aws.cloudhsmv2/cloud-hsm-invalid-request-exception, "CloudHsmAccessDeniedException" :portkey.aws.cloudhsmv2/cloud-hsm-access-denied-exception}})))))
 (clojure.spec.alpha/fdef list-tags :args (clojure.spec.alpha/tuple :portkey.aws.cloudhsmv2/list-tags-request) :ret (clojure.spec.alpha/and :portkey.aws.cloudhsmv2/list-tags-response))
 
-(clojure.core/defn describe-clusters ([] (describe-clusters {})) ([describe-clusters-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-clusters-request describe-clusters-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.cloudhsmv2/endpoints, :http.request.configuration/target-prefix "BaldrApiService", :http.request.spec/output-spec :portkey.aws.cloudhsmv2/describe-clusters-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-04-28", :http.request.configuration/service-id "CloudHSM V2", :http.request.spec/input-spec :portkey.aws.cloudhsmv2/describe-clusters-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeClusters", :http.request.spec/error-spec {"CloudHsmInternalFailureException" :portkey.aws.cloudhsmv2/cloud-hsm-internal-failure-exception, "CloudHsmServiceException" :portkey.aws.cloudhsmv2/cloud-hsm-service-exception, "CloudHsmInvalidRequestException" :portkey.aws.cloudhsmv2/cloud-hsm-invalid-request-exception, "CloudHsmAccessDeniedException" :portkey.aws.cloudhsmv2/cloud-hsm-access-denied-exception}})))))
+(clojure.core/defn describe-clusters ([] (describe-clusters {})) ([describe-clusters-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-clusters-request describe-clusters-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.cloudhsmv2/endpoints, :http.request.configuration/target-prefix "BaldrApiService", :http.request.spec/output-spec :portkey.aws.cloudhsmv2/describe-clusters-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-04-28", :http.request.configuration/service-id "CloudHSM V2", :http.request.spec/input-spec :portkey.aws.cloudhsmv2/describe-clusters-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeClusters", :http.request.configuration/output-deser-fn deser-describe-clusters-response, :http.request.spec/error-spec {"CloudHsmInternalFailureException" :portkey.aws.cloudhsmv2/cloud-hsm-internal-failure-exception, "CloudHsmServiceException" :portkey.aws.cloudhsmv2/cloud-hsm-service-exception, "CloudHsmInvalidRequestException" :portkey.aws.cloudhsmv2/cloud-hsm-invalid-request-exception, "CloudHsmAccessDeniedException" :portkey.aws.cloudhsmv2/cloud-hsm-access-denied-exception}})))))
 (clojure.spec.alpha/fdef describe-clusters :args (clojure.spec.alpha/? :portkey.aws.cloudhsmv2/describe-clusters-request) :ret (clojure.spec.alpha/and :portkey.aws.cloudhsmv2/describe-clusters-response))
 
-(clojure.core/defn delete-hsm ([delete-hsm-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-hsm-request delete-hsm-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.cloudhsmv2/endpoints, :http.request.configuration/target-prefix "BaldrApiService", :http.request.spec/output-spec :portkey.aws.cloudhsmv2/delete-hsm-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-04-28", :http.request.configuration/service-id "CloudHSM V2", :http.request.spec/input-spec :portkey.aws.cloudhsmv2/delete-hsm-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteHsm", :http.request.spec/error-spec {"CloudHsmInternalFailureException" :portkey.aws.cloudhsmv2/cloud-hsm-internal-failure-exception, "CloudHsmServiceException" :portkey.aws.cloudhsmv2/cloud-hsm-service-exception, "CloudHsmResourceNotFoundException" :portkey.aws.cloudhsmv2/cloud-hsm-resource-not-found-exception, "CloudHsmInvalidRequestException" :portkey.aws.cloudhsmv2/cloud-hsm-invalid-request-exception, "CloudHsmAccessDeniedException" :portkey.aws.cloudhsmv2/cloud-hsm-access-denied-exception}})))))
+(clojure.core/defn delete-hsm ([delete-hsm-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-hsm-request delete-hsm-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.cloudhsmv2/endpoints, :http.request.configuration/target-prefix "BaldrApiService", :http.request.spec/output-spec :portkey.aws.cloudhsmv2/delete-hsm-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-04-28", :http.request.configuration/service-id "CloudHSM V2", :http.request.spec/input-spec :portkey.aws.cloudhsmv2/delete-hsm-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteHsm", :http.request.configuration/output-deser-fn deser-delete-hsm-response, :http.request.spec/error-spec {"CloudHsmInternalFailureException" :portkey.aws.cloudhsmv2/cloud-hsm-internal-failure-exception, "CloudHsmServiceException" :portkey.aws.cloudhsmv2/cloud-hsm-service-exception, "CloudHsmResourceNotFoundException" :portkey.aws.cloudhsmv2/cloud-hsm-resource-not-found-exception, "CloudHsmInvalidRequestException" :portkey.aws.cloudhsmv2/cloud-hsm-invalid-request-exception, "CloudHsmAccessDeniedException" :portkey.aws.cloudhsmv2/cloud-hsm-access-denied-exception}})))))
 (clojure.spec.alpha/fdef delete-hsm :args (clojure.spec.alpha/tuple :portkey.aws.cloudhsmv2/delete-hsm-request) :ret (clojure.spec.alpha/and :portkey.aws.cloudhsmv2/delete-hsm-response))
 
-(clojure.core/defn delete-cluster ([delete-cluster-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-cluster-request delete-cluster-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.cloudhsmv2/endpoints, :http.request.configuration/target-prefix "BaldrApiService", :http.request.spec/output-spec :portkey.aws.cloudhsmv2/delete-cluster-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-04-28", :http.request.configuration/service-id "CloudHSM V2", :http.request.spec/input-spec :portkey.aws.cloudhsmv2/delete-cluster-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteCluster", :http.request.spec/error-spec {"CloudHsmInternalFailureException" :portkey.aws.cloudhsmv2/cloud-hsm-internal-failure-exception, "CloudHsmServiceException" :portkey.aws.cloudhsmv2/cloud-hsm-service-exception, "CloudHsmResourceNotFoundException" :portkey.aws.cloudhsmv2/cloud-hsm-resource-not-found-exception, "CloudHsmInvalidRequestException" :portkey.aws.cloudhsmv2/cloud-hsm-invalid-request-exception, "CloudHsmAccessDeniedException" :portkey.aws.cloudhsmv2/cloud-hsm-access-denied-exception}})))))
+(clojure.core/defn delete-cluster ([delete-cluster-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-cluster-request delete-cluster-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.cloudhsmv2/endpoints, :http.request.configuration/target-prefix "BaldrApiService", :http.request.spec/output-spec :portkey.aws.cloudhsmv2/delete-cluster-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-04-28", :http.request.configuration/service-id "CloudHSM V2", :http.request.spec/input-spec :portkey.aws.cloudhsmv2/delete-cluster-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteCluster", :http.request.configuration/output-deser-fn deser-delete-cluster-response, :http.request.spec/error-spec {"CloudHsmInternalFailureException" :portkey.aws.cloudhsmv2/cloud-hsm-internal-failure-exception, "CloudHsmServiceException" :portkey.aws.cloudhsmv2/cloud-hsm-service-exception, "CloudHsmResourceNotFoundException" :portkey.aws.cloudhsmv2/cloud-hsm-resource-not-found-exception, "CloudHsmInvalidRequestException" :portkey.aws.cloudhsmv2/cloud-hsm-invalid-request-exception, "CloudHsmAccessDeniedException" :portkey.aws.cloudhsmv2/cloud-hsm-access-denied-exception}})))))
 (clojure.spec.alpha/fdef delete-cluster :args (clojure.spec.alpha/tuple :portkey.aws.cloudhsmv2/delete-cluster-request) :ret (clojure.spec.alpha/and :portkey.aws.cloudhsmv2/delete-cluster-response))
 
-(clojure.core/defn untag-resource ([untag-resource-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-untag-resource-request untag-resource-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.cloudhsmv2/endpoints, :http.request.configuration/target-prefix "BaldrApiService", :http.request.spec/output-spec :portkey.aws.cloudhsmv2/untag-resource-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-04-28", :http.request.configuration/service-id "CloudHSM V2", :http.request.spec/input-spec :portkey.aws.cloudhsmv2/untag-resource-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UntagResource", :http.request.spec/error-spec {"CloudHsmInternalFailureException" :portkey.aws.cloudhsmv2/cloud-hsm-internal-failure-exception, "CloudHsmServiceException" :portkey.aws.cloudhsmv2/cloud-hsm-service-exception, "CloudHsmResourceNotFoundException" :portkey.aws.cloudhsmv2/cloud-hsm-resource-not-found-exception, "CloudHsmInvalidRequestException" :portkey.aws.cloudhsmv2/cloud-hsm-invalid-request-exception, "CloudHsmAccessDeniedException" :portkey.aws.cloudhsmv2/cloud-hsm-access-denied-exception}})))))
+(clojure.core/defn untag-resource ([untag-resource-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-untag-resource-request untag-resource-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.cloudhsmv2/endpoints, :http.request.configuration/target-prefix "BaldrApiService", :http.request.spec/output-spec :portkey.aws.cloudhsmv2/untag-resource-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-04-28", :http.request.configuration/service-id "CloudHSM V2", :http.request.spec/input-spec :portkey.aws.cloudhsmv2/untag-resource-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UntagResource", :http.request.configuration/output-deser-fn deser-untag-resource-response, :http.request.spec/error-spec {"CloudHsmInternalFailureException" :portkey.aws.cloudhsmv2/cloud-hsm-internal-failure-exception, "CloudHsmServiceException" :portkey.aws.cloudhsmv2/cloud-hsm-service-exception, "CloudHsmResourceNotFoundException" :portkey.aws.cloudhsmv2/cloud-hsm-resource-not-found-exception, "CloudHsmInvalidRequestException" :portkey.aws.cloudhsmv2/cloud-hsm-invalid-request-exception, "CloudHsmAccessDeniedException" :portkey.aws.cloudhsmv2/cloud-hsm-access-denied-exception}})))))
 (clojure.spec.alpha/fdef untag-resource :args (clojure.spec.alpha/tuple :portkey.aws.cloudhsmv2/untag-resource-request) :ret (clojure.spec.alpha/and :portkey.aws.cloudhsmv2/untag-resource-response))
 
-(clojure.core/defn initialize-cluster ([initialize-cluster-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-initialize-cluster-request initialize-cluster-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.cloudhsmv2/endpoints, :http.request.configuration/target-prefix "BaldrApiService", :http.request.spec/output-spec :portkey.aws.cloudhsmv2/initialize-cluster-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-04-28", :http.request.configuration/service-id "CloudHSM V2", :http.request.spec/input-spec :portkey.aws.cloudhsmv2/initialize-cluster-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "InitializeCluster", :http.request.spec/error-spec {"CloudHsmInternalFailureException" :portkey.aws.cloudhsmv2/cloud-hsm-internal-failure-exception, "CloudHsmServiceException" :portkey.aws.cloudhsmv2/cloud-hsm-service-exception, "CloudHsmResourceNotFoundException" :portkey.aws.cloudhsmv2/cloud-hsm-resource-not-found-exception, "CloudHsmInvalidRequestException" :portkey.aws.cloudhsmv2/cloud-hsm-invalid-request-exception, "CloudHsmAccessDeniedException" :portkey.aws.cloudhsmv2/cloud-hsm-access-denied-exception}})))))
+(clojure.core/defn initialize-cluster ([initialize-cluster-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-initialize-cluster-request initialize-cluster-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.cloudhsmv2/endpoints, :http.request.configuration/target-prefix "BaldrApiService", :http.request.spec/output-spec :portkey.aws.cloudhsmv2/initialize-cluster-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-04-28", :http.request.configuration/service-id "CloudHSM V2", :http.request.spec/input-spec :portkey.aws.cloudhsmv2/initialize-cluster-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "InitializeCluster", :http.request.configuration/output-deser-fn deser-initialize-cluster-response, :http.request.spec/error-spec {"CloudHsmInternalFailureException" :portkey.aws.cloudhsmv2/cloud-hsm-internal-failure-exception, "CloudHsmServiceException" :portkey.aws.cloudhsmv2/cloud-hsm-service-exception, "CloudHsmResourceNotFoundException" :portkey.aws.cloudhsmv2/cloud-hsm-resource-not-found-exception, "CloudHsmInvalidRequestException" :portkey.aws.cloudhsmv2/cloud-hsm-invalid-request-exception, "CloudHsmAccessDeniedException" :portkey.aws.cloudhsmv2/cloud-hsm-access-denied-exception}})))))
 (clojure.spec.alpha/fdef initialize-cluster :args (clojure.spec.alpha/tuple :portkey.aws.cloudhsmv2/initialize-cluster-request) :ret (clojure.spec.alpha/and :portkey.aws.cloudhsmv2/initialize-cluster-response))
 
-(clojure.core/defn delete-backup ([delete-backup-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-backup-request delete-backup-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.cloudhsmv2/endpoints, :http.request.configuration/target-prefix "BaldrApiService", :http.request.spec/output-spec :portkey.aws.cloudhsmv2/delete-backup-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-04-28", :http.request.configuration/service-id "CloudHSM V2", :http.request.spec/input-spec :portkey.aws.cloudhsmv2/delete-backup-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteBackup", :http.request.spec/error-spec {"CloudHsmInternalFailureException" :portkey.aws.cloudhsmv2/cloud-hsm-internal-failure-exception, "CloudHsmServiceException" :portkey.aws.cloudhsmv2/cloud-hsm-service-exception, "CloudHsmResourceNotFoundException" :portkey.aws.cloudhsmv2/cloud-hsm-resource-not-found-exception, "CloudHsmInvalidRequestException" :portkey.aws.cloudhsmv2/cloud-hsm-invalid-request-exception, "CloudHsmAccessDeniedException" :portkey.aws.cloudhsmv2/cloud-hsm-access-denied-exception}})))))
+(clojure.core/defn delete-backup ([delete-backup-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-backup-request delete-backup-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.cloudhsmv2/endpoints, :http.request.configuration/target-prefix "BaldrApiService", :http.request.spec/output-spec :portkey.aws.cloudhsmv2/delete-backup-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-04-28", :http.request.configuration/service-id "CloudHSM V2", :http.request.spec/input-spec :portkey.aws.cloudhsmv2/delete-backup-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteBackup", :http.request.configuration/output-deser-fn deser-delete-backup-response, :http.request.spec/error-spec {"CloudHsmInternalFailureException" :portkey.aws.cloudhsmv2/cloud-hsm-internal-failure-exception, "CloudHsmServiceException" :portkey.aws.cloudhsmv2/cloud-hsm-service-exception, "CloudHsmResourceNotFoundException" :portkey.aws.cloudhsmv2/cloud-hsm-resource-not-found-exception, "CloudHsmInvalidRequestException" :portkey.aws.cloudhsmv2/cloud-hsm-invalid-request-exception, "CloudHsmAccessDeniedException" :portkey.aws.cloudhsmv2/cloud-hsm-access-denied-exception}})))))
 (clojure.spec.alpha/fdef delete-backup :args (clojure.spec.alpha/tuple :portkey.aws.cloudhsmv2/delete-backup-request) :ret (clojure.spec.alpha/and :portkey.aws.cloudhsmv2/delete-backup-response))
 
-(clojure.core/defn describe-backups ([] (describe-backups {})) ([describe-backups-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-backups-request describe-backups-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.cloudhsmv2/endpoints, :http.request.configuration/target-prefix "BaldrApiService", :http.request.spec/output-spec :portkey.aws.cloudhsmv2/describe-backups-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-04-28", :http.request.configuration/service-id "CloudHSM V2", :http.request.spec/input-spec :portkey.aws.cloudhsmv2/describe-backups-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeBackups", :http.request.spec/error-spec {"CloudHsmInternalFailureException" :portkey.aws.cloudhsmv2/cloud-hsm-internal-failure-exception, "CloudHsmServiceException" :portkey.aws.cloudhsmv2/cloud-hsm-service-exception, "CloudHsmResourceNotFoundException" :portkey.aws.cloudhsmv2/cloud-hsm-resource-not-found-exception, "CloudHsmInvalidRequestException" :portkey.aws.cloudhsmv2/cloud-hsm-invalid-request-exception, "CloudHsmAccessDeniedException" :portkey.aws.cloudhsmv2/cloud-hsm-access-denied-exception}})))))
+(clojure.core/defn describe-backups ([] (describe-backups {})) ([describe-backups-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-backups-request describe-backups-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.cloudhsmv2/endpoints, :http.request.configuration/target-prefix "BaldrApiService", :http.request.spec/output-spec :portkey.aws.cloudhsmv2/describe-backups-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-04-28", :http.request.configuration/service-id "CloudHSM V2", :http.request.spec/input-spec :portkey.aws.cloudhsmv2/describe-backups-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeBackups", :http.request.configuration/output-deser-fn deser-describe-backups-response, :http.request.spec/error-spec {"CloudHsmInternalFailureException" :portkey.aws.cloudhsmv2/cloud-hsm-internal-failure-exception, "CloudHsmServiceException" :portkey.aws.cloudhsmv2/cloud-hsm-service-exception, "CloudHsmResourceNotFoundException" :portkey.aws.cloudhsmv2/cloud-hsm-resource-not-found-exception, "CloudHsmInvalidRequestException" :portkey.aws.cloudhsmv2/cloud-hsm-invalid-request-exception, "CloudHsmAccessDeniedException" :portkey.aws.cloudhsmv2/cloud-hsm-access-denied-exception}})))))
 (clojure.spec.alpha/fdef describe-backups :args (clojure.spec.alpha/? :portkey.aws.cloudhsmv2/describe-backups-request) :ret (clojure.spec.alpha/and :portkey.aws.cloudhsmv2/describe-backups-response))
 
-(clojure.core/defn copy-backup-to-region ([copy-backup-to-region-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-copy-backup-to-region-request copy-backup-to-region-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.cloudhsmv2/endpoints, :http.request.configuration/target-prefix "BaldrApiService", :http.request.spec/output-spec :portkey.aws.cloudhsmv2/copy-backup-to-region-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-04-28", :http.request.configuration/service-id "CloudHSM V2", :http.request.spec/input-spec :portkey.aws.cloudhsmv2/copy-backup-to-region-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CopyBackupToRegion", :http.request.spec/error-spec {"CloudHsmInternalFailureException" :portkey.aws.cloudhsmv2/cloud-hsm-internal-failure-exception, "CloudHsmServiceException" :portkey.aws.cloudhsmv2/cloud-hsm-service-exception, "CloudHsmResourceNotFoundException" :portkey.aws.cloudhsmv2/cloud-hsm-resource-not-found-exception, "CloudHsmInvalidRequestException" :portkey.aws.cloudhsmv2/cloud-hsm-invalid-request-exception, "CloudHsmAccessDeniedException" :portkey.aws.cloudhsmv2/cloud-hsm-access-denied-exception}})))))
+(clojure.core/defn copy-backup-to-region ([copy-backup-to-region-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-copy-backup-to-region-request copy-backup-to-region-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.cloudhsmv2/endpoints, :http.request.configuration/target-prefix "BaldrApiService", :http.request.spec/output-spec :portkey.aws.cloudhsmv2/copy-backup-to-region-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-04-28", :http.request.configuration/service-id "CloudHSM V2", :http.request.spec/input-spec :portkey.aws.cloudhsmv2/copy-backup-to-region-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CopyBackupToRegion", :http.request.configuration/output-deser-fn deser-copy-backup-to-region-response, :http.request.spec/error-spec {"CloudHsmInternalFailureException" :portkey.aws.cloudhsmv2/cloud-hsm-internal-failure-exception, "CloudHsmServiceException" :portkey.aws.cloudhsmv2/cloud-hsm-service-exception, "CloudHsmResourceNotFoundException" :portkey.aws.cloudhsmv2/cloud-hsm-resource-not-found-exception, "CloudHsmInvalidRequestException" :portkey.aws.cloudhsmv2/cloud-hsm-invalid-request-exception, "CloudHsmAccessDeniedException" :portkey.aws.cloudhsmv2/cloud-hsm-access-denied-exception}})))))
 (clojure.spec.alpha/fdef copy-backup-to-region :args (clojure.spec.alpha/tuple :portkey.aws.cloudhsmv2/copy-backup-to-region-request) :ret (clojure.spec.alpha/and :portkey.aws.cloudhsmv2/copy-backup-to-region-response))

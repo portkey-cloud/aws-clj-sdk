@@ -70,6 +70,84 @@
 
 (clojure.core/defn- req-delete-report-definition-request [input] (clojure.core/cond-> {} (clojure.core/contains? input :report-name) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-report-name (input :report-name)) #:http.request.field{:name "ReportName", :shape "ReportName"}))))
 
+(clojure.core/declare deser-additional-artifact-list)
+
+(clojure.core/declare deser-time-unit)
+
+(clojure.core/declare deser-compression-format)
+
+(clojure.core/declare deser-schema-element)
+
+(clojure.core/declare deser-schema-element-list)
+
+(clojure.core/declare deser-error-message)
+
+(clojure.core/declare deser-report-definition-list)
+
+(clojure.core/declare deser-aws-region)
+
+(clojure.core/declare deser-delete-response-message)
+
+(clojure.core/declare deser-report-format)
+
+(clojure.core/declare deser-generic-string)
+
+(clojure.core/declare deser-additional-artifact)
+
+(clojure.core/declare deser-report-definition)
+
+(clojure.core/declare deser-s-3-bucket)
+
+(clojure.core/declare deser-report-name)
+
+(clojure.core/declare deser-s-3-prefix)
+
+(clojure.core/defn- deser-additional-artifact-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-additional-artifact coll))) input))
+
+(clojure.core/defn- deser-time-unit [input] (clojure.core/get {"HOURLY" :hourly, "DAILY" :daily} input))
+
+(clojure.core/defn- deser-compression-format [input] (clojure.core/get {"ZIP" :zip, "GZIP" :gzip} input))
+
+(clojure.core/defn- deser-schema-element [input] (clojure.core/get {"RESOURCES" :resources} input))
+
+(clojure.core/defn- deser-schema-element-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-schema-element coll))) input))
+
+(clojure.core/defn- deser-error-message [input] input)
+
+(clojure.core/defn- deser-report-definition-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-report-definition coll))) input))
+
+(clojure.core/defn- deser-aws-region [input] (clojure.core/get {"us-east-1" :useast-1, "us-west-1" :uswest-1, "us-west-2" :uswest-2, "eu-central-1" :eucentral-1, "eu-west-1" :euwest-1, "ap-southeast-1" :apsoutheast-1, "ap-southeast-2" :apsoutheast-2, "ap-northeast-1" :apnortheast-1} input))
+
+(clojure.core/defn- deser-delete-response-message [input] input)
+
+(clojure.core/defn- deser-report-format [input] (clojure.core/get {"textORcsv" :text-o-rcsv} input))
+
+(clojure.core/defn- deser-generic-string [input] input)
+
+(clojure.core/defn- deser-additional-artifact [input] (clojure.core/get {"REDSHIFT" :redshift, "QUICKSIGHT" :quicksight} input))
+
+(clojure.core/defn- deser-report-definition [input] (clojure.core/cond-> {:report-name (deser-report-name (input "ReportName")), :time-unit (deser-time-unit (input "TimeUnit")), :format (deser-report-format (input "Format")), :compression (deser-compression-format (input "Compression")), :additional-schema-elements (deser-schema-element-list (input "AdditionalSchemaElements")), :s-3-bucket (deser-s-3-bucket (input "S3Bucket")), :s-3-prefix (deser-s-3-prefix (input "S3Prefix")), :s-3-region (deser-aws-region (input "S3Region"))} (clojure.core/contains? input "AdditionalArtifacts") (clojure.core/assoc :additional-artifacts (deser-additional-artifact-list (input "AdditionalArtifacts")))))
+
+(clojure.core/defn- deser-s-3-bucket [input] input)
+
+(clojure.core/defn- deser-report-name [input] input)
+
+(clojure.core/defn- deser-s-3-prefix [input] input)
+
+(clojure.core/defn- deser-report-limit-reached-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-error-message (input "Message")))))
+
+(clojure.core/defn- deser-validation-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-error-message (input "Message")))))
+
+(clojure.core/defn- deser-put-report-definition-response [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-describe-report-definitions-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "ReportDefinitions") (clojure.core/assoc :report-definitions (deser-report-definition-list (input "ReportDefinitions"))) (clojure.core/contains? input "NextToken") (clojure.core/assoc :next-token (deser-generic-string (input "NextToken")))))
+
+(clojure.core/defn- deser-internal-error-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-error-message (input "Message")))))
+
+(clojure.core/defn- deser-duplicate-report-name-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-error-message (input "Message")))))
+
+(clojure.core/defn- deser-delete-report-definition-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "ResponseMessage") (clojure.core/assoc :response-message (deser-delete-response-message (input "ResponseMessage")))))
+
 (clojure.spec.alpha/def :portkey.aws.cur.report-limit-reached-exception/message (clojure.spec.alpha/and :portkey.aws.cur/error-message))
 (clojure.spec.alpha/def :portkey.aws.cur/report-limit-reached-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.cur.report-limit-reached-exception/message]))
 
@@ -121,27 +199,27 @@
 (clojure.spec.alpha/def :portkey.aws.cur.report-definition/compression (clojure.spec.alpha/and :portkey.aws.cur/compression-format))
 (clojure.spec.alpha/def :portkey.aws.cur/report-definition (clojure.spec.alpha/keys :req-un [:portkey.aws.cur/report-name :portkey.aws.cur/time-unit :portkey.aws.cur.report-definition/format :portkey.aws.cur.report-definition/compression :portkey.aws.cur.report-definition/additional-schema-elements :portkey.aws.cur/s-3-bucket :portkey.aws.cur/s-3-prefix :portkey.aws.cur.report-definition/s-3-region] :opt-un [:portkey.aws.cur.report-definition/additional-artifacts]))
 
-(clojure.spec.alpha/def :portkey.aws.cur/s-3-bucket (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256))))
+(clojure.spec.alpha/def :portkey.aws.cur/s-3-bucket (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 256))))
 
 (clojure.spec.alpha/def :portkey.aws.cur.duplicate-report-name-exception/message (clojure.spec.alpha/and :portkey.aws.cur/error-message))
 (clojure.spec.alpha/def :portkey.aws.cur/duplicate-report-name-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.cur.duplicate-report-name-exception/message]))
 
 (clojure.spec.alpha/def :portkey.aws.cur/max-results (clojure.spec.alpha/int-in 5 5))
 
-(clojure.spec.alpha/def :portkey.aws.cur/report-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[0-9A-Za-z!\-_.*\'()]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.cur/report-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 256)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[0-9A-Za-z!\-_.*\'()]+" s__27881__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.cur/s-3-prefix (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[0-9A-Za-z!\-_.*\'()/]*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.cur/s-3-prefix (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 256)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[0-9A-Za-z!\-_.*\'()/]*" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.cur.delete-report-definition-response/response-message (clojure.spec.alpha/and :portkey.aws.cur/delete-response-message))
 (clojure.spec.alpha/def :portkey.aws.cur/delete-report-definition-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.cur.delete-report-definition-response/response-message]))
 
 (clojure.spec.alpha/def :portkey.aws.cur/delete-report-definition-request (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.cur/report-name]))
 
-(clojure.core/defn delete-report-definition ([] (delete-report-definition {})) ([delete-report-definition-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-report-definition-request delete-report-definition-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.cur/endpoints, :http.request.configuration/target-prefix "AWSOrigamiServiceGatewayService", :http.request.spec/output-spec :portkey.aws.cur/delete-report-definition-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-01-06", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.cur/delete-report-definition-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteReportDefinition", :http.request.spec/error-spec {"InternalErrorException" :portkey.aws.cur/internal-error-exception, "ValidationException" :portkey.aws.cur/validation-exception}})))))
+(clojure.core/defn delete-report-definition ([] (delete-report-definition {})) ([delete-report-definition-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-report-definition-request delete-report-definition-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.cur/endpoints, :http.request.configuration/target-prefix "AWSOrigamiServiceGatewayService", :http.request.spec/output-spec :portkey.aws.cur/delete-report-definition-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-01-06", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.cur/delete-report-definition-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteReportDefinition", :http.request.configuration/output-deser-fn deser-delete-report-definition-response, :http.request.spec/error-spec {"InternalErrorException" :portkey.aws.cur/internal-error-exception, "ValidationException" :portkey.aws.cur/validation-exception}})))))
 (clojure.spec.alpha/fdef delete-report-definition :args (clojure.spec.alpha/? :portkey.aws.cur/delete-report-definition-request) :ret (clojure.spec.alpha/and :portkey.aws.cur/delete-report-definition-response))
 
-(clojure.core/defn describe-report-definitions ([] (describe-report-definitions {})) ([describe-report-definitions-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-report-definitions-request describe-report-definitions-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.cur/endpoints, :http.request.configuration/target-prefix "AWSOrigamiServiceGatewayService", :http.request.spec/output-spec :portkey.aws.cur/describe-report-definitions-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-01-06", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.cur/describe-report-definitions-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeReportDefinitions", :http.request.spec/error-spec {"InternalErrorException" :portkey.aws.cur/internal-error-exception}})))))
+(clojure.core/defn describe-report-definitions ([] (describe-report-definitions {})) ([describe-report-definitions-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-report-definitions-request describe-report-definitions-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.cur/endpoints, :http.request.configuration/target-prefix "AWSOrigamiServiceGatewayService", :http.request.spec/output-spec :portkey.aws.cur/describe-report-definitions-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-01-06", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.cur/describe-report-definitions-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeReportDefinitions", :http.request.configuration/output-deser-fn deser-describe-report-definitions-response, :http.request.spec/error-spec {"InternalErrorException" :portkey.aws.cur/internal-error-exception}})))))
 (clojure.spec.alpha/fdef describe-report-definitions :args (clojure.spec.alpha/? :portkey.aws.cur/describe-report-definitions-request) :ret (clojure.spec.alpha/and :portkey.aws.cur/describe-report-definitions-response))
 
-(clojure.core/defn put-report-definition ([put-report-definition-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-put-report-definition-request put-report-definition-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.cur/endpoints, :http.request.configuration/target-prefix "AWSOrigamiServiceGatewayService", :http.request.spec/output-spec :portkey.aws.cur/put-report-definition-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-01-06", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.cur/put-report-definition-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutReportDefinition", :http.request.spec/error-spec {"DuplicateReportNameException" :portkey.aws.cur/duplicate-report-name-exception, "ReportLimitReachedException" :portkey.aws.cur/report-limit-reached-exception, "InternalErrorException" :portkey.aws.cur/internal-error-exception, "ValidationException" :portkey.aws.cur/validation-exception}})))))
+(clojure.core/defn put-report-definition ([put-report-definition-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-put-report-definition-request put-report-definition-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.cur/endpoints, :http.request.configuration/target-prefix "AWSOrigamiServiceGatewayService", :http.request.spec/output-spec :portkey.aws.cur/put-report-definition-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-01-06", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.cur/put-report-definition-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutReportDefinition", :http.request.configuration/output-deser-fn deser-put-report-definition-response, :http.request.spec/error-spec {"DuplicateReportNameException" :portkey.aws.cur/duplicate-report-name-exception, "ReportLimitReachedException" :portkey.aws.cur/report-limit-reached-exception, "InternalErrorException" :portkey.aws.cur/internal-error-exception, "ValidationException" :portkey.aws.cur/validation-exception}})))))
 (clojure.spec.alpha/fdef put-report-definition :args (clojure.spec.alpha/tuple :portkey.aws.cur/put-report-definition-request) :ret (clojure.spec.alpha/and :portkey.aws.cur/put-report-definition-response))

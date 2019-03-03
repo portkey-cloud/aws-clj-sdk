@@ -655,6 +655,670 @@
 
 (clojure.core/defn- req-update-global-table-input [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-table-name (input :global-table-name)) #:http.request.field{:name "GlobalTableName", :shape "TableName"}) (clojure.core/into (ser-replica-update-list (input :replica-updates)) #:http.request.field{:name "ReplicaUpdates", :shape "ReplicaUpdateList"})]}))
 
+(clojure.core/declare deser-attribute-map)
+
+(clojure.core/declare deser-stream-specification)
+
+(clojure.core/declare deser-double)
+
+(clojure.core/declare deser-replica-status)
+
+(clojure.core/declare deser-tag-value-string)
+
+(clojure.core/declare deser-non-key-attribute-name-list)
+
+(clojure.core/declare deser-item-collection-size-estimate-range)
+
+(clojure.core/declare deser-local-secondary-index-description-list)
+
+(clojure.core/declare deser-backup-status)
+
+(clojure.core/declare deser-item-collection-metrics)
+
+(clojure.core/declare deser-global-table-description)
+
+(clojure.core/declare deser-backfilling)
+
+(clojure.core/declare deser-index-status)
+
+(clojure.core/declare deser-source-table-feature-details)
+
+(clojure.core/declare deser-auto-scaling-policy-description-list)
+
+(clojure.core/declare deser-global-table)
+
+(clojure.core/declare deser-number-set-attribute-value)
+
+(clojure.core/declare deser-number-attribute-value)
+
+(clojure.core/declare deser-consumed-capacity-units)
+
+(clojure.core/declare deser-replica)
+
+(clojure.core/declare deser-attribute-name)
+
+(clojure.core/declare deser-delete-request)
+
+(clojure.core/declare deser-source-table-details)
+
+(clojure.core/declare deser-projection)
+
+(clojure.core/declare deser-global-table-list)
+
+(clojure.core/declare deser-time-to-live-specification)
+
+(clojure.core/declare deser-auto-scaling-policy-name)
+
+(clojure.core/declare deser-index-name)
+
+(clojure.core/declare deser-attribute-definition)
+
+(clojure.core/declare deser-item-collection-key-attribute-map)
+
+(clojure.core/declare deser-positive-long-object)
+
+(clojure.core/declare deser-key-list)
+
+(clojure.core/declare deser-item-collection-metrics-multiple)
+
+(clojure.core/declare deser-replica-global-secondary-index-settings-description)
+
+(clojure.core/declare deser-replica-description)
+
+(clojure.core/declare deser-secondary-indexes-capacity-map)
+
+(clojure.core/declare deser-table-id)
+
+(clojure.core/declare deser-table-name-list)
+
+(clojure.core/declare deser-endpoints)
+
+(clojure.core/declare deser-backup-summaries)
+
+(clojure.core/declare deser-non-key-attribute-name)
+
+(clojure.core/declare deser-global-table-arn-string)
+
+(clojure.core/declare deser-boolean-attribute-value)
+
+(clojure.core/declare deser-attribute-definitions)
+
+(clojure.core/declare deser-null-attribute-value)
+
+(clojure.core/declare deser-table-description)
+
+(clojure.core/declare deser-time-to-live-description)
+
+(clojure.core/declare deser-restore-in-progress)
+
+(clojure.core/declare deser-projection-type)
+
+(clojure.core/declare deser-map-attribute-value)
+
+(clojure.core/declare deser-item-list)
+
+(clojure.core/declare deser-provisioned-throughput-description)
+
+(clojure.core/declare deser-put-item-input-attribute-map)
+
+(clojure.core/declare deser-key-schema)
+
+(clojure.core/declare deser-write-requests)
+
+(clojure.core/declare deser-error-message)
+
+(clojure.core/declare deser-keys-and-attributes)
+
+(clojure.core/declare deser-date)
+
+(clojure.core/declare deser-binary-set-attribute-value)
+
+(clojure.core/declare deser-consistent-read)
+
+(clojure.core/declare deser-time-to-live-enabled)
+
+(clojure.core/declare deser-point-in-time-recovery-description)
+
+(clojure.core/declare deser-key)
+
+(clojure.core/declare deser-tag-key-string)
+
+(clojure.core/declare deser-region-name)
+
+(clojure.core/declare deser-stream-view-type)
+
+(clojure.core/declare deser-tag-list)
+
+(clojure.core/declare deser-backup-creation-date-time)
+
+(clojure.core/declare deser-replica-settings-description)
+
+(clojure.core/declare deser-continuous-backups-status)
+
+(clojure.core/declare deser-replica-list)
+
+(clojure.core/declare deser-binary-attribute-value)
+
+(clojure.core/declare deser-attribute-value)
+
+(clojure.core/declare deser-continuous-backups-description)
+
+(clojure.core/declare deser-sse-status)
+
+(clojure.core/declare deser-item-collection-metrics-per-table)
+
+(clojure.core/declare deser-stream-arn)
+
+(clojure.core/declare deser-auto-scaling-settings-description)
+
+(clojure.core/declare deser-global-table-status)
+
+(clojure.core/declare deser-auto-scaling-policy-description)
+
+(clojure.core/declare deser-local-secondary-indexes)
+
+(clojure.core/declare deser-batch-get-request-map)
+
+(clojure.core/declare deser-consumed-capacity)
+
+(clojure.core/declare deser-global-secondary-index-info)
+
+(clojure.core/declare deser-backup-details)
+
+(clojure.core/declare deser-batch-write-item-request-map)
+
+(clojure.core/declare deser-attribute-name-list)
+
+(clojure.core/declare deser-table-status)
+
+(clojure.core/declare deser-scalar-attribute-type)
+
+(clojure.core/declare deser-backup-name)
+
+(clojure.core/declare deser-backup-summary)
+
+(clojure.core/declare deser-replica-description-list)
+
+(clojure.core/declare deser-integer)
+
+(clojure.core/declare deser-string)
+
+(clojure.core/declare deser-table-creation-date-time)
+
+(clojure.core/declare deser-item-collection-size-estimate-bound)
+
+(clojure.core/declare deser-global-secondary-index-description)
+
+(clojure.core/declare deser-time-to-live-status)
+
+(clojure.core/declare deser-capacity)
+
+(clojure.core/declare deser-item-count)
+
+(clojure.core/declare deser-backup-arn)
+
+(clojure.core/declare deser-local-secondary-index-info)
+
+(clojure.core/declare deser-put-request)
+
+(clojure.core/declare deser-auto-scaling-target-tracking-scaling-policy-configuration-description)
+
+(clojure.core/declare deser-table-name)
+
+(clojure.core/declare deser-global-secondary-indexes)
+
+(clojure.core/declare deser-backup-description)
+
+(clojure.core/declare deser-point-in-time-recovery-status)
+
+(clojure.core/declare deser-endpoint)
+
+(clojure.core/declare deser-long)
+
+(clojure.core/declare deser-table-arn)
+
+(clojure.core/declare deser-stream-enabled)
+
+(clojure.core/declare deser-batch-get-response-map)
+
+(clojure.core/declare deser-consumed-capacity-multiple)
+
+(clojure.core/declare deser-backup-type)
+
+(clojure.core/declare deser-key-schema-element)
+
+(clojure.core/declare deser-restore-summary)
+
+(clojure.core/declare deser-backup-size-bytes)
+
+(clojure.core/declare deser-tag)
+
+(clojure.core/declare deser-list-attribute-value)
+
+(clojure.core/declare deser-replica-global-secondary-index-settings-description-list)
+
+(clojure.core/declare deser-string-attribute-value)
+
+(clojure.core/declare deser-local-secondary-index-description)
+
+(clojure.core/declare deser-expression-attribute-name-variable)
+
+(clojure.core/declare deser-projection-expression)
+
+(clojure.core/declare deser-provisioned-throughput)
+
+(clojure.core/declare deser-sse-description)
+
+(clojure.core/declare deser-string-set-attribute-value)
+
+(clojure.core/declare deser-kms-master-key-arn)
+
+(clojure.core/declare deser-next-token-string)
+
+(clojure.core/declare deser-key-schema-attribute-name)
+
+(clojure.core/declare deser-boolean-object)
+
+(clojure.core/declare deser-global-secondary-index-description-list)
+
+(clojure.core/declare deser-expression-attribute-name-map)
+
+(clojure.core/declare deser-key-type)
+
+(clojure.core/declare deser-write-request)
+
+(clojure.core/declare deser-integer-object)
+
+(clojure.core/declare deser-replica-settings-description-list)
+
+(clojure.core/declare deser-time-to-live-attribute-name)
+
+(clojure.core/declare deser-sse-type)
+
+(clojure.core/defn- deser-attribute-map [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-attribute-name k) (deser-attribute-value v)])) input))
+
+(clojure.core/defn- deser-stream-specification [input] (clojure.core/cond-> {} (clojure.core/contains? input "StreamEnabled") (clojure.core/assoc :stream-enabled (deser-stream-enabled (input "StreamEnabled"))) (clojure.core/contains? input "StreamViewType") (clojure.core/assoc :stream-view-type (deser-stream-view-type (input "StreamViewType")))))
+
+(clojure.core/defn- deser-double [input] input)
+
+(clojure.core/defn- deser-replica-status [input] (clojure.core/get {"CREATING" :creating, "UPDATING" :updating, "DELETING" :deleting, "ACTIVE" :active} input))
+
+(clojure.core/defn- deser-tag-value-string [input] input)
+
+(clojure.core/defn- deser-non-key-attribute-name-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-non-key-attribute-name coll))) input))
+
+(clojure.core/defn- deser-item-collection-size-estimate-range [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-item-collection-size-estimate-bound coll))) input))
+
+(clojure.core/defn- deser-local-secondary-index-description-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-local-secondary-index-description coll))) input))
+
+(clojure.core/defn- deser-backup-status [input] (clojure.core/get {"CREATING" :creating, "DELETED" :deleted, "AVAILABLE" :available} input))
+
+(clojure.core/defn- deser-item-collection-metrics [input] (clojure.core/cond-> {} (clojure.core/contains? input "ItemCollectionKey") (clojure.core/assoc :item-collection-key (deser-item-collection-key-attribute-map (input "ItemCollectionKey"))) (clojure.core/contains? input "SizeEstimateRangeGB") (clojure.core/assoc :size-estimate-range-gb (deser-item-collection-size-estimate-range (input "SizeEstimateRangeGB")))))
+
+(clojure.core/defn- deser-global-table-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "ReplicationGroup") (clojure.core/assoc :replication-group (deser-replica-description-list (input "ReplicationGroup"))) (clojure.core/contains? input "GlobalTableArn") (clojure.core/assoc :global-table-arn (deser-global-table-arn-string (input "GlobalTableArn"))) (clojure.core/contains? input "CreationDateTime") (clojure.core/assoc :creation-date-time (deser-date (input "CreationDateTime"))) (clojure.core/contains? input "GlobalTableStatus") (clojure.core/assoc :global-table-status (deser-global-table-status (input "GlobalTableStatus"))) (clojure.core/contains? input "GlobalTableName") (clojure.core/assoc :global-table-name (deser-table-name (input "GlobalTableName")))))
+
+(clojure.core/defn- deser-backfilling [input] input)
+
+(clojure.core/defn- deser-index-status [input] (clojure.core/get {"CREATING" :creating, "UPDATING" :updating, "DELETING" :deleting, "ACTIVE" :active} input))
+
+(clojure.core/defn- deser-source-table-feature-details [input] (clojure.core/cond-> {} (clojure.core/contains? input "LocalSecondaryIndexes") (clojure.core/assoc :local-secondary-indexes (deser-local-secondary-indexes (input "LocalSecondaryIndexes"))) (clojure.core/contains? input "GlobalSecondaryIndexes") (clojure.core/assoc :global-secondary-indexes (deser-global-secondary-indexes (input "GlobalSecondaryIndexes"))) (clojure.core/contains? input "StreamDescription") (clojure.core/assoc :stream-description (deser-stream-specification (input "StreamDescription"))) (clojure.core/contains? input "TimeToLiveDescription") (clojure.core/assoc :time-to-live-description (deser-time-to-live-description (input "TimeToLiveDescription"))) (clojure.core/contains? input "SSEDescription") (clojure.core/assoc :sse-description (deser-sse-description (input "SSEDescription")))))
+
+(clojure.core/defn- deser-auto-scaling-policy-description-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-auto-scaling-policy-description coll))) input))
+
+(clojure.core/defn- deser-global-table [input] (clojure.core/cond-> {} (clojure.core/contains? input "GlobalTableName") (clojure.core/assoc :global-table-name (deser-table-name (input "GlobalTableName"))) (clojure.core/contains? input "ReplicationGroup") (clojure.core/assoc :replication-group (deser-replica-list (input "ReplicationGroup")))))
+
+(clojure.core/defn- deser-number-set-attribute-value [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-number-attribute-value coll))) input))
+
+(clojure.core/defn- deser-number-attribute-value [input] input)
+
+(clojure.core/defn- deser-consumed-capacity-units [input] input)
+
+(clojure.core/defn- deser-replica [input] (clojure.core/cond-> {} (clojure.core/contains? input "RegionName") (clojure.core/assoc :region-name (deser-region-name (input "RegionName")))))
+
+(clojure.core/defn- deser-attribute-name [input] input)
+
+(clojure.core/defn- deser-delete-request [input] (clojure.core/cond-> {:key (deser-key (input "Key"))}))
+
+(clojure.core/defn- deser-source-table-details [input] (clojure.core/cond-> {:table-name (deser-table-name (input "TableName")), :table-id (deser-table-id (input "TableId")), :key-schema (deser-key-schema (input "KeySchema")), :table-creation-date-time (deser-table-creation-date-time (input "TableCreationDateTime")), :provisioned-throughput (deser-provisioned-throughput (input "ProvisionedThroughput"))} (clojure.core/contains? input "TableArn") (clojure.core/assoc :table-arn (deser-table-arn (input "TableArn"))) (clojure.core/contains? input "TableSizeBytes") (clojure.core/assoc :table-size-bytes (deser-long (input "TableSizeBytes"))) (clojure.core/contains? input "ItemCount") (clojure.core/assoc :item-count (deser-item-count (input "ItemCount")))))
+
+(clojure.core/defn- deser-projection [input] (clojure.core/cond-> {} (clojure.core/contains? input "ProjectionType") (clojure.core/assoc :projection-type (deser-projection-type (input "ProjectionType"))) (clojure.core/contains? input "NonKeyAttributes") (clojure.core/assoc :non-key-attributes (deser-non-key-attribute-name-list (input "NonKeyAttributes")))))
+
+(clojure.core/defn- deser-global-table-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-global-table coll))) input))
+
+(clojure.core/defn- deser-time-to-live-specification [input] (clojure.core/cond-> {:enabled (deser-time-to-live-enabled (input "Enabled")), :attribute-name (deser-time-to-live-attribute-name (input "AttributeName"))}))
+
+(clojure.core/defn- deser-auto-scaling-policy-name [input] input)
+
+(clojure.core/defn- deser-index-name [input] input)
+
+(clojure.core/defn- deser-attribute-definition [input] (clojure.core/cond-> {:attribute-name (deser-key-schema-attribute-name (input "AttributeName")), :attribute-type (deser-scalar-attribute-type (input "AttributeType"))}))
+
+(clojure.core/defn- deser-item-collection-key-attribute-map [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-attribute-name k) (deser-attribute-value v)])) input))
+
+(clojure.core/defn- deser-positive-long-object [input] input)
+
+(clojure.core/defn- deser-key-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-key coll))) input))
+
+(clojure.core/defn- deser-item-collection-metrics-multiple [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-item-collection-metrics coll))) input))
+
+(clojure.core/defn- deser-replica-global-secondary-index-settings-description [input] (clojure.core/cond-> {:index-name (deser-index-name (input "IndexName"))} (clojure.core/contains? input "IndexStatus") (clojure.core/assoc :index-status (deser-index-status (input "IndexStatus"))) (clojure.core/contains? input "ProvisionedReadCapacityUnits") (clojure.core/assoc :provisioned-read-capacity-units (deser-positive-long-object (input "ProvisionedReadCapacityUnits"))) (clojure.core/contains? input "ProvisionedReadCapacityAutoScalingSettings") (clojure.core/assoc :provisioned-read-capacity-auto-scaling-settings (deser-auto-scaling-settings-description (input "ProvisionedReadCapacityAutoScalingSettings"))) (clojure.core/contains? input "ProvisionedWriteCapacityUnits") (clojure.core/assoc :provisioned-write-capacity-units (deser-positive-long-object (input "ProvisionedWriteCapacityUnits"))) (clojure.core/contains? input "ProvisionedWriteCapacityAutoScalingSettings") (clojure.core/assoc :provisioned-write-capacity-auto-scaling-settings (deser-auto-scaling-settings-description (input "ProvisionedWriteCapacityAutoScalingSettings")))))
+
+(clojure.core/defn- deser-replica-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "RegionName") (clojure.core/assoc :region-name (deser-region-name (input "RegionName")))))
+
+(clojure.core/defn- deser-secondary-indexes-capacity-map [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-index-name k) (deser-capacity v)])) input))
+
+(clojure.core/defn- deser-table-id [input] input)
+
+(clojure.core/defn- deser-table-name-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-table-name coll))) input))
+
+(clojure.core/defn- deser-endpoints [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-endpoint coll))) input))
+
+(clojure.core/defn- deser-backup-summaries [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-backup-summary coll))) input))
+
+(clojure.core/defn- deser-non-key-attribute-name [input] input)
+
+(clojure.core/defn- deser-global-table-arn-string [input] input)
+
+(clojure.core/defn- deser-boolean-attribute-value [input] input)
+
+(clojure.core/defn- deser-attribute-definitions [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-attribute-definition coll))) input))
+
+(clojure.core/defn- deser-null-attribute-value [input] input)
+
+(clojure.core/defn- deser-table-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "StreamSpecification") (clojure.core/assoc :stream-specification (deser-stream-specification (input "StreamSpecification"))) (clojure.core/contains? input "LatestStreamArn") (clojure.core/assoc :latest-stream-arn (deser-stream-arn (input "LatestStreamArn"))) (clojure.core/contains? input "TableId") (clojure.core/assoc :table-id (deser-table-id (input "TableId"))) (clojure.core/contains? input "AttributeDefinitions") (clojure.core/assoc :attribute-definitions (deser-attribute-definitions (input "AttributeDefinitions"))) (clojure.core/contains? input "KeySchema") (clojure.core/assoc :key-schema (deser-key-schema (input "KeySchema"))) (clojure.core/contains? input "CreationDateTime") (clojure.core/assoc :creation-date-time (deser-date (input "CreationDateTime"))) (clojure.core/contains? input "LocalSecondaryIndexes") (clojure.core/assoc :local-secondary-indexes (deser-local-secondary-index-description-list (input "LocalSecondaryIndexes"))) (clojure.core/contains? input "TableStatus") (clojure.core/assoc :table-status (deser-table-status (input "TableStatus"))) (clojure.core/contains? input "TableSizeBytes") (clojure.core/assoc :table-size-bytes (deser-long (input "TableSizeBytes"))) (clojure.core/contains? input "ItemCount") (clojure.core/assoc :item-count (deser-long (input "ItemCount"))) (clojure.core/contains? input "TableName") (clojure.core/assoc :table-name (deser-table-name (input "TableName"))) (clojure.core/contains? input "GlobalSecondaryIndexes") (clojure.core/assoc :global-secondary-indexes (deser-global-secondary-index-description-list (input "GlobalSecondaryIndexes"))) (clojure.core/contains? input "TableArn") (clojure.core/assoc :table-arn (deser-string (input "TableArn"))) (clojure.core/contains? input "RestoreSummary") (clojure.core/assoc :restore-summary (deser-restore-summary (input "RestoreSummary"))) (clojure.core/contains? input "LatestStreamLabel") (clojure.core/assoc :latest-stream-label (deser-string (input "LatestStreamLabel"))) (clojure.core/contains? input "ProvisionedThroughput") (clojure.core/assoc :provisioned-throughput (deser-provisioned-throughput-description (input "ProvisionedThroughput"))) (clojure.core/contains? input "SSEDescription") (clojure.core/assoc :sse-description (deser-sse-description (input "SSEDescription")))))
+
+(clojure.core/defn- deser-time-to-live-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "TimeToLiveStatus") (clojure.core/assoc :time-to-live-status (deser-time-to-live-status (input "TimeToLiveStatus"))) (clojure.core/contains? input "AttributeName") (clojure.core/assoc :attribute-name (deser-time-to-live-attribute-name (input "AttributeName")))))
+
+(clojure.core/defn- deser-restore-in-progress [input] input)
+
+(clojure.core/defn- deser-projection-type [input] (clojure.core/get {"ALL" :all, "KEYS_ONLY" :keys-only, "INCLUDE" :include} input))
+
+(clojure.core/defn- deser-map-attribute-value [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-attribute-name k) (deser-attribute-value v)])) input))
+
+(clojure.core/defn- deser-item-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-attribute-map coll))) input))
+
+(clojure.core/defn- deser-provisioned-throughput-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "LastIncreaseDateTime") (clojure.core/assoc :last-increase-date-time (deser-date (input "LastIncreaseDateTime"))) (clojure.core/contains? input "LastDecreaseDateTime") (clojure.core/assoc :last-decrease-date-time (deser-date (input "LastDecreaseDateTime"))) (clojure.core/contains? input "NumberOfDecreasesToday") (clojure.core/assoc :number-of-decreases-today (deser-positive-long-object (input "NumberOfDecreasesToday"))) (clojure.core/contains? input "ReadCapacityUnits") (clojure.core/assoc :read-capacity-units (deser-positive-long-object (input "ReadCapacityUnits"))) (clojure.core/contains? input "WriteCapacityUnits") (clojure.core/assoc :write-capacity-units (deser-positive-long-object (input "WriteCapacityUnits")))))
+
+(clojure.core/defn- deser-put-item-input-attribute-map [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-attribute-name k) (deser-attribute-value v)])) input))
+
+(clojure.core/defn- deser-key-schema [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-key-schema-element coll))) input))
+
+(clojure.core/defn- deser-write-requests [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-write-request coll))) input))
+
+(clojure.core/defn- deser-error-message [input] input)
+
+(clojure.core/defn- deser-keys-and-attributes [input] (clojure.core/cond-> {:keys (deser-key-list (input "Keys"))} (clojure.core/contains? input "AttributesToGet") (clojure.core/assoc :attributes-to-get (deser-attribute-name-list (input "AttributesToGet"))) (clojure.core/contains? input "ConsistentRead") (clojure.core/assoc :consistent-read (deser-consistent-read (input "ConsistentRead"))) (clojure.core/contains? input "ProjectionExpression") (clojure.core/assoc :projection-expression (deser-projection-expression (input "ProjectionExpression"))) (clojure.core/contains? input "ExpressionAttributeNames") (clojure.core/assoc :expression-attribute-names (deser-expression-attribute-name-map (input "ExpressionAttributeNames")))))
+
+(clojure.core/defn- deser-date [input] input)
+
+(clojure.core/defn- deser-binary-set-attribute-value [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-binary-attribute-value coll))) input))
+
+(clojure.core/defn- deser-consistent-read [input] input)
+
+(clojure.core/defn- deser-time-to-live-enabled [input] input)
+
+(clojure.core/defn- deser-point-in-time-recovery-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "PointInTimeRecoveryStatus") (clojure.core/assoc :point-in-time-recovery-status (deser-point-in-time-recovery-status (input "PointInTimeRecoveryStatus"))) (clojure.core/contains? input "EarliestRestorableDateTime") (clojure.core/assoc :earliest-restorable-date-time (deser-date (input "EarliestRestorableDateTime"))) (clojure.core/contains? input "LatestRestorableDateTime") (clojure.core/assoc :latest-restorable-date-time (deser-date (input "LatestRestorableDateTime")))))
+
+(clojure.core/defn- deser-key [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-attribute-name k) (deser-attribute-value v)])) input))
+
+(clojure.core/defn- deser-tag-key-string [input] input)
+
+(clojure.core/defn- deser-region-name [input] input)
+
+(clojure.core/defn- deser-stream-view-type [input] (clojure.core/get {"NEW_IMAGE" :new-image, "OLD_IMAGE" :old-image, "NEW_AND_OLD_IMAGES" :new-and-old-images, "KEYS_ONLY" :keys-only} input))
+
+(clojure.core/defn- deser-tag-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-tag coll))) input))
+
+(clojure.core/defn- deser-backup-creation-date-time [input] input)
+
+(clojure.core/defn- deser-replica-settings-description [input] (clojure.core/cond-> {:region-name (deser-region-name (input "RegionName"))} (clojure.core/contains? input "ReplicaStatus") (clojure.core/assoc :replica-status (deser-replica-status (input "ReplicaStatus"))) (clojure.core/contains? input "ReplicaProvisionedReadCapacityUnits") (clojure.core/assoc :replica-provisioned-read-capacity-units (deser-positive-long-object (input "ReplicaProvisionedReadCapacityUnits"))) (clojure.core/contains? input "ReplicaProvisionedReadCapacityAutoScalingSettings") (clojure.core/assoc :replica-provisioned-read-capacity-auto-scaling-settings (deser-auto-scaling-settings-description (input "ReplicaProvisionedReadCapacityAutoScalingSettings"))) (clojure.core/contains? input "ReplicaProvisionedWriteCapacityUnits") (clojure.core/assoc :replica-provisioned-write-capacity-units (deser-positive-long-object (input "ReplicaProvisionedWriteCapacityUnits"))) (clojure.core/contains? input "ReplicaProvisionedWriteCapacityAutoScalingSettings") (clojure.core/assoc :replica-provisioned-write-capacity-auto-scaling-settings (deser-auto-scaling-settings-description (input "ReplicaProvisionedWriteCapacityAutoScalingSettings"))) (clojure.core/contains? input "ReplicaGlobalSecondaryIndexSettings") (clojure.core/assoc :replica-global-secondary-index-settings (deser-replica-global-secondary-index-settings-description-list (input "ReplicaGlobalSecondaryIndexSettings")))))
+
+(clojure.core/defn- deser-continuous-backups-status [input] (clojure.core/get {"ENABLED" :enabled, "DISABLED" :disabled} input))
+
+(clojure.core/defn- deser-replica-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-replica coll))) input))
+
+(clojure.core/defn- deser-binary-attribute-value [input] (portkey.aws/base64-decode input))
+
+(clojure.core/defn- deser-attribute-value [input] (clojure.core/cond-> {} (clojure.core/contains? input "NULL") (clojure.core/assoc :null (deser-null-attribute-value (input "NULL"))) (clojure.core/contains? input "L") (clojure.core/assoc :l (deser-list-attribute-value (input "L"))) (clojure.core/contains? input "BOOL") (clojure.core/assoc :bool (deser-boolean-attribute-value (input "BOOL"))) (clojure.core/contains? input "M") (clojure.core/assoc :m (deser-map-attribute-value (input "M"))) (clojure.core/contains? input "S") (clojure.core/assoc :s (deser-string-attribute-value (input "S"))) (clojure.core/contains? input "B") (clojure.core/assoc :b (deser-binary-attribute-value (input "B"))) (clojure.core/contains? input "NS") (clojure.core/assoc :ns (deser-number-set-attribute-value (input "NS"))) (clojure.core/contains? input "N") (clojure.core/assoc :n (deser-number-attribute-value (input "N"))) (clojure.core/contains? input "BS") (clojure.core/assoc :bs (deser-binary-set-attribute-value (input "BS"))) (clojure.core/contains? input "SS") (clojure.core/assoc :ss (deser-string-set-attribute-value (input "SS")))))
+
+(clojure.core/defn- deser-continuous-backups-description [input] (clojure.core/cond-> {:continuous-backups-status (deser-continuous-backups-status (input "ContinuousBackupsStatus"))} (clojure.core/contains? input "PointInTimeRecoveryDescription") (clojure.core/assoc :point-in-time-recovery-description (deser-point-in-time-recovery-description (input "PointInTimeRecoveryDescription")))))
+
+(clojure.core/defn- deser-sse-status [input] (clojure.core/get {"ENABLING" :enabling, "ENABLED" :enabled, "DISABLING" :disabling, "DISABLED" :disabled, "UPDATING" :updating} input))
+
+(clojure.core/defn- deser-item-collection-metrics-per-table [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-table-name k) (deser-item-collection-metrics-multiple v)])) input))
+
+(clojure.core/defn- deser-stream-arn [input] input)
+
+(clojure.core/defn- deser-auto-scaling-settings-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "MinimumUnits") (clojure.core/assoc :minimum-units (deser-positive-long-object (input "MinimumUnits"))) (clojure.core/contains? input "MaximumUnits") (clojure.core/assoc :maximum-units (deser-positive-long-object (input "MaximumUnits"))) (clojure.core/contains? input "AutoScalingDisabled") (clojure.core/assoc :auto-scaling-disabled (deser-boolean-object (input "AutoScalingDisabled"))) (clojure.core/contains? input "AutoScalingRoleArn") (clojure.core/assoc :auto-scaling-role-arn (deser-string (input "AutoScalingRoleArn"))) (clojure.core/contains? input "ScalingPolicies") (clojure.core/assoc :scaling-policies (deser-auto-scaling-policy-description-list (input "ScalingPolicies")))))
+
+(clojure.core/defn- deser-global-table-status [input] (clojure.core/get {"CREATING" :creating, "ACTIVE" :active, "DELETING" :deleting, "UPDATING" :updating} input))
+
+(clojure.core/defn- deser-auto-scaling-policy-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "PolicyName") (clojure.core/assoc :policy-name (deser-auto-scaling-policy-name (input "PolicyName"))) (clojure.core/contains? input "TargetTrackingScalingPolicyConfiguration") (clojure.core/assoc :target-tracking-scaling-policy-configuration (deser-auto-scaling-target-tracking-scaling-policy-configuration-description (input "TargetTrackingScalingPolicyConfiguration")))))
+
+(clojure.core/defn- deser-local-secondary-indexes [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-local-secondary-index-info coll))) input))
+
+(clojure.core/defn- deser-batch-get-request-map [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-table-name k) (deser-keys-and-attributes v)])) input))
+
+(clojure.core/defn- deser-consumed-capacity [input] (clojure.core/cond-> {} (clojure.core/contains? input "TableName") (clojure.core/assoc :table-name (deser-table-name (input "TableName"))) (clojure.core/contains? input "CapacityUnits") (clojure.core/assoc :capacity-units (deser-consumed-capacity-units (input "CapacityUnits"))) (clojure.core/contains? input "Table") (clojure.core/assoc :table (deser-capacity (input "Table"))) (clojure.core/contains? input "LocalSecondaryIndexes") (clojure.core/assoc :local-secondary-indexes (deser-secondary-indexes-capacity-map (input "LocalSecondaryIndexes"))) (clojure.core/contains? input "GlobalSecondaryIndexes") (clojure.core/assoc :global-secondary-indexes (deser-secondary-indexes-capacity-map (input "GlobalSecondaryIndexes")))))
+
+(clojure.core/defn- deser-global-secondary-index-info [input] (clojure.core/cond-> {} (clojure.core/contains? input "IndexName") (clojure.core/assoc :index-name (deser-index-name (input "IndexName"))) (clojure.core/contains? input "KeySchema") (clojure.core/assoc :key-schema (deser-key-schema (input "KeySchema"))) (clojure.core/contains? input "Projection") (clojure.core/assoc :projection (deser-projection (input "Projection"))) (clojure.core/contains? input "ProvisionedThroughput") (clojure.core/assoc :provisioned-throughput (deser-provisioned-throughput (input "ProvisionedThroughput")))))
+
+(clojure.core/defn- deser-backup-details [input] (clojure.core/cond-> {:backup-arn (deser-backup-arn (input "BackupArn")), :backup-name (deser-backup-name (input "BackupName")), :backup-status (deser-backup-status (input "BackupStatus")), :backup-type (deser-backup-type (input "BackupType")), :backup-creation-date-time (deser-backup-creation-date-time (input "BackupCreationDateTime"))} (clojure.core/contains? input "BackupSizeBytes") (clojure.core/assoc :backup-size-bytes (deser-backup-size-bytes (input "BackupSizeBytes"))) (clojure.core/contains? input "BackupExpiryDateTime") (clojure.core/assoc :backup-expiry-date-time (deser-date (input "BackupExpiryDateTime")))))
+
+(clojure.core/defn- deser-batch-write-item-request-map [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-table-name k) (deser-write-requests v)])) input))
+
+(clojure.core/defn- deser-attribute-name-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-attribute-name coll))) input))
+
+(clojure.core/defn- deser-table-status [input] (clojure.core/get {"CREATING" :creating, "UPDATING" :updating, "DELETING" :deleting, "ACTIVE" :active} input))
+
+(clojure.core/defn- deser-scalar-attribute-type [input] (clojure.core/get {"S" :s, "N" :n, "B" :b} input))
+
+(clojure.core/defn- deser-backup-name [input] input)
+
+(clojure.core/defn- deser-backup-summary [input] (clojure.core/cond-> {} (clojure.core/contains? input "BackupStatus") (clojure.core/assoc :backup-status (deser-backup-status (input "BackupStatus"))) (clojure.core/contains? input "TableId") (clojure.core/assoc :table-id (deser-table-id (input "TableId"))) (clojure.core/contains? input "BackupCreationDateTime") (clojure.core/assoc :backup-creation-date-time (deser-backup-creation-date-time (input "BackupCreationDateTime"))) (clojure.core/contains? input "BackupName") (clojure.core/assoc :backup-name (deser-backup-name (input "BackupName"))) (clojure.core/contains? input "BackupExpiryDateTime") (clojure.core/assoc :backup-expiry-date-time (deser-date (input "BackupExpiryDateTime"))) (clojure.core/contains? input "BackupArn") (clojure.core/assoc :backup-arn (deser-backup-arn (input "BackupArn"))) (clojure.core/contains? input "TableName") (clojure.core/assoc :table-name (deser-table-name (input "TableName"))) (clojure.core/contains? input "TableArn") (clojure.core/assoc :table-arn (deser-table-arn (input "TableArn"))) (clojure.core/contains? input "BackupType") (clojure.core/assoc :backup-type (deser-backup-type (input "BackupType"))) (clojure.core/contains? input "BackupSizeBytes") (clojure.core/assoc :backup-size-bytes (deser-backup-size-bytes (input "BackupSizeBytes")))))
+
+(clojure.core/defn- deser-replica-description-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-replica-description coll))) input))
+
+(clojure.core/defn- deser-integer [input] input)
+
+(clojure.core/defn- deser-string [input] input)
+
+(clojure.core/defn- deser-table-creation-date-time [input] input)
+
+(clojure.core/defn- deser-item-collection-size-estimate-bound [input] input)
+
+(clojure.core/defn- deser-global-secondary-index-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "Backfilling") (clojure.core/assoc :backfilling (deser-backfilling (input "Backfilling"))) (clojure.core/contains? input "IndexStatus") (clojure.core/assoc :index-status (deser-index-status (input "IndexStatus"))) (clojure.core/contains? input "Projection") (clojure.core/assoc :projection (deser-projection (input "Projection"))) (clojure.core/contains? input "IndexName") (clojure.core/assoc :index-name (deser-index-name (input "IndexName"))) (clojure.core/contains? input "IndexSizeBytes") (clojure.core/assoc :index-size-bytes (deser-long (input "IndexSizeBytes"))) (clojure.core/contains? input "IndexArn") (clojure.core/assoc :index-arn (deser-string (input "IndexArn"))) (clojure.core/contains? input "KeySchema") (clojure.core/assoc :key-schema (deser-key-schema (input "KeySchema"))) (clojure.core/contains? input "ItemCount") (clojure.core/assoc :item-count (deser-long (input "ItemCount"))) (clojure.core/contains? input "ProvisionedThroughput") (clojure.core/assoc :provisioned-throughput (deser-provisioned-throughput-description (input "ProvisionedThroughput")))))
+
+(clojure.core/defn- deser-time-to-live-status [input] (clojure.core/get {"ENABLING" :enabling, "DISABLING" :disabling, "ENABLED" :enabled, "DISABLED" :disabled} input))
+
+(clojure.core/defn- deser-capacity [input] (clojure.core/cond-> {} (clojure.core/contains? input "CapacityUnits") (clojure.core/assoc :capacity-units (deser-consumed-capacity-units (input "CapacityUnits")))))
+
+(clojure.core/defn- deser-item-count [input] input)
+
+(clojure.core/defn- deser-backup-arn [input] input)
+
+(clojure.core/defn- deser-local-secondary-index-info [input] (clojure.core/cond-> {} (clojure.core/contains? input "IndexName") (clojure.core/assoc :index-name (deser-index-name (input "IndexName"))) (clojure.core/contains? input "KeySchema") (clojure.core/assoc :key-schema (deser-key-schema (input "KeySchema"))) (clojure.core/contains? input "Projection") (clojure.core/assoc :projection (deser-projection (input "Projection")))))
+
+(clojure.core/defn- deser-put-request [input] (clojure.core/cond-> {:item (deser-put-item-input-attribute-map (input "Item"))}))
+
+(clojure.core/defn- deser-auto-scaling-target-tracking-scaling-policy-configuration-description [input] (clojure.core/cond-> {:target-value (deser-double (input "TargetValue"))} (clojure.core/contains? input "DisableScaleIn") (clojure.core/assoc :disable-scale-in (deser-boolean-object (input "DisableScaleIn"))) (clojure.core/contains? input "ScaleInCooldown") (clojure.core/assoc :scale-in-cooldown (deser-integer-object (input "ScaleInCooldown"))) (clojure.core/contains? input "ScaleOutCooldown") (clojure.core/assoc :scale-out-cooldown (deser-integer-object (input "ScaleOutCooldown")))))
+
+(clojure.core/defn- deser-table-name [input] input)
+
+(clojure.core/defn- deser-global-secondary-indexes [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-global-secondary-index-info coll))) input))
+
+(clojure.core/defn- deser-backup-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "BackupDetails") (clojure.core/assoc :backup-details (deser-backup-details (input "BackupDetails"))) (clojure.core/contains? input "SourceTableDetails") (clojure.core/assoc :source-table-details (deser-source-table-details (input "SourceTableDetails"))) (clojure.core/contains? input "SourceTableFeatureDetails") (clojure.core/assoc :source-table-feature-details (deser-source-table-feature-details (input "SourceTableFeatureDetails")))))
+
+(clojure.core/defn- deser-point-in-time-recovery-status [input] (clojure.core/get {"ENABLED" :enabled, "DISABLED" :disabled} input))
+
+(clojure.core/defn- deser-endpoint [input] (clojure.core/cond-> {:address (deser-string (input "Address")), :cache-period-in-minutes (deser-long (input "CachePeriodInMinutes"))}))
+
+(clojure.core/defn- deser-long [input] input)
+
+(clojure.core/defn- deser-table-arn [input] input)
+
+(clojure.core/defn- deser-stream-enabled [input] input)
+
+(clojure.core/defn- deser-batch-get-response-map [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-table-name k) (deser-item-list v)])) input))
+
+(clojure.core/defn- deser-consumed-capacity-multiple [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-consumed-capacity coll))) input))
+
+(clojure.core/defn- deser-backup-type [input] (clojure.core/get {"USER" :user, "SYSTEM" :system} input))
+
+(clojure.core/defn- deser-key-schema-element [input] (clojure.core/cond-> {:attribute-name (deser-key-schema-attribute-name (input "AttributeName")), :key-type (deser-key-type (input "KeyType"))}))
+
+(clojure.core/defn- deser-restore-summary [input] (clojure.core/cond-> {:restore-date-time (deser-date (input "RestoreDateTime")), :restore-in-progress (deser-restore-in-progress (input "RestoreInProgress"))} (clojure.core/contains? input "SourceBackupArn") (clojure.core/assoc :source-backup-arn (deser-backup-arn (input "SourceBackupArn"))) (clojure.core/contains? input "SourceTableArn") (clojure.core/assoc :source-table-arn (deser-table-arn (input "SourceTableArn")))))
+
+(clojure.core/defn- deser-backup-size-bytes [input] input)
+
+(clojure.core/defn- deser-tag [input] (clojure.core/cond-> {:key (deser-tag-key-string (input "Key")), :value (deser-tag-value-string (input "Value"))}))
+
+(clojure.core/defn- deser-list-attribute-value [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-attribute-value coll))) input))
+
+(clojure.core/defn- deser-replica-global-secondary-index-settings-description-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-replica-global-secondary-index-settings-description coll))) input))
+
+(clojure.core/defn- deser-string-attribute-value [input] input)
+
+(clojure.core/defn- deser-local-secondary-index-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "IndexName") (clojure.core/assoc :index-name (deser-index-name (input "IndexName"))) (clojure.core/contains? input "KeySchema") (clojure.core/assoc :key-schema (deser-key-schema (input "KeySchema"))) (clojure.core/contains? input "Projection") (clojure.core/assoc :projection (deser-projection (input "Projection"))) (clojure.core/contains? input "IndexSizeBytes") (clojure.core/assoc :index-size-bytes (deser-long (input "IndexSizeBytes"))) (clojure.core/contains? input "ItemCount") (clojure.core/assoc :item-count (deser-long (input "ItemCount"))) (clojure.core/contains? input "IndexArn") (clojure.core/assoc :index-arn (deser-string (input "IndexArn")))))
+
+(clojure.core/defn- deser-expression-attribute-name-variable [input] input)
+
+(clojure.core/defn- deser-projection-expression [input] input)
+
+(clojure.core/defn- deser-provisioned-throughput [input] (clojure.core/cond-> {:read-capacity-units (deser-positive-long-object (input "ReadCapacityUnits")), :write-capacity-units (deser-positive-long-object (input "WriteCapacityUnits"))}))
+
+(clojure.core/defn- deser-sse-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "Status") (clojure.core/assoc :status (deser-sse-status (input "Status"))) (clojure.core/contains? input "SSEType") (clojure.core/assoc :sse-type (deser-sse-type (input "SSEType"))) (clojure.core/contains? input "KMSMasterKeyArn") (clojure.core/assoc :kms-master-key-arn (deser-kms-master-key-arn (input "KMSMasterKeyArn")))))
+
+(clojure.core/defn- deser-string-set-attribute-value [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-string-attribute-value coll))) input))
+
+(clojure.core/defn- deser-kms-master-key-arn [input] input)
+
+(clojure.core/defn- deser-next-token-string [input] input)
+
+(clojure.core/defn- deser-key-schema-attribute-name [input] input)
+
+(clojure.core/defn- deser-boolean-object [input] input)
+
+(clojure.core/defn- deser-global-secondary-index-description-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-global-secondary-index-description coll))) input))
+
+(clojure.core/defn- deser-expression-attribute-name-map [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-expression-attribute-name-variable k) (deser-attribute-name v)])) input))
+
+(clojure.core/defn- deser-key-type [input] (clojure.core/get {"HASH" :hash, "RANGE" :range} input))
+
+(clojure.core/defn- deser-write-request [input] (clojure.core/cond-> {} (clojure.core/contains? input "PutRequest") (clojure.core/assoc :put-request (deser-put-request (input "PutRequest"))) (clojure.core/contains? input "DeleteRequest") (clojure.core/assoc :delete-request (deser-delete-request (input "DeleteRequest")))))
+
+(clojure.core/defn- deser-integer-object [input] input)
+
+(clojure.core/defn- deser-replica-settings-description-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-replica-settings-description coll))) input))
+
+(clojure.core/defn- deser-time-to-live-attribute-name [input] input)
+
+(clojure.core/defn- deser-sse-type [input] (clojure.core/get {"AES256" :aes-256, "KMS" :kms} input))
+
+(clojure.core/defn- deser-update-item-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "Attributes") (clojure.core/assoc :attributes (deser-attribute-map (input "Attributes"))) (clojure.core/contains? input "ConsumedCapacity") (clojure.core/assoc :consumed-capacity (deser-consumed-capacity (input "ConsumedCapacity"))) (clojure.core/contains? input "ItemCollectionMetrics") (clojure.core/assoc :item-collection-metrics (deser-item-collection-metrics (input "ItemCollectionMetrics")))))
+
+(clojure.core/defn- deser-update-global-table-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "GlobalTableDescription") (clojure.core/assoc :global-table-description (deser-global-table-description (input "GlobalTableDescription")))))
+
+(clojure.core/defn- deser-index-not-found-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-list-tags-of-resource-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "Tags") (clojure.core/assoc :tags (deser-tag-list (input "Tags"))) (clojure.core/contains? input "NextToken") (clojure.core/assoc :next-token (deser-next-token-string (input "NextToken")))))
+
+(clojure.core/defn- deser-global-table-already-exists-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-delete-item-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "Attributes") (clojure.core/assoc :attributes (deser-attribute-map (input "Attributes"))) (clojure.core/contains? input "ConsumedCapacity") (clojure.core/assoc :consumed-capacity (deser-consumed-capacity (input "ConsumedCapacity"))) (clojure.core/contains? input "ItemCollectionMetrics") (clojure.core/assoc :item-collection-metrics (deser-item-collection-metrics (input "ItemCollectionMetrics")))))
+
+(clojure.core/defn- deser-get-item-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "Item") (clojure.core/assoc :item (deser-attribute-map (input "Item"))) (clojure.core/contains? input "ConsumedCapacity") (clojure.core/assoc :consumed-capacity (deser-consumed-capacity (input "ConsumedCapacity")))))
+
+(clojure.core/defn- deser-create-global-table-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "GlobalTableDescription") (clojure.core/assoc :global-table-description (deser-global-table-description (input "GlobalTableDescription")))))
+
+(clojure.core/defn- deser-update-time-to-live-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "TimeToLiveSpecification") (clojure.core/assoc :time-to-live-specification (deser-time-to-live-specification (input "TimeToLiveSpecification")))))
+
+(clojure.core/defn- deser-continuous-backups-unavailable-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-update-table-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "TableDescription") (clojure.core/assoc :table-description (deser-table-description (input "TableDescription")))))
+
+(clojure.core/defn- deser-describe-global-table-settings-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "GlobalTableName") (clojure.core/assoc :global-table-name (deser-table-name (input "GlobalTableName"))) (clojure.core/contains? input "ReplicaSettings") (clojure.core/assoc :replica-settings (deser-replica-settings-description-list (input "ReplicaSettings")))))
+
+(clojure.core/defn- deser-point-in-time-recovery-unavailable-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-resource-in-use-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-limit-exceeded-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-describe-time-to-live-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "TimeToLiveDescription") (clojure.core/assoc :time-to-live-description (deser-time-to-live-description (input "TimeToLiveDescription")))))
+
+(clojure.core/defn- deser-item-collection-size-limit-exceeded-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-describe-table-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "Table") (clojure.core/assoc :table (deser-table-description (input "Table")))))
+
+(clojure.core/defn- deser-restore-table-to-point-in-time-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "TableDescription") (clojure.core/assoc :table-description (deser-table-description (input "TableDescription")))))
+
+(clojure.core/defn- deser-query-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "Items") (clojure.core/assoc :items (deser-item-list (input "Items"))) (clojure.core/contains? input "Count") (clojure.core/assoc :count (deser-integer (input "Count"))) (clojure.core/contains? input "ScannedCount") (clojure.core/assoc :scanned-count (deser-integer (input "ScannedCount"))) (clojure.core/contains? input "LastEvaluatedKey") (clojure.core/assoc :last-evaluated-key (deser-key (input "LastEvaluatedKey"))) (clojure.core/contains? input "ConsumedCapacity") (clojure.core/assoc :consumed-capacity (deser-consumed-capacity (input "ConsumedCapacity")))))
+
+(clojure.core/defn- deser-describe-limits-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "AccountMaxReadCapacityUnits") (clojure.core/assoc :account-max-read-capacity-units (deser-positive-long-object (input "AccountMaxReadCapacityUnits"))) (clojure.core/contains? input "AccountMaxWriteCapacityUnits") (clojure.core/assoc :account-max-write-capacity-units (deser-positive-long-object (input "AccountMaxWriteCapacityUnits"))) (clojure.core/contains? input "TableMaxReadCapacityUnits") (clojure.core/assoc :table-max-read-capacity-units (deser-positive-long-object (input "TableMaxReadCapacityUnits"))) (clojure.core/contains? input "TableMaxWriteCapacityUnits") (clojure.core/assoc :table-max-write-capacity-units (deser-positive-long-object (input "TableMaxWriteCapacityUnits")))))
+
+(clojure.core/defn- deser-list-global-tables-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "GlobalTables") (clojure.core/assoc :global-tables (deser-global-table-list (input "GlobalTables"))) (clojure.core/contains? input "LastEvaluatedGlobalTableName") (clojure.core/assoc :last-evaluated-global-table-name (deser-table-name (input "LastEvaluatedGlobalTableName")))))
+
+(clojure.core/defn- deser-table-in-use-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-list-backups-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "BackupSummaries") (clojure.core/assoc :backup-summaries (deser-backup-summaries (input "BackupSummaries"))) (clojure.core/contains? input "LastEvaluatedBackupArn") (clojure.core/assoc :last-evaluated-backup-arn (deser-backup-arn (input "LastEvaluatedBackupArn")))))
+
+(clojure.core/defn- deser-global-table-not-found-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-replica-not-found-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-describe-backup-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "BackupDescription") (clojure.core/assoc :backup-description (deser-backup-description (input "BackupDescription")))))
+
+(clojure.core/defn- deser-resource-not-found-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-update-continuous-backups-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "ContinuousBackupsDescription") (clojure.core/assoc :continuous-backups-description (deser-continuous-backups-description (input "ContinuousBackupsDescription")))))
+
+(clojure.core/defn- deser-describe-global-table-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "GlobalTableDescription") (clojure.core/assoc :global-table-description (deser-global-table-description (input "GlobalTableDescription")))))
+
+(clojure.core/defn- deser-describe-endpoints-response [input] (clojure.core/cond-> {:endpoints (deser-endpoints (input "Endpoints"))}))
+
+(clojure.core/defn- deser-create-backup-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "BackupDetails") (clojure.core/assoc :backup-details (deser-backup-details (input "BackupDetails")))))
+
+(clojure.core/defn- deser-update-global-table-settings-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "GlobalTableName") (clojure.core/assoc :global-table-name (deser-table-name (input "GlobalTableName"))) (clojure.core/contains? input "ReplicaSettings") (clojure.core/assoc :replica-settings (deser-replica-settings-description-list (input "ReplicaSettings")))))
+
+(clojure.core/defn- deser-list-tables-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "TableNames") (clojure.core/assoc :table-names (deser-table-name-list (input "TableNames"))) (clojure.core/contains? input "LastEvaluatedTableName") (clojure.core/assoc :last-evaluated-table-name (deser-table-name (input "LastEvaluatedTableName")))))
+
+(clojure.core/defn- deser-batch-get-item-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "Responses") (clojure.core/assoc :responses (deser-batch-get-response-map (input "Responses"))) (clojure.core/contains? input "UnprocessedKeys") (clojure.core/assoc :unprocessed-keys (deser-batch-get-request-map (input "UnprocessedKeys"))) (clojure.core/contains? input "ConsumedCapacity") (clojure.core/assoc :consumed-capacity (deser-consumed-capacity-multiple (input "ConsumedCapacity")))))
+
+(clojure.core/defn- deser-put-item-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "Attributes") (clojure.core/assoc :attributes (deser-attribute-map (input "Attributes"))) (clojure.core/contains? input "ConsumedCapacity") (clojure.core/assoc :consumed-capacity (deser-consumed-capacity (input "ConsumedCapacity"))) (clojure.core/contains? input "ItemCollectionMetrics") (clojure.core/assoc :item-collection-metrics (deser-item-collection-metrics (input "ItemCollectionMetrics")))))
+
+(clojure.core/defn- deser-invalid-restore-time-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-backup-not-found-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-delete-table-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "TableDescription") (clojure.core/assoc :table-description (deser-table-description (input "TableDescription")))))
+
+(clojure.core/defn- deser-table-already-exists-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-describe-continuous-backups-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "ContinuousBackupsDescription") (clojure.core/assoc :continuous-backups-description (deser-continuous-backups-description (input "ContinuousBackupsDescription")))))
+
+(clojure.core/defn- deser-replica-already-exists-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-restore-table-from-backup-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "TableDescription") (clojure.core/assoc :table-description (deser-table-description (input "TableDescription")))))
+
+(clojure.core/defn- deser-delete-backup-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "BackupDescription") (clojure.core/assoc :backup-description (deser-backup-description (input "BackupDescription")))))
+
+(clojure.core/defn- deser-batch-write-item-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "UnprocessedItems") (clojure.core/assoc :unprocessed-items (deser-batch-write-item-request-map (input "UnprocessedItems"))) (clojure.core/contains? input "ItemCollectionMetrics") (clojure.core/assoc :item-collection-metrics (deser-item-collection-metrics-per-table (input "ItemCollectionMetrics"))) (clojure.core/contains? input "ConsumedCapacity") (clojure.core/assoc :consumed-capacity (deser-consumed-capacity-multiple (input "ConsumedCapacity")))))
+
+(clojure.core/defn- deser-backup-in-use-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-scan-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "Items") (clojure.core/assoc :items (deser-item-list (input "Items"))) (clojure.core/contains? input "Count") (clojure.core/assoc :count (deser-integer (input "Count"))) (clojure.core/contains? input "ScannedCount") (clojure.core/assoc :scanned-count (deser-integer (input "ScannedCount"))) (clojure.core/contains? input "LastEvaluatedKey") (clojure.core/assoc :last-evaluated-key (deser-key (input "LastEvaluatedKey"))) (clojure.core/contains? input "ConsumedCapacity") (clojure.core/assoc :consumed-capacity (deser-consumed-capacity (input "ConsumedCapacity")))))
+
+(clojure.core/defn- deser-conditional-check-failed-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-create-table-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "TableDescription") (clojure.core/assoc :table-description (deser-table-description (input "TableDescription")))))
+
+(clojure.core/defn- deser-internal-server-error [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-table-not-found-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-provisioned-throughput-exceeded-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/attribute-map (clojure.spec.alpha/map-of :portkey.aws.dynamodb.-2012-08-10/attribute-name :portkey.aws.dynamodb.-2012-08-10/attribute-value))
 
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10.restore-table-from-backup-input/target-table-name (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/table-name))
@@ -679,7 +1343,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/sse-enabled clojure.core/boolean?)
 
-(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/tag-value-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 0 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256))))
+(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/tag-value-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 0 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 256))))
 
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/delete-global-secondary-index-action (clojure.spec.alpha/keys :req-un [:portkey.aws.dynamodb.-2012-08-10/index-name] :opt-un []))
 
@@ -769,7 +1433,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/describe-limits-input (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/attribute-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 65535))))
+(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/attribute-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 65535))))
 
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/delete-request (clojure.spec.alpha/keys :req-un [:portkey.aws.dynamodb.-2012-08-10/key] :opt-un []))
 
@@ -793,9 +1457,9 @@
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10.time-to-live-specification/attribute-name (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/time-to-live-attribute-name))
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/time-to-live-specification (clojure.spec.alpha/keys :req-un [:portkey.aws.dynamodb.-2012-08-10.time-to-live-specification/enabled :portkey.aws.dynamodb.-2012-08-10.time-to-live-specification/attribute-name] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/auto-scaling-policy-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"\p{Print}+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/auto-scaling-policy-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 256)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"\p{Print}+" s__27881__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/index-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 3 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_.-]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/index-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 3 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 255)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_.-]+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10.attribute-definition/attribute-name (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/key-schema-attribute-name))
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10.attribute-definition/attribute-type (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/scalar-attribute-type))
@@ -836,7 +1500,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/expression-attribute-value-map (clojure.spec.alpha/map-of :portkey.aws.dynamodb.-2012-08-10/expression-attribute-value-variable :portkey.aws.dynamodb.-2012-08-10/attribute-value))
 
-(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/table-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/table-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10.describe-global-table-settings-input/global-table-name (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/table-name))
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/describe-global-table-settings-input (clojure.spec.alpha/keys :req-un [:portkey.aws.dynamodb.-2012-08-10.describe-global-table-settings-input/global-table-name] :opt-un []))
@@ -857,7 +1521,7 @@
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10.describe-global-table-settings-output/replica-settings (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/replica-settings-description-list))
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/describe-global-table-settings-output (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.dynamodb.-2012-08-10.describe-global-table-settings-output/global-table-name :portkey.aws.dynamodb.-2012-08-10.describe-global-table-settings-output/replica-settings]))
 
-(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/non-key-attribute-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255))))
+(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/non-key-attribute-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 255))))
 
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10.point-in-time-recovery-unavailable-exception/message (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/error-message))
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/point-in-time-recovery-unavailable-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.dynamodb.-2012-08-10.point-in-time-recovery-unavailable-exception/message]))
@@ -1018,7 +1682,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/key (clojure.spec.alpha/map-of :portkey.aws.dynamodb.-2012-08-10/attribute-name :portkey.aws.dynamodb.-2012-08-10/attribute-value))
 
-(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/tag-key-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 128))))
+(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/tag-key-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 128))))
 
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/region-name (clojure.spec.alpha/and clojure.core/string?))
 
@@ -1087,7 +1751,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/item-collection-metrics-per-table (clojure.spec.alpha/map-of :portkey.aws.dynamodb.-2012-08-10/table-name :portkey.aws.dynamodb.-2012-08-10/item-collection-metrics-multiple))
 
-(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/stream-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 37 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1024))))
+(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/stream-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 37 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1024))))
 
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10.auto-scaling-settings-description/minimum-units (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/positive-long-object))
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10.auto-scaling-settings-description/maximum-units (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/positive-long-object))
@@ -1162,7 +1826,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/local-secondary-index-list (clojure.spec.alpha/coll-of :portkey.aws.dynamodb.-2012-08-10/local-secondary-index))
 
-(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/auto-scaling-role-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1600)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/auto-scaling-role-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1600)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/attribute-name-list (clojure.spec.alpha/coll-of :portkey.aws.dynamodb.-2012-08-10/attribute-name :min-count 1))
 
@@ -1188,7 +1852,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/describe-time-to-live-input (clojure.spec.alpha/keys :req-un [:portkey.aws.dynamodb.-2012-08-10/table-name] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/backup-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 3 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_.-]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/backup-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 3 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 255)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_.-]+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10.backup-summary/backup-expiry-date-time (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/date))
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/backup-summary (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.dynamodb.-2012-08-10/backup-status :portkey.aws.dynamodb.-2012-08-10/table-id :portkey.aws.dynamodb.-2012-08-10/backup-creation-date-time :portkey.aws.dynamodb.-2012-08-10/backup-name :portkey.aws.dynamodb.-2012-08-10.backup-summary/backup-expiry-date-time :portkey.aws.dynamodb.-2012-08-10/backup-arn :portkey.aws.dynamodb.-2012-08-10/table-name :portkey.aws.dynamodb.-2012-08-10/table-arn :portkey.aws.dynamodb.-2012-08-10/backup-type :portkey.aws.dynamodb.-2012-08-10/backup-size-bytes]))
@@ -1235,7 +1899,7 @@
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10.invalid-restore-time-exception/message (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/error-message))
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/invalid-restore-time-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.dynamodb.-2012-08-10.invalid-restore-time-exception/message]))
 
-(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/backup-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 37 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1024))))
+(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/backup-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 37 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1024))))
 
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10.restore-table-to-point-in-time-input/source-table-name (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/table-name))
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10.restore-table-to-point-in-time-input/target-table-name (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/table-name))
@@ -1283,7 +1947,7 @@
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10.attribute-value-update/action (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/attribute-action))
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/attribute-value-update (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.dynamodb.-2012-08-10.attribute-value-update/value :portkey.aws.dynamodb.-2012-08-10.attribute-value-update/action]))
 
-(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/table-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 3 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_.-]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/table-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 3 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 255)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_.-]+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/global-secondary-indexes (clojure.spec.alpha/coll-of :portkey.aws.dynamodb.-2012-08-10/global-secondary-index-info))
 
@@ -1418,11 +2082,11 @@
 
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/describe-continuous-backups-input (clojure.spec.alpha/keys :req-un [:portkey.aws.dynamodb.-2012-08-10/table-name] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/resource-arn-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1283))))
+(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/resource-arn-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1283))))
 
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/next-token-string (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/key-schema-attribute-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255))))
+(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/key-schema-attribute-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 255))))
 
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/boolean-object clojure.core/boolean?)
 
@@ -1454,111 +2118,111 @@
 
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/replica-settings-description-list (clojure.spec.alpha/coll-of :portkey.aws.dynamodb.-2012-08-10/replica-settings-description))
 
-(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/time-to-live-attribute-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255))))
+(clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/time-to-live-attribute-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 255))))
 
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10.provisioned-throughput-exceeded-exception/message (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/error-message))
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/provisioned-throughput-exceeded-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.dynamodb.-2012-08-10.provisioned-throughput-exceeded-exception/message]))
 
 (clojure.spec.alpha/def :portkey.aws.dynamodb.-2012-08-10/sse-type #{"KMS" :aes-256 :kms "AES256"})
 
-(clojure.core/defn tag-resource ([tag-resource-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-tag-resource-input tag-resource-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/tag-resource-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "TagResource", :http.request.spec/error-spec {"LimitExceededException" :portkey.aws.dynamodb.-2012-08-10/limit-exceeded-exception, "ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error, "ResourceInUseException" :portkey.aws.dynamodb.-2012-08-10/resource-in-use-exception}})))))
+(clojure.core/defn tag-resource ([tag-resource-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-tag-resource-input tag-resource-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/tag-resource-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "TagResource", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {"LimitExceededException" :portkey.aws.dynamodb.-2012-08-10/limit-exceeded-exception, "ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error, "ResourceInUseException" :portkey.aws.dynamodb.-2012-08-10/resource-in-use-exception}})))))
 (clojure.spec.alpha/fdef tag-resource :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/tag-resource-input) :ret clojure.core/true?)
 
-(clojure.core/defn create-global-table ([create-global-table-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-global-table-input create-global-table-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/create-global-table-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/create-global-table-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateGlobalTable", :http.request.spec/error-spec {"LimitExceededException" :portkey.aws.dynamodb.-2012-08-10/limit-exceeded-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error, "GlobalTableAlreadyExistsException" :portkey.aws.dynamodb.-2012-08-10/global-table-already-exists-exception, "TableNotFoundException" :portkey.aws.dynamodb.-2012-08-10/table-not-found-exception}})))))
+(clojure.core/defn create-global-table ([create-global-table-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-create-global-table-input create-global-table-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/create-global-table-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/create-global-table-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateGlobalTable", :http.request.configuration/output-deser-fn deser-create-global-table-output, :http.request.spec/error-spec {"LimitExceededException" :portkey.aws.dynamodb.-2012-08-10/limit-exceeded-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error, "GlobalTableAlreadyExistsException" :portkey.aws.dynamodb.-2012-08-10/global-table-already-exists-exception, "TableNotFoundException" :portkey.aws.dynamodb.-2012-08-10/table-not-found-exception}})))))
 (clojure.spec.alpha/fdef create-global-table :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/create-global-table-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/create-global-table-output))
 
-(clojure.core/defn update-table ([update-table-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-update-table-input update-table-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/update-table-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/update-table-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateTable", :http.request.spec/error-spec {"ResourceInUseException" :portkey.aws.dynamodb.-2012-08-10/resource-in-use-exception, "ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "LimitExceededException" :portkey.aws.dynamodb.-2012-08-10/limit-exceeded-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn update-table ([update-table-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-update-table-input update-table-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/update-table-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/update-table-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateTable", :http.request.configuration/output-deser-fn deser-update-table-output, :http.request.spec/error-spec {"ResourceInUseException" :portkey.aws.dynamodb.-2012-08-10/resource-in-use-exception, "ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "LimitExceededException" :portkey.aws.dynamodb.-2012-08-10/limit-exceeded-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef update-table :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/update-table-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/update-table-output))
 
-(clojure.core/defn describe-endpoints ([] (describe-endpoints {})) ([describe-endpoints-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-endpoints-request describe-endpoints-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/describe-endpoints-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/describe-endpoints-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeEndpoints", :http.request.spec/error-spec {}})))))
+(clojure.core/defn describe-endpoints ([] (describe-endpoints {})) ([describe-endpoints-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-endpoints-request describe-endpoints-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/describe-endpoints-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/describe-endpoints-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeEndpoints", :http.request.configuration/output-deser-fn deser-describe-endpoints-response, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef describe-endpoints :args (clojure.spec.alpha/? :portkey.aws.dynamodb.-2012-08-10/describe-endpoints-request) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/describe-endpoints-response))
 
-(clojure.core/defn update-global-table ([update-global-table-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-update-global-table-input update-global-table-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/update-global-table-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/update-global-table-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateGlobalTable", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error, "GlobalTableNotFoundException" :portkey.aws.dynamodb.-2012-08-10/global-table-not-found-exception, "ReplicaAlreadyExistsException" :portkey.aws.dynamodb.-2012-08-10/replica-already-exists-exception, "ReplicaNotFoundException" :portkey.aws.dynamodb.-2012-08-10/replica-not-found-exception, "TableNotFoundException" :portkey.aws.dynamodb.-2012-08-10/table-not-found-exception}})))))
+(clojure.core/defn update-global-table ([update-global-table-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-update-global-table-input update-global-table-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/update-global-table-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/update-global-table-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateGlobalTable", :http.request.configuration/output-deser-fn deser-update-global-table-output, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error, "GlobalTableNotFoundException" :portkey.aws.dynamodb.-2012-08-10/global-table-not-found-exception, "ReplicaAlreadyExistsException" :portkey.aws.dynamodb.-2012-08-10/replica-already-exists-exception, "ReplicaNotFoundException" :portkey.aws.dynamodb.-2012-08-10/replica-not-found-exception, "TableNotFoundException" :portkey.aws.dynamodb.-2012-08-10/table-not-found-exception}})))))
 (clojure.spec.alpha/fdef update-global-table :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/update-global-table-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/update-global-table-output))
 
-(clojure.core/defn update-item ([update-item-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-update-item-input update-item-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/update-item-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/update-item-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateItem", :http.request.spec/error-spec {"ConditionalCheckFailedException" :portkey.aws.dynamodb.-2012-08-10/conditional-check-failed-exception, "ProvisionedThroughputExceededException" :portkey.aws.dynamodb.-2012-08-10/provisioned-throughput-exceeded-exception, "ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "ItemCollectionSizeLimitExceededException" :portkey.aws.dynamodb.-2012-08-10/item-collection-size-limit-exceeded-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn update-item ([update-item-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-update-item-input update-item-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/update-item-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/update-item-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateItem", :http.request.configuration/output-deser-fn deser-update-item-output, :http.request.spec/error-spec {"ConditionalCheckFailedException" :portkey.aws.dynamodb.-2012-08-10/conditional-check-failed-exception, "ProvisionedThroughputExceededException" :portkey.aws.dynamodb.-2012-08-10/provisioned-throughput-exceeded-exception, "ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "ItemCollectionSizeLimitExceededException" :portkey.aws.dynamodb.-2012-08-10/item-collection-size-limit-exceeded-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef update-item :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/update-item-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/update-item-output))
 
-(clojure.core/defn scan ([scan-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-scan-input scan-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/scan-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/scan-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "Scan", :http.request.spec/error-spec {"ProvisionedThroughputExceededException" :portkey.aws.dynamodb.-2012-08-10/provisioned-throughput-exceeded-exception, "ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn scan ([scan-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-scan-input scan-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/scan-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/scan-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "Scan", :http.request.configuration/output-deser-fn deser-scan-output, :http.request.spec/error-spec {"ProvisionedThroughputExceededException" :portkey.aws.dynamodb.-2012-08-10/provisioned-throughput-exceeded-exception, "ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef scan :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/scan-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/scan-output))
 
-(clojure.core/defn describe-limits ([] (describe-limits {})) ([describe-limits-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-limits-input describe-limits-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/describe-limits-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/describe-limits-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeLimits", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn describe-limits ([] (describe-limits {})) ([describe-limits-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-limits-input describe-limits-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/describe-limits-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/describe-limits-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeLimits", :http.request.configuration/output-deser-fn deser-describe-limits-output, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef describe-limits :args (clojure.spec.alpha/? :portkey.aws.dynamodb.-2012-08-10/describe-limits-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/describe-limits-output))
 
-(clojure.core/defn list-backups ([] (list-backups {})) ([list-backups-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-backups-input list-backups-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/list-backups-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/list-backups-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListBackups", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn list-backups ([] (list-backups {})) ([list-backups-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-backups-input list-backups-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/list-backups-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/list-backups-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListBackups", :http.request.configuration/output-deser-fn deser-list-backups-output, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef list-backups :args (clojure.spec.alpha/? :portkey.aws.dynamodb.-2012-08-10/list-backups-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/list-backups-output))
 
-(clojure.core/defn create-table ([create-table-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-table-input create-table-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/create-table-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/create-table-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateTable", :http.request.spec/error-spec {"ResourceInUseException" :portkey.aws.dynamodb.-2012-08-10/resource-in-use-exception, "LimitExceededException" :portkey.aws.dynamodb.-2012-08-10/limit-exceeded-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn create-table ([create-table-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-create-table-input create-table-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/create-table-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/create-table-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateTable", :http.request.configuration/output-deser-fn deser-create-table-output, :http.request.spec/error-spec {"ResourceInUseException" :portkey.aws.dynamodb.-2012-08-10/resource-in-use-exception, "LimitExceededException" :portkey.aws.dynamodb.-2012-08-10/limit-exceeded-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef create-table :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/create-table-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/create-table-output))
 
-(clojure.core/defn describe-time-to-live ([describe-time-to-live-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-time-to-live-input describe-time-to-live-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/describe-time-to-live-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/describe-time-to-live-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeTimeToLive", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn describe-time-to-live ([describe-time-to-live-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-time-to-live-input describe-time-to-live-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/describe-time-to-live-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/describe-time-to-live-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeTimeToLive", :http.request.configuration/output-deser-fn deser-describe-time-to-live-output, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef describe-time-to-live :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/describe-time-to-live-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/describe-time-to-live-output))
 
-(clojure.core/defn list-tags-of-resource ([list-tags-of-resource-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-tags-of-resource-input list-tags-of-resource-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/list-tags-of-resource-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/list-tags-of-resource-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListTagsOfResource", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn list-tags-of-resource ([list-tags-of-resource-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-tags-of-resource-input list-tags-of-resource-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/list-tags-of-resource-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/list-tags-of-resource-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListTagsOfResource", :http.request.configuration/output-deser-fn deser-list-tags-of-resource-output, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef list-tags-of-resource :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/list-tags-of-resource-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/list-tags-of-resource-output))
 
-(clojure.core/defn describe-global-table ([describe-global-table-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-global-table-input describe-global-table-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/describe-global-table-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/describe-global-table-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeGlobalTable", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error, "GlobalTableNotFoundException" :portkey.aws.dynamodb.-2012-08-10/global-table-not-found-exception}})))))
+(clojure.core/defn describe-global-table ([describe-global-table-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-global-table-input describe-global-table-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/describe-global-table-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/describe-global-table-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeGlobalTable", :http.request.configuration/output-deser-fn deser-describe-global-table-output, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error, "GlobalTableNotFoundException" :portkey.aws.dynamodb.-2012-08-10/global-table-not-found-exception}})))))
 (clojure.spec.alpha/fdef describe-global-table :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/describe-global-table-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/describe-global-table-output))
 
-(clojure.core/defn describe-backup ([describe-backup-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-backup-input describe-backup-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/describe-backup-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/describe-backup-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeBackup", :http.request.spec/error-spec {"BackupNotFoundException" :portkey.aws.dynamodb.-2012-08-10/backup-not-found-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn describe-backup ([describe-backup-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-backup-input describe-backup-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/describe-backup-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/describe-backup-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeBackup", :http.request.configuration/output-deser-fn deser-describe-backup-output, :http.request.spec/error-spec {"BackupNotFoundException" :portkey.aws.dynamodb.-2012-08-10/backup-not-found-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef describe-backup :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/describe-backup-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/describe-backup-output))
 
-(clojure.core/defn update-time-to-live ([update-time-to-live-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-update-time-to-live-input update-time-to-live-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/update-time-to-live-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/update-time-to-live-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateTimeToLive", :http.request.spec/error-spec {"ResourceInUseException" :portkey.aws.dynamodb.-2012-08-10/resource-in-use-exception, "ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "LimitExceededException" :portkey.aws.dynamodb.-2012-08-10/limit-exceeded-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn update-time-to-live ([update-time-to-live-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-update-time-to-live-input update-time-to-live-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/update-time-to-live-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/update-time-to-live-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateTimeToLive", :http.request.configuration/output-deser-fn deser-update-time-to-live-output, :http.request.spec/error-spec {"ResourceInUseException" :portkey.aws.dynamodb.-2012-08-10/resource-in-use-exception, "ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "LimitExceededException" :portkey.aws.dynamodb.-2012-08-10/limit-exceeded-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef update-time-to-live :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/update-time-to-live-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/update-time-to-live-output))
 
-(clojure.core/defn query ([query-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-query-input query-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/query-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/query-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "Query", :http.request.spec/error-spec {"ProvisionedThroughputExceededException" :portkey.aws.dynamodb.-2012-08-10/provisioned-throughput-exceeded-exception, "ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn query ([query-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-query-input query-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/query-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/query-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "Query", :http.request.configuration/output-deser-fn deser-query-output, :http.request.spec/error-spec {"ProvisionedThroughputExceededException" :portkey.aws.dynamodb.-2012-08-10/provisioned-throughput-exceeded-exception, "ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef query :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/query-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/query-output))
 
-(clojure.core/defn describe-global-table-settings ([describe-global-table-settings-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-global-table-settings-input describe-global-table-settings-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/describe-global-table-settings-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/describe-global-table-settings-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeGlobalTableSettings", :http.request.spec/error-spec {"GlobalTableNotFoundException" :portkey.aws.dynamodb.-2012-08-10/global-table-not-found-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn describe-global-table-settings ([describe-global-table-settings-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-global-table-settings-input describe-global-table-settings-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/describe-global-table-settings-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/describe-global-table-settings-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeGlobalTableSettings", :http.request.configuration/output-deser-fn deser-describe-global-table-settings-output, :http.request.spec/error-spec {"GlobalTableNotFoundException" :portkey.aws.dynamodb.-2012-08-10/global-table-not-found-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef describe-global-table-settings :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/describe-global-table-settings-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/describe-global-table-settings-output))
 
-(clojure.core/defn list-global-tables ([] (list-global-tables {})) ([list-global-tables-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-global-tables-input list-global-tables-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/list-global-tables-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/list-global-tables-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListGlobalTables", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn list-global-tables ([] (list-global-tables {})) ([list-global-tables-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-global-tables-input list-global-tables-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/list-global-tables-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/list-global-tables-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListGlobalTables", :http.request.configuration/output-deser-fn deser-list-global-tables-output, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef list-global-tables :args (clojure.spec.alpha/? :portkey.aws.dynamodb.-2012-08-10/list-global-tables-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/list-global-tables-output))
 
-(clojure.core/defn list-tables ([] (list-tables {})) ([list-tables-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-tables-input list-tables-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/list-tables-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/list-tables-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListTables", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn list-tables ([] (list-tables {})) ([list-tables-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-tables-input list-tables-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/list-tables-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/list-tables-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListTables", :http.request.configuration/output-deser-fn deser-list-tables-output, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef list-tables :args (clojure.spec.alpha/? :portkey.aws.dynamodb.-2012-08-10/list-tables-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/list-tables-output))
 
-(clojure.core/defn batch-get-item ([batch-get-item-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-batch-get-item-input batch-get-item-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/batch-get-item-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/batch-get-item-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "BatchGetItem", :http.request.spec/error-spec {"ProvisionedThroughputExceededException" :portkey.aws.dynamodb.-2012-08-10/provisioned-throughput-exceeded-exception, "ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn batch-get-item ([batch-get-item-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-batch-get-item-input batch-get-item-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/batch-get-item-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/batch-get-item-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "BatchGetItem", :http.request.configuration/output-deser-fn deser-batch-get-item-output, :http.request.spec/error-spec {"ProvisionedThroughputExceededException" :portkey.aws.dynamodb.-2012-08-10/provisioned-throughput-exceeded-exception, "ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef batch-get-item :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/batch-get-item-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/batch-get-item-output))
 
-(clojure.core/defn batch-write-item ([batch-write-item-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-batch-write-item-input batch-write-item-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/batch-write-item-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/batch-write-item-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "BatchWriteItem", :http.request.spec/error-spec {"ProvisionedThroughputExceededException" :portkey.aws.dynamodb.-2012-08-10/provisioned-throughput-exceeded-exception, "ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "ItemCollectionSizeLimitExceededException" :portkey.aws.dynamodb.-2012-08-10/item-collection-size-limit-exceeded-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn batch-write-item ([batch-write-item-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-batch-write-item-input batch-write-item-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/batch-write-item-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/batch-write-item-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "BatchWriteItem", :http.request.configuration/output-deser-fn deser-batch-write-item-output, :http.request.spec/error-spec {"ProvisionedThroughputExceededException" :portkey.aws.dynamodb.-2012-08-10/provisioned-throughput-exceeded-exception, "ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "ItemCollectionSizeLimitExceededException" :portkey.aws.dynamodb.-2012-08-10/item-collection-size-limit-exceeded-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef batch-write-item :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/batch-write-item-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/batch-write-item-output))
 
-(clojure.core/defn create-backup ([create-backup-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-backup-input create-backup-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/create-backup-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/create-backup-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateBackup", :http.request.spec/error-spec {"TableNotFoundException" :portkey.aws.dynamodb.-2012-08-10/table-not-found-exception, "TableInUseException" :portkey.aws.dynamodb.-2012-08-10/table-in-use-exception, "ContinuousBackupsUnavailableException" :portkey.aws.dynamodb.-2012-08-10/continuous-backups-unavailable-exception, "BackupInUseException" :portkey.aws.dynamodb.-2012-08-10/backup-in-use-exception, "LimitExceededException" :portkey.aws.dynamodb.-2012-08-10/limit-exceeded-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn create-backup ([create-backup-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-create-backup-input create-backup-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/create-backup-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/create-backup-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateBackup", :http.request.configuration/output-deser-fn deser-create-backup-output, :http.request.spec/error-spec {"TableNotFoundException" :portkey.aws.dynamodb.-2012-08-10/table-not-found-exception, "TableInUseException" :portkey.aws.dynamodb.-2012-08-10/table-in-use-exception, "ContinuousBackupsUnavailableException" :portkey.aws.dynamodb.-2012-08-10/continuous-backups-unavailable-exception, "BackupInUseException" :portkey.aws.dynamodb.-2012-08-10/backup-in-use-exception, "LimitExceededException" :portkey.aws.dynamodb.-2012-08-10/limit-exceeded-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef create-backup :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/create-backup-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/create-backup-output))
 
-(clojure.core/defn get-item ([get-item-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-item-input get-item-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/get-item-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/get-item-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetItem", :http.request.spec/error-spec {"ProvisionedThroughputExceededException" :portkey.aws.dynamodb.-2012-08-10/provisioned-throughput-exceeded-exception, "ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn get-item ([get-item-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-get-item-input get-item-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/get-item-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/get-item-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetItem", :http.request.configuration/output-deser-fn deser-get-item-output, :http.request.spec/error-spec {"ProvisionedThroughputExceededException" :portkey.aws.dynamodb.-2012-08-10/provisioned-throughput-exceeded-exception, "ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef get-item :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/get-item-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/get-item-output))
 
-(clojure.core/defn update-global-table-settings ([update-global-table-settings-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-update-global-table-settings-input update-global-table-settings-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/update-global-table-settings-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/update-global-table-settings-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateGlobalTableSettings", :http.request.spec/error-spec {"GlobalTableNotFoundException" :portkey.aws.dynamodb.-2012-08-10/global-table-not-found-exception, "ReplicaNotFoundException" :portkey.aws.dynamodb.-2012-08-10/replica-not-found-exception, "IndexNotFoundException" :portkey.aws.dynamodb.-2012-08-10/index-not-found-exception, "LimitExceededException" :portkey.aws.dynamodb.-2012-08-10/limit-exceeded-exception, "ResourceInUseException" :portkey.aws.dynamodb.-2012-08-10/resource-in-use-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn update-global-table-settings ([update-global-table-settings-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-update-global-table-settings-input update-global-table-settings-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/update-global-table-settings-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/update-global-table-settings-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateGlobalTableSettings", :http.request.configuration/output-deser-fn deser-update-global-table-settings-output, :http.request.spec/error-spec {"GlobalTableNotFoundException" :portkey.aws.dynamodb.-2012-08-10/global-table-not-found-exception, "ReplicaNotFoundException" :portkey.aws.dynamodb.-2012-08-10/replica-not-found-exception, "IndexNotFoundException" :portkey.aws.dynamodb.-2012-08-10/index-not-found-exception, "LimitExceededException" :portkey.aws.dynamodb.-2012-08-10/limit-exceeded-exception, "ResourceInUseException" :portkey.aws.dynamodb.-2012-08-10/resource-in-use-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef update-global-table-settings :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/update-global-table-settings-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/update-global-table-settings-output))
 
-(clojure.core/defn describe-continuous-backups ([describe-continuous-backups-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-continuous-backups-input describe-continuous-backups-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/describe-continuous-backups-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/describe-continuous-backups-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeContinuousBackups", :http.request.spec/error-spec {"TableNotFoundException" :portkey.aws.dynamodb.-2012-08-10/table-not-found-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn describe-continuous-backups ([describe-continuous-backups-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-continuous-backups-input describe-continuous-backups-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/describe-continuous-backups-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/describe-continuous-backups-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeContinuousBackups", :http.request.configuration/output-deser-fn deser-describe-continuous-backups-output, :http.request.spec/error-spec {"TableNotFoundException" :portkey.aws.dynamodb.-2012-08-10/table-not-found-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef describe-continuous-backups :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/describe-continuous-backups-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/describe-continuous-backups-output))
 
-(clojure.core/defn restore-table-to-point-in-time ([restore-table-to-point-in-time-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-restore-table-to-point-in-time-input restore-table-to-point-in-time-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/restore-table-to-point-in-time-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/restore-table-to-point-in-time-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "RestoreTableToPointInTime", :http.request.spec/error-spec {"TableAlreadyExistsException" :portkey.aws.dynamodb.-2012-08-10/table-already-exists-exception, "TableNotFoundException" :portkey.aws.dynamodb.-2012-08-10/table-not-found-exception, "TableInUseException" :portkey.aws.dynamodb.-2012-08-10/table-in-use-exception, "LimitExceededException" :portkey.aws.dynamodb.-2012-08-10/limit-exceeded-exception, "InvalidRestoreTimeException" :portkey.aws.dynamodb.-2012-08-10/invalid-restore-time-exception, "PointInTimeRecoveryUnavailableException" :portkey.aws.dynamodb.-2012-08-10/point-in-time-recovery-unavailable-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn restore-table-to-point-in-time ([restore-table-to-point-in-time-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-restore-table-to-point-in-time-input restore-table-to-point-in-time-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/restore-table-to-point-in-time-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/restore-table-to-point-in-time-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "RestoreTableToPointInTime", :http.request.configuration/output-deser-fn deser-restore-table-to-point-in-time-output, :http.request.spec/error-spec {"TableAlreadyExistsException" :portkey.aws.dynamodb.-2012-08-10/table-already-exists-exception, "TableNotFoundException" :portkey.aws.dynamodb.-2012-08-10/table-not-found-exception, "TableInUseException" :portkey.aws.dynamodb.-2012-08-10/table-in-use-exception, "LimitExceededException" :portkey.aws.dynamodb.-2012-08-10/limit-exceeded-exception, "InvalidRestoreTimeException" :portkey.aws.dynamodb.-2012-08-10/invalid-restore-time-exception, "PointInTimeRecoveryUnavailableException" :portkey.aws.dynamodb.-2012-08-10/point-in-time-recovery-unavailable-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef restore-table-to-point-in-time :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/restore-table-to-point-in-time-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/restore-table-to-point-in-time-output))
 
-(clojure.core/defn untag-resource ([untag-resource-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-untag-resource-input untag-resource-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/untag-resource-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UntagResource", :http.request.spec/error-spec {"LimitExceededException" :portkey.aws.dynamodb.-2012-08-10/limit-exceeded-exception, "ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error, "ResourceInUseException" :portkey.aws.dynamodb.-2012-08-10/resource-in-use-exception}})))))
+(clojure.core/defn untag-resource ([untag-resource-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-untag-resource-input untag-resource-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/untag-resource-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UntagResource", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {"LimitExceededException" :portkey.aws.dynamodb.-2012-08-10/limit-exceeded-exception, "ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error, "ResourceInUseException" :portkey.aws.dynamodb.-2012-08-10/resource-in-use-exception}})))))
 (clojure.spec.alpha/fdef untag-resource :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/untag-resource-input) :ret clojure.core/true?)
 
-(clojure.core/defn update-continuous-backups ([update-continuous-backups-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-update-continuous-backups-input update-continuous-backups-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/update-continuous-backups-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/update-continuous-backups-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateContinuousBackups", :http.request.spec/error-spec {"TableNotFoundException" :portkey.aws.dynamodb.-2012-08-10/table-not-found-exception, "ContinuousBackupsUnavailableException" :portkey.aws.dynamodb.-2012-08-10/continuous-backups-unavailable-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn update-continuous-backups ([update-continuous-backups-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-update-continuous-backups-input update-continuous-backups-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/update-continuous-backups-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/update-continuous-backups-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateContinuousBackups", :http.request.configuration/output-deser-fn deser-update-continuous-backups-output, :http.request.spec/error-spec {"TableNotFoundException" :portkey.aws.dynamodb.-2012-08-10/table-not-found-exception, "ContinuousBackupsUnavailableException" :portkey.aws.dynamodb.-2012-08-10/continuous-backups-unavailable-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef update-continuous-backups :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/update-continuous-backups-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/update-continuous-backups-output))
 
-(clojure.core/defn delete-backup ([delete-backup-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-backup-input delete-backup-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/delete-backup-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/delete-backup-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteBackup", :http.request.spec/error-spec {"BackupNotFoundException" :portkey.aws.dynamodb.-2012-08-10/backup-not-found-exception, "BackupInUseException" :portkey.aws.dynamodb.-2012-08-10/backup-in-use-exception, "LimitExceededException" :portkey.aws.dynamodb.-2012-08-10/limit-exceeded-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn delete-backup ([delete-backup-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-backup-input delete-backup-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/delete-backup-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/delete-backup-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteBackup", :http.request.configuration/output-deser-fn deser-delete-backup-output, :http.request.spec/error-spec {"BackupNotFoundException" :portkey.aws.dynamodb.-2012-08-10/backup-not-found-exception, "BackupInUseException" :portkey.aws.dynamodb.-2012-08-10/backup-in-use-exception, "LimitExceededException" :portkey.aws.dynamodb.-2012-08-10/limit-exceeded-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef delete-backup :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/delete-backup-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/delete-backup-output))
 
-(clojure.core/defn delete-item ([delete-item-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-item-input delete-item-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/delete-item-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/delete-item-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteItem", :http.request.spec/error-spec {"ConditionalCheckFailedException" :portkey.aws.dynamodb.-2012-08-10/conditional-check-failed-exception, "ProvisionedThroughputExceededException" :portkey.aws.dynamodb.-2012-08-10/provisioned-throughput-exceeded-exception, "ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "ItemCollectionSizeLimitExceededException" :portkey.aws.dynamodb.-2012-08-10/item-collection-size-limit-exceeded-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn delete-item ([delete-item-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-item-input delete-item-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/delete-item-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/delete-item-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteItem", :http.request.configuration/output-deser-fn deser-delete-item-output, :http.request.spec/error-spec {"ConditionalCheckFailedException" :portkey.aws.dynamodb.-2012-08-10/conditional-check-failed-exception, "ProvisionedThroughputExceededException" :portkey.aws.dynamodb.-2012-08-10/provisioned-throughput-exceeded-exception, "ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "ItemCollectionSizeLimitExceededException" :portkey.aws.dynamodb.-2012-08-10/item-collection-size-limit-exceeded-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef delete-item :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/delete-item-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/delete-item-output))
 
-(clojure.core/defn restore-table-from-backup ([restore-table-from-backup-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-restore-table-from-backup-input restore-table-from-backup-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/restore-table-from-backup-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/restore-table-from-backup-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "RestoreTableFromBackup", :http.request.spec/error-spec {"TableAlreadyExistsException" :portkey.aws.dynamodb.-2012-08-10/table-already-exists-exception, "TableInUseException" :portkey.aws.dynamodb.-2012-08-10/table-in-use-exception, "BackupNotFoundException" :portkey.aws.dynamodb.-2012-08-10/backup-not-found-exception, "BackupInUseException" :portkey.aws.dynamodb.-2012-08-10/backup-in-use-exception, "LimitExceededException" :portkey.aws.dynamodb.-2012-08-10/limit-exceeded-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn restore-table-from-backup ([restore-table-from-backup-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-restore-table-from-backup-input restore-table-from-backup-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/restore-table-from-backup-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/restore-table-from-backup-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "RestoreTableFromBackup", :http.request.configuration/output-deser-fn deser-restore-table-from-backup-output, :http.request.spec/error-spec {"TableAlreadyExistsException" :portkey.aws.dynamodb.-2012-08-10/table-already-exists-exception, "TableInUseException" :portkey.aws.dynamodb.-2012-08-10/table-in-use-exception, "BackupNotFoundException" :portkey.aws.dynamodb.-2012-08-10/backup-not-found-exception, "BackupInUseException" :portkey.aws.dynamodb.-2012-08-10/backup-in-use-exception, "LimitExceededException" :portkey.aws.dynamodb.-2012-08-10/limit-exceeded-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef restore-table-from-backup :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/restore-table-from-backup-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/restore-table-from-backup-output))
 
-(clojure.core/defn put-item ([put-item-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-put-item-input put-item-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/put-item-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/put-item-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutItem", :http.request.spec/error-spec {"ConditionalCheckFailedException" :portkey.aws.dynamodb.-2012-08-10/conditional-check-failed-exception, "ProvisionedThroughputExceededException" :portkey.aws.dynamodb.-2012-08-10/provisioned-throughput-exceeded-exception, "ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "ItemCollectionSizeLimitExceededException" :portkey.aws.dynamodb.-2012-08-10/item-collection-size-limit-exceeded-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn put-item ([put-item-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-put-item-input put-item-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/put-item-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/put-item-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutItem", :http.request.configuration/output-deser-fn deser-put-item-output, :http.request.spec/error-spec {"ConditionalCheckFailedException" :portkey.aws.dynamodb.-2012-08-10/conditional-check-failed-exception, "ProvisionedThroughputExceededException" :portkey.aws.dynamodb.-2012-08-10/provisioned-throughput-exceeded-exception, "ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "ItemCollectionSizeLimitExceededException" :portkey.aws.dynamodb.-2012-08-10/item-collection-size-limit-exceeded-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef put-item :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/put-item-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/put-item-output))
 
-(clojure.core/defn describe-table ([describe-table-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-table-input describe-table-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/describe-table-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/describe-table-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeTable", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn describe-table ([describe-table-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-table-input describe-table-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/describe-table-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/describe-table-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeTable", :http.request.configuration/output-deser-fn deser-describe-table-output, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef describe-table :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/describe-table-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/describe-table-output))
 
-(clojure.core/defn delete-table ([delete-table-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-table-input delete-table-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/delete-table-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/delete-table-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteTable", :http.request.spec/error-spec {"ResourceInUseException" :portkey.aws.dynamodb.-2012-08-10/resource-in-use-exception, "ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "LimitExceededException" :portkey.aws.dynamodb.-2012-08-10/limit-exceeded-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
+(clojure.core/defn delete-table ([delete-table-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-table-input delete-table-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.dynamodb.-2012-08-10/endpoints, :http.request.configuration/target-prefix "DynamoDB_20120810", :http.request.spec/output-spec :portkey.aws.dynamodb.-2012-08-10/delete-table-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id "DynamoDB", :http.request.spec/input-spec :portkey.aws.dynamodb.-2012-08-10/delete-table-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteTable", :http.request.configuration/output-deser-fn deser-delete-table-output, :http.request.spec/error-spec {"ResourceInUseException" :portkey.aws.dynamodb.-2012-08-10/resource-in-use-exception, "ResourceNotFoundException" :portkey.aws.dynamodb.-2012-08-10/resource-not-found-exception, "LimitExceededException" :portkey.aws.dynamodb.-2012-08-10/limit-exceeded-exception, "InternalServerError" :portkey.aws.dynamodb.-2012-08-10/internal-server-error}})))))
 (clojure.spec.alpha/fdef delete-table :args (clojure.spec.alpha/tuple :portkey.aws.dynamodb.-2012-08-10/delete-table-input) :ret (clojure.spec.alpha/and :portkey.aws.dynamodb.-2012-08-10/delete-table-output))

@@ -40,11 +40,63 @@
 
 (clojure.core/defn- req-get-entitlements-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-product-code (input :product-code)) #:http.request.field{:name "ProductCode", :shape "ProductCode"})]} (clojure.core/contains? input :filter) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-get-entitlement-filters (input :filter)) #:http.request.field{:name "Filter", :shape "GetEntitlementFilters"})) (clojure.core/contains? input :next-token) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-non-empty-string (input :next-token)) #:http.request.field{:name "NextToken", :shape "NonEmptyString"})) (clojure.core/contains? input :max-results) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer (input :max-results)) #:http.request.field{:name "MaxResults", :shape "Integer"}))))
 
+(clojure.core/declare deser-double)
+
+(clojure.core/declare deser-non-empty-string)
+
+(clojure.core/declare deser-error-message)
+
+(clojure.core/declare deser-entitlement)
+
+(clojure.core/declare deser-entitlement-value)
+
+(clojure.core/declare deser-integer)
+
+(clojure.core/declare deser-string)
+
+(clojure.core/declare deser-timestamp)
+
+(clojure.core/declare deser-product-code)
+
+(clojure.core/declare deser-entitlement-list)
+
+(clojure.core/declare deser-boolean)
+
+(clojure.core/defn- deser-double [input] input)
+
+(clojure.core/defn- deser-non-empty-string [input] input)
+
+(clojure.core/defn- deser-error-message [input] input)
+
+(clojure.core/defn- deser-entitlement [input] (clojure.core/cond-> {} (clojure.core/contains? input "ProductCode") (clojure.core/assoc :product-code (deser-product-code (input "ProductCode"))) (clojure.core/contains? input "Dimension") (clojure.core/assoc :dimension (deser-non-empty-string (input "Dimension"))) (clojure.core/contains? input "CustomerIdentifier") (clojure.core/assoc :customer-identifier (deser-non-empty-string (input "CustomerIdentifier"))) (clojure.core/contains? input "Value") (clojure.core/assoc :value (deser-entitlement-value (input "Value"))) (clojure.core/contains? input "ExpirationDate") (clojure.core/assoc :expiration-date (deser-timestamp (input "ExpirationDate")))))
+
+(clojure.core/defn- deser-entitlement-value [input] (clojure.core/cond-> {} (clojure.core/contains? input "IntegerValue") (clojure.core/assoc :integer-value (deser-integer (input "IntegerValue"))) (clojure.core/contains? input "DoubleValue") (clojure.core/assoc :double-value (deser-double (input "DoubleValue"))) (clojure.core/contains? input "BooleanValue") (clojure.core/assoc :boolean-value (deser-boolean (input "BooleanValue"))) (clojure.core/contains? input "StringValue") (clojure.core/assoc :string-value (deser-string (input "StringValue")))))
+
+(clojure.core/defn- deser-integer [input] input)
+
+(clojure.core/defn- deser-string [input] input)
+
+(clojure.core/defn- deser-timestamp [input] input)
+
+(clojure.core/defn- deser-product-code [input] input)
+
+(clojure.core/defn- deser-entitlement-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-entitlement coll))) input))
+
+(clojure.core/defn- deser-boolean [input] input)
+
+(clojure.core/defn- deser-get-entitlements-result [input] (clojure.core/cond-> {} (clojure.core/contains? input "Entitlements") (clojure.core/assoc :entitlements (deser-entitlement-list (input "Entitlements"))) (clojure.core/contains? input "NextToken") (clojure.core/assoc :next-token (deser-non-empty-string (input "NextToken")))))
+
+(clojure.core/defn- deser-internal-service-error-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-throttling-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-invalid-parameter-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
 (clojure.spec.alpha/def :portkey.aws.entitlement-marketplace/double clojure.core/double?)
 
 (clojure.spec.alpha/def :portkey.aws.entitlement-marketplace/filter-value-list (clojure.spec.alpha/coll-of :portkey.aws.entitlement-marketplace/filter-value :min-count 1))
 
-(clojure.spec.alpha/def :portkey.aws.entitlement-marketplace/non-empty-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"\S+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.entitlement-marketplace/non-empty-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"\S+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.entitlement-marketplace.get-entitlements-result/entitlements (clojure.spec.alpha/and :portkey.aws.entitlement-marketplace/entitlement-list))
 (clojure.spec.alpha/def :portkey.aws.entitlement-marketplace.get-entitlements-result/next-token (clojure.spec.alpha/and :portkey.aws.entitlement-marketplace/non-empty-string))
@@ -77,7 +129,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.entitlement-marketplace/timestamp clojure.core/inst?)
 
-(clojure.spec.alpha/def :portkey.aws.entitlement-marketplace/product-code (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255))))
+(clojure.spec.alpha/def :portkey.aws.entitlement-marketplace/product-code (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 255))))
 
 (clojure.spec.alpha/def :portkey.aws.entitlement-marketplace.throttling-exception/message (clojure.spec.alpha/and :portkey.aws.entitlement-marketplace/error-message))
 (clojure.spec.alpha/def :portkey.aws.entitlement-marketplace/throttling-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.entitlement-marketplace.throttling-exception/message]))
@@ -96,5 +148,5 @@
 
 (clojure.spec.alpha/def :portkey.aws.entitlement-marketplace/boolean clojure.core/boolean?)
 
-(clojure.core/defn get-entitlements ([get-entitlements-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-entitlements-request get-entitlements-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.entitlement-marketplace/endpoints, :http.request.configuration/target-prefix "AWSMPEntitlementService", :http.request.spec/output-spec :portkey.aws.entitlement-marketplace/get-entitlements-result, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-01-11", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.entitlement-marketplace/get-entitlements-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetEntitlements", :http.request.spec/error-spec {"InvalidParameterException" :portkey.aws.entitlement-marketplace/invalid-parameter-exception, "ThrottlingException" :portkey.aws.entitlement-marketplace/throttling-exception, "InternalServiceErrorException" :portkey.aws.entitlement-marketplace/internal-service-error-exception}})))))
+(clojure.core/defn get-entitlements ([get-entitlements-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-get-entitlements-request get-entitlements-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.entitlement-marketplace/endpoints, :http.request.configuration/target-prefix "AWSMPEntitlementService", :http.request.spec/output-spec :portkey.aws.entitlement-marketplace/get-entitlements-result, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-01-11", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.entitlement-marketplace/get-entitlements-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetEntitlements", :http.request.configuration/output-deser-fn deser-get-entitlements-result, :http.request.spec/error-spec {"InvalidParameterException" :portkey.aws.entitlement-marketplace/invalid-parameter-exception, "ThrottlingException" :portkey.aws.entitlement-marketplace/throttling-exception, "InternalServiceErrorException" :portkey.aws.entitlement-marketplace/internal-service-error-exception}})))))
 (clojure.spec.alpha/fdef get-entitlements :args (clojure.spec.alpha/tuple :portkey.aws.entitlement-marketplace/get-entitlements-request) :ret (clojure.spec.alpha/and :portkey.aws.entitlement-marketplace/get-entitlements-result))

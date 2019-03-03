@@ -152,6 +152,202 @@
 
 (clojure.core/defn- req-delete-named-query-input [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-named-query-id (input :named-query-id)) #:http.request.field{:name "NamedQueryId", :shape "NamedQueryId", :idempotency-token true})]}))
 
+(clojure.core/declare deser-unprocessed-named-query-id)
+
+(clojure.core/declare deser-query-execution-state)
+
+(clojure.core/declare deser-query-execution-id)
+
+(clojure.core/declare deser-encryption-configuration)
+
+(clojure.core/declare deser-named-query-id-list)
+
+(clojure.core/declare deser-database-string)
+
+(clojure.core/declare deser-query-execution-status)
+
+(clojure.core/declare deser-encryption-option)
+
+(clojure.core/declare deser-query-string)
+
+(clojure.core/declare deserdatum-string)
+
+(clojure.core/declare deser-error-message)
+
+(clojure.core/declare deser-named-query-id)
+
+(clojure.core/declare deser-date)
+
+(clojure.core/declare deser-row)
+
+(clojure.core/declare deser-column-info)
+
+(clojure.core/declare deser-throttle-reason)
+
+(clojure.core/declare deser-named-query)
+
+(clojure.core/declare deser-query-execution-context)
+
+(clojure.core/declare deser-error-code)
+
+(clojure.core/declare deser-column-nullable)
+
+(clojure.core/declare deser-query-execution-id-list)
+
+(clojure.core/declare deser-result-set)
+
+(clojure.core/declare deser-result-set-metadata)
+
+(clojure.core/declare deser-integer)
+
+(clojure.core/declare deser-string)
+
+(clojure.core/declare deser-name-string)
+
+(clojure.core/declare deser-query-execution-statistics)
+
+(clojure.core/declare deser-unprocessed-named-query-id-list)
+
+(clojure.core/declare deser-description-string)
+
+(clojure.core/declare deser-query-execution-list)
+
+(clojure.core/declare deser-row-list)
+
+(clojure.core/declare deser-unprocessed-query-execution-id)
+
+(clojure.core/declare deser-long)
+
+(clojure.core/declare deser-unprocessed-query-execution-id-list)
+
+(clojure.core/declare deserdatum-list)
+
+(clojure.core/declare deser-column-info-list)
+
+(clojure.core/declare deser-query-execution)
+
+(clojure.core/declare deser-result-configuration)
+
+(clojure.core/declare deser-named-query-list)
+
+(clojure.core/declare deser-token)
+
+(clojure.core/declare deser-datum)
+
+(clojure.core/declare deser-boolean)
+
+(clojure.core/defn- deser-unprocessed-named-query-id [input] (clojure.core/cond-> {} (clojure.core/contains? input "NamedQueryId") (clojure.core/assoc :named-query-id (deser-named-query-id (input "NamedQueryId"))) (clojure.core/contains? input "ErrorCode") (clojure.core/assoc :error-code (deser-error-code (input "ErrorCode"))) (clojure.core/contains? input "ErrorMessage") (clojure.core/assoc :error-message (deser-error-message (input "ErrorMessage")))))
+
+(clojure.core/defn- deser-query-execution-state [input] (clojure.core/get {"QUEUED" :queued, "RUNNING" :running, "SUCCEEDED" :succeeded, "FAILED" :failed, "CANCELLED" :cancelled} input))
+
+(clojure.core/defn- deser-query-execution-id [input] input)
+
+(clojure.core/defn- deser-encryption-configuration [input] (clojure.core/cond-> {:encryption-option (deser-encryption-option (input "EncryptionOption"))} (clojure.core/contains? input "KmsKey") (clojure.core/assoc :kms-key (deser-string (input "KmsKey")))))
+
+(clojure.core/defn- deser-named-query-id-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-named-query-id coll))) input))
+
+(clojure.core/defn- deser-database-string [input] input)
+
+(clojure.core/defn- deser-query-execution-status [input] (clojure.core/cond-> {} (clojure.core/contains? input "State") (clojure.core/assoc :state (deser-query-execution-state (input "State"))) (clojure.core/contains? input "StateChangeReason") (clojure.core/assoc :state-change-reason (deser-string (input "StateChangeReason"))) (clojure.core/contains? input "SubmissionDateTime") (clojure.core/assoc :submission-date-time (deser-date (input "SubmissionDateTime"))) (clojure.core/contains? input "CompletionDateTime") (clojure.core/assoc :completion-date-time (deser-date (input "CompletionDateTime")))))
+
+(clojure.core/defn- deser-encryption-option [input] (clojure.core/get {"SSE_S3" :sse-s-3, "SSE_KMS" :sse-kms, "CSE_KMS" :cse-kms} input))
+
+(clojure.core/defn- deser-query-string [input] input)
+
+(clojure.core/defn- deserdatum-string [input] input)
+
+(clojure.core/defn- deser-error-message [input] input)
+
+(clojure.core/defn- deser-named-query-id [input] input)
+
+(clojure.core/defn- deser-date [input] input)
+
+(clojure.core/defn- deser-row [input] (clojure.core/cond-> {} (clojure.core/contains? input "Data") (clojure.core/assoc :data (deserdatum-list (input "Data")))))
+
+(clojure.core/defn- deser-column-info [input] (clojure.core/cond-> {:name (deser-string (input "Name")), :type (deser-string (input "Type"))} (clojure.core/contains? input "Precision") (clojure.core/assoc :precision (deser-integer (input "Precision"))) (clojure.core/contains? input "Nullable") (clojure.core/assoc :nullable (deser-column-nullable (input "Nullable"))) (clojure.core/contains? input "CatalogName") (clojure.core/assoc :catalog-name (deser-string (input "CatalogName"))) (clojure.core/contains? input "CaseSensitive") (clojure.core/assoc :case-sensitive (deser-boolean (input "CaseSensitive"))) (clojure.core/contains? input "Scale") (clojure.core/assoc :scale (deser-integer (input "Scale"))) (clojure.core/contains? input "Label") (clojure.core/assoc :label (deser-string (input "Label"))) (clojure.core/contains? input "TableName") (clojure.core/assoc :table-name (deser-string (input "TableName"))) (clojure.core/contains? input "SchemaName") (clojure.core/assoc :schema-name (deser-string (input "SchemaName")))))
+
+(clojure.core/defn- deser-throttle-reason [input] (clojure.core/get {"CONCURRENT_QUERY_LIMIT_EXCEEDED" :concurrent-query-limit-exceeded} input))
+
+(clojure.core/defn- deser-named-query [input] (clojure.core/cond-> {:name (deser-name-string (input "Name")), :database (deser-database-string (input "Database")), :query-string (deser-query-string (input "QueryString"))} (clojure.core/contains? input "Description") (clojure.core/assoc :description (deser-description-string (input "Description"))) (clojure.core/contains? input "NamedQueryId") (clojure.core/assoc :named-query-id (deser-named-query-id (input "NamedQueryId")))))
+
+(clojure.core/defn- deser-query-execution-context [input] (clojure.core/cond-> {} (clojure.core/contains? input "Database") (clojure.core/assoc :database (deser-database-string (input "Database")))))
+
+(clojure.core/defn- deser-error-code [input] input)
+
+(clojure.core/defn- deser-column-nullable [input] (clojure.core/get {"NOT_NULL" :not-null, "NULLABLE" :nullable, "UNKNOWN" :unknown} input))
+
+(clojure.core/defn- deser-query-execution-id-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-query-execution-id coll))) input))
+
+(clojure.core/defn- deser-result-set [input] (clojure.core/cond-> {} (clojure.core/contains? input "Rows") (clojure.core/assoc :rows (deser-row-list (input "Rows"))) (clojure.core/contains? input "ResultSetMetadata") (clojure.core/assoc :result-set-metadata (deser-result-set-metadata (input "ResultSetMetadata")))))
+
+(clojure.core/defn- deser-result-set-metadata [input] (clojure.core/cond-> {} (clojure.core/contains? input "ColumnInfo") (clojure.core/assoc :column-info (deser-column-info-list (input "ColumnInfo")))))
+
+(clojure.core/defn- deser-integer [input] input)
+
+(clojure.core/defn- deser-string [input] input)
+
+(clojure.core/defn- deser-name-string [input] input)
+
+(clojure.core/defn- deser-query-execution-statistics [input] (clojure.core/cond-> {} (clojure.core/contains? input "EngineExecutionTimeInMillis") (clojure.core/assoc :engine-execution-time-in-millis (deser-long (input "EngineExecutionTimeInMillis"))) (clojure.core/contains? input "DataScannedInBytes") (clojure.core/assoc :data-scanned-in-bytes (deser-long (input "DataScannedInBytes")))))
+
+(clojure.core/defn- deser-unprocessed-named-query-id-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-unprocessed-named-query-id coll))) input))
+
+(clojure.core/defn- deser-description-string [input] input)
+
+(clojure.core/defn- deser-query-execution-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-query-execution coll))) input))
+
+(clojure.core/defn- deser-row-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-row coll))) input))
+
+(clojure.core/defn- deser-unprocessed-query-execution-id [input] (clojure.core/cond-> {} (clojure.core/contains? input "QueryExecutionId") (clojure.core/assoc :query-execution-id (deser-query-execution-id (input "QueryExecutionId"))) (clojure.core/contains? input "ErrorCode") (clojure.core/assoc :error-code (deser-error-code (input "ErrorCode"))) (clojure.core/contains? input "ErrorMessage") (clojure.core/assoc :error-message (deser-error-message (input "ErrorMessage")))))
+
+(clojure.core/defn- deser-long [input] input)
+
+(clojure.core/defn- deser-unprocessed-query-execution-id-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-unprocessed-query-execution-id coll))) input))
+
+(clojure.core/defn- deserdatum-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-datum coll))) input))
+
+(clojure.core/defn- deser-column-info-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-column-info coll))) input))
+
+(clojure.core/defn- deser-query-execution [input] (clojure.core/cond-> {} (clojure.core/contains? input "QueryExecutionId") (clojure.core/assoc :query-execution-id (deser-query-execution-id (input "QueryExecutionId"))) (clojure.core/contains? input "Query") (clojure.core/assoc :query (deser-query-string (input "Query"))) (clojure.core/contains? input "ResultConfiguration") (clojure.core/assoc :result-configuration (deser-result-configuration (input "ResultConfiguration"))) (clojure.core/contains? input "QueryExecutionContext") (clojure.core/assoc :query-execution-context (deser-query-execution-context (input "QueryExecutionContext"))) (clojure.core/contains? input "Status") (clojure.core/assoc :status (deser-query-execution-status (input "Status"))) (clojure.core/contains? input "Statistics") (clojure.core/assoc :statistics (deser-query-execution-statistics (input "Statistics")))))
+
+(clojure.core/defn- deser-result-configuration [input] (clojure.core/cond-> {:output-location (deser-string (input "OutputLocation"))} (clojure.core/contains? input "EncryptionConfiguration") (clojure.core/assoc :encryption-configuration (deser-encryption-configuration (input "EncryptionConfiguration")))))
+
+(clojure.core/defn- deser-named-query-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-named-query coll))) input))
+
+(clojure.core/defn- deser-token [input] input)
+
+(clojure.core/defn- deser-datum [input] (clojure.core/cond-> {} (clojure.core/contains? input "VarCharValue") (clojure.core/assoc :var-char-value (deserdatum-string (input "VarCharValue")))))
+
+(clojure.core/defn- deser-boolean [input] input)
+
+(clojure.core/defn- deser-stop-query-execution-output [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-invalid-request-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "AthenaErrorCode") (clojure.core/assoc :athena-error-code (deser-error-code (input "AthenaErrorCode"))) (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-error-message (input "Message")))))
+
+(clojure.core/defn- deser-get-query-execution-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "QueryExecution") (clojure.core/assoc :query-execution (deser-query-execution (input "QueryExecution")))))
+
+(clojure.core/defn- deser-list-named-queries-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "NamedQueryIds") (clojure.core/assoc :named-query-ids (deser-named-query-id-list (input "NamedQueryIds"))) (clojure.core/contains? input "NextToken") (clojure.core/assoc :next-token (deser-token (input "NextToken")))))
+
+(clojure.core/defn- deser-too-many-requests-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-error-message (input "Message"))) (clojure.core/contains? input "Reason") (clojure.core/assoc :reason (deser-throttle-reason (input "Reason")))))
+
+(clojure.core/defn- deser-batch-get-named-query-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "NamedQueries") (clojure.core/assoc :named-queries (deser-named-query-list (input "NamedQueries"))) (clojure.core/contains? input "UnprocessedNamedQueryIds") (clojure.core/assoc :unprocessed-named-query-ids (deser-unprocessed-named-query-id-list (input "UnprocessedNamedQueryIds")))))
+
+(clojure.core/defn- deser-internal-server-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-error-message (input "Message")))))
+
+(clojure.core/defn- deser-create-named-query-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "NamedQueryId") (clojure.core/assoc :named-query-id (deser-named-query-id (input "NamedQueryId")))))
+
+(clojure.core/defn- deser-start-query-execution-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "QueryExecutionId") (clojure.core/assoc :query-execution-id (deser-query-execution-id (input "QueryExecutionId")))))
+
+(clojure.core/defn- deser-get-named-query-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "NamedQuery") (clojure.core/assoc :named-query (deser-named-query (input "NamedQuery")))))
+
+(clojure.core/defn- deser-delete-named-query-output [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-batch-get-query-execution-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "QueryExecutions") (clojure.core/assoc :query-executions (deser-query-execution-list (input "QueryExecutions"))) (clojure.core/contains? input "UnprocessedQueryExecutionIds") (clojure.core/assoc :unprocessed-query-execution-ids (deser-unprocessed-query-execution-id-list (input "UnprocessedQueryExecutionIds")))))
+
+(clojure.core/defn- deser-get-query-results-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "ResultSet") (clojure.core/assoc :result-set (deser-result-set (input "ResultSet"))) (clojure.core/contains? input "NextToken") (clojure.core/assoc :next-token (deser-token (input "NextToken")))))
+
+(clojure.core/defn- deser-list-query-executions-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "QueryExecutionIds") (clojure.core/assoc :query-execution-ids (deser-query-execution-id-list (input "QueryExecutionIds"))) (clojure.core/contains? input "NextToken") (clojure.core/assoc :next-token (deser-token (input "NextToken")))))
+
 (clojure.spec.alpha/def :portkey.aws.athena/unprocessed-named-query-id (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.athena/named-query-id :portkey.aws.athena/error-code :portkey.aws.athena/error-message]))
 
 (clojure.spec.alpha/def :portkey.aws.athena/stop-query-execution-output (clojure.spec.alpha/keys :req-un [] :opt-un []))
@@ -173,7 +369,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.athena/named-query-id-list (clojure.spec.alpha/coll-of :portkey.aws.athena/named-query-id :min-count 1 :max-count 50))
 
-(clojure.spec.alpha/def :portkey.aws.athena/database-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 32))))
+(clojure.spec.alpha/def :portkey.aws.athena/database-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 32))))
 
 (clojure.spec.alpha/def :portkey.aws.athena.batch-get-query-execution-input/query-execution-ids (clojure.spec.alpha/and :portkey.aws.athena/query-execution-id-list))
 (clojure.spec.alpha/def :portkey.aws.athena/batch-get-query-execution-input (clojure.spec.alpha/keys :req-un [:portkey.aws.athena.batch-get-query-execution-input/query-execution-ids] :opt-un []))
@@ -186,7 +382,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.athena/encryption-option #{:sse-kms :cse-kms :sse-s-3 "CSE_KMS" "SSE_S3" "SSE_KMS"})
 
-(clojure.spec.alpha/def :portkey.aws.athena/query-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 262144))))
+(clojure.spec.alpha/def :portkey.aws.athena/query-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 262144))))
 
 (clojure.spec.alpha/def :portkey.aws.athena.batch-get-named-query-input/named-query-ids (clojure.spec.alpha/and :portkey.aws.athena/named-query-id-list))
 (clojure.spec.alpha/def :portkey.aws.athena/batch-get-named-query-input (clojure.spec.alpha/keys :req-un [:portkey.aws.athena.batch-get-named-query-input/named-query-ids] :opt-un []))
@@ -242,7 +438,7 @@
 (clojure.spec.alpha/def :portkey.aws.athena.batch-get-named-query-output/unprocessed-named-query-ids (clojure.spec.alpha/and :portkey.aws.athena/unprocessed-named-query-id-list))
 (clojure.spec.alpha/def :portkey.aws.athena/batch-get-named-query-output (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.athena.batch-get-named-query-output/named-queries :portkey.aws.athena.batch-get-named-query-output/unprocessed-named-query-ids]))
 
-(clojure.spec.alpha/def :portkey.aws.athena/error-code (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256))))
+(clojure.spec.alpha/def :portkey.aws.athena/error-code (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 256))))
 
 (clojure.spec.alpha/def :portkey.aws.athena.internal-server-exception/message (clojure.spec.alpha/and :portkey.aws.athena/error-message))
 (clojure.spec.alpha/def :portkey.aws.athena/internal-server-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.athena.internal-server-exception/message]))
@@ -282,7 +478,7 @@
 (clojure.spec.alpha/def :portkey.aws.athena.start-query-execution-input/client-request-token (clojure.spec.alpha/and :portkey.aws.athena/idempotency-token))
 (clojure.spec.alpha/def :portkey.aws.athena/start-query-execution-input (clojure.spec.alpha/keys :req-un [:portkey.aws.athena/query-string :portkey.aws.athena/result-configuration] :opt-un [:portkey.aws.athena.start-query-execution-input/client-request-token :portkey.aws.athena/query-execution-context]))
 
-(clojure.spec.alpha/def :portkey.aws.athena/name-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 128))))
+(clojure.spec.alpha/def :portkey.aws.athena/name-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 128))))
 
 (clojure.spec.alpha/def :portkey.aws.athena/delete-named-query-output (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
@@ -296,13 +492,13 @@
 (clojure.spec.alpha/def :portkey.aws.athena.batch-get-query-execution-output/unprocessed-query-execution-ids (clojure.spec.alpha/and :portkey.aws.athena/unprocessed-query-execution-id-list))
 (clojure.spec.alpha/def :portkey.aws.athena/batch-get-query-execution-output (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.athena.batch-get-query-execution-output/query-executions :portkey.aws.athena.batch-get-query-execution-output/unprocessed-query-execution-ids]))
 
-(clojure.spec.alpha/def :portkey.aws.athena/description-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1024))))
+(clojure.spec.alpha/def :portkey.aws.athena/description-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1024))))
 
 (clojure.spec.alpha/def :portkey.aws.athena.list-query-executions-input/next-token (clojure.spec.alpha/and :portkey.aws.athena/token))
 (clojure.spec.alpha/def :portkey.aws.athena.list-query-executions-input/max-results (clojure.spec.alpha/and :portkey.aws.athena/max-query-executions-count))
 (clojure.spec.alpha/def :portkey.aws.athena/list-query-executions-input (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.athena.list-query-executions-input/next-token :portkey.aws.athena.list-query-executions-input/max-results]))
 
-(clojure.spec.alpha/def :portkey.aws.athena/idempotency-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 32 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 128))))
+(clojure.spec.alpha/def :portkey.aws.athena/idempotency-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 32 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 128))))
 
 (clojure.spec.alpha/def :portkey.aws.athena/query-execution-list (clojure.spec.alpha/coll-of :portkey.aws.athena/query-execution))
 
@@ -350,35 +546,35 @@
 
 (clojure.spec.alpha/def :portkey.aws.athena/boolean clojure.core/boolean?)
 
-(clojure.core/defn list-named-queries ([] (list-named-queries {})) ([list-named-queries-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-named-queries-input list-named-queries-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.athena/endpoints, :http.request.configuration/target-prefix "AmazonAthena", :http.request.spec/output-spec :portkey.aws.athena/list-named-queries-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-05-18", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.athena/list-named-queries-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListNamedQueries", :http.request.spec/error-spec {"InternalServerException" :portkey.aws.athena/internal-server-exception, "InvalidRequestException" :portkey.aws.athena/invalid-request-exception}})))))
+(clojure.core/defn list-named-queries ([] (list-named-queries {})) ([list-named-queries-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-named-queries-input list-named-queries-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.athena/endpoints, :http.request.configuration/target-prefix "AmazonAthena", :http.request.spec/output-spec :portkey.aws.athena/list-named-queries-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-05-18", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.athena/list-named-queries-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListNamedQueries", :http.request.configuration/output-deser-fn deser-list-named-queries-output, :http.request.spec/error-spec {"InternalServerException" :portkey.aws.athena/internal-server-exception, "InvalidRequestException" :portkey.aws.athena/invalid-request-exception}})))))
 (clojure.spec.alpha/fdef list-named-queries :args (clojure.spec.alpha/? :portkey.aws.athena/list-named-queries-input) :ret (clojure.spec.alpha/and :portkey.aws.athena/list-named-queries-output))
 
-(clojure.core/defn stop-query-execution ([stop-query-execution-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-stop-query-execution-input stop-query-execution-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.athena/endpoints, :http.request.configuration/target-prefix "AmazonAthena", :http.request.spec/output-spec :portkey.aws.athena/stop-query-execution-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-05-18", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.athena/stop-query-execution-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "StopQueryExecution", :http.request.spec/error-spec {"InternalServerException" :portkey.aws.athena/internal-server-exception, "InvalidRequestException" :portkey.aws.athena/invalid-request-exception}})))))
+(clojure.core/defn stop-query-execution ([stop-query-execution-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-stop-query-execution-input stop-query-execution-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.athena/endpoints, :http.request.configuration/target-prefix "AmazonAthena", :http.request.spec/output-spec :portkey.aws.athena/stop-query-execution-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-05-18", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.athena/stop-query-execution-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "StopQueryExecution", :http.request.configuration/output-deser-fn deser-stop-query-execution-output, :http.request.spec/error-spec {"InternalServerException" :portkey.aws.athena/internal-server-exception, "InvalidRequestException" :portkey.aws.athena/invalid-request-exception}})))))
 (clojure.spec.alpha/fdef stop-query-execution :args (clojure.spec.alpha/tuple :portkey.aws.athena/stop-query-execution-input) :ret (clojure.spec.alpha/and :portkey.aws.athena/stop-query-execution-output))
 
-(clojure.core/defn list-query-executions ([] (list-query-executions {})) ([list-query-executions-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-query-executions-input list-query-executions-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.athena/endpoints, :http.request.configuration/target-prefix "AmazonAthena", :http.request.spec/output-spec :portkey.aws.athena/list-query-executions-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-05-18", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.athena/list-query-executions-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListQueryExecutions", :http.request.spec/error-spec {"InternalServerException" :portkey.aws.athena/internal-server-exception, "InvalidRequestException" :portkey.aws.athena/invalid-request-exception}})))))
+(clojure.core/defn list-query-executions ([] (list-query-executions {})) ([list-query-executions-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-query-executions-input list-query-executions-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.athena/endpoints, :http.request.configuration/target-prefix "AmazonAthena", :http.request.spec/output-spec :portkey.aws.athena/list-query-executions-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-05-18", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.athena/list-query-executions-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListQueryExecutions", :http.request.configuration/output-deser-fn deser-list-query-executions-output, :http.request.spec/error-spec {"InternalServerException" :portkey.aws.athena/internal-server-exception, "InvalidRequestException" :portkey.aws.athena/invalid-request-exception}})))))
 (clojure.spec.alpha/fdef list-query-executions :args (clojure.spec.alpha/? :portkey.aws.athena/list-query-executions-input) :ret (clojure.spec.alpha/and :portkey.aws.athena/list-query-executions-output))
 
-(clojure.core/defn start-query-execution ([start-query-execution-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-start-query-execution-input start-query-execution-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.athena/endpoints, :http.request.configuration/target-prefix "AmazonAthena", :http.request.spec/output-spec :portkey.aws.athena/start-query-execution-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-05-18", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.athena/start-query-execution-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "StartQueryExecution", :http.request.spec/error-spec {"InternalServerException" :portkey.aws.athena/internal-server-exception, "InvalidRequestException" :portkey.aws.athena/invalid-request-exception, "TooManyRequestsException" :portkey.aws.athena/too-many-requests-exception}})))))
+(clojure.core/defn start-query-execution ([start-query-execution-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-start-query-execution-input start-query-execution-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.athena/endpoints, :http.request.configuration/target-prefix "AmazonAthena", :http.request.spec/output-spec :portkey.aws.athena/start-query-execution-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-05-18", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.athena/start-query-execution-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "StartQueryExecution", :http.request.configuration/output-deser-fn deser-start-query-execution-output, :http.request.spec/error-spec {"InternalServerException" :portkey.aws.athena/internal-server-exception, "InvalidRequestException" :portkey.aws.athena/invalid-request-exception, "TooManyRequestsException" :portkey.aws.athena/too-many-requests-exception}})))))
 (clojure.spec.alpha/fdef start-query-execution :args (clojure.spec.alpha/tuple :portkey.aws.athena/start-query-execution-input) :ret (clojure.spec.alpha/and :portkey.aws.athena/start-query-execution-output))
 
-(clojure.core/defn delete-named-query ([delete-named-query-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-named-query-input delete-named-query-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.athena/endpoints, :http.request.configuration/target-prefix "AmazonAthena", :http.request.spec/output-spec :portkey.aws.athena/delete-named-query-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-05-18", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.athena/delete-named-query-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteNamedQuery", :http.request.spec/error-spec {"InternalServerException" :portkey.aws.athena/internal-server-exception, "InvalidRequestException" :portkey.aws.athena/invalid-request-exception}})))))
+(clojure.core/defn delete-named-query ([delete-named-query-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-named-query-input delete-named-query-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.athena/endpoints, :http.request.configuration/target-prefix "AmazonAthena", :http.request.spec/output-spec :portkey.aws.athena/delete-named-query-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-05-18", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.athena/delete-named-query-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteNamedQuery", :http.request.configuration/output-deser-fn deser-delete-named-query-output, :http.request.spec/error-spec {"InternalServerException" :portkey.aws.athena/internal-server-exception, "InvalidRequestException" :portkey.aws.athena/invalid-request-exception}})))))
 (clojure.spec.alpha/fdef delete-named-query :args (clojure.spec.alpha/tuple :portkey.aws.athena/delete-named-query-input) :ret (clojure.spec.alpha/and :portkey.aws.athena/delete-named-query-output))
 
-(clojure.core/defn get-named-query ([get-named-query-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-named-query-input get-named-query-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.athena/endpoints, :http.request.configuration/target-prefix "AmazonAthena", :http.request.spec/output-spec :portkey.aws.athena/get-named-query-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-05-18", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.athena/get-named-query-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetNamedQuery", :http.request.spec/error-spec {"InternalServerException" :portkey.aws.athena/internal-server-exception, "InvalidRequestException" :portkey.aws.athena/invalid-request-exception}})))))
+(clojure.core/defn get-named-query ([get-named-query-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-get-named-query-input get-named-query-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.athena/endpoints, :http.request.configuration/target-prefix "AmazonAthena", :http.request.spec/output-spec :portkey.aws.athena/get-named-query-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-05-18", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.athena/get-named-query-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetNamedQuery", :http.request.configuration/output-deser-fn deser-get-named-query-output, :http.request.spec/error-spec {"InternalServerException" :portkey.aws.athena/internal-server-exception, "InvalidRequestException" :portkey.aws.athena/invalid-request-exception}})))))
 (clojure.spec.alpha/fdef get-named-query :args (clojure.spec.alpha/tuple :portkey.aws.athena/get-named-query-input) :ret (clojure.spec.alpha/and :portkey.aws.athena/get-named-query-output))
 
-(clojure.core/defn get-query-execution ([get-query-execution-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-query-execution-input get-query-execution-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.athena/endpoints, :http.request.configuration/target-prefix "AmazonAthena", :http.request.spec/output-spec :portkey.aws.athena/get-query-execution-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-05-18", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.athena/get-query-execution-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetQueryExecution", :http.request.spec/error-spec {"InternalServerException" :portkey.aws.athena/internal-server-exception, "InvalidRequestException" :portkey.aws.athena/invalid-request-exception}})))))
+(clojure.core/defn get-query-execution ([get-query-execution-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-get-query-execution-input get-query-execution-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.athena/endpoints, :http.request.configuration/target-prefix "AmazonAthena", :http.request.spec/output-spec :portkey.aws.athena/get-query-execution-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-05-18", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.athena/get-query-execution-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetQueryExecution", :http.request.configuration/output-deser-fn deser-get-query-execution-output, :http.request.spec/error-spec {"InternalServerException" :portkey.aws.athena/internal-server-exception, "InvalidRequestException" :portkey.aws.athena/invalid-request-exception}})))))
 (clojure.spec.alpha/fdef get-query-execution :args (clojure.spec.alpha/tuple :portkey.aws.athena/get-query-execution-input) :ret (clojure.spec.alpha/and :portkey.aws.athena/get-query-execution-output))
 
-(clojure.core/defn batch-get-named-query ([batch-get-named-query-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-batch-get-named-query-input batch-get-named-query-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.athena/endpoints, :http.request.configuration/target-prefix "AmazonAthena", :http.request.spec/output-spec :portkey.aws.athena/batch-get-named-query-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-05-18", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.athena/batch-get-named-query-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "BatchGetNamedQuery", :http.request.spec/error-spec {"InternalServerException" :portkey.aws.athena/internal-server-exception, "InvalidRequestException" :portkey.aws.athena/invalid-request-exception}})))))
+(clojure.core/defn batch-get-named-query ([batch-get-named-query-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-batch-get-named-query-input batch-get-named-query-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.athena/endpoints, :http.request.configuration/target-prefix "AmazonAthena", :http.request.spec/output-spec :portkey.aws.athena/batch-get-named-query-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-05-18", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.athena/batch-get-named-query-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "BatchGetNamedQuery", :http.request.configuration/output-deser-fn deser-batch-get-named-query-output, :http.request.spec/error-spec {"InternalServerException" :portkey.aws.athena/internal-server-exception, "InvalidRequestException" :portkey.aws.athena/invalid-request-exception}})))))
 (clojure.spec.alpha/fdef batch-get-named-query :args (clojure.spec.alpha/tuple :portkey.aws.athena/batch-get-named-query-input) :ret (clojure.spec.alpha/and :portkey.aws.athena/batch-get-named-query-output))
 
-(clojure.core/defn create-named-query ([create-named-query-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-named-query-input create-named-query-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.athena/endpoints, :http.request.configuration/target-prefix "AmazonAthena", :http.request.spec/output-spec :portkey.aws.athena/create-named-query-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-05-18", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.athena/create-named-query-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateNamedQuery", :http.request.spec/error-spec {"InternalServerException" :portkey.aws.athena/internal-server-exception, "InvalidRequestException" :portkey.aws.athena/invalid-request-exception}})))))
+(clojure.core/defn create-named-query ([create-named-query-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-create-named-query-input create-named-query-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.athena/endpoints, :http.request.configuration/target-prefix "AmazonAthena", :http.request.spec/output-spec :portkey.aws.athena/create-named-query-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-05-18", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.athena/create-named-query-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateNamedQuery", :http.request.configuration/output-deser-fn deser-create-named-query-output, :http.request.spec/error-spec {"InternalServerException" :portkey.aws.athena/internal-server-exception, "InvalidRequestException" :portkey.aws.athena/invalid-request-exception}})))))
 (clojure.spec.alpha/fdef create-named-query :args (clojure.spec.alpha/tuple :portkey.aws.athena/create-named-query-input) :ret (clojure.spec.alpha/and :portkey.aws.athena/create-named-query-output))
 
-(clojure.core/defn batch-get-query-execution ([batch-get-query-execution-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-batch-get-query-execution-input batch-get-query-execution-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.athena/endpoints, :http.request.configuration/target-prefix "AmazonAthena", :http.request.spec/output-spec :portkey.aws.athena/batch-get-query-execution-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-05-18", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.athena/batch-get-query-execution-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "BatchGetQueryExecution", :http.request.spec/error-spec {"InternalServerException" :portkey.aws.athena/internal-server-exception, "InvalidRequestException" :portkey.aws.athena/invalid-request-exception}})))))
+(clojure.core/defn batch-get-query-execution ([batch-get-query-execution-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-batch-get-query-execution-input batch-get-query-execution-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.athena/endpoints, :http.request.configuration/target-prefix "AmazonAthena", :http.request.spec/output-spec :portkey.aws.athena/batch-get-query-execution-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-05-18", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.athena/batch-get-query-execution-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "BatchGetQueryExecution", :http.request.configuration/output-deser-fn deser-batch-get-query-execution-output, :http.request.spec/error-spec {"InternalServerException" :portkey.aws.athena/internal-server-exception, "InvalidRequestException" :portkey.aws.athena/invalid-request-exception}})))))
 (clojure.spec.alpha/fdef batch-get-query-execution :args (clojure.spec.alpha/tuple :portkey.aws.athena/batch-get-query-execution-input) :ret (clojure.spec.alpha/and :portkey.aws.athena/batch-get-query-execution-output))
 
-(clojure.core/defn get-query-results ([get-query-results-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-query-results-input get-query-results-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.athena/endpoints, :http.request.configuration/target-prefix "AmazonAthena", :http.request.spec/output-spec :portkey.aws.athena/get-query-results-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-05-18", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.athena/get-query-results-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetQueryResults", :http.request.spec/error-spec {"InternalServerException" :portkey.aws.athena/internal-server-exception, "InvalidRequestException" :portkey.aws.athena/invalid-request-exception}})))))
+(clojure.core/defn get-query-results ([get-query-results-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-get-query-results-input get-query-results-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.athena/endpoints, :http.request.configuration/target-prefix "AmazonAthena", :http.request.spec/output-spec :portkey.aws.athena/get-query-results-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-05-18", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.athena/get-query-results-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetQueryResults", :http.request.configuration/output-deser-fn deser-get-query-results-output, :http.request.spec/error-spec {"InternalServerException" :portkey.aws.athena/internal-server-exception, "InvalidRequestException" :portkey.aws.athena/invalid-request-exception}})))))
 (clojure.spec.alpha/fdef get-query-results :args (clojure.spec.alpha/tuple :portkey.aws.athena/get-query-results-input) :ret (clojure.spec.alpha/and :portkey.aws.athena/get-query-results-output))

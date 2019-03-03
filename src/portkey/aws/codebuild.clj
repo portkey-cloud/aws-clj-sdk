@@ -312,6 +312,332 @@
 
 (clojure.core/defn- req-list-builds-for-project-input [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-non-empty-string (input :project-name)) #:http.request.field{:name "projectName", :shape "NonEmptyString"})]} (clojure.core/contains? input :sort-order) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-sort-order-type (input :sort-order)) #:http.request.field{:name "sortOrder", :shape "SortOrderType"})) (clojure.core/contains? input :next-token) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :next-token)) #:http.request.field{:name "nextToken", :shape "String"}))))
 
+(clojure.core/declare deser-environment-language)
+
+(clojure.core/declare deser-build-not-deleted)
+
+(clojure.core/declare deser-environment-image)
+
+(clojure.core/declare deser-project-badge)
+
+(clojure.core/declare deser-build-artifacts-list)
+
+(clojure.core/declare deser-artifact-namespace)
+
+(clojure.core/declare deser-non-empty-string)
+
+(clojure.core/declare deser-environment-type)
+
+(clojure.core/declare deser-value-input)
+
+(clojure.core/declare deser-security-group-ids)
+
+(clojure.core/declare deser-artifact-packaging)
+
+(clojure.core/declare deser-subnets)
+
+(clojure.core/declare deser-build-phases)
+
+(clojure.core/declare deser-wrapper-long)
+
+(clojure.core/declare deser-environment-variables)
+
+(clojure.core/declare deser-logs-location)
+
+(clojure.core/declare deser-cloud-watch-logs-config)
+
+(clojure.core/declare deser-project-source)
+
+(clojure.core/declare deser-environment-languages)
+
+(clojure.core/declare deser-platform-type)
+
+(clojure.core/declare deser-environment-images)
+
+(clojure.core/declare deser-source-type)
+
+(clojure.core/declare deser-time-out)
+
+(clojure.core/declare deser-status-type)
+
+(clojure.core/declare deser-image-versions)
+
+(clojure.core/declare deser-project-environment)
+
+(clojure.core/declare deser-project-sources)
+
+(clojure.core/declare deser-tag-list)
+
+(clojure.core/declare deser-s-3-logs-config)
+
+(clojure.core/declare deser-logs-config-status-type)
+
+(clojure.core/declare deser-language-type)
+
+(clojure.core/declare deser-project-names)
+
+(clojure.core/declare deser-environment-variable)
+
+(clojure.core/declare deser-key-input)
+
+(clojure.core/declare deser-build)
+
+(clojure.core/declare deser-string)
+
+(clojure.core/declare deser-source-auth)
+
+(clojure.core/declare deser-project-description)
+
+(clojure.core/declare deser-project)
+
+(clojure.core/declare deser-network-interface)
+
+(clojure.core/declare deser-project-cache)
+
+(clojure.core/declare deser-cache-type)
+
+(clojure.core/declare deser-wrapper-int)
+
+(clojure.core/declare deser-environment-variable-type)
+
+(clojure.core/declare deser-phase-context)
+
+(clojure.core/declare deser-vpc-config)
+
+(clojure.core/declare deser-project-source-version)
+
+(clojure.core/declare deser-timestamp)
+
+(clojure.core/declare deser-source-auth-type)
+
+(clojure.core/declare deser-wrapper-boolean)
+
+(clojure.core/declare deser-build-phase-type)
+
+(clojure.core/declare deser-build-artifacts)
+
+(clojure.core/declare deser-tag)
+
+(clojure.core/declare deser-builds)
+
+(clojure.core/declare deser-compute-type)
+
+(clojure.core/declare deser-projects)
+
+(clojure.core/declare deser-project-name)
+
+(clojure.core/declare deser-git-clone-depth)
+
+(clojure.core/declare deser-build-ids)
+
+(clojure.core/declare deser-build-phase)
+
+(clojure.core/declare deser-project-artifacts-list)
+
+(clojure.core/declare deser-builds-not-deleted)
+
+(clojure.core/declare deser-project-secondary-source-versions)
+
+(clojure.core/declare deser-phase-contexts)
+
+(clojure.core/declare deser-logs-config)
+
+(clojure.core/declare deser-environment-platform)
+
+(clojure.core/declare deser-artifacts-type)
+
+(clojure.core/declare deser-environment-platforms)
+
+(clojure.core/declare deser-project-artifacts)
+
+(clojure.core/declare deser-boolean)
+
+(clojure.core/declare deser-webhook)
+
+(clojure.core/defn- deser-environment-language [input] (clojure.core/cond-> {} (clojure.core/contains? input "language") (clojure.core/assoc :language (deser-language-type (input "language"))) (clojure.core/contains? input "images") (clojure.core/assoc :images (deser-environment-images (input "images")))))
+
+(clojure.core/defn- deser-build-not-deleted [input] (clojure.core/cond-> {} (clojure.core/contains? input "id") (clojure.core/assoc :id (deser-non-empty-string (input "id"))) (clojure.core/contains? input "statusCode") (clojure.core/assoc :status-code (deser-string (input "statusCode")))))
+
+(clojure.core/defn- deser-environment-image [input] (clojure.core/cond-> {} (clojure.core/contains? input "name") (clojure.core/assoc :name (deser-string (input "name"))) (clojure.core/contains? input "description") (clojure.core/assoc :description (deser-string (input "description"))) (clojure.core/contains? input "versions") (clojure.core/assoc :versions (deser-image-versions (input "versions")))))
+
+(clojure.core/defn- deser-project-badge [input] (clojure.core/cond-> {} (clojure.core/contains? input "badgeEnabled") (clojure.core/assoc :badge-enabled (deser-boolean (input "badgeEnabled"))) (clojure.core/contains? input "badgeRequestUrl") (clojure.core/assoc :badge-request-url (deser-string (input "badgeRequestUrl")))))
+
+(clojure.core/defn- deser-build-artifacts-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-build-artifacts coll))) input))
+
+(clojure.core/defn- deser-artifact-namespace [input] (clojure.core/get {"NONE" :none, "BUILD_ID" :build-id} input))
+
+(clojure.core/defn- deser-non-empty-string [input] input)
+
+(clojure.core/defn- deser-environment-type [input] (clojure.core/get {"WINDOWS_CONTAINER" :windows-container, "LINUX_CONTAINER" :linux-container} input))
+
+(clojure.core/defn- deser-value-input [input] input)
+
+(clojure.core/defn- deser-security-group-ids [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-non-empty-string coll))) input))
+
+(clojure.core/defn- deser-artifact-packaging [input] (clojure.core/get {"NONE" :none, "ZIP" :zip} input))
+
+(clojure.core/defn- deser-subnets [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-non-empty-string coll))) input))
+
+(clojure.core/defn- deser-build-phases [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-build-phase coll))) input))
+
+(clojure.core/defn- deser-wrapper-long [input] input)
+
+(clojure.core/defn- deser-environment-variables [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-environment-variable coll))) input))
+
+(clojure.core/defn- deser-logs-location [input] (clojure.core/cond-> {} (clojure.core/contains? input "groupName") (clojure.core/assoc :group-name (deser-string (input "groupName"))) (clojure.core/contains? input "streamName") (clojure.core/assoc :stream-name (deser-string (input "streamName"))) (clojure.core/contains? input "deepLink") (clojure.core/assoc :deep-link (deser-string (input "deepLink"))) (clojure.core/contains? input "s3DeepLink") (clojure.core/assoc :s-3-deep-link (deser-string (input "s3DeepLink"))) (clojure.core/contains? input "cloudWatchLogs") (clojure.core/assoc :cloud-watch-logs (deser-cloud-watch-logs-config (input "cloudWatchLogs"))) (clojure.core/contains? input "s3Logs") (clojure.core/assoc :s-3-logs (deser-s-3-logs-config (input "s3Logs")))))
+
+(clojure.core/defn- deser-cloud-watch-logs-config [input] (clojure.core/cond-> {:status (deser-logs-config-status-type (input "status"))} (clojure.core/contains? input "groupName") (clojure.core/assoc :group-name (deser-string (input "groupName"))) (clojure.core/contains? input "streamName") (clojure.core/assoc :stream-name (deser-string (input "streamName")))))
+
+(clojure.core/defn- deser-project-source [input] (clojure.core/cond-> {:type (deser-source-type (input "type"))} (clojure.core/contains? input "location") (clojure.core/assoc :location (deser-string (input "location"))) (clojure.core/contains? input "gitCloneDepth") (clojure.core/assoc :git-clone-depth (deser-git-clone-depth (input "gitCloneDepth"))) (clojure.core/contains? input "buildspec") (clojure.core/assoc :buildspec (deser-string (input "buildspec"))) (clojure.core/contains? input "auth") (clojure.core/assoc :auth (deser-source-auth (input "auth"))) (clojure.core/contains? input "reportBuildStatus") (clojure.core/assoc :report-build-status (deser-wrapper-boolean (input "reportBuildStatus"))) (clojure.core/contains? input "insecureSsl") (clojure.core/assoc :insecure-ssl (deser-wrapper-boolean (input "insecureSsl"))) (clojure.core/contains? input "sourceIdentifier") (clojure.core/assoc :source-identifier (deser-string (input "sourceIdentifier")))))
+
+(clojure.core/defn- deser-environment-languages [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-environment-language coll))) input))
+
+(clojure.core/defn- deser-platform-type [input] (clojure.core/get {"DEBIAN" :debian, "AMAZON_LINUX" :amazon-linux, "UBUNTU" :ubuntu, "WINDOWS_SERVER" :windows-server} input))
+
+(clojure.core/defn- deser-environment-images [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-environment-image coll))) input))
+
+(clojure.core/defn- deser-source-type [input] (clojure.core/get {"CODECOMMIT" :codecommit, "CODEPIPELINE" :codepipeline, "GITHUB" :github, "S3" :s-3, "BITBUCKET" :bitbucket, "GITHUB_ENTERPRISE" :github-enterprise, "NO_SOURCE" :no-source} input))
+
+(clojure.core/defn- deser-time-out [input] input)
+
+(clojure.core/defn- deser-status-type [input] (clojure.core/get {"SUCCEEDED" :succeeded, "FAILED" :failed, "FAULT" :fault, "TIMED_OUT" :timed-out, "IN_PROGRESS" :in-progress, "STOPPED" :stopped} input))
+
+(clojure.core/defn- deser-image-versions [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-string coll))) input))
+
+(clojure.core/defn- deser-project-environment [input] (clojure.core/cond-> {:type (deser-environment-type (input "type")), :image (deser-non-empty-string (input "image")), :compute-type (deser-compute-type (input "computeType"))} (clojure.core/contains? input "environmentVariables") (clojure.core/assoc :environment-variables (deser-environment-variables (input "environmentVariables"))) (clojure.core/contains? input "privilegedMode") (clojure.core/assoc :privileged-mode (deser-wrapper-boolean (input "privilegedMode"))) (clojure.core/contains? input "certificate") (clojure.core/assoc :certificate (deser-string (input "certificate")))))
+
+(clojure.core/defn- deser-project-sources [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-project-source coll))) input))
+
+(clojure.core/defn- deser-tag-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-tag coll))) input))
+
+(clojure.core/defn- deser-s-3-logs-config [input] (clojure.core/cond-> {:status (deser-logs-config-status-type (input "status"))} (clojure.core/contains? input "location") (clojure.core/assoc :location (deser-string (input "location")))))
+
+(clojure.core/defn- deser-logs-config-status-type [input] (clojure.core/get {"ENABLED" :enabled, "DISABLED" :disabled} input))
+
+(clojure.core/defn- deser-language-type [input] (clojure.core/get {"BASE" :base, "DOTNET" :dotnet, "GOLANG" :golang, "JAVA" :java, "DOCKER" :docker, "PYTHON" :python, "NODE_JS" :node-js, "RUBY" :ruby, "ANDROID" :android} input))
+
+(clojure.core/defn- deser-project-names [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-non-empty-string coll))) input))
+
+(clojure.core/defn- deser-environment-variable [input] (clojure.core/cond-> {:name (deser-non-empty-string (input "name")), :value (deser-string (input "value"))} (clojure.core/contains? input "type") (clojure.core/assoc :type (deser-environment-variable-type (input "type")))))
+
+(clojure.core/defn- deser-key-input [input] input)
+
+(clojure.core/defn- deser-build [input] (clojure.core/cond-> {} (clojure.core/contains? input "vpcConfig") (clojure.core/assoc :vpc-config (deser-vpc-config (input "vpcConfig"))) (clojure.core/contains? input "serviceRole") (clojure.core/assoc :service-role (deser-non-empty-string (input "serviceRole"))) (clojure.core/contains? input "sourceVersion") (clojure.core/assoc :source-version (deser-non-empty-string (input "sourceVersion"))) (clojure.core/contains? input "buildComplete") (clojure.core/assoc :build-complete (deser-boolean (input "buildComplete"))) (clojure.core/contains? input "secondarySourceVersions") (clojure.core/assoc :secondary-source-versions (deser-project-secondary-source-versions (input "secondarySourceVersions"))) (clojure.core/contains? input "artifacts") (clojure.core/assoc :artifacts (deser-build-artifacts (input "artifacts"))) (clojure.core/contains? input "arn") (clojure.core/assoc :arn (deser-non-empty-string (input "arn"))) (clojure.core/contains? input "networkInterface") (clojure.core/assoc :network-interface (deser-network-interface (input "networkInterface"))) (clojure.core/contains? input "secondarySources") (clojure.core/assoc :secondary-sources (deser-project-sources (input "secondarySources"))) (clojure.core/contains? input "id") (clojure.core/assoc :id (deser-non-empty-string (input "id"))) (clojure.core/contains? input "resolvedSourceVersion") (clojure.core/assoc :resolved-source-version (deser-non-empty-string (input "resolvedSourceVersion"))) (clojure.core/contains? input "cache") (clojure.core/assoc :cache (deser-project-cache (input "cache"))) (clojure.core/contains? input "startTime") (clojure.core/assoc :start-time (deser-timestamp (input "startTime"))) (clojure.core/contains? input "logs") (clojure.core/assoc :logs (deser-logs-location (input "logs"))) (clojure.core/contains? input "initiator") (clojure.core/assoc :initiator (deser-string (input "initiator"))) (clojure.core/contains? input "encryptionKey") (clojure.core/assoc :encryption-key (deser-non-empty-string (input "encryptionKey"))) (clojure.core/contains? input "source") (clojure.core/assoc :source (deser-project-source (input "source"))) (clojure.core/contains? input "environment") (clojure.core/assoc :environment (deser-project-environment (input "environment"))) (clojure.core/contains? input "secondaryArtifacts") (clojure.core/assoc :secondary-artifacts (deser-build-artifacts-list (input "secondaryArtifacts"))) (clojure.core/contains? input "currentPhase") (clojure.core/assoc :current-phase (deser-string (input "currentPhase"))) (clojure.core/contains? input "timeoutInMinutes") (clojure.core/assoc :timeout-in-minutes (deser-wrapper-int (input "timeoutInMinutes"))) (clojure.core/contains? input "endTime") (clojure.core/assoc :end-time (deser-timestamp (input "endTime"))) (clojure.core/contains? input "projectName") (clojure.core/assoc :project-name (deser-non-empty-string (input "projectName"))) (clojure.core/contains? input "buildStatus") (clojure.core/assoc :build-status (deser-status-type (input "buildStatus"))) (clojure.core/contains? input "phases") (clojure.core/assoc :phases (deser-build-phases (input "phases")))))
+
+(clojure.core/defn- deser-string [input] input)
+
+(clojure.core/defn- deser-source-auth [input] (clojure.core/cond-> {:type (deser-source-auth-type (input "type"))} (clojure.core/contains? input "resource") (clojure.core/assoc :resource (deser-string (input "resource")))))
+
+(clojure.core/defn- deser-project-description [input] input)
+
+(clojure.core/defn- deser-project [input] (clojure.core/cond-> {} (clojure.core/contains? input "vpcConfig") (clojure.core/assoc :vpc-config (deser-vpc-config (input "vpcConfig"))) (clojure.core/contains? input "serviceRole") (clojure.core/assoc :service-role (deser-non-empty-string (input "serviceRole"))) (clojure.core/contains? input "lastModified") (clojure.core/assoc :last-modified (deser-timestamp (input "lastModified"))) (clojure.core/contains? input "created") (clojure.core/assoc :created (deser-timestamp (input "created"))) (clojure.core/contains? input "artifacts") (clojure.core/assoc :artifacts (deser-project-artifacts (input "artifacts"))) (clojure.core/contains? input "arn") (clojure.core/assoc :arn (deser-string (input "arn"))) (clojure.core/contains? input "secondarySources") (clojure.core/assoc :secondary-sources (deser-project-sources (input "secondarySources"))) (clojure.core/contains? input "tags") (clojure.core/assoc :tags (deser-tag-list (input "tags"))) (clojure.core/contains? input "cache") (clojure.core/assoc :cache (deser-project-cache (input "cache"))) (clojure.core/contains? input "name") (clojure.core/assoc :name (deser-project-name (input "name"))) (clojure.core/contains? input "encryptionKey") (clojure.core/assoc :encryption-key (deser-non-empty-string (input "encryptionKey"))) (clojure.core/contains? input "source") (clojure.core/assoc :source (deser-project-source (input "source"))) (clojure.core/contains? input "environment") (clojure.core/assoc :environment (deser-project-environment (input "environment"))) (clojure.core/contains? input "secondaryArtifacts") (clojure.core/assoc :secondary-artifacts (deser-project-artifacts-list (input "secondaryArtifacts"))) (clojure.core/contains? input "timeoutInMinutes") (clojure.core/assoc :timeout-in-minutes (deser-time-out (input "timeoutInMinutes"))) (clojure.core/contains? input "webhook") (clojure.core/assoc :webhook (deser-webhook (input "webhook"))) (clojure.core/contains? input "logsConfig") (clojure.core/assoc :logs-config (deser-logs-config (input "logsConfig"))) (clojure.core/contains? input "description") (clojure.core/assoc :description (deser-project-description (input "description"))) (clojure.core/contains? input "badge") (clojure.core/assoc :badge (deser-project-badge (input "badge")))))
+
+(clojure.core/defn- deser-network-interface [input] (clojure.core/cond-> {} (clojure.core/contains? input "subnetId") (clojure.core/assoc :subnet-id (deser-non-empty-string (input "subnetId"))) (clojure.core/contains? input "networkInterfaceId") (clojure.core/assoc :network-interface-id (deser-non-empty-string (input "networkInterfaceId")))))
+
+(clojure.core/defn- deser-project-cache [input] (clojure.core/cond-> {:type (deser-cache-type (input "type"))} (clojure.core/contains? input "location") (clojure.core/assoc :location (deser-string (input "location")))))
+
+(clojure.core/defn- deser-cache-type [input] (clojure.core/get {"NO_CACHE" :no-cache, "S3" :s-3} input))
+
+(clojure.core/defn- deser-wrapper-int [input] input)
+
+(clojure.core/defn- deser-environment-variable-type [input] (clojure.core/get {"PLAINTEXT" :plaintext, "PARAMETER_STORE" :parameter-store} input))
+
+(clojure.core/defn- deser-phase-context [input] (clojure.core/cond-> {} (clojure.core/contains? input "statusCode") (clojure.core/assoc :status-code (deser-string (input "statusCode"))) (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-string (input "message")))))
+
+(clojure.core/defn- deser-vpc-config [input] (clojure.core/cond-> {} (clojure.core/contains? input "vpcId") (clojure.core/assoc :vpc-id (deser-non-empty-string (input "vpcId"))) (clojure.core/contains? input "subnets") (clojure.core/assoc :subnets (deser-subnets (input "subnets"))) (clojure.core/contains? input "securityGroupIds") (clojure.core/assoc :security-group-ids (deser-security-group-ids (input "securityGroupIds")))))
+
+(clojure.core/defn- deser-project-source-version [input] (clojure.core/cond-> {:source-identifier (deser-string (input "sourceIdentifier")), :source-version (deser-string (input "sourceVersion"))}))
+
+(clojure.core/defn- deser-timestamp [input] input)
+
+(clojure.core/defn- deser-source-auth-type [input] (clojure.core/get {"OAUTH" :oauth} input))
+
+(clojure.core/defn- deser-wrapper-boolean [input] input)
+
+(clojure.core/defn- deser-build-phase-type [input] (clojure.core/get {"COMPLETED" :completed, "POST_BUILD" :post-build, "PROVISIONING" :provisioning, "SUBMITTED" :submitted, "UPLOAD_ARTIFACTS" :upload-artifacts, "BUILD" :build, "DOWNLOAD_SOURCE" :download-source, "INSTALL" :install, "FINALIZING" :finalizing, "PRE_BUILD" :pre-build} input))
+
+(clojure.core/defn- deser-build-artifacts [input] (clojure.core/cond-> {} (clojure.core/contains? input "location") (clojure.core/assoc :location (deser-string (input "location"))) (clojure.core/contains? input "sha256sum") (clojure.core/assoc :sha-256sum (deser-string (input "sha256sum"))) (clojure.core/contains? input "md5sum") (clojure.core/assoc :md-5sum (deser-string (input "md5sum"))) (clojure.core/contains? input "overrideArtifactName") (clojure.core/assoc :override-artifact-name (deser-wrapper-boolean (input "overrideArtifactName"))) (clojure.core/contains? input "encryptionDisabled") (clojure.core/assoc :encryption-disabled (deser-wrapper-boolean (input "encryptionDisabled"))) (clojure.core/contains? input "artifactIdentifier") (clojure.core/assoc :artifact-identifier (deser-string (input "artifactIdentifier")))))
+
+(clojure.core/defn- deser-tag [input] (clojure.core/cond-> {} (clojure.core/contains? input "key") (clojure.core/assoc :key (deser-key-input (input "key"))) (clojure.core/contains? input "value") (clojure.core/assoc :value (deser-value-input (input "value")))))
+
+(clojure.core/defn- deser-builds [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-build coll))) input))
+
+(clojure.core/defn- deser-compute-type [input] (clojure.core/get {"BUILD_GENERAL1_SMALL" :build-general-1-small, "BUILD_GENERAL1_MEDIUM" :build-general-1-medium, "BUILD_GENERAL1_LARGE" :build-general-1-large} input))
+
+(clojure.core/defn- deser-projects [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-project coll))) input))
+
+(clojure.core/defn- deser-project-name [input] input)
+
+(clojure.core/defn- deser-git-clone-depth [input] input)
+
+(clojure.core/defn- deser-build-ids [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-non-empty-string coll))) input))
+
+(clojure.core/defn- deser-build-phase [input] (clojure.core/cond-> {} (clojure.core/contains? input "phaseType") (clojure.core/assoc :phase-type (deser-build-phase-type (input "phaseType"))) (clojure.core/contains? input "phaseStatus") (clojure.core/assoc :phase-status (deser-status-type (input "phaseStatus"))) (clojure.core/contains? input "startTime") (clojure.core/assoc :start-time (deser-timestamp (input "startTime"))) (clojure.core/contains? input "endTime") (clojure.core/assoc :end-time (deser-timestamp (input "endTime"))) (clojure.core/contains? input "durationInSeconds") (clojure.core/assoc :duration-in-seconds (deser-wrapper-long (input "durationInSeconds"))) (clojure.core/contains? input "contexts") (clojure.core/assoc :contexts (deser-phase-contexts (input "contexts")))))
+
+(clojure.core/defn- deser-project-artifacts-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-project-artifacts coll))) input))
+
+(clojure.core/defn- deser-builds-not-deleted [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-build-not-deleted coll))) input))
+
+(clojure.core/defn- deser-project-secondary-source-versions [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-project-source-version coll))) input))
+
+(clojure.core/defn- deser-phase-contexts [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-phase-context coll))) input))
+
+(clojure.core/defn- deser-logs-config [input] (clojure.core/cond-> {} (clojure.core/contains? input "cloudWatchLogs") (clojure.core/assoc :cloud-watch-logs (deser-cloud-watch-logs-config (input "cloudWatchLogs"))) (clojure.core/contains? input "s3Logs") (clojure.core/assoc :s-3-logs (deser-s-3-logs-config (input "s3Logs")))))
+
+(clojure.core/defn- deser-environment-platform [input] (clojure.core/cond-> {} (clojure.core/contains? input "platform") (clojure.core/assoc :platform (deser-platform-type (input "platform"))) (clojure.core/contains? input "languages") (clojure.core/assoc :languages (deser-environment-languages (input "languages")))))
+
+(clojure.core/defn- deser-artifacts-type [input] (clojure.core/get {"CODEPIPELINE" :codepipeline, "S3" :s-3, "NO_ARTIFACTS" :no-artifacts} input))
+
+(clojure.core/defn- deser-environment-platforms [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-environment-platform coll))) input))
+
+(clojure.core/defn- deser-project-artifacts [input] (clojure.core/cond-> {:type (deser-artifacts-type (input "type"))} (clojure.core/contains? input "overrideArtifactName") (clojure.core/assoc :override-artifact-name (deser-wrapper-boolean (input "overrideArtifactName"))) (clojure.core/contains? input "path") (clojure.core/assoc :path (deser-string (input "path"))) (clojure.core/contains? input "encryptionDisabled") (clojure.core/assoc :encryption-disabled (deser-wrapper-boolean (input "encryptionDisabled"))) (clojure.core/contains? input "packaging") (clojure.core/assoc :packaging (deser-artifact-packaging (input "packaging"))) (clojure.core/contains? input "name") (clojure.core/assoc :name (deser-string (input "name"))) (clojure.core/contains? input "location") (clojure.core/assoc :location (deser-string (input "location"))) (clojure.core/contains? input "namespaceType") (clojure.core/assoc :namespace-type (deser-artifact-namespace (input "namespaceType"))) (clojure.core/contains? input "artifactIdentifier") (clojure.core/assoc :artifact-identifier (deser-string (input "artifactIdentifier")))))
+
+(clojure.core/defn- deser-boolean [input] input)
+
+(clojure.core/defn- deser-webhook [input] (clojure.core/cond-> {} (clojure.core/contains? input "url") (clojure.core/assoc :url (deser-non-empty-string (input "url"))) (clojure.core/contains? input "payloadUrl") (clojure.core/assoc :payload-url (deser-non-empty-string (input "payloadUrl"))) (clojure.core/contains? input "secret") (clojure.core/assoc :secret (deser-non-empty-string (input "secret"))) (clojure.core/contains? input "branchFilter") (clojure.core/assoc :branch-filter (deser-string (input "branchFilter"))) (clojure.core/contains? input "lastModifiedSecret") (clojure.core/assoc :last-modified-secret (deser-timestamp (input "lastModifiedSecret")))))
+
+(clojure.core/defn- deser-update-webhook-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "webhook") (clojure.core/assoc :webhook (deser-webhook (input "webhook")))))
+
+(clojure.core/defn- deser-start-build-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "build") (clojure.core/assoc :build (deser-build (input "build")))))
+
+(clojure.core/defn- deser-create-project-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "project") (clojure.core/assoc :project (deser-project (input "project")))))
+
+(clojure.core/defn- deser-list-curated-environment-images-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "platforms") (clojure.core/assoc :platforms (deser-environment-platforms (input "platforms")))))
+
+(clojure.core/defn- deser-invalidate-project-cache-output [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-batch-delete-builds-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "buildsDeleted") (clojure.core/assoc :builds-deleted (deser-build-ids (input "buildsDeleted"))) (clojure.core/contains? input "buildsNotDeleted") (clojure.core/assoc :builds-not-deleted (deser-builds-not-deleted (input "buildsNotDeleted")))))
+
+(clojure.core/defn- deser-account-limit-exceeded-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-batch-get-projects-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "projects") (clojure.core/assoc :projects (deser-projects (input "projects"))) (clojure.core/contains? input "projectsNotFound") (clojure.core/assoc :projects-not-found (deser-project-names (input "projectsNotFound")))))
+
+(clojure.core/defn- deser-resource-already-exists-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-batch-get-builds-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "builds") (clojure.core/assoc :builds (deser-builds (input "builds"))) (clojure.core/contains? input "buildsNotFound") (clojure.core/assoc :builds-not-found (deser-build-ids (input "buildsNotFound")))))
+
+(clojure.core/defn- deser-list-builds-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "ids") (clojure.core/assoc :ids (deser-build-ids (input "ids"))) (clojure.core/contains? input "nextToken") (clojure.core/assoc :next-token (deser-string (input "nextToken")))))
+
+(clojure.core/defn- deser-list-projects-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "nextToken") (clojure.core/assoc :next-token (deser-string (input "nextToken"))) (clojure.core/contains? input "projects") (clojure.core/assoc :projects (deser-project-names (input "projects")))))
+
+(clojure.core/defn- deser-o-auth-provider-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-resource-not-found-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-delete-webhook-output [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-invalid-input-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-delete-project-output [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-create-webhook-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "webhook") (clojure.core/assoc :webhook (deser-webhook (input "webhook")))))
+
+(clojure.core/defn- deser-list-builds-for-project-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "ids") (clojure.core/assoc :ids (deser-build-ids (input "ids"))) (clojure.core/contains? input "nextToken") (clojure.core/assoc :next-token (deser-string (input "nextToken")))))
+
+(clojure.core/defn- deser-update-project-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "project") (clojure.core/assoc :project (deser-project (input "project")))))
+
+(clojure.core/defn- deser-stop-build-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "build") (clojure.core/assoc :build (deser-build (input "build")))))
+
 (clojure.spec.alpha/def :portkey.aws.codebuild.environment-language/language (clojure.spec.alpha/and :portkey.aws.codebuild/language-type))
 (clojure.spec.alpha/def :portkey.aws.codebuild.environment-language/images (clojure.spec.alpha/and :portkey.aws.codebuild/environment-images))
 (clojure.spec.alpha/def :portkey.aws.codebuild/environment-language (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.codebuild.environment-language/language :portkey.aws.codebuild.environment-language/images]))
@@ -342,14 +668,14 @@
 
 (clojure.spec.alpha/def :portkey.aws.codebuild/artifact-namespace #{"BUILD_ID" "NONE" :build-id :none})
 
-(clojure.spec.alpha/def :portkey.aws.codebuild/non-empty-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__)))))
+(clojure.spec.alpha/def :portkey.aws.codebuild/non-empty-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__)))))
 
 (clojure.spec.alpha/def :portkey.aws.codebuild.create-project-output/project (clojure.spec.alpha/and :portkey.aws.codebuild/project))
 (clojure.spec.alpha/def :portkey.aws.codebuild/create-project-output (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.codebuild.create-project-output/project]))
 
 (clojure.spec.alpha/def :portkey.aws.codebuild/environment-type #{:linux-container "WINDOWS_CONTAINER" "LINUX_CONTAINER" :windows-container})
 
-(clojure.spec.alpha/def :portkey.aws.codebuild/value-input (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^([\\p{L}\\p{Z}\\p{N}_.:/=@+\\-]*)$" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.codebuild/value-input (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 255)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"^([\\p{L}\\p{Z}\\p{N}_.:/=@+\\-]*)$" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.codebuild.create-webhook-input/project-name (clojure.spec.alpha/and :portkey.aws.codebuild/project-name))
 (clojure.spec.alpha/def :portkey.aws.codebuild.create-webhook-input/branch-filter (clojure.spec.alpha/and :portkey.aws.codebuild/string))
@@ -500,7 +826,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.codebuild/invalid-input-exception (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.codebuild/key-input (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 127)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^([\\p{L}\\p{Z}\\p{N}_.:/=@+\\-]*)$" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.codebuild/key-input (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 127)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"^([\\p{L}\\p{Z}\\p{N}_.:/=@+\\-]*)$" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.codebuild.batch-delete-builds-input/ids (clojure.spec.alpha/and :portkey.aws.codebuild/build-ids))
 (clojure.spec.alpha/def :portkey.aws.codebuild/batch-delete-builds-input (clojure.spec.alpha/keys :req-un [:portkey.aws.codebuild.batch-delete-builds-input/ids] :opt-un []))
@@ -564,7 +890,7 @@
 (clojure.spec.alpha/def :portkey.aws.codebuild.source-auth/resource (clojure.spec.alpha/and :portkey.aws.codebuild/string))
 (clojure.spec.alpha/def :portkey.aws.codebuild/source-auth (clojure.spec.alpha/keys :req-un [:portkey.aws.codebuild.source-auth/type] :opt-un [:portkey.aws.codebuild.source-auth/resource]))
 
-(clojure.spec.alpha/def :portkey.aws.codebuild/project-description (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 0 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255))))
+(clojure.spec.alpha/def :portkey.aws.codebuild/project-description (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 0 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 255))))
 
 (clojure.spec.alpha/def :portkey.aws.codebuild.project/vpc-config (clojure.spec.alpha/and :portkey.aws.codebuild/vpc-config))
 (clojure.spec.alpha/def :portkey.aws.codebuild.project/service-role (clojure.spec.alpha/and :portkey.aws.codebuild/non-empty-string))
@@ -686,7 +1012,7 @@
 (clojure.spec.alpha/def :portkey.aws.codebuild.list-builds-input/next-token (clojure.spec.alpha/and :portkey.aws.codebuild/string))
 (clojure.spec.alpha/def :portkey.aws.codebuild/list-builds-input (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.codebuild.list-builds-input/sort-order :portkey.aws.codebuild.list-builds-input/next-token]))
 
-(clojure.spec.alpha/def :portkey.aws.codebuild/project-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 2 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[A-Za-z0-9][A-Za-z0-9\-_]{1,254}" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.codebuild/project-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 2 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 255)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[A-Za-z0-9][A-Za-z0-9\-_]{1,254}" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.codebuild/git-clone-depth (clojure.spec.alpha/int-in 0 Long/MAX_VALUE))
 
@@ -751,50 +1077,50 @@
 (clojure.spec.alpha/def :portkey.aws.codebuild.webhook/last-modified-secret (clojure.spec.alpha/and :portkey.aws.codebuild/timestamp))
 (clojure.spec.alpha/def :portkey.aws.codebuild/webhook (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.codebuild.webhook/url :portkey.aws.codebuild.webhook/payload-url :portkey.aws.codebuild.webhook/secret :portkey.aws.codebuild.webhook/branch-filter :portkey.aws.codebuild.webhook/last-modified-secret]))
 
-(clojure.core/defn start-build ([start-build-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-start-build-input start-build-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/start-build-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/start-build-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "StartBuild", :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception, "ResourceNotFoundException" :portkey.aws.codebuild/resource-not-found-exception, "AccountLimitExceededException" :portkey.aws.codebuild/account-limit-exceeded-exception}})))))
+(clojure.core/defn start-build ([start-build-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-start-build-input start-build-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/start-build-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/start-build-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "StartBuild", :http.request.configuration/output-deser-fn deser-start-build-output, :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception, "ResourceNotFoundException" :portkey.aws.codebuild/resource-not-found-exception, "AccountLimitExceededException" :portkey.aws.codebuild/account-limit-exceeded-exception}})))))
 (clojure.spec.alpha/fdef start-build :args (clojure.spec.alpha/tuple :portkey.aws.codebuild/start-build-input) :ret (clojure.spec.alpha/and :portkey.aws.codebuild/start-build-output))
 
-(clojure.core/defn list-curated-environment-images ([] (list-curated-environment-images {})) ([list-curated-environment-images-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-curated-environment-images-input list-curated-environment-images-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/list-curated-environment-images-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/list-curated-environment-images-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListCuratedEnvironmentImages", :http.request.spec/error-spec {}})))))
+(clojure.core/defn list-curated-environment-images ([] (list-curated-environment-images {})) ([list-curated-environment-images-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-curated-environment-images-input list-curated-environment-images-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/list-curated-environment-images-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/list-curated-environment-images-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListCuratedEnvironmentImages", :http.request.configuration/output-deser-fn deser-list-curated-environment-images-output, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef list-curated-environment-images :args (clojure.spec.alpha/? :portkey.aws.codebuild/list-curated-environment-images-input) :ret (clojure.spec.alpha/and :portkey.aws.codebuild/list-curated-environment-images-output))
 
-(clojure.core/defn invalidate-project-cache ([invalidate-project-cache-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-invalidate-project-cache-input invalidate-project-cache-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/invalidate-project-cache-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/invalidate-project-cache-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "InvalidateProjectCache", :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception, "ResourceNotFoundException" :portkey.aws.codebuild/resource-not-found-exception}})))))
+(clojure.core/defn invalidate-project-cache ([invalidate-project-cache-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-invalidate-project-cache-input invalidate-project-cache-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/invalidate-project-cache-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/invalidate-project-cache-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "InvalidateProjectCache", :http.request.configuration/output-deser-fn deser-invalidate-project-cache-output, :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception, "ResourceNotFoundException" :portkey.aws.codebuild/resource-not-found-exception}})))))
 (clojure.spec.alpha/fdef invalidate-project-cache :args (clojure.spec.alpha/tuple :portkey.aws.codebuild/invalidate-project-cache-input) :ret (clojure.spec.alpha/and :portkey.aws.codebuild/invalidate-project-cache-output))
 
-(clojure.core/defn list-builds ([] (list-builds {})) ([list-builds-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-builds-input list-builds-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/list-builds-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/list-builds-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListBuilds", :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception}})))))
+(clojure.core/defn list-builds ([] (list-builds {})) ([list-builds-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-builds-input list-builds-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/list-builds-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/list-builds-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListBuilds", :http.request.configuration/output-deser-fn deser-list-builds-output, :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception}})))))
 (clojure.spec.alpha/fdef list-builds :args (clojure.spec.alpha/? :portkey.aws.codebuild/list-builds-input) :ret (clojure.spec.alpha/and :portkey.aws.codebuild/list-builds-output))
 
-(clojure.core/defn batch-delete-builds ([batch-delete-builds-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-batch-delete-builds-input batch-delete-builds-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/batch-delete-builds-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/batch-delete-builds-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "BatchDeleteBuilds", :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception}})))))
+(clojure.core/defn batch-delete-builds ([batch-delete-builds-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-batch-delete-builds-input batch-delete-builds-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/batch-delete-builds-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/batch-delete-builds-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "BatchDeleteBuilds", :http.request.configuration/output-deser-fn deser-batch-delete-builds-output, :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception}})))))
 (clojure.spec.alpha/fdef batch-delete-builds :args (clojure.spec.alpha/tuple :portkey.aws.codebuild/batch-delete-builds-input) :ret (clojure.spec.alpha/and :portkey.aws.codebuild/batch-delete-builds-output))
 
-(clojure.core/defn create-webhook ([create-webhook-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-webhook-input create-webhook-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/create-webhook-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/create-webhook-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateWebhook", :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception, "OAuthProviderException" :portkey.aws.codebuild/o-auth-provider-exception, "ResourceAlreadyExistsException" :portkey.aws.codebuild/resource-already-exists-exception, "ResourceNotFoundException" :portkey.aws.codebuild/resource-not-found-exception}})))))
+(clojure.core/defn create-webhook ([create-webhook-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-create-webhook-input create-webhook-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/create-webhook-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/create-webhook-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateWebhook", :http.request.configuration/output-deser-fn deser-create-webhook-output, :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception, "OAuthProviderException" :portkey.aws.codebuild/o-auth-provider-exception, "ResourceAlreadyExistsException" :portkey.aws.codebuild/resource-already-exists-exception, "ResourceNotFoundException" :portkey.aws.codebuild/resource-not-found-exception}})))))
 (clojure.spec.alpha/fdef create-webhook :args (clojure.spec.alpha/tuple :portkey.aws.codebuild/create-webhook-input) :ret (clojure.spec.alpha/and :portkey.aws.codebuild/create-webhook-output))
 
-(clojure.core/defn list-projects ([] (list-projects {})) ([list-projects-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-projects-input list-projects-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/list-projects-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/list-projects-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListProjects", :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception}})))))
+(clojure.core/defn list-projects ([] (list-projects {})) ([list-projects-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-projects-input list-projects-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/list-projects-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/list-projects-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListProjects", :http.request.configuration/output-deser-fn deser-list-projects-output, :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception}})))))
 (clojure.spec.alpha/fdef list-projects :args (clojure.spec.alpha/? :portkey.aws.codebuild/list-projects-input) :ret (clojure.spec.alpha/and :portkey.aws.codebuild/list-projects-output))
 
-(clojure.core/defn delete-webhook ([delete-webhook-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-webhook-input delete-webhook-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/delete-webhook-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/delete-webhook-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteWebhook", :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception, "ResourceNotFoundException" :portkey.aws.codebuild/resource-not-found-exception, "OAuthProviderException" :portkey.aws.codebuild/o-auth-provider-exception}})))))
+(clojure.core/defn delete-webhook ([delete-webhook-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-webhook-input delete-webhook-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/delete-webhook-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/delete-webhook-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteWebhook", :http.request.configuration/output-deser-fn deser-delete-webhook-output, :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception, "ResourceNotFoundException" :portkey.aws.codebuild/resource-not-found-exception, "OAuthProviderException" :portkey.aws.codebuild/o-auth-provider-exception}})))))
 (clojure.spec.alpha/fdef delete-webhook :args (clojure.spec.alpha/tuple :portkey.aws.codebuild/delete-webhook-input) :ret (clojure.spec.alpha/and :portkey.aws.codebuild/delete-webhook-output))
 
-(clojure.core/defn batch-get-projects ([batch-get-projects-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-batch-get-projects-input batch-get-projects-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/batch-get-projects-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/batch-get-projects-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "BatchGetProjects", :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception}})))))
+(clojure.core/defn batch-get-projects ([batch-get-projects-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-batch-get-projects-input batch-get-projects-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/batch-get-projects-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/batch-get-projects-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "BatchGetProjects", :http.request.configuration/output-deser-fn deser-batch-get-projects-output, :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception}})))))
 (clojure.spec.alpha/fdef batch-get-projects :args (clojure.spec.alpha/tuple :portkey.aws.codebuild/batch-get-projects-input) :ret (clojure.spec.alpha/and :portkey.aws.codebuild/batch-get-projects-output))
 
-(clojure.core/defn update-project ([update-project-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-update-project-input update-project-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/update-project-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/update-project-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateProject", :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception, "ResourceNotFoundException" :portkey.aws.codebuild/resource-not-found-exception}})))))
+(clojure.core/defn update-project ([update-project-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-update-project-input update-project-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/update-project-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/update-project-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateProject", :http.request.configuration/output-deser-fn deser-update-project-output, :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception, "ResourceNotFoundException" :portkey.aws.codebuild/resource-not-found-exception}})))))
 (clojure.spec.alpha/fdef update-project :args (clojure.spec.alpha/tuple :portkey.aws.codebuild/update-project-input) :ret (clojure.spec.alpha/and :portkey.aws.codebuild/update-project-output))
 
-(clojure.core/defn batch-get-builds ([batch-get-builds-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-batch-get-builds-input batch-get-builds-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/batch-get-builds-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/batch-get-builds-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "BatchGetBuilds", :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception}})))))
+(clojure.core/defn batch-get-builds ([batch-get-builds-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-batch-get-builds-input batch-get-builds-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/batch-get-builds-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/batch-get-builds-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "BatchGetBuilds", :http.request.configuration/output-deser-fn deser-batch-get-builds-output, :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception}})))))
 (clojure.spec.alpha/fdef batch-get-builds :args (clojure.spec.alpha/tuple :portkey.aws.codebuild/batch-get-builds-input) :ret (clojure.spec.alpha/and :portkey.aws.codebuild/batch-get-builds-output))
 
-(clojure.core/defn update-webhook ([update-webhook-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-update-webhook-input update-webhook-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/update-webhook-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/update-webhook-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateWebhook", :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception, "ResourceNotFoundException" :portkey.aws.codebuild/resource-not-found-exception, "OAuthProviderException" :portkey.aws.codebuild/o-auth-provider-exception}})))))
+(clojure.core/defn update-webhook ([update-webhook-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-update-webhook-input update-webhook-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/update-webhook-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/update-webhook-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateWebhook", :http.request.configuration/output-deser-fn deser-update-webhook-output, :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception, "ResourceNotFoundException" :portkey.aws.codebuild/resource-not-found-exception, "OAuthProviderException" :portkey.aws.codebuild/o-auth-provider-exception}})))))
 (clojure.spec.alpha/fdef update-webhook :args (clojure.spec.alpha/tuple :portkey.aws.codebuild/update-webhook-input) :ret (clojure.spec.alpha/and :portkey.aws.codebuild/update-webhook-output))
 
-(clojure.core/defn stop-build ([stop-build-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-stop-build-input stop-build-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/stop-build-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/stop-build-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "StopBuild", :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception, "ResourceNotFoundException" :portkey.aws.codebuild/resource-not-found-exception}})))))
+(clojure.core/defn stop-build ([stop-build-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-stop-build-input stop-build-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/stop-build-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/stop-build-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "StopBuild", :http.request.configuration/output-deser-fn deser-stop-build-output, :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception, "ResourceNotFoundException" :portkey.aws.codebuild/resource-not-found-exception}})))))
 (clojure.spec.alpha/fdef stop-build :args (clojure.spec.alpha/tuple :portkey.aws.codebuild/stop-build-input) :ret (clojure.spec.alpha/and :portkey.aws.codebuild/stop-build-output))
 
-(clojure.core/defn delete-project ([delete-project-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-project-input delete-project-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/delete-project-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/delete-project-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteProject", :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception}})))))
+(clojure.core/defn delete-project ([delete-project-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-project-input delete-project-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/delete-project-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/delete-project-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteProject", :http.request.configuration/output-deser-fn deser-delete-project-output, :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception}})))))
 (clojure.spec.alpha/fdef delete-project :args (clojure.spec.alpha/tuple :portkey.aws.codebuild/delete-project-input) :ret (clojure.spec.alpha/and :portkey.aws.codebuild/delete-project-output))
 
-(clojure.core/defn list-builds-for-project ([list-builds-for-project-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-builds-for-project-input list-builds-for-project-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/list-builds-for-project-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/list-builds-for-project-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListBuildsForProject", :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception, "ResourceNotFoundException" :portkey.aws.codebuild/resource-not-found-exception}})))))
+(clojure.core/defn list-builds-for-project ([list-builds-for-project-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-builds-for-project-input list-builds-for-project-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/list-builds-for-project-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/list-builds-for-project-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListBuildsForProject", :http.request.configuration/output-deser-fn deser-list-builds-for-project-output, :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception, "ResourceNotFoundException" :portkey.aws.codebuild/resource-not-found-exception}})))))
 (clojure.spec.alpha/fdef list-builds-for-project :args (clojure.spec.alpha/tuple :portkey.aws.codebuild/list-builds-for-project-input) :ret (clojure.spec.alpha/and :portkey.aws.codebuild/list-builds-for-project-output))
 
-(clojure.core/defn create-project ([create-project-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-project-input create-project-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/create-project-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/create-project-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateProject", :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception, "ResourceAlreadyExistsException" :portkey.aws.codebuild/resource-already-exists-exception, "AccountLimitExceededException" :portkey.aws.codebuild/account-limit-exceeded-exception}})))))
+(clojure.core/defn create-project ([create-project-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-create-project-input create-project-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codebuild/endpoints, :http.request.configuration/target-prefix "CodeBuild_20161006", :http.request.spec/output-spec :portkey.aws.codebuild/create-project-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-10-06", :http.request.configuration/service-id "CodeBuild", :http.request.spec/input-spec :portkey.aws.codebuild/create-project-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateProject", :http.request.configuration/output-deser-fn deser-create-project-output, :http.request.spec/error-spec {"InvalidInputException" :portkey.aws.codebuild/invalid-input-exception, "ResourceAlreadyExistsException" :portkey.aws.codebuild/resource-already-exists-exception, "AccountLimitExceededException" :portkey.aws.codebuild/account-limit-exceeded-exception}})))))
 (clojure.spec.alpha/fdef create-project :args (clojure.spec.alpha/tuple :portkey.aws.codebuild/create-project-input) :ret (clojure.spec.alpha/and :portkey.aws.codebuild/create-project-output))

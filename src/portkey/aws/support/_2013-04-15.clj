@@ -144,6 +144,280 @@
 
 (clojure.core/defn- req-describe-trusted-advisor-check-refresh-statuses-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-string-list (input :check-ids)) #:http.request.field{:name "checkIds", :shape "StringList"})]}))
 
+(clojure.core/declare deser-service-list)
+
+(clojure.core/declare deser-string-list)
+
+(clojure.core/declare deser-double)
+
+(clojure.core/declare deser-attachment)
+
+(clojure.core/declare deser-trusted-advisor-resource-detail-list)
+
+(clojure.core/declare deser-communication)
+
+(clojure.core/declare deser-cc-email-address)
+
+(clojure.core/declare deser-expiry-time)
+
+(clojure.core/declare deser-trusted-advisor-check-summary-list)
+
+(clojure.core/declare deser-category)
+
+(clojure.core/declare deser-trusted-advisor-category-specific-summary)
+
+(clojure.core/declare deser-severity-level-code)
+
+(clojure.core/declare deser-severity-levels-list)
+
+(clojure.core/declare deser-case-id)
+
+(clojure.core/declare deser-severity-code)
+
+(clojure.core/declare deser-category-list)
+
+(clojure.core/declare deser-result)
+
+(clojure.core/declare deser-severity-level)
+
+(clojure.core/declare deser-status)
+
+(clojure.core/declare deser-next-token)
+
+(clojure.core/declare deser-error-message)
+
+(clojure.core/declare deser-trusted-advisor-check-refresh-status)
+
+(clojure.core/declare deser-recent-case-communications)
+
+(clojure.core/declare deser-time-created)
+
+(clojure.core/declare deser-subject)
+
+(clojure.core/declare deser-trusted-advisor-check-list)
+
+(clojure.core/declare deser-service-code)
+
+(clojure.core/declare deser-case-list)
+
+(clojure.core/declare deser-trusted-advisor-resources-summary)
+
+(clojure.core/declare deser-communication-list)
+
+(clojure.core/declare deser-string)
+
+(clojure.core/declare deser-communication-body)
+
+(clojure.core/declare deser-data)
+
+(clojure.core/declare deser-attachment-set)
+
+(clojure.core/declare deser-trusted-advisor-resource-detail)
+
+(clojure.core/declare deser-trusted-advisor-check-summary)
+
+(clojure.core/declare deser-attachment-details)
+
+(clojure.core/declare deser-submitted-by)
+
+(clojure.core/declare deser-long)
+
+(clojure.core/declare deser-trusted-advisor-cost-optimizing-summary)
+
+(clojure.core/declare deser-category-name)
+
+(clojure.core/declare deser-attachment-set-id)
+
+(clojure.core/declare deser-case-details)
+
+(clojure.core/declare deser-language)
+
+(clojure.core/declare deser-service-name)
+
+(clojure.core/declare deser-trusted-advisor-check-refresh-status-list)
+
+(clojure.core/declare deser-severity-level-name)
+
+(clojure.core/declare deser-service)
+
+(clojure.core/declare deser-category-code)
+
+(clojure.core/declare deser-case-status)
+
+(clojure.core/declare deser-display-id)
+
+(clojure.core/declare deser-file-name)
+
+(clojure.core/declare deser-cc-email-address-list)
+
+(clojure.core/declare deser-trusted-advisor-check-result)
+
+(clojure.core/declare deser-trusted-advisor-check-description)
+
+(clojure.core/declare deser-attachment-id)
+
+(clojure.core/declare deser-boolean)
+
+(clojure.core/defn- deser-service-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-service coll))) input))
+
+(clojure.core/defn- deser-string-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-string coll))) input))
+
+(clojure.core/defn- deser-double [input] input)
+
+(clojure.core/defn- deser-attachment [input] (clojure.core/cond-> {} (clojure.core/contains? input "fileName") (clojure.core/assoc :file-name (deser-file-name (input "fileName"))) (clojure.core/contains? input "data") (clojure.core/assoc :data (deser-data (input "data")))))
+
+(clojure.core/defn- deser-trusted-advisor-resource-detail-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-trusted-advisor-resource-detail coll))) input))
+
+(clojure.core/defn- deser-communication [input] (clojure.core/cond-> {} (clojure.core/contains? input "caseId") (clojure.core/assoc :case-id (deser-case-id (input "caseId"))) (clojure.core/contains? input "body") (clojure.core/assoc :body (deser-communication-body (input "body"))) (clojure.core/contains? input "submittedBy") (clojure.core/assoc :submitted-by (deser-submitted-by (input "submittedBy"))) (clojure.core/contains? input "timeCreated") (clojure.core/assoc :time-created (deser-time-created (input "timeCreated"))) (clojure.core/contains? input "attachmentSet") (clojure.core/assoc :attachment-set (deser-attachment-set (input "attachmentSet")))))
+
+(clojure.core/defn- deser-cc-email-address [input] input)
+
+(clojure.core/defn- deser-expiry-time [input] input)
+
+(clojure.core/defn- deser-trusted-advisor-check-summary-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-trusted-advisor-check-summary coll))) input))
+
+(clojure.core/defn- deser-category [input] (clojure.core/cond-> {} (clojure.core/contains? input "code") (clojure.core/assoc :code (deser-category-code (input "code"))) (clojure.core/contains? input "name") (clojure.core/assoc :name (deser-category-name (input "name")))))
+
+(clojure.core/defn- deser-trusted-advisor-category-specific-summary [input] (clojure.core/cond-> {} (clojure.core/contains? input "costOptimizing") (clojure.core/assoc :cost-optimizing (deser-trusted-advisor-cost-optimizing-summary (input "costOptimizing")))))
+
+(clojure.core/defn- deser-severity-level-code [input] input)
+
+(clojure.core/defn- deser-severity-levels-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-severity-level coll))) input))
+
+(clojure.core/defn- deser-case-id [input] input)
+
+(clojure.core/defn- deser-severity-code [input] input)
+
+(clojure.core/defn- deser-category-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-category coll))) input))
+
+(clojure.core/defn- deser-result [input] input)
+
+(clojure.core/defn- deser-severity-level [input] (clojure.core/cond-> {} (clojure.core/contains? input "code") (clojure.core/assoc :code (deser-severity-level-code (input "code"))) (clojure.core/contains? input "name") (clojure.core/assoc :name (deser-severity-level-name (input "name")))))
+
+(clojure.core/defn- deser-status [input] input)
+
+(clojure.core/defn- deser-next-token [input] input)
+
+(clojure.core/defn- deser-error-message [input] input)
+
+(clojure.core/defn- deser-trusted-advisor-check-refresh-status [input] (clojure.core/cond-> {:check-id (deser-string (input "checkId")), :status (deser-string (input "status")), :millis-until-next-refreshable (deser-long (input "millisUntilNextRefreshable"))}))
+
+(clojure.core/defn- deser-recent-case-communications [input] (clojure.core/cond-> {} (clojure.core/contains? input "communications") (clojure.core/assoc :communications (deser-communication-list (input "communications"))) (clojure.core/contains? input "nextToken") (clojure.core/assoc :next-token (deser-next-token (input "nextToken")))))
+
+(clojure.core/defn- deser-time-created [input] input)
+
+(clojure.core/defn- deser-subject [input] input)
+
+(clojure.core/defn- deser-trusted-advisor-check-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-trusted-advisor-check-description coll))) input))
+
+(clojure.core/defn- deser-service-code [input] input)
+
+(clojure.core/defn- deser-case-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-case-details coll))) input))
+
+(clojure.core/defn- deser-trusted-advisor-resources-summary [input] (clojure.core/cond-> {:resources-processed (deser-long (input "resourcesProcessed")), :resources-flagged (deser-long (input "resourcesFlagged")), :resources-ignored (deser-long (input "resourcesIgnored")), :resources-suppressed (deser-long (input "resourcesSuppressed"))}))
+
+(clojure.core/defn- deser-communication-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-communication coll))) input))
+
+(clojure.core/defn- deser-string [input] input)
+
+(clojure.core/defn- deser-communication-body [input] input)
+
+(clojure.core/defn- deser-data [input] (portkey.aws/base64-decode input))
+
+(clojure.core/defn- deser-attachment-set [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-attachment-details coll))) input))
+
+(clojure.core/defn- deser-trusted-advisor-resource-detail [input] (clojure.core/cond-> {:status (deser-string (input "status")), :resource-id (deser-string (input "resourceId")), :metadata (deser-string-list (input "metadata"))} (clojure.core/contains? input "region") (clojure.core/assoc :region (deser-string (input "region"))) (clojure.core/contains? input "isSuppressed") (clojure.core/assoc :is-suppressed (deser-boolean (input "isSuppressed")))))
+
+(clojure.core/defn- deser-trusted-advisor-check-summary [input] (clojure.core/cond-> {:check-id (deser-string (input "checkId")), :timestamp (deser-string (input "timestamp")), :status (deser-string (input "status")), :resources-summary (deser-trusted-advisor-resources-summary (input "resourcesSummary")), :category-specific-summary (deser-trusted-advisor-category-specific-summary (input "categorySpecificSummary"))} (clojure.core/contains? input "hasFlaggedResources") (clojure.core/assoc :has-flagged-resources (deser-boolean (input "hasFlaggedResources")))))
+
+(clojure.core/defn- deser-attachment-details [input] (clojure.core/cond-> {} (clojure.core/contains? input "attachmentId") (clojure.core/assoc :attachment-id (deser-attachment-id (input "attachmentId"))) (clojure.core/contains? input "fileName") (clojure.core/assoc :file-name (deser-file-name (input "fileName")))))
+
+(clojure.core/defn- deser-submitted-by [input] input)
+
+(clojure.core/defn- deser-long [input] input)
+
+(clojure.core/defn- deser-trusted-advisor-cost-optimizing-summary [input] (clojure.core/cond-> {:estimated-monthly-savings (deser-double (input "estimatedMonthlySavings")), :estimated-percent-monthly-savings (deser-double (input "estimatedPercentMonthlySavings"))}))
+
+(clojure.core/defn- deser-category-name [input] input)
+
+(clojure.core/defn- deser-attachment-set-id [input] input)
+
+(clojure.core/defn- deser-case-details [input] (clojure.core/cond-> {} (clojure.core/contains? input "displayId") (clojure.core/assoc :display-id (deser-display-id (input "displayId"))) (clojure.core/contains? input "severityCode") (clojure.core/assoc :severity-code (deser-severity-code (input "severityCode"))) (clojure.core/contains? input "ccEmailAddresses") (clojure.core/assoc :cc-email-addresses (deser-cc-email-address-list (input "ccEmailAddresses"))) (clojure.core/contains? input "caseId") (clojure.core/assoc :case-id (deser-case-id (input "caseId"))) (clojure.core/contains? input "categoryCode") (clojure.core/assoc :category-code (deser-category-code (input "categoryCode"))) (clojure.core/contains? input "status") (clojure.core/assoc :status (deser-status (input "status"))) (clojure.core/contains? input "serviceCode") (clojure.core/assoc :service-code (deser-service-code (input "serviceCode"))) (clojure.core/contains? input "subject") (clojure.core/assoc :subject (deser-subject (input "subject"))) (clojure.core/contains? input "timeCreated") (clojure.core/assoc :time-created (deser-time-created (input "timeCreated"))) (clojure.core/contains? input "recentCommunications") (clojure.core/assoc :recent-communications (deser-recent-case-communications (input "recentCommunications"))) (clojure.core/contains? input "language") (clojure.core/assoc :language (deser-language (input "language"))) (clojure.core/contains? input "submittedBy") (clojure.core/assoc :submitted-by (deser-submitted-by (input "submittedBy")))))
+
+(clojure.core/defn- deser-language [input] input)
+
+(clojure.core/defn- deser-service-name [input] input)
+
+(clojure.core/defn- deser-trusted-advisor-check-refresh-status-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-trusted-advisor-check-refresh-status coll))) input))
+
+(clojure.core/defn- deser-severity-level-name [input] input)
+
+(clojure.core/defn- deser-service [input] (clojure.core/cond-> {} (clojure.core/contains? input "code") (clojure.core/assoc :code (deser-service-code (input "code"))) (clojure.core/contains? input "name") (clojure.core/assoc :name (deser-service-name (input "name"))) (clojure.core/contains? input "categories") (clojure.core/assoc :categories (deser-category-list (input "categories")))))
+
+(clojure.core/defn- deser-category-code [input] input)
+
+(clojure.core/defn- deser-case-status [input] input)
+
+(clojure.core/defn- deser-display-id [input] input)
+
+(clojure.core/defn- deser-file-name [input] input)
+
+(clojure.core/defn- deser-cc-email-address-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-cc-email-address coll))) input))
+
+(clojure.core/defn- deser-trusted-advisor-check-result [input] (clojure.core/cond-> {:check-id (deser-string (input "checkId")), :timestamp (deser-string (input "timestamp")), :status (deser-string (input "status")), :resources-summary (deser-trusted-advisor-resources-summary (input "resourcesSummary")), :category-specific-summary (deser-trusted-advisor-category-specific-summary (input "categorySpecificSummary")), :flagged-resources (deser-trusted-advisor-resource-detail-list (input "flaggedResources"))}))
+
+(clojure.core/defn- deser-trusted-advisor-check-description [input] (clojure.core/cond-> {:id (deser-string (input "id")), :name (deser-string (input "name")), :description (deser-string (input "description")), :category (deser-string (input "category")), :metadata (deser-string-list (input "metadata"))}))
+
+(clojure.core/defn- deser-attachment-id [input] input)
+
+(clojure.core/defn- deser-boolean [input] input)
+
+(clojure.core/defn- deser-describe-trusted-advisor-check-summaries-response [input] (clojure.core/cond-> {:summaries (deser-trusted-advisor-check-summary-list (input "summaries"))}))
+
+(clojure.core/defn- deser-add-attachments-to-set-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "attachmentSetId") (clojure.core/assoc :attachment-set-id (deser-attachment-set-id (input "attachmentSetId"))) (clojure.core/contains? input "expiryTime") (clojure.core/assoc :expiry-time (deser-expiry-time (input "expiryTime")))))
+
+(clojure.core/defn- deser-add-communication-to-case-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "result") (clojure.core/assoc :result (deser-result (input "result")))))
+
+(clojure.core/defn- deser-attachment-set-size-limit-exceeded [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-describe-attachment-limit-exceeded [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-describe-trusted-advisor-checks-response [input] (clojure.core/cond-> {:checks (deser-trusted-advisor-check-list (input "checks"))}))
+
+(clojure.core/defn- deser-create-case-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "caseId") (clojure.core/assoc :case-id (deser-case-id (input "caseId")))))
+
+(clojure.core/defn- deser-describe-trusted-advisor-check-refresh-statuses-response [input] (clojure.core/cond-> {:statuses (deser-trusted-advisor-check-refresh-status-list (input "statuses"))}))
+
+(clojure.core/defn- deser-attachment-set-expired [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-describe-services-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "services") (clojure.core/assoc :services (deser-service-list (input "services")))))
+
+(clojure.core/defn- deser-refresh-trusted-advisor-check-response [input] (clojure.core/cond-> {:status (deser-trusted-advisor-check-refresh-status (input "status"))}))
+
+(clojure.core/defn- deser-case-id-not-found [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-describe-trusted-advisor-check-result-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "result") (clojure.core/assoc :result (deser-trusted-advisor-check-result (input "result")))))
+
+(clojure.core/defn- deser-describe-communications-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "communications") (clojure.core/assoc :communications (deser-communication-list (input "communications"))) (clojure.core/contains? input "nextToken") (clojure.core/assoc :next-token (deser-next-token (input "nextToken")))))
+
+(clojure.core/defn- deser-attachment-id-not-found [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-resolve-case-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "initialCaseStatus") (clojure.core/assoc :initial-case-status (deser-case-status (input "initialCaseStatus"))) (clojure.core/contains? input "finalCaseStatus") (clojure.core/assoc :final-case-status (deser-case-status (input "finalCaseStatus")))))
+
+(clojure.core/defn- deser-attachment-limit-exceeded [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-internal-server-error [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-describe-severity-levels-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "severityLevels") (clojure.core/assoc :severity-levels (deser-severity-levels-list (input "severityLevels")))))
+
+(clojure.core/defn- deser-describe-cases-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "cases") (clojure.core/assoc :cases (deser-case-list (input "cases"))) (clojure.core/contains? input "nextToken") (clojure.core/assoc :next-token (deser-next-token (input "nextToken")))))
+
+(clojure.core/defn- deser-describe-attachment-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "attachment") (clojure.core/assoc :attachment (deser-attachment (input "attachment")))))
+
+(clojure.core/defn- deser-attachment-set-id-not-found [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-case-creation-limit-exceeded [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
 (clojure.spec.alpha/def :portkey.aws.support.-2013-04-15/service-list (clojure.spec.alpha/coll-of :portkey.aws.support.-2013-04-15/service))
 
 (clojure.spec.alpha/def :portkey.aws.support.-2013-04-15.describe-trusted-advisor-check-summaries-response/summaries (clojure.spec.alpha/and :portkey.aws.support.-2013-04-15/trusted-advisor-check-summary-list))
@@ -321,7 +595,7 @@
 (clojure.spec.alpha/def :portkey.aws.support.-2013-04-15.describe-trusted-advisor-check-result-response/result (clojure.spec.alpha/and :portkey.aws.support.-2013-04-15/trusted-advisor-check-result))
 (clojure.spec.alpha/def :portkey.aws.support.-2013-04-15/describe-trusted-advisor-check-result-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.support.-2013-04-15.describe-trusted-advisor-check-result-response/result]))
 
-(clojure.spec.alpha/def :portkey.aws.support.-2013-04-15/communication-body (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 8000))))
+(clojure.spec.alpha/def :portkey.aws.support.-2013-04-15/communication-body (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 8000))))
 
 (clojure.spec.alpha/def :portkey.aws.support.-2013-04-15/data clojure.core/bytes?)
 
@@ -479,44 +753,44 @@
 (clojure.spec.alpha/def :portkey.aws.support.-2013-04-15.case-creation-limit-exceeded/message (clojure.spec.alpha/and :portkey.aws.support.-2013-04-15/error-message))
 (clojure.spec.alpha/def :portkey.aws.support.-2013-04-15/case-creation-limit-exceeded (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.support.-2013-04-15.case-creation-limit-exceeded/message]))
 
-(clojure.core/defn describe-trusted-advisor-check-summaries ([describe-trusted-advisor-check-summaries-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-trusted-advisor-check-summaries-request describe-trusted-advisor-check-summaries-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/describe-trusted-advisor-check-summaries-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/describe-trusted-advisor-check-summaries-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeTrustedAdvisorCheckSummaries", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error}})))))
+(clojure.core/defn describe-trusted-advisor-check-summaries ([describe-trusted-advisor-check-summaries-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-trusted-advisor-check-summaries-request describe-trusted-advisor-check-summaries-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/describe-trusted-advisor-check-summaries-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/describe-trusted-advisor-check-summaries-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeTrustedAdvisorCheckSummaries", :http.request.configuration/output-deser-fn deser-describe-trusted-advisor-check-summaries-response, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error}})))))
 (clojure.spec.alpha/fdef describe-trusted-advisor-check-summaries :args (clojure.spec.alpha/tuple :portkey.aws.support.-2013-04-15/describe-trusted-advisor-check-summaries-request) :ret (clojure.spec.alpha/and :portkey.aws.support.-2013-04-15/describe-trusted-advisor-check-summaries-response))
 
-(clojure.core/defn add-attachments-to-set ([add-attachments-to-set-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-add-attachments-to-set-request add-attachments-to-set-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/add-attachments-to-set-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/add-attachments-to-set-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AddAttachmentsToSet", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error, "AttachmentSetIdNotFound" :portkey.aws.support.-2013-04-15/attachment-set-id-not-found, "AttachmentSetExpired" :portkey.aws.support.-2013-04-15/attachment-set-expired, "AttachmentSetSizeLimitExceeded" :portkey.aws.support.-2013-04-15/attachment-set-size-limit-exceeded, "AttachmentLimitExceeded" :portkey.aws.support.-2013-04-15/attachment-limit-exceeded}})))))
+(clojure.core/defn add-attachments-to-set ([add-attachments-to-set-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-add-attachments-to-set-request add-attachments-to-set-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/add-attachments-to-set-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/add-attachments-to-set-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AddAttachmentsToSet", :http.request.configuration/output-deser-fn deser-add-attachments-to-set-response, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error, "AttachmentSetIdNotFound" :portkey.aws.support.-2013-04-15/attachment-set-id-not-found, "AttachmentSetExpired" :portkey.aws.support.-2013-04-15/attachment-set-expired, "AttachmentSetSizeLimitExceeded" :portkey.aws.support.-2013-04-15/attachment-set-size-limit-exceeded, "AttachmentLimitExceeded" :portkey.aws.support.-2013-04-15/attachment-limit-exceeded}})))))
 (clojure.spec.alpha/fdef add-attachments-to-set :args (clojure.spec.alpha/tuple :portkey.aws.support.-2013-04-15/add-attachments-to-set-request) :ret (clojure.spec.alpha/and :portkey.aws.support.-2013-04-15/add-attachments-to-set-response))
 
-(clojure.core/defn describe-trusted-advisor-checks ([describe-trusted-advisor-checks-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-trusted-advisor-checks-request describe-trusted-advisor-checks-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/describe-trusted-advisor-checks-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/describe-trusted-advisor-checks-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeTrustedAdvisorChecks", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error}})))))
+(clojure.core/defn describe-trusted-advisor-checks ([describe-trusted-advisor-checks-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-trusted-advisor-checks-request describe-trusted-advisor-checks-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/describe-trusted-advisor-checks-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/describe-trusted-advisor-checks-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeTrustedAdvisorChecks", :http.request.configuration/output-deser-fn deser-describe-trusted-advisor-checks-response, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error}})))))
 (clojure.spec.alpha/fdef describe-trusted-advisor-checks :args (clojure.spec.alpha/tuple :portkey.aws.support.-2013-04-15/describe-trusted-advisor-checks-request) :ret (clojure.spec.alpha/and :portkey.aws.support.-2013-04-15/describe-trusted-advisor-checks-response))
 
-(clojure.core/defn describe-attachment ([describe-attachment-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-attachment-request describe-attachment-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/describe-attachment-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/describe-attachment-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeAttachment", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error, "DescribeAttachmentLimitExceeded" :portkey.aws.support.-2013-04-15/describe-attachment-limit-exceeded, "AttachmentIdNotFound" :portkey.aws.support.-2013-04-15/attachment-id-not-found}})))))
+(clojure.core/defn describe-attachment ([describe-attachment-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-attachment-request describe-attachment-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/describe-attachment-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/describe-attachment-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeAttachment", :http.request.configuration/output-deser-fn deser-describe-attachment-response, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error, "DescribeAttachmentLimitExceeded" :portkey.aws.support.-2013-04-15/describe-attachment-limit-exceeded, "AttachmentIdNotFound" :portkey.aws.support.-2013-04-15/attachment-id-not-found}})))))
 (clojure.spec.alpha/fdef describe-attachment :args (clojure.spec.alpha/tuple :portkey.aws.support.-2013-04-15/describe-attachment-request) :ret (clojure.spec.alpha/and :portkey.aws.support.-2013-04-15/describe-attachment-response))
 
-(clojure.core/defn resolve-case ([] (resolve-case {})) ([resolve-case-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-resolve-case-request resolve-case-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/resolve-case-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/resolve-case-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ResolveCase", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error, "CaseIdNotFound" :portkey.aws.support.-2013-04-15/case-id-not-found}})))))
+(clojure.core/defn resolve-case ([] (resolve-case {})) ([resolve-case-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-resolve-case-request resolve-case-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/resolve-case-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/resolve-case-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ResolveCase", :http.request.configuration/output-deser-fn deser-resolve-case-response, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error, "CaseIdNotFound" :portkey.aws.support.-2013-04-15/case-id-not-found}})))))
 (clojure.spec.alpha/fdef resolve-case :args (clojure.spec.alpha/? :portkey.aws.support.-2013-04-15/resolve-case-request) :ret (clojure.spec.alpha/and :portkey.aws.support.-2013-04-15/resolve-case-response))
 
-(clojure.core/defn create-case ([create-case-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-case-request create-case-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/create-case-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/create-case-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateCase", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error, "CaseCreationLimitExceeded" :portkey.aws.support.-2013-04-15/case-creation-limit-exceeded, "AttachmentSetIdNotFound" :portkey.aws.support.-2013-04-15/attachment-set-id-not-found, "AttachmentSetExpired" :portkey.aws.support.-2013-04-15/attachment-set-expired}})))))
+(clojure.core/defn create-case ([create-case-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-create-case-request create-case-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/create-case-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/create-case-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateCase", :http.request.configuration/output-deser-fn deser-create-case-response, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error, "CaseCreationLimitExceeded" :portkey.aws.support.-2013-04-15/case-creation-limit-exceeded, "AttachmentSetIdNotFound" :portkey.aws.support.-2013-04-15/attachment-set-id-not-found, "AttachmentSetExpired" :portkey.aws.support.-2013-04-15/attachment-set-expired}})))))
 (clojure.spec.alpha/fdef create-case :args (clojure.spec.alpha/tuple :portkey.aws.support.-2013-04-15/create-case-request) :ret (clojure.spec.alpha/and :portkey.aws.support.-2013-04-15/create-case-response))
 
-(clojure.core/defn describe-communications ([describe-communications-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-communications-request describe-communications-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/describe-communications-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/describe-communications-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeCommunications", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error, "CaseIdNotFound" :portkey.aws.support.-2013-04-15/case-id-not-found}})))))
+(clojure.core/defn describe-communications ([describe-communications-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-communications-request describe-communications-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/describe-communications-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/describe-communications-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeCommunications", :http.request.configuration/output-deser-fn deser-describe-communications-response, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error, "CaseIdNotFound" :portkey.aws.support.-2013-04-15/case-id-not-found}})))))
 (clojure.spec.alpha/fdef describe-communications :args (clojure.spec.alpha/tuple :portkey.aws.support.-2013-04-15/describe-communications-request) :ret (clojure.spec.alpha/and :portkey.aws.support.-2013-04-15/describe-communications-response))
 
-(clojure.core/defn describe-services ([] (describe-services {})) ([describe-services-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-services-request describe-services-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/describe-services-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/describe-services-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeServices", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error}})))))
+(clojure.core/defn describe-services ([] (describe-services {})) ([describe-services-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-services-request describe-services-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/describe-services-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/describe-services-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeServices", :http.request.configuration/output-deser-fn deser-describe-services-response, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error}})))))
 (clojure.spec.alpha/fdef describe-services :args (clojure.spec.alpha/? :portkey.aws.support.-2013-04-15/describe-services-request) :ret (clojure.spec.alpha/and :portkey.aws.support.-2013-04-15/describe-services-response))
 
-(clojure.core/defn describe-trusted-advisor-check-refresh-statuses ([describe-trusted-advisor-check-refresh-statuses-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-trusted-advisor-check-refresh-statuses-request describe-trusted-advisor-check-refresh-statuses-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/describe-trusted-advisor-check-refresh-statuses-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/describe-trusted-advisor-check-refresh-statuses-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeTrustedAdvisorCheckRefreshStatuses", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error}})))))
+(clojure.core/defn describe-trusted-advisor-check-refresh-statuses ([describe-trusted-advisor-check-refresh-statuses-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-trusted-advisor-check-refresh-statuses-request describe-trusted-advisor-check-refresh-statuses-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/describe-trusted-advisor-check-refresh-statuses-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/describe-trusted-advisor-check-refresh-statuses-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeTrustedAdvisorCheckRefreshStatuses", :http.request.configuration/output-deser-fn deser-describe-trusted-advisor-check-refresh-statuses-response, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error}})))))
 (clojure.spec.alpha/fdef describe-trusted-advisor-check-refresh-statuses :args (clojure.spec.alpha/tuple :portkey.aws.support.-2013-04-15/describe-trusted-advisor-check-refresh-statuses-request) :ret (clojure.spec.alpha/and :portkey.aws.support.-2013-04-15/describe-trusted-advisor-check-refresh-statuses-response))
 
-(clojure.core/defn add-communication-to-case ([add-communication-to-case-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-add-communication-to-case-request add-communication-to-case-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/add-communication-to-case-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/add-communication-to-case-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AddCommunicationToCase", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error, "CaseIdNotFound" :portkey.aws.support.-2013-04-15/case-id-not-found, "AttachmentSetIdNotFound" :portkey.aws.support.-2013-04-15/attachment-set-id-not-found, "AttachmentSetExpired" :portkey.aws.support.-2013-04-15/attachment-set-expired}})))))
+(clojure.core/defn add-communication-to-case ([add-communication-to-case-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-add-communication-to-case-request add-communication-to-case-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/add-communication-to-case-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/add-communication-to-case-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AddCommunicationToCase", :http.request.configuration/output-deser-fn deser-add-communication-to-case-response, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error, "CaseIdNotFound" :portkey.aws.support.-2013-04-15/case-id-not-found, "AttachmentSetIdNotFound" :portkey.aws.support.-2013-04-15/attachment-set-id-not-found, "AttachmentSetExpired" :portkey.aws.support.-2013-04-15/attachment-set-expired}})))))
 (clojure.spec.alpha/fdef add-communication-to-case :args (clojure.spec.alpha/tuple :portkey.aws.support.-2013-04-15/add-communication-to-case-request) :ret (clojure.spec.alpha/and :portkey.aws.support.-2013-04-15/add-communication-to-case-response))
 
-(clojure.core/defn refresh-trusted-advisor-check ([refresh-trusted-advisor-check-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-refresh-trusted-advisor-check-request refresh-trusted-advisor-check-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/refresh-trusted-advisor-check-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/refresh-trusted-advisor-check-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "RefreshTrustedAdvisorCheck", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error}})))))
+(clojure.core/defn refresh-trusted-advisor-check ([refresh-trusted-advisor-check-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-refresh-trusted-advisor-check-request refresh-trusted-advisor-check-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/refresh-trusted-advisor-check-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/refresh-trusted-advisor-check-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "RefreshTrustedAdvisorCheck", :http.request.configuration/output-deser-fn deser-refresh-trusted-advisor-check-response, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error}})))))
 (clojure.spec.alpha/fdef refresh-trusted-advisor-check :args (clojure.spec.alpha/tuple :portkey.aws.support.-2013-04-15/refresh-trusted-advisor-check-request) :ret (clojure.spec.alpha/and :portkey.aws.support.-2013-04-15/refresh-trusted-advisor-check-response))
 
-(clojure.core/defn describe-severity-levels ([] (describe-severity-levels {})) ([describe-severity-levels-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-severity-levels-request describe-severity-levels-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/describe-severity-levels-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/describe-severity-levels-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeSeverityLevels", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error}})))))
+(clojure.core/defn describe-severity-levels ([] (describe-severity-levels {})) ([describe-severity-levels-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-severity-levels-request describe-severity-levels-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/describe-severity-levels-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/describe-severity-levels-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeSeverityLevels", :http.request.configuration/output-deser-fn deser-describe-severity-levels-response, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error}})))))
 (clojure.spec.alpha/fdef describe-severity-levels :args (clojure.spec.alpha/? :portkey.aws.support.-2013-04-15/describe-severity-levels-request) :ret (clojure.spec.alpha/and :portkey.aws.support.-2013-04-15/describe-severity-levels-response))
 
-(clojure.core/defn describe-cases ([] (describe-cases {})) ([describe-cases-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-cases-request describe-cases-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/describe-cases-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/describe-cases-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeCases", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error, "CaseIdNotFound" :portkey.aws.support.-2013-04-15/case-id-not-found}})))))
+(clojure.core/defn describe-cases ([] (describe-cases {})) ([describe-cases-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-cases-request describe-cases-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/describe-cases-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/describe-cases-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeCases", :http.request.configuration/output-deser-fn deser-describe-cases-response, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error, "CaseIdNotFound" :portkey.aws.support.-2013-04-15/case-id-not-found}})))))
 (clojure.spec.alpha/fdef describe-cases :args (clojure.spec.alpha/? :portkey.aws.support.-2013-04-15/describe-cases-request) :ret (clojure.spec.alpha/and :portkey.aws.support.-2013-04-15/describe-cases-response))
 
-(clojure.core/defn describe-trusted-advisor-check-result ([describe-trusted-advisor-check-result-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-trusted-advisor-check-result-request describe-trusted-advisor-check-result-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/describe-trusted-advisor-check-result-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/describe-trusted-advisor-check-result-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeTrustedAdvisorCheckResult", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error}})))))
+(clojure.core/defn describe-trusted-advisor-check-result ([describe-trusted-advisor-check-result-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-trusted-advisor-check-result-request describe-trusted-advisor-check-result-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.support.-2013-04-15/endpoints, :http.request.configuration/target-prefix "AWSSupport_20130415", :http.request.spec/output-spec :portkey.aws.support.-2013-04-15/describe-trusted-advisor-check-result-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2013-04-15", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.support.-2013-04-15/describe-trusted-advisor-check-result-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeTrustedAdvisorCheckResult", :http.request.configuration/output-deser-fn deser-describe-trusted-advisor-check-result-response, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.support.-2013-04-15/internal-server-error}})))))
 (clojure.spec.alpha/fdef describe-trusted-advisor-check-result :args (clojure.spec.alpha/tuple :portkey.aws.support.-2013-04-15/describe-trusted-advisor-check-result-request) :ret (clojure.spec.alpha/and :portkey.aws.support.-2013-04-15/describe-trusted-advisor-check-result-response))

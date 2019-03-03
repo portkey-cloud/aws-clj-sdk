@@ -345,6 +345,312 @@
 
 (clojure.core/defn- req-describe-application-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-application-name (input :application-name)) #:http.request.field{:name "ApplicationName", :shape "ApplicationName"})]}))
 
+(clojure.core/declare deser-input-processing-configuration-description)
+
+(clojure.core/declare deser-log-stream-arn)
+
+(clojure.core/declare deser-cloud-watch-logging-option-description)
+
+(clojure.core/declare deser-application-detail)
+
+(clojure.core/declare deser-in-app-stream-name)
+
+(clojure.core/declare deser-application-version-id)
+
+(clojure.core/declare deser-application-summaries)
+
+(clojure.core/declare deser-parsed-input-records)
+
+(clojure.core/declare deser-input-description)
+
+(clojure.core/declare deser-role-arn)
+
+(clojure.core/declare deser-record-column-mapping)
+
+(clojure.core/declare deser-record-format)
+
+(clojure.core/declare deser-output-descriptions)
+
+(clojure.core/declare deser-kinesis-streams-output-description)
+
+(clojure.core/declare deser-output-description)
+
+(clojure.core/declare deser-parsed-input-record)
+
+(clojure.core/declare deser-cloud-watch-logging-option-descriptions)
+
+(clojure.core/declare deser-csv-mapping-parameters)
+
+(clojure.core/declare deser-input-parallelism)
+
+(clojure.core/declare deser-application-summary)
+
+(clojure.core/declare deser-record-column-delimiter)
+
+(clojure.core/declare deser-in-app-stream-names)
+
+(clojure.core/declare deser-record-column-name)
+
+(clojure.core/declare deser-record-row-path)
+
+(clojure.core/declare deser-input-parallelism-count)
+
+(clojure.core/declare deser-destination-schema)
+
+(clojure.core/declare deser-kinesis-firehose-output-description)
+
+(clojure.core/declare deser-processed-input-records)
+
+(clojure.core/declare deser-json-mapping-parameters)
+
+(clojure.core/declare deser-error-message)
+
+(clojure.core/declare deser-application-code)
+
+(clojure.core/declare deser-record-column)
+
+(clojure.core/declare deser-input-starting-position-configuration)
+
+(clojure.core/declare deser-s-3-reference-data-source-description)
+
+(clojure.core/declare deser-record-encoding)
+
+(clojure.core/declare deser-application-status)
+
+(clojure.core/declare deser-processed-input-record)
+
+(clojure.core/declare deser-file-key)
+
+(clojure.core/declare deser-application-name)
+
+(clojure.core/declare deser-input-descriptions)
+
+(clojure.core/declare deser-record-column-sql-type)
+
+(clojure.core/declare deser-kinesis-streams-input-description)
+
+(clojure.core/declare deser-parsed-input-record-field)
+
+(clojure.core/declare deser-mapping-parameters)
+
+(clojure.core/declare deser-timestamp)
+
+(clojure.core/declare deser-reference-data-source-descriptions)
+
+(clojure.core/declare deser-in-app-table-name)
+
+(clojure.core/declare deser-record-columns)
+
+(clojure.core/declare deser-lambda-output-description)
+
+(clojure.core/declare deser-kinesis-firehose-input-description)
+
+(clojure.core/declare deser-record-format-type)
+
+(clojure.core/declare deser-reference-data-source-description)
+
+(clojure.core/declare deser-application-description)
+
+(clojure.core/declare deser-source-schema)
+
+(clojure.core/declare deser-input-lambda-processor-description)
+
+(clojure.core/declare deser-resource-arn)
+
+(clojure.core/declare deser-boolean-object)
+
+(clojure.core/declare deser-record-row-delimiter)
+
+(clojure.core/declare deser-id)
+
+(clojure.core/declare deser-raw-input-record)
+
+(clojure.core/declare deser-bucket-arn)
+
+(clojure.core/declare deser-input-starting-position)
+
+(clojure.core/declare deser-raw-input-records)
+
+(clojure.core/defn- deser-input-processing-configuration-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "InputLambdaProcessorDescription") (clojure.core/assoc :input-lambda-processor-description (deser-input-lambda-processor-description (input "InputLambdaProcessorDescription")))))
+
+(clojure.core/defn- deser-log-stream-arn [input] input)
+
+(clojure.core/defn- deser-cloud-watch-logging-option-description [input] (clojure.core/cond-> {:log-stream-arn (deser-log-stream-arn (input "LogStreamARN")), :role-arn (deser-role-arn (input "RoleARN"))} (clojure.core/contains? input "CloudWatchLoggingOptionId") (clojure.core/assoc :cloud-watch-logging-option-id (deser-id (input "CloudWatchLoggingOptionId")))))
+
+(clojure.core/defn- deser-application-detail [input] (clojure.core/cond-> {:application-name (deser-application-name (input "ApplicationName")), :application-arn (deser-resource-arn (input "ApplicationARN")), :application-status (deser-application-status (input "ApplicationStatus")), :application-version-id (deser-application-version-id (input "ApplicationVersionId"))} (clojure.core/contains? input "CreateTimestamp") (clojure.core/assoc :create-timestamp (deser-timestamp (input "CreateTimestamp"))) (clojure.core/contains? input "LastUpdateTimestamp") (clojure.core/assoc :last-update-timestamp (deser-timestamp (input "LastUpdateTimestamp"))) (clojure.core/contains? input "OutputDescriptions") (clojure.core/assoc :output-descriptions (deser-output-descriptions (input "OutputDescriptions"))) (clojure.core/contains? input "CloudWatchLoggingOptionDescriptions") (clojure.core/assoc :cloud-watch-logging-option-descriptions (deser-cloud-watch-logging-option-descriptions (input "CloudWatchLoggingOptionDescriptions"))) (clojure.core/contains? input "ApplicationCode") (clojure.core/assoc :application-code (deser-application-code (input "ApplicationCode"))) (clojure.core/contains? input "InputDescriptions") (clojure.core/assoc :input-descriptions (deser-input-descriptions (input "InputDescriptions"))) (clojure.core/contains? input "ReferenceDataSourceDescriptions") (clojure.core/assoc :reference-data-source-descriptions (deser-reference-data-source-descriptions (input "ReferenceDataSourceDescriptions"))) (clojure.core/contains? input "ApplicationDescription") (clojure.core/assoc :application-description (deser-application-description (input "ApplicationDescription")))))
+
+(clojure.core/defn- deser-in-app-stream-name [input] input)
+
+(clojure.core/defn- deser-application-version-id [input] input)
+
+(clojure.core/defn- deser-application-summaries [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-application-summary coll))) input))
+
+(clojure.core/defn- deser-parsed-input-records [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-parsed-input-record coll))) input))
+
+(clojure.core/defn- deser-input-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "InputProcessingConfigurationDescription") (clojure.core/assoc :input-processing-configuration-description (deser-input-processing-configuration-description (input "InputProcessingConfigurationDescription"))) (clojure.core/contains? input "InputId") (clojure.core/assoc :input-id (deser-id (input "InputId"))) (clojure.core/contains? input "InputParallelism") (clojure.core/assoc :input-parallelism (deser-input-parallelism (input "InputParallelism"))) (clojure.core/contains? input "InAppStreamNames") (clojure.core/assoc :in-app-stream-names (deser-in-app-stream-names (input "InAppStreamNames"))) (clojure.core/contains? input "InputStartingPositionConfiguration") (clojure.core/assoc :input-starting-position-configuration (deser-input-starting-position-configuration (input "InputStartingPositionConfiguration"))) (clojure.core/contains? input "NamePrefix") (clojure.core/assoc :name-prefix (deser-in-app-stream-name (input "NamePrefix"))) (clojure.core/contains? input "KinesisStreamsInputDescription") (clojure.core/assoc :kinesis-streams-input-description (deser-kinesis-streams-input-description (input "KinesisStreamsInputDescription"))) (clojure.core/contains? input "InputSchema") (clojure.core/assoc :input-schema (deser-source-schema (input "InputSchema"))) (clojure.core/contains? input "KinesisFirehoseInputDescription") (clojure.core/assoc :kinesis-firehose-input-description (deser-kinesis-firehose-input-description (input "KinesisFirehoseInputDescription")))))
+
+(clojure.core/defn- deser-role-arn [input] input)
+
+(clojure.core/defn- deser-record-column-mapping [input] input)
+
+(clojure.core/defn- deser-record-format [input] (clojure.core/cond-> {:record-format-type (deser-record-format-type (input "RecordFormatType"))} (clojure.core/contains? input "MappingParameters") (clojure.core/assoc :mapping-parameters (deser-mapping-parameters (input "MappingParameters")))))
+
+(clojure.core/defn- deser-output-descriptions [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-output-description coll))) input))
+
+(clojure.core/defn- deser-kinesis-streams-output-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "ResourceARN") (clojure.core/assoc :resource-arn (deser-resource-arn (input "ResourceARN"))) (clojure.core/contains? input "RoleARN") (clojure.core/assoc :role-arn (deser-role-arn (input "RoleARN")))))
+
+(clojure.core/defn- deser-output-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "OutputId") (clojure.core/assoc :output-id (deser-id (input "OutputId"))) (clojure.core/contains? input "Name") (clojure.core/assoc :name (deser-in-app-stream-name (input "Name"))) (clojure.core/contains? input "KinesisStreamsOutputDescription") (clojure.core/assoc :kinesis-streams-output-description (deser-kinesis-streams-output-description (input "KinesisStreamsOutputDescription"))) (clojure.core/contains? input "KinesisFirehoseOutputDescription") (clojure.core/assoc :kinesis-firehose-output-description (deser-kinesis-firehose-output-description (input "KinesisFirehoseOutputDescription"))) (clojure.core/contains? input "LambdaOutputDescription") (clojure.core/assoc :lambda-output-description (deser-lambda-output-description (input "LambdaOutputDescription"))) (clojure.core/contains? input "DestinationSchema") (clojure.core/assoc :destination-schema (deser-destination-schema (input "DestinationSchema")))))
+
+(clojure.core/defn- deser-parsed-input-record [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-parsed-input-record-field coll))) input))
+
+(clojure.core/defn- deser-cloud-watch-logging-option-descriptions [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-cloud-watch-logging-option-description coll))) input))
+
+(clojure.core/defn- deser-csv-mapping-parameters [input] (clojure.core/cond-> {:record-row-delimiter (deser-record-row-delimiter (input "RecordRowDelimiter")), :record-column-delimiter (deser-record-column-delimiter (input "RecordColumnDelimiter"))}))
+
+(clojure.core/defn- deser-input-parallelism [input] (clojure.core/cond-> {} (clojure.core/contains? input "Count") (clojure.core/assoc :count (deser-input-parallelism-count (input "Count")))))
+
+(clojure.core/defn- deser-application-summary [input] (clojure.core/cond-> {:application-name (deser-application-name (input "ApplicationName")), :application-arn (deser-resource-arn (input "ApplicationARN")), :application-status (deser-application-status (input "ApplicationStatus"))}))
+
+(clojure.core/defn- deser-record-column-delimiter [input] input)
+
+(clojure.core/defn- deser-in-app-stream-names [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-in-app-stream-name coll))) input))
+
+(clojure.core/defn- deser-record-column-name [input] input)
+
+(clojure.core/defn- deser-record-row-path [input] input)
+
+(clojure.core/defn- deser-input-parallelism-count [input] input)
+
+(clojure.core/defn- deser-destination-schema [input] (clojure.core/cond-> {} (clojure.core/contains? input "RecordFormatType") (clojure.core/assoc :record-format-type (deser-record-format-type (input "RecordFormatType")))))
+
+(clojure.core/defn- deser-kinesis-firehose-output-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "ResourceARN") (clojure.core/assoc :resource-arn (deser-resource-arn (input "ResourceARN"))) (clojure.core/contains? input "RoleARN") (clojure.core/assoc :role-arn (deser-role-arn (input "RoleARN")))))
+
+(clojure.core/defn- deser-processed-input-records [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-processed-input-record coll))) input))
+
+(clojure.core/defn- deser-json-mapping-parameters [input] (clojure.core/cond-> {:record-row-path (deser-record-row-path (input "RecordRowPath"))}))
+
+(clojure.core/defn- deser-error-message [input] input)
+
+(clojure.core/defn- deser-application-code [input] input)
+
+(clojure.core/defn- deser-record-column [input] (clojure.core/cond-> {:name (deser-record-column-name (input "Name")), :sql-type (deser-record-column-sql-type (input "SqlType"))} (clojure.core/contains? input "Mapping") (clojure.core/assoc :mapping (deser-record-column-mapping (input "Mapping")))))
+
+(clojure.core/defn- deser-input-starting-position-configuration [input] (clojure.core/cond-> {} (clojure.core/contains? input "InputStartingPosition") (clojure.core/assoc :input-starting-position (deser-input-starting-position (input "InputStartingPosition")))))
+
+(clojure.core/defn- deser-s-3-reference-data-source-description [input] (clojure.core/cond-> {:bucket-arn (deser-bucket-arn (input "BucketARN")), :file-key (deser-file-key (input "FileKey")), :reference-role-arn (deser-role-arn (input "ReferenceRoleARN"))}))
+
+(clojure.core/defn- deser-record-encoding [input] input)
+
+(clojure.core/defn- deser-application-status [input] (clojure.core/get {"DELETING" :deleting, "STARTING" :starting, "STOPPING" :stopping, "READY" :ready, "RUNNING" :running, "UPDATING" :updating} input))
+
+(clojure.core/defn- deser-processed-input-record [input] input)
+
+(clojure.core/defn- deser-file-key [input] input)
+
+(clojure.core/defn- deser-application-name [input] input)
+
+(clojure.core/defn- deser-input-descriptions [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-input-description coll))) input))
+
+(clojure.core/defn- deser-record-column-sql-type [input] input)
+
+(clojure.core/defn- deser-kinesis-streams-input-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "ResourceARN") (clojure.core/assoc :resource-arn (deser-resource-arn (input "ResourceARN"))) (clojure.core/contains? input "RoleARN") (clojure.core/assoc :role-arn (deser-role-arn (input "RoleARN")))))
+
+(clojure.core/defn- deser-parsed-input-record-field [input] input)
+
+(clojure.core/defn- deser-mapping-parameters [input] (clojure.core/cond-> {} (clojure.core/contains? input "JSONMappingParameters") (clojure.core/assoc :json-mapping-parameters (deser-json-mapping-parameters (input "JSONMappingParameters"))) (clojure.core/contains? input "CSVMappingParameters") (clojure.core/assoc :csv-mapping-parameters (deser-csv-mapping-parameters (input "CSVMappingParameters")))))
+
+(clojure.core/defn- deser-timestamp [input] input)
+
+(clojure.core/defn- deser-reference-data-source-descriptions [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-reference-data-source-description coll))) input))
+
+(clojure.core/defn- deser-in-app-table-name [input] input)
+
+(clojure.core/defn- deser-record-columns [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-record-column coll))) input))
+
+(clojure.core/defn- deser-lambda-output-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "ResourceARN") (clojure.core/assoc :resource-arn (deser-resource-arn (input "ResourceARN"))) (clojure.core/contains? input "RoleARN") (clojure.core/assoc :role-arn (deser-role-arn (input "RoleARN")))))
+
+(clojure.core/defn- deser-kinesis-firehose-input-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "ResourceARN") (clojure.core/assoc :resource-arn (deser-resource-arn (input "ResourceARN"))) (clojure.core/contains? input "RoleARN") (clojure.core/assoc :role-arn (deser-role-arn (input "RoleARN")))))
+
+(clojure.core/defn- deser-record-format-type [input] (clojure.core/get {"JSON" :json, "CSV" :csv} input))
+
+(clojure.core/defn- deser-reference-data-source-description [input] (clojure.core/cond-> {:reference-id (deser-id (input "ReferenceId")), :table-name (deser-in-app-table-name (input "TableName")), :s-3-reference-data-source-description (deser-s-3-reference-data-source-description (input "S3ReferenceDataSourceDescription"))} (clojure.core/contains? input "ReferenceSchema") (clojure.core/assoc :reference-schema (deser-source-schema (input "ReferenceSchema")))))
+
+(clojure.core/defn- deser-application-description [input] input)
+
+(clojure.core/defn- deser-source-schema [input] (clojure.core/cond-> {:record-format (deser-record-format (input "RecordFormat")), :record-columns (deser-record-columns (input "RecordColumns"))} (clojure.core/contains? input "RecordEncoding") (clojure.core/assoc :record-encoding (deser-record-encoding (input "RecordEncoding")))))
+
+(clojure.core/defn- deser-input-lambda-processor-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "ResourceARN") (clojure.core/assoc :resource-arn (deser-resource-arn (input "ResourceARN"))) (clojure.core/contains? input "RoleARN") (clojure.core/assoc :role-arn (deser-role-arn (input "RoleARN")))))
+
+(clojure.core/defn- deser-resource-arn [input] input)
+
+(clojure.core/defn- deser-boolean-object [input] input)
+
+(clojure.core/defn- deser-record-row-delimiter [input] input)
+
+(clojure.core/defn- deser-id [input] input)
+
+(clojure.core/defn- deser-raw-input-record [input] input)
+
+(clojure.core/defn- deser-bucket-arn [input] input)
+
+(clojure.core/defn- deser-input-starting-position [input] (clojure.core/get {"NOW" :now, "TRIM_HORIZON" :trim-horizon, "LAST_STOPPED_POINT" :last-stopped-point} input))
+
+(clojure.core/defn- deser-raw-input-records [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-raw-input-record coll))) input))
+
+(clojure.core/defn- deser-add-application-input-response [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-stop-application-response [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-add-application-reference-data-source-response [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-code-validation-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-discover-input-schema-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "InputSchema") (clojure.core/assoc :input-schema (deser-source-schema (input "InputSchema"))) (clojure.core/contains? input "ParsedInputRecords") (clojure.core/assoc :parsed-input-records (deser-parsed-input-records (input "ParsedInputRecords"))) (clojure.core/contains? input "ProcessedInputRecords") (clojure.core/assoc :processed-input-records (deser-processed-input-records (input "ProcessedInputRecords"))) (clojure.core/contains? input "RawInputRecords") (clojure.core/assoc :raw-input-records (deser-raw-input-records (input "RawInputRecords")))))
+
+(clojure.core/defn- deser-unable-to-detect-schema-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message"))) (clojure.core/contains? input "RawInputRecords") (clojure.core/assoc :raw-input-records (deser-raw-input-records (input "RawInputRecords"))) (clojure.core/contains? input "ProcessedInputRecords") (clojure.core/assoc :processed-input-records (deser-processed-input-records (input "ProcessedInputRecords")))))
+
+(clojure.core/defn- deser-delete-application-output-response [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-describe-application-response [input] (clojure.core/cond-> {:application-detail (deser-application-detail (input "ApplicationDetail"))}))
+
+(clojure.core/defn- deser-delete-application-reference-data-source-response [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-resource-in-use-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-limit-exceeded-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-update-application-response [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-service-unavailable-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-resource-not-found-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-add-application-input-processing-configuration-response [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-delete-application-input-processing-configuration-response [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-resource-provisioned-throughput-exceeded-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-add-application-output-response [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-create-application-response [input] (clojure.core/cond-> {:application-summary (deser-application-summary (input "ApplicationSummary"))}))
+
+(clojure.core/defn- deser-invalid-argument-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-add-application-cloud-watch-logging-option-response [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-start-application-response [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-delete-application-response [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-concurrent-modification-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-delete-application-cloud-watch-logging-option-response [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-list-applications-response [input] (clojure.core/cond-> {:application-summaries (deser-application-summaries (input "ApplicationSummaries")), :has-more-applications (deser-boolean-object (input "HasMoreApplications"))}))
+
+(clojure.core/defn- deser-invalid-application-configuration-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/input-processing-configuration-description (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.kinesisanalytics.-2015-08-14/input-lambda-processor-description]))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/stop-application-request (clojure.spec.alpha/keys :req-un [:portkey.aws.kinesisanalytics.-2015-08-14/application-name] :opt-un []))
@@ -358,7 +664,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/add-application-reference-data-source-response (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/log-stream-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 2048)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"arn:.*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/log-stream-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 2048)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"arn:.*" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14.code-validation-exception/message (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/error-message))
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/code-validation-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.kinesisanalytics.-2015-08-14.code-validation-exception/message]))
@@ -378,7 +684,7 @@
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14.application-detail/application-arn (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/resource-arn))
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/application-detail (clojure.spec.alpha/keys :req-un [:portkey.aws.kinesisanalytics.-2015-08-14/application-name :portkey.aws.kinesisanalytics.-2015-08-14.application-detail/application-arn :portkey.aws.kinesisanalytics.-2015-08-14/application-status :portkey.aws.kinesisanalytics.-2015-08-14/application-version-id] :opt-un [:portkey.aws.kinesisanalytics.-2015-08-14.application-detail/create-timestamp :portkey.aws.kinesisanalytics.-2015-08-14.application-detail/last-update-timestamp :portkey.aws.kinesisanalytics.-2015-08-14/output-descriptions :portkey.aws.kinesisanalytics.-2015-08-14/cloud-watch-logging-option-descriptions :portkey.aws.kinesisanalytics.-2015-08-14/application-code :portkey.aws.kinesisanalytics.-2015-08-14/input-descriptions :portkey.aws.kinesisanalytics.-2015-08-14/reference-data-source-descriptions :portkey.aws.kinesisanalytics.-2015-08-14/application-description]))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/in-app-stream-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 32)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-zA-Z][a-zA-Z0-9_]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/in-app-stream-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 32)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-zA-Z][a-zA-Z0-9_]+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/cloud-watch-logging-option (clojure.spec.alpha/keys :req-un [:portkey.aws.kinesisanalytics.-2015-08-14/log-stream-arn :portkey.aws.kinesisanalytics.-2015-08-14/role-arn] :opt-un []))
 
@@ -417,7 +723,7 @@
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14.input-description/input-schema (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/source-schema))
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/input-description (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.kinesisanalytics.-2015-08-14/input-processing-configuration-description :portkey.aws.kinesisanalytics.-2015-08-14.input-description/input-id :portkey.aws.kinesisanalytics.-2015-08-14/input-parallelism :portkey.aws.kinesisanalytics.-2015-08-14/in-app-stream-names :portkey.aws.kinesisanalytics.-2015-08-14/input-starting-position-configuration :portkey.aws.kinesisanalytics.-2015-08-14.input-description/name-prefix :portkey.aws.kinesisanalytics.-2015-08-14/kinesis-streams-input-description :portkey.aws.kinesisanalytics.-2015-08-14.input-description/input-schema :portkey.aws.kinesisanalytics.-2015-08-14/kinesis-firehose-input-description]))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/role-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 2048)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/role-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 2048)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"arn:aws:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14.input-update/input-id (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/id))
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14.input-update/name-prefix-update (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/in-app-stream-name))
@@ -476,15 +782,15 @@
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14.application-summary/application-arn (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/resource-arn))
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/application-summary (clojure.spec.alpha/keys :req-un [:portkey.aws.kinesisanalytics.-2015-08-14/application-name :portkey.aws.kinesisanalytics.-2015-08-14.application-summary/application-arn :portkey.aws.kinesisanalytics.-2015-08-14/application-status] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/record-column-delimiter (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__)))))
+(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/record-column-delimiter (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__)))))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/update-application-response (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/in-app-stream-names (clojure.spec.alpha/coll-of :portkey.aws.kinesisanalytics.-2015-08-14/in-app-stream-name))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/record-column-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-zA-Z_][a-zA-Z0-9_]*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/record-column-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-zA-Z_][a-zA-Z0-9_]*" s__27881__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/record-row-path (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__)))))
+(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/record-row-path (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__)))))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/input-parallelism-count (clojure.spec.alpha/int-in 1 64))
 
@@ -512,7 +818,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/error-message (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/application-code (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 0 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 51200))))
+(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/application-code (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 0 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 51200))))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/cloud-watch-logging-options (clojure.spec.alpha/coll-of :portkey.aws.kinesisanalytics.-2015-08-14/cloud-watch-logging-option))
 
@@ -530,7 +836,7 @@
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14.s-3-reference-data-source-description/reference-role-arn (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/role-arn))
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/s-3-reference-data-source-description (clojure.spec.alpha/keys :req-un [:portkey.aws.kinesisanalytics.-2015-08-14/bucket-arn :portkey.aws.kinesisanalytics.-2015-08-14/file-key :portkey.aws.kinesisanalytics.-2015-08-14.s-3-reference-data-source-description/reference-role-arn] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/record-encoding (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"UTF-8" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/record-encoding (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"UTF-8" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/application-status #{:ready :starting "UPDATING" "READY" :deleting :running :stopping "STARTING" "DELETING" :updating "STOPPING" "RUNNING"})
 
@@ -554,13 +860,13 @@
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14.kinesis-streams-input-update/role-arn-update (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/role-arn))
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/kinesis-streams-input-update (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.kinesisanalytics.-2015-08-14.kinesis-streams-input-update/resource-arn-update :portkey.aws.kinesisanalytics.-2015-08-14.kinesis-streams-input-update/role-arn-update]))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/file-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1024))))
+(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/file-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1024))))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14.input/name-prefix (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/in-app-stream-name))
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14.input/input-schema (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/source-schema))
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/input (clojure.spec.alpha/keys :req-un [:portkey.aws.kinesisanalytics.-2015-08-14.input/name-prefix :portkey.aws.kinesisanalytics.-2015-08-14.input/input-schema] :opt-un [:portkey.aws.kinesisanalytics.-2015-08-14/input-processing-configuration :portkey.aws.kinesisanalytics.-2015-08-14/kinesis-streams-input :portkey.aws.kinesisanalytics.-2015-08-14/kinesis-firehose-input :portkey.aws.kinesisanalytics.-2015-08-14/input-parallelism]))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/application-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 128)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_.-]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/application-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 128)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_.-]+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/input-descriptions (clojure.spec.alpha/coll-of :portkey.aws.kinesisanalytics.-2015-08-14/input-description))
 
@@ -578,7 +884,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/add-application-output-response (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/record-column-sql-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__)))))
+(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/record-column-sql-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__)))))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/cloud-watch-logging-option-updates (clojure.spec.alpha/coll-of :portkey.aws.kinesisanalytics.-2015-08-14/cloud-watch-logging-option-update))
 
@@ -631,7 +937,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/kinesis-firehose-output (clojure.spec.alpha/keys :req-un [:portkey.aws.kinesisanalytics.-2015-08-14/resource-arn :portkey.aws.kinesisanalytics.-2015-08-14/role-arn] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/in-app-table-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 32)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-zA-Z][a-zA-Z0-9_]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/in-app-table-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 32)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-zA-Z][a-zA-Z0-9_]+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/start-application-response (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
@@ -669,7 +975,7 @@
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14.reference-data-source-description/reference-schema (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/source-schema))
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/reference-data-source-description (clojure.spec.alpha/keys :req-un [:portkey.aws.kinesisanalytics.-2015-08-14.reference-data-source-description/reference-id :portkey.aws.kinesisanalytics.-2015-08-14.reference-data-source-description/table-name :portkey.aws.kinesisanalytics.-2015-08-14/s-3-reference-data-source-description] :opt-un [:portkey.aws.kinesisanalytics.-2015-08-14.reference-data-source-description/reference-schema]))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/application-description (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 0 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1024))))
+(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/application-description (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 0 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1024))))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/input-configuration (clojure.spec.alpha/keys :req-un [:portkey.aws.kinesisanalytics.-2015-08-14/id :portkey.aws.kinesisanalytics.-2015-08-14/input-starting-position-configuration] :opt-un []))
 
@@ -677,7 +983,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/input-lambda-processor-description (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.kinesisanalytics.-2015-08-14/resource-arn :portkey.aws.kinesisanalytics.-2015-08-14/role-arn]))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/resource-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 2048)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"arn:.*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/resource-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 2048)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"arn:.*" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/input-updates (clojure.spec.alpha/coll-of :portkey.aws.kinesisanalytics.-2015-08-14/input-update))
 
@@ -685,7 +991,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/kinesis-streams-input (clojure.spec.alpha/keys :req-un [:portkey.aws.kinesisanalytics.-2015-08-14/resource-arn :portkey.aws.kinesisanalytics.-2015-08-14/role-arn] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/record-row-delimiter (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__)))))
+(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/record-row-delimiter (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__)))))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14.list-applications-response/has-more-applications (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/boolean-object))
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/list-applications-response (clojure.spec.alpha/keys :req-un [:portkey.aws.kinesisanalytics.-2015-08-14/application-summaries :portkey.aws.kinesisanalytics.-2015-08-14.list-applications-response/has-more-applications] :opt-un []))
@@ -693,7 +999,7 @@
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14.update-application-request/current-application-version-id (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/application-version-id))
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/update-application-request (clojure.spec.alpha/keys :req-un [:portkey.aws.kinesisanalytics.-2015-08-14/application-name :portkey.aws.kinesisanalytics.-2015-08-14.update-application-request/current-application-version-id :portkey.aws.kinesisanalytics.-2015-08-14/application-update] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 50)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_.-]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 50)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_.-]+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/raw-input-record (clojure.spec.alpha/and clojure.core/string?))
 
@@ -714,59 +1020,59 @@
 
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/reference-data-source-updates (clojure.spec.alpha/coll-of :portkey.aws.kinesisanalytics.-2015-08-14/reference-data-source-update))
 
-(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/bucket-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 2048)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"arn:.*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/bucket-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 2048)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"arn:.*" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/input-starting-position #{"NOW" "TRIM_HORIZON" :now "LAST_STOPPED_POINT" :last-stopped-point :trim-horizon})
 
 (clojure.spec.alpha/def :portkey.aws.kinesisanalytics.-2015-08-14/raw-input-records (clojure.spec.alpha/coll-of :portkey.aws.kinesisanalytics.-2015-08-14/raw-input-record))
 
-(clojure.core/defn list-applications ([] (list-applications {})) ([list-applications-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-applications-request list-applications-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/list-applications-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/list-applications-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListApplications", :http.request.spec/error-spec {}})))))
+(clojure.core/defn list-applications ([] (list-applications {})) ([list-applications-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-applications-request list-applications-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/list-applications-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/list-applications-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListApplications", :http.request.configuration/output-deser-fn deser-list-applications-response, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef list-applications :args (clojure.spec.alpha/? :portkey.aws.kinesisanalytics.-2015-08-14/list-applications-request) :ret (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/list-applications-response))
 
-(clojure.core/defn delete-application-output ([delete-application-output-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-application-output-request delete-application-output-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-output-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-output-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteApplicationOutput", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception, "InvalidArgumentException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-argument-exception, "ConcurrentModificationException" :portkey.aws.kinesisanalytics.-2015-08-14/concurrent-modification-exception}})))))
+(clojure.core/defn delete-application-output ([delete-application-output-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-application-output-request delete-application-output-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-output-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-output-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteApplicationOutput", :http.request.configuration/output-deser-fn deser-delete-application-output-response, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception, "InvalidArgumentException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-argument-exception, "ConcurrentModificationException" :portkey.aws.kinesisanalytics.-2015-08-14/concurrent-modification-exception}})))))
 (clojure.spec.alpha/fdef delete-application-output :args (clojure.spec.alpha/tuple :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-output-request) :ret (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-output-response))
 
-(clojure.core/defn stop-application ([stop-application-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-stop-application-request stop-application-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/stop-application-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/stop-application-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "StopApplication", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception}})))))
+(clojure.core/defn stop-application ([stop-application-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-stop-application-request stop-application-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/stop-application-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/stop-application-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "StopApplication", :http.request.configuration/output-deser-fn deser-stop-application-response, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception}})))))
 (clojure.spec.alpha/fdef stop-application :args (clojure.spec.alpha/tuple :portkey.aws.kinesisanalytics.-2015-08-14/stop-application-request) :ret (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/stop-application-response))
 
-(clojure.core/defn delete-application-reference-data-source ([delete-application-reference-data-source-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-application-reference-data-source-request delete-application-reference-data-source-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-reference-data-source-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-reference-data-source-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteApplicationReferenceDataSource", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception, "InvalidArgumentException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-argument-exception, "ConcurrentModificationException" :portkey.aws.kinesisanalytics.-2015-08-14/concurrent-modification-exception}})))))
+(clojure.core/defn delete-application-reference-data-source ([delete-application-reference-data-source-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-application-reference-data-source-request delete-application-reference-data-source-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-reference-data-source-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-reference-data-source-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteApplicationReferenceDataSource", :http.request.configuration/output-deser-fn deser-delete-application-reference-data-source-response, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception, "InvalidArgumentException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-argument-exception, "ConcurrentModificationException" :portkey.aws.kinesisanalytics.-2015-08-14/concurrent-modification-exception}})))))
 (clojure.spec.alpha/fdef delete-application-reference-data-source :args (clojure.spec.alpha/tuple :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-reference-data-source-request) :ret (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-reference-data-source-response))
 
-(clojure.core/defn delete-application ([delete-application-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-application-request delete-application-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteApplication", :http.request.spec/error-spec {"ConcurrentModificationException" :portkey.aws.kinesisanalytics.-2015-08-14/concurrent-modification-exception, "ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception}})))))
+(clojure.core/defn delete-application ([delete-application-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-application-request delete-application-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteApplication", :http.request.configuration/output-deser-fn deser-delete-application-response, :http.request.spec/error-spec {"ConcurrentModificationException" :portkey.aws.kinesisanalytics.-2015-08-14/concurrent-modification-exception, "ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception}})))))
 (clojure.spec.alpha/fdef delete-application :args (clojure.spec.alpha/tuple :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-request) :ret (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-response))
 
-(clojure.core/defn delete-application-cloud-watch-logging-option ([delete-application-cloud-watch-logging-option-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-application-cloud-watch-logging-option-request delete-application-cloud-watch-logging-option-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-cloud-watch-logging-option-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-cloud-watch-logging-option-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteApplicationCloudWatchLoggingOption", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception, "InvalidArgumentException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-argument-exception, "ConcurrentModificationException" :portkey.aws.kinesisanalytics.-2015-08-14/concurrent-modification-exception}})))))
+(clojure.core/defn delete-application-cloud-watch-logging-option ([delete-application-cloud-watch-logging-option-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-application-cloud-watch-logging-option-request delete-application-cloud-watch-logging-option-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-cloud-watch-logging-option-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-cloud-watch-logging-option-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteApplicationCloudWatchLoggingOption", :http.request.configuration/output-deser-fn deser-delete-application-cloud-watch-logging-option-response, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception, "InvalidArgumentException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-argument-exception, "ConcurrentModificationException" :portkey.aws.kinesisanalytics.-2015-08-14/concurrent-modification-exception}})))))
 (clojure.spec.alpha/fdef delete-application-cloud-watch-logging-option :args (clojure.spec.alpha/tuple :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-cloud-watch-logging-option-request) :ret (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-cloud-watch-logging-option-response))
 
-(clojure.core/defn describe-application ([describe-application-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-application-request describe-application-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/describe-application-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/describe-application-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeApplication", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception}})))))
+(clojure.core/defn describe-application ([describe-application-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-application-request describe-application-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/describe-application-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/describe-application-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeApplication", :http.request.configuration/output-deser-fn deser-describe-application-response, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception}})))))
 (clojure.spec.alpha/fdef describe-application :args (clojure.spec.alpha/tuple :portkey.aws.kinesisanalytics.-2015-08-14/describe-application-request) :ret (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/describe-application-response))
 
-(clojure.core/defn add-application-input-processing-configuration ([add-application-input-processing-configuration-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-add-application-input-processing-configuration-request add-application-input-processing-configuration-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/add-application-input-processing-configuration-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/add-application-input-processing-configuration-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AddApplicationInputProcessingConfiguration", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception, "InvalidArgumentException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-argument-exception, "ConcurrentModificationException" :portkey.aws.kinesisanalytics.-2015-08-14/concurrent-modification-exception}})))))
+(clojure.core/defn add-application-input-processing-configuration ([add-application-input-processing-configuration-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-add-application-input-processing-configuration-request add-application-input-processing-configuration-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/add-application-input-processing-configuration-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/add-application-input-processing-configuration-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AddApplicationInputProcessingConfiguration", :http.request.configuration/output-deser-fn deser-add-application-input-processing-configuration-response, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception, "InvalidArgumentException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-argument-exception, "ConcurrentModificationException" :portkey.aws.kinesisanalytics.-2015-08-14/concurrent-modification-exception}})))))
 (clojure.spec.alpha/fdef add-application-input-processing-configuration :args (clojure.spec.alpha/tuple :portkey.aws.kinesisanalytics.-2015-08-14/add-application-input-processing-configuration-request) :ret (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/add-application-input-processing-configuration-response))
 
-(clojure.core/defn add-application-reference-data-source ([add-application-reference-data-source-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-add-application-reference-data-source-request add-application-reference-data-source-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/add-application-reference-data-source-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/add-application-reference-data-source-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AddApplicationReferenceDataSource", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception, "InvalidArgumentException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-argument-exception, "ConcurrentModificationException" :portkey.aws.kinesisanalytics.-2015-08-14/concurrent-modification-exception}})))))
+(clojure.core/defn add-application-reference-data-source ([add-application-reference-data-source-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-add-application-reference-data-source-request add-application-reference-data-source-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/add-application-reference-data-source-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/add-application-reference-data-source-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AddApplicationReferenceDataSource", :http.request.configuration/output-deser-fn deser-add-application-reference-data-source-response, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception, "InvalidArgumentException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-argument-exception, "ConcurrentModificationException" :portkey.aws.kinesisanalytics.-2015-08-14/concurrent-modification-exception}})))))
 (clojure.spec.alpha/fdef add-application-reference-data-source :args (clojure.spec.alpha/tuple :portkey.aws.kinesisanalytics.-2015-08-14/add-application-reference-data-source-request) :ret (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/add-application-reference-data-source-response))
 
-(clojure.core/defn update-application ([update-application-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-update-application-request update-application-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/update-application-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/update-application-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateApplication", :http.request.spec/error-spec {"CodeValidationException" :portkey.aws.kinesisanalytics.-2015-08-14/code-validation-exception, "ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception, "InvalidArgumentException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-argument-exception, "ConcurrentModificationException" :portkey.aws.kinesisanalytics.-2015-08-14/concurrent-modification-exception}})))))
+(clojure.core/defn update-application ([update-application-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-update-application-request update-application-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/update-application-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/update-application-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateApplication", :http.request.configuration/output-deser-fn deser-update-application-response, :http.request.spec/error-spec {"CodeValidationException" :portkey.aws.kinesisanalytics.-2015-08-14/code-validation-exception, "ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception, "InvalidArgumentException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-argument-exception, "ConcurrentModificationException" :portkey.aws.kinesisanalytics.-2015-08-14/concurrent-modification-exception}})))))
 (clojure.spec.alpha/fdef update-application :args (clojure.spec.alpha/tuple :portkey.aws.kinesisanalytics.-2015-08-14/update-application-request) :ret (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/update-application-response))
 
-(clojure.core/defn add-application-cloud-watch-logging-option ([add-application-cloud-watch-logging-option-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-add-application-cloud-watch-logging-option-request add-application-cloud-watch-logging-option-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/add-application-cloud-watch-logging-option-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/add-application-cloud-watch-logging-option-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AddApplicationCloudWatchLoggingOption", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception, "InvalidArgumentException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-argument-exception, "ConcurrentModificationException" :portkey.aws.kinesisanalytics.-2015-08-14/concurrent-modification-exception}})))))
+(clojure.core/defn add-application-cloud-watch-logging-option ([add-application-cloud-watch-logging-option-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-add-application-cloud-watch-logging-option-request add-application-cloud-watch-logging-option-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/add-application-cloud-watch-logging-option-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/add-application-cloud-watch-logging-option-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AddApplicationCloudWatchLoggingOption", :http.request.configuration/output-deser-fn deser-add-application-cloud-watch-logging-option-response, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception, "InvalidArgumentException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-argument-exception, "ConcurrentModificationException" :portkey.aws.kinesisanalytics.-2015-08-14/concurrent-modification-exception}})))))
 (clojure.spec.alpha/fdef add-application-cloud-watch-logging-option :args (clojure.spec.alpha/tuple :portkey.aws.kinesisanalytics.-2015-08-14/add-application-cloud-watch-logging-option-request) :ret (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/add-application-cloud-watch-logging-option-response))
 
-(clojure.core/defn create-application ([create-application-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-application-request create-application-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/create-application-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/create-application-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateApplication", :http.request.spec/error-spec {"CodeValidationException" :portkey.aws.kinesisanalytics.-2015-08-14/code-validation-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception, "LimitExceededException" :portkey.aws.kinesisanalytics.-2015-08-14/limit-exceeded-exception, "InvalidArgumentException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-argument-exception}})))))
+(clojure.core/defn create-application ([create-application-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-create-application-request create-application-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/create-application-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/create-application-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateApplication", :http.request.configuration/output-deser-fn deser-create-application-response, :http.request.spec/error-spec {"CodeValidationException" :portkey.aws.kinesisanalytics.-2015-08-14/code-validation-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception, "LimitExceededException" :portkey.aws.kinesisanalytics.-2015-08-14/limit-exceeded-exception, "InvalidArgumentException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-argument-exception}})))))
 (clojure.spec.alpha/fdef create-application :args (clojure.spec.alpha/tuple :portkey.aws.kinesisanalytics.-2015-08-14/create-application-request) :ret (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/create-application-response))
 
-(clojure.core/defn add-application-input ([add-application-input-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-add-application-input-request add-application-input-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/add-application-input-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/add-application-input-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AddApplicationInput", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception, "InvalidArgumentException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-argument-exception, "ConcurrentModificationException" :portkey.aws.kinesisanalytics.-2015-08-14/concurrent-modification-exception, "CodeValidationException" :portkey.aws.kinesisanalytics.-2015-08-14/code-validation-exception}})))))
+(clojure.core/defn add-application-input ([add-application-input-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-add-application-input-request add-application-input-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/add-application-input-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/add-application-input-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AddApplicationInput", :http.request.configuration/output-deser-fn deser-add-application-input-response, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception, "InvalidArgumentException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-argument-exception, "ConcurrentModificationException" :portkey.aws.kinesisanalytics.-2015-08-14/concurrent-modification-exception, "CodeValidationException" :portkey.aws.kinesisanalytics.-2015-08-14/code-validation-exception}})))))
 (clojure.spec.alpha/fdef add-application-input :args (clojure.spec.alpha/tuple :portkey.aws.kinesisanalytics.-2015-08-14/add-application-input-request) :ret (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/add-application-input-response))
 
-(clojure.core/defn add-application-output ([add-application-output-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-add-application-output-request add-application-output-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/add-application-output-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/add-application-output-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AddApplicationOutput", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception, "InvalidArgumentException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-argument-exception, "ConcurrentModificationException" :portkey.aws.kinesisanalytics.-2015-08-14/concurrent-modification-exception}})))))
+(clojure.core/defn add-application-output ([add-application-output-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-add-application-output-request add-application-output-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/add-application-output-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/add-application-output-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AddApplicationOutput", :http.request.configuration/output-deser-fn deser-add-application-output-response, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception, "InvalidArgumentException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-argument-exception, "ConcurrentModificationException" :portkey.aws.kinesisanalytics.-2015-08-14/concurrent-modification-exception}})))))
 (clojure.spec.alpha/fdef add-application-output :args (clojure.spec.alpha/tuple :portkey.aws.kinesisanalytics.-2015-08-14/add-application-output-request) :ret (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/add-application-output-response))
 
-(clojure.core/defn discover-input-schema ([] (discover-input-schema {})) ([discover-input-schema-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-discover-input-schema-request discover-input-schema-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/discover-input-schema-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/discover-input-schema-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DiscoverInputSchema", :http.request.spec/error-spec {"InvalidArgumentException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-argument-exception, "UnableToDetectSchemaException" :portkey.aws.kinesisanalytics.-2015-08-14/unable-to-detect-schema-exception, "ResourceProvisionedThroughputExceededException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-provisioned-throughput-exceeded-exception, "ServiceUnavailableException" :portkey.aws.kinesisanalytics.-2015-08-14/service-unavailable-exception}})))))
+(clojure.core/defn discover-input-schema ([] (discover-input-schema {})) ([discover-input-schema-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-discover-input-schema-request discover-input-schema-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/discover-input-schema-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/discover-input-schema-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DiscoverInputSchema", :http.request.configuration/output-deser-fn deser-discover-input-schema-response, :http.request.spec/error-spec {"InvalidArgumentException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-argument-exception, "UnableToDetectSchemaException" :portkey.aws.kinesisanalytics.-2015-08-14/unable-to-detect-schema-exception, "ResourceProvisionedThroughputExceededException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-provisioned-throughput-exceeded-exception, "ServiceUnavailableException" :portkey.aws.kinesisanalytics.-2015-08-14/service-unavailable-exception}})))))
 (clojure.spec.alpha/fdef discover-input-schema :args (clojure.spec.alpha/? :portkey.aws.kinesisanalytics.-2015-08-14/discover-input-schema-request) :ret (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/discover-input-schema-response))
 
-(clojure.core/defn start-application ([start-application-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-start-application-request start-application-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/start-application-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/start-application-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "StartApplication", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception, "InvalidArgumentException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-argument-exception, "InvalidApplicationConfigurationException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-application-configuration-exception}})))))
+(clojure.core/defn start-application ([start-application-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-start-application-request start-application-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/start-application-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/start-application-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "StartApplication", :http.request.configuration/output-deser-fn deser-start-application-response, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception, "InvalidArgumentException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-argument-exception, "InvalidApplicationConfigurationException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-application-configuration-exception}})))))
 (clojure.spec.alpha/fdef start-application :args (clojure.spec.alpha/tuple :portkey.aws.kinesisanalytics.-2015-08-14/start-application-request) :ret (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/start-application-response))
 
-(clojure.core/defn delete-application-input-processing-configuration ([delete-application-input-processing-configuration-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-application-input-processing-configuration-request delete-application-input-processing-configuration-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-input-processing-configuration-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-input-processing-configuration-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteApplicationInputProcessingConfiguration", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception, "InvalidArgumentException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-argument-exception, "ConcurrentModificationException" :portkey.aws.kinesisanalytics.-2015-08-14/concurrent-modification-exception}})))))
+(clojure.core/defn delete-application-input-processing-configuration ([delete-application-input-processing-configuration-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-application-input-processing-configuration-request delete-application-input-processing-configuration-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.kinesisanalytics.-2015-08-14/endpoints, :http.request.configuration/target-prefix "KinesisAnalytics_20150814", :http.request.spec/output-spec :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-input-processing-configuration-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-14", :http.request.configuration/service-id "Kinesis Analytics", :http.request.spec/input-spec :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-input-processing-configuration-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteApplicationInputProcessingConfiguration", :http.request.configuration/output-deser-fn deser-delete-application-input-processing-configuration-response, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-not-found-exception, "ResourceInUseException" :portkey.aws.kinesisanalytics.-2015-08-14/resource-in-use-exception, "InvalidArgumentException" :portkey.aws.kinesisanalytics.-2015-08-14/invalid-argument-exception, "ConcurrentModificationException" :portkey.aws.kinesisanalytics.-2015-08-14/concurrent-modification-exception}})))))
 (clojure.spec.alpha/fdef delete-application-input-processing-configuration :args (clojure.spec.alpha/tuple :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-input-processing-configuration-request) :ret (clojure.spec.alpha/and :portkey.aws.kinesisanalytics.-2015-08-14/delete-application-input-processing-configuration-response))

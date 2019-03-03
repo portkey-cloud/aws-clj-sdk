@@ -143,6 +143,180 @@
 
 (clojure.core/defn- req-describe-stream-input [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-stream-arn (input :stream-arn)) #:http.request.field{:name "StreamArn", :shape "StreamArn"})]} (clojure.core/contains? input :limit) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-positive-integer-object (input :limit)) #:http.request.field{:name "Limit", :shape "PositiveIntegerObject"})) (clojure.core/contains? input :exclusive-start-shard-id) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-shard-id (input :exclusive-start-shard-id)) #:http.request.field{:name "ExclusiveStartShardId", :shape "ShardId"}))))
 
+(clojure.core/declare deser-attribute-map)
+
+(clojure.core/declare deser-number-set-attribute-value)
+
+(clojure.core/declare deser-number-attribute-value)
+
+(clojure.core/declare deser-attribute-name)
+
+(clojure.core/declare deser-positive-long-object)
+
+(clojure.core/declare deser-shard-id)
+
+(clojure.core/declare deser-boolean-attribute-value)
+
+(clojure.core/declare deser-shard-iterator)
+
+(clojure.core/declare deser-null-attribute-value)
+
+(clojure.core/declare deser-map-attribute-value)
+
+(clojure.core/declare deser-shard)
+
+(clojure.core/declare deser-key-schema)
+
+(clojure.core/declare deser-error-message)
+
+(clojure.core/declare deser-date)
+
+(clojure.core/declare deser-binary-set-attribute-value)
+
+(clojure.core/declare deser-stream-description)
+
+(clojure.core/declare deser-sequence-number)
+
+(clojure.core/declare deser-stream-view-type)
+
+(clojure.core/declare deser-binary-attribute-value)
+
+(clojure.core/declare deser-attribute-value)
+
+(clojure.core/declare deser-stream-arn)
+
+(clojure.core/declare deser-stream-record)
+
+(clojure.core/declare deser-stream-status)
+
+(clojure.core/declare deser-string)
+
+(clojure.core/declare deser-record)
+
+(clojure.core/declare deser-record-list)
+
+(clojure.core/declare deser-operation-type)
+
+(clojure.core/declare deser-identity)
+
+(clojure.core/declare deser-stream-list)
+
+(clojure.core/declare deser-table-name)
+
+(clojure.core/declare deser-stream)
+
+(clojure.core/declare deser-key-schema-element)
+
+(clojure.core/declare deser-shard-description-list)
+
+(clojure.core/declare deser-sequence-number-range)
+
+(clojure.core/declare deser-list-attribute-value)
+
+(clojure.core/declare deser-string-attribute-value)
+
+(clojure.core/declare deser-string-set-attribute-value)
+
+(clojure.core/declare deser-key-schema-attribute-name)
+
+(clojure.core/declare deser-key-type)
+
+(clojure.core/defn- deser-attribute-map [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-attribute-name k) (deser-attribute-value v)])) input))
+
+(clojure.core/defn- deser-number-set-attribute-value [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-number-attribute-value coll))) input))
+
+(clojure.core/defn- deser-number-attribute-value [input] input)
+
+(clojure.core/defn- deser-attribute-name [input] input)
+
+(clojure.core/defn- deser-positive-long-object [input] input)
+
+(clojure.core/defn- deser-shard-id [input] input)
+
+(clojure.core/defn- deser-boolean-attribute-value [input] input)
+
+(clojure.core/defn- deser-shard-iterator [input] input)
+
+(clojure.core/defn- deser-null-attribute-value [input] input)
+
+(clojure.core/defn- deser-map-attribute-value [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-attribute-name k) (deser-attribute-value v)])) input))
+
+(clojure.core/defn- deser-shard [input] (clojure.core/cond-> {} (clojure.core/contains? input "ShardId") (clojure.core/assoc :shard-id (deser-shard-id (input "ShardId"))) (clojure.core/contains? input "SequenceNumberRange") (clojure.core/assoc :sequence-number-range (deser-sequence-number-range (input "SequenceNumberRange"))) (clojure.core/contains? input "ParentShardId") (clojure.core/assoc :parent-shard-id (deser-shard-id (input "ParentShardId")))))
+
+(clojure.core/defn- deser-key-schema [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-key-schema-element coll))) input))
+
+(clojure.core/defn- deser-error-message [input] input)
+
+(clojure.core/defn- deser-date [input] input)
+
+(clojure.core/defn- deser-binary-set-attribute-value [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-binary-attribute-value coll))) input))
+
+(clojure.core/defn- deser-stream-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "StreamLabel") (clojure.core/assoc :stream-label (deser-string (input "StreamLabel"))) (clojure.core/contains? input "Shards") (clojure.core/assoc :shards (deser-shard-description-list (input "Shards"))) (clojure.core/contains? input "LastEvaluatedShardId") (clojure.core/assoc :last-evaluated-shard-id (deser-shard-id (input "LastEvaluatedShardId"))) (clojure.core/contains? input "KeySchema") (clojure.core/assoc :key-schema (deser-key-schema (input "KeySchema"))) (clojure.core/contains? input "StreamViewType") (clojure.core/assoc :stream-view-type (deser-stream-view-type (input "StreamViewType"))) (clojure.core/contains? input "CreationRequestDateTime") (clojure.core/assoc :creation-request-date-time (deser-date (input "CreationRequestDateTime"))) (clojure.core/contains? input "StreamArn") (clojure.core/assoc :stream-arn (deser-stream-arn (input "StreamArn"))) (clojure.core/contains? input "StreamStatus") (clojure.core/assoc :stream-status (deser-stream-status (input "StreamStatus"))) (clojure.core/contains? input "TableName") (clojure.core/assoc :table-name (deser-table-name (input "TableName")))))
+
+(clojure.core/defn- deser-sequence-number [input] input)
+
+(clojure.core/defn- deser-stream-view-type [input] (clojure.core/get {"NEW_IMAGE" :new-image, "OLD_IMAGE" :old-image, "NEW_AND_OLD_IMAGES" :new-and-old-images, "KEYS_ONLY" :keys-only} input))
+
+(clojure.core/defn- deser-binary-attribute-value [input] (portkey.aws/base64-decode input))
+
+(clojure.core/defn- deser-attribute-value [input] (clojure.core/cond-> {} (clojure.core/contains? input "NULL") (clojure.core/assoc :null (deser-null-attribute-value (input "NULL"))) (clojure.core/contains? input "L") (clojure.core/assoc :l (deser-list-attribute-value (input "L"))) (clojure.core/contains? input "BOOL") (clojure.core/assoc :bool (deser-boolean-attribute-value (input "BOOL"))) (clojure.core/contains? input "M") (clojure.core/assoc :m (deser-map-attribute-value (input "M"))) (clojure.core/contains? input "S") (clojure.core/assoc :s (deser-string-attribute-value (input "S"))) (clojure.core/contains? input "B") (clojure.core/assoc :b (deser-binary-attribute-value (input "B"))) (clojure.core/contains? input "NS") (clojure.core/assoc :ns (deser-number-set-attribute-value (input "NS"))) (clojure.core/contains? input "N") (clojure.core/assoc :n (deser-number-attribute-value (input "N"))) (clojure.core/contains? input "BS") (clojure.core/assoc :bs (deser-binary-set-attribute-value (input "BS"))) (clojure.core/contains? input "SS") (clojure.core/assoc :ss (deser-string-set-attribute-value (input "SS")))))
+
+(clojure.core/defn- deser-stream-arn [input] input)
+
+(clojure.core/defn- deser-stream-record [input] (clojure.core/cond-> {} (clojure.core/contains? input "ApproximateCreationDateTime") (clojure.core/assoc :approximate-creation-date-time (deser-date (input "ApproximateCreationDateTime"))) (clojure.core/contains? input "Keys") (clojure.core/assoc :keys (deser-attribute-map (input "Keys"))) (clojure.core/contains? input "NewImage") (clojure.core/assoc :new-image (deser-attribute-map (input "NewImage"))) (clojure.core/contains? input "OldImage") (clojure.core/assoc :old-image (deser-attribute-map (input "OldImage"))) (clojure.core/contains? input "SequenceNumber") (clojure.core/assoc :sequence-number (deser-sequence-number (input "SequenceNumber"))) (clojure.core/contains? input "SizeBytes") (clojure.core/assoc :size-bytes (deser-positive-long-object (input "SizeBytes"))) (clojure.core/contains? input "StreamViewType") (clojure.core/assoc :stream-view-type (deser-stream-view-type (input "StreamViewType")))))
+
+(clojure.core/defn- deser-stream-status [input] (clojure.core/get {"ENABLING" :enabling, "ENABLED" :enabled, "DISABLING" :disabling, "DISABLED" :disabled} input))
+
+(clojure.core/defn- deser-string [input] input)
+
+(clojure.core/defn- deser-record [input] (clojure.core/cond-> {} (clojure.core/contains? input "eventID") (clojure.core/assoc :event-id (deser-string (input "eventID"))) (clojure.core/contains? input "eventName") (clojure.core/assoc :event-name (deser-operation-type (input "eventName"))) (clojure.core/contains? input "eventVersion") (clojure.core/assoc :event-version (deser-string (input "eventVersion"))) (clojure.core/contains? input "eventSource") (clojure.core/assoc :event-source (deser-string (input "eventSource"))) (clojure.core/contains? input "awsRegion") (clojure.core/assoc :aws-region (deser-string (input "awsRegion"))) (clojure.core/contains? input "dynamodb") (clojure.core/assoc :dynamodb (deser-stream-record (input "dynamodb"))) (clojure.core/contains? input "userIdentity") (clojure.core/assoc :user-identity (deser-identity (input "userIdentity")))))
+
+(clojure.core/defn- deser-record-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-record coll))) input))
+
+(clojure.core/defn- deser-operation-type [input] (clojure.core/get {"INSERT" :insert, "MODIFY" :modify, "REMOVE" :remove} input))
+
+(clojure.core/defn- deser-identity [input] (clojure.core/cond-> {} (clojure.core/contains? input "PrincipalId") (clojure.core/assoc :principal-id (deser-string (input "PrincipalId"))) (clojure.core/contains? input "Type") (clojure.core/assoc :type (deser-string (input "Type")))))
+
+(clojure.core/defn- deser-stream-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-stream coll))) input))
+
+(clojure.core/defn- deser-table-name [input] input)
+
+(clojure.core/defn- deser-stream [input] (clojure.core/cond-> {} (clojure.core/contains? input "StreamArn") (clojure.core/assoc :stream-arn (deser-stream-arn (input "StreamArn"))) (clojure.core/contains? input "TableName") (clojure.core/assoc :table-name (deser-table-name (input "TableName"))) (clojure.core/contains? input "StreamLabel") (clojure.core/assoc :stream-label (deser-string (input "StreamLabel")))))
+
+(clojure.core/defn- deser-key-schema-element [input] (clojure.core/cond-> {:attribute-name (deser-key-schema-attribute-name (input "AttributeName")), :key-type (deser-key-type (input "KeyType"))}))
+
+(clojure.core/defn- deser-shard-description-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-shard coll))) input))
+
+(clojure.core/defn- deser-sequence-number-range [input] (clojure.core/cond-> {} (clojure.core/contains? input "StartingSequenceNumber") (clojure.core/assoc :starting-sequence-number (deser-sequence-number (input "StartingSequenceNumber"))) (clojure.core/contains? input "EndingSequenceNumber") (clojure.core/assoc :ending-sequence-number (deser-sequence-number (input "EndingSequenceNumber")))))
+
+(clojure.core/defn- deser-list-attribute-value [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-attribute-value coll))) input))
+
+(clojure.core/defn- deser-string-attribute-value [input] input)
+
+(clojure.core/defn- deser-string-set-attribute-value [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-string-attribute-value coll))) input))
+
+(clojure.core/defn- deser-key-schema-attribute-name [input] input)
+
+(clojure.core/defn- deser-key-type [input] (clojure.core/get {"HASH" :hash, "RANGE" :range} input))
+
+(clojure.core/defn- deser-describe-stream-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "StreamDescription") (clojure.core/assoc :stream-description (deser-stream-description (input "StreamDescription")))))
+
+(clojure.core/defn- deser-limit-exceeded-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-expired-iterator-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-get-records-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "Records") (clojure.core/assoc :records (deser-record-list (input "Records"))) (clojure.core/contains? input "NextShardIterator") (clojure.core/assoc :next-shard-iterator (deser-shard-iterator (input "NextShardIterator")))))
+
+(clojure.core/defn- deser-resource-not-found-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-list-streams-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "Streams") (clojure.core/assoc :streams (deser-stream-list (input "Streams"))) (clojure.core/contains? input "LastEvaluatedStreamArn") (clojure.core/assoc :last-evaluated-stream-arn (deser-stream-arn (input "LastEvaluatedStreamArn")))))
+
+(clojure.core/defn- deser-trimmed-data-access-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-get-shard-iterator-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "ShardIterator") (clojure.core/assoc :shard-iterator (deser-shard-iterator (input "ShardIterator")))))
+
+(clojure.core/defn- deser-internal-server-error [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
 (clojure.spec.alpha/def :portkey.aws.streams-dynamodb/attribute-map (clojure.spec.alpha/map-of :portkey.aws.streams-dynamodb/attribute-name :portkey.aws.streams-dynamodb/attribute-value))
 
 (clojure.spec.alpha/def :portkey.aws.streams-dynamodb/get-shard-iterator-input (clojure.spec.alpha/keys :req-un [:portkey.aws.streams-dynamodb/stream-arn :portkey.aws.streams-dynamodb/shard-id :portkey.aws.streams-dynamodb/shard-iterator-type] :opt-un [:portkey.aws.streams-dynamodb/sequence-number]))
@@ -151,11 +325,11 @@
 
 (clojure.spec.alpha/def :portkey.aws.streams-dynamodb/number-attribute-value (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.streams-dynamodb/attribute-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 65535))))
+(clojure.spec.alpha/def :portkey.aws.streams-dynamodb/attribute-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 65535))))
 
 (clojure.spec.alpha/def :portkey.aws.streams-dynamodb/positive-long-object clojure.core/int?)
 
-(clojure.spec.alpha/def :portkey.aws.streams-dynamodb/shard-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 28 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 65))))
+(clojure.spec.alpha/def :portkey.aws.streams-dynamodb/shard-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 28 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 65))))
 
 (clojure.spec.alpha/def :portkey.aws.streams-dynamodb/shard-iterator-type #{"LATEST" "TRIM_HORIZON" "AFTER_SEQUENCE_NUMBER" "AT_SEQUENCE_NUMBER" :at-sequence-number :latest :trim-horizon :after-sequence-number})
 
@@ -166,7 +340,7 @@
 (clojure.spec.alpha/def :portkey.aws.streams-dynamodb.limit-exceeded-exception/message (clojure.spec.alpha/and :portkey.aws.streams-dynamodb/error-message))
 (clojure.spec.alpha/def :portkey.aws.streams-dynamodb/limit-exceeded-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.streams-dynamodb.limit-exceeded-exception/message]))
 
-(clojure.spec.alpha/def :portkey.aws.streams-dynamodb/shard-iterator (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 2048))))
+(clojure.spec.alpha/def :portkey.aws.streams-dynamodb/shard-iterator (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 2048))))
 
 (clojure.spec.alpha/def :portkey.aws.streams-dynamodb/null-attribute-value clojure.core/boolean?)
 
@@ -192,7 +366,7 @@
 (clojure.spec.alpha/def :portkey.aws.streams-dynamodb.stream-description/creation-request-date-time (clojure.spec.alpha/and :portkey.aws.streams-dynamodb/date))
 (clojure.spec.alpha/def :portkey.aws.streams-dynamodb/stream-description (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.streams-dynamodb.stream-description/stream-label :portkey.aws.streams-dynamodb.stream-description/shards :portkey.aws.streams-dynamodb.stream-description/last-evaluated-shard-id :portkey.aws.streams-dynamodb/key-schema :portkey.aws.streams-dynamodb/stream-view-type :portkey.aws.streams-dynamodb.stream-description/creation-request-date-time :portkey.aws.streams-dynamodb/stream-arn :portkey.aws.streams-dynamodb/stream-status :portkey.aws.streams-dynamodb/table-name]))
 
-(clojure.spec.alpha/def :portkey.aws.streams-dynamodb/sequence-number (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 21 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 40))))
+(clojure.spec.alpha/def :portkey.aws.streams-dynamodb/sequence-number (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 21 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 40))))
 
 (clojure.spec.alpha/def :portkey.aws.streams-dynamodb/stream-view-type #{:new-image :old-image "NEW_IMAGE" "NEW_AND_OLD_IMAGES" :keys-only :new-and-old-images "OLD_IMAGE" "KEYS_ONLY"})
 
@@ -214,7 +388,7 @@
 (clojure.spec.alpha/def :portkey.aws.streams-dynamodb.attribute-value/ss (clojure.spec.alpha/and :portkey.aws.streams-dynamodb/string-set-attribute-value))
 (clojure.spec.alpha/def :portkey.aws.streams-dynamodb/attribute-value (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.streams-dynamodb.attribute-value/null :portkey.aws.streams-dynamodb.attribute-value/l :portkey.aws.streams-dynamodb.attribute-value/bool :portkey.aws.streams-dynamodb.attribute-value/m :portkey.aws.streams-dynamodb.attribute-value/s :portkey.aws.streams-dynamodb.attribute-value/b :portkey.aws.streams-dynamodb.attribute-value/ns :portkey.aws.streams-dynamodb.attribute-value/n :portkey.aws.streams-dynamodb.attribute-value/bs :portkey.aws.streams-dynamodb.attribute-value/ss]))
 
-(clojure.spec.alpha/def :portkey.aws.streams-dynamodb/stream-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 37 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1024))))
+(clojure.spec.alpha/def :portkey.aws.streams-dynamodb/stream-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 37 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1024))))
 
 (clojure.spec.alpha/def :portkey.aws.streams-dynamodb.resource-not-found-exception/message (clojure.spec.alpha/and :portkey.aws.streams-dynamodb/error-message))
 (clojure.spec.alpha/def :portkey.aws.streams-dynamodb/resource-not-found-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.streams-dynamodb.resource-not-found-exception/message]))
@@ -256,7 +430,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.streams-dynamodb/stream-list (clojure.spec.alpha/coll-of :portkey.aws.streams-dynamodb/stream))
 
-(clojure.spec.alpha/def :portkey.aws.streams-dynamodb/table-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 3 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_.-]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.streams-dynamodb/table-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 3 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 255)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_.-]+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.streams-dynamodb/get-shard-iterator-output (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.streams-dynamodb/shard-iterator]))
 
@@ -290,7 +464,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.streams-dynamodb/string-set-attribute-value (clojure.spec.alpha/coll-of :portkey.aws.streams-dynamodb/string-attribute-value))
 
-(clojure.spec.alpha/def :portkey.aws.streams-dynamodb/key-schema-attribute-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255))))
+(clojure.spec.alpha/def :portkey.aws.streams-dynamodb/key-schema-attribute-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 255))))
 
 (clojure.spec.alpha/def :portkey.aws.streams-dynamodb/key-type #{:hash "RANGE" "HASH" :range})
 
@@ -298,14 +472,14 @@
 (clojure.spec.alpha/def :portkey.aws.streams-dynamodb.describe-stream-input/exclusive-start-shard-id (clojure.spec.alpha/and :portkey.aws.streams-dynamodb/shard-id))
 (clojure.spec.alpha/def :portkey.aws.streams-dynamodb/describe-stream-input (clojure.spec.alpha/keys :req-un [:portkey.aws.streams-dynamodb/stream-arn] :opt-un [:portkey.aws.streams-dynamodb.describe-stream-input/limit :portkey.aws.streams-dynamodb.describe-stream-input/exclusive-start-shard-id]))
 
-(clojure.core/defn describe-stream ([describe-stream-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-stream-input describe-stream-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.streams-dynamodb/endpoints, :http.request.configuration/target-prefix "DynamoDBStreams_20120810", :http.request.spec/output-spec :portkey.aws.streams-dynamodb/describe-stream-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.streams-dynamodb/describe-stream-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeStream", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.streams-dynamodb/resource-not-found-exception, "InternalServerError" :portkey.aws.streams-dynamodb/internal-server-error}})))))
+(clojure.core/defn describe-stream ([describe-stream-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-stream-input describe-stream-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.streams-dynamodb/endpoints, :http.request.configuration/target-prefix "DynamoDBStreams_20120810", :http.request.spec/output-spec :portkey.aws.streams-dynamodb/describe-stream-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.streams-dynamodb/describe-stream-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeStream", :http.request.configuration/output-deser-fn deser-describe-stream-output, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.streams-dynamodb/resource-not-found-exception, "InternalServerError" :portkey.aws.streams-dynamodb/internal-server-error}})))))
 (clojure.spec.alpha/fdef describe-stream :args (clojure.spec.alpha/tuple :portkey.aws.streams-dynamodb/describe-stream-input) :ret (clojure.spec.alpha/and :portkey.aws.streams-dynamodb/describe-stream-output))
 
-(clojure.core/defn get-records ([get-records-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-records-input get-records-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.streams-dynamodb/endpoints, :http.request.configuration/target-prefix "DynamoDBStreams_20120810", :http.request.spec/output-spec :portkey.aws.streams-dynamodb/get-records-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.streams-dynamodb/get-records-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetRecords", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.streams-dynamodb/resource-not-found-exception, "LimitExceededException" :portkey.aws.streams-dynamodb/limit-exceeded-exception, "InternalServerError" :portkey.aws.streams-dynamodb/internal-server-error, "ExpiredIteratorException" :portkey.aws.streams-dynamodb/expired-iterator-exception, "TrimmedDataAccessException" :portkey.aws.streams-dynamodb/trimmed-data-access-exception}})))))
+(clojure.core/defn get-records ([get-records-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-get-records-input get-records-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.streams-dynamodb/endpoints, :http.request.configuration/target-prefix "DynamoDBStreams_20120810", :http.request.spec/output-spec :portkey.aws.streams-dynamodb/get-records-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.streams-dynamodb/get-records-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetRecords", :http.request.configuration/output-deser-fn deser-get-records-output, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.streams-dynamodb/resource-not-found-exception, "LimitExceededException" :portkey.aws.streams-dynamodb/limit-exceeded-exception, "InternalServerError" :portkey.aws.streams-dynamodb/internal-server-error, "ExpiredIteratorException" :portkey.aws.streams-dynamodb/expired-iterator-exception, "TrimmedDataAccessException" :portkey.aws.streams-dynamodb/trimmed-data-access-exception}})))))
 (clojure.spec.alpha/fdef get-records :args (clojure.spec.alpha/tuple :portkey.aws.streams-dynamodb/get-records-input) :ret (clojure.spec.alpha/and :portkey.aws.streams-dynamodb/get-records-output))
 
-(clojure.core/defn get-shard-iterator ([get-shard-iterator-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-shard-iterator-input get-shard-iterator-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.streams-dynamodb/endpoints, :http.request.configuration/target-prefix "DynamoDBStreams_20120810", :http.request.spec/output-spec :portkey.aws.streams-dynamodb/get-shard-iterator-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.streams-dynamodb/get-shard-iterator-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetShardIterator", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.streams-dynamodb/resource-not-found-exception, "InternalServerError" :portkey.aws.streams-dynamodb/internal-server-error, "TrimmedDataAccessException" :portkey.aws.streams-dynamodb/trimmed-data-access-exception}})))))
+(clojure.core/defn get-shard-iterator ([get-shard-iterator-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-get-shard-iterator-input get-shard-iterator-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.streams-dynamodb/endpoints, :http.request.configuration/target-prefix "DynamoDBStreams_20120810", :http.request.spec/output-spec :portkey.aws.streams-dynamodb/get-shard-iterator-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.streams-dynamodb/get-shard-iterator-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetShardIterator", :http.request.configuration/output-deser-fn deser-get-shard-iterator-output, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.streams-dynamodb/resource-not-found-exception, "InternalServerError" :portkey.aws.streams-dynamodb/internal-server-error, "TrimmedDataAccessException" :portkey.aws.streams-dynamodb/trimmed-data-access-exception}})))))
 (clojure.spec.alpha/fdef get-shard-iterator :args (clojure.spec.alpha/tuple :portkey.aws.streams-dynamodb/get-shard-iterator-input) :ret (clojure.spec.alpha/and :portkey.aws.streams-dynamodb/get-shard-iterator-output))
 
-(clojure.core/defn list-streams ([] (list-streams {})) ([list-streams-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-streams-input list-streams-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.streams-dynamodb/endpoints, :http.request.configuration/target-prefix "DynamoDBStreams_20120810", :http.request.spec/output-spec :portkey.aws.streams-dynamodb/list-streams-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.streams-dynamodb/list-streams-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListStreams", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.streams-dynamodb/resource-not-found-exception, "InternalServerError" :portkey.aws.streams-dynamodb/internal-server-error}})))))
+(clojure.core/defn list-streams ([] (list-streams {})) ([list-streams-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-streams-input list-streams-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.streams-dynamodb/endpoints, :http.request.configuration/target-prefix "DynamoDBStreams_20120810", :http.request.spec/output-spec :portkey.aws.streams-dynamodb/list-streams-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2012-08-10", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.streams-dynamodb/list-streams-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListStreams", :http.request.configuration/output-deser-fn deser-list-streams-output, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.streams-dynamodb/resource-not-found-exception, "InternalServerError" :portkey.aws.streams-dynamodb/internal-server-error}})))))
 (clojure.spec.alpha/fdef list-streams :args (clojure.spec.alpha/? :portkey.aws.streams-dynamodb/list-streams-input) :ret (clojure.spec.alpha/and :portkey.aws.streams-dynamodb/list-streams-output))

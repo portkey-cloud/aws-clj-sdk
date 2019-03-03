@@ -510,9 +510,457 @@
 
 (clojure.core/defn- req-put-record-batch-input [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-delivery-stream-name (input :delivery-stream-name)) #:http.request.field{:name "DeliveryStreamName", :shape "DeliveryStreamName"}) (clojure.core/into (ser-put-record-batch-request-entry-list (input :records)) #:http.request.field{:name "Records", :shape "PutRecordBatchRequestEntryList"})]}))
 
+(clojure.core/declare deser-processor-list)
+
+(clojure.core/declare deser-username)
+
+(clojure.core/declare deser-deserializer)
+
+(clojure.core/declare deser-non-negative-integer-object)
+
+(clojure.core/declare deser-splunk-retry-options)
+
+(clojure.core/declare deser-copy-options)
+
+(clojure.core/declare deser-hec-endpoint)
+
+(clojure.core/declare deser-non-empty-string)
+
+(clojure.core/declare deser-serializer)
+
+(clojure.core/declare deser-non-empty-string-without-whitespace)
+
+(clojure.core/declare deser-prefix)
+
+(clojure.core/declare deser-kinesis-stream-arn)
+
+(clojure.core/declare deser-encryption-configuration)
+
+(clojure.core/declare deser-redshift-retry-options)
+
+(clojure.core/declare deser-source-description)
+
+(clojure.core/declare deser-elasticsearch-index-name)
+
+(clojure.core/declare deser-data-table-name)
+
+(clojure.core/declare deser-role-arn)
+
+(clojure.core/declare deser-delivery-stream-type)
+
+(clojure.core/declare deser-block-size-bytes)
+
+(clojure.core/declare deser-delivery-stream-name-list)
+
+(clojure.core/declare deser-elasticsearch-retry-duration-in-seconds)
+
+(clojure.core/declare deser-data-format-conversion-configuration)
+
+(clojure.core/declare deser-delivery-stream-version-id)
+
+(clojure.core/declare deser-output-format-configuration)
+
+(clojure.core/declare deser-list-of-non-empty-strings)
+
+(clojure.core/declare deser-tag-key)
+
+(clojure.core/declare deser-buffering-hints)
+
+(clojure.core/declare deser-elasticsearch-s-3-backup-mode)
+
+(clojure.core/declare deser-redshift-s-3-backup-mode)
+
+(clojure.core/declare deser-compression-format)
+
+(clojure.core/declare deser-elasticsearch-retry-options)
+
+(clojure.core/declare deser-input-format-configuration)
+
+(clojure.core/declare deser-list-of-non-empty-strings-without-whitespace)
+
+(clojure.core/declare deser-parquet-compression)
+
+(clojure.core/declare deser-processor-parameter-list)
+
+(clojure.core/declare deser-put-record-batch-response-entry)
+
+(clojure.core/declare deser-processor-parameter)
+
+(clojure.core/declare deser-error-message)
+
+(clojure.core/declare deser-destination-id)
+
+(clojure.core/declare deser-size-in-m-bs)
+
+(clojure.core/declare deser-parquet-ser-de)
+
+(clojure.core/declare deser-cloud-watch-logging-options)
+
+(clojure.core/declare deser-elasticsearch-index-rotation-period)
+
+(clojure.core/declare deser-elasticsearch-destination-description)
+
+(clojure.core/declare deser-redshift-destination-description)
+
+(clojure.core/declare deser-interval-in-seconds)
+
+(clojure.core/declare deser-hec-endpoint-type)
+
+(clojure.core/declare deser-redshift-retry-duration-in-seconds)
+
+(clojure.core/declare deser-cluster-jdbcurl)
+
+(clojure.core/declare deser-kms-encryption-config)
+
+(clojure.core/declare deser-error-code)
+
+(clojure.core/declare deser-elasticsearch-domain-arn)
+
+(clojure.core/declare deser-log-stream-name)
+
+(clojure.core/declare deser-orc-compression)
+
+(clojure.core/declare deser-tag-value)
+
+(clojure.core/declare deser-extended-s-3-destination-description)
+
+(clojure.core/declare deser-elasticsearch-buffering-interval-in-seconds)
+
+(clojure.core/declare deser-delivery-start-timestamp)
+
+(clojure.core/declare deser-destination-description-list)
+
+(clojure.core/declare deser-delivery-stream-name)
+
+(clojure.core/declare deser-parquet-page-size-bytes)
+
+(clojure.core/declare deser-destination-description)
+
+(clojure.core/declare deser-delivery-stream-arn)
+
+(clojure.core/declare deser-list-tags-for-delivery-stream-output-tag-list)
+
+(clojure.core/declare deser-processor)
+
+(clojure.core/declare deser-log-group-name)
+
+(clojure.core/declare deser-proportion)
+
+(clojure.core/declare deser-hive-json-ser-de)
+
+(clojure.core/declare deser-orc-row-index-stride)
+
+(clojure.core/declare deser-copy-command)
+
+(clojure.core/declare deser-parquet-writer-version)
+
+(clojure.core/declare deser-awskms-key-arn)
+
+(clojure.core/declare deser-no-encryption-config)
+
+(clojure.core/declare deser-timestamp)
+
+(clojure.core/declare deser-s-3-backup-mode)
+
+(clojure.core/declare deser-hec-acknowledgment-timeout-in-seconds)
+
+(clojure.core/declare deser-tag)
+
+(clojure.core/declare deser-kinesis-stream-source-description)
+
+(clojure.core/declare deser-orc-format-version)
+
+(clojure.core/declare deser-delivery-stream-status)
+
+(clojure.core/declare deser-put-record-batch-response-entry-list)
+
+(clojure.core/declare deser-processor-parameter-value)
+
+(clojure.core/declare deser-orc-ser-de)
+
+(clojure.core/declare deser-s-3-destination-description)
+
+(clojure.core/declare deser-orc-stripe-size-bytes)
+
+(clojure.core/declare deser-processing-configuration)
+
+(clojure.core/declare deser-data-table-columns)
+
+(clojure.core/declare deser-processor-type)
+
+(clojure.core/declare deser-put-response-record-id)
+
+(clojure.core/declare deser-column-to-json-key-mappings)
+
+(clojure.core/declare deser-boolean-object)
+
+(clojure.core/declare deser-schema-configuration)
+
+(clojure.core/declare deser-elasticsearch-type-name)
+
+(clojure.core/declare deser-processor-parameter-name)
+
+(clojure.core/declare deser-splunk-retry-duration-in-seconds)
+
+(clojure.core/declare deser-elasticsearch-buffering-hints)
+
+(clojure.core/declare deser-splunk-destination-description)
+
+(clojure.core/declare deser-hec-token)
+
+(clojure.core/declare deser-open-x-json-ser-de)
+
+(clojure.core/declare deser-elasticsearch-buffering-size-in-m-bs)
+
+(clojure.core/declare deser-delivery-stream-description)
+
+(clojure.core/declare deser-splunk-s-3-backup-mode)
+
+(clojure.core/declare deser-bucket-arn)
+
+(clojure.core/defn- deser-processor-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-processor coll))) input))
+
+(clojure.core/defn- deser-username [input] input)
+
+(clojure.core/defn- deser-deserializer [input] (clojure.core/cond-> {} (clojure.core/contains? input "OpenXJsonSerDe") (clojure.core/assoc :open-x-json-ser-de (deser-open-x-json-ser-de (input "OpenXJsonSerDe"))) (clojure.core/contains? input "HiveJsonSerDe") (clojure.core/assoc :hive-json-ser-de (deser-hive-json-ser-de (input "HiveJsonSerDe")))))
+
+(clojure.core/defn- deser-non-negative-integer-object [input] input)
+
+(clojure.core/defn- deser-splunk-retry-options [input] (clojure.core/cond-> {} (clojure.core/contains? input "DurationInSeconds") (clojure.core/assoc :duration-in-seconds (deser-splunk-retry-duration-in-seconds (input "DurationInSeconds")))))
+
+(clojure.core/defn- deser-copy-options [input] input)
+
+(clojure.core/defn- deser-hec-endpoint [input] input)
+
+(clojure.core/defn- deser-non-empty-string [input] input)
+
+(clojure.core/defn- deser-serializer [input] (clojure.core/cond-> {} (clojure.core/contains? input "ParquetSerDe") (clojure.core/assoc :parquet-ser-de (deser-parquet-ser-de (input "ParquetSerDe"))) (clojure.core/contains? input "OrcSerDe") (clojure.core/assoc :orc-ser-de (deser-orc-ser-de (input "OrcSerDe")))))
+
+(clojure.core/defn- deser-non-empty-string-without-whitespace [input] input)
+
+(clojure.core/defn- deser-prefix [input] input)
+
+(clojure.core/defn- deser-kinesis-stream-arn [input] input)
+
+(clojure.core/defn- deser-encryption-configuration [input] (clojure.core/cond-> {} (clojure.core/contains? input "NoEncryptionConfig") (clojure.core/assoc :no-encryption-config (deser-no-encryption-config (input "NoEncryptionConfig"))) (clojure.core/contains? input "KMSEncryptionConfig") (clojure.core/assoc :kms-encryption-config (deser-kms-encryption-config (input "KMSEncryptionConfig")))))
+
+(clojure.core/defn- deser-redshift-retry-options [input] (clojure.core/cond-> {} (clojure.core/contains? input "DurationInSeconds") (clojure.core/assoc :duration-in-seconds (deser-redshift-retry-duration-in-seconds (input "DurationInSeconds")))))
+
+(clojure.core/defn- deser-source-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "KinesisStreamSourceDescription") (clojure.core/assoc :kinesis-stream-source-description (deser-kinesis-stream-source-description (input "KinesisStreamSourceDescription")))))
+
+(clojure.core/defn- deser-elasticsearch-index-name [input] input)
+
+(clojure.core/defn- deser-data-table-name [input] input)
+
+(clojure.core/defn- deser-role-arn [input] input)
+
+(clojure.core/defn- deser-delivery-stream-type [input] (clojure.core/get {"DirectPut" :direct-put, "KinesisStreamAsSource" :kinesis-stream-as-source} input))
+
+(clojure.core/defn- deser-block-size-bytes [input] input)
+
+(clojure.core/defn- deser-delivery-stream-name-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-delivery-stream-name coll))) input))
+
+(clojure.core/defn- deser-elasticsearch-retry-duration-in-seconds [input] input)
+
+(clojure.core/defn- deser-data-format-conversion-configuration [input] (clojure.core/cond-> {} (clojure.core/contains? input "SchemaConfiguration") (clojure.core/assoc :schema-configuration (deser-schema-configuration (input "SchemaConfiguration"))) (clojure.core/contains? input "InputFormatConfiguration") (clojure.core/assoc :input-format-configuration (deser-input-format-configuration (input "InputFormatConfiguration"))) (clojure.core/contains? input "OutputFormatConfiguration") (clojure.core/assoc :output-format-configuration (deser-output-format-configuration (input "OutputFormatConfiguration"))) (clojure.core/contains? input "Enabled") (clojure.core/assoc :enabled (deser-boolean-object (input "Enabled")))))
+
+(clojure.core/defn- deser-delivery-stream-version-id [input] input)
+
+(clojure.core/defn- deser-output-format-configuration [input] (clojure.core/cond-> {} (clojure.core/contains? input "Serializer") (clojure.core/assoc :serializer (deser-serializer (input "Serializer")))))
+
+(clojure.core/defn- deser-list-of-non-empty-strings [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-non-empty-string coll))) input))
+
+(clojure.core/defn- deser-tag-key [input] input)
+
+(clojure.core/defn- deser-buffering-hints [input] (clojure.core/cond-> {} (clojure.core/contains? input "SizeInMBs") (clojure.core/assoc :size-in-m-bs (deser-size-in-m-bs (input "SizeInMBs"))) (clojure.core/contains? input "IntervalInSeconds") (clojure.core/assoc :interval-in-seconds (deser-interval-in-seconds (input "IntervalInSeconds")))))
+
+(clojure.core/defn- deser-elasticsearch-s-3-backup-mode [input] (clojure.core/get {"FailedDocumentsOnly" :failed-documents-only, "AllDocuments" :all-documents} input))
+
+(clojure.core/defn- deser-redshift-s-3-backup-mode [input] (clojure.core/get {"Disabled" :disabled, "Enabled" :enabled} input))
+
+(clojure.core/defn- deser-compression-format [input] (clojure.core/get {"UNCOMPRESSED" :uncompressed, "GZIP" :gzip, "ZIP" :zip, "Snappy" :snappy} input))
+
+(clojure.core/defn- deser-elasticsearch-retry-options [input] (clojure.core/cond-> {} (clojure.core/contains? input "DurationInSeconds") (clojure.core/assoc :duration-in-seconds (deser-elasticsearch-retry-duration-in-seconds (input "DurationInSeconds")))))
+
+(clojure.core/defn- deser-input-format-configuration [input] (clojure.core/cond-> {} (clojure.core/contains? input "Deserializer") (clojure.core/assoc :deserializer (deser-deserializer (input "Deserializer")))))
+
+(clojure.core/defn- deser-list-of-non-empty-strings-without-whitespace [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-non-empty-string-without-whitespace coll))) input))
+
+(clojure.core/defn- deser-parquet-compression [input] (clojure.core/get {"UNCOMPRESSED" :uncompressed, "GZIP" :gzip, "SNAPPY" :snappy} input))
+
+(clojure.core/defn- deser-processor-parameter-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-processor-parameter coll))) input))
+
+(clojure.core/defn- deser-put-record-batch-response-entry [input] (clojure.core/cond-> {} (clojure.core/contains? input "RecordId") (clojure.core/assoc :record-id (deser-put-response-record-id (input "RecordId"))) (clojure.core/contains? input "ErrorCode") (clojure.core/assoc :error-code (deser-error-code (input "ErrorCode"))) (clojure.core/contains? input "ErrorMessage") (clojure.core/assoc :error-message (deser-error-message (input "ErrorMessage")))))
+
+(clojure.core/defn- deser-processor-parameter [input] (clojure.core/cond-> {:parameter-name (deser-processor-parameter-name (input "ParameterName")), :parameter-value (deser-processor-parameter-value (input "ParameterValue"))}))
+
+(clojure.core/defn- deser-error-message [input] input)
+
+(clojure.core/defn- deser-destination-id [input] input)
+
+(clojure.core/defn- deser-size-in-m-bs [input] input)
+
+(clojure.core/defn- deser-parquet-ser-de [input] (clojure.core/cond-> {} (clojure.core/contains? input "BlockSizeBytes") (clojure.core/assoc :block-size-bytes (deser-block-size-bytes (input "BlockSizeBytes"))) (clojure.core/contains? input "PageSizeBytes") (clojure.core/assoc :page-size-bytes (deser-parquet-page-size-bytes (input "PageSizeBytes"))) (clojure.core/contains? input "Compression") (clojure.core/assoc :compression (deser-parquet-compression (input "Compression"))) (clojure.core/contains? input "EnableDictionaryCompression") (clojure.core/assoc :enable-dictionary-compression (deser-boolean-object (input "EnableDictionaryCompression"))) (clojure.core/contains? input "MaxPaddingBytes") (clojure.core/assoc :max-padding-bytes (deser-non-negative-integer-object (input "MaxPaddingBytes"))) (clojure.core/contains? input "WriterVersion") (clojure.core/assoc :writer-version (deser-parquet-writer-version (input "WriterVersion")))))
+
+(clojure.core/defn- deser-cloud-watch-logging-options [input] (clojure.core/cond-> {} (clojure.core/contains? input "Enabled") (clojure.core/assoc :enabled (deser-boolean-object (input "Enabled"))) (clojure.core/contains? input "LogGroupName") (clojure.core/assoc :log-group-name (deser-log-group-name (input "LogGroupName"))) (clojure.core/contains? input "LogStreamName") (clojure.core/assoc :log-stream-name (deser-log-stream-name (input "LogStreamName")))))
+
+(clojure.core/defn- deser-elasticsearch-index-rotation-period [input] (clojure.core/get {"NoRotation" :no-rotation, "OneHour" :one-hour, "OneDay" :one-day, "OneWeek" :one-week, "OneMonth" :one-month} input))
+
+(clojure.core/defn- deser-elasticsearch-destination-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "RoleARN") (clojure.core/assoc :role-arn (deser-role-arn (input "RoleARN"))) (clojure.core/contains? input "IndexName") (clojure.core/assoc :index-name (deser-elasticsearch-index-name (input "IndexName"))) (clojure.core/contains? input "BufferingHints") (clojure.core/assoc :buffering-hints (deser-elasticsearch-buffering-hints (input "BufferingHints"))) (clojure.core/contains? input "TypeName") (clojure.core/assoc :type-name (deser-elasticsearch-type-name (input "TypeName"))) (clojure.core/contains? input "IndexRotationPeriod") (clojure.core/assoc :index-rotation-period (deser-elasticsearch-index-rotation-period (input "IndexRotationPeriod"))) (clojure.core/contains? input "CloudWatchLoggingOptions") (clojure.core/assoc :cloud-watch-logging-options (deser-cloud-watch-logging-options (input "CloudWatchLoggingOptions"))) (clojure.core/contains? input "RetryOptions") (clojure.core/assoc :retry-options (deser-elasticsearch-retry-options (input "RetryOptions"))) (clojure.core/contains? input "S3BackupMode") (clojure.core/assoc :s-3-backup-mode (deser-elasticsearch-s-3-backup-mode (input "S3BackupMode"))) (clojure.core/contains? input "S3DestinationDescription") (clojure.core/assoc :s-3-destination-description (deser-s-3-destination-description (input "S3DestinationDescription"))) (clojure.core/contains? input "ProcessingConfiguration") (clojure.core/assoc :processing-configuration (deser-processing-configuration (input "ProcessingConfiguration"))) (clojure.core/contains? input "DomainARN") (clojure.core/assoc :domain-arn (deser-elasticsearch-domain-arn (input "DomainARN")))))
+
+(clojure.core/defn- deser-redshift-destination-description [input] (clojure.core/cond-> {:role-arn (deser-role-arn (input "RoleARN")), :cluster-jdbcurl (deser-cluster-jdbcurl (input "ClusterJDBCURL")), :copy-command (deser-copy-command (input "CopyCommand")), :username (deser-username (input "Username")), :s-3-destination-description (deser-s-3-destination-description (input "S3DestinationDescription"))} (clojure.core/contains? input "CloudWatchLoggingOptions") (clojure.core/assoc :cloud-watch-logging-options (deser-cloud-watch-logging-options (input "CloudWatchLoggingOptions"))) (clojure.core/contains? input "RetryOptions") (clojure.core/assoc :retry-options (deser-redshift-retry-options (input "RetryOptions"))) (clojure.core/contains? input "S3BackupDescription") (clojure.core/assoc :s-3-backup-description (deser-s-3-destination-description (input "S3BackupDescription"))) (clojure.core/contains? input "S3BackupMode") (clojure.core/assoc :s-3-backup-mode (deser-redshift-s-3-backup-mode (input "S3BackupMode"))) (clojure.core/contains? input "ProcessingConfiguration") (clojure.core/assoc :processing-configuration (deser-processing-configuration (input "ProcessingConfiguration")))))
+
+(clojure.core/defn- deser-interval-in-seconds [input] input)
+
+(clojure.core/defn- deser-hec-endpoint-type [input] (clojure.core/get {"Raw" :raw, "Event" :event} input))
+
+(clojure.core/defn- deser-redshift-retry-duration-in-seconds [input] input)
+
+(clojure.core/defn- deser-cluster-jdbcurl [input] input)
+
+(clojure.core/defn- deser-kms-encryption-config [input] (clojure.core/cond-> {:awskms-key-arn (deser-awskms-key-arn (input "AWSKMSKeyARN"))}))
+
+(clojure.core/defn- deser-error-code [input] input)
+
+(clojure.core/defn- deser-elasticsearch-domain-arn [input] input)
+
+(clojure.core/defn- deser-log-stream-name [input] input)
+
+(clojure.core/defn- deser-orc-compression [input] (clojure.core/get {"NONE" :none, "ZLIB" :zlib, "SNAPPY" :snappy} input))
+
+(clojure.core/defn- deser-tag-value [input] input)
+
+(clojure.core/defn- deser-extended-s-3-destination-description [input] (clojure.core/cond-> {:role-arn (deser-role-arn (input "RoleARN")), :bucket-arn (deser-bucket-arn (input "BucketARN")), :buffering-hints (deser-buffering-hints (input "BufferingHints")), :compression-format (deser-compression-format (input "CompressionFormat")), :encryption-configuration (deser-encryption-configuration (input "EncryptionConfiguration"))} (clojure.core/contains? input "Prefix") (clojure.core/assoc :prefix (deser-prefix (input "Prefix"))) (clojure.core/contains? input "DataFormatConversionConfiguration") (clojure.core/assoc :data-format-conversion-configuration (deser-data-format-conversion-configuration (input "DataFormatConversionConfiguration"))) (clojure.core/contains? input "CloudWatchLoggingOptions") (clojure.core/assoc :cloud-watch-logging-options (deser-cloud-watch-logging-options (input "CloudWatchLoggingOptions"))) (clojure.core/contains? input "S3BackupDescription") (clojure.core/assoc :s-3-backup-description (deser-s-3-destination-description (input "S3BackupDescription"))) (clojure.core/contains? input "S3BackupMode") (clojure.core/assoc :s-3-backup-mode (deser-s-3-backup-mode (input "S3BackupMode"))) (clojure.core/contains? input "ProcessingConfiguration") (clojure.core/assoc :processing-configuration (deser-processing-configuration (input "ProcessingConfiguration")))))
+
+(clojure.core/defn- deser-elasticsearch-buffering-interval-in-seconds [input] input)
+
+(clojure.core/defn- deser-delivery-start-timestamp [input] input)
+
+(clojure.core/defn- deser-destination-description-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-destination-description coll))) input))
+
+(clojure.core/defn- deser-delivery-stream-name [input] input)
+
+(clojure.core/defn- deser-parquet-page-size-bytes [input] input)
+
+(clojure.core/defn- deser-destination-description [input] (clojure.core/cond-> {:destination-id (deser-destination-id (input "DestinationId"))} (clojure.core/contains? input "S3DestinationDescription") (clojure.core/assoc :s-3-destination-description (deser-s-3-destination-description (input "S3DestinationDescription"))) (clojure.core/contains? input "ExtendedS3DestinationDescription") (clojure.core/assoc :extended-s-3-destination-description (deser-extended-s-3-destination-description (input "ExtendedS3DestinationDescription"))) (clojure.core/contains? input "RedshiftDestinationDescription") (clojure.core/assoc :redshift-destination-description (deser-redshift-destination-description (input "RedshiftDestinationDescription"))) (clojure.core/contains? input "ElasticsearchDestinationDescription") (clojure.core/assoc :elasticsearch-destination-description (deser-elasticsearch-destination-description (input "ElasticsearchDestinationDescription"))) (clojure.core/contains? input "SplunkDestinationDescription") (clojure.core/assoc :splunk-destination-description (deser-splunk-destination-description (input "SplunkDestinationDescription")))))
+
+(clojure.core/defn- deser-delivery-stream-arn [input] input)
+
+(clojure.core/defn- deser-list-tags-for-delivery-stream-output-tag-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-tag coll))) input))
+
+(clojure.core/defn- deser-processor [input] (clojure.core/cond-> {:type (deser-processor-type (input "Type"))} (clojure.core/contains? input "Parameters") (clojure.core/assoc :parameters (deser-processor-parameter-list (input "Parameters")))))
+
+(clojure.core/defn- deser-log-group-name [input] input)
+
+(clojure.core/defn- deser-proportion [input] input)
+
+(clojure.core/defn- deser-hive-json-ser-de [input] (clojure.core/cond-> {} (clojure.core/contains? input "TimestampFormats") (clojure.core/assoc :timestamp-formats (deser-list-of-non-empty-strings (input "TimestampFormats")))))
+
+(clojure.core/defn- deser-orc-row-index-stride [input] input)
+
+(clojure.core/defn- deser-copy-command [input] (clojure.core/cond-> {:data-table-name (deser-data-table-name (input "DataTableName"))} (clojure.core/contains? input "DataTableColumns") (clojure.core/assoc :data-table-columns (deser-data-table-columns (input "DataTableColumns"))) (clojure.core/contains? input "CopyOptions") (clojure.core/assoc :copy-options (deser-copy-options (input "CopyOptions")))))
+
+(clojure.core/defn- deser-parquet-writer-version [input] (clojure.core/get {"V1" :v-1, "V2" :v-2} input))
+
+(clojure.core/defn- deser-awskms-key-arn [input] input)
+
+(clojure.core/defn- deser-no-encryption-config [input] (clojure.core/get {"NoEncryption" :no-encryption} input))
+
+(clojure.core/defn- deser-timestamp [input] input)
+
+(clojure.core/defn- deser-s-3-backup-mode [input] (clojure.core/get {"Disabled" :disabled, "Enabled" :enabled} input))
+
+(clojure.core/defn- deser-hec-acknowledgment-timeout-in-seconds [input] input)
+
+(clojure.core/defn- deser-tag [input] (clojure.core/cond-> {:key (deser-tag-key (input "Key"))} (clojure.core/contains? input "Value") (clojure.core/assoc :value (deser-tag-value (input "Value")))))
+
+(clojure.core/defn- deser-kinesis-stream-source-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "KinesisStreamARN") (clojure.core/assoc :kinesis-stream-arn (deser-kinesis-stream-arn (input "KinesisStreamARN"))) (clojure.core/contains? input "RoleARN") (clojure.core/assoc :role-arn (deser-role-arn (input "RoleARN"))) (clojure.core/contains? input "DeliveryStartTimestamp") (clojure.core/assoc :delivery-start-timestamp (deser-delivery-start-timestamp (input "DeliveryStartTimestamp")))))
+
+(clojure.core/defn- deser-orc-format-version [input] (clojure.core/get {"V0_11" :v-0-11, "V0_12" :v-0-12} input))
+
+(clojure.core/defn- deser-delivery-stream-status [input] (clojure.core/get {"CREATING" :creating, "DELETING" :deleting, "ACTIVE" :active} input))
+
+(clojure.core/defn- deser-put-record-batch-response-entry-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-put-record-batch-response-entry coll))) input))
+
+(clojure.core/defn- deser-processor-parameter-value [input] input)
+
+(clojure.core/defn- deser-orc-ser-de [input] (clojure.core/cond-> {} (clojure.core/contains? input "BlockSizeBytes") (clojure.core/assoc :block-size-bytes (deser-block-size-bytes (input "BlockSizeBytes"))) (clojure.core/contains? input "RowIndexStride") (clojure.core/assoc :row-index-stride (deser-orc-row-index-stride (input "RowIndexStride"))) (clojure.core/contains? input "FormatVersion") (clojure.core/assoc :format-version (deser-orc-format-version (input "FormatVersion"))) (clojure.core/contains? input "StripeSizeBytes") (clojure.core/assoc :stripe-size-bytes (deser-orc-stripe-size-bytes (input "StripeSizeBytes"))) (clojure.core/contains? input "DictionaryKeyThreshold") (clojure.core/assoc :dictionary-key-threshold (deser-proportion (input "DictionaryKeyThreshold"))) (clojure.core/contains? input "BloomFilterColumns") (clojure.core/assoc :bloom-filter-columns (deser-list-of-non-empty-strings-without-whitespace (input "BloomFilterColumns"))) (clojure.core/contains? input "Compression") (clojure.core/assoc :compression (deser-orc-compression (input "Compression"))) (clojure.core/contains? input "PaddingTolerance") (clojure.core/assoc :padding-tolerance (deser-proportion (input "PaddingTolerance"))) (clojure.core/contains? input "BloomFilterFalsePositiveProbability") (clojure.core/assoc :bloom-filter-false-positive-probability (deser-proportion (input "BloomFilterFalsePositiveProbability"))) (clojure.core/contains? input "EnablePadding") (clojure.core/assoc :enable-padding (deser-boolean-object (input "EnablePadding")))))
+
+(clojure.core/defn- deser-s-3-destination-description [input] (clojure.core/cond-> {:role-arn (deser-role-arn (input "RoleARN")), :bucket-arn (deser-bucket-arn (input "BucketARN")), :buffering-hints (deser-buffering-hints (input "BufferingHints")), :compression-format (deser-compression-format (input "CompressionFormat")), :encryption-configuration (deser-encryption-configuration (input "EncryptionConfiguration"))} (clojure.core/contains? input "Prefix") (clojure.core/assoc :prefix (deser-prefix (input "Prefix"))) (clojure.core/contains? input "CloudWatchLoggingOptions") (clojure.core/assoc :cloud-watch-logging-options (deser-cloud-watch-logging-options (input "CloudWatchLoggingOptions")))))
+
+(clojure.core/defn- deser-orc-stripe-size-bytes [input] input)
+
+(clojure.core/defn- deser-processing-configuration [input] (clojure.core/cond-> {} (clojure.core/contains? input "Enabled") (clojure.core/assoc :enabled (deser-boolean-object (input "Enabled"))) (clojure.core/contains? input "Processors") (clojure.core/assoc :processors (deser-processor-list (input "Processors")))))
+
+(clojure.core/defn- deser-data-table-columns [input] input)
+
+(clojure.core/defn- deser-processor-type [input] (clojure.core/get {"Lambda" :lambda} input))
+
+(clojure.core/defn- deser-put-response-record-id [input] input)
+
+(clojure.core/defn- deser-column-to-json-key-mappings [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-non-empty-string-without-whitespace k) (deser-non-empty-string v)])) input))
+
+(clojure.core/defn- deser-boolean-object [input] input)
+
+(clojure.core/defn- deser-schema-configuration [input] (clojure.core/cond-> {} (clojure.core/contains? input "RoleARN") (clojure.core/assoc :role-arn (deser-non-empty-string-without-whitespace (input "RoleARN"))) (clojure.core/contains? input "CatalogId") (clojure.core/assoc :catalog-id (deser-non-empty-string-without-whitespace (input "CatalogId"))) (clojure.core/contains? input "DatabaseName") (clojure.core/assoc :database-name (deser-non-empty-string-without-whitespace (input "DatabaseName"))) (clojure.core/contains? input "TableName") (clojure.core/assoc :table-name (deser-non-empty-string-without-whitespace (input "TableName"))) (clojure.core/contains? input "Region") (clojure.core/assoc :region (deser-non-empty-string-without-whitespace (input "Region"))) (clojure.core/contains? input "VersionId") (clojure.core/assoc :version-id (deser-non-empty-string-without-whitespace (input "VersionId")))))
+
+(clojure.core/defn- deser-elasticsearch-type-name [input] input)
+
+(clojure.core/defn- deser-processor-parameter-name [input] (clojure.core/get {"LambdaArn" :lambda-arn, "NumberOfRetries" :number-of-retries, "RoleArn" :role-arn, "BufferSizeInMBs" :buffer-size-in-m-bs, "BufferIntervalInSeconds" :buffer-interval-in-seconds} input))
+
+(clojure.core/defn- deser-splunk-retry-duration-in-seconds [input] input)
+
+(clojure.core/defn- deser-elasticsearch-buffering-hints [input] (clojure.core/cond-> {} (clojure.core/contains? input "IntervalInSeconds") (clojure.core/assoc :interval-in-seconds (deser-elasticsearch-buffering-interval-in-seconds (input "IntervalInSeconds"))) (clojure.core/contains? input "SizeInMBs") (clojure.core/assoc :size-in-m-bs (deser-elasticsearch-buffering-size-in-m-bs (input "SizeInMBs")))))
+
+(clojure.core/defn- deser-splunk-destination-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "HECEndpoint") (clojure.core/assoc :hec-endpoint (deser-hec-endpoint (input "HECEndpoint"))) (clojure.core/contains? input "CloudWatchLoggingOptions") (clojure.core/assoc :cloud-watch-logging-options (deser-cloud-watch-logging-options (input "CloudWatchLoggingOptions"))) (clojure.core/contains? input "HECEndpointType") (clojure.core/assoc :hec-endpoint-type (deser-hec-endpoint-type (input "HECEndpointType"))) (clojure.core/contains? input "RetryOptions") (clojure.core/assoc :retry-options (deser-splunk-retry-options (input "RetryOptions"))) (clojure.core/contains? input "S3BackupMode") (clojure.core/assoc :s-3-backup-mode (deser-splunk-s-3-backup-mode (input "S3BackupMode"))) (clojure.core/contains? input "HECAcknowledgmentTimeoutInSeconds") (clojure.core/assoc :hec-acknowledgment-timeout-in-seconds (deser-hec-acknowledgment-timeout-in-seconds (input "HECAcknowledgmentTimeoutInSeconds"))) (clojure.core/contains? input "S3DestinationDescription") (clojure.core/assoc :s-3-destination-description (deser-s-3-destination-description (input "S3DestinationDescription"))) (clojure.core/contains? input "ProcessingConfiguration") (clojure.core/assoc :processing-configuration (deser-processing-configuration (input "ProcessingConfiguration"))) (clojure.core/contains? input "HECToken") (clojure.core/assoc :hec-token (deser-hec-token (input "HECToken")))))
+
+(clojure.core/defn- deser-hec-token [input] input)
+
+(clojure.core/defn- deser-open-x-json-ser-de [input] (clojure.core/cond-> {} (clojure.core/contains? input "ConvertDotsInJsonKeysToUnderscores") (clojure.core/assoc :convert-dots-in-json-keys-to-underscores (deser-boolean-object (input "ConvertDotsInJsonKeysToUnderscores"))) (clojure.core/contains? input "CaseInsensitive") (clojure.core/assoc :case-insensitive (deser-boolean-object (input "CaseInsensitive"))) (clojure.core/contains? input "ColumnToJsonKeyMappings") (clojure.core/assoc :column-to-json-key-mappings (deser-column-to-json-key-mappings (input "ColumnToJsonKeyMappings")))))
+
+(clojure.core/defn- deser-elasticsearch-buffering-size-in-m-bs [input] input)
+
+(clojure.core/defn- deser-delivery-stream-description [input] (clojure.core/cond-> {:delivery-stream-name (deser-delivery-stream-name (input "DeliveryStreamName")), :delivery-stream-arn (deser-delivery-stream-arn (input "DeliveryStreamARN")), :delivery-stream-status (deser-delivery-stream-status (input "DeliveryStreamStatus")), :delivery-stream-type (deser-delivery-stream-type (input "DeliveryStreamType")), :version-id (deser-delivery-stream-version-id (input "VersionId")), :destinations (deser-destination-description-list (input "Destinations")), :has-more-destinations (deser-boolean-object (input "HasMoreDestinations"))} (clojure.core/contains? input "CreateTimestamp") (clojure.core/assoc :create-timestamp (deser-timestamp (input "CreateTimestamp"))) (clojure.core/contains? input "LastUpdateTimestamp") (clojure.core/assoc :last-update-timestamp (deser-timestamp (input "LastUpdateTimestamp"))) (clojure.core/contains? input "Source") (clojure.core/assoc :source (deser-source-description (input "Source")))))
+
+(clojure.core/defn- deser-splunk-s-3-backup-mode [input] (clojure.core/get {"FailedEventsOnly" :failed-events-only, "AllEvents" :all-events} input))
+
+(clojure.core/defn- deser-bucket-arn [input] input)
+
+(clojure.core/defn- deser-delete-delivery-stream-output [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-update-destination-output [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-create-delivery-stream-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "DeliveryStreamARN") (clojure.core/assoc :delivery-stream-arn (deser-delivery-stream-arn (input "DeliveryStreamARN")))))
+
+(clojure.core/defn- deser-untag-delivery-stream-output [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-tag-delivery-stream-output [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-resource-in-use-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-limit-exceeded-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-service-unavailable-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-put-record-batch-output [input] (clojure.core/cond-> {:failed-put-count (deser-non-negative-integer-object (input "FailedPutCount")), :request-responses (deser-put-record-batch-response-entry-list (input "RequestResponses"))}))
+
+(clojure.core/defn- deser-describe-delivery-stream-output [input] (clojure.core/cond-> {:delivery-stream-description (deser-delivery-stream-description (input "DeliveryStreamDescription"))}))
+
+(clojure.core/defn- deser-resource-not-found-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-list-delivery-streams-output [input] (clojure.core/cond-> {:delivery-stream-names (deser-delivery-stream-name-list (input "DeliveryStreamNames")), :has-more-delivery-streams (deser-boolean-object (input "HasMoreDeliveryStreams"))}))
+
+(clojure.core/defn- deser-invalid-argument-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-put-record-output [input] (clojure.core/cond-> {:record-id (deser-put-response-record-id (input "RecordId"))}))
+
+(clojure.core/defn- deser-concurrent-modification-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-error-message (input "message")))))
+
+(clojure.core/defn- deser-list-tags-for-delivery-stream-output [input] (clojure.core/cond-> {:tags (deser-list-tags-for-delivery-stream-output-tag-list (input "Tags")), :has-more-tags (deser-boolean-object (input "HasMoreTags"))}))
+
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/processor-list (clojure.spec.alpha/coll-of :portkey.aws.firehose.-2015-08-04/processor))
 
-(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/username (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__)))))
+(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/username (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__)))))
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/delete-delivery-stream-input (clojure.spec.alpha/keys :req-un [:portkey.aws.firehose.-2015-08-04/delivery-stream-name] :opt-un []))
 
@@ -539,7 +987,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/update-destination-output (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/non-empty-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^(?!\s*$).+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/non-empty-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"^(?!\s*$).+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/describe-delivery-stream-input-limit (clojure.spec.alpha/int-in 1 10000))
 
@@ -547,7 +995,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/serializer (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.firehose.-2015-08-04/parquet-ser-de :portkey.aws.firehose.-2015-08-04/orc-ser-de]))
 
-(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/non-empty-string-without-whitespace (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^\S+$" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/non-empty-string-without-whitespace (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"^\S+$" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04.redshift-destination-configuration/s-3-configuration (clojure.spec.alpha/and :portkey.aws.firehose.-2015-08-04/s-3-destination-configuration))
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04.redshift-destination-configuration/retry-options (clojure.spec.alpha/and :portkey.aws.firehose.-2015-08-04/redshift-retry-options))
@@ -564,9 +1012,9 @@
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/create-delivery-stream-output (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.firehose.-2015-08-04/delivery-stream-arn]))
 
-(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/kinesis-stream-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 512)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"arn:.*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/kinesis-stream-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 512)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"arn:.*" s__27881__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/password (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 6 (clojure.core/count s__27880__auto__)))))
+(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/password (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 6 (clojure.core/count s__27879__auto__)))))
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/encryption-configuration (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.firehose.-2015-08-04/no-encryption-config :portkey.aws.firehose.-2015-08-04/kms-encryption-config]))
 
@@ -575,11 +1023,11 @@
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/source-description (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.firehose.-2015-08-04/kinesis-stream-source-description]))
 
-(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/elasticsearch-index-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 80))))
+(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/elasticsearch-index-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 80))))
 
-(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/data-table-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__)))))
+(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/data-table-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__)))))
 
-(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/role-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 512)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"arn:.*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/role-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 512)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"arn:.*" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/untag-delivery-stream-output (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
@@ -610,13 +1058,13 @@
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04.data-format-conversion-configuration/enabled (clojure.spec.alpha/and :portkey.aws.firehose.-2015-08-04/boolean-object))
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/data-format-conversion-configuration (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.firehose.-2015-08-04/schema-configuration :portkey.aws.firehose.-2015-08-04/input-format-configuration :portkey.aws.firehose.-2015-08-04/output-format-configuration :portkey.aws.firehose.-2015-08-04.data-format-conversion-configuration/enabled]))
 
-(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/delivery-stream-version-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 50)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[0-9]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/delivery-stream-version-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 50)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[0-9]+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/output-format-configuration (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.firehose.-2015-08-04/serializer]))
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/list-of-non-empty-strings (clojure.spec.alpha/coll-of :portkey.aws.firehose.-2015-08-04/non-empty-string))
 
-(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/tag-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 128))))
+(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/tag-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 128))))
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/buffering-hints (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.firehose.-2015-08-04/size-in-m-bs :portkey.aws.firehose.-2015-08-04/interval-in-seconds]))
 
@@ -671,7 +1119,7 @@
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04.put-record-batch-output/request-responses (clojure.spec.alpha/and :portkey.aws.firehose.-2015-08-04/put-record-batch-response-entry-list))
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/put-record-batch-output (clojure.spec.alpha/keys :req-un [:portkey.aws.firehose.-2015-08-04.put-record-batch-output/failed-put-count :portkey.aws.firehose.-2015-08-04.put-record-batch-output/request-responses] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/destination-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 100))))
+(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/destination-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 100))))
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/size-in-m-bs (clojure.spec.alpha/int-in 1 128))
 
@@ -709,7 +1157,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/redshift-retry-duration-in-seconds (clojure.spec.alpha/int-in 0 7200))
 
-(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/cluster-jdbcurl (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"jdbc:(redshift|postgresql)://((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+redshift\.amazonaws\.com:\d{1,5}/[a-zA-Z0-9_$]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/cluster-jdbcurl (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"jdbc:(redshift|postgresql)://((?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)+redshift\.amazonaws\.com:\d{1,5}/[a-zA-Z0-9_$]+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/describe-delivery-stream-output (clojure.spec.alpha/keys :req-un [:portkey.aws.firehose.-2015-08-04/delivery-stream-description] :opt-un []))
 
@@ -723,7 +1171,7 @@
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04.extended-s-3-destination-update/s-3-backup-update (clojure.spec.alpha/and :portkey.aws.firehose.-2015-08-04/s-3-destination-update))
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/extended-s-3-destination-update (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.firehose.-2015-08-04/prefix :portkey.aws.firehose.-2015-08-04/encryption-configuration :portkey.aws.firehose.-2015-08-04/role-arn :portkey.aws.firehose.-2015-08-04.extended-s-3-destination-update/s-3-backup-update :portkey.aws.firehose.-2015-08-04/data-format-conversion-configuration :portkey.aws.firehose.-2015-08-04/buffering-hints :portkey.aws.firehose.-2015-08-04/compression-format :portkey.aws.firehose.-2015-08-04/cloud-watch-logging-options :portkey.aws.firehose.-2015-08-04/s-3-backup-mode :portkey.aws.firehose.-2015-08-04/processing-configuration :portkey.aws.firehose.-2015-08-04/bucket-arn]))
 
-(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/elasticsearch-domain-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 512)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"arn:.*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/elasticsearch-domain-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 512)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"arn:.*" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04.tag-delivery-stream-input/tags (clojure.spec.alpha/and :portkey.aws.firehose.-2015-08-04/tag-delivery-stream-input-tag-list))
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/tag-delivery-stream-input (clojure.spec.alpha/keys :req-un [:portkey.aws.firehose.-2015-08-04/delivery-stream-name :portkey.aws.firehose.-2015-08-04.tag-delivery-stream-input/tags] :opt-un []))
@@ -736,7 +1184,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/orc-compression #{:zlib :snappy "NONE" "ZLIB" "SNAPPY" :none})
 
-(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/tag-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 0 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256))))
+(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/tag-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 0 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 256))))
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04.extended-s-3-destination-description/s-3-backup-description (clojure.spec.alpha/and :portkey.aws.firehose.-2015-08-04/s-3-destination-description))
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/extended-s-3-destination-description (clojure.spec.alpha/keys :req-un [:portkey.aws.firehose.-2015-08-04/role-arn :portkey.aws.firehose.-2015-08-04/bucket-arn :portkey.aws.firehose.-2015-08-04/buffering-hints :portkey.aws.firehose.-2015-08-04/compression-format :portkey.aws.firehose.-2015-08-04/encryption-configuration] :opt-un [:portkey.aws.firehose.-2015-08-04/prefix :portkey.aws.firehose.-2015-08-04/data-format-conversion-configuration :portkey.aws.firehose.-2015-08-04/cloud-watch-logging-options :portkey.aws.firehose.-2015-08-04.extended-s-3-destination-description/s-3-backup-description :portkey.aws.firehose.-2015-08-04/s-3-backup-mode :portkey.aws.firehose.-2015-08-04/processing-configuration]))
@@ -752,13 +1200,13 @@
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/destination-description-list (clojure.spec.alpha/coll-of :portkey.aws.firehose.-2015-08-04/destination-description))
 
-(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/delivery-stream-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 64)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_.-]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/delivery-stream-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 64)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_.-]+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/parquet-page-size-bytes (clojure.spec.alpha/int-in 65536 Long/MAX_VALUE))
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/destination-description (clojure.spec.alpha/keys :req-un [:portkey.aws.firehose.-2015-08-04/destination-id] :opt-un [:portkey.aws.firehose.-2015-08-04/s-3-destination-description :portkey.aws.firehose.-2015-08-04/extended-s-3-destination-description :portkey.aws.firehose.-2015-08-04/redshift-destination-description :portkey.aws.firehose.-2015-08-04/elasticsearch-destination-description :portkey.aws.firehose.-2015-08-04/splunk-destination-description]))
 
-(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/delivery-stream-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 512)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"arn:.*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/delivery-stream-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 512)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"arn:.*" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/list-tags-for-delivery-stream-output-tag-list (clojure.spec.alpha/coll-of :portkey.aws.firehose.-2015-08-04/tag :min-count 0 :max-count 50))
 
@@ -791,7 +1239,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/parquet-writer-version #{"V2" "V1" :v-1 :v-2})
 
-(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/awskms-key-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 512)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"arn:.*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/awskms-key-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 512)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"arn:.*" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/no-encryption-config #{"NoEncryption" :no-encryption})
 
@@ -816,7 +1264,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/put-record-batch-response-entry-list (clojure.spec.alpha/coll-of :portkey.aws.firehose.-2015-08-04/put-record-batch-response-entry :min-count 1 :max-count 500))
 
-(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/processor-parameter-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 512))))
+(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/processor-parameter-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 512))))
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04.concurrent-modification-exception/message (clojure.spec.alpha/and :portkey.aws.firehose.-2015-08-04/error-message))
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/concurrent-modification-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.firehose.-2015-08-04.concurrent-modification-exception/message]))
@@ -844,7 +1292,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/processor-type #{:lambda "Lambda"})
 
-(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/put-response-record-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__)))))
+(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/put-response-record-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__)))))
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/column-to-json-key-mappings (clojure.spec.alpha/map-of :portkey.aws.firehose.-2015-08-04/non-empty-string-without-whitespace :portkey.aws.firehose.-2015-08-04/non-empty-string))
 
@@ -870,7 +1318,7 @@
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04.schema-configuration/version-id (clojure.spec.alpha/and :portkey.aws.firehose.-2015-08-04/non-empty-string-without-whitespace))
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/schema-configuration (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.firehose.-2015-08-04.schema-configuration/role-arn :portkey.aws.firehose.-2015-08-04.schema-configuration/catalog-id :portkey.aws.firehose.-2015-08-04.schema-configuration/database-name :portkey.aws.firehose.-2015-08-04.schema-configuration/table-name :portkey.aws.firehose.-2015-08-04.schema-configuration/region :portkey.aws.firehose.-2015-08-04.schema-configuration/version-id]))
 
-(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/elasticsearch-type-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 100))))
+(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/elasticsearch-type-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 100))))
 
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04.elasticsearch-destination-update/index-name (clojure.spec.alpha/and :portkey.aws.firehose.-2015-08-04/elasticsearch-index-name))
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04.elasticsearch-destination-update/buffering-hints (clojure.spec.alpha/and :portkey.aws.firehose.-2015-08-04/elasticsearch-buffering-hints))
@@ -920,34 +1368,34 @@
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04.put-record-batch-input/records (clojure.spec.alpha/and :portkey.aws.firehose.-2015-08-04/put-record-batch-request-entry-list))
 (clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/put-record-batch-input (clojure.spec.alpha/keys :req-un [:portkey.aws.firehose.-2015-08-04/delivery-stream-name :portkey.aws.firehose.-2015-08-04.put-record-batch-input/records] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/bucket-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 2048)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"arn:.*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.firehose.-2015-08-04/bucket-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 2048)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"arn:.*" s__27881__auto__))))
 
-(clojure.core/defn delete-delivery-stream ([delete-delivery-stream-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-delivery-stream-input delete-delivery-stream-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.firehose.-2015-08-04/endpoints, :http.request.configuration/target-prefix "Firehose_20150804", :http.request.spec/output-spec :portkey.aws.firehose.-2015-08-04/delete-delivery-stream-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-04", :http.request.configuration/service-id "Firehose", :http.request.spec/input-spec :portkey.aws.firehose.-2015-08-04/delete-delivery-stream-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteDeliveryStream", :http.request.spec/error-spec {"ResourceInUseException" :portkey.aws.firehose.-2015-08-04/resource-in-use-exception, "ResourceNotFoundException" :portkey.aws.firehose.-2015-08-04/resource-not-found-exception}})))))
+(clojure.core/defn delete-delivery-stream ([delete-delivery-stream-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-delivery-stream-input delete-delivery-stream-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.firehose.-2015-08-04/endpoints, :http.request.configuration/target-prefix "Firehose_20150804", :http.request.spec/output-spec :portkey.aws.firehose.-2015-08-04/delete-delivery-stream-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-04", :http.request.configuration/service-id "Firehose", :http.request.spec/input-spec :portkey.aws.firehose.-2015-08-04/delete-delivery-stream-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteDeliveryStream", :http.request.configuration/output-deser-fn deser-delete-delivery-stream-output, :http.request.spec/error-spec {"ResourceInUseException" :portkey.aws.firehose.-2015-08-04/resource-in-use-exception, "ResourceNotFoundException" :portkey.aws.firehose.-2015-08-04/resource-not-found-exception}})))))
 (clojure.spec.alpha/fdef delete-delivery-stream :args (clojure.spec.alpha/tuple :portkey.aws.firehose.-2015-08-04/delete-delivery-stream-input) :ret (clojure.spec.alpha/and :portkey.aws.firehose.-2015-08-04/delete-delivery-stream-output))
 
-(clojure.core/defn untag-delivery-stream ([untag-delivery-stream-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-untag-delivery-stream-input untag-delivery-stream-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.firehose.-2015-08-04/endpoints, :http.request.configuration/target-prefix "Firehose_20150804", :http.request.spec/output-spec :portkey.aws.firehose.-2015-08-04/untag-delivery-stream-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-04", :http.request.configuration/service-id "Firehose", :http.request.spec/input-spec :portkey.aws.firehose.-2015-08-04/untag-delivery-stream-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UntagDeliveryStream", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.firehose.-2015-08-04/resource-not-found-exception, "ResourceInUseException" :portkey.aws.firehose.-2015-08-04/resource-in-use-exception, "InvalidArgumentException" :portkey.aws.firehose.-2015-08-04/invalid-argument-exception, "LimitExceededException" :portkey.aws.firehose.-2015-08-04/limit-exceeded-exception}})))))
+(clojure.core/defn untag-delivery-stream ([untag-delivery-stream-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-untag-delivery-stream-input untag-delivery-stream-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.firehose.-2015-08-04/endpoints, :http.request.configuration/target-prefix "Firehose_20150804", :http.request.spec/output-spec :portkey.aws.firehose.-2015-08-04/untag-delivery-stream-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-04", :http.request.configuration/service-id "Firehose", :http.request.spec/input-spec :portkey.aws.firehose.-2015-08-04/untag-delivery-stream-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UntagDeliveryStream", :http.request.configuration/output-deser-fn deser-untag-delivery-stream-output, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.firehose.-2015-08-04/resource-not-found-exception, "ResourceInUseException" :portkey.aws.firehose.-2015-08-04/resource-in-use-exception, "InvalidArgumentException" :portkey.aws.firehose.-2015-08-04/invalid-argument-exception, "LimitExceededException" :portkey.aws.firehose.-2015-08-04/limit-exceeded-exception}})))))
 (clojure.spec.alpha/fdef untag-delivery-stream :args (clojure.spec.alpha/tuple :portkey.aws.firehose.-2015-08-04/untag-delivery-stream-input) :ret (clojure.spec.alpha/and :portkey.aws.firehose.-2015-08-04/untag-delivery-stream-output))
 
-(clojure.core/defn list-tags-for-delivery-stream ([list-tags-for-delivery-stream-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-tags-for-delivery-stream-input list-tags-for-delivery-stream-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.firehose.-2015-08-04/endpoints, :http.request.configuration/target-prefix "Firehose_20150804", :http.request.spec/output-spec :portkey.aws.firehose.-2015-08-04/list-tags-for-delivery-stream-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-04", :http.request.configuration/service-id "Firehose", :http.request.spec/input-spec :portkey.aws.firehose.-2015-08-04/list-tags-for-delivery-stream-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListTagsForDeliveryStream", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.firehose.-2015-08-04/resource-not-found-exception, "InvalidArgumentException" :portkey.aws.firehose.-2015-08-04/invalid-argument-exception, "LimitExceededException" :portkey.aws.firehose.-2015-08-04/limit-exceeded-exception}})))))
+(clojure.core/defn list-tags-for-delivery-stream ([list-tags-for-delivery-stream-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-tags-for-delivery-stream-input list-tags-for-delivery-stream-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.firehose.-2015-08-04/endpoints, :http.request.configuration/target-prefix "Firehose_20150804", :http.request.spec/output-spec :portkey.aws.firehose.-2015-08-04/list-tags-for-delivery-stream-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-04", :http.request.configuration/service-id "Firehose", :http.request.spec/input-spec :portkey.aws.firehose.-2015-08-04/list-tags-for-delivery-stream-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListTagsForDeliveryStream", :http.request.configuration/output-deser-fn deser-list-tags-for-delivery-stream-output, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.firehose.-2015-08-04/resource-not-found-exception, "InvalidArgumentException" :portkey.aws.firehose.-2015-08-04/invalid-argument-exception, "LimitExceededException" :portkey.aws.firehose.-2015-08-04/limit-exceeded-exception}})))))
 (clojure.spec.alpha/fdef list-tags-for-delivery-stream :args (clojure.spec.alpha/tuple :portkey.aws.firehose.-2015-08-04/list-tags-for-delivery-stream-input) :ret (clojure.spec.alpha/and :portkey.aws.firehose.-2015-08-04/list-tags-for-delivery-stream-output))
 
-(clojure.core/defn tag-delivery-stream ([tag-delivery-stream-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-tag-delivery-stream-input tag-delivery-stream-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.firehose.-2015-08-04/endpoints, :http.request.configuration/target-prefix "Firehose_20150804", :http.request.spec/output-spec :portkey.aws.firehose.-2015-08-04/tag-delivery-stream-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-04", :http.request.configuration/service-id "Firehose", :http.request.spec/input-spec :portkey.aws.firehose.-2015-08-04/tag-delivery-stream-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "TagDeliveryStream", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.firehose.-2015-08-04/resource-not-found-exception, "ResourceInUseException" :portkey.aws.firehose.-2015-08-04/resource-in-use-exception, "InvalidArgumentException" :portkey.aws.firehose.-2015-08-04/invalid-argument-exception, "LimitExceededException" :portkey.aws.firehose.-2015-08-04/limit-exceeded-exception}})))))
+(clojure.core/defn tag-delivery-stream ([tag-delivery-stream-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-tag-delivery-stream-input tag-delivery-stream-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.firehose.-2015-08-04/endpoints, :http.request.configuration/target-prefix "Firehose_20150804", :http.request.spec/output-spec :portkey.aws.firehose.-2015-08-04/tag-delivery-stream-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-04", :http.request.configuration/service-id "Firehose", :http.request.spec/input-spec :portkey.aws.firehose.-2015-08-04/tag-delivery-stream-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "TagDeliveryStream", :http.request.configuration/output-deser-fn deser-tag-delivery-stream-output, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.firehose.-2015-08-04/resource-not-found-exception, "ResourceInUseException" :portkey.aws.firehose.-2015-08-04/resource-in-use-exception, "InvalidArgumentException" :portkey.aws.firehose.-2015-08-04/invalid-argument-exception, "LimitExceededException" :portkey.aws.firehose.-2015-08-04/limit-exceeded-exception}})))))
 (clojure.spec.alpha/fdef tag-delivery-stream :args (clojure.spec.alpha/tuple :portkey.aws.firehose.-2015-08-04/tag-delivery-stream-input) :ret (clojure.spec.alpha/and :portkey.aws.firehose.-2015-08-04/tag-delivery-stream-output))
 
-(clojure.core/defn list-delivery-streams ([] (list-delivery-streams {})) ([list-delivery-streams-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-delivery-streams-input list-delivery-streams-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.firehose.-2015-08-04/endpoints, :http.request.configuration/target-prefix "Firehose_20150804", :http.request.spec/output-spec :portkey.aws.firehose.-2015-08-04/list-delivery-streams-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-04", :http.request.configuration/service-id "Firehose", :http.request.spec/input-spec :portkey.aws.firehose.-2015-08-04/list-delivery-streams-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListDeliveryStreams", :http.request.spec/error-spec {}})))))
+(clojure.core/defn list-delivery-streams ([] (list-delivery-streams {})) ([list-delivery-streams-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-delivery-streams-input list-delivery-streams-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.firehose.-2015-08-04/endpoints, :http.request.configuration/target-prefix "Firehose_20150804", :http.request.spec/output-spec :portkey.aws.firehose.-2015-08-04/list-delivery-streams-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-04", :http.request.configuration/service-id "Firehose", :http.request.spec/input-spec :portkey.aws.firehose.-2015-08-04/list-delivery-streams-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListDeliveryStreams", :http.request.configuration/output-deser-fn deser-list-delivery-streams-output, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef list-delivery-streams :args (clojure.spec.alpha/? :portkey.aws.firehose.-2015-08-04/list-delivery-streams-input) :ret (clojure.spec.alpha/and :portkey.aws.firehose.-2015-08-04/list-delivery-streams-output))
 
-(clojure.core/defn put-record-batch ([put-record-batch-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-put-record-batch-input put-record-batch-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.firehose.-2015-08-04/endpoints, :http.request.configuration/target-prefix "Firehose_20150804", :http.request.spec/output-spec :portkey.aws.firehose.-2015-08-04/put-record-batch-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-04", :http.request.configuration/service-id "Firehose", :http.request.spec/input-spec :portkey.aws.firehose.-2015-08-04/put-record-batch-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutRecordBatch", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.firehose.-2015-08-04/resource-not-found-exception, "InvalidArgumentException" :portkey.aws.firehose.-2015-08-04/invalid-argument-exception, "ServiceUnavailableException" :portkey.aws.firehose.-2015-08-04/service-unavailable-exception}})))))
+(clojure.core/defn put-record-batch ([put-record-batch-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-put-record-batch-input put-record-batch-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.firehose.-2015-08-04/endpoints, :http.request.configuration/target-prefix "Firehose_20150804", :http.request.spec/output-spec :portkey.aws.firehose.-2015-08-04/put-record-batch-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-04", :http.request.configuration/service-id "Firehose", :http.request.spec/input-spec :portkey.aws.firehose.-2015-08-04/put-record-batch-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutRecordBatch", :http.request.configuration/output-deser-fn deser-put-record-batch-output, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.firehose.-2015-08-04/resource-not-found-exception, "InvalidArgumentException" :portkey.aws.firehose.-2015-08-04/invalid-argument-exception, "ServiceUnavailableException" :portkey.aws.firehose.-2015-08-04/service-unavailable-exception}})))))
 (clojure.spec.alpha/fdef put-record-batch :args (clojure.spec.alpha/tuple :portkey.aws.firehose.-2015-08-04/put-record-batch-input) :ret (clojure.spec.alpha/and :portkey.aws.firehose.-2015-08-04/put-record-batch-output))
 
-(clojure.core/defn put-record ([put-record-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-put-record-input put-record-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.firehose.-2015-08-04/endpoints, :http.request.configuration/target-prefix "Firehose_20150804", :http.request.spec/output-spec :portkey.aws.firehose.-2015-08-04/put-record-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-04", :http.request.configuration/service-id "Firehose", :http.request.spec/input-spec :portkey.aws.firehose.-2015-08-04/put-record-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutRecord", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.firehose.-2015-08-04/resource-not-found-exception, "InvalidArgumentException" :portkey.aws.firehose.-2015-08-04/invalid-argument-exception, "ServiceUnavailableException" :portkey.aws.firehose.-2015-08-04/service-unavailable-exception}})))))
+(clojure.core/defn put-record ([put-record-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-put-record-input put-record-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.firehose.-2015-08-04/endpoints, :http.request.configuration/target-prefix "Firehose_20150804", :http.request.spec/output-spec :portkey.aws.firehose.-2015-08-04/put-record-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-04", :http.request.configuration/service-id "Firehose", :http.request.spec/input-spec :portkey.aws.firehose.-2015-08-04/put-record-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutRecord", :http.request.configuration/output-deser-fn deser-put-record-output, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.firehose.-2015-08-04/resource-not-found-exception, "InvalidArgumentException" :portkey.aws.firehose.-2015-08-04/invalid-argument-exception, "ServiceUnavailableException" :portkey.aws.firehose.-2015-08-04/service-unavailable-exception}})))))
 (clojure.spec.alpha/fdef put-record :args (clojure.spec.alpha/tuple :portkey.aws.firehose.-2015-08-04/put-record-input) :ret (clojure.spec.alpha/and :portkey.aws.firehose.-2015-08-04/put-record-output))
 
-(clojure.core/defn create-delivery-stream ([create-delivery-stream-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-delivery-stream-input create-delivery-stream-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.firehose.-2015-08-04/endpoints, :http.request.configuration/target-prefix "Firehose_20150804", :http.request.spec/output-spec :portkey.aws.firehose.-2015-08-04/create-delivery-stream-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-04", :http.request.configuration/service-id "Firehose", :http.request.spec/input-spec :portkey.aws.firehose.-2015-08-04/create-delivery-stream-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateDeliveryStream", :http.request.spec/error-spec {"InvalidArgumentException" :portkey.aws.firehose.-2015-08-04/invalid-argument-exception, "LimitExceededException" :portkey.aws.firehose.-2015-08-04/limit-exceeded-exception, "ResourceInUseException" :portkey.aws.firehose.-2015-08-04/resource-in-use-exception}})))))
+(clojure.core/defn create-delivery-stream ([create-delivery-stream-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-create-delivery-stream-input create-delivery-stream-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.firehose.-2015-08-04/endpoints, :http.request.configuration/target-prefix "Firehose_20150804", :http.request.spec/output-spec :portkey.aws.firehose.-2015-08-04/create-delivery-stream-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-04", :http.request.configuration/service-id "Firehose", :http.request.spec/input-spec :portkey.aws.firehose.-2015-08-04/create-delivery-stream-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateDeliveryStream", :http.request.configuration/output-deser-fn deser-create-delivery-stream-output, :http.request.spec/error-spec {"InvalidArgumentException" :portkey.aws.firehose.-2015-08-04/invalid-argument-exception, "LimitExceededException" :portkey.aws.firehose.-2015-08-04/limit-exceeded-exception, "ResourceInUseException" :portkey.aws.firehose.-2015-08-04/resource-in-use-exception}})))))
 (clojure.spec.alpha/fdef create-delivery-stream :args (clojure.spec.alpha/tuple :portkey.aws.firehose.-2015-08-04/create-delivery-stream-input) :ret (clojure.spec.alpha/and :portkey.aws.firehose.-2015-08-04/create-delivery-stream-output))
 
-(clojure.core/defn describe-delivery-stream ([describe-delivery-stream-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-delivery-stream-input describe-delivery-stream-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.firehose.-2015-08-04/endpoints, :http.request.configuration/target-prefix "Firehose_20150804", :http.request.spec/output-spec :portkey.aws.firehose.-2015-08-04/describe-delivery-stream-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-04", :http.request.configuration/service-id "Firehose", :http.request.spec/input-spec :portkey.aws.firehose.-2015-08-04/describe-delivery-stream-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeDeliveryStream", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.firehose.-2015-08-04/resource-not-found-exception}})))))
+(clojure.core/defn describe-delivery-stream ([describe-delivery-stream-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-delivery-stream-input describe-delivery-stream-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.firehose.-2015-08-04/endpoints, :http.request.configuration/target-prefix "Firehose_20150804", :http.request.spec/output-spec :portkey.aws.firehose.-2015-08-04/describe-delivery-stream-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-04", :http.request.configuration/service-id "Firehose", :http.request.spec/input-spec :portkey.aws.firehose.-2015-08-04/describe-delivery-stream-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeDeliveryStream", :http.request.configuration/output-deser-fn deser-describe-delivery-stream-output, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.firehose.-2015-08-04/resource-not-found-exception}})))))
 (clojure.spec.alpha/fdef describe-delivery-stream :args (clojure.spec.alpha/tuple :portkey.aws.firehose.-2015-08-04/describe-delivery-stream-input) :ret (clojure.spec.alpha/and :portkey.aws.firehose.-2015-08-04/describe-delivery-stream-output))
 
-(clojure.core/defn update-destination ([update-destination-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-update-destination-input update-destination-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.firehose.-2015-08-04/endpoints, :http.request.configuration/target-prefix "Firehose_20150804", :http.request.spec/output-spec :portkey.aws.firehose.-2015-08-04/update-destination-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-04", :http.request.configuration/service-id "Firehose", :http.request.spec/input-spec :portkey.aws.firehose.-2015-08-04/update-destination-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateDestination", :http.request.spec/error-spec {"InvalidArgumentException" :portkey.aws.firehose.-2015-08-04/invalid-argument-exception, "ResourceInUseException" :portkey.aws.firehose.-2015-08-04/resource-in-use-exception, "ResourceNotFoundException" :portkey.aws.firehose.-2015-08-04/resource-not-found-exception, "ConcurrentModificationException" :portkey.aws.firehose.-2015-08-04/concurrent-modification-exception}})))))
+(clojure.core/defn update-destination ([update-destination-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-update-destination-input update-destination-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.firehose.-2015-08-04/endpoints, :http.request.configuration/target-prefix "Firehose_20150804", :http.request.spec/output-spec :portkey.aws.firehose.-2015-08-04/update-destination-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-08-04", :http.request.configuration/service-id "Firehose", :http.request.spec/input-spec :portkey.aws.firehose.-2015-08-04/update-destination-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateDestination", :http.request.configuration/output-deser-fn deser-update-destination-output, :http.request.spec/error-spec {"InvalidArgumentException" :portkey.aws.firehose.-2015-08-04/invalid-argument-exception, "ResourceInUseException" :portkey.aws.firehose.-2015-08-04/resource-in-use-exception, "ResourceNotFoundException" :portkey.aws.firehose.-2015-08-04/resource-not-found-exception, "ConcurrentModificationException" :portkey.aws.firehose.-2015-08-04/concurrent-modification-exception}})))))
 (clojure.spec.alpha/fdef update-destination :args (clojure.spec.alpha/tuple :portkey.aws.firehose.-2015-08-04/update-destination-input) :ret (clojure.spec.alpha/and :portkey.aws.firehose.-2015-08-04/update-destination-output))

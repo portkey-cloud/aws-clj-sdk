@@ -58,6 +58,30 @@
 
 (clojure.core/defn- req-translate-text-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-bounded-length-string (input :text)) #:http.request.field{:name "Text", :shape "BoundedLengthString"}) (clojure.core/into (ser-language-code-string (input :source-language-code)) #:http.request.field{:name "SourceLanguageCode", :shape "LanguageCodeString"}) (clojure.core/into (ser-language-code-string (input :target-language-code)) #:http.request.field{:name "TargetLanguageCode", :shape "LanguageCodeString"})]}))
 
+(clojure.core/declare deser-language-code-string)
+
+(clojure.core/declare deser-string)
+
+(clojure.core/defn- deser-language-code-string [input] input)
+
+(clojure.core/defn- deser-string [input] input)
+
+(clojure.core/defn- deser-detected-language-low-confidence-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-string (input "Message"))) (clojure.core/contains? input "DetectedLanguageCode") (clojure.core/assoc :detected-language-code (deser-language-code-string (input "DetectedLanguageCode")))))
+
+(clojure.core/defn- deser-invalid-request-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-string (input "Message")))))
+
+(clojure.core/defn- deser-text-size-limit-exceeded-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-string (input "Message")))))
+
+(clojure.core/defn- deser-service-unavailable-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-string (input "Message")))))
+
+(clojure.core/defn- deser-too-many-requests-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-string (input "Message")))))
+
+(clojure.core/defn- deser-internal-server-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-string (input "Message")))))
+
+(clojure.core/defn- deser-translate-text-response [input] (clojure.core/cond-> {:translated-text (deser-string (input "TranslatedText")), :source-language-code (deser-language-code-string (input "SourceLanguageCode")), :target-language-code (deser-language-code-string (input "TargetLanguageCode"))}))
+
+(clojure.core/defn- deser-unsupported-language-pair-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-string (input "Message")))))
+
 (clojure.spec.alpha/def :portkey.aws.translate.detected-language-low-confidence-exception/message (clojure.spec.alpha/and :portkey.aws.translate/string))
 (clojure.spec.alpha/def :portkey.aws.translate.detected-language-low-confidence-exception/detected-language-code (clojure.spec.alpha/and :portkey.aws.translate/language-code-string))
 (clojure.spec.alpha/def :portkey.aws.translate/detected-language-low-confidence-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.translate.detected-language-low-confidence-exception/message :portkey.aws.translate.detected-language-low-confidence-exception/detected-language-code]))
@@ -65,7 +89,7 @@
 (clojure.spec.alpha/def :portkey.aws.translate.invalid-request-exception/message (clojure.spec.alpha/and :portkey.aws.translate/string))
 (clojure.spec.alpha/def :portkey.aws.translate/invalid-request-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.translate.invalid-request-exception/message]))
 
-(clojure.spec.alpha/def :portkey.aws.translate/language-code-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 2 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 5))))
+(clojure.spec.alpha/def :portkey.aws.translate/language-code-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 2 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 5))))
 
 (clojure.spec.alpha/def :portkey.aws.translate.translate-text-request/text (clojure.spec.alpha/and :portkey.aws.translate/bounded-length-string))
 (clojure.spec.alpha/def :portkey.aws.translate.translate-text-request/source-language-code (clojure.spec.alpha/and :portkey.aws.translate/language-code-string))
@@ -84,7 +108,7 @@
 (clojure.spec.alpha/def :portkey.aws.translate.internal-server-exception/message (clojure.spec.alpha/and :portkey.aws.translate/string))
 (clojure.spec.alpha/def :portkey.aws.translate/internal-server-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.translate.internal-server-exception/message]))
 
-(clojure.spec.alpha/def :portkey.aws.translate/string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__)))))
+(clojure.spec.alpha/def :portkey.aws.translate/string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__)))))
 
 (clojure.spec.alpha/def :portkey.aws.translate.translate-text-response/translated-text (clojure.spec.alpha/and :portkey.aws.translate/string))
 (clojure.spec.alpha/def :portkey.aws.translate.translate-text-response/source-language-code (clojure.spec.alpha/and :portkey.aws.translate/language-code-string))
@@ -94,7 +118,7 @@
 (clojure.spec.alpha/def :portkey.aws.translate.unsupported-language-pair-exception/message (clojure.spec.alpha/and :portkey.aws.translate/string))
 (clojure.spec.alpha/def :portkey.aws.translate/unsupported-language-pair-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.translate.unsupported-language-pair-exception/message]))
 
-(clojure.spec.alpha/def :portkey.aws.translate/bounded-length-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 5000))))
+(clojure.spec.alpha/def :portkey.aws.translate/bounded-length-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 5000))))
 
-(clojure.core/defn translate-text ([translate-text-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-translate-text-request translate-text-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.translate/endpoints, :http.request.configuration/target-prefix "AWSShineFrontendService_20170701", :http.request.spec/output-spec :portkey.aws.translate/translate-text-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-01", :http.request.configuration/service-id "Translate", :http.request.spec/input-spec :portkey.aws.translate/translate-text-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "TranslateText", :http.request.spec/error-spec {"InvalidRequestException" :portkey.aws.translate/invalid-request-exception, "TextSizeLimitExceededException" :portkey.aws.translate/text-size-limit-exceeded-exception, "TooManyRequestsException" :portkey.aws.translate/too-many-requests-exception, "UnsupportedLanguagePairException" :portkey.aws.translate/unsupported-language-pair-exception, "DetectedLanguageLowConfidenceException" :portkey.aws.translate/detected-language-low-confidence-exception, "InternalServerException" :portkey.aws.translate/internal-server-exception, "ServiceUnavailableException" :portkey.aws.translate/service-unavailable-exception}})))))
+(clojure.core/defn translate-text ([translate-text-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-translate-text-request translate-text-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.translate/endpoints, :http.request.configuration/target-prefix "AWSShineFrontendService_20170701", :http.request.spec/output-spec :portkey.aws.translate/translate-text-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-01", :http.request.configuration/service-id "Translate", :http.request.spec/input-spec :portkey.aws.translate/translate-text-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "TranslateText", :http.request.configuration/output-deser-fn deser-translate-text-response, :http.request.spec/error-spec {"InvalidRequestException" :portkey.aws.translate/invalid-request-exception, "TextSizeLimitExceededException" :portkey.aws.translate/text-size-limit-exceeded-exception, "TooManyRequestsException" :portkey.aws.translate/too-many-requests-exception, "UnsupportedLanguagePairException" :portkey.aws.translate/unsupported-language-pair-exception, "DetectedLanguageLowConfidenceException" :portkey.aws.translate/detected-language-low-confidence-exception, "InternalServerException" :portkey.aws.translate/internal-server-exception, "ServiceUnavailableException" :portkey.aws.translate/service-unavailable-exception}})))))
 (clojure.spec.alpha/fdef translate-text :args (clojure.spec.alpha/tuple :portkey.aws.translate/translate-text-request) :ret (clojure.spec.alpha/and :portkey.aws.translate/translate-text-response))

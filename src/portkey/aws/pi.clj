@@ -50,6 +50,72 @@
 
 (clojure.core/defn- req-describe-dimension-keys-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-service-type (input :service-type)) #:http.request.field{:name "ServiceType", :shape "ServiceType"}) (clojure.core/into (ser-string (input :identifier)) #:http.request.field{:name "Identifier", :shape "String"}) (clojure.core/into (ser-iso-timestamp (input :start-time)) #:http.request.field{:name "StartTime", :shape "ISOTimestamp"}) (clojure.core/into (ser-iso-timestamp (input :end-time)) #:http.request.field{:name "EndTime", :shape "ISOTimestamp"}) (clojure.core/into (ser-string (input :metric)) #:http.request.field{:name "Metric", :shape "String"}) (clojure.core/into (ser-dimension-group (input :group-by)) #:http.request.field{:name "GroupBy", :shape "DimensionGroup"})]} (clojure.core/contains? input :period-in-seconds) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer (input :period-in-seconds)) #:http.request.field{:name "PeriodInSeconds", :shape "Integer"})) (clojure.core/contains? input :filter) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-metric-query-filter-map (input :filter)) #:http.request.field{:name "Filter", :shape "MetricQueryFilterMap"})) (clojure.core/contains? input :next-token) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :next-token)) #:http.request.field{:name "NextToken", :shape "String"})) (clojure.core/contains? input :max-results) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-max-results (input :max-results)) #:http.request.field{:name "MaxResults", :shape "MaxResults"})) (clojure.core/contains? input :partition-by) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-dimension-group (input :partition-by)) #:http.request.field{:name "PartitionBy", :shape "DimensionGroup"}))))
 
+(clojure.core/declare deser-response-partition-key-list)
+
+(clojure.core/declare deser-dimension-map)
+
+(clojure.core/declare deser-double)
+
+(clojure.core/declare deser-metric-values-list)
+
+(clojure.core/declare deser-dimension-key-description-list)
+
+(clojure.core/declare deser-dimension-key-description)
+
+(clojure.core/declare deser-response-resource-metric-key)
+
+(clojure.core/declare deser-iso-timestamp)
+
+(clojure.core/declare deser-data-point)
+
+(clojure.core/declare deser-string)
+
+(clojure.core/declare deser-data-points-list)
+
+(clojure.core/declare deser-metric-key-data-points)
+
+(clojure.core/declare deser-response-partition-key)
+
+(clojure.core/declare deser-metric-key-data-points-list)
+
+(clojure.core/defn- deser-response-partition-key-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-response-partition-key coll))) input))
+
+(clojure.core/defn- deser-dimension-map [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-string k) (deser-string v)])) input))
+
+(clojure.core/defn- deser-double [input] input)
+
+(clojure.core/defn- deser-metric-values-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-double coll))) input))
+
+(clojure.core/defn- deser-dimension-key-description-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-dimension-key-description coll))) input))
+
+(clojure.core/defn- deser-dimension-key-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "Dimensions") (clojure.core/assoc :dimensions (deser-dimension-map (input "Dimensions"))) (clojure.core/contains? input "Total") (clojure.core/assoc :total (deser-double (input "Total"))) (clojure.core/contains? input "Partitions") (clojure.core/assoc :partitions (deser-metric-values-list (input "Partitions")))))
+
+(clojure.core/defn- deser-response-resource-metric-key [input] (clojure.core/cond-> {:metric (deser-string (input "Metric"))} (clojure.core/contains? input "Dimensions") (clojure.core/assoc :dimensions (deser-dimension-map (input "Dimensions")))))
+
+(clojure.core/defn- deser-iso-timestamp [input] input)
+
+(clojure.core/defn- deser-data-point [input] (clojure.core/cond-> {:timestamp (deser-iso-timestamp (input "Timestamp")), :value (deser-double (input "Value"))}))
+
+(clojure.core/defn- deser-string [input] input)
+
+(clojure.core/defn- deser-data-points-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-data-point coll))) input))
+
+(clojure.core/defn- deser-metric-key-data-points [input] (clojure.core/cond-> {} (clojure.core/contains? input "Key") (clojure.core/assoc :key (deser-response-resource-metric-key (input "Key"))) (clojure.core/contains? input "DataPoints") (clojure.core/assoc :data-points (deser-data-points-list (input "DataPoints")))))
+
+(clojure.core/defn- deser-response-partition-key [input] (clojure.core/cond-> {:dimensions (deser-dimension-map (input "Dimensions"))}))
+
+(clojure.core/defn- deser-metric-key-data-points-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-metric-key-data-points coll))) input))
+
+(clojure.core/defn- deser-internal-service-error [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-string (input "Message")))))
+
+(clojure.core/defn- deser-not-authorized-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-string (input "Message")))))
+
+(clojure.core/defn- deser-describe-dimension-keys-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "AlignedStartTime") (clojure.core/assoc :aligned-start-time (deser-iso-timestamp (input "AlignedStartTime"))) (clojure.core/contains? input "AlignedEndTime") (clojure.core/assoc :aligned-end-time (deser-iso-timestamp (input "AlignedEndTime"))) (clojure.core/contains? input "PartitionKeys") (clojure.core/assoc :partition-keys (deser-response-partition-key-list (input "PartitionKeys"))) (clojure.core/contains? input "Keys") (clojure.core/assoc :keys (deser-dimension-key-description-list (input "Keys"))) (clojure.core/contains? input "NextToken") (clojure.core/assoc :next-token (deser-string (input "NextToken")))))
+
+(clojure.core/defn- deser-get-resource-metrics-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "AlignedStartTime") (clojure.core/assoc :aligned-start-time (deser-iso-timestamp (input "AlignedStartTime"))) (clojure.core/contains? input "AlignedEndTime") (clojure.core/assoc :aligned-end-time (deser-iso-timestamp (input "AlignedEndTime"))) (clojure.core/contains? input "Identifier") (clojure.core/assoc :identifier (deser-string (input "Identifier"))) (clojure.core/contains? input "MetricList") (clojure.core/assoc :metric-list (deser-metric-key-data-points-list (input "MetricList"))) (clojure.core/contains? input "NextToken") (clojure.core/assoc :next-token (deser-string (input "NextToken")))))
+
+(clojure.core/defn- deser-invalid-argument-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-string (input "Message")))))
+
 (clojure.spec.alpha/def :portkey.aws.pi/response-partition-key-list (clojure.spec.alpha/coll-of :portkey.aws.pi/response-partition-key))
 
 (clojure.spec.alpha/def :portkey.aws.pi/dimension-map (clojure.spec.alpha/map-of :portkey.aws.pi/string :portkey.aws.pi/string))
@@ -153,8 +219,8 @@
 (clojure.spec.alpha/def :portkey.aws.pi.describe-dimension-keys-request/partition-by (clojure.spec.alpha/and :portkey.aws.pi/dimension-group))
 (clojure.spec.alpha/def :portkey.aws.pi/describe-dimension-keys-request (clojure.spec.alpha/keys :req-un [:portkey.aws.pi/service-type :portkey.aws.pi.describe-dimension-keys-request/identifier :portkey.aws.pi.describe-dimension-keys-request/start-time :portkey.aws.pi.describe-dimension-keys-request/end-time :portkey.aws.pi.describe-dimension-keys-request/metric :portkey.aws.pi.describe-dimension-keys-request/group-by] :opt-un [:portkey.aws.pi.describe-dimension-keys-request/period-in-seconds :portkey.aws.pi.describe-dimension-keys-request/filter :portkey.aws.pi.describe-dimension-keys-request/next-token :portkey.aws.pi/max-results :portkey.aws.pi.describe-dimension-keys-request/partition-by]))
 
-(clojure.core/defn describe-dimension-keys ([describe-dimension-keys-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-dimension-keys-request describe-dimension-keys-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.pi/endpoints, :http.request.configuration/target-prefix "PerformanceInsightsv20180227", :http.request.spec/output-spec :portkey.aws.pi/describe-dimension-keys-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-02-27", :http.request.configuration/service-id "PI", :http.request.spec/input-spec :portkey.aws.pi/describe-dimension-keys-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeDimensionKeys", :http.request.spec/error-spec {"InvalidArgumentException" :portkey.aws.pi/invalid-argument-exception, "InternalServiceError" :portkey.aws.pi/internal-service-error, "NotAuthorizedException" :portkey.aws.pi/not-authorized-exception}})))))
+(clojure.core/defn describe-dimension-keys ([describe-dimension-keys-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-dimension-keys-request describe-dimension-keys-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.pi/endpoints, :http.request.configuration/target-prefix "PerformanceInsightsv20180227", :http.request.spec/output-spec :portkey.aws.pi/describe-dimension-keys-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-02-27", :http.request.configuration/service-id "PI", :http.request.spec/input-spec :portkey.aws.pi/describe-dimension-keys-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeDimensionKeys", :http.request.configuration/output-deser-fn deser-describe-dimension-keys-response, :http.request.spec/error-spec {"InvalidArgumentException" :portkey.aws.pi/invalid-argument-exception, "InternalServiceError" :portkey.aws.pi/internal-service-error, "NotAuthorizedException" :portkey.aws.pi/not-authorized-exception}})))))
 (clojure.spec.alpha/fdef describe-dimension-keys :args (clojure.spec.alpha/tuple :portkey.aws.pi/describe-dimension-keys-request) :ret (clojure.spec.alpha/and :portkey.aws.pi/describe-dimension-keys-response))
 
-(clojure.core/defn get-resource-metrics ([get-resource-metrics-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-resource-metrics-request get-resource-metrics-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.pi/endpoints, :http.request.configuration/target-prefix "PerformanceInsightsv20180227", :http.request.spec/output-spec :portkey.aws.pi/get-resource-metrics-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-02-27", :http.request.configuration/service-id "PI", :http.request.spec/input-spec :portkey.aws.pi/get-resource-metrics-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetResourceMetrics", :http.request.spec/error-spec {"InvalidArgumentException" :portkey.aws.pi/invalid-argument-exception, "InternalServiceError" :portkey.aws.pi/internal-service-error, "NotAuthorizedException" :portkey.aws.pi/not-authorized-exception}})))))
+(clojure.core/defn get-resource-metrics ([get-resource-metrics-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-get-resource-metrics-request get-resource-metrics-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.pi/endpoints, :http.request.configuration/target-prefix "PerformanceInsightsv20180227", :http.request.spec/output-spec :portkey.aws.pi/get-resource-metrics-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-02-27", :http.request.configuration/service-id "PI", :http.request.spec/input-spec :portkey.aws.pi/get-resource-metrics-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetResourceMetrics", :http.request.configuration/output-deser-fn deser-get-resource-metrics-response, :http.request.spec/error-spec {"InvalidArgumentException" :portkey.aws.pi/invalid-argument-exception, "InternalServiceError" :portkey.aws.pi/internal-service-error, "NotAuthorizedException" :portkey.aws.pi/not-authorized-exception}})))))
 (clojure.spec.alpha/fdef get-resource-metrics :args (clojure.spec.alpha/tuple :portkey.aws.pi/get-resource-metrics-request) :ret (clojure.spec.alpha/and :portkey.aws.pi/get-resource-metrics-response))

@@ -211,6 +211,336 @@
 
 (clojure.core/defn- req-get-tags-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-date-interval (input :time-period)) #:http.request.field{:name "TimePeriod", :shape "DateInterval"})]} (clojure.core/contains? input :search-string) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-search-string (input :search-string)) #:http.request.field{:name "SearchString", :shape "SearchString"})) (clojure.core/contains? input :tag-key) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-tag-key (input :tag-key)) #:http.request.field{:name "TagKey", :shape "TagKey"})) (clojure.core/contains? input :next-page-token) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-next-page-token (input :next-page-token)) #:http.request.field{:name "NextPageToken", :shape "NextPageToken"}))))
 
+(clojure.core/declare deser-group-definitions)
+
+(clojure.core/declare deser-attribute-type)
+
+(clojure.core/declare deser-estimated)
+
+(clojure.core/declare deser-total-amortized-fee)
+
+(clojure.core/declare deser-total-potential-ri-savings)
+
+(clojure.core/declare deser-coverage)
+
+(clojure.core/declare deser-page-size)
+
+(clojure.core/declare deser-term-in-years)
+
+(clojure.core/declare deser-reservation-purchase-recommendation-detail)
+
+(clojure.core/declare deser-unused-hours)
+
+(clojure.core/declare deser-year-month-day)
+
+(clojure.core/declare deser-group-definition-key)
+
+(clojure.core/declare deser-reservation-group-value)
+
+(clojure.core/declare deser-reservation-purchase-recommendation-summary)
+
+(clojure.core/declare deser-instance-details)
+
+(clojure.core/declare deser-reserved-hours)
+
+(clojure.core/declare deser-amortized-upfront-fee)
+
+(clojure.core/declare deser-utilizations-by-time)
+
+(clojure.core/declare deser-ec-2-instance-details)
+
+(clojure.core/declare deser-date-interval)
+
+(clojure.core/declare deser-generic-boolean)
+
+(clojure.core/declare deser-utilization-percentage)
+
+(clojure.core/declare deser-reservation-purchase-recommendations)
+
+(clojure.core/declare deser-dimension-values-with-attributes-list)
+
+(clojure.core/declare deser-redshift-instance-details)
+
+(clojure.core/declare deser-payment-option)
+
+(clojure.core/declare deser-metric-unit)
+
+(clojure.core/declare deser-account-scope)
+
+(clojure.core/declare deser-on-demand-cost-of-ri-hours-used)
+
+(clojure.core/declare deser-lookback-period-in-days)
+
+(clojure.core/declare deser-reservation-utilization-group)
+
+(clojure.core/declare deser-error-message)
+
+(clojure.core/declare deser-reservation-coverage-group)
+
+(clojure.core/declare deser-reservation-aggregates)
+
+(clojure.core/declare deser-key)
+
+(clojure.core/declare deser-attributes)
+
+(clojure.core/declare deser-reservation-group-key)
+
+(clojure.core/declare deser-tag-list)
+
+(clojure.core/declare deser-coverage-by-time)
+
+(clojure.core/declare deser-attribute-value)
+
+(clojure.core/declare deser-es-instance-details)
+
+(clojure.core/declare deser-value)
+
+(clojure.core/declare deser-net-ri-savings)
+
+(clojure.core/declare deser-total-actual-hours)
+
+(clojure.core/declare deser-reservation-utilization-groups)
+
+(clojure.core/declare deser-utilization-by-time)
+
+(clojure.core/declare deser-generic-string)
+
+(clojure.core/declare deser-coverage-hours-percentage)
+
+(clojure.core/declare deser-reservation-purchase-recommendation)
+
+(clojure.core/declare deser-reservation-purchase-recommendation-metadata)
+
+(clojure.core/declare deser-service-specification)
+
+(clojure.core/declare deser-reservation-purchase-recommendation-details)
+
+(clojure.core/declare deser-coverages-by-time)
+
+(clojure.core/declare deser-elasti-cache-instance-details)
+
+(clojure.core/declare deser-dimension-values-with-attributes)
+
+(clojure.core/declare deser-groups)
+
+(clojure.core/declare deser-ec-2-specification)
+
+(clojure.core/declare deser-group-definition-type)
+
+(clojure.core/declare deser-coverage-hours)
+
+(clojure.core/declare deser-metric-value)
+
+(clojure.core/declare deser-total-running-hours)
+
+(clojure.core/declare deser-results-by-time)
+
+(clojure.core/declare deser-amortized-recurring-fee)
+
+(clojure.core/declare deser-entity)
+
+(clojure.core/declare deser-metric-name)
+
+(clojure.core/declare deser-offering-class)
+
+(clojure.core/declare deser-reservation-coverage-groups)
+
+(clojure.core/declare deser-keys)
+
+(clojure.core/declare deser-group)
+
+(clojure.core/declare deser-rds-instance-details)
+
+(clojure.core/declare deser-group-definition)
+
+(clojure.core/declare deser-purchased-hours)
+
+(clojure.core/declare deser-metric-amount)
+
+(clojure.core/declare deser-next-page-token)
+
+(clojure.core/declare deser-result-by-time)
+
+(clojure.core/declare deser-on-demand-hours)
+
+(clojure.core/declare deser-metrics)
+
+(clojure.core/defn- deser-group-definitions [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-group-definition coll))) input))
+
+(clojure.core/defn- deser-attribute-type [input] input)
+
+(clojure.core/defn- deser-estimated [input] input)
+
+(clojure.core/defn- deser-total-amortized-fee [input] input)
+
+(clojure.core/defn- deser-total-potential-ri-savings [input] input)
+
+(clojure.core/defn- deser-coverage [input] (clojure.core/cond-> {} (clojure.core/contains? input "CoverageHours") (clojure.core/assoc :coverage-hours (deser-coverage-hours (input "CoverageHours")))))
+
+(clojure.core/defn- deser-page-size [input] input)
+
+(clojure.core/defn- deser-term-in-years [input] (clojure.core/get {"ONE_YEAR" :one-year, "THREE_YEARS" :three-years} input))
+
+(clojure.core/defn- deser-reservation-purchase-recommendation-detail [input] (clojure.core/cond-> {} (clojure.core/contains? input "CurrencyCode") (clojure.core/assoc :currency-code (deser-generic-string (input "CurrencyCode"))) (clojure.core/contains? input "AverageUtilization") (clojure.core/assoc :average-utilization (deser-generic-string (input "AverageUtilization"))) (clojure.core/contains? input "EstimatedBreakEvenInMonths") (clojure.core/assoc :estimated-break-even-in-months (deser-generic-string (input "EstimatedBreakEvenInMonths"))) (clojure.core/contains? input "MaximumNumberOfInstancesUsedPerHour") (clojure.core/assoc :maximum-number-of-instances-used-per-hour (deser-generic-string (input "MaximumNumberOfInstancesUsedPerHour"))) (clojure.core/contains? input "EstimatedReservationCostForLookbackPeriod") (clojure.core/assoc :estimated-reservation-cost-for-lookback-period (deser-generic-string (input "EstimatedReservationCostForLookbackPeriod"))) (clojure.core/contains? input "InstanceDetails") (clojure.core/assoc :instance-details (deser-instance-details (input "InstanceDetails"))) (clojure.core/contains? input "RecurringStandardMonthlyCost") (clojure.core/assoc :recurring-standard-monthly-cost (deser-generic-string (input "RecurringStandardMonthlyCost"))) (clojure.core/contains? input "MinimumNormalizedUnitsUsedPerHour") (clojure.core/assoc :minimum-normalized-units-used-per-hour (deser-generic-string (input "MinimumNormalizedUnitsUsedPerHour"))) (clojure.core/contains? input "EstimatedMonthlySavingsAmount") (clojure.core/assoc :estimated-monthly-savings-amount (deser-generic-string (input "EstimatedMonthlySavingsAmount"))) (clojure.core/contains? input "UpfrontCost") (clojure.core/assoc :upfront-cost (deser-generic-string (input "UpfrontCost"))) (clojure.core/contains? input "AverageNumberOfInstancesUsedPerHour") (clojure.core/assoc :average-number-of-instances-used-per-hour (deser-generic-string (input "AverageNumberOfInstancesUsedPerHour"))) (clojure.core/contains? input "AverageNormalizedUnitsUsedPerHour") (clojure.core/assoc :average-normalized-units-used-per-hour (deser-generic-string (input "AverageNormalizedUnitsUsedPerHour"))) (clojure.core/contains? input "RecommendedNumberOfInstancesToPurchase") (clojure.core/assoc :recommended-number-of-instances-to-purchase (deser-generic-string (input "RecommendedNumberOfInstancesToPurchase"))) (clojure.core/contains? input "EstimatedMonthlySavingsPercentage") (clojure.core/assoc :estimated-monthly-savings-percentage (deser-generic-string (input "EstimatedMonthlySavingsPercentage"))) (clojure.core/contains? input "RecommendedNormalizedUnitsToPurchase") (clojure.core/assoc :recommended-normalized-units-to-purchase (deser-generic-string (input "RecommendedNormalizedUnitsToPurchase"))) (clojure.core/contains? input "EstimatedMonthlyOnDemandCost") (clojure.core/assoc :estimated-monthly-on-demand-cost (deser-generic-string (input "EstimatedMonthlyOnDemandCost"))) (clojure.core/contains? input "MinimumNumberOfInstancesUsedPerHour") (clojure.core/assoc :minimum-number-of-instances-used-per-hour (deser-generic-string (input "MinimumNumberOfInstancesUsedPerHour"))) (clojure.core/contains? input "MaximumNormalizedUnitsUsedPerHour") (clojure.core/assoc :maximum-normalized-units-used-per-hour (deser-generic-string (input "MaximumNormalizedUnitsUsedPerHour")))))
+
+(clojure.core/defn- deser-unused-hours [input] input)
+
+(clojure.core/defn- deser-year-month-day [input] input)
+
+(clojure.core/defn- deser-group-definition-key [input] input)
+
+(clojure.core/defn- deser-reservation-group-value [input] input)
+
+(clojure.core/defn- deser-reservation-purchase-recommendation-summary [input] (clojure.core/cond-> {} (clojure.core/contains? input "TotalEstimatedMonthlySavingsAmount") (clojure.core/assoc :total-estimated-monthly-savings-amount (deser-generic-string (input "TotalEstimatedMonthlySavingsAmount"))) (clojure.core/contains? input "TotalEstimatedMonthlySavingsPercentage") (clojure.core/assoc :total-estimated-monthly-savings-percentage (deser-generic-string (input "TotalEstimatedMonthlySavingsPercentage"))) (clojure.core/contains? input "CurrencyCode") (clojure.core/assoc :currency-code (deser-generic-string (input "CurrencyCode")))))
+
+(clojure.core/defn- deser-instance-details [input] (clojure.core/cond-> {} (clojure.core/contains? input "EC2InstanceDetails") (clojure.core/assoc :ec-2-instance-details (deser-ec-2-instance-details (input "EC2InstanceDetails"))) (clojure.core/contains? input "RDSInstanceDetails") (clojure.core/assoc :rds-instance-details (deser-rds-instance-details (input "RDSInstanceDetails"))) (clojure.core/contains? input "RedshiftInstanceDetails") (clojure.core/assoc :redshift-instance-details (deser-redshift-instance-details (input "RedshiftInstanceDetails"))) (clojure.core/contains? input "ElastiCacheInstanceDetails") (clojure.core/assoc :elasti-cache-instance-details (deser-elasti-cache-instance-details (input "ElastiCacheInstanceDetails"))) (clojure.core/contains? input "ESInstanceDetails") (clojure.core/assoc :es-instance-details (deser-es-instance-details (input "ESInstanceDetails")))))
+
+(clojure.core/defn- deser-reserved-hours [input] input)
+
+(clojure.core/defn- deser-amortized-upfront-fee [input] input)
+
+(clojure.core/defn- deser-utilizations-by-time [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-utilization-by-time coll))) input))
+
+(clojure.core/defn- deser-ec-2-instance-details [input] (clojure.core/cond-> {} (clojure.core/contains? input "Family") (clojure.core/assoc :family (deser-generic-string (input "Family"))) (clojure.core/contains? input "InstanceType") (clojure.core/assoc :instance-type (deser-generic-string (input "InstanceType"))) (clojure.core/contains? input "Region") (clojure.core/assoc :region (deser-generic-string (input "Region"))) (clojure.core/contains? input "AvailabilityZone") (clojure.core/assoc :availability-zone (deser-generic-string (input "AvailabilityZone"))) (clojure.core/contains? input "Platform") (clojure.core/assoc :platform (deser-generic-string (input "Platform"))) (clojure.core/contains? input "Tenancy") (clojure.core/assoc :tenancy (deser-generic-string (input "Tenancy"))) (clojure.core/contains? input "CurrentGeneration") (clojure.core/assoc :current-generation (deser-generic-boolean (input "CurrentGeneration"))) (clojure.core/contains? input "SizeFlexEligible") (clojure.core/assoc :size-flex-eligible (deser-generic-boolean (input "SizeFlexEligible")))))
+
+(clojure.core/defn- deser-date-interval [input] (clojure.core/cond-> {:start (deser-year-month-day (input "Start")), :end (deser-year-month-day (input "End"))}))
+
+(clojure.core/defn- deser-generic-boolean [input] input)
+
+(clojure.core/defn- deser-utilization-percentage [input] input)
+
+(clojure.core/defn- deser-reservation-purchase-recommendations [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-reservation-purchase-recommendation coll))) input))
+
+(clojure.core/defn- deser-dimension-values-with-attributes-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-dimension-values-with-attributes coll))) input))
+
+(clojure.core/defn- deser-redshift-instance-details [input] (clojure.core/cond-> {} (clojure.core/contains? input "Family") (clojure.core/assoc :family (deser-generic-string (input "Family"))) (clojure.core/contains? input "NodeType") (clojure.core/assoc :node-type (deser-generic-string (input "NodeType"))) (clojure.core/contains? input "Region") (clojure.core/assoc :region (deser-generic-string (input "Region"))) (clojure.core/contains? input "CurrentGeneration") (clojure.core/assoc :current-generation (deser-generic-boolean (input "CurrentGeneration"))) (clojure.core/contains? input "SizeFlexEligible") (clojure.core/assoc :size-flex-eligible (deser-generic-boolean (input "SizeFlexEligible")))))
+
+(clojure.core/defn- deser-payment-option [input] (clojure.core/get {"NO_UPFRONT" :no-upfront, "PARTIAL_UPFRONT" :partial-upfront, "ALL_UPFRONT" :all-upfront, "LIGHT_UTILIZATION" :light-utilization, "MEDIUM_UTILIZATION" :medium-utilization, "HEAVY_UTILIZATION" :heavy-utilization} input))
+
+(clojure.core/defn- deser-metric-unit [input] input)
+
+(clojure.core/defn- deser-account-scope [input] (clojure.core/get {"PAYER" :payer, "LINKED" :linked} input))
+
+(clojure.core/defn- deser-on-demand-cost-of-ri-hours-used [input] input)
+
+(clojure.core/defn- deser-lookback-period-in-days [input] (clojure.core/get {"SEVEN_DAYS" :seven-days, "THIRTY_DAYS" :thirty-days, "SIXTY_DAYS" :sixty-days} input))
+
+(clojure.core/defn- deser-reservation-utilization-group [input] (clojure.core/cond-> {} (clojure.core/contains? input "Key") (clojure.core/assoc :key (deser-reservation-group-key (input "Key"))) (clojure.core/contains? input "Value") (clojure.core/assoc :value (deser-reservation-group-value (input "Value"))) (clojure.core/contains? input "Attributes") (clojure.core/assoc :attributes (deser-attributes (input "Attributes"))) (clojure.core/contains? input "Utilization") (clojure.core/assoc :utilization (deser-reservation-aggregates (input "Utilization")))))
+
+(clojure.core/defn- deser-error-message [input] input)
+
+(clojure.core/defn- deser-reservation-coverage-group [input] (clojure.core/cond-> {} (clojure.core/contains? input "Attributes") (clojure.core/assoc :attributes (deser-attributes (input "Attributes"))) (clojure.core/contains? input "Coverage") (clojure.core/assoc :coverage (deser-coverage (input "Coverage")))))
+
+(clojure.core/defn- deser-reservation-aggregates [input] (clojure.core/cond-> {} (clojure.core/contains? input "TotalAmortizedFee") (clojure.core/assoc :total-amortized-fee (deser-total-amortized-fee (input "TotalAmortizedFee"))) (clojure.core/contains? input "TotalPotentialRISavings") (clojure.core/assoc :total-potential-ri-savings (deser-total-potential-ri-savings (input "TotalPotentialRISavings"))) (clojure.core/contains? input "UnusedHours") (clojure.core/assoc :unused-hours (deser-unused-hours (input "UnusedHours"))) (clojure.core/contains? input "AmortizedUpfrontFee") (clojure.core/assoc :amortized-upfront-fee (deser-amortized-upfront-fee (input "AmortizedUpfrontFee"))) (clojure.core/contains? input "UtilizationPercentage") (clojure.core/assoc :utilization-percentage (deser-utilization-percentage (input "UtilizationPercentage"))) (clojure.core/contains? input "OnDemandCostOfRIHoursUsed") (clojure.core/assoc :on-demand-cost-of-ri-hours-used (deser-on-demand-cost-of-ri-hours-used (input "OnDemandCostOfRIHoursUsed"))) (clojure.core/contains? input "NetRISavings") (clojure.core/assoc :net-ri-savings (deser-net-ri-savings (input "NetRISavings"))) (clojure.core/contains? input "TotalActualHours") (clojure.core/assoc :total-actual-hours (deser-total-actual-hours (input "TotalActualHours"))) (clojure.core/contains? input "AmortizedRecurringFee") (clojure.core/assoc :amortized-recurring-fee (deser-amortized-recurring-fee (input "AmortizedRecurringFee"))) (clojure.core/contains? input "PurchasedHours") (clojure.core/assoc :purchased-hours (deser-purchased-hours (input "PurchasedHours")))))
+
+(clojure.core/defn- deser-key [input] input)
+
+(clojure.core/defn- deser-attributes [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-attribute-type k) (deser-attribute-value v)])) input))
+
+(clojure.core/defn- deser-reservation-group-key [input] input)
+
+(clojure.core/defn- deser-tag-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-entity coll))) input))
+
+(clojure.core/defn- deser-coverage-by-time [input] (clojure.core/cond-> {} (clojure.core/contains? input "TimePeriod") (clojure.core/assoc :time-period (deser-date-interval (input "TimePeriod"))) (clojure.core/contains? input "Groups") (clojure.core/assoc :groups (deser-reservation-coverage-groups (input "Groups"))) (clojure.core/contains? input "Total") (clojure.core/assoc :total (deser-coverage (input "Total")))))
+
+(clojure.core/defn- deser-attribute-value [input] input)
+
+(clojure.core/defn- deser-es-instance-details [input] (clojure.core/cond-> {} (clojure.core/contains? input "InstanceClass") (clojure.core/assoc :instance-class (deser-generic-string (input "InstanceClass"))) (clojure.core/contains? input "InstanceSize") (clojure.core/assoc :instance-size (deser-generic-string (input "InstanceSize"))) (clojure.core/contains? input "Region") (clojure.core/assoc :region (deser-generic-string (input "Region"))) (clojure.core/contains? input "CurrentGeneration") (clojure.core/assoc :current-generation (deser-generic-boolean (input "CurrentGeneration"))) (clojure.core/contains? input "SizeFlexEligible") (clojure.core/assoc :size-flex-eligible (deser-generic-boolean (input "SizeFlexEligible")))))
+
+(clojure.core/defn- deser-value [input] input)
+
+(clojure.core/defn- deser-net-ri-savings [input] input)
+
+(clojure.core/defn- deser-total-actual-hours [input] input)
+
+(clojure.core/defn- deser-reservation-utilization-groups [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-reservation-utilization-group coll))) input))
+
+(clojure.core/defn- deser-utilization-by-time [input] (clojure.core/cond-> {} (clojure.core/contains? input "TimePeriod") (clojure.core/assoc :time-period (deser-date-interval (input "TimePeriod"))) (clojure.core/contains? input "Groups") (clojure.core/assoc :groups (deser-reservation-utilization-groups (input "Groups"))) (clojure.core/contains? input "Total") (clojure.core/assoc :total (deser-reservation-aggregates (input "Total")))))
+
+(clojure.core/defn- deser-generic-string [input] input)
+
+(clojure.core/defn- deser-coverage-hours-percentage [input] input)
+
+(clojure.core/defn- deser-reservation-purchase-recommendation [input] (clojure.core/cond-> {} (clojure.core/contains? input "AccountScope") (clojure.core/assoc :account-scope (deser-account-scope (input "AccountScope"))) (clojure.core/contains? input "LookbackPeriodInDays") (clojure.core/assoc :lookback-period-in-days (deser-lookback-period-in-days (input "LookbackPeriodInDays"))) (clojure.core/contains? input "TermInYears") (clojure.core/assoc :term-in-years (deser-term-in-years (input "TermInYears"))) (clojure.core/contains? input "PaymentOption") (clojure.core/assoc :payment-option (deser-payment-option (input "PaymentOption"))) (clojure.core/contains? input "ServiceSpecification") (clojure.core/assoc :service-specification (deser-service-specification (input "ServiceSpecification"))) (clojure.core/contains? input "RecommendationDetails") (clojure.core/assoc :recommendation-details (deser-reservation-purchase-recommendation-details (input "RecommendationDetails"))) (clojure.core/contains? input "RecommendationSummary") (clojure.core/assoc :recommendation-summary (deser-reservation-purchase-recommendation-summary (input "RecommendationSummary")))))
+
+(clojure.core/defn- deser-reservation-purchase-recommendation-metadata [input] (clojure.core/cond-> {} (clojure.core/contains? input "RecommendationId") (clojure.core/assoc :recommendation-id (deser-generic-string (input "RecommendationId"))) (clojure.core/contains? input "GenerationTimestamp") (clojure.core/assoc :generation-timestamp (deser-generic-string (input "GenerationTimestamp")))))
+
+(clojure.core/defn- deser-service-specification [input] (clojure.core/cond-> {} (clojure.core/contains? input "EC2Specification") (clojure.core/assoc :ec-2-specification (deser-ec-2-specification (input "EC2Specification")))))
+
+(clojure.core/defn- deser-reservation-purchase-recommendation-details [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-reservation-purchase-recommendation-detail coll))) input))
+
+(clojure.core/defn- deser-coverages-by-time [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-coverage-by-time coll))) input))
+
+(clojure.core/defn- deser-elasti-cache-instance-details [input] (clojure.core/cond-> {} (clojure.core/contains? input "Family") (clojure.core/assoc :family (deser-generic-string (input "Family"))) (clojure.core/contains? input "NodeType") (clojure.core/assoc :node-type (deser-generic-string (input "NodeType"))) (clojure.core/contains? input "Region") (clojure.core/assoc :region (deser-generic-string (input "Region"))) (clojure.core/contains? input "ProductDescription") (clojure.core/assoc :product-description (deser-generic-string (input "ProductDescription"))) (clojure.core/contains? input "CurrentGeneration") (clojure.core/assoc :current-generation (deser-generic-boolean (input "CurrentGeneration"))) (clojure.core/contains? input "SizeFlexEligible") (clojure.core/assoc :size-flex-eligible (deser-generic-boolean (input "SizeFlexEligible")))))
+
+(clojure.core/defn- deser-dimension-values-with-attributes [input] (clojure.core/cond-> {} (clojure.core/contains? input "Value") (clojure.core/assoc :value (deser-value (input "Value"))) (clojure.core/contains? input "Attributes") (clojure.core/assoc :attributes (deser-attributes (input "Attributes")))))
+
+(clojure.core/defn- deser-groups [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-group coll))) input))
+
+(clojure.core/defn- deser-ec-2-specification [input] (clojure.core/cond-> {} (clojure.core/contains? input "OfferingClass") (clojure.core/assoc :offering-class (deser-offering-class (input "OfferingClass")))))
+
+(clojure.core/defn- deser-group-definition-type [input] (clojure.core/get {"DIMENSION" :dimension, "TAG" :tag} input))
+
+(clojure.core/defn- deser-coverage-hours [input] (clojure.core/cond-> {} (clojure.core/contains? input "OnDemandHours") (clojure.core/assoc :on-demand-hours (deser-on-demand-hours (input "OnDemandHours"))) (clojure.core/contains? input "ReservedHours") (clojure.core/assoc :reserved-hours (deser-reserved-hours (input "ReservedHours"))) (clojure.core/contains? input "TotalRunningHours") (clojure.core/assoc :total-running-hours (deser-total-running-hours (input "TotalRunningHours"))) (clojure.core/contains? input "CoverageHoursPercentage") (clojure.core/assoc :coverage-hours-percentage (deser-coverage-hours-percentage (input "CoverageHoursPercentage")))))
+
+(clojure.core/defn- deser-metric-value [input] (clojure.core/cond-> {} (clojure.core/contains? input "Amount") (clojure.core/assoc :amount (deser-metric-amount (input "Amount"))) (clojure.core/contains? input "Unit") (clojure.core/assoc :unit (deser-metric-unit (input "Unit")))))
+
+(clojure.core/defn- deser-total-running-hours [input] input)
+
+(clojure.core/defn- deser-results-by-time [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-result-by-time coll))) input))
+
+(clojure.core/defn- deser-amortized-recurring-fee [input] input)
+
+(clojure.core/defn- deser-entity [input] input)
+
+(clojure.core/defn- deser-metric-name [input] input)
+
+(clojure.core/defn- deser-offering-class [input] (clojure.core/get {"STANDARD" :standard, "CONVERTIBLE" :convertible} input))
+
+(clojure.core/defn- deser-reservation-coverage-groups [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-reservation-coverage-group coll))) input))
+
+(clojure.core/defn- deser-keys [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-key coll))) input))
+
+(clojure.core/defn- deser-group [input] (clojure.core/cond-> {} (clojure.core/contains? input "Keys") (clojure.core/assoc :keys (deser-keys (input "Keys"))) (clojure.core/contains? input "Metrics") (clojure.core/assoc :metrics (deser-metrics (input "Metrics")))))
+
+(clojure.core/defn- deser-rds-instance-details [input] (clojure.core/cond-> {} (clojure.core/contains? input "DatabaseEngine") (clojure.core/assoc :database-engine (deser-generic-string (input "DatabaseEngine"))) (clojure.core/contains? input "DatabaseEdition") (clojure.core/assoc :database-edition (deser-generic-string (input "DatabaseEdition"))) (clojure.core/contains? input "InstanceType") (clojure.core/assoc :instance-type (deser-generic-string (input "InstanceType"))) (clojure.core/contains? input "LicenseModel") (clojure.core/assoc :license-model (deser-generic-string (input "LicenseModel"))) (clojure.core/contains? input "Family") (clojure.core/assoc :family (deser-generic-string (input "Family"))) (clojure.core/contains? input "DeploymentOption") (clojure.core/assoc :deployment-option (deser-generic-string (input "DeploymentOption"))) (clojure.core/contains? input "SizeFlexEligible") (clojure.core/assoc :size-flex-eligible (deser-generic-boolean (input "SizeFlexEligible"))) (clojure.core/contains? input "CurrentGeneration") (clojure.core/assoc :current-generation (deser-generic-boolean (input "CurrentGeneration"))) (clojure.core/contains? input "Region") (clojure.core/assoc :region (deser-generic-string (input "Region")))))
+
+(clojure.core/defn- deser-group-definition [input] (clojure.core/cond-> {} (clojure.core/contains? input "Type") (clojure.core/assoc :type (deser-group-definition-type (input "Type"))) (clojure.core/contains? input "Key") (clojure.core/assoc :key (deser-group-definition-key (input "Key")))))
+
+(clojure.core/defn- deser-purchased-hours [input] input)
+
+(clojure.core/defn- deser-metric-amount [input] input)
+
+(clojure.core/defn- deser-next-page-token [input] input)
+
+(clojure.core/defn- deser-result-by-time [input] (clojure.core/cond-> {} (clojure.core/contains? input "TimePeriod") (clojure.core/assoc :time-period (deser-date-interval (input "TimePeriod"))) (clojure.core/contains? input "Total") (clojure.core/assoc :total (deser-metrics (input "Total"))) (clojure.core/contains? input "Groups") (clojure.core/assoc :groups (deser-groups (input "Groups"))) (clojure.core/contains? input "Estimated") (clojure.core/assoc :estimated (deser-estimated (input "Estimated")))))
+
+(clojure.core/defn- deser-on-demand-hours [input] input)
+
+(clojure.core/defn- deser-metrics [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-metric-name k) (deser-metric-value v)])) input))
+
+(clojure.core/defn- deser-get-reservation-utilization-response [input] (clojure.core/cond-> {:utilizations-by-time (deser-utilizations-by-time (input "UtilizationsByTime"))} (clojure.core/contains? input "Total") (clojure.core/assoc :total (deser-reservation-aggregates (input "Total"))) (clojure.core/contains? input "NextPageToken") (clojure.core/assoc :next-page-token (deser-next-page-token (input "NextPageToken")))))
+
+(clojure.core/defn- deser-request-changed-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-error-message (input "Message")))))
+
+(clojure.core/defn- deser-data-unavailable-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-error-message (input "Message")))))
+
+(clojure.core/defn- deser-limit-exceeded-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-error-message (input "Message")))))
+
+(clojure.core/defn- deser-invalid-next-token-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-error-message (input "Message")))))
+
+(clojure.core/defn- deser-bill-expiration-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-error-message (input "Message")))))
+
+(clojure.core/defn- deser-get-tags-response [input] (clojure.core/cond-> {:tags (deser-tag-list (input "Tags")), :return-size (deser-page-size (input "ReturnSize")), :total-size (deser-page-size (input "TotalSize"))} (clojure.core/contains? input "NextPageToken") (clojure.core/assoc :next-page-token (deser-next-page-token (input "NextPageToken")))))
+
+(clojure.core/defn- deser-get-reservation-coverage-response [input] (clojure.core/cond-> {:coverages-by-time (deser-coverages-by-time (input "CoveragesByTime"))} (clojure.core/contains? input "Total") (clojure.core/assoc :total (deser-coverage (input "Total"))) (clojure.core/contains? input "NextPageToken") (clojure.core/assoc :next-page-token (deser-next-page-token (input "NextPageToken")))))
+
+(clojure.core/defn- deser-get-reservation-purchase-recommendation-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "Metadata") (clojure.core/assoc :metadata (deser-reservation-purchase-recommendation-metadata (input "Metadata"))) (clojure.core/contains? input "Recommendations") (clojure.core/assoc :recommendations (deser-reservation-purchase-recommendations (input "Recommendations"))) (clojure.core/contains? input "NextPageToken") (clojure.core/assoc :next-page-token (deser-next-page-token (input "NextPageToken")))))
+
+(clojure.core/defn- deser-get-dimension-values-response [input] (clojure.core/cond-> {:dimension-values (deser-dimension-values-with-attributes-list (input "DimensionValues")), :return-size (deser-page-size (input "ReturnSize")), :total-size (deser-page-size (input "TotalSize"))} (clojure.core/contains? input "NextPageToken") (clojure.core/assoc :next-page-token (deser-next-page-token (input "NextPageToken")))))
+
+(clojure.core/defn- deser-get-cost-and-usage-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "NextPageToken") (clojure.core/assoc :next-page-token (deser-next-page-token (input "NextPageToken"))) (clojure.core/contains? input "GroupDefinitions") (clojure.core/assoc :group-definitions (deser-group-definitions (input "GroupDefinitions"))) (clojure.core/contains? input "ResultsByTime") (clojure.core/assoc :results-by-time (deser-results-by-time (input "ResultsByTime")))))
+
 (clojure.spec.alpha/def :portkey.aws.ce.tag-values/key (clojure.spec.alpha/and :portkey.aws.ce/tag-key))
 (clojure.spec.alpha/def :portkey.aws.ce/tag-values (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.ce.tag-values/key :portkey.aws.ce/values]))
 
@@ -268,7 +598,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.ce/unused-hours (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.ce/year-month-day (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"\d{4}-\d{2}-\d{2}" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.ce/year-month-day (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"\d{4}-\d{2}-\d{2}" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.ce/group-definition-key (clojure.spec.alpha/and clojure.core/string?))
 
@@ -534,20 +864,20 @@
 
 (clojure.spec.alpha/def :portkey.aws.ce/metrics (clojure.spec.alpha/map-of :portkey.aws.ce/metric-name :portkey.aws.ce/metric-value))
 
-(clojure.core/defn get-cost-and-usage ([] (get-cost-and-usage {})) ([get-cost-and-usage-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-cost-and-usage-request get-cost-and-usage-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.ce/endpoints, :http.request.configuration/target-prefix "AWSInsightsIndexService", :http.request.spec/output-spec :portkey.aws.ce/get-cost-and-usage-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-10-25", :http.request.configuration/service-id "Cost Explorer", :http.request.spec/input-spec :portkey.aws.ce/get-cost-and-usage-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetCostAndUsage", :http.request.spec/error-spec {"LimitExceededException" :portkey.aws.ce/limit-exceeded-exception, "BillExpirationException" :portkey.aws.ce/bill-expiration-exception, "DataUnavailableException" :portkey.aws.ce/data-unavailable-exception, "InvalidNextTokenException" :portkey.aws.ce/invalid-next-token-exception, "RequestChangedException" :portkey.aws.ce/request-changed-exception}})))))
+(clojure.core/defn get-cost-and-usage ([] (get-cost-and-usage {})) ([get-cost-and-usage-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-get-cost-and-usage-request get-cost-and-usage-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.ce/endpoints, :http.request.configuration/target-prefix "AWSInsightsIndexService", :http.request.spec/output-spec :portkey.aws.ce/get-cost-and-usage-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-10-25", :http.request.configuration/service-id "Cost Explorer", :http.request.spec/input-spec :portkey.aws.ce/get-cost-and-usage-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetCostAndUsage", :http.request.configuration/output-deser-fn deser-get-cost-and-usage-response, :http.request.spec/error-spec {"LimitExceededException" :portkey.aws.ce/limit-exceeded-exception, "BillExpirationException" :portkey.aws.ce/bill-expiration-exception, "DataUnavailableException" :portkey.aws.ce/data-unavailable-exception, "InvalidNextTokenException" :portkey.aws.ce/invalid-next-token-exception, "RequestChangedException" :portkey.aws.ce/request-changed-exception}})))))
 (clojure.spec.alpha/fdef get-cost-and-usage :args (clojure.spec.alpha/? :portkey.aws.ce/get-cost-and-usage-request) :ret (clojure.spec.alpha/and :portkey.aws.ce/get-cost-and-usage-response))
 
-(clojure.core/defn get-dimension-values ([get-dimension-values-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-dimension-values-request get-dimension-values-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.ce/endpoints, :http.request.configuration/target-prefix "AWSInsightsIndexService", :http.request.spec/output-spec :portkey.aws.ce/get-dimension-values-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-10-25", :http.request.configuration/service-id "Cost Explorer", :http.request.spec/input-spec :portkey.aws.ce/get-dimension-values-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetDimensionValues", :http.request.spec/error-spec {"LimitExceededException" :portkey.aws.ce/limit-exceeded-exception, "BillExpirationException" :portkey.aws.ce/bill-expiration-exception, "DataUnavailableException" :portkey.aws.ce/data-unavailable-exception, "InvalidNextTokenException" :portkey.aws.ce/invalid-next-token-exception, "RequestChangedException" :portkey.aws.ce/request-changed-exception}})))))
+(clojure.core/defn get-dimension-values ([get-dimension-values-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-get-dimension-values-request get-dimension-values-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.ce/endpoints, :http.request.configuration/target-prefix "AWSInsightsIndexService", :http.request.spec/output-spec :portkey.aws.ce/get-dimension-values-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-10-25", :http.request.configuration/service-id "Cost Explorer", :http.request.spec/input-spec :portkey.aws.ce/get-dimension-values-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetDimensionValues", :http.request.configuration/output-deser-fn deser-get-dimension-values-response, :http.request.spec/error-spec {"LimitExceededException" :portkey.aws.ce/limit-exceeded-exception, "BillExpirationException" :portkey.aws.ce/bill-expiration-exception, "DataUnavailableException" :portkey.aws.ce/data-unavailable-exception, "InvalidNextTokenException" :portkey.aws.ce/invalid-next-token-exception, "RequestChangedException" :portkey.aws.ce/request-changed-exception}})))))
 (clojure.spec.alpha/fdef get-dimension-values :args (clojure.spec.alpha/tuple :portkey.aws.ce/get-dimension-values-request) :ret (clojure.spec.alpha/and :portkey.aws.ce/get-dimension-values-response))
 
-(clojure.core/defn get-reservation-coverage ([get-reservation-coverage-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-reservation-coverage-request get-reservation-coverage-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.ce/endpoints, :http.request.configuration/target-prefix "AWSInsightsIndexService", :http.request.spec/output-spec :portkey.aws.ce/get-reservation-coverage-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-10-25", :http.request.configuration/service-id "Cost Explorer", :http.request.spec/input-spec :portkey.aws.ce/get-reservation-coverage-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetReservationCoverage", :http.request.spec/error-spec {"LimitExceededException" :portkey.aws.ce/limit-exceeded-exception, "DataUnavailableException" :portkey.aws.ce/data-unavailable-exception, "InvalidNextTokenException" :portkey.aws.ce/invalid-next-token-exception}})))))
+(clojure.core/defn get-reservation-coverage ([get-reservation-coverage-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-get-reservation-coverage-request get-reservation-coverage-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.ce/endpoints, :http.request.configuration/target-prefix "AWSInsightsIndexService", :http.request.spec/output-spec :portkey.aws.ce/get-reservation-coverage-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-10-25", :http.request.configuration/service-id "Cost Explorer", :http.request.spec/input-spec :portkey.aws.ce/get-reservation-coverage-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetReservationCoverage", :http.request.configuration/output-deser-fn deser-get-reservation-coverage-response, :http.request.spec/error-spec {"LimitExceededException" :portkey.aws.ce/limit-exceeded-exception, "DataUnavailableException" :portkey.aws.ce/data-unavailable-exception, "InvalidNextTokenException" :portkey.aws.ce/invalid-next-token-exception}})))))
 (clojure.spec.alpha/fdef get-reservation-coverage :args (clojure.spec.alpha/tuple :portkey.aws.ce/get-reservation-coverage-request) :ret (clojure.spec.alpha/and :portkey.aws.ce/get-reservation-coverage-response))
 
-(clojure.core/defn get-reservation-purchase-recommendation ([get-reservation-purchase-recommendation-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-reservation-purchase-recommendation-request get-reservation-purchase-recommendation-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.ce/endpoints, :http.request.configuration/target-prefix "AWSInsightsIndexService", :http.request.spec/output-spec :portkey.aws.ce/get-reservation-purchase-recommendation-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-10-25", :http.request.configuration/service-id "Cost Explorer", :http.request.spec/input-spec :portkey.aws.ce/get-reservation-purchase-recommendation-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetReservationPurchaseRecommendation", :http.request.spec/error-spec {"LimitExceededException" :portkey.aws.ce/limit-exceeded-exception, "DataUnavailableException" :portkey.aws.ce/data-unavailable-exception, "InvalidNextTokenException" :portkey.aws.ce/invalid-next-token-exception}})))))
+(clojure.core/defn get-reservation-purchase-recommendation ([get-reservation-purchase-recommendation-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-get-reservation-purchase-recommendation-request get-reservation-purchase-recommendation-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.ce/endpoints, :http.request.configuration/target-prefix "AWSInsightsIndexService", :http.request.spec/output-spec :portkey.aws.ce/get-reservation-purchase-recommendation-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-10-25", :http.request.configuration/service-id "Cost Explorer", :http.request.spec/input-spec :portkey.aws.ce/get-reservation-purchase-recommendation-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetReservationPurchaseRecommendation", :http.request.configuration/output-deser-fn deser-get-reservation-purchase-recommendation-response, :http.request.spec/error-spec {"LimitExceededException" :portkey.aws.ce/limit-exceeded-exception, "DataUnavailableException" :portkey.aws.ce/data-unavailable-exception, "InvalidNextTokenException" :portkey.aws.ce/invalid-next-token-exception}})))))
 (clojure.spec.alpha/fdef get-reservation-purchase-recommendation :args (clojure.spec.alpha/tuple :portkey.aws.ce/get-reservation-purchase-recommendation-request) :ret (clojure.spec.alpha/and :portkey.aws.ce/get-reservation-purchase-recommendation-response))
 
-(clojure.core/defn get-reservation-utilization ([get-reservation-utilization-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-reservation-utilization-request get-reservation-utilization-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.ce/endpoints, :http.request.configuration/target-prefix "AWSInsightsIndexService", :http.request.spec/output-spec :portkey.aws.ce/get-reservation-utilization-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-10-25", :http.request.configuration/service-id "Cost Explorer", :http.request.spec/input-spec :portkey.aws.ce/get-reservation-utilization-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetReservationUtilization", :http.request.spec/error-spec {"LimitExceededException" :portkey.aws.ce/limit-exceeded-exception, "DataUnavailableException" :portkey.aws.ce/data-unavailable-exception, "InvalidNextTokenException" :portkey.aws.ce/invalid-next-token-exception}})))))
+(clojure.core/defn get-reservation-utilization ([get-reservation-utilization-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-get-reservation-utilization-request get-reservation-utilization-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.ce/endpoints, :http.request.configuration/target-prefix "AWSInsightsIndexService", :http.request.spec/output-spec :portkey.aws.ce/get-reservation-utilization-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-10-25", :http.request.configuration/service-id "Cost Explorer", :http.request.spec/input-spec :portkey.aws.ce/get-reservation-utilization-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetReservationUtilization", :http.request.configuration/output-deser-fn deser-get-reservation-utilization-response, :http.request.spec/error-spec {"LimitExceededException" :portkey.aws.ce/limit-exceeded-exception, "DataUnavailableException" :portkey.aws.ce/data-unavailable-exception, "InvalidNextTokenException" :portkey.aws.ce/invalid-next-token-exception}})))))
 (clojure.spec.alpha/fdef get-reservation-utilization :args (clojure.spec.alpha/tuple :portkey.aws.ce/get-reservation-utilization-request) :ret (clojure.spec.alpha/and :portkey.aws.ce/get-reservation-utilization-response))
 
-(clojure.core/defn get-tags ([get-tags-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-tags-request get-tags-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.ce/endpoints, :http.request.configuration/target-prefix "AWSInsightsIndexService", :http.request.spec/output-spec :portkey.aws.ce/get-tags-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-10-25", :http.request.configuration/service-id "Cost Explorer", :http.request.spec/input-spec :portkey.aws.ce/get-tags-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetTags", :http.request.spec/error-spec {"LimitExceededException" :portkey.aws.ce/limit-exceeded-exception, "BillExpirationException" :portkey.aws.ce/bill-expiration-exception, "DataUnavailableException" :portkey.aws.ce/data-unavailable-exception, "InvalidNextTokenException" :portkey.aws.ce/invalid-next-token-exception, "RequestChangedException" :portkey.aws.ce/request-changed-exception}})))))
+(clojure.core/defn get-tags ([get-tags-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-get-tags-request get-tags-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.ce/endpoints, :http.request.configuration/target-prefix "AWSInsightsIndexService", :http.request.spec/output-spec :portkey.aws.ce/get-tags-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-10-25", :http.request.configuration/service-id "Cost Explorer", :http.request.spec/input-spec :portkey.aws.ce/get-tags-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetTags", :http.request.configuration/output-deser-fn deser-get-tags-response, :http.request.spec/error-spec {"LimitExceededException" :portkey.aws.ce/limit-exceeded-exception, "BillExpirationException" :portkey.aws.ce/bill-expiration-exception, "DataUnavailableException" :portkey.aws.ce/data-unavailable-exception, "InvalidNextTokenException" :portkey.aws.ce/invalid-next-token-exception, "RequestChangedException" :portkey.aws.ce/request-changed-exception}})))))
 (clojure.spec.alpha/fdef get-tags :args (clojure.spec.alpha/tuple :portkey.aws.ce/get-tags-request) :ret (clojure.spec.alpha/and :portkey.aws.ce/get-tags-response))

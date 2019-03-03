@@ -496,6 +496,642 @@
 
 (clojure.core/defn- req-get-third-party-job-details-input [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-third-party-job-id (input :job-id)) #:http.request.field{:name "jobId", :shape "ThirdPartyJobId"}) (clojure.core/into (ser-client-token (input :client-token)) #:http.request.field{:name "clientToken", :shape "ClientToken"})]}))
 
+(clojure.core/declare deser-action-state-list)
+
+(clojure.core/declare deser-webhook-auth-configuration)
+
+(clojure.core/declare deser-action-category)
+
+(clojure.core/declare deser-last-changed-by)
+
+(clojure.core/declare deser-artifact-store-type)
+
+(clojure.core/declare deser-transition-state)
+
+(clojure.core/declare deser-action-execution)
+
+(clojure.core/declare deser-job-details)
+
+(clojure.core/declare deser-third-party-job-data)
+
+(clojure.core/declare deser-list-webhook-item)
+
+(clojure.core/declare deser-action-type-id)
+
+(clojure.core/declare deser-input-artifact)
+
+(clojure.core/declare deser-action-configuration-key)
+
+(clojure.core/declare deser-encryption-key-type)
+
+(clojure.core/declare deser-action-execution-status)
+
+(clojure.core/declare deser-stage-state)
+
+(clojure.core/declare deser-job-list)
+
+(clojure.core/declare deser-pipeline-execution-id)
+
+(clojure.core/declare deser-job-status)
+
+(clojure.core/declare deser-artifact-store)
+
+(clojure.core/declare deser-revision-summary)
+
+(clojure.core/declare deser-artifact-list)
+
+(clojure.core/declare deser-webhook-auth-configuration-allowed-ip-range)
+
+(clojure.core/declare deser-encryption-key-id)
+
+(clojure.core/declare deser-webhook-authentication-type)
+
+(clojure.core/declare deser-webhook-error-code)
+
+(clojure.core/declare deser-webhook-auth-configuration-secret-token)
+
+(clojure.core/declare deser-artifact-location-type)
+
+(clojure.core/declare deser-disabled-reason)
+
+(clojure.core/declare deser-action-owner)
+
+(clojure.core/declare deser-pipeline-name)
+
+(clojure.core/declare deser-json-path)
+
+(clojure.core/declare deser-action-provider)
+
+(clojure.core/declare deser-action-configuration-property-type)
+
+(clojure.core/declare deser-action-revision)
+
+(clojure.core/declare deser-action-type-list)
+
+(clojure.core/declare deser-output-artifact)
+
+(clojure.core/declare deser-last-changed-at)
+
+(clojure.core/declare deser-role-arn)
+
+(clojure.core/declare deser-source-revision-list)
+
+(clojure.core/declare deser-stage-state-list)
+
+(clojure.core/declare deser-blocker-name)
+
+(clojure.core/declare deser-pipeline-list)
+
+(clojure.core/declare deser-third-party-job-id)
+
+(clojure.core/declare deser-s-3-bucket-name)
+
+(clojure.core/declare deser-webhook-url)
+
+(clojure.core/declare deser-action-execution-token)
+
+(clojure.core/declare deser-action-configuration)
+
+(clojure.core/declare deser-maximum-artifact-count)
+
+(clojure.core/declare deser-artifact-revision-list)
+
+(clojure.core/declare deser-stage-blocker-declaration-list)
+
+(clojure.core/declare deser-source-revision)
+
+(clojure.core/declare deser-artifact-revision)
+
+(clojure.core/declare deser-enabled)
+
+(clojure.core/declare deser-stage-execution)
+
+(clojure.core/declare deser-next-token)
+
+(clojure.core/declare deser-artifact)
+
+(clojure.core/declare deser-action-context)
+
+(clojure.core/declare deser-third-party-job-details)
+
+(clojure.core/declare deser-blocker-type)
+
+(clojure.core/declare deser-aws-session-credentials)
+
+(clojure.core/declare deser-webhook-filters)
+
+(clojure.core/declare deser-pipeline-context)
+
+(clojure.core/declare deser-session-token)
+
+(clojure.core/declare deser-match-equals)
+
+(clojure.core/declare deser-webhook-error-message)
+
+(clojure.core/declare deser-pipeline-declaration)
+
+(clojure.core/declare deser-third-party-job-list)
+
+(clojure.core/declare deser-action-run-order)
+
+(clojure.core/declare deser-revision)
+
+(clojure.core/declare deser-pipeline-summary)
+
+(clojure.core/declare deser-output-artifact-list)
+
+(clojure.core/declare deser-execution-summary)
+
+(clojure.core/declare deser-execution-id)
+
+(clojure.core/declare deser-url)
+
+(clojure.core/declare deser-description)
+
+(clojure.core/declare deser-pipeline-execution-summary-list)
+
+(clojure.core/declare deser-message)
+
+(clojure.core/declare deser-third-party-job)
+
+(clojure.core/declare deser-webhook-filter-rule)
+
+(clojure.core/declare deser-webhook-list)
+
+(clojure.core/declare deser-pipeline-execution-summary)
+
+(clojure.core/declare deser-action-state)
+
+(clojure.core/declare deser-action-configuration-value)
+
+(clojure.core/declare deser-revision-change-identifier)
+
+(clojure.core/declare deser-action-name)
+
+(clojure.core/declare deser-action-type-settings)
+
+(clojure.core/declare deser-blocker-declaration)
+
+(clojure.core/declare deser-account-id)
+
+(clojure.core/declare deser-percentage)
+
+(clojure.core/declare deser-pipeline-version)
+
+(clojure.core/declare deser-s-3-object-key)
+
+(clojure.core/declare deser-webhook-name)
+
+(clojure.core/declare deser-url-template)
+
+(clojure.core/declare deser-artifact-location)
+
+(clojure.core/declare deser-continuation-token)
+
+(clojure.core/declare deser-input-artifact-list)
+
+(clojure.core/declare deser-pipeline-execution-status)
+
+(clojure.core/declare deser-stage-declaration)
+
+(clojure.core/declare deser-client-id)
+
+(clojure.core/declare deser-error-details)
+
+(clojure.core/declare deser-job-data)
+
+(clojure.core/declare deser-webhook-arn)
+
+(clojure.core/declare deser-timestamp)
+
+(clojure.core/declare deser-stage-execution-status)
+
+(clojure.core/declare deser-artifact-name)
+
+(clojure.core/declare deser-artifact-details)
+
+(clojure.core/declare deser-version)
+
+(clojure.core/declare deser-s-3-artifact-location)
+
+(clojure.core/declare deser-nonce)
+
+(clojure.core/declare deser-stage-name)
+
+(clojure.core/declare deser-job)
+
+(clojure.core/declare deser-webhook-last-triggered)
+
+(clojure.core/declare deser-action-configuration-map)
+
+(clojure.core/declare deser-code)
+
+(clojure.core/declare deser-pipeline-stage-declaration-list)
+
+(clojure.core/declare deser-action-type)
+
+(clojure.core/declare deser-webhook-definition)
+
+(clojure.core/declare deser-stage-context)
+
+(clojure.core/declare deser-artifact-store-location)
+
+(clojure.core/declare deser-pipeline-arn)
+
+(clojure.core/declare deser-minimum-artifact-count)
+
+(clojure.core/declare deser-pipeline-execution)
+
+(clojure.core/declare deser-action-configuration-property-list)
+
+(clojure.core/declare deser-action-declaration)
+
+(clojure.core/declare deser-secret-access-key)
+
+(clojure.core/declare deser-action-configuration-property)
+
+(clojure.core/declare deser-stage-action-declaration-list)
+
+(clojure.core/declare deser-last-updated-by)
+
+(clojure.core/declare deser-access-key-id)
+
+(clojure.core/declare deser-encryption-key)
+
+(clojure.core/declare deser-pipeline-metadata)
+
+(clojure.core/declare deser-boolean)
+
+(clojure.core/declare deser-job-id)
+
+(clojure.core/defn- deser-action-state-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-action-state coll))) input))
+
+(clojure.core/defn- deser-webhook-auth-configuration [input] (clojure.core/cond-> {} (clojure.core/contains? input "AllowedIPRange") (clojure.core/assoc :allowed-ip-range (deser-webhook-auth-configuration-allowed-ip-range (input "AllowedIPRange"))) (clojure.core/contains? input "SecretToken") (clojure.core/assoc :secret-token (deser-webhook-auth-configuration-secret-token (input "SecretToken")))))
+
+(clojure.core/defn- deser-action-category [input] (clojure.core/get {"Source" :source, "Build" :build, "Deploy" :deploy, "Test" :test, "Invoke" :invoke, "Approval" :approval} input))
+
+(clojure.core/defn- deser-last-changed-by [input] input)
+
+(clojure.core/defn- deser-artifact-store-type [input] (clojure.core/get {"S3" :s-3} input))
+
+(clojure.core/defn- deser-transition-state [input] (clojure.core/cond-> {} (clojure.core/contains? input "enabled") (clojure.core/assoc :enabled (deser-enabled (input "enabled"))) (clojure.core/contains? input "lastChangedBy") (clojure.core/assoc :last-changed-by (deser-last-changed-by (input "lastChangedBy"))) (clojure.core/contains? input "lastChangedAt") (clojure.core/assoc :last-changed-at (deser-last-changed-at (input "lastChangedAt"))) (clojure.core/contains? input "disabledReason") (clojure.core/assoc :disabled-reason (deser-disabled-reason (input "disabledReason")))))
+
+(clojure.core/defn- deser-action-execution [input] (clojure.core/cond-> {} (clojure.core/contains? input "lastStatusChange") (clojure.core/assoc :last-status-change (deser-timestamp (input "lastStatusChange"))) (clojure.core/contains? input "token") (clojure.core/assoc :token (deser-action-execution-token (input "token"))) (clojure.core/contains? input "externalExecutionId") (clojure.core/assoc :external-execution-id (deser-execution-id (input "externalExecutionId"))) (clojure.core/contains? input "summary") (clojure.core/assoc :summary (deser-execution-summary (input "summary"))) (clojure.core/contains? input "status") (clojure.core/assoc :status (deser-action-execution-status (input "status"))) (clojure.core/contains? input "errorDetails") (clojure.core/assoc :error-details (deser-error-details (input "errorDetails"))) (clojure.core/contains? input "percentComplete") (clojure.core/assoc :percent-complete (deser-percentage (input "percentComplete"))) (clojure.core/contains? input "externalExecutionUrl") (clojure.core/assoc :external-execution-url (deser-url (input "externalExecutionUrl"))) (clojure.core/contains? input "lastUpdatedBy") (clojure.core/assoc :last-updated-by (deser-last-updated-by (input "lastUpdatedBy")))))
+
+(clojure.core/defn- deser-job-details [input] (clojure.core/cond-> {} (clojure.core/contains? input "id") (clojure.core/assoc :id (deser-job-id (input "id"))) (clojure.core/contains? input "data") (clojure.core/assoc :data (deser-job-data (input "data"))) (clojure.core/contains? input "accountId") (clojure.core/assoc :account-id (deser-account-id (input "accountId")))))
+
+(clojure.core/defn- deser-third-party-job-data [input] (clojure.core/cond-> {} (clojure.core/contains? input "actionTypeId") (clojure.core/assoc :action-type-id (deser-action-type-id (input "actionTypeId"))) (clojure.core/contains? input "actionConfiguration") (clojure.core/assoc :action-configuration (deser-action-configuration (input "actionConfiguration"))) (clojure.core/contains? input "pipelineContext") (clojure.core/assoc :pipeline-context (deser-pipeline-context (input "pipelineContext"))) (clojure.core/contains? input "inputArtifacts") (clojure.core/assoc :input-artifacts (deser-artifact-list (input "inputArtifacts"))) (clojure.core/contains? input "outputArtifacts") (clojure.core/assoc :output-artifacts (deser-artifact-list (input "outputArtifacts"))) (clojure.core/contains? input "artifactCredentials") (clojure.core/assoc :artifact-credentials (deser-aws-session-credentials (input "artifactCredentials"))) (clojure.core/contains? input "continuationToken") (clojure.core/assoc :continuation-token (deser-continuation-token (input "continuationToken"))) (clojure.core/contains? input "encryptionKey") (clojure.core/assoc :encryption-key (deser-encryption-key (input "encryptionKey")))))
+
+(clojure.core/defn- deser-list-webhook-item [input] (clojure.core/cond-> {:definition (deser-webhook-definition (input "definition")), :url (deser-webhook-url (input "url"))} (clojure.core/contains? input "errorMessage") (clojure.core/assoc :error-message (deser-webhook-error-message (input "errorMessage"))) (clojure.core/contains? input "errorCode") (clojure.core/assoc :error-code (deser-webhook-error-code (input "errorCode"))) (clojure.core/contains? input "lastTriggered") (clojure.core/assoc :last-triggered (deser-webhook-last-triggered (input "lastTriggered"))) (clojure.core/contains? input "arn") (clojure.core/assoc :arn (deser-webhook-arn (input "arn")))))
+
+(clojure.core/defn- deser-action-type-id [input] (clojure.core/cond-> {:category (deser-action-category (input "category")), :owner (deser-action-owner (input "owner")), :provider (deser-action-provider (input "provider")), :version (deser-version (input "version"))}))
+
+(clojure.core/defn- deser-input-artifact [input] (clojure.core/cond-> {:name (deser-artifact-name (input "name"))}))
+
+(clojure.core/defn- deser-action-configuration-key [input] input)
+
+(clojure.core/defn- deser-encryption-key-type [input] (clojure.core/get {"KMS" :kms} input))
+
+(clojure.core/defn- deser-action-execution-status [input] (clojure.core/get {"InProgress" :in-progress, "Succeeded" :succeeded, "Failed" :failed} input))
+
+(clojure.core/defn- deser-stage-state [input] (clojure.core/cond-> {} (clojure.core/contains? input "stageName") (clojure.core/assoc :stage-name (deser-stage-name (input "stageName"))) (clojure.core/contains? input "inboundTransitionState") (clojure.core/assoc :inbound-transition-state (deser-transition-state (input "inboundTransitionState"))) (clojure.core/contains? input "actionStates") (clojure.core/assoc :action-states (deser-action-state-list (input "actionStates"))) (clojure.core/contains? input "latestExecution") (clojure.core/assoc :latest-execution (deser-stage-execution (input "latestExecution")))))
+
+(clojure.core/defn- deser-job-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-job coll))) input))
+
+(clojure.core/defn- deser-pipeline-execution-id [input] input)
+
+(clojure.core/defn- deser-job-status [input] (clojure.core/get {"Created" :created, "Queued" :queued, "Dispatched" :dispatched, "InProgress" :in-progress, "TimedOut" :timed-out, "Succeeded" :succeeded, "Failed" :failed} input))
+
+(clojure.core/defn- deser-artifact-store [input] (clojure.core/cond-> {:type (deser-artifact-store-type (input "type")), :location (deser-artifact-store-location (input "location"))} (clojure.core/contains? input "encryptionKey") (clojure.core/assoc :encryption-key (deser-encryption-key (input "encryptionKey")))))
+
+(clojure.core/defn- deser-revision-summary [input] input)
+
+(clojure.core/defn- deser-artifact-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-artifact coll))) input))
+
+(clojure.core/defn- deser-webhook-auth-configuration-allowed-ip-range [input] input)
+
+(clojure.core/defn- deser-encryption-key-id [input] input)
+
+(clojure.core/defn- deser-webhook-authentication-type [input] (clojure.core/get {"GITHUB_HMAC" :github-hmac, "IP" :ip, "UNAUTHENTICATED" :unauthenticated} input))
+
+(clojure.core/defn- deser-webhook-error-code [input] input)
+
+(clojure.core/defn- deser-webhook-auth-configuration-secret-token [input] input)
+
+(clojure.core/defn- deser-artifact-location-type [input] (clojure.core/get {"S3" :s-3} input))
+
+(clojure.core/defn- deser-disabled-reason [input] input)
+
+(clojure.core/defn- deser-action-owner [input] (clojure.core/get {"AWS" :aws, "ThirdParty" :third-party, "Custom" :custom} input))
+
+(clojure.core/defn- deser-pipeline-name [input] input)
+
+(clojure.core/defn- deser-json-path [input] input)
+
+(clojure.core/defn- deser-action-provider [input] input)
+
+(clojure.core/defn- deser-action-configuration-property-type [input] (clojure.core/get {"String" :string, "Number" :number, "Boolean" :boolean} input))
+
+(clojure.core/defn- deser-action-revision [input] (clojure.core/cond-> {:revision-id (deser-revision (input "revisionId")), :revision-change-id (deser-revision-change-identifier (input "revisionChangeId")), :created (deser-timestamp (input "created"))}))
+
+(clojure.core/defn- deser-action-type-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-action-type coll))) input))
+
+(clojure.core/defn- deser-output-artifact [input] (clojure.core/cond-> {:name (deser-artifact-name (input "name"))}))
+
+(clojure.core/defn- deser-last-changed-at [input] input)
+
+(clojure.core/defn- deser-role-arn [input] input)
+
+(clojure.core/defn- deser-source-revision-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-source-revision coll))) input))
+
+(clojure.core/defn- deser-stage-state-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-stage-state coll))) input))
+
+(clojure.core/defn- deser-blocker-name [input] input)
+
+(clojure.core/defn- deser-pipeline-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-pipeline-summary coll))) input))
+
+(clojure.core/defn- deser-third-party-job-id [input] input)
+
+(clojure.core/defn- deser-s-3-bucket-name [input] input)
+
+(clojure.core/defn- deser-webhook-url [input] input)
+
+(clojure.core/defn- deser-action-execution-token [input] input)
+
+(clojure.core/defn- deser-action-configuration [input] (clojure.core/cond-> {} (clojure.core/contains? input "configuration") (clojure.core/assoc :configuration (deser-action-configuration-map (input "configuration")))))
+
+(clojure.core/defn- deser-maximum-artifact-count [input] input)
+
+(clojure.core/defn- deser-artifact-revision-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-artifact-revision coll))) input))
+
+(clojure.core/defn- deser-stage-blocker-declaration-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-blocker-declaration coll))) input))
+
+(clojure.core/defn- deser-source-revision [input] (clojure.core/cond-> {:action-name (deser-action-name (input "actionName"))} (clojure.core/contains? input "revisionId") (clojure.core/assoc :revision-id (deser-revision (input "revisionId"))) (clojure.core/contains? input "revisionSummary") (clojure.core/assoc :revision-summary (deser-revision-summary (input "revisionSummary"))) (clojure.core/contains? input "revisionUrl") (clojure.core/assoc :revision-url (deser-url (input "revisionUrl")))))
+
+(clojure.core/defn- deser-artifact-revision [input] (clojure.core/cond-> {} (clojure.core/contains? input "name") (clojure.core/assoc :name (deser-artifact-name (input "name"))) (clojure.core/contains? input "revisionId") (clojure.core/assoc :revision-id (deser-revision (input "revisionId"))) (clojure.core/contains? input "revisionChangeIdentifier") (clojure.core/assoc :revision-change-identifier (deser-revision-change-identifier (input "revisionChangeIdentifier"))) (clojure.core/contains? input "revisionSummary") (clojure.core/assoc :revision-summary (deser-revision-summary (input "revisionSummary"))) (clojure.core/contains? input "created") (clojure.core/assoc :created (deser-timestamp (input "created"))) (clojure.core/contains? input "revisionUrl") (clojure.core/assoc :revision-url (deser-url (input "revisionUrl")))))
+
+(clojure.core/defn- deser-enabled [input] input)
+
+(clojure.core/defn- deser-stage-execution [input] (clojure.core/cond-> {:pipeline-execution-id (deser-pipeline-execution-id (input "pipelineExecutionId")), :status (deser-stage-execution-status (input "status"))}))
+
+(clojure.core/defn- deser-next-token [input] input)
+
+(clojure.core/defn- deser-artifact [input] (clojure.core/cond-> {} (clojure.core/contains? input "name") (clojure.core/assoc :name (deser-artifact-name (input "name"))) (clojure.core/contains? input "revision") (clojure.core/assoc :revision (deser-revision (input "revision"))) (clojure.core/contains? input "location") (clojure.core/assoc :location (deser-artifact-location (input "location")))))
+
+(clojure.core/defn- deser-action-context [input] (clojure.core/cond-> {} (clojure.core/contains? input "name") (clojure.core/assoc :name (deser-action-name (input "name")))))
+
+(clojure.core/defn- deser-third-party-job-details [input] (clojure.core/cond-> {} (clojure.core/contains? input "id") (clojure.core/assoc :id (deser-third-party-job-id (input "id"))) (clojure.core/contains? input "data") (clojure.core/assoc :data (deser-third-party-job-data (input "data"))) (clojure.core/contains? input "nonce") (clojure.core/assoc :nonce (deser-nonce (input "nonce")))))
+
+(clojure.core/defn- deser-blocker-type [input] (clojure.core/get {"Schedule" :schedule} input))
+
+(clojure.core/defn- deser-aws-session-credentials [input] (clojure.core/cond-> {:access-key-id (deser-access-key-id (input "accessKeyId")), :secret-access-key (deser-secret-access-key (input "secretAccessKey")), :session-token (deser-session-token (input "sessionToken"))}))
+
+(clojure.core/defn- deser-webhook-filters [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-webhook-filter-rule coll))) input))
+
+(clojure.core/defn- deser-pipeline-context [input] (clojure.core/cond-> {} (clojure.core/contains? input "pipelineName") (clojure.core/assoc :pipeline-name (deser-pipeline-name (input "pipelineName"))) (clojure.core/contains? input "stage") (clojure.core/assoc :stage (deser-stage-context (input "stage"))) (clojure.core/contains? input "action") (clojure.core/assoc :action (deser-action-context (input "action")))))
+
+(clojure.core/defn- deser-session-token [input] input)
+
+(clojure.core/defn- deser-match-equals [input] input)
+
+(clojure.core/defn- deser-webhook-error-message [input] input)
+
+(clojure.core/defn- deser-pipeline-declaration [input] (clojure.core/cond-> {:name (deser-pipeline-name (input "name")), :role-arn (deser-role-arn (input "roleArn")), :artifact-store (deser-artifact-store (input "artifactStore")), :stages (deser-pipeline-stage-declaration-list (input "stages"))} (clojure.core/contains? input "version") (clojure.core/assoc :version (deser-pipeline-version (input "version")))))
+
+(clojure.core/defn- deser-third-party-job-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-third-party-job coll))) input))
+
+(clojure.core/defn- deser-action-run-order [input] input)
+
+(clojure.core/defn- deser-revision [input] input)
+
+(clojure.core/defn- deser-pipeline-summary [input] (clojure.core/cond-> {} (clojure.core/contains? input "name") (clojure.core/assoc :name (deser-pipeline-name (input "name"))) (clojure.core/contains? input "version") (clojure.core/assoc :version (deser-pipeline-version (input "version"))) (clojure.core/contains? input "created") (clojure.core/assoc :created (deser-timestamp (input "created"))) (clojure.core/contains? input "updated") (clojure.core/assoc :updated (deser-timestamp (input "updated")))))
+
+(clojure.core/defn- deser-output-artifact-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-output-artifact coll))) input))
+
+(clojure.core/defn- deser-execution-summary [input] input)
+
+(clojure.core/defn- deser-execution-id [input] input)
+
+(clojure.core/defn- deser-url [input] input)
+
+(clojure.core/defn- deser-description [input] input)
+
+(clojure.core/defn- deser-pipeline-execution-summary-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-pipeline-execution-summary coll))) input))
+
+(clojure.core/defn- deser-message [input] input)
+
+(clojure.core/defn- deser-third-party-job [input] (clojure.core/cond-> {} (clojure.core/contains? input "clientId") (clojure.core/assoc :client-id (deser-client-id (input "clientId"))) (clojure.core/contains? input "jobId") (clojure.core/assoc :job-id (deser-job-id (input "jobId")))))
+
+(clojure.core/defn- deser-webhook-filter-rule [input] (clojure.core/cond-> {:json-path (deser-json-path (input "jsonPath"))} (clojure.core/contains? input "matchEquals") (clojure.core/assoc :match-equals (deser-match-equals (input "matchEquals")))))
+
+(clojure.core/defn- deser-webhook-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-list-webhook-item coll))) input))
+
+(clojure.core/defn- deser-pipeline-execution-summary [input] (clojure.core/cond-> {} (clojure.core/contains? input "pipelineExecutionId") (clojure.core/assoc :pipeline-execution-id (deser-pipeline-execution-id (input "pipelineExecutionId"))) (clojure.core/contains? input "status") (clojure.core/assoc :status (deser-pipeline-execution-status (input "status"))) (clojure.core/contains? input "startTime") (clojure.core/assoc :start-time (deser-timestamp (input "startTime"))) (clojure.core/contains? input "lastUpdateTime") (clojure.core/assoc :last-update-time (deser-timestamp (input "lastUpdateTime"))) (clojure.core/contains? input "sourceRevisions") (clojure.core/assoc :source-revisions (deser-source-revision-list (input "sourceRevisions")))))
+
+(clojure.core/defn- deser-action-state [input] (clojure.core/cond-> {} (clojure.core/contains? input "actionName") (clojure.core/assoc :action-name (deser-action-name (input "actionName"))) (clojure.core/contains? input "currentRevision") (clojure.core/assoc :current-revision (deser-action-revision (input "currentRevision"))) (clojure.core/contains? input "latestExecution") (clojure.core/assoc :latest-execution (deser-action-execution (input "latestExecution"))) (clojure.core/contains? input "entityUrl") (clojure.core/assoc :entity-url (deser-url (input "entityUrl"))) (clojure.core/contains? input "revisionUrl") (clojure.core/assoc :revision-url (deser-url (input "revisionUrl")))))
+
+(clojure.core/defn- deser-action-configuration-value [input] input)
+
+(clojure.core/defn- deser-revision-change-identifier [input] input)
+
+(clojure.core/defn- deser-action-name [input] input)
+
+(clojure.core/defn- deser-action-type-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "thirdPartyConfigurationUrl") (clojure.core/assoc :third-party-configuration-url (deser-url (input "thirdPartyConfigurationUrl"))) (clojure.core/contains? input "entityUrlTemplate") (clojure.core/assoc :entity-url-template (deser-url-template (input "entityUrlTemplate"))) (clojure.core/contains? input "executionUrlTemplate") (clojure.core/assoc :execution-url-template (deser-url-template (input "executionUrlTemplate"))) (clojure.core/contains? input "revisionUrlTemplate") (clojure.core/assoc :revision-url-template (deser-url-template (input "revisionUrlTemplate")))))
+
+(clojure.core/defn- deser-blocker-declaration [input] (clojure.core/cond-> {:name (deser-blocker-name (input "name")), :type (deser-blocker-type (input "type"))}))
+
+(clojure.core/defn- deser-account-id [input] input)
+
+(clojure.core/defn- deser-percentage [input] input)
+
+(clojure.core/defn- deser-pipeline-version [input] input)
+
+(clojure.core/defn- deser-s-3-object-key [input] input)
+
+(clojure.core/defn- deser-webhook-name [input] input)
+
+(clojure.core/defn- deser-url-template [input] input)
+
+(clojure.core/defn- deser-artifact-location [input] (clojure.core/cond-> {} (clojure.core/contains? input "type") (clojure.core/assoc :type (deser-artifact-location-type (input "type"))) (clojure.core/contains? input "s3Location") (clojure.core/assoc :s-3-location (deser-s-3-artifact-location (input "s3Location")))))
+
+(clojure.core/defn- deser-continuation-token [input] input)
+
+(clojure.core/defn- deser-input-artifact-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-input-artifact coll))) input))
+
+(clojure.core/defn- deser-pipeline-execution-status [input] (clojure.core/get {"InProgress" :in-progress, "Succeeded" :succeeded, "Superseded" :superseded, "Failed" :failed} input))
+
+(clojure.core/defn- deser-stage-declaration [input] (clojure.core/cond-> {:name (deser-stage-name (input "name")), :actions (deser-stage-action-declaration-list (input "actions"))} (clojure.core/contains? input "blockers") (clojure.core/assoc :blockers (deser-stage-blocker-declaration-list (input "blockers")))))
+
+(clojure.core/defn- deser-client-id [input] input)
+
+(clojure.core/defn- deser-error-details [input] (clojure.core/cond-> {} (clojure.core/contains? input "code") (clojure.core/assoc :code (deser-code (input "code"))) (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-message (input "message")))))
+
+(clojure.core/defn- deser-job-data [input] (clojure.core/cond-> {} (clojure.core/contains? input "actionTypeId") (clojure.core/assoc :action-type-id (deser-action-type-id (input "actionTypeId"))) (clojure.core/contains? input "actionConfiguration") (clojure.core/assoc :action-configuration (deser-action-configuration (input "actionConfiguration"))) (clojure.core/contains? input "pipelineContext") (clojure.core/assoc :pipeline-context (deser-pipeline-context (input "pipelineContext"))) (clojure.core/contains? input "inputArtifacts") (clojure.core/assoc :input-artifacts (deser-artifact-list (input "inputArtifacts"))) (clojure.core/contains? input "outputArtifacts") (clojure.core/assoc :output-artifacts (deser-artifact-list (input "outputArtifacts"))) (clojure.core/contains? input "artifactCredentials") (clojure.core/assoc :artifact-credentials (deser-aws-session-credentials (input "artifactCredentials"))) (clojure.core/contains? input "continuationToken") (clojure.core/assoc :continuation-token (deser-continuation-token (input "continuationToken"))) (clojure.core/contains? input "encryptionKey") (clojure.core/assoc :encryption-key (deser-encryption-key (input "encryptionKey")))))
+
+(clojure.core/defn- deser-webhook-arn [input] input)
+
+(clojure.core/defn- deser-timestamp [input] input)
+
+(clojure.core/defn- deser-stage-execution-status [input] (clojure.core/get {"InProgress" :in-progress, "Failed" :failed, "Succeeded" :succeeded} input))
+
+(clojure.core/defn- deser-artifact-name [input] input)
+
+(clojure.core/defn- deser-artifact-details [input] (clojure.core/cond-> {:minimum-count (deser-minimum-artifact-count (input "minimumCount")), :maximum-count (deser-maximum-artifact-count (input "maximumCount"))}))
+
+(clojure.core/defn- deser-version [input] input)
+
+(clojure.core/defn- deser-s-3-artifact-location [input] (clojure.core/cond-> {:bucket-name (deser-s-3-bucket-name (input "bucketName")), :object-key (deser-s-3-object-key (input "objectKey"))}))
+
+(clojure.core/defn- deser-nonce [input] input)
+
+(clojure.core/defn- deser-stage-name [input] input)
+
+(clojure.core/defn- deser-job [input] (clojure.core/cond-> {} (clojure.core/contains? input "id") (clojure.core/assoc :id (deser-job-id (input "id"))) (clojure.core/contains? input "data") (clojure.core/assoc :data (deser-job-data (input "data"))) (clojure.core/contains? input "nonce") (clojure.core/assoc :nonce (deser-nonce (input "nonce"))) (clojure.core/contains? input "accountId") (clojure.core/assoc :account-id (deser-account-id (input "accountId")))))
+
+(clojure.core/defn- deser-webhook-last-triggered [input] input)
+
+(clojure.core/defn- deser-action-configuration-map [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-action-configuration-key k) (deser-action-configuration-value v)])) input))
+
+(clojure.core/defn- deser-code [input] input)
+
+(clojure.core/defn- deser-pipeline-stage-declaration-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-stage-declaration coll))) input))
+
+(clojure.core/defn- deser-action-type [input] (clojure.core/cond-> {:id (deser-action-type-id (input "id")), :input-artifact-details (deser-artifact-details (input "inputArtifactDetails")), :output-artifact-details (deser-artifact-details (input "outputArtifactDetails"))} (clojure.core/contains? input "settings") (clojure.core/assoc :settings (deser-action-type-settings (input "settings"))) (clojure.core/contains? input "actionConfigurationProperties") (clojure.core/assoc :action-configuration-properties (deser-action-configuration-property-list (input "actionConfigurationProperties")))))
+
+(clojure.core/defn- deser-webhook-definition [input] (clojure.core/cond-> {:name (deser-webhook-name (input "name")), :target-pipeline (deser-pipeline-name (input "targetPipeline")), :target-action (deser-action-name (input "targetAction")), :filters (deser-webhook-filters (input "filters")), :authentication (deser-webhook-authentication-type (input "authentication")), :authentication-configuration (deser-webhook-auth-configuration (input "authenticationConfiguration"))}))
+
+(clojure.core/defn- deser-stage-context [input] (clojure.core/cond-> {} (clojure.core/contains? input "name") (clojure.core/assoc :name (deser-stage-name (input "name")))))
+
+(clojure.core/defn- deser-artifact-store-location [input] input)
+
+(clojure.core/defn- deser-pipeline-arn [input] input)
+
+(clojure.core/defn- deser-minimum-artifact-count [input] input)
+
+(clojure.core/defn- deser-pipeline-execution [input] (clojure.core/cond-> {} (clojure.core/contains? input "pipelineName") (clojure.core/assoc :pipeline-name (deser-pipeline-name (input "pipelineName"))) (clojure.core/contains? input "pipelineVersion") (clojure.core/assoc :pipeline-version (deser-pipeline-version (input "pipelineVersion"))) (clojure.core/contains? input "pipelineExecutionId") (clojure.core/assoc :pipeline-execution-id (deser-pipeline-execution-id (input "pipelineExecutionId"))) (clojure.core/contains? input "status") (clojure.core/assoc :status (deser-pipeline-execution-status (input "status"))) (clojure.core/contains? input "artifactRevisions") (clojure.core/assoc :artifact-revisions (deser-artifact-revision-list (input "artifactRevisions")))))
+
+(clojure.core/defn- deser-action-configuration-property-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-action-configuration-property coll))) input))
+
+(clojure.core/defn- deser-action-declaration [input] (clojure.core/cond-> {:name (deser-action-name (input "name")), :action-type-id (deser-action-type-id (input "actionTypeId"))} (clojure.core/contains? input "runOrder") (clojure.core/assoc :run-order (deser-action-run-order (input "runOrder"))) (clojure.core/contains? input "configuration") (clojure.core/assoc :configuration (deser-action-configuration-map (input "configuration"))) (clojure.core/contains? input "outputArtifacts") (clojure.core/assoc :output-artifacts (deser-output-artifact-list (input "outputArtifacts"))) (clojure.core/contains? input "inputArtifacts") (clojure.core/assoc :input-artifacts (deser-input-artifact-list (input "inputArtifacts"))) (clojure.core/contains? input "roleArn") (clojure.core/assoc :role-arn (deser-role-arn (input "roleArn")))))
+
+(clojure.core/defn- deser-secret-access-key [input] input)
+
+(clojure.core/defn- deser-action-configuration-property [input] (clojure.core/cond-> {:name (deser-action-configuration-key (input "name")), :required (deser-boolean (input "required")), :key (deser-boolean (input "key")), :secret (deser-boolean (input "secret"))} (clojure.core/contains? input "queryable") (clojure.core/assoc :queryable (deser-boolean (input "queryable"))) (clojure.core/contains? input "description") (clojure.core/assoc :description (deser-description (input "description"))) (clojure.core/contains? input "type") (clojure.core/assoc :type (deser-action-configuration-property-type (input "type")))))
+
+(clojure.core/defn- deser-stage-action-declaration-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-action-declaration coll))) input))
+
+(clojure.core/defn- deser-last-updated-by [input] input)
+
+(clojure.core/defn- deser-access-key-id [input] input)
+
+(clojure.core/defn- deser-encryption-key [input] (clojure.core/cond-> {:id (deser-encryption-key-id (input "id")), :type (deser-encryption-key-type (input "type"))}))
+
+(clojure.core/defn- deser-pipeline-metadata [input] (clojure.core/cond-> {} (clojure.core/contains? input "pipelineArn") (clojure.core/assoc :pipeline-arn (deser-pipeline-arn (input "pipelineArn"))) (clojure.core/contains? input "created") (clojure.core/assoc :created (deser-timestamp (input "created"))) (clojure.core/contains? input "updated") (clojure.core/assoc :updated (deser-timestamp (input "updated")))))
+
+(clojure.core/defn- deser-boolean [input] input)
+
+(clojure.core/defn- deser-job-id [input] input)
+
+(clojure.core/defn- deser-invalid-structure-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-pipeline-execution-not-found-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-put-action-revision-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "newRevision") (clojure.core/assoc :new-revision (deser-boolean (input "newRevision"))) (clojure.core/contains? input "pipelineExecutionId") (clojure.core/assoc :pipeline-execution-id (deser-pipeline-execution-id (input "pipelineExecutionId")))))
+
+(clojure.core/defn- deser-validation-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-put-webhook-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "webhook") (clojure.core/assoc :webhook (deser-list-webhook-item (input "webhook")))))
+
+(clojure.core/defn- deser-get-pipeline-execution-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "pipelineExecution") (clojure.core/assoc :pipeline-execution (deser-pipeline-execution (input "pipelineExecution")))))
+
+(clojure.core/defn- deser-invalid-client-token-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-get-pipeline-state-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "pipelineName") (clojure.core/assoc :pipeline-name (deser-pipeline-name (input "pipelineName"))) (clojure.core/contains? input "pipelineVersion") (clojure.core/assoc :pipeline-version (deser-pipeline-version (input "pipelineVersion"))) (clojure.core/contains? input "stageStates") (clojure.core/assoc :stage-states (deser-stage-state-list (input "stageStates"))) (clojure.core/contains? input "created") (clojure.core/assoc :created (deser-timestamp (input "created"))) (clojure.core/contains? input "updated") (clojure.core/assoc :updated (deser-timestamp (input "updated")))))
+
+(clojure.core/defn- deser-put-approval-result-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "approvedAt") (clojure.core/assoc :approved-at (deser-timestamp (input "approvedAt")))))
+
+(clojure.core/defn- deser-invalid-stage-declaration-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-start-pipeline-execution-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "pipelineExecutionId") (clojure.core/assoc :pipeline-execution-id (deser-pipeline-execution-id (input "pipelineExecutionId")))))
+
+(clojure.core/defn- deser-invalid-webhook-filter-pattern-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-approval-already-completed-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-poll-for-third-party-jobs-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "jobs") (clojure.core/assoc :jobs (deser-third-party-job-list (input "jobs")))))
+
+(clojure.core/defn- deser-action-type-not-found-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-poll-for-jobs-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "jobs") (clojure.core/assoc :jobs (deser-job-list (input "jobs")))))
+
+(clojure.core/defn- deser-retry-stage-execution-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "pipelineExecutionId") (clojure.core/assoc :pipeline-execution-id (deser-pipeline-execution-id (input "pipelineExecutionId")))))
+
+(clojure.core/defn- deser-deregister-webhook-with-third-party-output [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-pipeline-not-found-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-limit-exceeded-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-acknowledge-third-party-job-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "status") (clojure.core/assoc :status (deser-job-status (input "status")))))
+
+(clojure.core/defn- deser-list-webhooks-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "webhooks") (clojure.core/assoc :webhooks (deser-webhook-list (input "webhooks"))) (clojure.core/contains? input "NextToken") (clojure.core/assoc :next-token (deser-next-token (input "NextToken")))))
+
+(clojure.core/defn- deser-invalid-blocker-declaration-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-invalid-next-token-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-get-third-party-job-details-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "jobDetails") (clojure.core/assoc :job-details (deser-third-party-job-details (input "jobDetails")))))
+
+(clojure.core/defn- deser-invalid-nonce-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-stage-not-found-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-get-pipeline-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "pipeline") (clojure.core/assoc :pipeline (deser-pipeline-declaration (input "pipeline"))) (clojure.core/contains? input "metadata") (clojure.core/assoc :metadata (deser-pipeline-metadata (input "metadata")))))
+
+(clojure.core/defn- deser-invalid-action-declaration-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-delete-webhook-output [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-list-pipelines-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "pipelines") (clojure.core/assoc :pipelines (deser-pipeline-list (input "pipelines"))) (clojure.core/contains? input "nextToken") (clojure.core/assoc :next-token (deser-next-token (input "nextToken")))))
+
+(clojure.core/defn- deser-register-webhook-with-third-party-output [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-create-pipeline-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "pipeline") (clojure.core/assoc :pipeline (deser-pipeline-declaration (input "pipeline")))))
+
+(clojure.core/defn- deser-invalid-job-state-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-pipeline-version-not-found-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-update-pipeline-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "pipeline") (clojure.core/assoc :pipeline (deser-pipeline-declaration (input "pipeline")))))
+
+(clojure.core/defn- deser-not-latest-pipeline-execution-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-stage-not-retryable-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-job-not-found-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-invalid-approval-token-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-invalid-webhook-authentication-parameters-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-list-pipeline-executions-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "pipelineExecutionSummaries") (clojure.core/assoc :pipeline-execution-summaries (deser-pipeline-execution-summary-list (input "pipelineExecutionSummaries"))) (clojure.core/contains? input "nextToken") (clojure.core/assoc :next-token (deser-next-token (input "nextToken")))))
+
+(clojure.core/defn- deser-action-not-found-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-invalid-job-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-pipeline-name-in-use-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-acknowledge-job-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "status") (clojure.core/assoc :status (deser-job-status (input "status")))))
+
+(clojure.core/defn- deser-list-action-types-output [input] (clojure.core/cond-> {:action-types (deser-action-type-list (input "actionTypes"))} (clojure.core/contains? input "nextToken") (clojure.core/assoc :next-token (deser-next-token (input "nextToken")))))
+
+(clojure.core/defn- deser-create-custom-action-type-output [input] (clojure.core/cond-> {:action-type (deser-action-type (input "actionType"))}))
+
+(clojure.core/defn- deser-webhook-not-found-exception [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-get-job-details-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "jobDetails") (clojure.core/assoc :job-details (deser-job-details (input "jobDetails")))))
+
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/action-state-list (clojure.spec.alpha/coll-of :portkey.aws.codepipeline.-2015-07-09/action-state))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.get-pipeline-input/name (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/pipeline-name))
@@ -578,9 +1214,9 @@
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.input-artifact/name (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/artifact-name))
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/input-artifact (clojure.spec.alpha/keys :req-un [:portkey.aws.codepipeline.-2015-07-09.input-artifact/name] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/action-configuration-queryable-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 50)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_-]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/action-configuration-queryable-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 50)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_-]+" s__27881__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/action-configuration-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 50))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/action-configuration-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 50))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/validation-exception (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
@@ -599,7 +1235,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/job-list (clojure.spec.alpha/coll-of :portkey.aws.codepipeline.-2015-07-09/job))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/pipeline-execution-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/pipeline-execution-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/job-status #{:timed-out "Created" "Failed" "Dispatched" :in-progress "Succeeded" "TimedOut" :created :queued "InProgress" :dispatched "Queued" :failed :succeeded})
 
@@ -611,15 +1247,15 @@
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.get-pipeline-execution-output/pipeline-execution (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/pipeline-execution))
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/get-pipeline-execution-output (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.codepipeline.-2015-07-09.get-pipeline-execution-output/pipeline-execution]))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/revision-summary (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 2048))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/revision-summary (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 2048))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/invalid-client-token-exception (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/artifact-list (clojure.spec.alpha/coll-of :portkey.aws.codepipeline.-2015-07-09/artifact))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/webhook-auth-configuration-allowed-ip-range (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 100))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/webhook-auth-configuration-allowed-ip-range (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 100))))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/encryption-key-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 100))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/encryption-key-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 100))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.get-pipeline-state-output/pipeline-name (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/pipeline-name))
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.get-pipeline-state-output/pipeline-version (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/pipeline-version))
@@ -635,7 +1271,7 @@
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.put-approval-result-output/approved-at (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/timestamp))
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/put-approval-result-output (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.codepipeline.-2015-07-09.put-approval-result-output/approved-at]))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/webhook-auth-configuration-secret-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 100))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/webhook-auth-configuration-secret-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 100))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.put-job-success-result-input/job-id (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/job-id))
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.put-job-success-result-input/current-revision (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/current-revision))
@@ -655,16 +1291,16 @@
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/invalid-stage-declaration-exception (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/disabled-reason (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 300)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-zA-Z0-9!@ \(\)\.\*\?\-]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/disabled-reason (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 300)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-zA-Z0-9!@ \(\)\.\*\?\-]+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/action-owner #{:aws "Custom" "AWS" "ThirdParty" :custom :third-party})
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/approval-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/approval-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.start-pipeline-execution-output/pipeline-execution-id (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/pipeline-execution-id))
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/start-pipeline-execution-output (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.codepipeline.-2015-07-09.start-pipeline-execution-output/pipeline-execution-id]))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/pipeline-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 100)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[A-Za-z0-9.@\-_]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/pipeline-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 100)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[A-Za-z0-9.@\-_]+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/invalid-webhook-filter-pattern-exception (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
@@ -673,7 +1309,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/approval-already-completed-exception (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/json-path (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 150))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/json-path (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 150))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.put-third-party-job-success-result-input/job-id (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/third-party-job-id))
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.put-third-party-job-success-result-input/client-token (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/client-token))
@@ -682,7 +1318,7 @@
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.put-third-party-job-success-result-input/execution-details (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/execution-details))
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/put-third-party-job-success-result-input (clojure.spec.alpha/keys :req-un [:portkey.aws.codepipeline.-2015-07-09.put-third-party-job-success-result-input/job-id :portkey.aws.codepipeline.-2015-07-09.put-third-party-job-success-result-input/client-token] :opt-un [:portkey.aws.codepipeline.-2015-07-09.put-third-party-job-success-result-input/current-revision :portkey.aws.codepipeline.-2015-07-09.put-third-party-job-success-result-input/continuation-token :portkey.aws.codepipeline.-2015-07-09.put-third-party-job-success-result-input/execution-details]))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/action-provider (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 25)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[0-9A-Za-z_-]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/action-provider (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 25)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[0-9A-Za-z_-]+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.poll-for-third-party-jobs-output/jobs (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/third-party-job-list))
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/poll-for-third-party-jobs-output (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.codepipeline.-2015-07-09.poll-for-third-party-jobs-output/jobs]))
@@ -714,7 +1350,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/last-changed-at clojure.core/inst?)
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/role-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1024)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"arn:aws(-[\w]+)*:iam::[0-9]{12}:role/.*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/role-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1024)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"arn:aws(-[\w]+)*:iam::[0-9]{12}:role/.*" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/source-revision-list (clojure.spec.alpha/coll-of :portkey.aws.codepipeline.-2015-07-09/source-revision))
 
@@ -722,19 +1358,19 @@
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/stage-state-list (clojure.spec.alpha/coll-of :portkey.aws.codepipeline.-2015-07-09/stage-state))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/blocker-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 100))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/blocker-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 100))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/pipeline-not-found-exception (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/pipeline-list (clojure.spec.alpha/coll-of :portkey.aws.codepipeline.-2015-07-09/pipeline-summary))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/third-party-job-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 512))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/third-party-job-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 512))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/s-3-bucket-name (clojure.spec.alpha/and clojure.core/string?))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/limit-exceeded-exception (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/webhook-url (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1000))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/webhook-url (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1000))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/stage-transition-type #{:outbound "Outbound" :inbound "Inbound"})
 
@@ -798,7 +1434,7 @@
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.list-pipeline-executions-input/next-token (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/next-token))
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/list-pipeline-executions-input (clojure.spec.alpha/keys :req-un [:portkey.aws.codepipeline.-2015-07-09.list-pipeline-executions-input/pipeline-name] :opt-un [:portkey.aws.codepipeline.-2015-07-09.list-pipeline-executions-input/max-results :portkey.aws.codepipeline.-2015-07-09.list-pipeline-executions-input/next-token]))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/next-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 2048))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/next-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 2048))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.artifact/name (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/artifact-name))
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.artifact/revision (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/revision))
@@ -850,7 +1486,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/session-token (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/match-equals (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 150))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/match-equals (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 150))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/invalid-nonce-exception (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
@@ -893,7 +1529,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/action-run-order (clojure.spec.alpha/int-in 1 999))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/revision (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1500))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/revision (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1500))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.pipeline-summary/name (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/pipeline-name))
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.pipeline-summary/version (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/pipeline-version))
@@ -905,13 +1541,13 @@
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/delete-webhook-output (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/execution-summary (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 2048))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/execution-summary (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 2048))))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/execution-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1500))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/execution-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1500))))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/url (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 2048))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/url (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 2048))))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/description (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 160))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/description (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 160))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.list-pipelines-output/pipelines (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/pipeline-list))
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.list-pipelines-output/next-token (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/next-token))
@@ -923,7 +1559,7 @@
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.acknowledge-job-input/nonce (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/nonce))
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/acknowledge-job-input (clojure.spec.alpha/keys :req-un [:portkey.aws.codepipeline.-2015-07-09.acknowledge-job-input/job-id :portkey.aws.codepipeline.-2015-07-09.acknowledge-job-input/nonce] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/message (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 5000))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/message (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 5000))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/register-webhook-with-third-party-output (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
@@ -959,16 +1595,16 @@
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.failure-details/external-execution-id (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/execution-id))
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/failure-details (clojure.spec.alpha/keys :req-un [:portkey.aws.codepipeline.-2015-07-09.failure-details/type :portkey.aws.codepipeline.-2015-07-09.failure-details/message] :opt-un [:portkey.aws.codepipeline.-2015-07-09.failure-details/external-execution-id]))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/action-configuration-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1000))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/action-configuration-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1000))))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/revision-change-identifier (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 100))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/revision-change-identifier (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 100))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/invalid-job-state-exception (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.list-pipelines-input/next-token (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/next-token))
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/list-pipelines-input (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.codepipeline.-2015-07-09.list-pipelines-input/next-token]))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/action-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 100)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[A-Za-z0-9.@\-_]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/action-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 100)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[A-Za-z0-9.@\-_]+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/pipeline-version-not-found-exception (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
@@ -991,7 +1627,7 @@
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.blocker-declaration/type (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/blocker-type))
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/blocker-declaration (clojure.spec.alpha/keys :req-un [:portkey.aws.codepipeline.-2015-07-09.blocker-declaration/name :portkey.aws.codepipeline.-2015-07-09.blocker-declaration/type] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/account-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[0-9]{12}" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/account-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[0-9]{12}" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/percentage (clojure.spec.alpha/int-in 0 100))
 
@@ -999,17 +1635,17 @@
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/s-3-object-key (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/webhook-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 100)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[A-Za-z0-9.@\-_]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/webhook-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 100)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[A-Za-z0-9.@\-_]+" s__27881__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/approval-summary (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 0 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 512))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/approval-summary (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 0 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 512))))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/url-template (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 2048))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/url-template (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 2048))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.artifact-location/type (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/artifact-location-type))
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.artifact-location/s-3-location (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/s-3-artifact-location))
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/artifact-location (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.codepipeline.-2015-07-09.artifact-location/type :portkey.aws.codepipeline.-2015-07-09.artifact-location/s-3-location]))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/continuation-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 2048))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/continuation-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 2048))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/input-artifact-list (clojure.spec.alpha/coll-of :portkey.aws.codepipeline.-2015-07-09/input-artifact))
 
@@ -1025,7 +1661,7 @@
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.stage-declaration/actions (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/stage-action-declaration-list))
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/stage-declaration (clojure.spec.alpha/keys :req-un [:portkey.aws.codepipeline.-2015-07-09.stage-declaration/name :portkey.aws.codepipeline.-2015-07-09.stage-declaration/actions] :opt-un [:portkey.aws.codepipeline.-2015-07-09.stage-declaration/blockers]))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/client-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/client-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/not-latest-pipeline-execution-exception (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
@@ -1080,7 +1716,7 @@
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.retry-stage-execution-input/retry-mode (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/stage-retry-mode))
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/retry-stage-execution-input (clojure.spec.alpha/keys :req-un [:portkey.aws.codepipeline.-2015-07-09.retry-stage-execution-input/pipeline-name :portkey.aws.codepipeline.-2015-07-09.retry-stage-execution-input/stage-name :portkey.aws.codepipeline.-2015-07-09.retry-stage-execution-input/pipeline-execution-id :portkey.aws.codepipeline.-2015-07-09.retry-stage-execution-input/retry-mode] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/artifact-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 100)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_\-]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/artifact-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 100)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-zA-Z0-9_\-]+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/max-results (clojure.spec.alpha/int-in 1 100))
 
@@ -1088,7 +1724,7 @@
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.artifact-details/maximum-count (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/maximum-artifact-count))
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/artifact-details (clojure.spec.alpha/keys :req-un [:portkey.aws.codepipeline.-2015-07-09.artifact-details/minimum-count :portkey.aws.codepipeline.-2015-07-09.artifact-details/maximum-count] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/version (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 9)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[0-9A-Za-z_-]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/version (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 9)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[0-9A-Za-z_-]+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/invalid-webhook-authentication-parameters-exception (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
@@ -1105,9 +1741,9 @@
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.poll-for-jobs-input/query-param (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/query-param-map))
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/poll-for-jobs-input (clojure.spec.alpha/keys :req-un [:portkey.aws.codepipeline.-2015-07-09.poll-for-jobs-input/action-type-id] :opt-un [:portkey.aws.codepipeline.-2015-07-09.poll-for-jobs-input/max-batch-size :portkey.aws.codepipeline.-2015-07-09.poll-for-jobs-input/query-param]))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/nonce (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 50))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/nonce (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 50))))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/stage-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 100)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[A-Za-z0-9.@\-_]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/stage-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 100)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[A-Za-z0-9.@\-_]+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.job/id (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/job-id))
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.job/data (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/job-data))
@@ -1165,9 +1801,9 @@
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.list-action-types-output/next-token (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/next-token))
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/list-action-types-output (clojure.spec.alpha/keys :req-un [:portkey.aws.codepipeline.-2015-07-09.list-action-types-output/action-types] :opt-un [:portkey.aws.codepipeline.-2015-07-09.list-action-types-output/next-token]))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/artifact-store-location (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 3 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 63)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-zA-Z0-9\-\.]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/artifact-store-location (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 3 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 63)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-zA-Z0-9\-\.]+" s__27881__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/pipeline-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"arn:aws(-[\w]+)*:codepipeline:.+:[0-9]{12}:.+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/pipeline-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"arn:aws(-[\w]+)*:codepipeline:.+:[0-9]{12}:.+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/minimum-artifact-count (clojure.spec.alpha/int-in 0 5))
 
@@ -1216,7 +1852,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/webhook-not-found-exception (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/client-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/client-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 256))))
 
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.get-job-details-output/job-details (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/job-details))
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/get-job-details-output (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.codepipeline.-2015-07-09.get-job-details-output/job-details]))
@@ -1238,100 +1874,100 @@
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09.get-third-party-job-details-input/client-token (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/client-token))
 (clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/get-third-party-job-details-input (clojure.spec.alpha/keys :req-un [:portkey.aws.codepipeline.-2015-07-09.get-third-party-job-details-input/job-id :portkey.aws.codepipeline.-2015-07-09.get-third-party-job-details-input/client-token] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/job-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.codepipeline.-2015-07-09/job-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}" s__27881__auto__))))
 
-(clojure.core/defn create-pipeline ([create-pipeline-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-pipeline-input create-pipeline-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/create-pipeline-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/create-pipeline-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreatePipeline", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "PipelineNameInUseException" :portkey.aws.codepipeline.-2015-07-09/pipeline-name-in-use-exception, "InvalidStageDeclarationException" :portkey.aws.codepipeline.-2015-07-09/invalid-stage-declaration-exception, "InvalidActionDeclarationException" :portkey.aws.codepipeline.-2015-07-09/invalid-action-declaration-exception, "InvalidBlockerDeclarationException" :portkey.aws.codepipeline.-2015-07-09/invalid-blocker-declaration-exception, "InvalidStructureException" :portkey.aws.codepipeline.-2015-07-09/invalid-structure-exception, "LimitExceededException" :portkey.aws.codepipeline.-2015-07-09/limit-exceeded-exception}})))))
+(clojure.core/defn create-pipeline ([create-pipeline-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-create-pipeline-input create-pipeline-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/create-pipeline-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/create-pipeline-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreatePipeline", :http.request.configuration/output-deser-fn deser-create-pipeline-output, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "PipelineNameInUseException" :portkey.aws.codepipeline.-2015-07-09/pipeline-name-in-use-exception, "InvalidStageDeclarationException" :portkey.aws.codepipeline.-2015-07-09/invalid-stage-declaration-exception, "InvalidActionDeclarationException" :portkey.aws.codepipeline.-2015-07-09/invalid-action-declaration-exception, "InvalidBlockerDeclarationException" :portkey.aws.codepipeline.-2015-07-09/invalid-blocker-declaration-exception, "InvalidStructureException" :portkey.aws.codepipeline.-2015-07-09/invalid-structure-exception, "LimitExceededException" :portkey.aws.codepipeline.-2015-07-09/limit-exceeded-exception}})))))
 (clojure.spec.alpha/fdef create-pipeline :args (clojure.spec.alpha/tuple :portkey.aws.codepipeline.-2015-07-09/create-pipeline-input) :ret (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/create-pipeline-output))
 
-(clojure.core/defn list-pipelines ([] (list-pipelines {})) ([list-pipelines-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-pipelines-input list-pipelines-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/list-pipelines-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/list-pipelines-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListPipelines", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "InvalidNextTokenException" :portkey.aws.codepipeline.-2015-07-09/invalid-next-token-exception}})))))
+(clojure.core/defn list-pipelines ([] (list-pipelines {})) ([list-pipelines-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-pipelines-input list-pipelines-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/list-pipelines-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/list-pipelines-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListPipelines", :http.request.configuration/output-deser-fn deser-list-pipelines-output, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "InvalidNextTokenException" :portkey.aws.codepipeline.-2015-07-09/invalid-next-token-exception}})))))
 (clojure.spec.alpha/fdef list-pipelines :args (clojure.spec.alpha/? :portkey.aws.codepipeline.-2015-07-09/list-pipelines-input) :ret (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/list-pipelines-output))
 
-(clojure.core/defn acknowledge-job ([acknowledge-job-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-acknowledge-job-input acknowledge-job-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/acknowledge-job-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/acknowledge-job-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AcknowledgeJob", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "InvalidNonceException" :portkey.aws.codepipeline.-2015-07-09/invalid-nonce-exception, "JobNotFoundException" :portkey.aws.codepipeline.-2015-07-09/job-not-found-exception}})))))
+(clojure.core/defn acknowledge-job ([acknowledge-job-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-acknowledge-job-input acknowledge-job-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/acknowledge-job-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/acknowledge-job-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AcknowledgeJob", :http.request.configuration/output-deser-fn deser-acknowledge-job-output, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "InvalidNonceException" :portkey.aws.codepipeline.-2015-07-09/invalid-nonce-exception, "JobNotFoundException" :portkey.aws.codepipeline.-2015-07-09/job-not-found-exception}})))))
 (clojure.spec.alpha/fdef acknowledge-job :args (clojure.spec.alpha/tuple :portkey.aws.codepipeline.-2015-07-09/acknowledge-job-input) :ret (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/acknowledge-job-output))
 
-(clojure.core/defn create-custom-action-type ([create-custom-action-type-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-custom-action-type-input create-custom-action-type-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/create-custom-action-type-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/create-custom-action-type-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateCustomActionType", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "LimitExceededException" :portkey.aws.codepipeline.-2015-07-09/limit-exceeded-exception}})))))
+(clojure.core/defn create-custom-action-type ([create-custom-action-type-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-create-custom-action-type-input create-custom-action-type-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/create-custom-action-type-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/create-custom-action-type-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateCustomActionType", :http.request.configuration/output-deser-fn deser-create-custom-action-type-output, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "LimitExceededException" :portkey.aws.codepipeline.-2015-07-09/limit-exceeded-exception}})))))
 (clojure.spec.alpha/fdef create-custom-action-type :args (clojure.spec.alpha/tuple :portkey.aws.codepipeline.-2015-07-09/create-custom-action-type-input) :ret (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/create-custom-action-type-output))
 
-(clojure.core/defn list-pipeline-executions ([list-pipeline-executions-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-pipeline-executions-input list-pipeline-executions-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/list-pipeline-executions-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/list-pipeline-executions-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListPipelineExecutions", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "PipelineNotFoundException" :portkey.aws.codepipeline.-2015-07-09/pipeline-not-found-exception, "InvalidNextTokenException" :portkey.aws.codepipeline.-2015-07-09/invalid-next-token-exception}})))))
+(clojure.core/defn list-pipeline-executions ([list-pipeline-executions-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-pipeline-executions-input list-pipeline-executions-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/list-pipeline-executions-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/list-pipeline-executions-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListPipelineExecutions", :http.request.configuration/output-deser-fn deser-list-pipeline-executions-output, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "PipelineNotFoundException" :portkey.aws.codepipeline.-2015-07-09/pipeline-not-found-exception, "InvalidNextTokenException" :portkey.aws.codepipeline.-2015-07-09/invalid-next-token-exception}})))))
 (clojure.spec.alpha/fdef list-pipeline-executions :args (clojure.spec.alpha/tuple :portkey.aws.codepipeline.-2015-07-09/list-pipeline-executions-input) :ret (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/list-pipeline-executions-output))
 
-(clojure.core/defn poll-for-jobs ([poll-for-jobs-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-poll-for-jobs-input poll-for-jobs-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/poll-for-jobs-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/poll-for-jobs-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PollForJobs", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "ActionTypeNotFoundException" :portkey.aws.codepipeline.-2015-07-09/action-type-not-found-exception}})))))
+(clojure.core/defn poll-for-jobs ([poll-for-jobs-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-poll-for-jobs-input poll-for-jobs-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/poll-for-jobs-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/poll-for-jobs-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PollForJobs", :http.request.configuration/output-deser-fn deser-poll-for-jobs-output, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "ActionTypeNotFoundException" :portkey.aws.codepipeline.-2015-07-09/action-type-not-found-exception}})))))
 (clojure.spec.alpha/fdef poll-for-jobs :args (clojure.spec.alpha/tuple :portkey.aws.codepipeline.-2015-07-09/poll-for-jobs-input) :ret (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/poll-for-jobs-output))
 
-(clojure.core/defn retry-stage-execution ([retry-stage-execution-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-retry-stage-execution-input retry-stage-execution-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/retry-stage-execution-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/retry-stage-execution-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "RetryStageExecution", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "PipelineNotFoundException" :portkey.aws.codepipeline.-2015-07-09/pipeline-not-found-exception, "StageNotFoundException" :portkey.aws.codepipeline.-2015-07-09/stage-not-found-exception, "StageNotRetryableException" :portkey.aws.codepipeline.-2015-07-09/stage-not-retryable-exception, "NotLatestPipelineExecutionException" :portkey.aws.codepipeline.-2015-07-09/not-latest-pipeline-execution-exception}})))))
+(clojure.core/defn retry-stage-execution ([retry-stage-execution-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-retry-stage-execution-input retry-stage-execution-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/retry-stage-execution-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/retry-stage-execution-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "RetryStageExecution", :http.request.configuration/output-deser-fn deser-retry-stage-execution-output, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "PipelineNotFoundException" :portkey.aws.codepipeline.-2015-07-09/pipeline-not-found-exception, "StageNotFoundException" :portkey.aws.codepipeline.-2015-07-09/stage-not-found-exception, "StageNotRetryableException" :portkey.aws.codepipeline.-2015-07-09/stage-not-retryable-exception, "NotLatestPipelineExecutionException" :portkey.aws.codepipeline.-2015-07-09/not-latest-pipeline-execution-exception}})))))
 (clojure.spec.alpha/fdef retry-stage-execution :args (clojure.spec.alpha/tuple :portkey.aws.codepipeline.-2015-07-09/retry-stage-execution-input) :ret (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/retry-stage-execution-output))
 
-(clojure.core/defn delete-webhook ([delete-webhook-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-webhook-input delete-webhook-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/delete-webhook-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/delete-webhook-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteWebhook", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception}})))))
+(clojure.core/defn delete-webhook ([delete-webhook-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-webhook-input delete-webhook-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/delete-webhook-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/delete-webhook-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteWebhook", :http.request.configuration/output-deser-fn deser-delete-webhook-output, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception}})))))
 (clojure.spec.alpha/fdef delete-webhook :args (clojure.spec.alpha/tuple :portkey.aws.codepipeline.-2015-07-09/delete-webhook-input) :ret (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/delete-webhook-output))
 
-(clojure.core/defn get-pipeline-state ([get-pipeline-state-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-pipeline-state-input get-pipeline-state-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/get-pipeline-state-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/get-pipeline-state-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetPipelineState", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "PipelineNotFoundException" :portkey.aws.codepipeline.-2015-07-09/pipeline-not-found-exception}})))))
+(clojure.core/defn get-pipeline-state ([get-pipeline-state-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-get-pipeline-state-input get-pipeline-state-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/get-pipeline-state-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/get-pipeline-state-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetPipelineState", :http.request.configuration/output-deser-fn deser-get-pipeline-state-output, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "PipelineNotFoundException" :portkey.aws.codepipeline.-2015-07-09/pipeline-not-found-exception}})))))
 (clojure.spec.alpha/fdef get-pipeline-state :args (clojure.spec.alpha/tuple :portkey.aws.codepipeline.-2015-07-09/get-pipeline-state-input) :ret (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/get-pipeline-state-output))
 
-(clojure.core/defn put-third-party-job-success-result ([put-third-party-job-success-result-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-put-third-party-job-success-result-input put-third-party-job-success-result-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/put-third-party-job-success-result-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutThirdPartyJobSuccessResult", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "JobNotFoundException" :portkey.aws.codepipeline.-2015-07-09/job-not-found-exception, "InvalidJobStateException" :portkey.aws.codepipeline.-2015-07-09/invalid-job-state-exception, "InvalidClientTokenException" :portkey.aws.codepipeline.-2015-07-09/invalid-client-token-exception}})))))
+(clojure.core/defn put-third-party-job-success-result ([put-third-party-job-success-result-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-put-third-party-job-success-result-input put-third-party-job-success-result-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/put-third-party-job-success-result-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutThirdPartyJobSuccessResult", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "JobNotFoundException" :portkey.aws.codepipeline.-2015-07-09/job-not-found-exception, "InvalidJobStateException" :portkey.aws.codepipeline.-2015-07-09/invalid-job-state-exception, "InvalidClientTokenException" :portkey.aws.codepipeline.-2015-07-09/invalid-client-token-exception}})))))
 (clojure.spec.alpha/fdef put-third-party-job-success-result :args (clojure.spec.alpha/tuple :portkey.aws.codepipeline.-2015-07-09/put-third-party-job-success-result-input) :ret clojure.core/true?)
 
-(clojure.core/defn put-third-party-job-failure-result ([put-third-party-job-failure-result-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-put-third-party-job-failure-result-input put-third-party-job-failure-result-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/put-third-party-job-failure-result-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutThirdPartyJobFailureResult", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "JobNotFoundException" :portkey.aws.codepipeline.-2015-07-09/job-not-found-exception, "InvalidJobStateException" :portkey.aws.codepipeline.-2015-07-09/invalid-job-state-exception, "InvalidClientTokenException" :portkey.aws.codepipeline.-2015-07-09/invalid-client-token-exception}})))))
+(clojure.core/defn put-third-party-job-failure-result ([put-third-party-job-failure-result-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-put-third-party-job-failure-result-input put-third-party-job-failure-result-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/put-third-party-job-failure-result-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutThirdPartyJobFailureResult", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "JobNotFoundException" :portkey.aws.codepipeline.-2015-07-09/job-not-found-exception, "InvalidJobStateException" :portkey.aws.codepipeline.-2015-07-09/invalid-job-state-exception, "InvalidClientTokenException" :portkey.aws.codepipeline.-2015-07-09/invalid-client-token-exception}})))))
 (clojure.spec.alpha/fdef put-third-party-job-failure-result :args (clojure.spec.alpha/tuple :portkey.aws.codepipeline.-2015-07-09/put-third-party-job-failure-result-input) :ret clojure.core/true?)
 
-(clojure.core/defn poll-for-third-party-jobs ([poll-for-third-party-jobs-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-poll-for-third-party-jobs-input poll-for-third-party-jobs-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/poll-for-third-party-jobs-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/poll-for-third-party-jobs-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PollForThirdPartyJobs", :http.request.spec/error-spec {"ActionTypeNotFoundException" :portkey.aws.codepipeline.-2015-07-09/action-type-not-found-exception, "ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception}})))))
+(clojure.core/defn poll-for-third-party-jobs ([poll-for-third-party-jobs-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-poll-for-third-party-jobs-input poll-for-third-party-jobs-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/poll-for-third-party-jobs-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/poll-for-third-party-jobs-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PollForThirdPartyJobs", :http.request.configuration/output-deser-fn deser-poll-for-third-party-jobs-output, :http.request.spec/error-spec {"ActionTypeNotFoundException" :portkey.aws.codepipeline.-2015-07-09/action-type-not-found-exception, "ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception}})))))
 (clojure.spec.alpha/fdef poll-for-third-party-jobs :args (clojure.spec.alpha/tuple :portkey.aws.codepipeline.-2015-07-09/poll-for-third-party-jobs-input) :ret (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/poll-for-third-party-jobs-output))
 
-(clojure.core/defn put-job-success-result ([put-job-success-result-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-put-job-success-result-input put-job-success-result-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/put-job-success-result-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutJobSuccessResult", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "JobNotFoundException" :portkey.aws.codepipeline.-2015-07-09/job-not-found-exception, "InvalidJobStateException" :portkey.aws.codepipeline.-2015-07-09/invalid-job-state-exception}})))))
+(clojure.core/defn put-job-success-result ([put-job-success-result-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-put-job-success-result-input put-job-success-result-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/put-job-success-result-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutJobSuccessResult", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "JobNotFoundException" :portkey.aws.codepipeline.-2015-07-09/job-not-found-exception, "InvalidJobStateException" :portkey.aws.codepipeline.-2015-07-09/invalid-job-state-exception}})))))
 (clojure.spec.alpha/fdef put-job-success-result :args (clojure.spec.alpha/tuple :portkey.aws.codepipeline.-2015-07-09/put-job-success-result-input) :ret clojure.core/true?)
 
-(clojure.core/defn get-pipeline ([get-pipeline-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-pipeline-input get-pipeline-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/get-pipeline-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/get-pipeline-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetPipeline", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "PipelineNotFoundException" :portkey.aws.codepipeline.-2015-07-09/pipeline-not-found-exception, "PipelineVersionNotFoundException" :portkey.aws.codepipeline.-2015-07-09/pipeline-version-not-found-exception}})))))
+(clojure.core/defn get-pipeline ([get-pipeline-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-get-pipeline-input get-pipeline-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/get-pipeline-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/get-pipeline-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetPipeline", :http.request.configuration/output-deser-fn deser-get-pipeline-output, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "PipelineNotFoundException" :portkey.aws.codepipeline.-2015-07-09/pipeline-not-found-exception, "PipelineVersionNotFoundException" :portkey.aws.codepipeline.-2015-07-09/pipeline-version-not-found-exception}})))))
 (clojure.spec.alpha/fdef get-pipeline :args (clojure.spec.alpha/tuple :portkey.aws.codepipeline.-2015-07-09/get-pipeline-input) :ret (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/get-pipeline-output))
 
-(clojure.core/defn put-webhook ([put-webhook-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-put-webhook-input put-webhook-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/put-webhook-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/put-webhook-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutWebhook", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "LimitExceededException" :portkey.aws.codepipeline.-2015-07-09/limit-exceeded-exception, "InvalidWebhookFilterPatternException" :portkey.aws.codepipeline.-2015-07-09/invalid-webhook-filter-pattern-exception, "InvalidWebhookAuthenticationParametersException" :portkey.aws.codepipeline.-2015-07-09/invalid-webhook-authentication-parameters-exception, "PipelineNotFoundException" :portkey.aws.codepipeline.-2015-07-09/pipeline-not-found-exception}})))))
+(clojure.core/defn put-webhook ([put-webhook-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-put-webhook-input put-webhook-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/put-webhook-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/put-webhook-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutWebhook", :http.request.configuration/output-deser-fn deser-put-webhook-output, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "LimitExceededException" :portkey.aws.codepipeline.-2015-07-09/limit-exceeded-exception, "InvalidWebhookFilterPatternException" :portkey.aws.codepipeline.-2015-07-09/invalid-webhook-filter-pattern-exception, "InvalidWebhookAuthenticationParametersException" :portkey.aws.codepipeline.-2015-07-09/invalid-webhook-authentication-parameters-exception, "PipelineNotFoundException" :portkey.aws.codepipeline.-2015-07-09/pipeline-not-found-exception}})))))
 (clojure.spec.alpha/fdef put-webhook :args (clojure.spec.alpha/tuple :portkey.aws.codepipeline.-2015-07-09/put-webhook-input) :ret (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/put-webhook-output))
 
-(clojure.core/defn get-third-party-job-details ([get-third-party-job-details-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-third-party-job-details-input get-third-party-job-details-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/get-third-party-job-details-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/get-third-party-job-details-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetThirdPartyJobDetails", :http.request.spec/error-spec {"JobNotFoundException" :portkey.aws.codepipeline.-2015-07-09/job-not-found-exception, "ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "InvalidClientTokenException" :portkey.aws.codepipeline.-2015-07-09/invalid-client-token-exception, "InvalidJobException" :portkey.aws.codepipeline.-2015-07-09/invalid-job-exception}})))))
+(clojure.core/defn get-third-party-job-details ([get-third-party-job-details-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-get-third-party-job-details-input get-third-party-job-details-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/get-third-party-job-details-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/get-third-party-job-details-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetThirdPartyJobDetails", :http.request.configuration/output-deser-fn deser-get-third-party-job-details-output, :http.request.spec/error-spec {"JobNotFoundException" :portkey.aws.codepipeline.-2015-07-09/job-not-found-exception, "ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "InvalidClientTokenException" :portkey.aws.codepipeline.-2015-07-09/invalid-client-token-exception, "InvalidJobException" :portkey.aws.codepipeline.-2015-07-09/invalid-job-exception}})))))
 (clojure.spec.alpha/fdef get-third-party-job-details :args (clojure.spec.alpha/tuple :portkey.aws.codepipeline.-2015-07-09/get-third-party-job-details-input) :ret (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/get-third-party-job-details-output))
 
-(clojure.core/defn deregister-webhook-with-third-party ([] (deregister-webhook-with-third-party {})) ([deregister-webhook-with-third-party-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-deregister-webhook-with-third-party-input deregister-webhook-with-third-party-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/deregister-webhook-with-third-party-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/deregister-webhook-with-third-party-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeregisterWebhookWithThirdParty", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "WebhookNotFoundException" :portkey.aws.codepipeline.-2015-07-09/webhook-not-found-exception}})))))
+(clojure.core/defn deregister-webhook-with-third-party ([] (deregister-webhook-with-third-party {})) ([deregister-webhook-with-third-party-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-deregister-webhook-with-third-party-input deregister-webhook-with-third-party-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/deregister-webhook-with-third-party-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/deregister-webhook-with-third-party-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeregisterWebhookWithThirdParty", :http.request.configuration/output-deser-fn deser-deregister-webhook-with-third-party-output, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "WebhookNotFoundException" :portkey.aws.codepipeline.-2015-07-09/webhook-not-found-exception}})))))
 (clojure.spec.alpha/fdef deregister-webhook-with-third-party :args (clojure.spec.alpha/? :portkey.aws.codepipeline.-2015-07-09/deregister-webhook-with-third-party-input) :ret (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/deregister-webhook-with-third-party-output))
 
-(clojure.core/defn disable-stage-transition ([disable-stage-transition-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-disable-stage-transition-input disable-stage-transition-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/disable-stage-transition-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DisableStageTransition", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "PipelineNotFoundException" :portkey.aws.codepipeline.-2015-07-09/pipeline-not-found-exception, "StageNotFoundException" :portkey.aws.codepipeline.-2015-07-09/stage-not-found-exception}})))))
+(clojure.core/defn disable-stage-transition ([disable-stage-transition-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-disable-stage-transition-input disable-stage-transition-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/disable-stage-transition-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DisableStageTransition", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "PipelineNotFoundException" :portkey.aws.codepipeline.-2015-07-09/pipeline-not-found-exception, "StageNotFoundException" :portkey.aws.codepipeline.-2015-07-09/stage-not-found-exception}})))))
 (clojure.spec.alpha/fdef disable-stage-transition :args (clojure.spec.alpha/tuple :portkey.aws.codepipeline.-2015-07-09/disable-stage-transition-input) :ret clojure.core/true?)
 
-(clojure.core/defn delete-custom-action-type ([delete-custom-action-type-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-custom-action-type-input delete-custom-action-type-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/delete-custom-action-type-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteCustomActionType", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception}})))))
+(clojure.core/defn delete-custom-action-type ([delete-custom-action-type-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-custom-action-type-input delete-custom-action-type-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/delete-custom-action-type-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteCustomActionType", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception}})))))
 (clojure.spec.alpha/fdef delete-custom-action-type :args (clojure.spec.alpha/tuple :portkey.aws.codepipeline.-2015-07-09/delete-custom-action-type-input) :ret clojure.core/true?)
 
-(clojure.core/defn enable-stage-transition ([enable-stage-transition-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-enable-stage-transition-input enable-stage-transition-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/enable-stage-transition-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "EnableStageTransition", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "PipelineNotFoundException" :portkey.aws.codepipeline.-2015-07-09/pipeline-not-found-exception, "StageNotFoundException" :portkey.aws.codepipeline.-2015-07-09/stage-not-found-exception}})))))
+(clojure.core/defn enable-stage-transition ([enable-stage-transition-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-enable-stage-transition-input enable-stage-transition-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/enable-stage-transition-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "EnableStageTransition", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "PipelineNotFoundException" :portkey.aws.codepipeline.-2015-07-09/pipeline-not-found-exception, "StageNotFoundException" :portkey.aws.codepipeline.-2015-07-09/stage-not-found-exception}})))))
 (clojure.spec.alpha/fdef enable-stage-transition :args (clojure.spec.alpha/tuple :portkey.aws.codepipeline.-2015-07-09/enable-stage-transition-input) :ret clojure.core/true?)
 
-(clojure.core/defn put-job-failure-result ([put-job-failure-result-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-put-job-failure-result-input put-job-failure-result-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/put-job-failure-result-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutJobFailureResult", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "JobNotFoundException" :portkey.aws.codepipeline.-2015-07-09/job-not-found-exception, "InvalidJobStateException" :portkey.aws.codepipeline.-2015-07-09/invalid-job-state-exception}})))))
+(clojure.core/defn put-job-failure-result ([put-job-failure-result-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-put-job-failure-result-input put-job-failure-result-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/put-job-failure-result-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutJobFailureResult", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "JobNotFoundException" :portkey.aws.codepipeline.-2015-07-09/job-not-found-exception, "InvalidJobStateException" :portkey.aws.codepipeline.-2015-07-09/invalid-job-state-exception}})))))
 (clojure.spec.alpha/fdef put-job-failure-result :args (clojure.spec.alpha/tuple :portkey.aws.codepipeline.-2015-07-09/put-job-failure-result-input) :ret clojure.core/true?)
 
-(clojure.core/defn put-approval-result ([put-approval-result-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-put-approval-result-input put-approval-result-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/put-approval-result-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/put-approval-result-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutApprovalResult", :http.request.spec/error-spec {"InvalidApprovalTokenException" :portkey.aws.codepipeline.-2015-07-09/invalid-approval-token-exception, "ApprovalAlreadyCompletedException" :portkey.aws.codepipeline.-2015-07-09/approval-already-completed-exception, "PipelineNotFoundException" :portkey.aws.codepipeline.-2015-07-09/pipeline-not-found-exception, "StageNotFoundException" :portkey.aws.codepipeline.-2015-07-09/stage-not-found-exception, "ActionNotFoundException" :portkey.aws.codepipeline.-2015-07-09/action-not-found-exception, "ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception}})))))
+(clojure.core/defn put-approval-result ([put-approval-result-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-put-approval-result-input put-approval-result-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/put-approval-result-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/put-approval-result-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutApprovalResult", :http.request.configuration/output-deser-fn deser-put-approval-result-output, :http.request.spec/error-spec {"InvalidApprovalTokenException" :portkey.aws.codepipeline.-2015-07-09/invalid-approval-token-exception, "ApprovalAlreadyCompletedException" :portkey.aws.codepipeline.-2015-07-09/approval-already-completed-exception, "PipelineNotFoundException" :portkey.aws.codepipeline.-2015-07-09/pipeline-not-found-exception, "StageNotFoundException" :portkey.aws.codepipeline.-2015-07-09/stage-not-found-exception, "ActionNotFoundException" :portkey.aws.codepipeline.-2015-07-09/action-not-found-exception, "ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception}})))))
 (clojure.spec.alpha/fdef put-approval-result :args (clojure.spec.alpha/tuple :portkey.aws.codepipeline.-2015-07-09/put-approval-result-input) :ret (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/put-approval-result-output))
 
-(clojure.core/defn delete-pipeline ([delete-pipeline-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-pipeline-input delete-pipeline-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/delete-pipeline-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeletePipeline", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception}})))))
+(clojure.core/defn delete-pipeline ([delete-pipeline-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-pipeline-input delete-pipeline-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/delete-pipeline-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeletePipeline", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception}})))))
 (clojure.spec.alpha/fdef delete-pipeline :args (clojure.spec.alpha/tuple :portkey.aws.codepipeline.-2015-07-09/delete-pipeline-input) :ret clojure.core/true?)
 
-(clojure.core/defn put-action-revision ([put-action-revision-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-put-action-revision-input put-action-revision-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/put-action-revision-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/put-action-revision-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutActionRevision", :http.request.spec/error-spec {"PipelineNotFoundException" :portkey.aws.codepipeline.-2015-07-09/pipeline-not-found-exception, "StageNotFoundException" :portkey.aws.codepipeline.-2015-07-09/stage-not-found-exception, "ActionNotFoundException" :portkey.aws.codepipeline.-2015-07-09/action-not-found-exception, "ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception}})))))
+(clojure.core/defn put-action-revision ([put-action-revision-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-put-action-revision-input put-action-revision-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/put-action-revision-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/put-action-revision-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutActionRevision", :http.request.configuration/output-deser-fn deser-put-action-revision-output, :http.request.spec/error-spec {"PipelineNotFoundException" :portkey.aws.codepipeline.-2015-07-09/pipeline-not-found-exception, "StageNotFoundException" :portkey.aws.codepipeline.-2015-07-09/stage-not-found-exception, "ActionNotFoundException" :portkey.aws.codepipeline.-2015-07-09/action-not-found-exception, "ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception}})))))
 (clojure.spec.alpha/fdef put-action-revision :args (clojure.spec.alpha/tuple :portkey.aws.codepipeline.-2015-07-09/put-action-revision-input) :ret (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/put-action-revision-output))
 
-(clojure.core/defn get-pipeline-execution ([get-pipeline-execution-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-pipeline-execution-input get-pipeline-execution-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/get-pipeline-execution-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/get-pipeline-execution-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetPipelineExecution", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "PipelineNotFoundException" :portkey.aws.codepipeline.-2015-07-09/pipeline-not-found-exception, "PipelineExecutionNotFoundException" :portkey.aws.codepipeline.-2015-07-09/pipeline-execution-not-found-exception}})))))
+(clojure.core/defn get-pipeline-execution ([get-pipeline-execution-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-get-pipeline-execution-input get-pipeline-execution-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/get-pipeline-execution-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/get-pipeline-execution-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetPipelineExecution", :http.request.configuration/output-deser-fn deser-get-pipeline-execution-output, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "PipelineNotFoundException" :portkey.aws.codepipeline.-2015-07-09/pipeline-not-found-exception, "PipelineExecutionNotFoundException" :portkey.aws.codepipeline.-2015-07-09/pipeline-execution-not-found-exception}})))))
 (clojure.spec.alpha/fdef get-pipeline-execution :args (clojure.spec.alpha/tuple :portkey.aws.codepipeline.-2015-07-09/get-pipeline-execution-input) :ret (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/get-pipeline-execution-output))
 
-(clojure.core/defn get-job-details ([get-job-details-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-job-details-input get-job-details-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/get-job-details-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/get-job-details-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetJobDetails", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "JobNotFoundException" :portkey.aws.codepipeline.-2015-07-09/job-not-found-exception}})))))
+(clojure.core/defn get-job-details ([get-job-details-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-get-job-details-input get-job-details-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/get-job-details-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/get-job-details-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetJobDetails", :http.request.configuration/output-deser-fn deser-get-job-details-output, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "JobNotFoundException" :portkey.aws.codepipeline.-2015-07-09/job-not-found-exception}})))))
 (clojure.spec.alpha/fdef get-job-details :args (clojure.spec.alpha/tuple :portkey.aws.codepipeline.-2015-07-09/get-job-details-input) :ret (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/get-job-details-output))
 
-(clojure.core/defn list-action-types ([] (list-action-types {})) ([list-action-types-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-action-types-input list-action-types-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/list-action-types-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/list-action-types-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListActionTypes", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "InvalidNextTokenException" :portkey.aws.codepipeline.-2015-07-09/invalid-next-token-exception}})))))
+(clojure.core/defn list-action-types ([] (list-action-types {})) ([list-action-types-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-action-types-input list-action-types-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/list-action-types-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/list-action-types-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListActionTypes", :http.request.configuration/output-deser-fn deser-list-action-types-output, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "InvalidNextTokenException" :portkey.aws.codepipeline.-2015-07-09/invalid-next-token-exception}})))))
 (clojure.spec.alpha/fdef list-action-types :args (clojure.spec.alpha/? :portkey.aws.codepipeline.-2015-07-09/list-action-types-input) :ret (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/list-action-types-output))
 
-(clojure.core/defn update-pipeline ([update-pipeline-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-update-pipeline-input update-pipeline-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/update-pipeline-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/update-pipeline-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdatePipeline", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "InvalidStageDeclarationException" :portkey.aws.codepipeline.-2015-07-09/invalid-stage-declaration-exception, "InvalidActionDeclarationException" :portkey.aws.codepipeline.-2015-07-09/invalid-action-declaration-exception, "InvalidBlockerDeclarationException" :portkey.aws.codepipeline.-2015-07-09/invalid-blocker-declaration-exception, "InvalidStructureException" :portkey.aws.codepipeline.-2015-07-09/invalid-structure-exception, "LimitExceededException" :portkey.aws.codepipeline.-2015-07-09/limit-exceeded-exception}})))))
+(clojure.core/defn update-pipeline ([update-pipeline-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-update-pipeline-input update-pipeline-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/update-pipeline-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/update-pipeline-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdatePipeline", :http.request.configuration/output-deser-fn deser-update-pipeline-output, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "InvalidStageDeclarationException" :portkey.aws.codepipeline.-2015-07-09/invalid-stage-declaration-exception, "InvalidActionDeclarationException" :portkey.aws.codepipeline.-2015-07-09/invalid-action-declaration-exception, "InvalidBlockerDeclarationException" :portkey.aws.codepipeline.-2015-07-09/invalid-blocker-declaration-exception, "InvalidStructureException" :portkey.aws.codepipeline.-2015-07-09/invalid-structure-exception, "LimitExceededException" :portkey.aws.codepipeline.-2015-07-09/limit-exceeded-exception}})))))
 (clojure.spec.alpha/fdef update-pipeline :args (clojure.spec.alpha/tuple :portkey.aws.codepipeline.-2015-07-09/update-pipeline-input) :ret (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/update-pipeline-output))
 
-(clojure.core/defn register-webhook-with-third-party ([] (register-webhook-with-third-party {})) ([register-webhook-with-third-party-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-register-webhook-with-third-party-input register-webhook-with-third-party-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/register-webhook-with-third-party-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/register-webhook-with-third-party-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "RegisterWebhookWithThirdParty", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "WebhookNotFoundException" :portkey.aws.codepipeline.-2015-07-09/webhook-not-found-exception}})))))
+(clojure.core/defn register-webhook-with-third-party ([] (register-webhook-with-third-party {})) ([register-webhook-with-third-party-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-register-webhook-with-third-party-input register-webhook-with-third-party-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/register-webhook-with-third-party-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/register-webhook-with-third-party-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "RegisterWebhookWithThirdParty", :http.request.configuration/output-deser-fn deser-register-webhook-with-third-party-output, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "WebhookNotFoundException" :portkey.aws.codepipeline.-2015-07-09/webhook-not-found-exception}})))))
 (clojure.spec.alpha/fdef register-webhook-with-third-party :args (clojure.spec.alpha/? :portkey.aws.codepipeline.-2015-07-09/register-webhook-with-third-party-input) :ret (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/register-webhook-with-third-party-output))
 
-(clojure.core/defn start-pipeline-execution ([start-pipeline-execution-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-start-pipeline-execution-input start-pipeline-execution-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/start-pipeline-execution-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/start-pipeline-execution-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "StartPipelineExecution", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "PipelineNotFoundException" :portkey.aws.codepipeline.-2015-07-09/pipeline-not-found-exception}})))))
+(clojure.core/defn start-pipeline-execution ([start-pipeline-execution-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-start-pipeline-execution-input start-pipeline-execution-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/start-pipeline-execution-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/start-pipeline-execution-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "StartPipelineExecution", :http.request.configuration/output-deser-fn deser-start-pipeline-execution-output, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "PipelineNotFoundException" :portkey.aws.codepipeline.-2015-07-09/pipeline-not-found-exception}})))))
 (clojure.spec.alpha/fdef start-pipeline-execution :args (clojure.spec.alpha/tuple :portkey.aws.codepipeline.-2015-07-09/start-pipeline-execution-input) :ret (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/start-pipeline-execution-output))
 
-(clojure.core/defn list-webhooks ([] (list-webhooks {})) ([list-webhooks-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-webhooks-input list-webhooks-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/list-webhooks-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/list-webhooks-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListWebhooks", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "InvalidNextTokenException" :portkey.aws.codepipeline.-2015-07-09/invalid-next-token-exception}})))))
+(clojure.core/defn list-webhooks ([] (list-webhooks {})) ([list-webhooks-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-webhooks-input list-webhooks-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/list-webhooks-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/list-webhooks-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListWebhooks", :http.request.configuration/output-deser-fn deser-list-webhooks-output, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "InvalidNextTokenException" :portkey.aws.codepipeline.-2015-07-09/invalid-next-token-exception}})))))
 (clojure.spec.alpha/fdef list-webhooks :args (clojure.spec.alpha/? :portkey.aws.codepipeline.-2015-07-09/list-webhooks-input) :ret (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/list-webhooks-output))
 
-(clojure.core/defn acknowledge-third-party-job ([acknowledge-third-party-job-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-acknowledge-third-party-job-input acknowledge-third-party-job-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/acknowledge-third-party-job-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/acknowledge-third-party-job-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AcknowledgeThirdPartyJob", :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "InvalidNonceException" :portkey.aws.codepipeline.-2015-07-09/invalid-nonce-exception, "JobNotFoundException" :portkey.aws.codepipeline.-2015-07-09/job-not-found-exception, "InvalidClientTokenException" :portkey.aws.codepipeline.-2015-07-09/invalid-client-token-exception}})))))
+(clojure.core/defn acknowledge-third-party-job ([acknowledge-third-party-job-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-acknowledge-third-party-job-input acknowledge-third-party-job-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.codepipeline.-2015-07-09/endpoints, :http.request.configuration/target-prefix "CodePipeline_20150709", :http.request.spec/output-spec :portkey.aws.codepipeline.-2015-07-09/acknowledge-third-party-job-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2015-07-09", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.codepipeline.-2015-07-09/acknowledge-third-party-job-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AcknowledgeThirdPartyJob", :http.request.configuration/output-deser-fn deser-acknowledge-third-party-job-output, :http.request.spec/error-spec {"ValidationException" :portkey.aws.codepipeline.-2015-07-09/validation-exception, "InvalidNonceException" :portkey.aws.codepipeline.-2015-07-09/invalid-nonce-exception, "JobNotFoundException" :portkey.aws.codepipeline.-2015-07-09/job-not-found-exception, "InvalidClientTokenException" :portkey.aws.codepipeline.-2015-07-09/invalid-client-token-exception}})))))
 (clojure.spec.alpha/fdef acknowledge-third-party-job :args (clojure.spec.alpha/tuple :portkey.aws.codepipeline.-2015-07-09/acknowledge-third-party-job-input) :ret (clojure.spec.alpha/and :portkey.aws.codepipeline.-2015-07-09/acknowledge-third-party-job-output))

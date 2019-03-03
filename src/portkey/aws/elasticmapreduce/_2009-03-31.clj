@@ -539,6 +539,608 @@
 
 (clojure.core/defn- req-terminate-job-flows-input [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-xml-string-list (input :job-flow-ids)) #:http.request.field{:name "JobFlowIds", :shape "XmlStringList"})]}))
 
+(clojure.core/declare deser-placement-type)
+
+(clojure.core/declare deser-application)
+
+(clojure.core/declare deser-instance-fleet-state)
+
+(clojure.core/declare deser-string-list)
+
+(clojure.core/declare deser-bootstrap-action-detail)
+
+(clojure.core/declare deser-unit)
+
+(clojure.core/declare deser-step-summary-list)
+
+(clojure.core/declare deser-instance-state-change-reason-code)
+
+(clojure.core/declare deser-instance-id)
+
+(clojure.core/declare deser-step-summary)
+
+(clojure.core/declare deser-instance-group-type)
+
+(clojure.core/declare deser-auto-scaling-policy-state-change-reason-code)
+
+(clojure.core/declare deser-instance-group-detail)
+
+(clojure.core/declare deser-string-map)
+
+(clojure.core/declare deser-instance-fleet-state-change-reason-code)
+
+(clojure.core/declare deser-xml-string-list)
+
+(clojure.core/declare deser-auto-scaling-policy-status)
+
+(clojure.core/declare deser-non-negative-double)
+
+(clojure.core/declare deser-ebs-block-device)
+
+(clojure.core/declare deser-key-value)
+
+(clojure.core/declare deser-instance-group-list)
+
+(clojure.core/declare deser-step-timeline)
+
+(clojure.core/declare deser-step-state-change-reason)
+
+(clojure.core/declare deser-script-bootstrap-action-config)
+
+(clojure.core/declare deser-supported-products-list)
+
+(clojure.core/declare deser-cancel-steps-info-list)
+
+(clojure.core/declare deser-scaling-action)
+
+(clojure.core/declare deser-step-detail-list)
+
+(clojure.core/declare deser-configuration-list)
+
+(clojure.core/declare deser-kerberos-attributes)
+
+(clojure.core/declare deser-bootstrap-action-detail-list)
+
+(clojure.core/declare deser-shrink-policy)
+
+(clojure.core/declare deser-instance-group)
+
+(clojure.core/declare deser-instance-type)
+
+(clojure.core/declare deser-step-execution-state)
+
+(clojure.core/declare deser-key-value-list)
+
+(clojure.core/declare deser-job-flow-execution-status-detail)
+
+(clojure.core/declare deser-auto-scaling-policy-state)
+
+(clojure.core/declare deser-xml-string-max-len-256)
+
+(clojure.core/declare deser-scale-down-behavior)
+
+(clojure.core/declare deser-repo-upgrade-on-boot)
+
+(clojure.core/declare deser-marker)
+
+(clojure.core/declare deser-job-flow-detail)
+
+(clojure.core/declare deser-ec-2-instance-attributes)
+
+(clojure.core/declare deser-whole-number)
+
+(clojure.core/declare deser-step-config)
+
+(clojure.core/declare deser-step-detail)
+
+(clojure.core/declare deser-comparison-operator)
+
+(clojure.core/declare deser-cluster-id)
+
+(clojure.core/declare deser-hadoop-jar-step-config)
+
+(clojure.core/declare deser-hadoop-step-config)
+
+(clojure.core/declare deser-instance-fleet)
+
+(clojure.core/declare deser-security-configuration-list)
+
+(clojure.core/declare deser-instance-group-state)
+
+(clojure.core/declare deser-xml-string-max-len-256-list)
+
+(clojure.core/declare deser-instance-fleet-list)
+
+(clojure.core/declare deser-instance-resize-policy)
+
+(clojure.core/declare deser-action-on-failure)
+
+(clojure.core/declare deser-cluster-summary)
+
+(clojure.core/declare deser-error-message)
+
+(clojure.core/declare deser-instance-fleet-id)
+
+(clojure.core/declare deser-date)
+
+(clojure.core/declare deser-auto-scaling-policy-state-change-reason)
+
+(clojure.core/declare deser-instance-group-timeline)
+
+(clojure.core/declare deser-spot-provisioning-specification)
+
+(clojure.core/declare deser-step)
+
+(clojure.core/declare deser-step-state-change-reason-code)
+
+(clojure.core/declare deser-tag-list)
+
+(clojure.core/declare deser-cluster-state)
+
+(clojure.core/declare deser-xml-string)
+
+(clojure.core/declare deser-instance-fleet-timeline)
+
+(clojure.core/declare deser-error-code)
+
+(clojure.core/declare deser-cluster)
+
+(clojure.core/declare deser-cluster-timeline)
+
+(clojure.core/declare deser-auto-scaling-policy-description)
+
+(clojure.core/declare deser-scaling-rule-list)
+
+(clojure.core/declare deser-step-ids-list)
+
+(clojure.core/declare deser-instance-group-id)
+
+(clojure.core/declare deser-instance-type-specification)
+
+(clojure.core/declare deser-adjustment-type)
+
+(clojure.core/declare deser-cluster-status)
+
+(clojure.core/declare deser-ebs-volume-list)
+
+(clojure.core/declare deser-ebs-block-device-list)
+
+(clojure.core/declare deser-cluster-state-change-reason)
+
+(clojure.core/declare deser-instance-type-specification-list)
+
+(clojure.core/declare deser-failure-details)
+
+(clojure.core/declare deser-job-flow-detail-list)
+
+(clojure.core/declare deser-metric-dimension)
+
+(clojure.core/declare deser-volume-specification)
+
+(clojure.core/declare deser-bootstrap-action-config)
+
+(clojure.core/declare deser-integer)
+
+(clojure.core/declare deser-string)
+
+(clojure.core/declare deser-step-status)
+
+(clojure.core/declare deser-metric-dimension-list)
+
+(clojure.core/declare deser-instance-collection-type)
+
+(clojure.core/declare deser-instance-group-status)
+
+(clojure.core/declare deser-instance-fleet-status)
+
+(clojure.core/declare deser-spot-provisioning-timeout-action)
+
+(clojure.core/declare deser-command)
+
+(clojure.core/declare deser-security-configuration-summary)
+
+(clojure.core/declare deser-instance-list)
+
+(clojure.core/declare deser-instance-group-state-change-reason)
+
+(clojure.core/declare deser-cluster-summary-list)
+
+(clojure.core/declare deser-command-list)
+
+(clojure.core/declare deser-application-list)
+
+(clojure.core/declare deser-instance-state)
+
+(clojure.core/declare deser-job-flow-execution-state)
+
+(clojure.core/declare deser-instance-group-ids-list)
+
+(clojure.core/declare deser-tag)
+
+(clojure.core/declare deser-cloud-watch-alarm-definition)
+
+(clojure.core/declare deser-instance-group-detail-list)
+
+(clojure.core/declare deser-instance-status)
+
+(clojure.core/declare deser-market-type)
+
+(clojure.core/declare deser-instance)
+
+(clojure.core/declare deser-instance-state-change-reason)
+
+(clojure.core/declare deser-scaling-rule)
+
+(clojure.core/declare deser-ebs-volume)
+
+(clojure.core/declare deser-cancel-steps-info)
+
+(clojure.core/declare deser-ec-2-instance-ids-list)
+
+(clojure.core/declare deser-scaling-constraints)
+
+(clojure.core/declare deser-scaling-trigger)
+
+(clojure.core/declare deser-instance-fleet-type)
+
+(clojure.core/declare deser-step-id)
+
+(clojure.core/declare deser-configuration)
+
+(clojure.core/declare deser-boolean-object)
+
+(clojure.core/declare deser-step-state)
+
+(clojure.core/declare deser-job-flow-instances-detail)
+
+(clojure.core/declare deser-cancel-steps-request-status)
+
+(clojure.core/declare deser-instance-role-type)
+
+(clojure.core/declare deser-statistic)
+
+(clojure.core/declare deser-instance-fleet-state-change-reason)
+
+(clojure.core/declare deser-step-execution-status-detail)
+
+(clojure.core/declare deser-cluster-state-change-reason-code)
+
+(clojure.core/declare deser-simple-scaling-policy-configuration)
+
+(clojure.core/declare deser-instance-timeline)
+
+(clojure.core/declare deser-instance-group-state-change-reason-code)
+
+(clojure.core/declare deser-instance-fleet-provisioning-specifications)
+
+(clojure.core/declare deser-boolean)
+
+(clojure.core/defn- deser-placement-type [input] (clojure.core/cond-> {} (clojure.core/contains? input "AvailabilityZone") (clojure.core/assoc :availability-zone (deser-xml-string (input "AvailabilityZone"))) (clojure.core/contains? input "AvailabilityZones") (clojure.core/assoc :availability-zones (deser-xml-string-max-len-256-list (input "AvailabilityZones")))))
+
+(clojure.core/defn- deser-application [input] (clojure.core/cond-> {} (clojure.core/contains? input "Name") (clojure.core/assoc :name (deser-string (input "Name"))) (clojure.core/contains? input "Version") (clojure.core/assoc :version (deser-string (input "Version"))) (clojure.core/contains? input "Args") (clojure.core/assoc :args (deser-string-list (input "Args"))) (clojure.core/contains? input "AdditionalInfo") (clojure.core/assoc :additional-info (deser-string-map (input "AdditionalInfo")))))
+
+(clojure.core/defn- deser-instance-fleet-state [input] (clojure.core/get {"PROVISIONING" :provisioning, "BOOTSTRAPPING" :bootstrapping, "RUNNING" :running, "RESIZING" :resizing, "SUSPENDED" :suspended, "TERMINATING" :terminating, "TERMINATED" :terminated} input))
+
+(clojure.core/defn- deser-string-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-string coll))) input))
+
+(clojure.core/defn- deser-bootstrap-action-detail [input] (clojure.core/cond-> {} (clojure.core/contains? input "BootstrapActionConfig") (clojure.core/assoc :bootstrap-action-config (deser-bootstrap-action-config (input "BootstrapActionConfig")))))
+
+(clojure.core/defn- deser-unit [input] (clojure.core/get {"KILO_BYTES_PER_SECOND" :kilo-bytes-per-second, "PERCENT" :percent, "BITS" :bits, "COUNT_PER_SECOND" :count-per-second, "MICRO_SECONDS" :micro-seconds, "COUNT" :count, "KILO_BITS" :kilo-bits, "MEGA_BITS" :mega-bits, "TERA_BYTES" :tera-bytes, "GIGA_BITS" :giga-bits, "SECONDS" :seconds, "GIGA_BYTES" :giga-bytes, "BYTES_PER_SECOND" :bytes-per-second, "GIGA_BITS_PER_SECOND" :giga-bits-per-second, "MEGA_BYTES_PER_SECOND" :mega-bytes-per-second, "TERA_BYTES_PER_SECOND" :tera-bytes-per-second, "KILO_BITS_PER_SECOND" :kilo-bits-per-second, "NONE" :none, "MEGA_BYTES" :mega-bytes, "BITS_PER_SECOND" :bits-per-second, "TERA_BITS" :tera-bits, "TERA_BITS_PER_SECOND" :tera-bits-per-second, "BYTES" :bytes, "MEGA_BITS_PER_SECOND" :mega-bits-per-second, "MILLI_SECONDS" :milli-seconds, "GIGA_BYTES_PER_SECOND" :giga-bytes-per-second, "KILO_BYTES" :kilo-bytes} input))
+
+(clojure.core/defn- deser-step-summary-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-step-summary coll))) input))
+
+(clojure.core/defn- deser-instance-state-change-reason-code [input] (clojure.core/get {"INTERNAL_ERROR" :internal-error, "VALIDATION_ERROR" :validation-error, "INSTANCE_FAILURE" :instance-failure, "BOOTSTRAP_FAILURE" :bootstrap-failure, "CLUSTER_TERMINATED" :cluster-terminated} input))
+
+(clojure.core/defn- deser-instance-id [input] input)
+
+(clojure.core/defn- deser-step-summary [input] (clojure.core/cond-> {} (clojure.core/contains? input "Id") (clojure.core/assoc :id (deser-step-id (input "Id"))) (clojure.core/contains? input "Name") (clojure.core/assoc :name (deser-string (input "Name"))) (clojure.core/contains? input "Config") (clojure.core/assoc :config (deser-hadoop-step-config (input "Config"))) (clojure.core/contains? input "ActionOnFailure") (clojure.core/assoc :action-on-failure (deser-action-on-failure (input "ActionOnFailure"))) (clojure.core/contains? input "Status") (clojure.core/assoc :status (deser-step-status (input "Status")))))
+
+(clojure.core/defn- deser-instance-group-type [input] (clojure.core/get {"MASTER" :master, "CORE" :core, "TASK" :task} input))
+
+(clojure.core/defn- deser-auto-scaling-policy-state-change-reason-code [input] (clojure.core/get {"USER_REQUEST" :user-request, "PROVISION_FAILURE" :provision-failure, "CLEANUP_FAILURE" :cleanup-failure} input))
+
+(clojure.core/defn- deser-instance-group-detail [input] (clojure.core/cond-> {:market (deser-market-type (input "Market")), :instance-role (deser-instance-role-type (input "InstanceRole")), :instance-type (deser-instance-type (input "InstanceType")), :instance-request-count (deser-integer (input "InstanceRequestCount")), :instance-running-count (deser-integer (input "InstanceRunningCount")), :state (deser-instance-group-state (input "State")), :creation-date-time (deser-date (input "CreationDateTime"))} (clojure.core/contains? input "BidPrice") (clojure.core/assoc :bid-price (deser-xml-string-max-len-256 (input "BidPrice"))) (clojure.core/contains? input "ReadyDateTime") (clojure.core/assoc :ready-date-time (deser-date (input "ReadyDateTime"))) (clojure.core/contains? input "InstanceGroupId") (clojure.core/assoc :instance-group-id (deser-xml-string-max-len-256 (input "InstanceGroupId"))) (clojure.core/contains? input "LastStateChangeReason") (clojure.core/assoc :last-state-change-reason (deser-xml-string (input "LastStateChangeReason"))) (clojure.core/contains? input "EndDateTime") (clojure.core/assoc :end-date-time (deser-date (input "EndDateTime"))) (clojure.core/contains? input "Name") (clojure.core/assoc :name (deser-xml-string-max-len-256 (input "Name"))) (clojure.core/contains? input "StartDateTime") (clojure.core/assoc :start-date-time (deser-date (input "StartDateTime")))))
+
+(clojure.core/defn- deser-string-map [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-string k) (deser-string v)])) input))
+
+(clojure.core/defn- deser-instance-fleet-state-change-reason-code [input] (clojure.core/get {"INTERNAL_ERROR" :internal-error, "VALIDATION_ERROR" :validation-error, "INSTANCE_FAILURE" :instance-failure, "CLUSTER_TERMINATED" :cluster-terminated} input))
+
+(clojure.core/defn- deser-xml-string-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-xml-string coll))) input))
+
+(clojure.core/defn- deser-auto-scaling-policy-status [input] (clojure.core/cond-> {} (clojure.core/contains? input "State") (clojure.core/assoc :state (deser-auto-scaling-policy-state (input "State"))) (clojure.core/contains? input "StateChangeReason") (clojure.core/assoc :state-change-reason (deser-auto-scaling-policy-state-change-reason (input "StateChangeReason")))))
+
+(clojure.core/defn- deser-non-negative-double [input] input)
+
+(clojure.core/defn- deser-ebs-block-device [input] (clojure.core/cond-> {} (clojure.core/contains? input "VolumeSpecification") (clojure.core/assoc :volume-specification (deser-volume-specification (input "VolumeSpecification"))) (clojure.core/contains? input "Device") (clojure.core/assoc :device (deser-string (input "Device")))))
+
+(clojure.core/defn- deser-key-value [input] (clojure.core/cond-> {} (clojure.core/contains? input "Key") (clojure.core/assoc :key (deser-xml-string (input "Key"))) (clojure.core/contains? input "Value") (clojure.core/assoc :value (deser-xml-string (input "Value")))))
+
+(clojure.core/defn- deser-instance-group-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-instance-group coll))) input))
+
+(clojure.core/defn- deser-step-timeline [input] (clojure.core/cond-> {} (clojure.core/contains? input "CreationDateTime") (clojure.core/assoc :creation-date-time (deser-date (input "CreationDateTime"))) (clojure.core/contains? input "StartDateTime") (clojure.core/assoc :start-date-time (deser-date (input "StartDateTime"))) (clojure.core/contains? input "EndDateTime") (clojure.core/assoc :end-date-time (deser-date (input "EndDateTime")))))
+
+(clojure.core/defn- deser-step-state-change-reason [input] (clojure.core/cond-> {} (clojure.core/contains? input "Code") (clojure.core/assoc :code (deser-step-state-change-reason-code (input "Code"))) (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-string (input "Message")))))
+
+(clojure.core/defn- deser-script-bootstrap-action-config [input] (clojure.core/cond-> {:path (deser-xml-string (input "Path"))} (clojure.core/contains? input "Args") (clojure.core/assoc :args (deser-xml-string-list (input "Args")))))
+
+(clojure.core/defn- deser-supported-products-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-xml-string-max-len-256 coll))) input))
+
+(clojure.core/defn- deser-cancel-steps-info-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-cancel-steps-info coll))) input))
+
+(clojure.core/defn- deser-scaling-action [input] (clojure.core/cond-> {:simple-scaling-policy-configuration (deser-simple-scaling-policy-configuration (input "SimpleScalingPolicyConfiguration"))} (clojure.core/contains? input "Market") (clojure.core/assoc :market (deser-market-type (input "Market")))))
+
+(clojure.core/defn- deser-step-detail-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-step-detail coll))) input))
+
+(clojure.core/defn- deser-configuration-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-configuration coll))) input))
+
+(clojure.core/defn- deser-kerberos-attributes [input] (clojure.core/cond-> {:realm (deser-xml-string-max-len-256 (input "Realm")), :kdc-admin-password (deser-xml-string-max-len-256 (input "KdcAdminPassword"))} (clojure.core/contains? input "CrossRealmTrustPrincipalPassword") (clojure.core/assoc :cross-realm-trust-principal-password (deser-xml-string-max-len-256 (input "CrossRealmTrustPrincipalPassword"))) (clojure.core/contains? input "ADDomainJoinUser") (clojure.core/assoc :ad-domain-join-user (deser-xml-string-max-len-256 (input "ADDomainJoinUser"))) (clojure.core/contains? input "ADDomainJoinPassword") (clojure.core/assoc :ad-domain-join-password (deser-xml-string-max-len-256 (input "ADDomainJoinPassword")))))
+
+(clojure.core/defn- deser-bootstrap-action-detail-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-bootstrap-action-detail coll))) input))
+
+(clojure.core/defn- deser-shrink-policy [input] (clojure.core/cond-> {} (clojure.core/contains? input "DecommissionTimeout") (clojure.core/assoc :decommission-timeout (deser-integer (input "DecommissionTimeout"))) (clojure.core/contains? input "InstanceResizePolicy") (clojure.core/assoc :instance-resize-policy (deser-instance-resize-policy (input "InstanceResizePolicy")))))
+
+(clojure.core/defn- deser-instance-group [input] (clojure.core/cond-> {} (clojure.core/contains? input "BidPrice") (clojure.core/assoc :bid-price (deser-string (input "BidPrice"))) (clojure.core/contains? input "InstanceGroupType") (clojure.core/assoc :instance-group-type (deser-instance-group-type (input "InstanceGroupType"))) (clojure.core/contains? input "EbsOptimized") (clojure.core/assoc :ebs-optimized (deser-boolean-object (input "EbsOptimized"))) (clojure.core/contains? input "ShrinkPolicy") (clojure.core/assoc :shrink-policy (deser-shrink-policy (input "ShrinkPolicy"))) (clojure.core/contains? input "InstanceType") (clojure.core/assoc :instance-type (deser-instance-type (input "InstanceType"))) (clojure.core/contains? input "Configurations") (clojure.core/assoc :configurations (deser-configuration-list (input "Configurations"))) (clojure.core/contains? input "Status") (clojure.core/assoc :status (deser-instance-group-status (input "Status"))) (clojure.core/contains? input "RunningInstanceCount") (clojure.core/assoc :running-instance-count (deser-integer (input "RunningInstanceCount"))) (clojure.core/contains? input "AutoScalingPolicy") (clojure.core/assoc :auto-scaling-policy (deser-auto-scaling-policy-description (input "AutoScalingPolicy"))) (clojure.core/contains? input "EbsBlockDevices") (clojure.core/assoc :ebs-block-devices (deser-ebs-block-device-list (input "EbsBlockDevices"))) (clojure.core/contains? input "Name") (clojure.core/assoc :name (deser-string (input "Name"))) (clojure.core/contains? input "RequestedInstanceCount") (clojure.core/assoc :requested-instance-count (deser-integer (input "RequestedInstanceCount"))) (clojure.core/contains? input "Id") (clojure.core/assoc :id (deser-instance-group-id (input "Id"))) (clojure.core/contains? input "Market") (clojure.core/assoc :market (deser-market-type (input "Market")))))
+
+(clojure.core/defn- deser-instance-type [input] input)
+
+(clojure.core/defn- deser-step-execution-state [input] (clojure.core/get {"PENDING" :pending, "RUNNING" :running, "CONTINUE" :continue, "COMPLETED" :completed, "CANCELLED" :cancelled, "FAILED" :failed, "INTERRUPTED" :interrupted} input))
+
+(clojure.core/defn- deser-key-value-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-key-value coll))) input))
+
+(clojure.core/defn- deser-job-flow-execution-status-detail [input] (clojure.core/cond-> {:state (deser-job-flow-execution-state (input "State")), :creation-date-time (deser-date (input "CreationDateTime"))} (clojure.core/contains? input "StartDateTime") (clojure.core/assoc :start-date-time (deser-date (input "StartDateTime"))) (clojure.core/contains? input "ReadyDateTime") (clojure.core/assoc :ready-date-time (deser-date (input "ReadyDateTime"))) (clojure.core/contains? input "EndDateTime") (clojure.core/assoc :end-date-time (deser-date (input "EndDateTime"))) (clojure.core/contains? input "LastStateChangeReason") (clojure.core/assoc :last-state-change-reason (deser-xml-string (input "LastStateChangeReason")))))
+
+(clojure.core/defn- deser-auto-scaling-policy-state [input] (clojure.core/get {"PENDING" :pending, "ATTACHING" :attaching, "ATTACHED" :attached, "DETACHING" :detaching, "DETACHED" :detached, "FAILED" :failed} input))
+
+(clojure.core/defn- deser-xml-string-max-len-256 [input] input)
+
+(clojure.core/defn- deser-scale-down-behavior [input] (clojure.core/get {"TERMINATE_AT_INSTANCE_HOUR" :terminate-at-instance-hour, "TERMINATE_AT_TASK_COMPLETION" :terminate-at-task-completion} input))
+
+(clojure.core/defn- deser-repo-upgrade-on-boot [input] (clojure.core/get {"SECURITY" :security, "NONE" :none} input))
+
+(clojure.core/defn- deser-marker [input] input)
+
+(clojure.core/defn- deser-job-flow-detail [input] (clojure.core/cond-> {:job-flow-id (deser-xml-string-max-len-256 (input "JobFlowId")), :name (deser-xml-string-max-len-256 (input "Name")), :execution-status-detail (deser-job-flow-execution-status-detail (input "ExecutionStatusDetail")), :instances (deser-job-flow-instances-detail (input "Instances"))} (clojure.core/contains? input "ServiceRole") (clojure.core/assoc :service-role (deser-xml-string (input "ServiceRole"))) (clojure.core/contains? input "AutoScalingRole") (clojure.core/assoc :auto-scaling-role (deser-xml-string (input "AutoScalingRole"))) (clojure.core/contains? input "JobFlowRole") (clojure.core/assoc :job-flow-role (deser-xml-string (input "JobFlowRole"))) (clojure.core/contains? input "LogUri") (clojure.core/assoc :log-uri (deser-xml-string (input "LogUri"))) (clojure.core/contains? input "ScaleDownBehavior") (clojure.core/assoc :scale-down-behavior (deser-scale-down-behavior (input "ScaleDownBehavior"))) (clojure.core/contains? input "VisibleToAllUsers") (clojure.core/assoc :visible-to-all-users (deser-boolean (input "VisibleToAllUsers"))) (clojure.core/contains? input "Steps") (clojure.core/assoc :steps (deser-step-detail-list (input "Steps"))) (clojure.core/contains? input "SupportedProducts") (clojure.core/assoc :supported-products (deser-supported-products-list (input "SupportedProducts"))) (clojure.core/contains? input "BootstrapActions") (clojure.core/assoc :bootstrap-actions (deser-bootstrap-action-detail-list (input "BootstrapActions"))) (clojure.core/contains? input "AmiVersion") (clojure.core/assoc :ami-version (deser-xml-string-max-len-256 (input "AmiVersion")))))
+
+(clojure.core/defn- deser-ec-2-instance-attributes [input] (clojure.core/cond-> {} (clojure.core/contains? input "EmrManagedSlaveSecurityGroup") (clojure.core/assoc :emr-managed-slave-security-group (deser-string (input "EmrManagedSlaveSecurityGroup"))) (clojure.core/contains? input "RequestedEc2SubnetIds") (clojure.core/assoc :requested-ec-2-subnet-ids (deser-xml-string-max-len-256-list (input "RequestedEc2SubnetIds"))) (clojure.core/contains? input "Ec2AvailabilityZone") (clojure.core/assoc :ec-2-availability-zone (deser-string (input "Ec2AvailabilityZone"))) (clojure.core/contains? input "Ec2KeyName") (clojure.core/assoc :ec-2-key-name (deser-string (input "Ec2KeyName"))) (clojure.core/contains? input "ServiceAccessSecurityGroup") (clojure.core/assoc :service-access-security-group (deser-string (input "ServiceAccessSecurityGroup"))) (clojure.core/contains? input "AdditionalSlaveSecurityGroups") (clojure.core/assoc :additional-slave-security-groups (deser-string-list (input "AdditionalSlaveSecurityGroups"))) (clojure.core/contains? input "EmrManagedMasterSecurityGroup") (clojure.core/assoc :emr-managed-master-security-group (deser-string (input "EmrManagedMasterSecurityGroup"))) (clojure.core/contains? input "Ec2SubnetId") (clojure.core/assoc :ec-2-subnet-id (deser-string (input "Ec2SubnetId"))) (clojure.core/contains? input "AdditionalMasterSecurityGroups") (clojure.core/assoc :additional-master-security-groups (deser-string-list (input "AdditionalMasterSecurityGroups"))) (clojure.core/contains? input "RequestedEc2AvailabilityZones") (clojure.core/assoc :requested-ec-2-availability-zones (deser-xml-string-max-len-256-list (input "RequestedEc2AvailabilityZones"))) (clojure.core/contains? input "IamInstanceProfile") (clojure.core/assoc :iam-instance-profile (deser-string (input "IamInstanceProfile")))))
+
+(clojure.core/defn- deser-whole-number [input] input)
+
+(clojure.core/defn- deser-step-config [input] (clojure.core/cond-> {:name (deser-xml-string-max-len-256 (input "Name")), :hadoop-jar-step (deser-hadoop-jar-step-config (input "HadoopJarStep"))} (clojure.core/contains? input "ActionOnFailure") (clojure.core/assoc :action-on-failure (deser-action-on-failure (input "ActionOnFailure")))))
+
+(clojure.core/defn- deser-step-detail [input] (clojure.core/cond-> {:step-config (deser-step-config (input "StepConfig")), :execution-status-detail (deser-step-execution-status-detail (input "ExecutionStatusDetail"))}))
+
+(clojure.core/defn- deser-comparison-operator [input] (clojure.core/get {"GREATER_THAN_OR_EQUAL" :greater-than-or-equal, "GREATER_THAN" :greater-than, "LESS_THAN" :less-than, "LESS_THAN_OR_EQUAL" :less-than-or-equal} input))
+
+(clojure.core/defn- deser-cluster-id [input] input)
+
+(clojure.core/defn- deser-hadoop-jar-step-config [input] (clojure.core/cond-> {:jar (deser-xml-string (input "Jar"))} (clojure.core/contains? input "Properties") (clojure.core/assoc :properties (deser-key-value-list (input "Properties"))) (clojure.core/contains? input "MainClass") (clojure.core/assoc :main-class (deser-xml-string (input "MainClass"))) (clojure.core/contains? input "Args") (clojure.core/assoc :args (deser-xml-string-list (input "Args")))))
+
+(clojure.core/defn- deser-hadoop-step-config [input] (clojure.core/cond-> {} (clojure.core/contains? input "Jar") (clojure.core/assoc :jar (deser-string (input "Jar"))) (clojure.core/contains? input "Properties") (clojure.core/assoc :properties (deser-string-map (input "Properties"))) (clojure.core/contains? input "MainClass") (clojure.core/assoc :main-class (deser-string (input "MainClass"))) (clojure.core/contains? input "Args") (clojure.core/assoc :args (deser-string-list (input "Args")))))
+
+(clojure.core/defn- deser-instance-fleet [input] (clojure.core/cond-> {} (clojure.core/contains? input "InstanceTypeSpecifications") (clojure.core/assoc :instance-type-specifications (deser-instance-type-specification-list (input "InstanceTypeSpecifications"))) (clojure.core/contains? input "TargetOnDemandCapacity") (clojure.core/assoc :target-on-demand-capacity (deser-whole-number (input "TargetOnDemandCapacity"))) (clojure.core/contains? input "Status") (clojure.core/assoc :status (deser-instance-fleet-status (input "Status"))) (clojure.core/contains? input "TargetSpotCapacity") (clojure.core/assoc :target-spot-capacity (deser-whole-number (input "TargetSpotCapacity"))) (clojure.core/contains? input "Name") (clojure.core/assoc :name (deser-xml-string-max-len-256 (input "Name"))) (clojure.core/contains? input "InstanceFleetType") (clojure.core/assoc :instance-fleet-type (deser-instance-fleet-type (input "InstanceFleetType"))) (clojure.core/contains? input "Id") (clojure.core/assoc :id (deser-instance-fleet-id (input "Id"))) (clojure.core/contains? input "ProvisionedSpotCapacity") (clojure.core/assoc :provisioned-spot-capacity (deser-whole-number (input "ProvisionedSpotCapacity"))) (clojure.core/contains? input "LaunchSpecifications") (clojure.core/assoc :launch-specifications (deser-instance-fleet-provisioning-specifications (input "LaunchSpecifications"))) (clojure.core/contains? input "ProvisionedOnDemandCapacity") (clojure.core/assoc :provisioned-on-demand-capacity (deser-whole-number (input "ProvisionedOnDemandCapacity")))))
+
+(clojure.core/defn- deser-security-configuration-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-security-configuration-summary coll))) input))
+
+(clojure.core/defn- deser-instance-group-state [input] (clojure.core/get {"BOOTSTRAPPING" :bootstrapping, "ARRESTED" :arrested, "PROVISIONING" :provisioning, "TERMINATED" :terminated, "RESIZING" :resizing, "ENDED" :ended, "SHUTTING_DOWN" :shutting-down, "TERMINATING" :terminating, "SUSPENDED" :suspended, "RUNNING" :running} input))
+
+(clojure.core/defn- deser-xml-string-max-len-256-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-xml-string-max-len-256 coll))) input))
+
+(clojure.core/defn- deser-instance-fleet-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-instance-fleet coll))) input))
+
+(clojure.core/defn- deser-instance-resize-policy [input] (clojure.core/cond-> {} (clojure.core/contains? input "InstancesToTerminate") (clojure.core/assoc :instances-to-terminate (deser-ec-2-instance-ids-list (input "InstancesToTerminate"))) (clojure.core/contains? input "InstancesToProtect") (clojure.core/assoc :instances-to-protect (deser-ec-2-instance-ids-list (input "InstancesToProtect"))) (clojure.core/contains? input "InstanceTerminationTimeout") (clojure.core/assoc :instance-termination-timeout (deser-integer (input "InstanceTerminationTimeout")))))
+
+(clojure.core/defn- deser-action-on-failure [input] (clojure.core/get {"TERMINATE_JOB_FLOW" :terminate-job-flow, "TERMINATE_CLUSTER" :terminate-cluster, "CANCEL_AND_WAIT" :cancel-and-wait, "CONTINUE" :continue} input))
+
+(clojure.core/defn- deser-cluster-summary [input] (clojure.core/cond-> {} (clojure.core/contains? input "Id") (clojure.core/assoc :id (deser-cluster-id (input "Id"))) (clojure.core/contains? input "Name") (clojure.core/assoc :name (deser-string (input "Name"))) (clojure.core/contains? input "Status") (clojure.core/assoc :status (deser-cluster-status (input "Status"))) (clojure.core/contains? input "NormalizedInstanceHours") (clojure.core/assoc :normalized-instance-hours (deser-integer (input "NormalizedInstanceHours")))))
+
+(clojure.core/defn- deser-error-message [input] input)
+
+(clojure.core/defn- deser-instance-fleet-id [input] input)
+
+(clojure.core/defn- deser-date [input] input)
+
+(clojure.core/defn- deser-auto-scaling-policy-state-change-reason [input] (clojure.core/cond-> {} (clojure.core/contains? input "Code") (clojure.core/assoc :code (deser-auto-scaling-policy-state-change-reason-code (input "Code"))) (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-string (input "Message")))))
+
+(clojure.core/defn- deser-instance-group-timeline [input] (clojure.core/cond-> {} (clojure.core/contains? input "CreationDateTime") (clojure.core/assoc :creation-date-time (deser-date (input "CreationDateTime"))) (clojure.core/contains? input "ReadyDateTime") (clojure.core/assoc :ready-date-time (deser-date (input "ReadyDateTime"))) (clojure.core/contains? input "EndDateTime") (clojure.core/assoc :end-date-time (deser-date (input "EndDateTime")))))
+
+(clojure.core/defn- deser-spot-provisioning-specification [input] (clojure.core/cond-> {:timeout-duration-minutes (deser-whole-number (input "TimeoutDurationMinutes")), :timeout-action (deser-spot-provisioning-timeout-action (input "TimeoutAction"))} (clojure.core/contains? input "BlockDurationMinutes") (clojure.core/assoc :block-duration-minutes (deser-whole-number (input "BlockDurationMinutes")))))
+
+(clojure.core/defn- deser-step [input] (clojure.core/cond-> {} (clojure.core/contains? input "Id") (clojure.core/assoc :id (deser-step-id (input "Id"))) (clojure.core/contains? input "Name") (clojure.core/assoc :name (deser-string (input "Name"))) (clojure.core/contains? input "Config") (clojure.core/assoc :config (deser-hadoop-step-config (input "Config"))) (clojure.core/contains? input "ActionOnFailure") (clojure.core/assoc :action-on-failure (deser-action-on-failure (input "ActionOnFailure"))) (clojure.core/contains? input "Status") (clojure.core/assoc :status (deser-step-status (input "Status")))))
+
+(clojure.core/defn- deser-step-state-change-reason-code [input] (clojure.core/get {"NONE" :none} input))
+
+(clojure.core/defn- deser-tag-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-tag coll))) input))
+
+(clojure.core/defn- deser-cluster-state [input] (clojure.core/get {"STARTING" :starting, "BOOTSTRAPPING" :bootstrapping, "RUNNING" :running, "WAITING" :waiting, "TERMINATING" :terminating, "TERMINATED" :terminated, "TERMINATED_WITH_ERRORS" :terminated-with-errors} input))
+
+(clojure.core/defn- deser-xml-string [input] input)
+
+(clojure.core/defn- deser-instance-fleet-timeline [input] (clojure.core/cond-> {} (clojure.core/contains? input "CreationDateTime") (clojure.core/assoc :creation-date-time (deser-date (input "CreationDateTime"))) (clojure.core/contains? input "ReadyDateTime") (clojure.core/assoc :ready-date-time (deser-date (input "ReadyDateTime"))) (clojure.core/contains? input "EndDateTime") (clojure.core/assoc :end-date-time (deser-date (input "EndDateTime")))))
+
+(clojure.core/defn- deser-error-code [input] input)
+
+(clojure.core/defn- deser-cluster [input] (clojure.core/cond-> {} (clojure.core/contains? input "ServiceRole") (clojure.core/assoc :service-role (deser-string (input "ServiceRole"))) (clojure.core/contains? input "AutoScalingRole") (clojure.core/assoc :auto-scaling-role (deser-xml-string (input "AutoScalingRole"))) (clojure.core/contains? input "CustomAmiId") (clojure.core/assoc :custom-ami-id (deser-xml-string-max-len-256 (input "CustomAmiId"))) (clojure.core/contains? input "LogUri") (clojure.core/assoc :log-uri (deser-string (input "LogUri"))) (clojure.core/contains? input "KerberosAttributes") (clojure.core/assoc :kerberos-attributes (deser-kerberos-attributes (input "KerberosAttributes"))) (clojure.core/contains? input "ScaleDownBehavior") (clojure.core/assoc :scale-down-behavior (deser-scale-down-behavior (input "ScaleDownBehavior"))) (clojure.core/contains? input "RepoUpgradeOnBoot") (clojure.core/assoc :repo-upgrade-on-boot (deser-repo-upgrade-on-boot (input "RepoUpgradeOnBoot"))) (clojure.core/contains? input "Ec2InstanceAttributes") (clojure.core/assoc :ec-2-instance-attributes (deser-ec-2-instance-attributes (input "Ec2InstanceAttributes"))) (clojure.core/contains? input "Configurations") (clojure.core/assoc :configurations (deser-configuration-list (input "Configurations"))) (clojure.core/contains? input "Tags") (clojure.core/assoc :tags (deser-tag-list (input "Tags"))) (clojure.core/contains? input "RequestedAmiVersion") (clojure.core/assoc :requested-ami-version (deser-string (input "RequestedAmiVersion"))) (clojure.core/contains? input "VisibleToAllUsers") (clojure.core/assoc :visible-to-all-users (deser-boolean (input "VisibleToAllUsers"))) (clojure.core/contains? input "Status") (clojure.core/assoc :status (deser-cluster-status (input "Status"))) (clojure.core/contains? input "NormalizedInstanceHours") (clojure.core/assoc :normalized-instance-hours (deser-integer (input "NormalizedInstanceHours"))) (clojure.core/contains? input "Applications") (clojure.core/assoc :applications (deser-application-list (input "Applications"))) (clojure.core/contains? input "EbsRootVolumeSize") (clojure.core/assoc :ebs-root-volume-size (deser-integer (input "EbsRootVolumeSize"))) (clojure.core/contains? input "InstanceCollectionType") (clojure.core/assoc :instance-collection-type (deser-instance-collection-type (input "InstanceCollectionType"))) (clojure.core/contains? input "SecurityConfiguration") (clojure.core/assoc :security-configuration (deser-xml-string (input "SecurityConfiguration"))) (clojure.core/contains? input "MasterPublicDnsName") (clojure.core/assoc :master-public-dns-name (deser-string (input "MasterPublicDnsName"))) (clojure.core/contains? input "ReleaseLabel") (clojure.core/assoc :release-label (deser-string (input "ReleaseLabel"))) (clojure.core/contains? input "TerminationProtected") (clojure.core/assoc :termination-protected (deser-boolean (input "TerminationProtected"))) (clojure.core/contains? input "Name") (clojure.core/assoc :name (deser-string (input "Name"))) (clojure.core/contains? input "RunningAmiVersion") (clojure.core/assoc :running-ami-version (deser-string (input "RunningAmiVersion"))) (clojure.core/contains? input "AutoTerminate") (clojure.core/assoc :auto-terminate (deser-boolean (input "AutoTerminate"))) (clojure.core/contains? input "Id") (clojure.core/assoc :id (deser-cluster-id (input "Id")))))
+
+(clojure.core/defn- deser-cluster-timeline [input] (clojure.core/cond-> {} (clojure.core/contains? input "CreationDateTime") (clojure.core/assoc :creation-date-time (deser-date (input "CreationDateTime"))) (clojure.core/contains? input "ReadyDateTime") (clojure.core/assoc :ready-date-time (deser-date (input "ReadyDateTime"))) (clojure.core/contains? input "EndDateTime") (clojure.core/assoc :end-date-time (deser-date (input "EndDateTime")))))
+
+(clojure.core/defn- deser-auto-scaling-policy-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "Status") (clojure.core/assoc :status (deser-auto-scaling-policy-status (input "Status"))) (clojure.core/contains? input "Constraints") (clojure.core/assoc :constraints (deser-scaling-constraints (input "Constraints"))) (clojure.core/contains? input "Rules") (clojure.core/assoc :rules (deser-scaling-rule-list (input "Rules")))))
+
+(clojure.core/defn- deser-scaling-rule-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-scaling-rule coll))) input))
+
+(clojure.core/defn- deser-step-ids-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-xml-string-max-len-256 coll))) input))
+
+(clojure.core/defn- deser-instance-group-id [input] input)
+
+(clojure.core/defn- deser-instance-type-specification [input] (clojure.core/cond-> {} (clojure.core/contains? input "InstanceType") (clojure.core/assoc :instance-type (deser-instance-type (input "InstanceType"))) (clojure.core/contains? input "WeightedCapacity") (clojure.core/assoc :weighted-capacity (deser-whole-number (input "WeightedCapacity"))) (clojure.core/contains? input "BidPrice") (clojure.core/assoc :bid-price (deser-xml-string-max-len-256 (input "BidPrice"))) (clojure.core/contains? input "BidPriceAsPercentageOfOnDemandPrice") (clojure.core/assoc :bid-price-as-percentage-of-on-demand-price (deser-non-negative-double (input "BidPriceAsPercentageOfOnDemandPrice"))) (clojure.core/contains? input "Configurations") (clojure.core/assoc :configurations (deser-configuration-list (input "Configurations"))) (clojure.core/contains? input "EbsBlockDevices") (clojure.core/assoc :ebs-block-devices (deser-ebs-block-device-list (input "EbsBlockDevices"))) (clojure.core/contains? input "EbsOptimized") (clojure.core/assoc :ebs-optimized (deser-boolean-object (input "EbsOptimized")))))
+
+(clojure.core/defn- deser-adjustment-type [input] (clojure.core/get {"CHANGE_IN_CAPACITY" :change-in-capacity, "PERCENT_CHANGE_IN_CAPACITY" :percent-change-in-capacity, "EXACT_CAPACITY" :exact-capacity} input))
+
+(clojure.core/defn- deser-cluster-status [input] (clojure.core/cond-> {} (clojure.core/contains? input "State") (clojure.core/assoc :state (deser-cluster-state (input "State"))) (clojure.core/contains? input "StateChangeReason") (clojure.core/assoc :state-change-reason (deser-cluster-state-change-reason (input "StateChangeReason"))) (clojure.core/contains? input "Timeline") (clojure.core/assoc :timeline (deser-cluster-timeline (input "Timeline")))))
+
+(clojure.core/defn- deser-ebs-volume-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-ebs-volume coll))) input))
+
+(clojure.core/defn- deser-ebs-block-device-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-ebs-block-device coll))) input))
+
+(clojure.core/defn- deser-cluster-state-change-reason [input] (clojure.core/cond-> {} (clojure.core/contains? input "Code") (clojure.core/assoc :code (deser-cluster-state-change-reason-code (input "Code"))) (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-string (input "Message")))))
+
+(clojure.core/defn- deser-instance-type-specification-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-instance-type-specification coll))) input))
+
+(clojure.core/defn- deser-failure-details [input] (clojure.core/cond-> {} (clojure.core/contains? input "Reason") (clojure.core/assoc :reason (deser-string (input "Reason"))) (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-string (input "Message"))) (clojure.core/contains? input "LogFile") (clojure.core/assoc :log-file (deser-string (input "LogFile")))))
+
+(clojure.core/defn- deser-job-flow-detail-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-job-flow-detail coll))) input))
+
+(clojure.core/defn- deser-metric-dimension [input] (clojure.core/cond-> {} (clojure.core/contains? input "Key") (clojure.core/assoc :key (deser-string (input "Key"))) (clojure.core/contains? input "Value") (clojure.core/assoc :value (deser-string (input "Value")))))
+
+(clojure.core/defn- deser-volume-specification [input] (clojure.core/cond-> {:volume-type (deser-string (input "VolumeType")), :size-in-gb (deser-integer (input "SizeInGB"))} (clojure.core/contains? input "Iops") (clojure.core/assoc :iops (deser-integer (input "Iops")))))
+
+(clojure.core/defn- deser-bootstrap-action-config [input] (clojure.core/cond-> {:name (deser-xml-string-max-len-256 (input "Name")), :script-bootstrap-action (deser-script-bootstrap-action-config (input "ScriptBootstrapAction"))}))
+
+(clojure.core/defn- deser-integer [input] input)
+
+(clojure.core/defn- deser-string [input] input)
+
+(clojure.core/defn- deser-step-status [input] (clojure.core/cond-> {} (clojure.core/contains? input "State") (clojure.core/assoc :state (deser-step-state (input "State"))) (clojure.core/contains? input "StateChangeReason") (clojure.core/assoc :state-change-reason (deser-step-state-change-reason (input "StateChangeReason"))) (clojure.core/contains? input "FailureDetails") (clojure.core/assoc :failure-details (deser-failure-details (input "FailureDetails"))) (clojure.core/contains? input "Timeline") (clojure.core/assoc :timeline (deser-step-timeline (input "Timeline")))))
+
+(clojure.core/defn- deser-metric-dimension-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-metric-dimension coll))) input))
+
+(clojure.core/defn- deser-instance-collection-type [input] (clojure.core/get {"INSTANCE_FLEET" :instance-fleet, "INSTANCE_GROUP" :instance-group} input))
+
+(clojure.core/defn- deser-instance-group-status [input] (clojure.core/cond-> {} (clojure.core/contains? input "State") (clojure.core/assoc :state (deser-instance-group-state (input "State"))) (clojure.core/contains? input "StateChangeReason") (clojure.core/assoc :state-change-reason (deser-instance-group-state-change-reason (input "StateChangeReason"))) (clojure.core/contains? input "Timeline") (clojure.core/assoc :timeline (deser-instance-group-timeline (input "Timeline")))))
+
+(clojure.core/defn- deser-instance-fleet-status [input] (clojure.core/cond-> {} (clojure.core/contains? input "State") (clojure.core/assoc :state (deser-instance-fleet-state (input "State"))) (clojure.core/contains? input "StateChangeReason") (clojure.core/assoc :state-change-reason (deser-instance-fleet-state-change-reason (input "StateChangeReason"))) (clojure.core/contains? input "Timeline") (clojure.core/assoc :timeline (deser-instance-fleet-timeline (input "Timeline")))))
+
+(clojure.core/defn- deser-spot-provisioning-timeout-action [input] (clojure.core/get {"SWITCH_TO_ON_DEMAND" :switch-to-on-demand, "TERMINATE_CLUSTER" :terminate-cluster} input))
+
+(clojure.core/defn- deser-command [input] (clojure.core/cond-> {} (clojure.core/contains? input "Name") (clojure.core/assoc :name (deser-string (input "Name"))) (clojure.core/contains? input "ScriptPath") (clojure.core/assoc :script-path (deser-string (input "ScriptPath"))) (clojure.core/contains? input "Args") (clojure.core/assoc :args (deser-string-list (input "Args")))))
+
+(clojure.core/defn- deser-security-configuration-summary [input] (clojure.core/cond-> {} (clojure.core/contains? input "Name") (clojure.core/assoc :name (deser-xml-string (input "Name"))) (clojure.core/contains? input "CreationDateTime") (clojure.core/assoc :creation-date-time (deser-date (input "CreationDateTime")))))
+
+(clojure.core/defn- deser-instance-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-instance coll))) input))
+
+(clojure.core/defn- deser-instance-group-state-change-reason [input] (clojure.core/cond-> {} (clojure.core/contains? input "Code") (clojure.core/assoc :code (deser-instance-group-state-change-reason-code (input "Code"))) (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-string (input "Message")))))
+
+(clojure.core/defn- deser-cluster-summary-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-cluster-summary coll))) input))
+
+(clojure.core/defn- deser-command-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-command coll))) input))
+
+(clojure.core/defn- deser-application-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-application coll))) input))
+
+(clojure.core/defn- deser-instance-state [input] (clojure.core/get {"AWAITING_FULFILLMENT" :awaiting-fulfillment, "PROVISIONING" :provisioning, "BOOTSTRAPPING" :bootstrapping, "RUNNING" :running, "TERMINATED" :terminated} input))
+
+(clojure.core/defn- deser-job-flow-execution-state [input] (clojure.core/get {"STARTING" :starting, "BOOTSTRAPPING" :bootstrapping, "RUNNING" :running, "WAITING" :waiting, "SHUTTING_DOWN" :shutting-down, "TERMINATED" :terminated, "COMPLETED" :completed, "FAILED" :failed} input))
+
+(clojure.core/defn- deser-instance-group-ids-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-xml-string-max-len-256 coll))) input))
+
+(clojure.core/defn- deser-tag [input] (clojure.core/cond-> {} (clojure.core/contains? input "Key") (clojure.core/assoc :key (deser-string (input "Key"))) (clojure.core/contains? input "Value") (clojure.core/assoc :value (deser-string (input "Value")))))
+
+(clojure.core/defn- deser-cloud-watch-alarm-definition [input] (clojure.core/cond-> {:comparison-operator (deser-comparison-operator (input "ComparisonOperator")), :metric-name (deser-string (input "MetricName")), :period (deser-integer (input "Period")), :threshold (deser-non-negative-double (input "Threshold"))} (clojure.core/contains? input "Unit") (clojure.core/assoc :unit (deser-unit (input "Unit"))) (clojure.core/contains? input "Dimensions") (clojure.core/assoc :dimensions (deser-metric-dimension-list (input "Dimensions"))) (clojure.core/contains? input "Namespace") (clojure.core/assoc :namespace (deser-string (input "Namespace"))) (clojure.core/contains? input "EvaluationPeriods") (clojure.core/assoc :evaluation-periods (deser-integer (input "EvaluationPeriods"))) (clojure.core/contains? input "Statistic") (clojure.core/assoc :statistic (deser-statistic (input "Statistic")))))
+
+(clojure.core/defn- deser-instance-group-detail-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-instance-group-detail coll))) input))
+
+(clojure.core/defn- deser-instance-status [input] (clojure.core/cond-> {} (clojure.core/contains? input "State") (clojure.core/assoc :state (deser-instance-state (input "State"))) (clojure.core/contains? input "StateChangeReason") (clojure.core/assoc :state-change-reason (deser-instance-state-change-reason (input "StateChangeReason"))) (clojure.core/contains? input "Timeline") (clojure.core/assoc :timeline (deser-instance-timeline (input "Timeline")))))
+
+(clojure.core/defn- deser-market-type [input] (clojure.core/get {"ON_DEMAND" :on-demand, "SPOT" :spot} input))
+
+(clojure.core/defn- deser-instance [input] (clojure.core/cond-> {} (clojure.core/contains? input "PublicDnsName") (clojure.core/assoc :public-dns-name (deser-string (input "PublicDnsName"))) (clojure.core/contains? input "EbsVolumes") (clojure.core/assoc :ebs-volumes (deser-ebs-volume-list (input "EbsVolumes"))) (clojure.core/contains? input "InstanceType") (clojure.core/assoc :instance-type (deser-instance-type (input "InstanceType"))) (clojure.core/contains? input "Status") (clojure.core/assoc :status (deser-instance-status (input "Status"))) (clojure.core/contains? input "InstanceFleetId") (clojure.core/assoc :instance-fleet-id (deser-instance-fleet-id (input "InstanceFleetId"))) (clojure.core/contains? input "PrivateDnsName") (clojure.core/assoc :private-dns-name (deser-string (input "PrivateDnsName"))) (clojure.core/contains? input "InstanceGroupId") (clojure.core/assoc :instance-group-id (deser-string (input "InstanceGroupId"))) (clojure.core/contains? input "Ec2InstanceId") (clojure.core/assoc :ec-2-instance-id (deser-instance-id (input "Ec2InstanceId"))) (clojure.core/contains? input "PublicIpAddress") (clojure.core/assoc :public-ip-address (deser-string (input "PublicIpAddress"))) (clojure.core/contains? input "Id") (clojure.core/assoc :id (deser-instance-id (input "Id"))) (clojure.core/contains? input "Market") (clojure.core/assoc :market (deser-market-type (input "Market"))) (clojure.core/contains? input "PrivateIpAddress") (clojure.core/assoc :private-ip-address (deser-string (input "PrivateIpAddress")))))
+
+(clojure.core/defn- deser-instance-state-change-reason [input] (clojure.core/cond-> {} (clojure.core/contains? input "Code") (clojure.core/assoc :code (deser-instance-state-change-reason-code (input "Code"))) (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-string (input "Message")))))
+
+(clojure.core/defn- deser-scaling-rule [input] (clojure.core/cond-> {:name (deser-string (input "Name")), :action (deser-scaling-action (input "Action")), :trigger (deser-scaling-trigger (input "Trigger"))} (clojure.core/contains? input "Description") (clojure.core/assoc :description (deser-string (input "Description")))))
+
+(clojure.core/defn- deser-ebs-volume [input] (clojure.core/cond-> {} (clojure.core/contains? input "Device") (clojure.core/assoc :device (deser-string (input "Device"))) (clojure.core/contains? input "VolumeId") (clojure.core/assoc :volume-id (deser-string (input "VolumeId")))))
+
+(clojure.core/defn- deser-cancel-steps-info [input] (clojure.core/cond-> {} (clojure.core/contains? input "StepId") (clojure.core/assoc :step-id (deser-step-id (input "StepId"))) (clojure.core/contains? input "Status") (clojure.core/assoc :status (deser-cancel-steps-request-status (input "Status"))) (clojure.core/contains? input "Reason") (clojure.core/assoc :reason (deser-string (input "Reason")))))
+
+(clojure.core/defn- deser-ec-2-instance-ids-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-instance-id coll))) input))
+
+(clojure.core/defn- deser-scaling-constraints [input] (clojure.core/cond-> {:min-capacity (deser-integer (input "MinCapacity")), :max-capacity (deser-integer (input "MaxCapacity"))}))
+
+(clojure.core/defn- deser-scaling-trigger [input] (clojure.core/cond-> {:cloud-watch-alarm-definition (deser-cloud-watch-alarm-definition (input "CloudWatchAlarmDefinition"))}))
+
+(clojure.core/defn- deser-instance-fleet-type [input] (clojure.core/get {"MASTER" :master, "CORE" :core, "TASK" :task} input))
+
+(clojure.core/defn- deser-step-id [input] input)
+
+(clojure.core/defn- deser-configuration [input] (clojure.core/cond-> {} (clojure.core/contains? input "Classification") (clojure.core/assoc :classification (deser-string (input "Classification"))) (clojure.core/contains? input "Configurations") (clojure.core/assoc :configurations (deser-configuration-list (input "Configurations"))) (clojure.core/contains? input "Properties") (clojure.core/assoc :properties (deser-string-map (input "Properties")))))
+
+(clojure.core/defn- deser-boolean-object [input] input)
+
+(clojure.core/defn- deser-step-state [input] (clojure.core/get {"PENDING" :pending, "CANCEL_PENDING" :cancel-pending, "RUNNING" :running, "COMPLETED" :completed, "CANCELLED" :cancelled, "FAILED" :failed, "INTERRUPTED" :interrupted} input))
+
+(clojure.core/defn- deser-job-flow-instances-detail [input] (clojure.core/cond-> {:master-instance-type (deser-instance-type (input "MasterInstanceType")), :slave-instance-type (deser-instance-type (input "SlaveInstanceType")), :instance-count (deser-integer (input "InstanceCount"))} (clojure.core/contains? input "Placement") (clojure.core/assoc :placement (deser-placement-type (input "Placement"))) (clojure.core/contains? input "HadoopVersion") (clojure.core/assoc :hadoop-version (deser-xml-string-max-len-256 (input "HadoopVersion"))) (clojure.core/contains? input "NormalizedInstanceHours") (clojure.core/assoc :normalized-instance-hours (deser-integer (input "NormalizedInstanceHours"))) (clojure.core/contains? input "KeepJobFlowAliveWhenNoSteps") (clojure.core/assoc :keep-job-flow-alive-when-no-steps (deser-boolean (input "KeepJobFlowAliveWhenNoSteps"))) (clojure.core/contains? input "Ec2KeyName") (clojure.core/assoc :ec-2-key-name (deser-xml-string-max-len-256 (input "Ec2KeyName"))) (clojure.core/contains? input "MasterPublicDnsName") (clojure.core/assoc :master-public-dns-name (deser-xml-string (input "MasterPublicDnsName"))) (clojure.core/contains? input "Ec2SubnetId") (clojure.core/assoc :ec-2-subnet-id (deser-xml-string-max-len-256 (input "Ec2SubnetId"))) (clojure.core/contains? input "MasterInstanceId") (clojure.core/assoc :master-instance-id (deser-xml-string (input "MasterInstanceId"))) (clojure.core/contains? input "TerminationProtected") (clojure.core/assoc :termination-protected (deser-boolean (input "TerminationProtected"))) (clojure.core/contains? input "InstanceGroups") (clojure.core/assoc :instance-groups (deser-instance-group-detail-list (input "InstanceGroups")))))
+
+(clojure.core/defn- deser-cancel-steps-request-status [input] (clojure.core/get {"SUBMITTED" :submitted, "FAILED" :failed} input))
+
+(clojure.core/defn- deser-instance-role-type [input] (clojure.core/get {"MASTER" :master, "CORE" :core, "TASK" :task} input))
+
+(clojure.core/defn- deser-statistic [input] (clojure.core/get {"SAMPLE_COUNT" :sample-count, "AVERAGE" :average, "SUM" :sum, "MINIMUM" :minimum, "MAXIMUM" :maximum} input))
+
+(clojure.core/defn- deser-instance-fleet-state-change-reason [input] (clojure.core/cond-> {} (clojure.core/contains? input "Code") (clojure.core/assoc :code (deser-instance-fleet-state-change-reason-code (input "Code"))) (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-string (input "Message")))))
+
+(clojure.core/defn- deser-step-execution-status-detail [input] (clojure.core/cond-> {:state (deser-step-execution-state (input "State")), :creation-date-time (deser-date (input "CreationDateTime"))} (clojure.core/contains? input "StartDateTime") (clojure.core/assoc :start-date-time (deser-date (input "StartDateTime"))) (clojure.core/contains? input "EndDateTime") (clojure.core/assoc :end-date-time (deser-date (input "EndDateTime"))) (clojure.core/contains? input "LastStateChangeReason") (clojure.core/assoc :last-state-change-reason (deser-xml-string (input "LastStateChangeReason")))))
+
+(clojure.core/defn- deser-cluster-state-change-reason-code [input] (clojure.core/get {"INTERNAL_ERROR" :internal-error, "VALIDATION_ERROR" :validation-error, "INSTANCE_FAILURE" :instance-failure, "INSTANCE_FLEET_TIMEOUT" :instance-fleet-timeout, "BOOTSTRAP_FAILURE" :bootstrap-failure, "USER_REQUEST" :user-request, "STEP_FAILURE" :step-failure, "ALL_STEPS_COMPLETED" :all-steps-completed} input))
+
+(clojure.core/defn- deser-simple-scaling-policy-configuration [input] (clojure.core/cond-> {:scaling-adjustment (deser-integer (input "ScalingAdjustment"))} (clojure.core/contains? input "AdjustmentType") (clojure.core/assoc :adjustment-type (deser-adjustment-type (input "AdjustmentType"))) (clojure.core/contains? input "CoolDown") (clojure.core/assoc :cool-down (deser-integer (input "CoolDown")))))
+
+(clojure.core/defn- deser-instance-timeline [input] (clojure.core/cond-> {} (clojure.core/contains? input "CreationDateTime") (clojure.core/assoc :creation-date-time (deser-date (input "CreationDateTime"))) (clojure.core/contains? input "ReadyDateTime") (clojure.core/assoc :ready-date-time (deser-date (input "ReadyDateTime"))) (clojure.core/contains? input "EndDateTime") (clojure.core/assoc :end-date-time (deser-date (input "EndDateTime")))))
+
+(clojure.core/defn- deser-instance-group-state-change-reason-code [input] (clojure.core/get {"INTERNAL_ERROR" :internal-error, "VALIDATION_ERROR" :validation-error, "INSTANCE_FAILURE" :instance-failure, "CLUSTER_TERMINATED" :cluster-terminated} input))
+
+(clojure.core/defn- deser-instance-fleet-provisioning-specifications [input] (clojure.core/cond-> {:spot-specification (deser-spot-provisioning-specification (input "SpotSpecification"))}))
+
+(clojure.core/defn- deser-boolean [input] input)
+
+(clojure.core/defn- deser-add-job-flow-steps-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "StepIds") (clojure.core/assoc :step-ids (deser-step-ids-list (input "StepIds")))))
+
+(clojure.core/defn- deser-invalid-request-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "ErrorCode") (clojure.core/assoc :error-code (deser-error-code (input "ErrorCode"))) (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-error-message (input "Message")))))
+
+(clojure.core/defn- deser-describe-security-configuration-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "Name") (clojure.core/assoc :name (deser-xml-string (input "Name"))) (clojure.core/contains? input "SecurityConfiguration") (clojure.core/assoc :security-configuration (deser-string (input "SecurityConfiguration"))) (clojure.core/contains? input "CreationDateTime") (clojure.core/assoc :creation-date-time (deser-date (input "CreationDateTime")))))
+
+(clojure.core/defn- deser-add-tags-output [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-list-security-configurations-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "SecurityConfigurations") (clojure.core/assoc :security-configurations (deser-security-configuration-list (input "SecurityConfigurations"))) (clojure.core/contains? input "Marker") (clojure.core/assoc :marker (deser-marker (input "Marker")))))
+
+(clojure.core/defn- deser-create-security-configuration-output [input] (clojure.core/cond-> {:name (deser-xml-string (input "Name")), :creation-date-time (deser-date (input "CreationDateTime"))}))
+
+(clojure.core/defn- deser-remove-tags-output [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-list-bootstrap-actions-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "BootstrapActions") (clojure.core/assoc :bootstrap-actions (deser-command-list (input "BootstrapActions"))) (clojure.core/contains? input "Marker") (clojure.core/assoc :marker (deser-marker (input "Marker")))))
+
+(clojure.core/defn- deser-list-steps-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "Steps") (clojure.core/assoc :steps (deser-step-summary-list (input "Steps"))) (clojure.core/contains? input "Marker") (clojure.core/assoc :marker (deser-marker (input "Marker")))))
+
+(clojure.core/defn- deser-describe-step-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "Step") (clojure.core/assoc :step (deser-step (input "Step")))))
+
+(clojure.core/defn- deser-internal-server-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-error-message (input "Message")))))
+
+(clojure.core/defn- deser-run-job-flow-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "JobFlowId") (clojure.core/assoc :job-flow-id (deser-xml-string-max-len-256 (input "JobFlowId")))))
+
+(clojure.core/defn- deser-list-instances-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "Instances") (clojure.core/assoc :instances (deser-instance-list (input "Instances"))) (clojure.core/contains? input "Marker") (clojure.core/assoc :marker (deser-marker (input "Marker")))))
+
+(clojure.core/defn- deser-add-instance-fleet-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "ClusterId") (clojure.core/assoc :cluster-id (deser-xml-string-max-len-256 (input "ClusterId"))) (clojure.core/contains? input "InstanceFleetId") (clojure.core/assoc :instance-fleet-id (deser-instance-fleet-id (input "InstanceFleetId")))))
+
+(clojure.core/defn- deser-delete-security-configuration-output [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-list-instance-fleets-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "InstanceFleets") (clojure.core/assoc :instance-fleets (deser-instance-fleet-list (input "InstanceFleets"))) (clojure.core/contains? input "Marker") (clojure.core/assoc :marker (deser-marker (input "Marker")))))
+
+(clojure.core/defn- deser-list-instance-groups-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "InstanceGroups") (clojure.core/assoc :instance-groups (deser-instance-group-list (input "InstanceGroups"))) (clojure.core/contains? input "Marker") (clojure.core/assoc :marker (deser-marker (input "Marker")))))
+
+(clojure.core/defn- deser-add-instance-groups-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "JobFlowId") (clojure.core/assoc :job-flow-id (deser-xml-string-max-len-256 (input "JobFlowId"))) (clojure.core/contains? input "InstanceGroupIds") (clojure.core/assoc :instance-group-ids (deser-instance-group-ids-list (input "InstanceGroupIds")))))
+
+(clojure.core/defn- deser-cancel-steps-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "CancelStepsInfoList") (clojure.core/assoc :cancel-steps-info-list (deser-cancel-steps-info-list (input "CancelStepsInfoList")))))
+
+(clojure.core/defn- deser-describe-cluster-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "Cluster") (clojure.core/assoc :cluster (deser-cluster (input "Cluster")))))
+
+(clojure.core/defn- deser-internal-server-error [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-list-clusters-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "Clusters") (clojure.core/assoc :clusters (deser-cluster-summary-list (input "Clusters"))) (clojure.core/contains? input "Marker") (clojure.core/assoc :marker (deser-marker (input "Marker")))))
+
+(clojure.core/defn- deser-put-auto-scaling-policy-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "ClusterId") (clojure.core/assoc :cluster-id (deser-cluster-id (input "ClusterId"))) (clojure.core/contains? input "InstanceGroupId") (clojure.core/assoc :instance-group-id (deser-instance-group-id (input "InstanceGroupId"))) (clojure.core/contains? input "AutoScalingPolicy") (clojure.core/assoc :auto-scaling-policy (deser-auto-scaling-policy-description (input "AutoScalingPolicy")))))
+
+(clojure.core/defn- deser-remove-auto-scaling-policy-output [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-describe-job-flows-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "JobFlows") (clojure.core/assoc :job-flows (deser-job-flow-detail-list (input "JobFlows")))))
+
 (clojure.spec.alpha/def :portkey.aws.elasticmapreduce.-2009-03-31.placement-type/availability-zone (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/xml-string))
 (clojure.spec.alpha/def :portkey.aws.elasticmapreduce.-2009-03-31.placement-type/availability-zones (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/xml-string-max-len-256-list))
 (clojure.spec.alpha/def :portkey.aws.elasticmapreduce.-2009-03-31/placement-type (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elasticmapreduce.-2009-03-31.placement-type/availability-zone :portkey.aws.elasticmapreduce.-2009-03-31.placement-type/availability-zones]))
@@ -708,7 +1310,7 @@
 (clojure.spec.alpha/def :portkey.aws.elasticmapreduce.-2009-03-31.instance-group/market (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/market-type))
 (clojure.spec.alpha/def :portkey.aws.elasticmapreduce.-2009-03-31/instance-group (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elasticmapreduce.-2009-03-31.instance-group/bid-price :portkey.aws.elasticmapreduce.-2009-03-31/instance-group-type :portkey.aws.elasticmapreduce.-2009-03-31.instance-group/ebs-optimized :portkey.aws.elasticmapreduce.-2009-03-31/shrink-policy :portkey.aws.elasticmapreduce.-2009-03-31/instance-type :portkey.aws.elasticmapreduce.-2009-03-31.instance-group/configurations :portkey.aws.elasticmapreduce.-2009-03-31.instance-group/status :portkey.aws.elasticmapreduce.-2009-03-31.instance-group/running-instance-count :portkey.aws.elasticmapreduce.-2009-03-31.instance-group/auto-scaling-policy :portkey.aws.elasticmapreduce.-2009-03-31.instance-group/ebs-block-devices :portkey.aws.elasticmapreduce.-2009-03-31.instance-group/name :portkey.aws.elasticmapreduce.-2009-03-31.instance-group/requested-instance-count :portkey.aws.elasticmapreduce.-2009-03-31.instance-group/id :portkey.aws.elasticmapreduce.-2009-03-31.instance-group/market]))
 
-(clojure.spec.alpha/def :portkey.aws.elasticmapreduce.-2009-03-31/instance-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elasticmapreduce.-2009-03-31/instance-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 256)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elasticmapreduce.-2009-03-31/step-execution-state #{"INTERRUPTED" "CONTINUE" "COMPLETED" :continue :pending :completed "PENDING" :running :cancelled "FAILED" :interrupted "CANCELLED" :failed "RUNNING"})
 
@@ -728,7 +1330,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.elasticmapreduce.-2009-03-31/instance-state-list (clojure.spec.alpha/coll-of :portkey.aws.elasticmapreduce.-2009-03-31/instance-state))
 
-(clojure.spec.alpha/def :portkey.aws.elasticmapreduce.-2009-03-31/xml-string-max-len-256 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 0 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elasticmapreduce.-2009-03-31/xml-string-max-len-256 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 0 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 256)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elasticmapreduce.-2009-03-31/scale-down-behavior #{:terminate-at-instance-hour "TERMINATE_AT_INSTANCE_HOUR" "TERMINATE_AT_TASK_COMPLETION" :terminate-at-task-completion})
 
@@ -934,7 +1536,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.elasticmapreduce.-2009-03-31/describe-step-output (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elasticmapreduce.-2009-03-31/step]))
 
-(clojure.spec.alpha/def :portkey.aws.elasticmapreduce.-2009-03-31/xml-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 0 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 10280)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elasticmapreduce.-2009-03-31/xml-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 0 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 10280)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[\u0020-\uD7FF\uE000-\uFFFD\uD800\uDC00-\uDBFF\uDFFF\r\n\t]*" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elasticmapreduce.-2009-03-31.instance-fleet-timeline/creation-date-time (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/date))
 (clojure.spec.alpha/def :portkey.aws.elasticmapreduce.-2009-03-31.instance-fleet-timeline/ready-date-time (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/date))
@@ -945,7 +1547,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.elasticmapreduce.-2009-03-31/ebs-block-device-config-list (clojure.spec.alpha/coll-of :portkey.aws.elasticmapreduce.-2009-03-31/ebs-block-device-config))
 
-(clojure.spec.alpha/def :portkey.aws.elasticmapreduce.-2009-03-31/error-code (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256))))
+(clojure.spec.alpha/def :portkey.aws.elasticmapreduce.-2009-03-31/error-code (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 256))))
 
 (clojure.spec.alpha/def :portkey.aws.elasticmapreduce.-2009-03-31.cluster/service-role (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/string))
 (clojure.spec.alpha/def :portkey.aws.elasticmapreduce.-2009-03-31.cluster/auto-scaling-role (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/xml-string))
@@ -1338,83 +1940,83 @@
 
 (clojure.spec.alpha/def :portkey.aws.elasticmapreduce.-2009-03-31/boolean clojure.core/boolean?)
 
-(clojure.core/defn list-instance-fleets ([list-instance-fleets-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-instance-fleets-input list-instance-fleets-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-instance-fleets-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-instance-fleets-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListInstanceFleets", :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
+(clojure.core/defn list-instance-fleets ([list-instance-fleets-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-instance-fleets-input list-instance-fleets-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-instance-fleets-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-instance-fleets-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListInstanceFleets", :http.request.configuration/output-deser-fn deser-list-instance-fleets-output, :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
 (clojure.spec.alpha/fdef list-instance-fleets :args (clojure.spec.alpha/tuple :portkey.aws.elasticmapreduce.-2009-03-31/list-instance-fleets-input) :ret (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/list-instance-fleets-output))
 
-(clojure.core/defn remove-tags ([remove-tags-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-remove-tags-input remove-tags-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/remove-tags-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/remove-tags-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "RemoveTags", :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
+(clojure.core/defn remove-tags ([remove-tags-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-remove-tags-input remove-tags-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/remove-tags-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/remove-tags-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "RemoveTags", :http.request.configuration/output-deser-fn deser-remove-tags-output, :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
 (clojure.spec.alpha/fdef remove-tags :args (clojure.spec.alpha/tuple :portkey.aws.elasticmapreduce.-2009-03-31/remove-tags-input) :ret (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/remove-tags-output))
 
-(clojure.core/defn delete-security-configuration ([delete-security-configuration-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-security-configuration-input delete-security-configuration-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/delete-security-configuration-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/delete-security-configuration-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteSecurityConfiguration", :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
+(clojure.core/defn delete-security-configuration ([delete-security-configuration-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-security-configuration-input delete-security-configuration-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/delete-security-configuration-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/delete-security-configuration-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteSecurityConfiguration", :http.request.configuration/output-deser-fn deser-delete-security-configuration-output, :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
 (clojure.spec.alpha/fdef delete-security-configuration :args (clojure.spec.alpha/tuple :portkey.aws.elasticmapreduce.-2009-03-31/delete-security-configuration-input) :ret (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/delete-security-configuration-output))
 
-(clojure.core/defn list-steps ([list-steps-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-steps-input list-steps-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-steps-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-steps-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListSteps", :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
+(clojure.core/defn list-steps ([list-steps-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-steps-input list-steps-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-steps-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-steps-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListSteps", :http.request.configuration/output-deser-fn deser-list-steps-output, :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
 (clojure.spec.alpha/fdef list-steps :args (clojure.spec.alpha/tuple :portkey.aws.elasticmapreduce.-2009-03-31/list-steps-input) :ret (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/list-steps-output))
 
-(clojure.core/defn describe-step ([describe-step-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-step-input describe-step-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/describe-step-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/describe-step-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeStep", :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
+(clojure.core/defn describe-step ([describe-step-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-step-input describe-step-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/describe-step-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/describe-step-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeStep", :http.request.configuration/output-deser-fn deser-describe-step-output, :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
 (clojure.spec.alpha/fdef describe-step :args (clojure.spec.alpha/tuple :portkey.aws.elasticmapreduce.-2009-03-31/describe-step-input) :ret (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/describe-step-output))
 
-(clojure.core/defn list-instances ([list-instances-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-instances-input list-instances-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-instances-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-instances-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListInstances", :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
+(clojure.core/defn list-instances ([list-instances-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-instances-input list-instances-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-instances-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-instances-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListInstances", :http.request.configuration/output-deser-fn deser-list-instances-output, :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
 (clojure.spec.alpha/fdef list-instances :args (clojure.spec.alpha/tuple :portkey.aws.elasticmapreduce.-2009-03-31/list-instances-input) :ret (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/list-instances-output))
 
-(clojure.core/defn put-auto-scaling-policy ([put-auto-scaling-policy-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-put-auto-scaling-policy-input put-auto-scaling-policy-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/put-auto-scaling-policy-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/put-auto-scaling-policy-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutAutoScalingPolicy", :http.request.spec/error-spec {}})))))
+(clojure.core/defn put-auto-scaling-policy ([put-auto-scaling-policy-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-put-auto-scaling-policy-input put-auto-scaling-policy-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/put-auto-scaling-policy-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/put-auto-scaling-policy-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutAutoScalingPolicy", :http.request.configuration/output-deser-fn deser-put-auto-scaling-policy-output, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef put-auto-scaling-policy :args (clojure.spec.alpha/tuple :portkey.aws.elasticmapreduce.-2009-03-31/put-auto-scaling-policy-input) :ret (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/put-auto-scaling-policy-output))
 
-(clojure.core/defn list-bootstrap-actions ([list-bootstrap-actions-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-bootstrap-actions-input list-bootstrap-actions-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-bootstrap-actions-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-bootstrap-actions-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListBootstrapActions", :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
+(clojure.core/defn list-bootstrap-actions ([list-bootstrap-actions-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-bootstrap-actions-input list-bootstrap-actions-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-bootstrap-actions-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-bootstrap-actions-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListBootstrapActions", :http.request.configuration/output-deser-fn deser-list-bootstrap-actions-output, :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
 (clojure.spec.alpha/fdef list-bootstrap-actions :args (clojure.spec.alpha/tuple :portkey.aws.elasticmapreduce.-2009-03-31/list-bootstrap-actions-input) :ret (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/list-bootstrap-actions-output))
 
-(clojure.core/defn set-termination-protection ([set-termination-protection-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-set-termination-protection-input set-termination-protection-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/set-termination-protection-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "SetTerminationProtection", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-error}})))))
+(clojure.core/defn set-termination-protection ([set-termination-protection-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-set-termination-protection-input set-termination-protection-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/set-termination-protection-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "SetTerminationProtection", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-error}})))))
 (clojure.spec.alpha/fdef set-termination-protection :args (clojure.spec.alpha/tuple :portkey.aws.elasticmapreduce.-2009-03-31/set-termination-protection-input) :ret clojure.core/true?)
 
-(clojure.core/defn list-security-configurations ([] (list-security-configurations {})) ([list-security-configurations-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-security-configurations-input list-security-configurations-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-security-configurations-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-security-configurations-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListSecurityConfigurations", :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
+(clojure.core/defn list-security-configurations ([] (list-security-configurations {})) ([list-security-configurations-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-security-configurations-input list-security-configurations-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-security-configurations-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-security-configurations-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListSecurityConfigurations", :http.request.configuration/output-deser-fn deser-list-security-configurations-output, :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
 (clojure.spec.alpha/fdef list-security-configurations :args (clojure.spec.alpha/? :portkey.aws.elasticmapreduce.-2009-03-31/list-security-configurations-input) :ret (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/list-security-configurations-output))
 
-(clojure.core/defn remove-auto-scaling-policy ([remove-auto-scaling-policy-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-remove-auto-scaling-policy-input remove-auto-scaling-policy-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/remove-auto-scaling-policy-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/remove-auto-scaling-policy-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "RemoveAutoScalingPolicy", :http.request.spec/error-spec {}})))))
+(clojure.core/defn remove-auto-scaling-policy ([remove-auto-scaling-policy-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-remove-auto-scaling-policy-input remove-auto-scaling-policy-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/remove-auto-scaling-policy-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/remove-auto-scaling-policy-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "RemoveAutoScalingPolicy", :http.request.configuration/output-deser-fn deser-remove-auto-scaling-policy-output, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef remove-auto-scaling-policy :args (clojure.spec.alpha/tuple :portkey.aws.elasticmapreduce.-2009-03-31/remove-auto-scaling-policy-input) :ret (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/remove-auto-scaling-policy-output))
 
-(clojure.core/defn create-security-configuration ([create-security-configuration-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-security-configuration-input create-security-configuration-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/create-security-configuration-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/create-security-configuration-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateSecurityConfiguration", :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
+(clojure.core/defn create-security-configuration ([create-security-configuration-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-create-security-configuration-input create-security-configuration-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/create-security-configuration-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/create-security-configuration-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateSecurityConfiguration", :http.request.configuration/output-deser-fn deser-create-security-configuration-output, :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
 (clojure.spec.alpha/fdef create-security-configuration :args (clojure.spec.alpha/tuple :portkey.aws.elasticmapreduce.-2009-03-31/create-security-configuration-input) :ret (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/create-security-configuration-output))
 
-(clojure.core/defn modify-instance-fleet ([modify-instance-fleet-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-modify-instance-fleet-input modify-instance-fleet-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/modify-instance-fleet-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ModifyInstanceFleet", :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
+(clojure.core/defn modify-instance-fleet ([modify-instance-fleet-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-modify-instance-fleet-input modify-instance-fleet-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/modify-instance-fleet-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ModifyInstanceFleet", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
 (clojure.spec.alpha/fdef modify-instance-fleet :args (clojure.spec.alpha/tuple :portkey.aws.elasticmapreduce.-2009-03-31/modify-instance-fleet-input) :ret clojure.core/true?)
 
-(clojure.core/defn list-clusters ([] (list-clusters {})) ([list-clusters-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-clusters-input list-clusters-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-clusters-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-clusters-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListClusters", :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
+(clojure.core/defn list-clusters ([] (list-clusters {})) ([list-clusters-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-clusters-input list-clusters-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-clusters-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-clusters-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListClusters", :http.request.configuration/output-deser-fn deser-list-clusters-output, :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
 (clojure.spec.alpha/fdef list-clusters :args (clojure.spec.alpha/? :portkey.aws.elasticmapreduce.-2009-03-31/list-clusters-input) :ret (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/list-clusters-output))
 
-(clojure.core/defn describe-cluster ([describe-cluster-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-cluster-input describe-cluster-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/describe-cluster-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/describe-cluster-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeCluster", :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
+(clojure.core/defn describe-cluster ([describe-cluster-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-cluster-input describe-cluster-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/describe-cluster-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/describe-cluster-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeCluster", :http.request.configuration/output-deser-fn deser-describe-cluster-output, :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
 (clojure.spec.alpha/fdef describe-cluster :args (clojure.spec.alpha/tuple :portkey.aws.elasticmapreduce.-2009-03-31/describe-cluster-input) :ret (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/describe-cluster-output))
 
-(clojure.core/defn add-instance-fleet ([add-instance-fleet-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-add-instance-fleet-input add-instance-fleet-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/add-instance-fleet-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/add-instance-fleet-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AddInstanceFleet", :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
+(clojure.core/defn add-instance-fleet ([add-instance-fleet-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-add-instance-fleet-input add-instance-fleet-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/add-instance-fleet-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/add-instance-fleet-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AddInstanceFleet", :http.request.configuration/output-deser-fn deser-add-instance-fleet-output, :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
 (clojure.spec.alpha/fdef add-instance-fleet :args (clojure.spec.alpha/tuple :portkey.aws.elasticmapreduce.-2009-03-31/add-instance-fleet-input) :ret (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/add-instance-fleet-output))
 
-(clojure.core/defn list-instance-groups ([list-instance-groups-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-instance-groups-input list-instance-groups-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-instance-groups-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-instance-groups-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListInstanceGroups", :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
+(clojure.core/defn list-instance-groups ([list-instance-groups-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-instance-groups-input list-instance-groups-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-instance-groups-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/list-instance-groups-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListInstanceGroups", :http.request.configuration/output-deser-fn deser-list-instance-groups-output, :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
 (clojure.spec.alpha/fdef list-instance-groups :args (clojure.spec.alpha/tuple :portkey.aws.elasticmapreduce.-2009-03-31/list-instance-groups-input) :ret (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/list-instance-groups-output))
 
-(clojure.core/defn add-job-flow-steps ([add-job-flow-steps-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-add-job-flow-steps-input add-job-flow-steps-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/add-job-flow-steps-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/add-job-flow-steps-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AddJobFlowSteps", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-error}})))))
+(clojure.core/defn add-job-flow-steps ([add-job-flow-steps-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-add-job-flow-steps-input add-job-flow-steps-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/add-job-flow-steps-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/add-job-flow-steps-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AddJobFlowSteps", :http.request.configuration/output-deser-fn deser-add-job-flow-steps-output, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-error}})))))
 (clojure.spec.alpha/fdef add-job-flow-steps :args (clojure.spec.alpha/tuple :portkey.aws.elasticmapreduce.-2009-03-31/add-job-flow-steps-input) :ret (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/add-job-flow-steps-output))
 
-(clojure.core/defn describe-job-flows ([] (describe-job-flows {})) ([describe-job-flows-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-job-flows-input describe-job-flows-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/describe-job-flows-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/describe-job-flows-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeJobFlows", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-error}})))))
+(clojure.core/defn describe-job-flows ([] (describe-job-flows {})) ([describe-job-flows-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-job-flows-input describe-job-flows-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/describe-job-flows-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/describe-job-flows-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeJobFlows", :http.request.configuration/output-deser-fn deser-describe-job-flows-output, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-error}})))))
 (clojure.spec.alpha/fdef describe-job-flows :args (clojure.spec.alpha/? :portkey.aws.elasticmapreduce.-2009-03-31/describe-job-flows-input) :ret (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/describe-job-flows-output))
 
-(clojure.core/defn terminate-job-flows ([terminate-job-flows-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-terminate-job-flows-input terminate-job-flows-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/terminate-job-flows-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "TerminateJobFlows", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-error}})))))
+(clojure.core/defn terminate-job-flows ([terminate-job-flows-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-terminate-job-flows-input terminate-job-flows-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/terminate-job-flows-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "TerminateJobFlows", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-error}})))))
 (clojure.spec.alpha/fdef terminate-job-flows :args (clojure.spec.alpha/tuple :portkey.aws.elasticmapreduce.-2009-03-31/terminate-job-flows-input) :ret clojure.core/true?)
 
-(clojure.core/defn describe-security-configuration ([describe-security-configuration-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-security-configuration-input describe-security-configuration-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/describe-security-configuration-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/describe-security-configuration-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeSecurityConfiguration", :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
+(clojure.core/defn describe-security-configuration ([describe-security-configuration-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-security-configuration-input describe-security-configuration-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/describe-security-configuration-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/describe-security-configuration-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeSecurityConfiguration", :http.request.configuration/output-deser-fn deser-describe-security-configuration-output, :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
 (clojure.spec.alpha/fdef describe-security-configuration :args (clojure.spec.alpha/tuple :portkey.aws.elasticmapreduce.-2009-03-31/describe-security-configuration-input) :ret (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/describe-security-configuration-output))
 
-(clojure.core/defn modify-instance-groups ([] (modify-instance-groups {})) ([modify-instance-groups-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-modify-instance-groups-input modify-instance-groups-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/modify-instance-groups-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ModifyInstanceGroups", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-error}})))))
+(clojure.core/defn modify-instance-groups ([] (modify-instance-groups {})) ([modify-instance-groups-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-modify-instance-groups-input modify-instance-groups-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/modify-instance-groups-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ModifyInstanceGroups", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-error}})))))
 (clojure.spec.alpha/fdef modify-instance-groups :args (clojure.spec.alpha/? :portkey.aws.elasticmapreduce.-2009-03-31/modify-instance-groups-input) :ret clojure.core/true?)
 
-(clojure.core/defn add-tags ([add-tags-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-add-tags-input add-tags-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/add-tags-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/add-tags-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AddTags", :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
+(clojure.core/defn add-tags ([add-tags-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-add-tags-input add-tags-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/add-tags-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/add-tags-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AddTags", :http.request.configuration/output-deser-fn deser-add-tags-output, :http.request.spec/error-spec {"InternalServerException" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-exception, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
 (clojure.spec.alpha/fdef add-tags :args (clojure.spec.alpha/tuple :portkey.aws.elasticmapreduce.-2009-03-31/add-tags-input) :ret (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/add-tags-output))
 
-(clojure.core/defn add-instance-groups ([add-instance-groups-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-add-instance-groups-input add-instance-groups-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/add-instance-groups-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/add-instance-groups-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AddInstanceGroups", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-error}})))))
+(clojure.core/defn add-instance-groups ([add-instance-groups-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-add-instance-groups-input add-instance-groups-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/add-instance-groups-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/add-instance-groups-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AddInstanceGroups", :http.request.configuration/output-deser-fn deser-add-instance-groups-output, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-error}})))))
 (clojure.spec.alpha/fdef add-instance-groups :args (clojure.spec.alpha/tuple :portkey.aws.elasticmapreduce.-2009-03-31/add-instance-groups-input) :ret (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/add-instance-groups-output))
 
-(clojure.core/defn cancel-steps ([] (cancel-steps {})) ([cancel-steps-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-cancel-steps-input cancel-steps-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/cancel-steps-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/cancel-steps-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CancelSteps", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-error, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
+(clojure.core/defn cancel-steps ([] (cancel-steps {})) ([cancel-steps-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-cancel-steps-input cancel-steps-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/cancel-steps-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/cancel-steps-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CancelSteps", :http.request.configuration/output-deser-fn deser-cancel-steps-output, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-error, "InvalidRequestException" :portkey.aws.elasticmapreduce.-2009-03-31/invalid-request-exception}})))))
 (clojure.spec.alpha/fdef cancel-steps :args (clojure.spec.alpha/? :portkey.aws.elasticmapreduce.-2009-03-31/cancel-steps-input) :ret (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/cancel-steps-output))
 
-(clojure.core/defn set-visible-to-all-users ([set-visible-to-all-users-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-set-visible-to-all-users-input set-visible-to-all-users-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/set-visible-to-all-users-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "SetVisibleToAllUsers", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-error}})))))
+(clojure.core/defn set-visible-to-all-users ([set-visible-to-all-users-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-set-visible-to-all-users-input set-visible-to-all-users-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/set-visible-to-all-users-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "SetVisibleToAllUsers", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-error}})))))
 (clojure.spec.alpha/fdef set-visible-to-all-users :args (clojure.spec.alpha/tuple :portkey.aws.elasticmapreduce.-2009-03-31/set-visible-to-all-users-input) :ret clojure.core/true?)
 
-(clojure.core/defn run-job-flow ([run-job-flow-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-run-job-flow-input run-job-flow-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/run-job-flow-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/run-job-flow-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "RunJobFlow", :http.request.spec/error-spec {"InternalServerError" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-error}})))))
+(clojure.core/defn run-job-flow ([run-job-flow-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-run-job-flow-input run-job-flow-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.elasticmapreduce.-2009-03-31/endpoints, :http.request.configuration/target-prefix "ElasticMapReduce", :http.request.spec/output-spec :portkey.aws.elasticmapreduce.-2009-03-31/run-job-flow-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2009-03-31", :http.request.configuration/service-id "EMR", :http.request.spec/input-spec :portkey.aws.elasticmapreduce.-2009-03-31/run-job-flow-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "RunJobFlow", :http.request.configuration/output-deser-fn deser-run-job-flow-output, :http.request.spec/error-spec {"InternalServerError" :portkey.aws.elasticmapreduce.-2009-03-31/internal-server-error}})))))
 (clojure.spec.alpha/fdef run-job-flow :args (clojure.spec.alpha/tuple :portkey.aws.elasticmapreduce.-2009-03-31/run-job-flow-input) :ret (clojure.spec.alpha/and :portkey.aws.elasticmapreduce.-2009-03-31/run-job-flow-output))

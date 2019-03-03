@@ -128,6 +128,194 @@
 
 (clojure.core/defn- req-associate-admin-account-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-aws-account-id (input :admin-account)) #:http.request.field{:name "AdminAccount", :shape "AWSAccountId"})]}))
 
+(clojure.core/declare deser-policy-compliance-detail)
+
+(clojure.core/declare deser-dependent-service-name)
+
+(clojure.core/declare deser-policy-compliance-status-type)
+
+(clojure.core/declare deser-compliance-violators)
+
+(clojure.core/declare deser-policy-summary)
+
+(clojure.core/declare deser-resource-tags)
+
+(clojure.core/declare deser-tag-key)
+
+(clojure.core/declare deser-pagination-token)
+
+(clojure.core/declare deser-violation-reason)
+
+(clojure.core/declare deser-customer-policy-scope-map)
+
+(clojure.core/declare deser-customer-policy-scope-id-list)
+
+(clojure.core/declare deser-error-message)
+
+(clojure.core/declare deser-evaluation-results)
+
+(clojure.core/declare deser-aws-account-id)
+
+(clojure.core/declare deser-evaluation-result)
+
+(clojure.core/declare deser-resource-id)
+
+(clojure.core/declare deser-issue-info-map)
+
+(clojure.core/declare deser-customer-policy-scope-id-type)
+
+(clojure.core/declare deser-policy-id)
+
+(clojure.core/declare deser-policy-compliance-status)
+
+(clojure.core/declare deser-compliance-violator)
+
+(clojure.core/declare deser-member-accounts)
+
+(clojure.core/declare deser-tag-value)
+
+(clojure.core/declare deser-policy-compliance-status-list)
+
+(clojure.core/declare deser-resource-name)
+
+(clojure.core/declare deser-policy-summary-list)
+
+(clojure.core/declare deser-resource-tag)
+
+(clojure.core/declare deser-resource-type)
+
+(clojure.core/declare deser-resource-count)
+
+(clojure.core/declare deser-customer-policy-scope-id)
+
+(clojure.core/declare deser-resource-arn)
+
+(clojure.core/declare deser-security-service-type)
+
+(clojure.core/declare deser-policy)
+
+(clojure.core/declare deser-managed-service-data)
+
+(clojure.core/declare deser-detailed-info)
+
+(clojure.core/declare deser-account-role-status)
+
+(clojure.core/declare deser-security-service-policy-data)
+
+(clojure.core/declare deser-time-stamp)
+
+(clojure.core/declare deser-policy-update-token)
+
+(clojure.core/declare deser-boolean)
+
+(clojure.core/defn- deser-policy-compliance-detail [input] (clojure.core/cond-> {} (clojure.core/contains? input "PolicyOwner") (clojure.core/assoc :policy-owner (deser-aws-account-id (input "PolicyOwner"))) (clojure.core/contains? input "PolicyId") (clojure.core/assoc :policy-id (deser-policy-id (input "PolicyId"))) (clojure.core/contains? input "MemberAccount") (clojure.core/assoc :member-account (deser-aws-account-id (input "MemberAccount"))) (clojure.core/contains? input "Violators") (clojure.core/assoc :violators (deser-compliance-violators (input "Violators"))) (clojure.core/contains? input "EvaluationLimitExceeded") (clojure.core/assoc :evaluation-limit-exceeded (deser-boolean (input "EvaluationLimitExceeded"))) (clojure.core/contains? input "ExpiredAt") (clojure.core/assoc :expired-at (deser-time-stamp (input "ExpiredAt"))) (clojure.core/contains? input "IssueInfoMap") (clojure.core/assoc :issue-info-map (deser-issue-info-map (input "IssueInfoMap")))))
+
+(clojure.core/defn- deser-dependent-service-name [input] (clojure.core/get {"AWSCONFIG" :awsconfig, "AWSWAF" :awswaf} input))
+
+(clojure.core/defn- deser-policy-compliance-status-type [input] (clojure.core/get {"COMPLIANT" :compliant, "NON_COMPLIANT" :non-compliant} input))
+
+(clojure.core/defn- deser-compliance-violators [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-compliance-violator coll))) input))
+
+(clojure.core/defn- deser-policy-summary [input] (clojure.core/cond-> {} (clojure.core/contains? input "PolicyArn") (clojure.core/assoc :policy-arn (deser-resource-arn (input "PolicyArn"))) (clojure.core/contains? input "PolicyId") (clojure.core/assoc :policy-id (deser-policy-id (input "PolicyId"))) (clojure.core/contains? input "PolicyName") (clojure.core/assoc :policy-name (deser-resource-name (input "PolicyName"))) (clojure.core/contains? input "ResourceType") (clojure.core/assoc :resource-type (deser-resource-type (input "ResourceType"))) (clojure.core/contains? input "SecurityServiceType") (clojure.core/assoc :security-service-type (deser-security-service-type (input "SecurityServiceType"))) (clojure.core/contains? input "RemediationEnabled") (clojure.core/assoc :remediation-enabled (deser-boolean (input "RemediationEnabled")))))
+
+(clojure.core/defn- deser-resource-tags [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-resource-tag coll))) input))
+
+(clojure.core/defn- deser-tag-key [input] input)
+
+(clojure.core/defn- deser-pagination-token [input] input)
+
+(clojure.core/defn- deser-violation-reason [input] (clojure.core/get {"WEB_ACL_MISSING_RULE_GROUP" :web-acl-missing-rule-group, "RESOURCE_MISSING_WEB_ACL" :resource-missing-web-acl, "RESOURCE_INCORRECT_WEB_ACL" :resource-incorrect-web-acl} input))
+
+(clojure.core/defn- deser-customer-policy-scope-map [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-customer-policy-scope-id-type k) (deser-customer-policy-scope-id-list v)])) input))
+
+(clojure.core/defn- deser-customer-policy-scope-id-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-customer-policy-scope-id coll))) input))
+
+(clojure.core/defn- deser-error-message [input] input)
+
+(clojure.core/defn- deser-evaluation-results [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-evaluation-result coll))) input))
+
+(clojure.core/defn- deser-aws-account-id [input] input)
+
+(clojure.core/defn- deser-evaluation-result [input] (clojure.core/cond-> {} (clojure.core/contains? input "ComplianceStatus") (clojure.core/assoc :compliance-status (deser-policy-compliance-status-type (input "ComplianceStatus"))) (clojure.core/contains? input "ViolatorCount") (clojure.core/assoc :violator-count (deser-resource-count (input "ViolatorCount"))) (clojure.core/contains? input "EvaluationLimitExceeded") (clojure.core/assoc :evaluation-limit-exceeded (deser-boolean (input "EvaluationLimitExceeded")))))
+
+(clojure.core/defn- deser-resource-id [input] input)
+
+(clojure.core/defn- deser-issue-info-map [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-dependent-service-name k) (deser-detailed-info v)])) input))
+
+(clojure.core/defn- deser-customer-policy-scope-id-type [input] (clojure.core/get {"ACCOUNT" :account} input))
+
+(clojure.core/defn- deser-policy-id [input] input)
+
+(clojure.core/defn- deser-policy-compliance-status [input] (clojure.core/cond-> {} (clojure.core/contains? input "PolicyOwner") (clojure.core/assoc :policy-owner (deser-aws-account-id (input "PolicyOwner"))) (clojure.core/contains? input "PolicyId") (clojure.core/assoc :policy-id (deser-policy-id (input "PolicyId"))) (clojure.core/contains? input "PolicyName") (clojure.core/assoc :policy-name (deser-resource-name (input "PolicyName"))) (clojure.core/contains? input "MemberAccount") (clojure.core/assoc :member-account (deser-aws-account-id (input "MemberAccount"))) (clojure.core/contains? input "EvaluationResults") (clojure.core/assoc :evaluation-results (deser-evaluation-results (input "EvaluationResults"))) (clojure.core/contains? input "LastUpdated") (clojure.core/assoc :last-updated (deser-time-stamp (input "LastUpdated"))) (clojure.core/contains? input "IssueInfoMap") (clojure.core/assoc :issue-info-map (deser-issue-info-map (input "IssueInfoMap")))))
+
+(clojure.core/defn- deser-compliance-violator [input] (clojure.core/cond-> {} (clojure.core/contains? input "ResourceId") (clojure.core/assoc :resource-id (deser-resource-id (input "ResourceId"))) (clojure.core/contains? input "ViolationReason") (clojure.core/assoc :violation-reason (deser-violation-reason (input "ViolationReason"))) (clojure.core/contains? input "ResourceType") (clojure.core/assoc :resource-type (deser-resource-type (input "ResourceType")))))
+
+(clojure.core/defn- deser-member-accounts [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-aws-account-id coll))) input))
+
+(clojure.core/defn- deser-tag-value [input] input)
+
+(clojure.core/defn- deser-policy-compliance-status-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-policy-compliance-status coll))) input))
+
+(clojure.core/defn- deser-resource-name [input] input)
+
+(clojure.core/defn- deser-policy-summary-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-policy-summary coll))) input))
+
+(clojure.core/defn- deser-resource-tag [input] (clojure.core/cond-> {:key (deser-tag-key (input "Key"))} (clojure.core/contains? input "Value") (clojure.core/assoc :value (deser-tag-value (input "Value")))))
+
+(clojure.core/defn- deser-resource-type [input] input)
+
+(clojure.core/defn- deser-resource-count [input] input)
+
+(clojure.core/defn- deser-customer-policy-scope-id [input] input)
+
+(clojure.core/defn- deser-resource-arn [input] input)
+
+(clojure.core/defn- deser-security-service-type [input] (clojure.core/get {"WAF" :waf} input))
+
+(clojure.core/defn- deser-policy [input] (clojure.core/cond-> {:policy-name (deser-resource-name (input "PolicyName")), :security-service-policy-data (deser-security-service-policy-data (input "SecurityServicePolicyData")), :resource-type (deser-resource-type (input "ResourceType")), :exclude-resource-tags (deser-boolean (input "ExcludeResourceTags")), :remediation-enabled (deser-boolean (input "RemediationEnabled"))} (clojure.core/contains? input "ResourceTags") (clojure.core/assoc :resource-tags (deser-resource-tags (input "ResourceTags"))) (clojure.core/contains? input "IncludeMap") (clojure.core/assoc :include-map (deser-customer-policy-scope-map (input "IncludeMap"))) (clojure.core/contains? input "PolicyId") (clojure.core/assoc :policy-id (deser-policy-id (input "PolicyId"))) (clojure.core/contains? input "ExcludeMap") (clojure.core/assoc :exclude-map (deser-customer-policy-scope-map (input "ExcludeMap"))) (clojure.core/contains? input "PolicyUpdateToken") (clojure.core/assoc :policy-update-token (deser-policy-update-token (input "PolicyUpdateToken")))))
+
+(clojure.core/defn- deser-managed-service-data [input] input)
+
+(clojure.core/defn- deser-detailed-info [input] input)
+
+(clojure.core/defn- deser-account-role-status [input] (clojure.core/get {"READY" :ready, "CREATING" :creating, "PENDING_DELETION" :pending-deletion, "DELETING" :deleting, "DELETED" :deleted} input))
+
+(clojure.core/defn- deser-security-service-policy-data [input] (clojure.core/cond-> {:type (deser-security-service-type (input "Type"))} (clojure.core/contains? input "ManagedServiceData") (clojure.core/assoc :managed-service-data (deser-managed-service-data (input "ManagedServiceData")))))
+
+(clojure.core/defn- deser-time-stamp [input] input)
+
+(clojure.core/defn- deser-policy-update-token [input] input)
+
+(clojure.core/defn- deser-boolean [input] input)
+
+(clojure.core/defn- deser-list-compliance-status-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "PolicyComplianceStatusList") (clojure.core/assoc :policy-compliance-status-list (deser-policy-compliance-status-list (input "PolicyComplianceStatusList"))) (clojure.core/contains? input "NextToken") (clojure.core/assoc :next-token (deser-pagination-token (input "NextToken")))))
+
+(clojure.core/defn- deser-list-member-accounts-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "MemberAccounts") (clojure.core/assoc :member-accounts (deser-member-accounts (input "MemberAccounts"))) (clojure.core/contains? input "NextToken") (clojure.core/assoc :next-token (deser-pagination-token (input "NextToken")))))
+
+(clojure.core/defn- deser-limit-exceeded-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-error-message (input "Message")))))
+
+(clojure.core/defn- deser-get-compliance-detail-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "PolicyComplianceDetail") (clojure.core/assoc :policy-compliance-detail (deser-policy-compliance-detail (input "PolicyComplianceDetail")))))
+
+(clojure.core/defn- deser-invalid-type-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-error-message (input "Message")))))
+
+(clojure.core/defn- deser-invalid-operation-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-error-message (input "Message")))))
+
+(clojure.core/defn- deser-internal-error-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-error-message (input "Message")))))
+
+(clojure.core/defn- deser-resource-not-found-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-error-message (input "Message")))))
+
+(clojure.core/defn- deser-get-notification-channel-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "SnsTopicArn") (clojure.core/assoc :sns-topic-arn (deser-resource-arn (input "SnsTopicArn"))) (clojure.core/contains? input "SnsRoleName") (clojure.core/assoc :sns-role-name (deser-resource-arn (input "SnsRoleName")))))
+
+(clojure.core/defn- deser-invalid-input-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-error-message (input "Message")))))
+
+(clojure.core/defn- deser-get-policy-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "Policy") (clojure.core/assoc :policy (deser-policy (input "Policy"))) (clojure.core/contains? input "PolicyArn") (clojure.core/assoc :policy-arn (deser-resource-arn (input "PolicyArn")))))
+
+(clojure.core/defn- deser-get-admin-account-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "AdminAccount") (clojure.core/assoc :admin-account (deser-aws-account-id (input "AdminAccount"))) (clojure.core/contains? input "RoleStatus") (clojure.core/assoc :role-status (deser-account-role-status (input "RoleStatus")))))
+
+(clojure.core/defn- deser-put-policy-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "Policy") (clojure.core/assoc :policy (deser-policy (input "Policy"))) (clojure.core/contains? input "PolicyArn") (clojure.core/assoc :policy-arn (deser-resource-arn (input "PolicyArn")))))
+
+(clojure.core/defn- deser-list-policies-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "PolicyList") (clojure.core/assoc :policy-list (deser-policy-summary-list (input "PolicyList"))) (clojure.core/contains? input "NextToken") (clojure.core/assoc :next-token (deser-pagination-token (input "NextToken")))))
+
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/disassociate-admin-account-request (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01.policy-compliance-detail/policy-owner (clojure.spec.alpha/and :portkey.aws.fms.-2018-01-01/aws-account-id))
@@ -174,9 +362,9 @@
 
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/resource-tags (clojure.spec.alpha/coll-of :portkey.aws.fms.-2018-01-01/resource-tag :min-count 0 :max-count 8))
 
-(clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/tag-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 128)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/tag-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 128)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$" s__27881__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/pagination-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__)))))
+(clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/pagination-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__)))))
 
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/violation-reason #{"RESOURCE_INCORRECT_WEB_ACL" "WEB_ACL_MISSING_RULE_GROUP" "RESOURCE_MISSING_WEB_ACL" :web-acl-missing-rule-group :resource-incorrect-web-acl :resource-missing-web-acl})
 
@@ -196,7 +384,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/evaluation-results (clojure.spec.alpha/coll-of :portkey.aws.fms.-2018-01-01/evaluation-result))
 
-(clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/aws-account-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1024))))
+(clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/aws-account-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1024))))
 
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01.evaluation-result/compliance-status (clojure.spec.alpha/and :portkey.aws.fms.-2018-01-01/policy-compliance-status-type))
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01.evaluation-result/violator-count (clojure.spec.alpha/and :portkey.aws.fms.-2018-01-01/resource-count))
@@ -206,7 +394,7 @@
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01.invalid-operation-exception/message (clojure.spec.alpha/and :portkey.aws.fms.-2018-01-01/error-message))
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/invalid-operation-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.fms.-2018-01-01.invalid-operation-exception/message]))
 
-(clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/resource-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1024))))
+(clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/resource-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1024))))
 
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01.internal-error-exception/message (clojure.spec.alpha/and :portkey.aws.fms.-2018-01-01/error-message))
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/internal-error-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.fms.-2018-01-01.internal-error-exception/message]))
@@ -218,7 +406,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/customer-policy-scope-id-type #{:account "ACCOUNT"})
 
-(clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/policy-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 36 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 36))))
+(clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/policy-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 36 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 36))))
 
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01.policy-compliance-status/policy-owner (clojure.spec.alpha/and :portkey.aws.fms.-2018-01-01/aws-account-id))
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01.policy-compliance-status/policy-name (clojure.spec.alpha/and :portkey.aws.fms.-2018-01-01/resource-name))
@@ -243,7 +431,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/delete-policy-request (clojure.spec.alpha/keys :req-un [:portkey.aws.fms.-2018-01-01/policy-id] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/tag-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/tag-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 256)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01.invalid-input-exception/message (clojure.spec.alpha/and :portkey.aws.fms.-2018-01-01/error-message))
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/invalid-input-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.fms.-2018-01-01.invalid-input-exception/message]))
@@ -253,7 +441,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/policy-compliance-status-list (clojure.spec.alpha/coll-of :portkey.aws.fms.-2018-01-01/policy-compliance-status))
 
-(clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/resource-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 128))))
+(clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/resource-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 128))))
 
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/policy-summary-list (clojure.spec.alpha/coll-of :portkey.aws.fms.-2018-01-01/policy-summary))
 
@@ -261,7 +449,7 @@
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01.resource-tag/value (clojure.spec.alpha/and :portkey.aws.fms.-2018-01-01/tag-value))
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/resource-tag (clojure.spec.alpha/keys :req-un [:portkey.aws.fms.-2018-01-01.resource-tag/key] :opt-un [:portkey.aws.fms.-2018-01-01.resource-tag/value]))
 
-(clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/resource-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 128))))
+(clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/resource-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 128))))
 
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01.list-policies-request/next-token (clojure.spec.alpha/and :portkey.aws.fms.-2018-01-01/pagination-token))
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01.list-policies-request/max-results (clojure.spec.alpha/and :portkey.aws.fms.-2018-01-01/pagination-max-results))
@@ -273,12 +461,12 @@
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01.get-admin-account-response/role-status (clojure.spec.alpha/and :portkey.aws.fms.-2018-01-01/account-role-status))
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/get-admin-account-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.fms.-2018-01-01.get-admin-account-response/admin-account :portkey.aws.fms.-2018-01-01.get-admin-account-response/role-status]))
 
-(clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/customer-policy-scope-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1024))))
+(clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/customer-policy-scope-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1024))))
 
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01.put-policy-response/policy-arn (clojure.spec.alpha/and :portkey.aws.fms.-2018-01-01/resource-arn))
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/put-policy-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.fms.-2018-01-01/policy :portkey.aws.fms.-2018-01-01.put-policy-response/policy-arn]))
 
-(clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/resource-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1024))))
+(clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/resource-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1024))))
 
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/security-service-type #{:waf "WAF"})
 
@@ -295,9 +483,9 @@
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01.list-policies-response/next-token (clojure.spec.alpha/and :portkey.aws.fms.-2018-01-01/pagination-token))
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/list-policies-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.fms.-2018-01-01.list-policies-response/policy-list :portkey.aws.fms.-2018-01-01.list-policies-response/next-token]))
 
-(clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/managed-service-data (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1024))))
+(clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/managed-service-data (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1024))))
 
-(clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/detailed-info (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1024))))
+(clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/detailed-info (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1024))))
 
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/account-role-status #{:deleted :ready :creating :pending-deletion "READY" :deleting "DELETING" "CREATING" "PENDING_DELETION" "DELETED"})
 
@@ -306,48 +494,48 @@
 
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/time-stamp clojure.core/inst?)
 
-(clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/policy-update-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1024))))
+(clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/policy-update-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1024))))
 
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01.associate-admin-account-request/admin-account (clojure.spec.alpha/and :portkey.aws.fms.-2018-01-01/aws-account-id))
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/associate-admin-account-request (clojure.spec.alpha/keys :req-un [:portkey.aws.fms.-2018-01-01.associate-admin-account-request/admin-account] :opt-un []))
 
 (clojure.spec.alpha/def :portkey.aws.fms.-2018-01-01/boolean clojure.core/boolean?)
 
-(clojure.core/defn list-member-accounts ([] (list-member-accounts {})) ([list-member-accounts-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-member-accounts-request list-member-accounts-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.fms.-2018-01-01/endpoints, :http.request.configuration/target-prefix "AWSFMS_20180101", :http.request.spec/output-spec :portkey.aws.fms.-2018-01-01/list-member-accounts-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-01", :http.request.configuration/service-id "FMS", :http.request.spec/input-spec :portkey.aws.fms.-2018-01-01/list-member-accounts-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListMemberAccounts", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.fms.-2018-01-01/resource-not-found-exception, "InternalErrorException" :portkey.aws.fms.-2018-01-01/internal-error-exception}})))))
+(clojure.core/defn list-member-accounts ([] (list-member-accounts {})) ([list-member-accounts-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-member-accounts-request list-member-accounts-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.fms.-2018-01-01/endpoints, :http.request.configuration/target-prefix "AWSFMS_20180101", :http.request.spec/output-spec :portkey.aws.fms.-2018-01-01/list-member-accounts-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-01", :http.request.configuration/service-id "FMS", :http.request.spec/input-spec :portkey.aws.fms.-2018-01-01/list-member-accounts-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListMemberAccounts", :http.request.configuration/output-deser-fn deser-list-member-accounts-response, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.fms.-2018-01-01/resource-not-found-exception, "InternalErrorException" :portkey.aws.fms.-2018-01-01/internal-error-exception}})))))
 (clojure.spec.alpha/fdef list-member-accounts :args (clojure.spec.alpha/? :portkey.aws.fms.-2018-01-01/list-member-accounts-request) :ret (clojure.spec.alpha/and :portkey.aws.fms.-2018-01-01/list-member-accounts-response))
 
-(clojure.core/defn associate-admin-account ([associate-admin-account-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-associate-admin-account-request associate-admin-account-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.fms.-2018-01-01/endpoints, :http.request.configuration/target-prefix "AWSFMS_20180101", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-01", :http.request.configuration/service-id "FMS", :http.request.spec/input-spec :portkey.aws.fms.-2018-01-01/associate-admin-account-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AssociateAdminAccount", :http.request.spec/error-spec {"InvalidOperationException" :portkey.aws.fms.-2018-01-01/invalid-operation-exception, "InvalidInputException" :portkey.aws.fms.-2018-01-01/invalid-input-exception, "ResourceNotFoundException" :portkey.aws.fms.-2018-01-01/resource-not-found-exception, "InternalErrorException" :portkey.aws.fms.-2018-01-01/internal-error-exception}})))))
+(clojure.core/defn associate-admin-account ([associate-admin-account-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-associate-admin-account-request associate-admin-account-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.fms.-2018-01-01/endpoints, :http.request.configuration/target-prefix "AWSFMS_20180101", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-01", :http.request.configuration/service-id "FMS", :http.request.spec/input-spec :portkey.aws.fms.-2018-01-01/associate-admin-account-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AssociateAdminAccount", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {"InvalidOperationException" :portkey.aws.fms.-2018-01-01/invalid-operation-exception, "InvalidInputException" :portkey.aws.fms.-2018-01-01/invalid-input-exception, "ResourceNotFoundException" :portkey.aws.fms.-2018-01-01/resource-not-found-exception, "InternalErrorException" :portkey.aws.fms.-2018-01-01/internal-error-exception}})))))
 (clojure.spec.alpha/fdef associate-admin-account :args (clojure.spec.alpha/tuple :portkey.aws.fms.-2018-01-01/associate-admin-account-request) :ret clojure.core/true?)
 
-(clojure.core/defn list-policies ([] (list-policies {})) ([list-policies-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-policies-request list-policies-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.fms.-2018-01-01/endpoints, :http.request.configuration/target-prefix "AWSFMS_20180101", :http.request.spec/output-spec :portkey.aws.fms.-2018-01-01/list-policies-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-01", :http.request.configuration/service-id "FMS", :http.request.spec/input-spec :portkey.aws.fms.-2018-01-01/list-policies-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListPolicies", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.fms.-2018-01-01/resource-not-found-exception, "InvalidOperationException" :portkey.aws.fms.-2018-01-01/invalid-operation-exception, "LimitExceededException" :portkey.aws.fms.-2018-01-01/limit-exceeded-exception, "InternalErrorException" :portkey.aws.fms.-2018-01-01/internal-error-exception}})))))
+(clojure.core/defn list-policies ([] (list-policies {})) ([list-policies-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-policies-request list-policies-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.fms.-2018-01-01/endpoints, :http.request.configuration/target-prefix "AWSFMS_20180101", :http.request.spec/output-spec :portkey.aws.fms.-2018-01-01/list-policies-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-01", :http.request.configuration/service-id "FMS", :http.request.spec/input-spec :portkey.aws.fms.-2018-01-01/list-policies-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListPolicies", :http.request.configuration/output-deser-fn deser-list-policies-response, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.fms.-2018-01-01/resource-not-found-exception, "InvalidOperationException" :portkey.aws.fms.-2018-01-01/invalid-operation-exception, "LimitExceededException" :portkey.aws.fms.-2018-01-01/limit-exceeded-exception, "InternalErrorException" :portkey.aws.fms.-2018-01-01/internal-error-exception}})))))
 (clojure.spec.alpha/fdef list-policies :args (clojure.spec.alpha/? :portkey.aws.fms.-2018-01-01/list-policies-request) :ret (clojure.spec.alpha/and :portkey.aws.fms.-2018-01-01/list-policies-response))
 
-(clojure.core/defn put-notification-channel ([put-notification-channel-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-put-notification-channel-request put-notification-channel-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.fms.-2018-01-01/endpoints, :http.request.configuration/target-prefix "AWSFMS_20180101", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-01", :http.request.configuration/service-id "FMS", :http.request.spec/input-spec :portkey.aws.fms.-2018-01-01/put-notification-channel-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutNotificationChannel", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.fms.-2018-01-01/resource-not-found-exception, "InvalidOperationException" :portkey.aws.fms.-2018-01-01/invalid-operation-exception, "InternalErrorException" :portkey.aws.fms.-2018-01-01/internal-error-exception}})))))
+(clojure.core/defn put-notification-channel ([put-notification-channel-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-put-notification-channel-request put-notification-channel-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.fms.-2018-01-01/endpoints, :http.request.configuration/target-prefix "AWSFMS_20180101", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-01", :http.request.configuration/service-id "FMS", :http.request.spec/input-spec :portkey.aws.fms.-2018-01-01/put-notification-channel-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutNotificationChannel", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.fms.-2018-01-01/resource-not-found-exception, "InvalidOperationException" :portkey.aws.fms.-2018-01-01/invalid-operation-exception, "InternalErrorException" :portkey.aws.fms.-2018-01-01/internal-error-exception}})))))
 (clojure.spec.alpha/fdef put-notification-channel :args (clojure.spec.alpha/tuple :portkey.aws.fms.-2018-01-01/put-notification-channel-request) :ret clojure.core/true?)
 
-(clojure.core/defn disassociate-admin-account ([] (disassociate-admin-account {})) ([disassociate-admin-account-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-disassociate-admin-account-request disassociate-admin-account-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.fms.-2018-01-01/endpoints, :http.request.configuration/target-prefix "AWSFMS_20180101", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-01", :http.request.configuration/service-id "FMS", :http.request.spec/input-spec :portkey.aws.fms.-2018-01-01/disassociate-admin-account-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DisassociateAdminAccount", :http.request.spec/error-spec {"InvalidOperationException" :portkey.aws.fms.-2018-01-01/invalid-operation-exception, "ResourceNotFoundException" :portkey.aws.fms.-2018-01-01/resource-not-found-exception, "InternalErrorException" :portkey.aws.fms.-2018-01-01/internal-error-exception}})))))
+(clojure.core/defn disassociate-admin-account ([] (disassociate-admin-account {})) ([disassociate-admin-account-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-disassociate-admin-account-request disassociate-admin-account-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.fms.-2018-01-01/endpoints, :http.request.configuration/target-prefix "AWSFMS_20180101", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-01", :http.request.configuration/service-id "FMS", :http.request.spec/input-spec :portkey.aws.fms.-2018-01-01/disassociate-admin-account-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DisassociateAdminAccount", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {"InvalidOperationException" :portkey.aws.fms.-2018-01-01/invalid-operation-exception, "ResourceNotFoundException" :portkey.aws.fms.-2018-01-01/resource-not-found-exception, "InternalErrorException" :portkey.aws.fms.-2018-01-01/internal-error-exception}})))))
 (clojure.spec.alpha/fdef disassociate-admin-account :args (clojure.spec.alpha/? :portkey.aws.fms.-2018-01-01/disassociate-admin-account-request) :ret clojure.core/true?)
 
-(clojure.core/defn get-compliance-detail ([get-compliance-detail-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-compliance-detail-request get-compliance-detail-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.fms.-2018-01-01/endpoints, :http.request.configuration/target-prefix "AWSFMS_20180101", :http.request.spec/output-spec :portkey.aws.fms.-2018-01-01/get-compliance-detail-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-01", :http.request.configuration/service-id "FMS", :http.request.spec/input-spec :portkey.aws.fms.-2018-01-01/get-compliance-detail-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetComplianceDetail", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.fms.-2018-01-01/resource-not-found-exception, "InternalErrorException" :portkey.aws.fms.-2018-01-01/internal-error-exception}})))))
+(clojure.core/defn get-compliance-detail ([get-compliance-detail-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-get-compliance-detail-request get-compliance-detail-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.fms.-2018-01-01/endpoints, :http.request.configuration/target-prefix "AWSFMS_20180101", :http.request.spec/output-spec :portkey.aws.fms.-2018-01-01/get-compliance-detail-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-01", :http.request.configuration/service-id "FMS", :http.request.spec/input-spec :portkey.aws.fms.-2018-01-01/get-compliance-detail-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetComplianceDetail", :http.request.configuration/output-deser-fn deser-get-compliance-detail-response, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.fms.-2018-01-01/resource-not-found-exception, "InternalErrorException" :portkey.aws.fms.-2018-01-01/internal-error-exception}})))))
 (clojure.spec.alpha/fdef get-compliance-detail :args (clojure.spec.alpha/tuple :portkey.aws.fms.-2018-01-01/get-compliance-detail-request) :ret (clojure.spec.alpha/and :portkey.aws.fms.-2018-01-01/get-compliance-detail-response))
 
-(clojure.core/defn get-notification-channel ([] (get-notification-channel {})) ([get-notification-channel-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-notification-channel-request get-notification-channel-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.fms.-2018-01-01/endpoints, :http.request.configuration/target-prefix "AWSFMS_20180101", :http.request.spec/output-spec :portkey.aws.fms.-2018-01-01/get-notification-channel-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-01", :http.request.configuration/service-id "FMS", :http.request.spec/input-spec :portkey.aws.fms.-2018-01-01/get-notification-channel-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetNotificationChannel", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.fms.-2018-01-01/resource-not-found-exception, "InvalidOperationException" :portkey.aws.fms.-2018-01-01/invalid-operation-exception, "InternalErrorException" :portkey.aws.fms.-2018-01-01/internal-error-exception}})))))
+(clojure.core/defn get-notification-channel ([] (get-notification-channel {})) ([get-notification-channel-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-get-notification-channel-request get-notification-channel-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.fms.-2018-01-01/endpoints, :http.request.configuration/target-prefix "AWSFMS_20180101", :http.request.spec/output-spec :portkey.aws.fms.-2018-01-01/get-notification-channel-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-01", :http.request.configuration/service-id "FMS", :http.request.spec/input-spec :portkey.aws.fms.-2018-01-01/get-notification-channel-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetNotificationChannel", :http.request.configuration/output-deser-fn deser-get-notification-channel-response, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.fms.-2018-01-01/resource-not-found-exception, "InvalidOperationException" :portkey.aws.fms.-2018-01-01/invalid-operation-exception, "InternalErrorException" :portkey.aws.fms.-2018-01-01/internal-error-exception}})))))
 (clojure.spec.alpha/fdef get-notification-channel :args (clojure.spec.alpha/? :portkey.aws.fms.-2018-01-01/get-notification-channel-request) :ret (clojure.spec.alpha/and :portkey.aws.fms.-2018-01-01/get-notification-channel-response))
 
-(clojure.core/defn get-policy ([get-policy-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-policy-request get-policy-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.fms.-2018-01-01/endpoints, :http.request.configuration/target-prefix "AWSFMS_20180101", :http.request.spec/output-spec :portkey.aws.fms.-2018-01-01/get-policy-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-01", :http.request.configuration/service-id "FMS", :http.request.spec/input-spec :portkey.aws.fms.-2018-01-01/get-policy-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetPolicy", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.fms.-2018-01-01/resource-not-found-exception, "InvalidOperationException" :portkey.aws.fms.-2018-01-01/invalid-operation-exception, "InternalErrorException" :portkey.aws.fms.-2018-01-01/internal-error-exception, "InvalidTypeException" :portkey.aws.fms.-2018-01-01/invalid-type-exception}})))))
+(clojure.core/defn get-policy ([get-policy-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-get-policy-request get-policy-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.fms.-2018-01-01/endpoints, :http.request.configuration/target-prefix "AWSFMS_20180101", :http.request.spec/output-spec :portkey.aws.fms.-2018-01-01/get-policy-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-01", :http.request.configuration/service-id "FMS", :http.request.spec/input-spec :portkey.aws.fms.-2018-01-01/get-policy-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetPolicy", :http.request.configuration/output-deser-fn deser-get-policy-response, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.fms.-2018-01-01/resource-not-found-exception, "InvalidOperationException" :portkey.aws.fms.-2018-01-01/invalid-operation-exception, "InternalErrorException" :portkey.aws.fms.-2018-01-01/internal-error-exception, "InvalidTypeException" :portkey.aws.fms.-2018-01-01/invalid-type-exception}})))))
 (clojure.spec.alpha/fdef get-policy :args (clojure.spec.alpha/tuple :portkey.aws.fms.-2018-01-01/get-policy-request) :ret (clojure.spec.alpha/and :portkey.aws.fms.-2018-01-01/get-policy-response))
 
-(clojure.core/defn delete-notification-channel ([] (delete-notification-channel {})) ([delete-notification-channel-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-notification-channel-request delete-notification-channel-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.fms.-2018-01-01/endpoints, :http.request.configuration/target-prefix "AWSFMS_20180101", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-01", :http.request.configuration/service-id "FMS", :http.request.spec/input-spec :portkey.aws.fms.-2018-01-01/delete-notification-channel-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteNotificationChannel", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.fms.-2018-01-01/resource-not-found-exception, "InvalidOperationException" :portkey.aws.fms.-2018-01-01/invalid-operation-exception, "InternalErrorException" :portkey.aws.fms.-2018-01-01/internal-error-exception}})))))
+(clojure.core/defn delete-notification-channel ([] (delete-notification-channel {})) ([delete-notification-channel-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-notification-channel-request delete-notification-channel-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.fms.-2018-01-01/endpoints, :http.request.configuration/target-prefix "AWSFMS_20180101", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-01", :http.request.configuration/service-id "FMS", :http.request.spec/input-spec :portkey.aws.fms.-2018-01-01/delete-notification-channel-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteNotificationChannel", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.fms.-2018-01-01/resource-not-found-exception, "InvalidOperationException" :portkey.aws.fms.-2018-01-01/invalid-operation-exception, "InternalErrorException" :portkey.aws.fms.-2018-01-01/internal-error-exception}})))))
 (clojure.spec.alpha/fdef delete-notification-channel :args (clojure.spec.alpha/? :portkey.aws.fms.-2018-01-01/delete-notification-channel-request) :ret clojure.core/true?)
 
-(clojure.core/defn put-policy ([put-policy-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-put-policy-request put-policy-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.fms.-2018-01-01/endpoints, :http.request.configuration/target-prefix "AWSFMS_20180101", :http.request.spec/output-spec :portkey.aws.fms.-2018-01-01/put-policy-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-01", :http.request.configuration/service-id "FMS", :http.request.spec/input-spec :portkey.aws.fms.-2018-01-01/put-policy-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutPolicy", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.fms.-2018-01-01/resource-not-found-exception, "InvalidOperationException" :portkey.aws.fms.-2018-01-01/invalid-operation-exception, "InvalidInputException" :portkey.aws.fms.-2018-01-01/invalid-input-exception, "LimitExceededException" :portkey.aws.fms.-2018-01-01/limit-exceeded-exception, "InternalErrorException" :portkey.aws.fms.-2018-01-01/internal-error-exception, "InvalidTypeException" :portkey.aws.fms.-2018-01-01/invalid-type-exception}})))))
+(clojure.core/defn put-policy ([put-policy-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-put-policy-request put-policy-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.fms.-2018-01-01/endpoints, :http.request.configuration/target-prefix "AWSFMS_20180101", :http.request.spec/output-spec :portkey.aws.fms.-2018-01-01/put-policy-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-01", :http.request.configuration/service-id "FMS", :http.request.spec/input-spec :portkey.aws.fms.-2018-01-01/put-policy-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "PutPolicy", :http.request.configuration/output-deser-fn deser-put-policy-response, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.fms.-2018-01-01/resource-not-found-exception, "InvalidOperationException" :portkey.aws.fms.-2018-01-01/invalid-operation-exception, "InvalidInputException" :portkey.aws.fms.-2018-01-01/invalid-input-exception, "LimitExceededException" :portkey.aws.fms.-2018-01-01/limit-exceeded-exception, "InternalErrorException" :portkey.aws.fms.-2018-01-01/internal-error-exception, "InvalidTypeException" :portkey.aws.fms.-2018-01-01/invalid-type-exception}})))))
 (clojure.spec.alpha/fdef put-policy :args (clojure.spec.alpha/tuple :portkey.aws.fms.-2018-01-01/put-policy-request) :ret (clojure.spec.alpha/and :portkey.aws.fms.-2018-01-01/put-policy-response))
 
-(clojure.core/defn delete-policy ([delete-policy-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-policy-request delete-policy-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.fms.-2018-01-01/endpoints, :http.request.configuration/target-prefix "AWSFMS_20180101", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-01", :http.request.configuration/service-id "FMS", :http.request.spec/input-spec :portkey.aws.fms.-2018-01-01/delete-policy-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeletePolicy", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.fms.-2018-01-01/resource-not-found-exception, "InvalidOperationException" :portkey.aws.fms.-2018-01-01/invalid-operation-exception, "InternalErrorException" :portkey.aws.fms.-2018-01-01/internal-error-exception}})))))
+(clojure.core/defn delete-policy ([delete-policy-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-policy-request delete-policy-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.fms.-2018-01-01/endpoints, :http.request.configuration/target-prefix "AWSFMS_20180101", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-01", :http.request.configuration/service-id "FMS", :http.request.spec/input-spec :portkey.aws.fms.-2018-01-01/delete-policy-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeletePolicy", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.fms.-2018-01-01/resource-not-found-exception, "InvalidOperationException" :portkey.aws.fms.-2018-01-01/invalid-operation-exception, "InternalErrorException" :portkey.aws.fms.-2018-01-01/internal-error-exception}})))))
 (clojure.spec.alpha/fdef delete-policy :args (clojure.spec.alpha/tuple :portkey.aws.fms.-2018-01-01/delete-policy-request) :ret clojure.core/true?)
 
-(clojure.core/defn list-compliance-status ([list-compliance-status-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-compliance-status-request list-compliance-status-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.fms.-2018-01-01/endpoints, :http.request.configuration/target-prefix "AWSFMS_20180101", :http.request.spec/output-spec :portkey.aws.fms.-2018-01-01/list-compliance-status-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-01", :http.request.configuration/service-id "FMS", :http.request.spec/input-spec :portkey.aws.fms.-2018-01-01/list-compliance-status-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListComplianceStatus", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.fms.-2018-01-01/resource-not-found-exception, "InternalErrorException" :portkey.aws.fms.-2018-01-01/internal-error-exception}})))))
+(clojure.core/defn list-compliance-status ([list-compliance-status-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-compliance-status-request list-compliance-status-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.fms.-2018-01-01/endpoints, :http.request.configuration/target-prefix "AWSFMS_20180101", :http.request.spec/output-spec :portkey.aws.fms.-2018-01-01/list-compliance-status-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-01", :http.request.configuration/service-id "FMS", :http.request.spec/input-spec :portkey.aws.fms.-2018-01-01/list-compliance-status-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListComplianceStatus", :http.request.configuration/output-deser-fn deser-list-compliance-status-response, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.fms.-2018-01-01/resource-not-found-exception, "InternalErrorException" :portkey.aws.fms.-2018-01-01/internal-error-exception}})))))
 (clojure.spec.alpha/fdef list-compliance-status :args (clojure.spec.alpha/tuple :portkey.aws.fms.-2018-01-01/list-compliance-status-request) :ret (clojure.spec.alpha/and :portkey.aws.fms.-2018-01-01/list-compliance-status-response))
 
-(clojure.core/defn get-admin-account ([] (get-admin-account {})) ([get-admin-account-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-admin-account-request get-admin-account-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.fms.-2018-01-01/endpoints, :http.request.configuration/target-prefix "AWSFMS_20180101", :http.request.spec/output-spec :portkey.aws.fms.-2018-01-01/get-admin-account-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-01", :http.request.configuration/service-id "FMS", :http.request.spec/input-spec :portkey.aws.fms.-2018-01-01/get-admin-account-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetAdminAccount", :http.request.spec/error-spec {"InvalidOperationException" :portkey.aws.fms.-2018-01-01/invalid-operation-exception, "ResourceNotFoundException" :portkey.aws.fms.-2018-01-01/resource-not-found-exception, "InternalErrorException" :portkey.aws.fms.-2018-01-01/internal-error-exception}})))))
+(clojure.core/defn get-admin-account ([] (get-admin-account {})) ([get-admin-account-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-get-admin-account-request get-admin-account-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.fms.-2018-01-01/endpoints, :http.request.configuration/target-prefix "AWSFMS_20180101", :http.request.spec/output-spec :portkey.aws.fms.-2018-01-01/get-admin-account-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2018-01-01", :http.request.configuration/service-id "FMS", :http.request.spec/input-spec :portkey.aws.fms.-2018-01-01/get-admin-account-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "GetAdminAccount", :http.request.configuration/output-deser-fn deser-get-admin-account-response, :http.request.spec/error-spec {"InvalidOperationException" :portkey.aws.fms.-2018-01-01/invalid-operation-exception, "ResourceNotFoundException" :portkey.aws.fms.-2018-01-01/resource-not-found-exception, "InternalErrorException" :portkey.aws.fms.-2018-01-01/internal-error-exception}})))))
 (clojure.spec.alpha/fdef get-admin-account :args (clojure.spec.alpha/? :portkey.aws.fms.-2018-01-01/get-admin-account-request) :ret (clojure.spec.alpha/and :portkey.aws.fms.-2018-01-01/get-admin-account-response))

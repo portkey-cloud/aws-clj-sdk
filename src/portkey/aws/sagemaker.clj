@@ -673,6 +673,694 @@
 
 (clojure.core/defn- req-describe-training-job-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-training-job-name (input :training-job-name)) #:http.request.field{:name "TrainingJobName", :shape "TrainingJobName"})]}))
 
+(clojure.core/declare deser-resource-config)
+
+(clojure.core/declare deser-input-data-config)
+
+(clojure.core/declare deser-objective-status-counter)
+
+(clojure.core/declare deser-task-count)
+
+(clojure.core/declare deser-compression-type)
+
+(clojure.core/declare deser-output-data-config)
+
+(clojure.core/declare deser-metric-regex)
+
+(clojure.core/declare deser-model-name)
+
+(clojure.core/declare deser-endpoint-status)
+
+(clojure.core/declare deser-hyper-parameter-tuning-job-status)
+
+(clojure.core/declare deser-endpoint-config-summary-list)
+
+(clojure.core/declare deser-variant-name)
+
+(clojure.core/declare deser-endpoint-summary)
+
+(clojure.core/declare deser-max-payload-in-mb)
+
+(clojure.core/declare deser-max-number-of-training-jobs)
+
+(clojure.core/declare deser-parameter-key)
+
+(clojure.core/declare deser-transform-resources)
+
+(clojure.core/declare deser-training-job-status-counter)
+
+(clojure.core/declare deser-volume-size-in-gb)
+
+(clojure.core/declare deser-security-group-ids)
+
+(clojure.core/declare deser-hyper-parameters)
+
+(clojure.core/declare deser-hyper-parameter-tuning-job-strategy-type)
+
+(clojure.core/declare deser-continuous-parameter-ranges)
+
+(clojure.core/declare deser-notebook-instance-arn)
+
+(clojure.core/declare deser-hyper-parameter-training-job-summaries)
+
+(clojure.core/declare deser-subnets)
+
+(clojure.core/declare deser-transform-instance-count)
+
+(clojure.core/declare deser-transform-data-source)
+
+(clojure.core/declare deser-resource-limits)
+
+(clojure.core/declare deser-training-instance-count)
+
+(clojure.core/declare deser-subnet-id)
+
+(clojure.core/declare deser-s-3-data-type)
+
+(clojure.core/declare deser-s-3-data-distribution)
+
+(clojure.core/declare deser-status-message)
+
+(clojure.core/declare deser-transform-s-3-data-source)
+
+(clojure.core/declare deser-max-concurrent-transforms)
+
+(clojure.core/declare deser-container-hostname)
+
+(clojure.core/declare deser-instance-type)
+
+(clojure.core/declare deser-final-hyper-parameter-tuning-job-objective-metric)
+
+(clojure.core/declare deser-role-arn)
+
+(clojure.core/declare deser-training-input-mode)
+
+(clojure.core/declare deser-transform-input)
+
+(clojure.core/declare deser-s-3-uri)
+
+(clojure.core/declare deser-tag-key)
+
+(clojure.core/declare deser-transform-job-summary)
+
+(clojure.core/declare deser-production-variant-instance-type)
+
+(clojure.core/declare deser-pagination-token)
+
+(clojure.core/declare deser-parameter-values)
+
+(clojure.core/declare deser-production-variant-list)
+
+(clojure.core/declare deser-network-interface-id)
+
+(clojure.core/declare deser-environment-map)
+
+(clojure.core/declare deser-max-parallel-training-jobs)
+
+(clojure.core/declare deser-notebook-instance-lifecycle-config-name)
+
+(clojure.core/declare deser-notebook-instance-url)
+
+(clojure.core/declare deser-vpc-security-group-ids)
+
+(clojure.core/declare deser-notebook-instance-status)
+
+(clojure.core/declare deser-next-token)
+
+(clojure.core/declare deser-objective-status)
+
+(clojure.core/declare deser-training-job-arn)
+
+(clojure.core/declare deser-endpoint-name)
+
+(clojure.core/declare deser-hyper-parameter-tuning-job-config)
+
+(clojure.core/declare deser-endpoint-config-arn)
+
+(clojure.core/declare deser-content-type)
+
+(clojure.core/declare deser-objective-status-counters)
+
+(clojure.core/declare deser-hyper-parameter-tuning-job-summaries)
+
+(clojure.core/declare deser-transform-environment-value)
+
+(clojure.core/declare deser-direct-internet-access)
+
+(clojure.core/declare deser-transform-environment-map)
+
+(clojure.core/declare deser-s-3-data-source)
+
+(clojure.core/declare deser-notebook-instance-lifecycle-config-arn)
+
+(clojure.core/declare deser-stopping-condition)
+
+(clojure.core/declare deser-transform-job-summaries)
+
+(clojure.core/declare deser-tag-list)
+
+(clojure.core/declare deser-secondary-status)
+
+(clojure.core/declare deser-notebook-instance-lifecycle-config-summary)
+
+(clojure.core/declare deser-environment-value)
+
+(clojure.core/declare deser-categorical-parameter-range)
+
+(clojure.core/declare deser-hyper-parameter-tuning-job-objective-type)
+
+(clojure.core/declare deser-training-job-summary)
+
+(clojure.core/declare deser-max-runtime-in-seconds)
+
+(clojure.core/declare deser-transform-environment-key)
+
+(clojure.core/declare deser-metric-definition-list)
+
+(clojure.core/declare deser-channel-name)
+
+(clojure.core/declare deser-categorical-parameter-ranges)
+
+(clojure.core/declare deser-hyper-parameter-tuning-job-arn)
+
+(clojure.core/declare deser-notebook-instance-lifecycle-config-list)
+
+(clojure.core/declare deser-model-summary)
+
+(clojure.core/declare deser-hyper-parameter-algorithm-specification)
+
+(clojure.core/declare deser-url)
+
+(clojure.core/declare deser-notebook-instance-lifecycle-config-content)
+
+(clojure.core/declare deser-tag-value)
+
+(clojure.core/declare deser-container-definition)
+
+(clojure.core/declare deser-model-summary-list)
+
+(clojure.core/declare deser-parameter-ranges)
+
+(clojure.core/declare deser-production-variant)
+
+(clojure.core/declare deser-security-group-id)
+
+(clojure.core/declare deser-notebook-instance-lifecycle-hook)
+
+(clojure.core/declare deser-failure-reason)
+
+(clojure.core/declare deser-endpoint-config-summary)
+
+(clojure.core/declare deser-transform-job-name)
+
+(clojure.core/declare deser-transform-job-arn)
+
+(clojure.core/declare deser-kms-key-id)
+
+(clojure.core/declare deser-batch-strategy)
+
+(clojure.core/declare deser-environment-key)
+
+(clojure.core/declare deser-endpoint-summary-list)
+
+(clojure.core/declare deser-data-source)
+
+(clojure.core/declare deser-notebook-instance-summary-list)
+
+(clojure.core/declare deser-training-job-status-counters)
+
+(clojure.core/declare deser-assembly-type)
+
+(clojure.core/declare deser-variant-weight)
+
+(clojure.core/declare deser-split-type)
+
+(clojure.core/declare deser-metric-value)
+
+(clojure.core/declare deser-production-variant-summary-list)
+
+(clojure.core/declare deser-production-variant-summary)
+
+(clojure.core/declare deser-creation-time)
+
+(clojure.core/declare deser-hyper-parameter-training-job-summary)
+
+(clojure.core/declare deser-metric-definition)
+
+(clojure.core/declare deser-vpc-config)
+
+(clojure.core/declare deser-notebook-instance-summary)
+
+(clojure.core/declare deser-hyper-parameter-tuning-job-name)
+
+(clojure.core/declare deser-training-job-name)
+
+(clojure.core/declare deser-transform-job-status)
+
+(clojure.core/declare deser-transform-output)
+
+(clojure.core/declare deser-notebook-instance-lifecycle-config-summary-list)
+
+(clojure.core/declare deser-hyper-parameter-training-job-definition)
+
+(clojure.core/declare deser-timestamp)
+
+(clojure.core/declare deser-hyper-parameter-tuning-job-summary)
+
+(clojure.core/declare deser-model-artifacts)
+
+(clojure.core/declare deser-record-wrapper)
+
+(clojure.core/declare deser-channel)
+
+(clojure.core/declare deser-hyper-parameter-tuning-job-objective)
+
+(clojure.core/declare deser-secondary-status-transition)
+
+(clojure.core/declare deser-deployed-images)
+
+(clojure.core/declare deser-tag)
+
+(clojure.core/declare deser-metric-name)
+
+(clojure.core/declare deser-integer-parameter-ranges)
+
+(clojure.core/declare deser-training-instance-type)
+
+(clojure.core/declare deser-integer-parameter-range)
+
+(clojure.core/declare deser-algorithm-image)
+
+(clojure.core/declare deser-last-modified-time)
+
+(clojure.core/declare deser-image)
+
+(clojure.core/declare deser-accept)
+
+(clojure.core/declare deser-training-job-summaries)
+
+(clojure.core/declare deser-training-job-status)
+
+(clojure.core/declare deser-continuous-parameter-range)
+
+(clojure.core/declare deser-algorithm-specification)
+
+(clojure.core/declare deser-endpoint-arn)
+
+(clojure.core/declare deser-notebook-instance-name)
+
+(clojure.core/declare deser-secondary-status-transitions)
+
+(clojure.core/declare deser-deployed-image)
+
+(clojure.core/declare deser-transform-instance-type)
+
+(clojure.core/declare deser-endpoint-config-name)
+
+(clojure.core/declare deser-parameter-value)
+
+(clojure.core/declare deser-model-arn)
+
+(clojure.core/defn- deser-resource-config [input] (clojure.core/cond-> {:instance-type (deser-training-instance-type (input "InstanceType")), :instance-count (deser-training-instance-count (input "InstanceCount")), :volume-size-in-gb (deser-volume-size-in-gb (input "VolumeSizeInGB"))} (clojure.core/contains? input "VolumeKmsKeyId") (clojure.core/assoc :volume-kms-key-id (deser-kms-key-id (input "VolumeKmsKeyId")))))
+
+(clojure.core/defn- deser-input-data-config [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-channel coll))) input))
+
+(clojure.core/defn- deser-objective-status-counter [input] input)
+
+(clojure.core/defn- deser-task-count [input] input)
+
+(clojure.core/defn- deser-compression-type [input] (clojure.core/get {"None" :none, "Gzip" :gzip} input))
+
+(clojure.core/defn- deser-output-data-config [input] (clojure.core/cond-> {:s-3-output-path (deser-s-3-uri (input "S3OutputPath"))} (clojure.core/contains? input "KmsKeyId") (clojure.core/assoc :kms-key-id (deser-kms-key-id (input "KmsKeyId")))))
+
+(clojure.core/defn- deser-metric-regex [input] input)
+
+(clojure.core/defn- deser-model-name [input] input)
+
+(clojure.core/defn- deser-endpoint-status [input] (clojure.core/get {"OutOfService" :out-of-service, "Creating" :creating, "Updating" :updating, "SystemUpdating" :system-updating, "RollingBack" :rolling-back, "InService" :in-service, "Deleting" :deleting, "Failed" :failed} input))
+
+(clojure.core/defn- deser-hyper-parameter-tuning-job-status [input] (clojure.core/get {"Completed" :completed, "InProgress" :in-progress, "Failed" :failed, "Stopped" :stopped, "Stopping" :stopping} input))
+
+(clojure.core/defn- deser-endpoint-config-summary-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-endpoint-config-summary coll))) input))
+
+(clojure.core/defn- deser-variant-name [input] input)
+
+(clojure.core/defn- deser-endpoint-summary [input] (clojure.core/cond-> {:endpoint-name (deser-endpoint-name (input "EndpointName")), :endpoint-arn (deser-endpoint-arn (input "EndpointArn")), :creation-time (deser-timestamp (input "CreationTime")), :last-modified-time (deser-timestamp (input "LastModifiedTime")), :endpoint-status (deser-endpoint-status (input "EndpointStatus"))}))
+
+(clojure.core/defn- deser-max-payload-in-mb [input] input)
+
+(clojure.core/defn- deser-max-number-of-training-jobs [input] input)
+
+(clojure.core/defn- deser-parameter-key [input] input)
+
+(clojure.core/defn- deser-transform-resources [input] (clojure.core/cond-> {:instance-type (deser-transform-instance-type (input "InstanceType")), :instance-count (deser-transform-instance-count (input "InstanceCount"))} (clojure.core/contains? input "VolumeKmsKeyId") (clojure.core/assoc :volume-kms-key-id (deser-kms-key-id (input "VolumeKmsKeyId")))))
+
+(clojure.core/defn- deser-training-job-status-counter [input] input)
+
+(clojure.core/defn- deser-volume-size-in-gb [input] input)
+
+(clojure.core/defn- deser-security-group-ids [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-security-group-id coll))) input))
+
+(clojure.core/defn- deser-hyper-parameters [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-parameter-key k) (deser-parameter-value v)])) input))
+
+(clojure.core/defn- deser-hyper-parameter-tuning-job-strategy-type [input] (clojure.core/get {"Bayesian" :bayesian} input))
+
+(clojure.core/defn- deser-continuous-parameter-ranges [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-continuous-parameter-range coll))) input))
+
+(clojure.core/defn- deser-notebook-instance-arn [input] input)
+
+(clojure.core/defn- deser-hyper-parameter-training-job-summaries [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-hyper-parameter-training-job-summary coll))) input))
+
+(clojure.core/defn- deser-subnets [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-subnet-id coll))) input))
+
+(clojure.core/defn- deser-transform-instance-count [input] input)
+
+(clojure.core/defn- deser-transform-data-source [input] (clojure.core/cond-> {:s-3-data-source (deser-transform-s-3-data-source (input "S3DataSource"))}))
+
+(clojure.core/defn- deser-resource-limits [input] (clojure.core/cond-> {:max-number-of-training-jobs (deser-max-number-of-training-jobs (input "MaxNumberOfTrainingJobs")), :max-parallel-training-jobs (deser-max-parallel-training-jobs (input "MaxParallelTrainingJobs"))}))
+
+(clojure.core/defn- deser-training-instance-count [input] input)
+
+(clojure.core/defn- deser-subnet-id [input] input)
+
+(clojure.core/defn- deser-s-3-data-type [input] (clojure.core/get {"ManifestFile" :manifest-file, "S3Prefix" :s-3-prefix} input))
+
+(clojure.core/defn- deser-s-3-data-distribution [input] (clojure.core/get {"FullyReplicated" :fully-replicated, "ShardedByS3Key" :sharded-by-s-3-key} input))
+
+(clojure.core/defn- deser-status-message [input] input)
+
+(clojure.core/defn- deser-transform-s-3-data-source [input] (clojure.core/cond-> {:s-3-data-type (deser-s-3-data-type (input "S3DataType")), :s-3-uri (deser-s-3-uri (input "S3Uri"))}))
+
+(clojure.core/defn- deser-max-concurrent-transforms [input] input)
+
+(clojure.core/defn- deser-container-hostname [input] input)
+
+(clojure.core/defn- deser-instance-type [input] (clojure.core/get {"ml.t2.large" :mlt-2large, "ml.m4.2xlarge" :mlm-42xlarge, "ml.p2.16xlarge" :mlp-216xlarge, "ml.t2.2xlarge" :mlt-22xlarge, "ml.m4.4xlarge" :mlm-44xlarge, "ml.m4.xlarge" :mlm-4xlarge, "ml.m4.16xlarge" :mlm-416xlarge, "ml.p2.8xlarge" :mlp-28xlarge, "ml.t2.xlarge" :mlt-2xlarge, "ml.p3.16xlarge" :mlp-316xlarge, "ml.p3.2xlarge" :mlp-32xlarge, "ml.p3.8xlarge" :mlp-38xlarge, "ml.p2.xlarge" :mlp-2xlarge, "ml.m4.10xlarge" :mlm-410xlarge, "ml.t2.medium" :mlt-2medium} input))
+
+(clojure.core/defn- deser-final-hyper-parameter-tuning-job-objective-metric [input] (clojure.core/cond-> {:metric-name (deser-metric-name (input "MetricName")), :value (deser-metric-value (input "Value"))} (clojure.core/contains? input "Type") (clojure.core/assoc :type (deser-hyper-parameter-tuning-job-objective-type (input "Type")))))
+
+(clojure.core/defn- deser-role-arn [input] input)
+
+(clojure.core/defn- deser-training-input-mode [input] (clojure.core/get {"Pipe" :pipe, "File" :file} input))
+
+(clojure.core/defn- deser-transform-input [input] (clojure.core/cond-> {:data-source (deser-transform-data-source (input "DataSource"))} (clojure.core/contains? input "ContentType") (clojure.core/assoc :content-type (deser-content-type (input "ContentType"))) (clojure.core/contains? input "CompressionType") (clojure.core/assoc :compression-type (deser-compression-type (input "CompressionType"))) (clojure.core/contains? input "SplitType") (clojure.core/assoc :split-type (deser-split-type (input "SplitType")))))
+
+(clojure.core/defn- deser-s-3-uri [input] input)
+
+(clojure.core/defn- deser-tag-key [input] input)
+
+(clojure.core/defn- deser-transform-job-summary [input] (clojure.core/cond-> {:transform-job-name (deser-transform-job-name (input "TransformJobName")), :transform-job-arn (deser-transform-job-arn (input "TransformJobArn")), :creation-time (deser-timestamp (input "CreationTime")), :transform-job-status (deser-transform-job-status (input "TransformJobStatus"))} (clojure.core/contains? input "TransformEndTime") (clojure.core/assoc :transform-end-time (deser-timestamp (input "TransformEndTime"))) (clojure.core/contains? input "LastModifiedTime") (clojure.core/assoc :last-modified-time (deser-timestamp (input "LastModifiedTime"))) (clojure.core/contains? input "FailureReason") (clojure.core/assoc :failure-reason (deser-failure-reason (input "FailureReason")))))
+
+(clojure.core/defn- deser-production-variant-instance-type [input] (clojure.core/get {"ml.t2.large" :mlt-2large, "ml.c4.large" :mlc-4large, "ml.m5.xlarge" :mlm-5xlarge, "ml.c5.xlarge" :mlc-5xlarge, "ml.m4.2xlarge" :mlm-42xlarge, "ml.c5.9xlarge" :mlc-59xlarge, "ml.p2.16xlarge" :mlp-216xlarge, "ml.m5.large" :mlm-5large, "ml.m5.12xlarge" :mlm-512xlarge, "ml.c5.2xlarge" :mlc-52xlarge, "ml.c4.2xlarge" :mlc-42xlarge, "ml.t2.2xlarge" :mlt-22xlarge, "ml.c5.large" :mlc-5large, "ml.c4.4xlarge" :mlc-44xlarge, "ml.m4.4xlarge" :mlm-44xlarge, "ml.m5.4xlarge" :mlm-54xlarge, "ml.m4.xlarge" :mlm-4xlarge, "ml.m4.16xlarge" :mlm-416xlarge, "ml.p2.8xlarge" :mlp-28xlarge, "ml.t2.xlarge" :mlt-2xlarge, "ml.p3.16xlarge" :mlp-316xlarge, "ml.c4.8xlarge" :mlc-48xlarge, "ml.c5.18xlarge" :mlc-518xlarge, "ml.m5.2xlarge" :mlm-52xlarge, "ml.c4.xlarge" :mlc-4xlarge, "ml.m5.24xlarge" :mlm-524xlarge, "ml.p3.2xlarge" :mlp-32xlarge, "ml.p3.8xlarge" :mlp-38xlarge, "ml.p2.xlarge" :mlp-2xlarge, "ml.m4.10xlarge" :mlm-410xlarge, "ml.t2.medium" :mlt-2medium, "ml.c5.4xlarge" :mlc-54xlarge} input))
+
+(clojure.core/defn- deser-pagination-token [input] input)
+
+(clojure.core/defn- deser-parameter-values [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-parameter-value coll))) input))
+
+(clojure.core/defn- deser-production-variant-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-production-variant coll))) input))
+
+(clojure.core/defn- deser-network-interface-id [input] input)
+
+(clojure.core/defn- deser-environment-map [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-environment-key k) (deser-environment-value v)])) input))
+
+(clojure.core/defn- deser-max-parallel-training-jobs [input] input)
+
+(clojure.core/defn- deser-notebook-instance-lifecycle-config-name [input] input)
+
+(clojure.core/defn- deser-notebook-instance-url [input] input)
+
+(clojure.core/defn- deser-vpc-security-group-ids [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-security-group-id coll))) input))
+
+(clojure.core/defn- deser-notebook-instance-status [input] (clojure.core/get {"Pending" :pending, "InService" :in-service, "Stopping" :stopping, "Stopped" :stopped, "Failed" :failed, "Deleting" :deleting, "Updating" :updating} input))
+
+(clojure.core/defn- deser-next-token [input] input)
+
+(clojure.core/defn- deser-objective-status [input] (clojure.core/get {"Succeeded" :succeeded, "Pending" :pending, "Failed" :failed} input))
+
+(clojure.core/defn- deser-training-job-arn [input] input)
+
+(clojure.core/defn- deser-endpoint-name [input] input)
+
+(clojure.core/defn- deser-hyper-parameter-tuning-job-config [input] (clojure.core/cond-> {:strategy (deser-hyper-parameter-tuning-job-strategy-type (input "Strategy")), :hyper-parameter-tuning-job-objective (deser-hyper-parameter-tuning-job-objective (input "HyperParameterTuningJobObjective")), :resource-limits (deser-resource-limits (input "ResourceLimits")), :parameter-ranges (deser-parameter-ranges (input "ParameterRanges"))}))
+
+(clojure.core/defn- deser-endpoint-config-arn [input] input)
+
+(clojure.core/defn- deser-content-type [input] input)
+
+(clojure.core/defn- deser-objective-status-counters [input] (clojure.core/cond-> {} (clojure.core/contains? input "Succeeded") (clojure.core/assoc :succeeded (deser-objective-status-counter (input "Succeeded"))) (clojure.core/contains? input "Pending") (clojure.core/assoc :pending (deser-objective-status-counter (input "Pending"))) (clojure.core/contains? input "Failed") (clojure.core/assoc :failed (deser-objective-status-counter (input "Failed")))))
+
+(clojure.core/defn- deser-hyper-parameter-tuning-job-summaries [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-hyper-parameter-tuning-job-summary coll))) input))
+
+(clojure.core/defn- deser-transform-environment-value [input] input)
+
+(clojure.core/defn- deser-direct-internet-access [input] (clojure.core/get {"Enabled" :enabled, "Disabled" :disabled} input))
+
+(clojure.core/defn- deser-transform-environment-map [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-transform-environment-key k) (deser-transform-environment-value v)])) input))
+
+(clojure.core/defn- deser-s-3-data-source [input] (clojure.core/cond-> {:s-3-data-type (deser-s-3-data-type (input "S3DataType")), :s-3-uri (deser-s-3-uri (input "S3Uri"))} (clojure.core/contains? input "S3DataDistributionType") (clojure.core/assoc :s-3-data-distribution-type (deser-s-3-data-distribution (input "S3DataDistributionType")))))
+
+(clojure.core/defn- deser-notebook-instance-lifecycle-config-arn [input] input)
+
+(clojure.core/defn- deser-stopping-condition [input] (clojure.core/cond-> {} (clojure.core/contains? input "MaxRuntimeInSeconds") (clojure.core/assoc :max-runtime-in-seconds (deser-max-runtime-in-seconds (input "MaxRuntimeInSeconds")))))
+
+(clojure.core/defn- deser-transform-job-summaries [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-transform-job-summary coll))) input))
+
+(clojure.core/defn- deser-tag-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-tag coll))) input))
+
+(clojure.core/defn- deser-secondary-status [input] (clojure.core/get {"Failed" :failed, "Downloading" :downloading, "LaunchingMLInstances" :launching-ml-instances, "DownloadingTrainingImage" :downloading-training-image, "PreparingTrainingStack" :preparing-training-stack, "MaxRuntimeExceeded" :max-runtime-exceeded, "Uploading" :uploading, "Stopping" :stopping, "Starting" :starting, "Stopped" :stopped, "Completed" :completed, "Training" :training} input))
+
+(clojure.core/defn- deser-notebook-instance-lifecycle-config-summary [input] (clojure.core/cond-> {:notebook-instance-lifecycle-config-name (deser-notebook-instance-lifecycle-config-name (input "NotebookInstanceLifecycleConfigName")), :notebook-instance-lifecycle-config-arn (deser-notebook-instance-lifecycle-config-arn (input "NotebookInstanceLifecycleConfigArn"))} (clojure.core/contains? input "CreationTime") (clojure.core/assoc :creation-time (deser-creation-time (input "CreationTime"))) (clojure.core/contains? input "LastModifiedTime") (clojure.core/assoc :last-modified-time (deser-last-modified-time (input "LastModifiedTime")))))
+
+(clojure.core/defn- deser-environment-value [input] input)
+
+(clojure.core/defn- deser-categorical-parameter-range [input] (clojure.core/cond-> {:name (deser-parameter-key (input "Name")), :values (deser-parameter-values (input "Values"))}))
+
+(clojure.core/defn- deser-hyper-parameter-tuning-job-objective-type [input] (clojure.core/get {"Maximize" :maximize, "Minimize" :minimize} input))
+
+(clojure.core/defn- deser-training-job-summary [input] (clojure.core/cond-> {:training-job-name (deser-training-job-name (input "TrainingJobName")), :training-job-arn (deser-training-job-arn (input "TrainingJobArn")), :creation-time (deser-timestamp (input "CreationTime")), :training-job-status (deser-training-job-status (input "TrainingJobStatus"))} (clojure.core/contains? input "TrainingEndTime") (clojure.core/assoc :training-end-time (deser-timestamp (input "TrainingEndTime"))) (clojure.core/contains? input "LastModifiedTime") (clojure.core/assoc :last-modified-time (deser-timestamp (input "LastModifiedTime")))))
+
+(clojure.core/defn- deser-max-runtime-in-seconds [input] input)
+
+(clojure.core/defn- deser-transform-environment-key [input] input)
+
+(clojure.core/defn- deser-metric-definition-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-metric-definition coll))) input))
+
+(clojure.core/defn- deser-channel-name [input] input)
+
+(clojure.core/defn- deser-categorical-parameter-ranges [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-categorical-parameter-range coll))) input))
+
+(clojure.core/defn- deser-hyper-parameter-tuning-job-arn [input] input)
+
+(clojure.core/defn- deser-notebook-instance-lifecycle-config-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-notebook-instance-lifecycle-hook coll))) input))
+
+(clojure.core/defn- deser-model-summary [input] (clojure.core/cond-> {:model-name (deser-model-name (input "ModelName")), :model-arn (deser-model-arn (input "ModelArn")), :creation-time (deser-timestamp (input "CreationTime"))}))
+
+(clojure.core/defn- deser-hyper-parameter-algorithm-specification [input] (clojure.core/cond-> {:training-image (deser-algorithm-image (input "TrainingImage")), :training-input-mode (deser-training-input-mode (input "TrainingInputMode"))} (clojure.core/contains? input "MetricDefinitions") (clojure.core/assoc :metric-definitions (deser-metric-definition-list (input "MetricDefinitions")))))
+
+(clojure.core/defn- deser-url [input] input)
+
+(clojure.core/defn- deser-notebook-instance-lifecycle-config-content [input] input)
+
+(clojure.core/defn- deser-tag-value [input] input)
+
+(clojure.core/defn- deser-container-definition [input] (clojure.core/cond-> {:image (deser-image (input "Image"))} (clojure.core/contains? input "ContainerHostname") (clojure.core/assoc :container-hostname (deser-container-hostname (input "ContainerHostname"))) (clojure.core/contains? input "ModelDataUrl") (clojure.core/assoc :model-data-url (deser-url (input "ModelDataUrl"))) (clojure.core/contains? input "Environment") (clojure.core/assoc :environment (deser-environment-map (input "Environment")))))
+
+(clojure.core/defn- deser-model-summary-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-model-summary coll))) input))
+
+(clojure.core/defn- deser-parameter-ranges [input] (clojure.core/cond-> {} (clojure.core/contains? input "IntegerParameterRanges") (clojure.core/assoc :integer-parameter-ranges (deser-integer-parameter-ranges (input "IntegerParameterRanges"))) (clojure.core/contains? input "ContinuousParameterRanges") (clojure.core/assoc :continuous-parameter-ranges (deser-continuous-parameter-ranges (input "ContinuousParameterRanges"))) (clojure.core/contains? input "CategoricalParameterRanges") (clojure.core/assoc :categorical-parameter-ranges (deser-categorical-parameter-ranges (input "CategoricalParameterRanges")))))
+
+(clojure.core/defn- deser-production-variant [input] (clojure.core/cond-> {:variant-name (deser-variant-name (input "VariantName")), :model-name (deser-model-name (input "ModelName")), :initial-instance-count (deser-task-count (input "InitialInstanceCount")), :instance-type (deser-production-variant-instance-type (input "InstanceType"))} (clojure.core/contains? input "InitialVariantWeight") (clojure.core/assoc :initial-variant-weight (deser-variant-weight (input "InitialVariantWeight")))))
+
+(clojure.core/defn- deser-security-group-id [input] input)
+
+(clojure.core/defn- deser-notebook-instance-lifecycle-hook [input] (clojure.core/cond-> {} (clojure.core/contains? input "Content") (clojure.core/assoc :content (deser-notebook-instance-lifecycle-config-content (input "Content")))))
+
+(clojure.core/defn- deser-failure-reason [input] input)
+
+(clojure.core/defn- deser-endpoint-config-summary [input] (clojure.core/cond-> {:endpoint-config-name (deser-endpoint-config-name (input "EndpointConfigName")), :endpoint-config-arn (deser-endpoint-config-arn (input "EndpointConfigArn")), :creation-time (deser-timestamp (input "CreationTime"))}))
+
+(clojure.core/defn- deser-transform-job-name [input] input)
+
+(clojure.core/defn- deser-transform-job-arn [input] input)
+
+(clojure.core/defn- deser-kms-key-id [input] input)
+
+(clojure.core/defn- deser-batch-strategy [input] (clojure.core/get {"MultiRecord" :multi-record, "SingleRecord" :single-record} input))
+
+(clojure.core/defn- deser-environment-key [input] input)
+
+(clojure.core/defn- deser-endpoint-summary-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-endpoint-summary coll))) input))
+
+(clojure.core/defn- deser-data-source [input] (clojure.core/cond-> {:s-3-data-source (deser-s-3-data-source (input "S3DataSource"))}))
+
+(clojure.core/defn- deser-notebook-instance-summary-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-notebook-instance-summary coll))) input))
+
+(clojure.core/defn- deser-training-job-status-counters [input] (clojure.core/cond-> {} (clojure.core/contains? input "Completed") (clojure.core/assoc :completed (deser-training-job-status-counter (input "Completed"))) (clojure.core/contains? input "InProgress") (clojure.core/assoc :in-progress (deser-training-job-status-counter (input "InProgress"))) (clojure.core/contains? input "RetryableError") (clojure.core/assoc :retryable-error (deser-training-job-status-counter (input "RetryableError"))) (clojure.core/contains? input "NonRetryableError") (clojure.core/assoc :non-retryable-error (deser-training-job-status-counter (input "NonRetryableError"))) (clojure.core/contains? input "Stopped") (clojure.core/assoc :stopped (deser-training-job-status-counter (input "Stopped")))))
+
+(clojure.core/defn- deser-assembly-type [input] (clojure.core/get {"None" :none, "Line" :line} input))
+
+(clojure.core/defn- deser-variant-weight [input] input)
+
+(clojure.core/defn- deser-split-type [input] (clojure.core/get {"None" :none, "Line" :line, "RecordIO" :record-io} input))
+
+(clojure.core/defn- deser-metric-value [input] input)
+
+(clojure.core/defn- deser-production-variant-summary-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-production-variant-summary coll))) input))
+
+(clojure.core/defn- deser-production-variant-summary [input] (clojure.core/cond-> {:variant-name (deser-variant-name (input "VariantName"))} (clojure.core/contains? input "DeployedImages") (clojure.core/assoc :deployed-images (deser-deployed-images (input "DeployedImages"))) (clojure.core/contains? input "CurrentWeight") (clojure.core/assoc :current-weight (deser-variant-weight (input "CurrentWeight"))) (clojure.core/contains? input "DesiredWeight") (clojure.core/assoc :desired-weight (deser-variant-weight (input "DesiredWeight"))) (clojure.core/contains? input "CurrentInstanceCount") (clojure.core/assoc :current-instance-count (deser-task-count (input "CurrentInstanceCount"))) (clojure.core/contains? input "DesiredInstanceCount") (clojure.core/assoc :desired-instance-count (deser-task-count (input "DesiredInstanceCount")))))
+
+(clojure.core/defn- deser-creation-time [input] input)
+
+(clojure.core/defn- deser-hyper-parameter-training-job-summary [input] (clojure.core/cond-> {:training-job-name (deser-training-job-name (input "TrainingJobName")), :training-job-arn (deser-training-job-arn (input "TrainingJobArn")), :creation-time (deser-timestamp (input "CreationTime")), :training-job-status (deser-training-job-status (input "TrainingJobStatus")), :tuned-hyper-parameters (deser-hyper-parameters (input "TunedHyperParameters"))} (clojure.core/contains? input "TrainingEndTime") (clojure.core/assoc :training-end-time (deser-timestamp (input "TrainingEndTime"))) (clojure.core/contains? input "FinalHyperParameterTuningJobObjectiveMetric") (clojure.core/assoc :final-hyper-parameter-tuning-job-objective-metric (deser-final-hyper-parameter-tuning-job-objective-metric (input "FinalHyperParameterTuningJobObjectiveMetric"))) (clojure.core/contains? input "ObjectiveStatus") (clojure.core/assoc :objective-status (deser-objective-status (input "ObjectiveStatus"))) (clojure.core/contains? input "FailureReason") (clojure.core/assoc :failure-reason (deser-failure-reason (input "FailureReason"))) (clojure.core/contains? input "TrainingStartTime") (clojure.core/assoc :training-start-time (deser-timestamp (input "TrainingStartTime")))))
+
+(clojure.core/defn- deser-metric-definition [input] (clojure.core/cond-> {:name (deser-metric-name (input "Name")), :regex (deser-metric-regex (input "Regex"))}))
+
+(clojure.core/defn- deser-vpc-config [input] (clojure.core/cond-> {:security-group-ids (deser-vpc-security-group-ids (input "SecurityGroupIds")), :subnets (deser-subnets (input "Subnets"))}))
+
+(clojure.core/defn- deser-notebook-instance-summary [input] (clojure.core/cond-> {:notebook-instance-name (deser-notebook-instance-name (input "NotebookInstanceName")), :notebook-instance-arn (deser-notebook-instance-arn (input "NotebookInstanceArn"))} (clojure.core/contains? input "NotebookInstanceStatus") (clojure.core/assoc :notebook-instance-status (deser-notebook-instance-status (input "NotebookInstanceStatus"))) (clojure.core/contains? input "Url") (clojure.core/assoc :url (deser-notebook-instance-url (input "Url"))) (clojure.core/contains? input "InstanceType") (clojure.core/assoc :instance-type (deser-instance-type (input "InstanceType"))) (clojure.core/contains? input "CreationTime") (clojure.core/assoc :creation-time (deser-creation-time (input "CreationTime"))) (clojure.core/contains? input "LastModifiedTime") (clojure.core/assoc :last-modified-time (deser-last-modified-time (input "LastModifiedTime"))) (clojure.core/contains? input "NotebookInstanceLifecycleConfigName") (clojure.core/assoc :notebook-instance-lifecycle-config-name (deser-notebook-instance-lifecycle-config-name (input "NotebookInstanceLifecycleConfigName")))))
+
+(clojure.core/defn- deser-hyper-parameter-tuning-job-name [input] input)
+
+(clojure.core/defn- deser-training-job-name [input] input)
+
+(clojure.core/defn- deser-transform-job-status [input] (clojure.core/get {"InProgress" :in-progress, "Completed" :completed, "Failed" :failed, "Stopping" :stopping, "Stopped" :stopped} input))
+
+(clojure.core/defn- deser-transform-output [input] (clojure.core/cond-> {:s-3-output-path (deser-s-3-uri (input "S3OutputPath"))} (clojure.core/contains? input "Accept") (clojure.core/assoc :accept (deser-accept (input "Accept"))) (clojure.core/contains? input "AssembleWith") (clojure.core/assoc :assemble-with (deser-assembly-type (input "AssembleWith"))) (clojure.core/contains? input "KmsKeyId") (clojure.core/assoc :kms-key-id (deser-kms-key-id (input "KmsKeyId")))))
+
+(clojure.core/defn- deser-notebook-instance-lifecycle-config-summary-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-notebook-instance-lifecycle-config-summary coll))) input))
+
+(clojure.core/defn- deser-hyper-parameter-training-job-definition [input] (clojure.core/cond-> {:algorithm-specification (deser-hyper-parameter-algorithm-specification (input "AlgorithmSpecification")), :role-arn (deser-role-arn (input "RoleArn")), :input-data-config (deser-input-data-config (input "InputDataConfig")), :output-data-config (deser-output-data-config (input "OutputDataConfig")), :resource-config (deser-resource-config (input "ResourceConfig")), :stopping-condition (deser-stopping-condition (input "StoppingCondition"))} (clojure.core/contains? input "StaticHyperParameters") (clojure.core/assoc :static-hyper-parameters (deser-hyper-parameters (input "StaticHyperParameters"))) (clojure.core/contains? input "VpcConfig") (clojure.core/assoc :vpc-config (deser-vpc-config (input "VpcConfig")))))
+
+(clojure.core/defn- deser-timestamp [input] input)
+
+(clojure.core/defn- deser-hyper-parameter-tuning-job-summary [input] (clojure.core/cond-> {:hyper-parameter-tuning-job-name (deser-hyper-parameter-tuning-job-name (input "HyperParameterTuningJobName")), :hyper-parameter-tuning-job-arn (deser-hyper-parameter-tuning-job-arn (input "HyperParameterTuningJobArn")), :hyper-parameter-tuning-job-status (deser-hyper-parameter-tuning-job-status (input "HyperParameterTuningJobStatus")), :strategy (deser-hyper-parameter-tuning-job-strategy-type (input "Strategy")), :creation-time (deser-timestamp (input "CreationTime")), :training-job-status-counters (deser-training-job-status-counters (input "TrainingJobStatusCounters")), :objective-status-counters (deser-objective-status-counters (input "ObjectiveStatusCounters"))} (clojure.core/contains? input "ResourceLimits") (clojure.core/assoc :resource-limits (deser-resource-limits (input "ResourceLimits"))) (clojure.core/contains? input "HyperParameterTuningEndTime") (clojure.core/assoc :hyper-parameter-tuning-end-time (deser-timestamp (input "HyperParameterTuningEndTime"))) (clojure.core/contains? input "LastModifiedTime") (clojure.core/assoc :last-modified-time (deser-timestamp (input "LastModifiedTime")))))
+
+(clojure.core/defn- deser-model-artifacts [input] (clojure.core/cond-> {:s-3-model-artifacts (deser-s-3-uri (input "S3ModelArtifacts"))}))
+
+(clojure.core/defn- deser-record-wrapper [input] (clojure.core/get {"None" :none, "RecordIO" :record-io} input))
+
+(clojure.core/defn- deser-channel [input] (clojure.core/cond-> {:channel-name (deser-channel-name (input "ChannelName")), :data-source (deser-data-source (input "DataSource"))} (clojure.core/contains? input "ContentType") (clojure.core/assoc :content-type (deser-content-type (input "ContentType"))) (clojure.core/contains? input "CompressionType") (clojure.core/assoc :compression-type (deser-compression-type (input "CompressionType"))) (clojure.core/contains? input "RecordWrapperType") (clojure.core/assoc :record-wrapper-type (deser-record-wrapper (input "RecordWrapperType")))))
+
+(clojure.core/defn- deser-hyper-parameter-tuning-job-objective [input] (clojure.core/cond-> {:type (deser-hyper-parameter-tuning-job-objective-type (input "Type")), :metric-name (deser-metric-name (input "MetricName"))}))
+
+(clojure.core/defn- deser-secondary-status-transition [input] (clojure.core/cond-> {:status (deser-secondary-status (input "Status")), :start-time (deser-timestamp (input "StartTime"))} (clojure.core/contains? input "EndTime") (clojure.core/assoc :end-time (deser-timestamp (input "EndTime"))) (clojure.core/contains? input "StatusMessage") (clojure.core/assoc :status-message (deser-status-message (input "StatusMessage")))))
+
+(clojure.core/defn- deser-deployed-images [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-deployed-image coll))) input))
+
+(clojure.core/defn- deser-tag [input] (clojure.core/cond-> {:key (deser-tag-key (input "Key")), :value (deser-tag-value (input "Value"))}))
+
+(clojure.core/defn- deser-metric-name [input] input)
+
+(clojure.core/defn- deser-integer-parameter-ranges [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-integer-parameter-range coll))) input))
+
+(clojure.core/defn- deser-training-instance-type [input] (clojure.core/get {"ml.m5.xlarge" :mlm-5xlarge, "ml.c5.xlarge" :mlc-5xlarge, "ml.m4.2xlarge" :mlm-42xlarge, "ml.c5.9xlarge" :mlc-59xlarge, "ml.p2.16xlarge" :mlp-216xlarge, "ml.m5.large" :mlm-5large, "ml.m5.12xlarge" :mlm-512xlarge, "ml.c5.2xlarge" :mlc-52xlarge, "ml.c4.2xlarge" :mlc-42xlarge, "ml.c4.4xlarge" :mlc-44xlarge, "ml.m4.4xlarge" :mlm-44xlarge, "ml.m5.4xlarge" :mlm-54xlarge, "ml.m4.xlarge" :mlm-4xlarge, "ml.m4.16xlarge" :mlm-416xlarge, "ml.p2.8xlarge" :mlp-28xlarge, "ml.p3.16xlarge" :mlp-316xlarge, "ml.c4.8xlarge" :mlc-48xlarge, "ml.c5.18xlarge" :mlc-518xlarge, "ml.m5.2xlarge" :mlm-52xlarge, "ml.c4.xlarge" :mlc-4xlarge, "ml.m5.24xlarge" :mlm-524xlarge, "ml.p3.2xlarge" :mlp-32xlarge, "ml.p3.8xlarge" :mlp-38xlarge, "ml.p2.xlarge" :mlp-2xlarge, "ml.m4.10xlarge" :mlm-410xlarge, "ml.c5.4xlarge" :mlc-54xlarge} input))
+
+(clojure.core/defn- deser-integer-parameter-range [input] (clojure.core/cond-> {:name (deser-parameter-key (input "Name")), :min-value (deser-parameter-value (input "MinValue")), :max-value (deser-parameter-value (input "MaxValue"))}))
+
+(clojure.core/defn- deser-algorithm-image [input] input)
+
+(clojure.core/defn- deser-last-modified-time [input] input)
+
+(clojure.core/defn- deser-image [input] input)
+
+(clojure.core/defn- deser-accept [input] input)
+
+(clojure.core/defn- deser-training-job-summaries [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-training-job-summary coll))) input))
+
+(clojure.core/defn- deser-training-job-status [input] (clojure.core/get {"InProgress" :in-progress, "Completed" :completed, "Failed" :failed, "Stopping" :stopping, "Stopped" :stopped} input))
+
+(clojure.core/defn- deser-continuous-parameter-range [input] (clojure.core/cond-> {:name (deser-parameter-key (input "Name")), :min-value (deser-parameter-value (input "MinValue")), :max-value (deser-parameter-value (input "MaxValue"))}))
+
+(clojure.core/defn- deser-algorithm-specification [input] (clojure.core/cond-> {:training-image (deser-algorithm-image (input "TrainingImage")), :training-input-mode (deser-training-input-mode (input "TrainingInputMode"))}))
+
+(clojure.core/defn- deser-endpoint-arn [input] input)
+
+(clojure.core/defn- deser-notebook-instance-name [input] input)
+
+(clojure.core/defn- deser-secondary-status-transitions [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-secondary-status-transition coll))) input))
+
+(clojure.core/defn- deser-deployed-image [input] (clojure.core/cond-> {} (clojure.core/contains? input "SpecifiedImage") (clojure.core/assoc :specified-image (deser-image (input "SpecifiedImage"))) (clojure.core/contains? input "ResolvedImage") (clojure.core/assoc :resolved-image (deser-image (input "ResolvedImage"))) (clojure.core/contains? input "ResolutionTime") (clojure.core/assoc :resolution-time (deser-timestamp (input "ResolutionTime")))))
+
+(clojure.core/defn- deser-transform-instance-type [input] (clojure.core/get {"ml.m5.xlarge" :mlm-5xlarge, "ml.c5.xlarge" :mlc-5xlarge, "ml.m4.2xlarge" :mlm-42xlarge, "ml.c5.9xlarge" :mlc-59xlarge, "ml.p2.16xlarge" :mlp-216xlarge, "ml.m5.large" :mlm-5large, "ml.m5.12xlarge" :mlm-512xlarge, "ml.c5.2xlarge" :mlc-52xlarge, "ml.c4.2xlarge" :mlc-42xlarge, "ml.c4.4xlarge" :mlc-44xlarge, "ml.m4.4xlarge" :mlm-44xlarge, "ml.m5.4xlarge" :mlm-54xlarge, "ml.m4.xlarge" :mlm-4xlarge, "ml.m4.16xlarge" :mlm-416xlarge, "ml.p2.8xlarge" :mlp-28xlarge, "ml.p3.16xlarge" :mlp-316xlarge, "ml.c4.8xlarge" :mlc-48xlarge, "ml.c5.18xlarge" :mlc-518xlarge, "ml.m5.2xlarge" :mlm-52xlarge, "ml.c4.xlarge" :mlc-4xlarge, "ml.m5.24xlarge" :mlm-524xlarge, "ml.p3.2xlarge" :mlp-32xlarge, "ml.p3.8xlarge" :mlp-38xlarge, "ml.p2.xlarge" :mlp-2xlarge, "ml.m4.10xlarge" :mlm-410xlarge, "ml.c5.4xlarge" :mlc-54xlarge} input))
+
+(clojure.core/defn- deser-endpoint-config-name [input] input)
+
+(clojure.core/defn- deser-parameter-value [input] input)
+
+(clojure.core/defn- deser-model-arn [input] input)
+
+(clojure.core/defn- deser-list-endpoint-configs-output [input] (clojure.core/cond-> {:endpoint-configs (deser-endpoint-config-summary-list (input "EndpointConfigs"))} (clojure.core/contains? input "NextToken") (clojure.core/assoc :next-token (deser-pagination-token (input "NextToken")))))
+
+(clojure.core/defn- deser-create-notebook-instance-lifecycle-config-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "NotebookInstanceLifecycleConfigArn") (clojure.core/assoc :notebook-instance-lifecycle-config-arn (deser-notebook-instance-lifecycle-config-arn (input "NotebookInstanceLifecycleConfigArn")))))
+
+(clojure.core/defn- deser-list-transform-jobs-response [input] (clojure.core/cond-> {:transform-job-summaries (deser-transform-job-summaries (input "TransformJobSummaries"))} (clojure.core/contains? input "NextToken") (clojure.core/assoc :next-token (deser-next-token (input "NextToken")))))
+
+(clojure.core/defn- deser-list-models-output [input] (clojure.core/cond-> {:models (deser-model-summary-list (input "Models"))} (clojure.core/contains? input "NextToken") (clojure.core/assoc :next-token (deser-pagination-token (input "NextToken")))))
+
+(clojure.core/defn- deser-create-presigned-notebook-instance-url-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "AuthorizedUrl") (clojure.core/assoc :authorized-url (deser-notebook-instance-url (input "AuthorizedUrl")))))
+
+(clojure.core/defn- deser-describe-hyper-parameter-tuning-job-response [input] (clojure.core/cond-> {:hyper-parameter-tuning-job-name (deser-hyper-parameter-tuning-job-name (input "HyperParameterTuningJobName")), :hyper-parameter-tuning-job-arn (deser-hyper-parameter-tuning-job-arn (input "HyperParameterTuningJobArn")), :hyper-parameter-tuning-job-config (deser-hyper-parameter-tuning-job-config (input "HyperParameterTuningJobConfig")), :training-job-definition (deser-hyper-parameter-training-job-definition (input "TrainingJobDefinition")), :hyper-parameter-tuning-job-status (deser-hyper-parameter-tuning-job-status (input "HyperParameterTuningJobStatus")), :creation-time (deser-timestamp (input "CreationTime")), :training-job-status-counters (deser-training-job-status-counters (input "TrainingJobStatusCounters")), :objective-status-counters (deser-objective-status-counters (input "ObjectiveStatusCounters"))} (clojure.core/contains? input "HyperParameterTuningEndTime") (clojure.core/assoc :hyper-parameter-tuning-end-time (deser-timestamp (input "HyperParameterTuningEndTime"))) (clojure.core/contains? input "BestTrainingJob") (clojure.core/assoc :best-training-job (deser-hyper-parameter-training-job-summary (input "BestTrainingJob"))) (clojure.core/contains? input "FailureReason") (clojure.core/assoc :failure-reason (deser-failure-reason (input "FailureReason"))) (clojure.core/contains? input "LastModifiedTime") (clojure.core/assoc :last-modified-time (deser-timestamp (input "LastModifiedTime")))))
+
+(clojure.core/defn- deser-create-hyper-parameter-tuning-job-response [input] (clojure.core/cond-> {:hyper-parameter-tuning-job-arn (deser-hyper-parameter-tuning-job-arn (input "HyperParameterTuningJobArn"))}))
+
+(clojure.core/defn- deser-describe-transform-job-response [input] (clojure.core/cond-> {:transform-job-name (deser-transform-job-name (input "TransformJobName")), :transform-job-arn (deser-transform-job-arn (input "TransformJobArn")), :transform-job-status (deser-transform-job-status (input "TransformJobStatus")), :model-name (deser-model-name (input "ModelName")), :transform-input (deser-transform-input (input "TransformInput")), :transform-resources (deser-transform-resources (input "TransformResources")), :creation-time (deser-timestamp (input "CreationTime"))} (clojure.core/contains? input "TransformEndTime") (clojure.core/assoc :transform-end-time (deser-timestamp (input "TransformEndTime"))) (clojure.core/contains? input "MaxPayloadInMB") (clojure.core/assoc :max-payload-in-mb (deser-max-payload-in-mb (input "MaxPayloadInMB"))) (clojure.core/contains? input "MaxConcurrentTransforms") (clojure.core/assoc :max-concurrent-transforms (deser-max-concurrent-transforms (input "MaxConcurrentTransforms"))) (clojure.core/contains? input "TransformStartTime") (clojure.core/assoc :transform-start-time (deser-timestamp (input "TransformStartTime"))) (clojure.core/contains? input "FailureReason") (clojure.core/assoc :failure-reason (deser-failure-reason (input "FailureReason"))) (clojure.core/contains? input "BatchStrategy") (clojure.core/assoc :batch-strategy (deser-batch-strategy (input "BatchStrategy"))) (clojure.core/contains? input "Environment") (clojure.core/assoc :environment (deser-transform-environment-map (input "Environment"))) (clojure.core/contains? input "TransformOutput") (clojure.core/assoc :transform-output (deser-transform-output (input "TransformOutput")))))
+
+(clojure.core/defn- deser-delete-tags-output [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-describe-model-output [input] (clojure.core/cond-> {:model-name (deser-model-name (input "ModelName")), :primary-container (deser-container-definition (input "PrimaryContainer")), :execution-role-arn (deser-role-arn (input "ExecutionRoleArn")), :creation-time (deser-timestamp (input "CreationTime")), :model-arn (deser-model-arn (input "ModelArn"))} (clojure.core/contains? input "VpcConfig") (clojure.core/assoc :vpc-config (deser-vpc-config (input "VpcConfig")))))
+
+(clojure.core/defn- deser-add-tags-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "Tags") (clojure.core/assoc :tags (deser-tag-list (input "Tags")))))
+
+(clojure.core/defn- deser-create-model-output [input] (clojure.core/cond-> {:model-arn (deser-model-arn (input "ModelArn"))}))
+
+(clojure.core/defn- deser-list-notebook-instances-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "NextToken") (clojure.core/assoc :next-token (deser-next-token (input "NextToken"))) (clojure.core/contains? input "NotebookInstances") (clojure.core/assoc :notebook-instances (deser-notebook-instance-summary-list (input "NotebookInstances")))))
+
+(clojure.core/defn- deser-describe-notebook-instance-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "NotebookInstanceArn") (clojure.core/assoc :notebook-instance-arn (deser-notebook-instance-arn (input "NotebookInstanceArn"))) (clojure.core/contains? input "SubnetId") (clojure.core/assoc :subnet-id (deser-subnet-id (input "SubnetId"))) (clojure.core/contains? input "SecurityGroups") (clojure.core/assoc :security-groups (deser-security-group-ids (input "SecurityGroups"))) (clojure.core/contains? input "InstanceType") (clojure.core/assoc :instance-type (deser-instance-type (input "InstanceType"))) (clojure.core/contains? input "RoleArn") (clojure.core/assoc :role-arn (deser-role-arn (input "RoleArn"))) (clojure.core/contains? input "NetworkInterfaceId") (clojure.core/assoc :network-interface-id (deser-network-interface-id (input "NetworkInterfaceId"))) (clojure.core/contains? input "NotebookInstanceLifecycleConfigName") (clojure.core/assoc :notebook-instance-lifecycle-config-name (deser-notebook-instance-lifecycle-config-name (input "NotebookInstanceLifecycleConfigName"))) (clojure.core/contains? input "NotebookInstanceStatus") (clojure.core/assoc :notebook-instance-status (deser-notebook-instance-status (input "NotebookInstanceStatus"))) (clojure.core/contains? input "DirectInternetAccess") (clojure.core/assoc :direct-internet-access (deser-direct-internet-access (input "DirectInternetAccess"))) (clojure.core/contains? input "Url") (clojure.core/assoc :url (deser-notebook-instance-url (input "Url"))) (clojure.core/contains? input "FailureReason") (clojure.core/assoc :failure-reason (deser-failure-reason (input "FailureReason"))) (clojure.core/contains? input "KmsKeyId") (clojure.core/assoc :kms-key-id (deser-kms-key-id (input "KmsKeyId"))) (clojure.core/contains? input "CreationTime") (clojure.core/assoc :creation-time (deser-creation-time (input "CreationTime"))) (clojure.core/contains? input "LastModifiedTime") (clojure.core/assoc :last-modified-time (deser-last-modified-time (input "LastModifiedTime"))) (clojure.core/contains? input "NotebookInstanceName") (clojure.core/assoc :notebook-instance-name (deser-notebook-instance-name (input "NotebookInstanceName")))))
+
+(clojure.core/defn- deser-list-training-jobs-for-hyper-parameter-tuning-job-response [input] (clojure.core/cond-> {:training-job-summaries (deser-hyper-parameter-training-job-summaries (input "TrainingJobSummaries"))} (clojure.core/contains? input "NextToken") (clojure.core/assoc :next-token (deser-next-token (input "NextToken")))))
+
+(clojure.core/defn- deser-list-training-jobs-response [input] (clojure.core/cond-> {:training-job-summaries (deser-training-job-summaries (input "TrainingJobSummaries"))} (clojure.core/contains? input "NextToken") (clojure.core/assoc :next-token (deser-next-token (input "NextToken")))))
+
+(clojure.core/defn- deser-update-endpoint-weights-and-capacities-output [input] (clojure.core/cond-> {:endpoint-arn (deser-endpoint-arn (input "EndpointArn"))}))
+
+(clojure.core/defn- deser-create-transform-job-response [input] (clojure.core/cond-> {:transform-job-arn (deser-transform-job-arn (input "TransformJobArn"))}))
+
+(clojure.core/defn- deser-describe-endpoint-config-output [input] (clojure.core/cond-> {:endpoint-config-name (deser-endpoint-config-name (input "EndpointConfigName")), :endpoint-config-arn (deser-endpoint-config-arn (input "EndpointConfigArn")), :production-variants (deser-production-variant-list (input "ProductionVariants")), :creation-time (deser-timestamp (input "CreationTime"))} (clojure.core/contains? input "KmsKeyId") (clojure.core/assoc :kms-key-id (deser-kms-key-id (input "KmsKeyId")))))
+
+(clojure.core/defn- deser-update-notebook-instance-lifecycle-config-output [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-describe-training-job-response [input] (clojure.core/cond-> {:stopping-condition (deser-stopping-condition (input "StoppingCondition")), :model-artifacts (deser-model-artifacts (input "ModelArtifacts")), :training-job-status (deser-training-job-status (input "TrainingJobStatus")), :resource-config (deser-resource-config (input "ResourceConfig")), :training-job-name (deser-training-job-name (input "TrainingJobName")), :secondary-status (deser-secondary-status (input "SecondaryStatus")), :training-job-arn (deser-training-job-arn (input "TrainingJobArn")), :algorithm-specification (deser-algorithm-specification (input "AlgorithmSpecification")), :creation-time (deser-timestamp (input "CreationTime")), :input-data-config (deser-input-data-config (input "InputDataConfig"))} (clojure.core/contains? input "TrainingEndTime") (clojure.core/assoc :training-end-time (deser-timestamp (input "TrainingEndTime"))) (clojure.core/contains? input "OutputDataConfig") (clojure.core/assoc :output-data-config (deser-output-data-config (input "OutputDataConfig"))) (clojure.core/contains? input "HyperParameters") (clojure.core/assoc :hyper-parameters (deser-hyper-parameters (input "HyperParameters"))) (clojure.core/contains? input "RoleArn") (clojure.core/assoc :role-arn (deser-role-arn (input "RoleArn"))) (clojure.core/contains? input "FailureReason") (clojure.core/assoc :failure-reason (deser-failure-reason (input "FailureReason"))) (clojure.core/contains? input "VpcConfig") (clojure.core/assoc :vpc-config (deser-vpc-config (input "VpcConfig"))) (clojure.core/contains? input "TuningJobArn") (clojure.core/assoc :tuning-job-arn (deser-hyper-parameter-tuning-job-arn (input "TuningJobArn"))) (clojure.core/contains? input "TrainingStartTime") (clojure.core/assoc :training-start-time (deser-timestamp (input "TrainingStartTime"))) (clojure.core/contains? input "LastModifiedTime") (clojure.core/assoc :last-modified-time (deser-timestamp (input "LastModifiedTime"))) (clojure.core/contains? input "SecondaryStatusTransitions") (clojure.core/assoc :secondary-status-transitions (deser-secondary-status-transitions (input "SecondaryStatusTransitions")))))
+
+(clojure.core/defn- deser-update-notebook-instance-output [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-create-training-job-response [input] (clojure.core/cond-> {:training-job-arn (deser-training-job-arn (input "TrainingJobArn"))}))
+
+(clojure.core/defn- deser-resource-limit-exceeded [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-failure-reason (input "Message")))))
+
+(clojure.core/defn- deser-update-endpoint-output [input] (clojure.core/cond-> {:endpoint-arn (deser-endpoint-arn (input "EndpointArn"))}))
+
+(clojure.core/defn- deser-create-endpoint-output [input] (clojure.core/cond-> {:endpoint-arn (deser-endpoint-arn (input "EndpointArn"))}))
+
+(clojure.core/defn- deser-resource-not-found [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-failure-reason (input "Message")))))
+
+(clojure.core/defn- deser-list-hyper-parameter-tuning-jobs-response [input] (clojure.core/cond-> {:hyper-parameter-tuning-job-summaries (deser-hyper-parameter-tuning-job-summaries (input "HyperParameterTuningJobSummaries"))} (clojure.core/contains? input "NextToken") (clojure.core/assoc :next-token (deser-next-token (input "NextToken")))))
+
+(clojure.core/defn- deser-list-endpoints-output [input] (clojure.core/cond-> {:endpoints (deser-endpoint-summary-list (input "Endpoints"))} (clojure.core/contains? input "NextToken") (clojure.core/assoc :next-token (deser-pagination-token (input "NextToken")))))
+
+(clojure.core/defn- deser-create-notebook-instance-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "NotebookInstanceArn") (clojure.core/assoc :notebook-instance-arn (deser-notebook-instance-arn (input "NotebookInstanceArn")))))
+
+(clojure.core/defn- deser-list-tags-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "Tags") (clojure.core/assoc :tags (deser-tag-list (input "Tags"))) (clojure.core/contains? input "NextToken") (clojure.core/assoc :next-token (deser-next-token (input "NextToken")))))
+
+(clojure.core/defn- deser-describe-endpoint-output [input] (clojure.core/cond-> {:endpoint-name (deser-endpoint-name (input "EndpointName")), :endpoint-arn (deser-endpoint-arn (input "EndpointArn")), :endpoint-config-name (deser-endpoint-config-name (input "EndpointConfigName")), :endpoint-status (deser-endpoint-status (input "EndpointStatus")), :creation-time (deser-timestamp (input "CreationTime")), :last-modified-time (deser-timestamp (input "LastModifiedTime"))} (clojure.core/contains? input "ProductionVariants") (clojure.core/assoc :production-variants (deser-production-variant-summary-list (input "ProductionVariants"))) (clojure.core/contains? input "FailureReason") (clojure.core/assoc :failure-reason (deser-failure-reason (input "FailureReason")))))
+
+(clojure.core/defn- deser-resource-in-use [input] (clojure.core/cond-> {} (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-failure-reason (input "Message")))))
+
+(clojure.core/defn- deser-describe-notebook-instance-lifecycle-config-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "NotebookInstanceLifecycleConfigArn") (clojure.core/assoc :notebook-instance-lifecycle-config-arn (deser-notebook-instance-lifecycle-config-arn (input "NotebookInstanceLifecycleConfigArn"))) (clojure.core/contains? input "NotebookInstanceLifecycleConfigName") (clojure.core/assoc :notebook-instance-lifecycle-config-name (deser-notebook-instance-lifecycle-config-name (input "NotebookInstanceLifecycleConfigName"))) (clojure.core/contains? input "OnCreate") (clojure.core/assoc :on-create (deser-notebook-instance-lifecycle-config-list (input "OnCreate"))) (clojure.core/contains? input "OnStart") (clojure.core/assoc :on-start (deser-notebook-instance-lifecycle-config-list (input "OnStart"))) (clojure.core/contains? input "LastModifiedTime") (clojure.core/assoc :last-modified-time (deser-last-modified-time (input "LastModifiedTime"))) (clojure.core/contains? input "CreationTime") (clojure.core/assoc :creation-time (deser-creation-time (input "CreationTime")))))
+
+(clojure.core/defn- deser-create-endpoint-config-output [input] (clojure.core/cond-> {:endpoint-config-arn (deser-endpoint-config-arn (input "EndpointConfigArn"))}))
+
+(clojure.core/defn- deser-list-notebook-instance-lifecycle-configs-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "NextToken") (clojure.core/assoc :next-token (deser-next-token (input "NextToken"))) (clojure.core/contains? input "NotebookInstanceLifecycleConfigs") (clojure.core/assoc :notebook-instance-lifecycle-configs (deser-notebook-instance-lifecycle-config-summary-list (input "NotebookInstanceLifecycleConfigs")))))
+
 (clojure.spec.alpha/def :portkey.aws.sagemaker.resource-config/instance-type (clojure.spec.alpha/and :portkey.aws.sagemaker/training-instance-type))
 (clojure.spec.alpha/def :portkey.aws.sagemaker.resource-config/instance-count (clojure.spec.alpha/and :portkey.aws.sagemaker/training-instance-count))
 (clojure.spec.alpha/def :portkey.aws.sagemaker.resource-config/volume-kms-key-id (clojure.spec.alpha/and :portkey.aws.sagemaker/kms-key-id))
@@ -697,11 +1385,11 @@
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/describe-notebook-instance-input (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker/notebook-instance-name] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/metric-regex (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 500))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/metric-regex (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 500))))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/model-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 63)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9](-*[a-zA-Z0-9])*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/model-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 63)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9](-*[a-zA-Z0-9])*" s__27881__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/name-contains (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 63)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-zA-Z0-9\-]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/name-contains (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 63)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-zA-Z0-9\-]+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/endpoint-status #{"Failed" "Creating" "SystemUpdating" :system-updating :creating "InService" "RollingBack" :deleting "OutOfService" :out-of-service "Deleting" :in-service :rolling-back :updating "Updating" :failed})
 
@@ -713,7 +1401,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/create-notebook-instance-lifecycle-config-output (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.sagemaker/notebook-instance-lifecycle-config-arn]))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/variant-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 63)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9](-*[a-zA-Z0-9])*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/variant-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 63)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9](-*[a-zA-Z0-9])*" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker.create-notebook-instance-lifecycle-config-input/on-create (clojure.spec.alpha/and :portkey.aws.sagemaker/notebook-instance-lifecycle-config-list))
 (clojure.spec.alpha/def :portkey.aws.sagemaker.create-notebook-instance-lifecycle-config-input/on-start (clojure.spec.alpha/and :portkey.aws.sagemaker/notebook-instance-lifecycle-config-list))
@@ -730,7 +1418,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/sort-by #{:name "Status" :status "CreationTime" "Name" :creation-time})
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/endpoint-config-name-contains (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-zA-Z0-9-]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/endpoint-config-name-contains (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-zA-Z0-9-]+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/list-transform-jobs-response (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker/transform-job-summaries] :opt-un [:portkey.aws.sagemaker/next-token]))
 
@@ -752,7 +1440,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/stop-hyper-parameter-tuning-job-request (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker/hyper-parameter-tuning-job-name] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/parameter-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/parameter-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 256))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker.transform-resources/instance-type (clojure.spec.alpha/and :portkey.aws.sagemaker/transform-instance-type))
 (clojure.spec.alpha/def :portkey.aws.sagemaker.transform-resources/instance-count (clojure.spec.alpha/and :portkey.aws.sagemaker/transform-instance-count))
@@ -781,7 +1469,7 @@
 (clojure.spec.alpha/def :portkey.aws.sagemaker.describe-hyper-parameter-tuning-job-response/last-modified-time (clojure.spec.alpha/and :portkey.aws.sagemaker/timestamp))
 (clojure.spec.alpha/def :portkey.aws.sagemaker/describe-hyper-parameter-tuning-job-response (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker/hyper-parameter-tuning-job-name :portkey.aws.sagemaker/hyper-parameter-tuning-job-arn :portkey.aws.sagemaker/hyper-parameter-tuning-job-config :portkey.aws.sagemaker.describe-hyper-parameter-tuning-job-response/training-job-definition :portkey.aws.sagemaker/hyper-parameter-tuning-job-status :portkey.aws.sagemaker.describe-hyper-parameter-tuning-job-response/creation-time :portkey.aws.sagemaker/training-job-status-counters :portkey.aws.sagemaker/objective-status-counters] :opt-un [:portkey.aws.sagemaker.describe-hyper-parameter-tuning-job-response/hyper-parameter-tuning-end-time :portkey.aws.sagemaker.describe-hyper-parameter-tuning-job-response/best-training-job :portkey.aws.sagemaker/failure-reason :portkey.aws.sagemaker.describe-hyper-parameter-tuning-job-response/last-modified-time]))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/notebook-instance-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/notebook-instance-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 256))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/hyper-parameter-training-job-summaries (clojure.spec.alpha/coll-of :portkey.aws.sagemaker/hyper-parameter-training-job-summary))
 
@@ -816,7 +1504,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/training-instance-count (clojure.spec.alpha/int-in 1 Long/MAX_VALUE))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/subnet-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 32))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/subnet-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 32))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/s-3-data-type #{:s-3-prefix "ManifestFile" :manifest-file "S3Prefix"})
 
@@ -824,7 +1512,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/status-message (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/model-name-contains (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-zA-Z0-9-]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/model-name-contains (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-zA-Z0-9-]+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/notebook-instance-lifecycle-config-sort-order #{"Descending" :descending :ascending "Ascending"})
 
@@ -834,7 +1522,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/max-concurrent-transforms (clojure.spec.alpha/int-in 0 Long/MAX_VALUE))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/container-hostname (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 63)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9](-*[a-zA-Z0-9])*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/container-hostname (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 63)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9](-*[a-zA-Z0-9])*" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker.list-hyper-parameter-tuning-jobs-request/creation-time-after (clojure.spec.alpha/and :portkey.aws.sagemaker/timestamp))
 (clojure.spec.alpha/def :portkey.aws.sagemaker.list-hyper-parameter-tuning-jobs-request/sort-by (clojure.spec.alpha/and :portkey.aws.sagemaker/hyper-parameter-tuning-job-sort-by-options))
@@ -869,14 +1557,14 @@
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/hyper-parameter-tuning-job-sort-by-options #{:name "Status" :status "CreationTime" "Name" :creation-time})
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/role-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 20 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 2048)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^arn:aws[a-z\-]*:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+$" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/role-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 20 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 2048)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"^arn:aws[a-z\-]*:iam::\d{12}:role/?[a-zA-Z_0-9+=,.@\-_/]+$" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/training-input-mode #{"Pipe" "File" :pipe :file})
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker.transform-input/data-source (clojure.spec.alpha/and :portkey.aws.sagemaker/transform-data-source))
 (clojure.spec.alpha/def :portkey.aws.sagemaker/transform-input (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker.transform-input/data-source] :opt-un [:portkey.aws.sagemaker/content-type :portkey.aws.sagemaker/compression-type :portkey.aws.sagemaker/split-type]))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/s-3-uri (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1024)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^(https|s3)://([^/]+)/?(.*)$" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/s-3-uri (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1024)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"^(https|s3)://([^/]+)/?(.*)$" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/endpoint-config-sort-key #{:name "CreationTime" "Name" :creation-time})
 
@@ -885,7 +1573,7 @@
 (clojure.spec.alpha/def :portkey.aws.sagemaker.add-tags-output/tags (clojure.spec.alpha/and :portkey.aws.sagemaker/tag-list))
 (clojure.spec.alpha/def :portkey.aws.sagemaker/add-tags-output (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.sagemaker.add-tags-output/tags]))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/tag-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 128)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^((?!aws:)[\p{L}\p{Z}\p{N}_.:/=+\-@]*)$" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/tag-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 128)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"^((?!aws:)[\p{L}\p{Z}\p{N}_.:/=+\-@]*)$" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker.transform-job-summary/creation-time (clojure.spec.alpha/and :portkey.aws.sagemaker/timestamp))
 (clojure.spec.alpha/def :portkey.aws.sagemaker.transform-job-summary/transform-end-time (clojure.spec.alpha/and :portkey.aws.sagemaker/timestamp))
@@ -896,7 +1584,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/sort-order #{"Descending" :descending :ascending "Ascending"})
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/pagination-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 8192))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/pagination-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 8192))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/parameter-values (clojure.spec.alpha/coll-of :portkey.aws.sagemaker/parameter-value :min-count 1 :max-count 20))
 
@@ -908,7 +1596,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/max-parallel-training-jobs (clojure.spec.alpha/int-in 1 Long/MAX_VALUE))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/notebook-instance-lifecycle-config-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 63)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9](-*[a-zA-Z0-9])*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/notebook-instance-lifecycle-config-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 63)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9](-*[a-zA-Z0-9])*" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker.update-endpoint-weights-and-capacities-input/desired-weights-and-capacities (clojure.spec.alpha/and :portkey.aws.sagemaker/desired-weight-and-capacity-list))
 (clojure.spec.alpha/def :portkey.aws.sagemaker/update-endpoint-weights-and-capacities-input (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker/endpoint-name :portkey.aws.sagemaker.update-endpoint-weights-and-capacities-input/desired-weights-and-capacities] :opt-un []))
@@ -938,14 +1626,14 @@
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/notebook-instance-sort-order #{"Descending" :descending :ascending "Ascending"})
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/notebook-instance-lifecycle-config-name-contains (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-zA-Z0-9-]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/notebook-instance-lifecycle-config-name-contains (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-zA-Z0-9-]+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker.list-training-jobs-for-hyper-parameter-tuning-job-response/training-job-summaries (clojure.spec.alpha/and :portkey.aws.sagemaker/hyper-parameter-training-job-summaries))
 (clojure.spec.alpha/def :portkey.aws.sagemaker/list-training-jobs-for-hyper-parameter-tuning-job-response (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker.list-training-jobs-for-hyper-parameter-tuning-job-response/training-job-summaries] :opt-un [:portkey.aws.sagemaker/next-token]))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/list-training-jobs-response (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker/training-job-summaries] :opt-un [:portkey.aws.sagemaker/next-token]))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/next-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 8192))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/next-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 8192))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/objective-status #{"Failed" "Succeeded" :pending "Pending" :failed :succeeded})
 
@@ -954,9 +1642,9 @@
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/describe-hyper-parameter-tuning-job-request (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker/hyper-parameter-tuning-job-name] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/training-job-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:training-job/.*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/training-job-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 256)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:training-job/.*" s__27881__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/endpoint-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 63)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9](-*[a-zA-Z0-9])*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/endpoint-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 63)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9](-*[a-zA-Z0-9])*" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/describe-endpoint-config-input (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker/endpoint-config-name] :opt-un []))
 
@@ -969,9 +1657,9 @@
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/update-endpoint-weights-and-capacities-output (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker/endpoint-arn] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/endpoint-config-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 20 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 2048))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/endpoint-config-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 20 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 2048))))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/content-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/content-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 256))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker.objective-status-counters/succeeded (clojure.spec.alpha/and :portkey.aws.sagemaker/objective-status-counter))
 (clojure.spec.alpha/def :portkey.aws.sagemaker.objective-status-counters/pending (clojure.spec.alpha/and :portkey.aws.sagemaker/objective-status-counter))
@@ -980,7 +1668,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/hyper-parameter-tuning-job-summaries (clojure.spec.alpha/coll-of :portkey.aws.sagemaker/hyper-parameter-tuning-job-summary))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/transform-environment-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 10240))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/transform-environment-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 10240))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/direct-internet-access #{"Disabled" :disabled "Enabled" :enabled})
 
@@ -989,7 +1677,7 @@
 (clojure.spec.alpha/def :portkey.aws.sagemaker.s-3-data-source/s-3-data-distribution-type (clojure.spec.alpha/and :portkey.aws.sagemaker/s-3-data-distribution))
 (clojure.spec.alpha/def :portkey.aws.sagemaker/s-3-data-source (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker/s-3-data-type :portkey.aws.sagemaker/s-3-uri] :opt-un [:portkey.aws.sagemaker.s-3-data-source/s-3-data-distribution-type]))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/notebook-instance-lifecycle-config-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/notebook-instance-lifecycle-config-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 256))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/stopping-condition (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.sagemaker/max-runtime-in-seconds]))
 
@@ -1009,7 +1697,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/notebook-instance-lifecycle-config-summary (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker/notebook-instance-lifecycle-config-name :portkey.aws.sagemaker/notebook-instance-lifecycle-config-arn] :opt-un [:portkey.aws.sagemaker/creation-time :portkey.aws.sagemaker/last-modified-time]))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/environment-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1024))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/environment-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1024))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker.categorical-parameter-range/name (clojure.spec.alpha/and :portkey.aws.sagemaker/parameter-key))
 (clojure.spec.alpha/def :portkey.aws.sagemaker.categorical-parameter-range/values (clojure.spec.alpha/and :portkey.aws.sagemaker/parameter-values))
@@ -1024,7 +1712,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/max-runtime-in-seconds (clojure.spec.alpha/int-in 1 Long/MAX_VALUE))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/transform-environment-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1024)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-zA-Z_][a-zA-Z0-9_]*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/transform-environment-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1024)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-zA-Z_][a-zA-Z0-9_]*" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker.create-model-input/primary-container (clojure.spec.alpha/and :portkey.aws.sagemaker/container-definition))
 (clojure.spec.alpha/def :portkey.aws.sagemaker.create-model-input/execution-role-arn (clojure.spec.alpha/and :portkey.aws.sagemaker/role-arn))
@@ -1039,7 +1727,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/notebook-instance-sort-key #{:name "Status" :status "CreationTime" "Name" :creation-time})
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/channel-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 64)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[A-Za-z0-9\.\-_]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/channel-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 64)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[A-Za-z0-9\.\-_]+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/categorical-parameter-ranges (clojure.spec.alpha/coll-of :portkey.aws.sagemaker/categorical-parameter-range :min-count 0 :max-count 20))
 
@@ -1051,7 +1739,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/stop-notebook-instance-input (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker/notebook-instance-name] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/hyper-parameter-tuning-job-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:hyper-parameter-tuning-job/.*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/hyper-parameter-tuning-job-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 256)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:hyper-parameter-tuning-job/.*" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/start-notebook-instance-input (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker/notebook-instance-name] :opt-un []))
 
@@ -1064,16 +1752,16 @@
 (clojure.spec.alpha/def :portkey.aws.sagemaker.hyper-parameter-algorithm-specification/metric-definitions (clojure.spec.alpha/and :portkey.aws.sagemaker/metric-definition-list))
 (clojure.spec.alpha/def :portkey.aws.sagemaker/hyper-parameter-algorithm-specification (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker.hyper-parameter-algorithm-specification/training-image :portkey.aws.sagemaker/training-input-mode] :opt-un [:portkey.aws.sagemaker.hyper-parameter-algorithm-specification/metric-definitions]))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/url (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1024)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^(https|s3)://([^/]+)/?(.*)$" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/url (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1024)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"^(https|s3)://([^/]+)/?(.*)$" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/delete-notebook-instance-input (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker/notebook-instance-name] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/notebook-instance-lifecycle-config-content (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 16384))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/notebook-instance-lifecycle-config-content (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 16384))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker.delete-tags-input/tag-keys (clojure.spec.alpha/and :portkey.aws.sagemaker/tag-key-list))
 (clojure.spec.alpha/def :portkey.aws.sagemaker/delete-tags-input (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker/resource-arn :portkey.aws.sagemaker.delete-tags-input/tag-keys] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/tag-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 0 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/tag-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 0 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 256)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker.container-definition/model-data-url (clojure.spec.alpha/and :portkey.aws.sagemaker/url))
 (clojure.spec.alpha/def :portkey.aws.sagemaker.container-definition/environment (clojure.spec.alpha/and :portkey.aws.sagemaker/environment-map))
@@ -1092,7 +1780,7 @@
 (clojure.spec.alpha/def :portkey.aws.sagemaker.production-variant/initial-variant-weight (clojure.spec.alpha/and :portkey.aws.sagemaker/variant-weight))
 (clojure.spec.alpha/def :portkey.aws.sagemaker/production-variant (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker/variant-name :portkey.aws.sagemaker/model-name :portkey.aws.sagemaker.production-variant/initial-instance-count :portkey.aws.sagemaker.production-variant/instance-type] :opt-un [:portkey.aws.sagemaker.production-variant/initial-variant-weight]))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/security-group-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 32))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/security-group-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 32))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/update-notebook-instance-lifecycle-config-output (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
@@ -1106,17 +1794,17 @@
 (clojure.spec.alpha/def :portkey.aws.sagemaker.notebook-instance-lifecycle-hook/content (clojure.spec.alpha/and :portkey.aws.sagemaker/notebook-instance-lifecycle-config-content))
 (clojure.spec.alpha/def :portkey.aws.sagemaker/notebook-instance-lifecycle-hook (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.sagemaker.notebook-instance-lifecycle-hook/content]))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/failure-reason (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1024))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/failure-reason (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1024))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker.endpoint-config-summary/creation-time (clojure.spec.alpha/and :portkey.aws.sagemaker/timestamp))
 (clojure.spec.alpha/def :portkey.aws.sagemaker/endpoint-config-summary (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker/endpoint-config-name :portkey.aws.sagemaker/endpoint-config-arn :portkey.aws.sagemaker.endpoint-config-summary/creation-time] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/transform-job-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 63)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9](-*[a-zA-Z0-9])*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/transform-job-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 63)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9](-*[a-zA-Z0-9])*" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker.add-tags-input/tags (clojure.spec.alpha/and :portkey.aws.sagemaker/tag-list))
 (clojure.spec.alpha/def :portkey.aws.sagemaker/add-tags-input (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker/resource-arn :portkey.aws.sagemaker.add-tags-input/tags] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/transform-job-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:transform-job/.*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/transform-job-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 256)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"arn:aws[a-z\-]*:sagemaker:[a-z0-9\-]*:[0-9]{12}:transform-job/.*" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker.list-endpoints-input/creation-time-after (clojure.spec.alpha/and :portkey.aws.sagemaker/timestamp))
 (clojure.spec.alpha/def :portkey.aws.sagemaker.list-endpoints-input/name-contains (clojure.spec.alpha/and :portkey.aws.sagemaker/endpoint-name-contains))
@@ -1131,11 +1819,11 @@
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/delete-notebook-instance-lifecycle-config-input (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker/notebook-instance-lifecycle-config-name] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/kms-key-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 2048))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/kms-key-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 2048))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/batch-strategy #{"MultiRecord" :multi-record "SingleRecord" :single-record})
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/environment-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1024)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-zA-Z_][a-zA-Z0-9_]*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/environment-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1024)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-zA-Z_][a-zA-Z0-9_]*" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/endpoint-summary-list (clojure.spec.alpha/coll-of :portkey.aws.sagemaker/endpoint-summary))
 
@@ -1190,9 +1878,9 @@
 (clojure.spec.alpha/def :portkey.aws.sagemaker.notebook-instance-summary/url (clojure.spec.alpha/and :portkey.aws.sagemaker/notebook-instance-url))
 (clojure.spec.alpha/def :portkey.aws.sagemaker/notebook-instance-summary (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker/notebook-instance-name :portkey.aws.sagemaker/notebook-instance-arn] :opt-un [:portkey.aws.sagemaker/notebook-instance-status :portkey.aws.sagemaker.notebook-instance-summary/url :portkey.aws.sagemaker/instance-type :portkey.aws.sagemaker/creation-time :portkey.aws.sagemaker/last-modified-time :portkey.aws.sagemaker/notebook-instance-lifecycle-config-name]))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/hyper-parameter-tuning-job-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 32)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9](-*[a-zA-Z0-9])*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/hyper-parameter-tuning-job-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 32)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9](-*[a-zA-Z0-9])*" s__27881__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/training-job-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 63)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9](-*[a-zA-Z0-9])*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/training-job-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 63)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9](-*[a-zA-Z0-9])*" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/transform-job-status #{"Failed" :in-progress :completed :stopping :stopped "InProgress" "Stopping" "Stopped" "Completed" :failed})
 
@@ -1202,7 +1890,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/desired-weight-and-capacity-list (clojure.spec.alpha/coll-of :portkey.aws.sagemaker/desired-weight-and-capacity :min-count 1))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/endpoint-name-contains (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-zA-Z0-9-]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/endpoint-name-contains (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-zA-Z0-9-]+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/notebook-instance-lifecycle-config-summary-list (clojure.spec.alpha/coll-of :portkey.aws.sagemaker/notebook-instance-lifecycle-config-summary))
 
@@ -1222,7 +1910,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/describe-notebook-instance-lifecycle-config-input (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker/notebook-instance-lifecycle-config-name] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/resource-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/resource-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 256))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker.model-artifacts/s-3-model-artifacts (clojure.spec.alpha/and :portkey.aws.sagemaker/s-3-uri))
 (clojure.spec.alpha/def :portkey.aws.sagemaker/model-artifacts (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker.model-artifacts/s-3-model-artifacts] :opt-un []))
@@ -1269,7 +1957,7 @@
 (clojure.spec.alpha/def :portkey.aws.sagemaker.tag/value (clojure.spec.alpha/and :portkey.aws.sagemaker/tag-value))
 (clojure.spec.alpha/def :portkey.aws.sagemaker/tag (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker.tag/key :portkey.aws.sagemaker.tag/value] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/metric-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/metric-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 255))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/integer-parameter-ranges (clojure.spec.alpha/coll-of :portkey.aws.sagemaker/integer-parameter-range :min-count 0 :max-count 20))
 
@@ -1280,7 +1968,7 @@
 (clojure.spec.alpha/def :portkey.aws.sagemaker.integer-parameter-range/max-value (clojure.spec.alpha/and :portkey.aws.sagemaker/parameter-value))
 (clojure.spec.alpha/def :portkey.aws.sagemaker/integer-parameter-range (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker.integer-parameter-range/name :portkey.aws.sagemaker.integer-parameter-range/min-value :portkey.aws.sagemaker.integer-parameter-range/max-value] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/algorithm-image (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/algorithm-image (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 255))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/last-modified-time clojure.core/inst?)
 
@@ -1290,9 +1978,9 @@
 (clojure.spec.alpha/def :portkey.aws.sagemaker.create-training-job-request/tags (clojure.spec.alpha/and :portkey.aws.sagemaker/tag-list))
 (clojure.spec.alpha/def :portkey.aws.sagemaker/create-training-job-request (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker/training-job-name :portkey.aws.sagemaker/algorithm-specification :portkey.aws.sagemaker/role-arn :portkey.aws.sagemaker/input-data-config :portkey.aws.sagemaker/output-data-config :portkey.aws.sagemaker/resource-config :portkey.aws.sagemaker/stopping-condition] :opt-un [:portkey.aws.sagemaker/hyper-parameters :portkey.aws.sagemaker.create-training-job-request/tags :portkey.aws.sagemaker/vpc-config]))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/image (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[\S]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/image (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 255)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[\S]+" s__27881__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/accept (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/accept (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 256))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/training-job-summaries (clojure.spec.alpha/coll-of :portkey.aws.sagemaker/training-job-summary))
 
@@ -1326,15 +2014,15 @@
 (clojure.spec.alpha/def :portkey.aws.sagemaker.algorithm-specification/training-image (clojure.spec.alpha/and :portkey.aws.sagemaker/algorithm-image))
 (clojure.spec.alpha/def :portkey.aws.sagemaker/algorithm-specification (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker.algorithm-specification/training-image :portkey.aws.sagemaker/training-input-mode] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/endpoint-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 20 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 2048))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/endpoint-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 20 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 2048))))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/notebook-instance-name-contains (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-zA-Z0-9-]+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/notebook-instance-name-contains (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-zA-Z0-9-]+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker.list-endpoints-output/endpoints (clojure.spec.alpha/and :portkey.aws.sagemaker/endpoint-summary-list))
 (clojure.spec.alpha/def :portkey.aws.sagemaker.list-endpoints-output/next-token (clojure.spec.alpha/and :portkey.aws.sagemaker/pagination-token))
 (clojure.spec.alpha/def :portkey.aws.sagemaker/list-endpoints-output (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker.list-endpoints-output/endpoints] :opt-un [:portkey.aws.sagemaker.list-endpoints-output/next-token]))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/notebook-instance-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 63)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9](-*[a-zA-Z0-9])*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/notebook-instance-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 63)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9](-*[a-zA-Z0-9])*" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/describe-model-input (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker/model-name] :opt-un []))
 
@@ -1378,144 +2066,144 @@
 (clojure.spec.alpha/def :portkey.aws.sagemaker.describe-notebook-instance-lifecycle-config-output/on-start (clojure.spec.alpha/and :portkey.aws.sagemaker/notebook-instance-lifecycle-config-list))
 (clojure.spec.alpha/def :portkey.aws.sagemaker/describe-notebook-instance-lifecycle-config-output (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.sagemaker/notebook-instance-lifecycle-config-arn :portkey.aws.sagemaker/notebook-instance-lifecycle-config-name :portkey.aws.sagemaker.describe-notebook-instance-lifecycle-config-output/on-create :portkey.aws.sagemaker.describe-notebook-instance-lifecycle-config-output/on-start :portkey.aws.sagemaker/last-modified-time :portkey.aws.sagemaker/creation-time]))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/endpoint-config-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 63)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9](-*[a-zA-Z0-9])*" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/endpoint-config-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 63)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9](-*[a-zA-Z0-9])*" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/describe-training-job-request (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker/training-job-name] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/parameter-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/parameter-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 256))))
 
-(clojure.spec.alpha/def :portkey.aws.sagemaker/model-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 20 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 2048))))
+(clojure.spec.alpha/def :portkey.aws.sagemaker/model-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 20 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 2048))))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker/create-endpoint-config-output (clojure.spec.alpha/keys :req-un [:portkey.aws.sagemaker/endpoint-config-arn] :opt-un []))
 
 (clojure.spec.alpha/def :portkey.aws.sagemaker.list-notebook-instance-lifecycle-configs-output/notebook-instance-lifecycle-configs (clojure.spec.alpha/and :portkey.aws.sagemaker/notebook-instance-lifecycle-config-summary-list))
 (clojure.spec.alpha/def :portkey.aws.sagemaker/list-notebook-instance-lifecycle-configs-output (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.sagemaker/next-token :portkey.aws.sagemaker.list-notebook-instance-lifecycle-configs-output/notebook-instance-lifecycle-configs]))
 
-(clojure.core/defn list-training-jobs-for-hyper-parameter-tuning-job ([list-training-jobs-for-hyper-parameter-tuning-job-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-training-jobs-for-hyper-parameter-tuning-job-request list-training-jobs-for-hyper-parameter-tuning-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/list-training-jobs-for-hyper-parameter-tuning-job-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/list-training-jobs-for-hyper-parameter-tuning-job-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListTrainingJobsForHyperParameterTuningJob", :http.request.spec/error-spec {"ResourceNotFound" :portkey.aws.sagemaker/resource-not-found}})))))
+(clojure.core/defn list-training-jobs-for-hyper-parameter-tuning-job ([list-training-jobs-for-hyper-parameter-tuning-job-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-training-jobs-for-hyper-parameter-tuning-job-request list-training-jobs-for-hyper-parameter-tuning-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/list-training-jobs-for-hyper-parameter-tuning-job-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/list-training-jobs-for-hyper-parameter-tuning-job-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListTrainingJobsForHyperParameterTuningJob", :http.request.configuration/output-deser-fn deser-list-training-jobs-for-hyper-parameter-tuning-job-response, :http.request.spec/error-spec {"ResourceNotFound" :portkey.aws.sagemaker/resource-not-found}})))))
 (clojure.spec.alpha/fdef list-training-jobs-for-hyper-parameter-tuning-job :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/list-training-jobs-for-hyper-parameter-tuning-job-request) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/list-training-jobs-for-hyper-parameter-tuning-job-response))
 
-(clojure.core/defn create-notebook-instance ([create-notebook-instance-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-notebook-instance-input create-notebook-instance-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/create-notebook-instance-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/create-notebook-instance-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateNotebookInstance", :http.request.spec/error-spec {"ResourceLimitExceeded" :portkey.aws.sagemaker/resource-limit-exceeded}})))))
+(clojure.core/defn create-notebook-instance ([create-notebook-instance-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-create-notebook-instance-input create-notebook-instance-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/create-notebook-instance-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/create-notebook-instance-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateNotebookInstance", :http.request.configuration/output-deser-fn deser-create-notebook-instance-output, :http.request.spec/error-spec {"ResourceLimitExceeded" :portkey.aws.sagemaker/resource-limit-exceeded}})))))
 (clojure.spec.alpha/fdef create-notebook-instance :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/create-notebook-instance-input) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/create-notebook-instance-output))
 
-(clojure.core/defn describe-notebook-instance-lifecycle-config ([describe-notebook-instance-lifecycle-config-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-notebook-instance-lifecycle-config-input describe-notebook-instance-lifecycle-config-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/describe-notebook-instance-lifecycle-config-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/describe-notebook-instance-lifecycle-config-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeNotebookInstanceLifecycleConfig", :http.request.spec/error-spec {}})))))
+(clojure.core/defn describe-notebook-instance-lifecycle-config ([describe-notebook-instance-lifecycle-config-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-notebook-instance-lifecycle-config-input describe-notebook-instance-lifecycle-config-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/describe-notebook-instance-lifecycle-config-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/describe-notebook-instance-lifecycle-config-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeNotebookInstanceLifecycleConfig", :http.request.configuration/output-deser-fn deser-describe-notebook-instance-lifecycle-config-output, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef describe-notebook-instance-lifecycle-config :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/describe-notebook-instance-lifecycle-config-input) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/describe-notebook-instance-lifecycle-config-output))
 
-(clojure.core/defn list-notebook-instance-lifecycle-configs ([] (list-notebook-instance-lifecycle-configs {})) ([list-notebook-instance-lifecycle-configs-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-notebook-instance-lifecycle-configs-input list-notebook-instance-lifecycle-configs-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/list-notebook-instance-lifecycle-configs-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/list-notebook-instance-lifecycle-configs-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListNotebookInstanceLifecycleConfigs", :http.request.spec/error-spec {}})))))
+(clojure.core/defn list-notebook-instance-lifecycle-configs ([] (list-notebook-instance-lifecycle-configs {})) ([list-notebook-instance-lifecycle-configs-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-notebook-instance-lifecycle-configs-input list-notebook-instance-lifecycle-configs-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/list-notebook-instance-lifecycle-configs-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/list-notebook-instance-lifecycle-configs-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListNotebookInstanceLifecycleConfigs", :http.request.configuration/output-deser-fn deser-list-notebook-instance-lifecycle-configs-output, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef list-notebook-instance-lifecycle-configs :args (clojure.spec.alpha/? :portkey.aws.sagemaker/list-notebook-instance-lifecycle-configs-input) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/list-notebook-instance-lifecycle-configs-output))
 
-(clojure.core/defn create-training-job ([create-training-job-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-training-job-request create-training-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/create-training-job-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/create-training-job-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateTrainingJob", :http.request.spec/error-spec {"ResourceInUse" :portkey.aws.sagemaker/resource-in-use, "ResourceLimitExceeded" :portkey.aws.sagemaker/resource-limit-exceeded}})))))
+(clojure.core/defn create-training-job ([create-training-job-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-create-training-job-request create-training-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/create-training-job-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/create-training-job-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateTrainingJob", :http.request.configuration/output-deser-fn deser-create-training-job-response, :http.request.spec/error-spec {"ResourceInUse" :portkey.aws.sagemaker/resource-in-use, "ResourceLimitExceeded" :portkey.aws.sagemaker/resource-limit-exceeded}})))))
 (clojure.spec.alpha/fdef create-training-job :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/create-training-job-request) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/create-training-job-response))
 
-(clojure.core/defn update-notebook-instance ([update-notebook-instance-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-update-notebook-instance-input update-notebook-instance-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/update-notebook-instance-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/update-notebook-instance-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateNotebookInstance", :http.request.spec/error-spec {"ResourceLimitExceeded" :portkey.aws.sagemaker/resource-limit-exceeded}})))))
+(clojure.core/defn update-notebook-instance ([update-notebook-instance-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-update-notebook-instance-input update-notebook-instance-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/update-notebook-instance-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/update-notebook-instance-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateNotebookInstance", :http.request.configuration/output-deser-fn deser-update-notebook-instance-output, :http.request.spec/error-spec {"ResourceLimitExceeded" :portkey.aws.sagemaker/resource-limit-exceeded}})))))
 (clojure.spec.alpha/fdef update-notebook-instance :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/update-notebook-instance-input) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/update-notebook-instance-output))
 
-(clojure.core/defn create-notebook-instance-lifecycle-config ([create-notebook-instance-lifecycle-config-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-notebook-instance-lifecycle-config-input create-notebook-instance-lifecycle-config-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/create-notebook-instance-lifecycle-config-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/create-notebook-instance-lifecycle-config-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateNotebookInstanceLifecycleConfig", :http.request.spec/error-spec {"ResourceLimitExceeded" :portkey.aws.sagemaker/resource-limit-exceeded}})))))
+(clojure.core/defn create-notebook-instance-lifecycle-config ([create-notebook-instance-lifecycle-config-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-create-notebook-instance-lifecycle-config-input create-notebook-instance-lifecycle-config-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/create-notebook-instance-lifecycle-config-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/create-notebook-instance-lifecycle-config-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateNotebookInstanceLifecycleConfig", :http.request.configuration/output-deser-fn deser-create-notebook-instance-lifecycle-config-output, :http.request.spec/error-spec {"ResourceLimitExceeded" :portkey.aws.sagemaker/resource-limit-exceeded}})))))
 (clojure.spec.alpha/fdef create-notebook-instance-lifecycle-config :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/create-notebook-instance-lifecycle-config-input) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/create-notebook-instance-lifecycle-config-output))
 
-(clojure.core/defn delete-tags ([delete-tags-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-tags-input delete-tags-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/delete-tags-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/delete-tags-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteTags", :http.request.spec/error-spec {}})))))
+(clojure.core/defn delete-tags ([delete-tags-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-tags-input delete-tags-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/delete-tags-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/delete-tags-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteTags", :http.request.configuration/output-deser-fn deser-delete-tags-output, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef delete-tags :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/delete-tags-input) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/delete-tags-output))
 
-(clojure.core/defn list-training-jobs ([] (list-training-jobs {})) ([list-training-jobs-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-training-jobs-request list-training-jobs-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/list-training-jobs-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/list-training-jobs-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListTrainingJobs", :http.request.spec/error-spec {}})))))
+(clojure.core/defn list-training-jobs ([] (list-training-jobs {})) ([list-training-jobs-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-training-jobs-request list-training-jobs-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/list-training-jobs-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/list-training-jobs-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListTrainingJobs", :http.request.configuration/output-deser-fn deser-list-training-jobs-response, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef list-training-jobs :args (clojure.spec.alpha/? :portkey.aws.sagemaker/list-training-jobs-request) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/list-training-jobs-response))
 
-(clojure.core/defn stop-notebook-instance ([stop-notebook-instance-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-stop-notebook-instance-input stop-notebook-instance-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/stop-notebook-instance-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "StopNotebookInstance", :http.request.spec/error-spec {}})))))
+(clojure.core/defn stop-notebook-instance ([stop-notebook-instance-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-stop-notebook-instance-input stop-notebook-instance-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/stop-notebook-instance-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "StopNotebookInstance", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef stop-notebook-instance :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/stop-notebook-instance-input) :ret clojure.core/true?)
 
-(clojure.core/defn create-transform-job ([create-transform-job-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-transform-job-request create-transform-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/create-transform-job-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/create-transform-job-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateTransformJob", :http.request.spec/error-spec {"ResourceInUse" :portkey.aws.sagemaker/resource-in-use, "ResourceLimitExceeded" :portkey.aws.sagemaker/resource-limit-exceeded}})))))
+(clojure.core/defn create-transform-job ([create-transform-job-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-create-transform-job-request create-transform-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/create-transform-job-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/create-transform-job-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateTransformJob", :http.request.configuration/output-deser-fn deser-create-transform-job-response, :http.request.spec/error-spec {"ResourceInUse" :portkey.aws.sagemaker/resource-in-use, "ResourceLimitExceeded" :portkey.aws.sagemaker/resource-limit-exceeded}})))))
 (clojure.spec.alpha/fdef create-transform-job :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/create-transform-job-request) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/create-transform-job-response))
 
-(clojure.core/defn list-notebook-instances ([] (list-notebook-instances {})) ([list-notebook-instances-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-notebook-instances-input list-notebook-instances-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/list-notebook-instances-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/list-notebook-instances-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListNotebookInstances", :http.request.spec/error-spec {}})))))
+(clojure.core/defn list-notebook-instances ([] (list-notebook-instances {})) ([list-notebook-instances-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-notebook-instances-input list-notebook-instances-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/list-notebook-instances-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/list-notebook-instances-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListNotebookInstances", :http.request.configuration/output-deser-fn deser-list-notebook-instances-output, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef list-notebook-instances :args (clojure.spec.alpha/? :portkey.aws.sagemaker/list-notebook-instances-input) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/list-notebook-instances-output))
 
-(clojure.core/defn list-tags ([list-tags-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-tags-input list-tags-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/list-tags-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/list-tags-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListTags", :http.request.spec/error-spec {}})))))
+(clojure.core/defn list-tags ([list-tags-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-tags-input list-tags-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/list-tags-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/list-tags-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListTags", :http.request.configuration/output-deser-fn deser-list-tags-output, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef list-tags :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/list-tags-input) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/list-tags-output))
 
-(clojure.core/defn create-endpoint ([create-endpoint-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-endpoint-input create-endpoint-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/create-endpoint-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/create-endpoint-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateEndpoint", :http.request.spec/error-spec {"ResourceLimitExceeded" :portkey.aws.sagemaker/resource-limit-exceeded}})))))
+(clojure.core/defn create-endpoint ([create-endpoint-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-create-endpoint-input create-endpoint-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/create-endpoint-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/create-endpoint-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateEndpoint", :http.request.configuration/output-deser-fn deser-create-endpoint-output, :http.request.spec/error-spec {"ResourceLimitExceeded" :portkey.aws.sagemaker/resource-limit-exceeded}})))))
 (clojure.spec.alpha/fdef create-endpoint :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/create-endpoint-input) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/create-endpoint-output))
 
-(clojure.core/defn list-endpoint-configs ([] (list-endpoint-configs {})) ([list-endpoint-configs-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-endpoint-configs-input list-endpoint-configs-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/list-endpoint-configs-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/list-endpoint-configs-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListEndpointConfigs", :http.request.spec/error-spec {}})))))
+(clojure.core/defn list-endpoint-configs ([] (list-endpoint-configs {})) ([list-endpoint-configs-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-endpoint-configs-input list-endpoint-configs-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/list-endpoint-configs-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/list-endpoint-configs-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListEndpointConfigs", :http.request.configuration/output-deser-fn deser-list-endpoint-configs-output, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef list-endpoint-configs :args (clojure.spec.alpha/? :portkey.aws.sagemaker/list-endpoint-configs-input) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/list-endpoint-configs-output))
 
-(clojure.core/defn create-model ([create-model-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-model-input create-model-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/create-model-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/create-model-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateModel", :http.request.spec/error-spec {"ResourceLimitExceeded" :portkey.aws.sagemaker/resource-limit-exceeded}})))))
+(clojure.core/defn create-model ([create-model-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-create-model-input create-model-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/create-model-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/create-model-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateModel", :http.request.configuration/output-deser-fn deser-create-model-output, :http.request.spec/error-spec {"ResourceLimitExceeded" :portkey.aws.sagemaker/resource-limit-exceeded}})))))
 (clojure.spec.alpha/fdef create-model :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/create-model-input) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/create-model-output))
 
-(clojure.core/defn stop-hyper-parameter-tuning-job ([stop-hyper-parameter-tuning-job-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-stop-hyper-parameter-tuning-job-request stop-hyper-parameter-tuning-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/stop-hyper-parameter-tuning-job-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "StopHyperParameterTuningJob", :http.request.spec/error-spec {"ResourceNotFound" :portkey.aws.sagemaker/resource-not-found}})))))
+(clojure.core/defn stop-hyper-parameter-tuning-job ([stop-hyper-parameter-tuning-job-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-stop-hyper-parameter-tuning-job-request stop-hyper-parameter-tuning-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/stop-hyper-parameter-tuning-job-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "StopHyperParameterTuningJob", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {"ResourceNotFound" :portkey.aws.sagemaker/resource-not-found}})))))
 (clojure.spec.alpha/fdef stop-hyper-parameter-tuning-job :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/stop-hyper-parameter-tuning-job-request) :ret clojure.core/true?)
 
-(clojure.core/defn list-models ([] (list-models {})) ([list-models-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-models-input list-models-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/list-models-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/list-models-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListModels", :http.request.spec/error-spec {}})))))
+(clojure.core/defn list-models ([] (list-models {})) ([list-models-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-models-input list-models-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/list-models-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/list-models-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListModels", :http.request.configuration/output-deser-fn deser-list-models-output, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef list-models :args (clojure.spec.alpha/? :portkey.aws.sagemaker/list-models-input) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/list-models-output))
 
-(clojure.core/defn update-endpoint-weights-and-capacities ([update-endpoint-weights-and-capacities-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-update-endpoint-weights-and-capacities-input update-endpoint-weights-and-capacities-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/update-endpoint-weights-and-capacities-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/update-endpoint-weights-and-capacities-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateEndpointWeightsAndCapacities", :http.request.spec/error-spec {"ResourceLimitExceeded" :portkey.aws.sagemaker/resource-limit-exceeded}})))))
+(clojure.core/defn update-endpoint-weights-and-capacities ([update-endpoint-weights-and-capacities-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-update-endpoint-weights-and-capacities-input update-endpoint-weights-and-capacities-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/update-endpoint-weights-and-capacities-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/update-endpoint-weights-and-capacities-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateEndpointWeightsAndCapacities", :http.request.configuration/output-deser-fn deser-update-endpoint-weights-and-capacities-output, :http.request.spec/error-spec {"ResourceLimitExceeded" :portkey.aws.sagemaker/resource-limit-exceeded}})))))
 (clojure.spec.alpha/fdef update-endpoint-weights-and-capacities :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/update-endpoint-weights-and-capacities-input) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/update-endpoint-weights-and-capacities-output))
 
-(clojure.core/defn create-presigned-notebook-instance-url ([create-presigned-notebook-instance-url-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-presigned-notebook-instance-url-input create-presigned-notebook-instance-url-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/create-presigned-notebook-instance-url-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/create-presigned-notebook-instance-url-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreatePresignedNotebookInstanceUrl", :http.request.spec/error-spec {}})))))
+(clojure.core/defn create-presigned-notebook-instance-url ([create-presigned-notebook-instance-url-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-create-presigned-notebook-instance-url-input create-presigned-notebook-instance-url-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/create-presigned-notebook-instance-url-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/create-presigned-notebook-instance-url-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreatePresignedNotebookInstanceUrl", :http.request.configuration/output-deser-fn deser-create-presigned-notebook-instance-url-output, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef create-presigned-notebook-instance-url :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/create-presigned-notebook-instance-url-input) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/create-presigned-notebook-instance-url-output))
 
-(clojure.core/defn describe-endpoint ([describe-endpoint-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-endpoint-input describe-endpoint-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/describe-endpoint-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/describe-endpoint-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeEndpoint", :http.request.spec/error-spec {}})))))
+(clojure.core/defn describe-endpoint ([describe-endpoint-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-endpoint-input describe-endpoint-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/describe-endpoint-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/describe-endpoint-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeEndpoint", :http.request.configuration/output-deser-fn deser-describe-endpoint-output, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef describe-endpoint :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/describe-endpoint-input) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/describe-endpoint-output))
 
-(clojure.core/defn describe-hyper-parameter-tuning-job ([describe-hyper-parameter-tuning-job-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-hyper-parameter-tuning-job-request describe-hyper-parameter-tuning-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/describe-hyper-parameter-tuning-job-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/describe-hyper-parameter-tuning-job-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeHyperParameterTuningJob", :http.request.spec/error-spec {"ResourceNotFound" :portkey.aws.sagemaker/resource-not-found}})))))
+(clojure.core/defn describe-hyper-parameter-tuning-job ([describe-hyper-parameter-tuning-job-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-hyper-parameter-tuning-job-request describe-hyper-parameter-tuning-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/describe-hyper-parameter-tuning-job-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/describe-hyper-parameter-tuning-job-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeHyperParameterTuningJob", :http.request.configuration/output-deser-fn deser-describe-hyper-parameter-tuning-job-response, :http.request.spec/error-spec {"ResourceNotFound" :portkey.aws.sagemaker/resource-not-found}})))))
 (clojure.spec.alpha/fdef describe-hyper-parameter-tuning-job :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/describe-hyper-parameter-tuning-job-request) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/describe-hyper-parameter-tuning-job-response))
 
-(clojure.core/defn describe-transform-job ([describe-transform-job-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-transform-job-request describe-transform-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/describe-transform-job-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/describe-transform-job-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeTransformJob", :http.request.spec/error-spec {"ResourceNotFound" :portkey.aws.sagemaker/resource-not-found}})))))
+(clojure.core/defn describe-transform-job ([describe-transform-job-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-transform-job-request describe-transform-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/describe-transform-job-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/describe-transform-job-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeTransformJob", :http.request.configuration/output-deser-fn deser-describe-transform-job-response, :http.request.spec/error-spec {"ResourceNotFound" :portkey.aws.sagemaker/resource-not-found}})))))
 (clojure.spec.alpha/fdef describe-transform-job :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/describe-transform-job-request) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/describe-transform-job-response))
 
-(clojure.core/defn start-notebook-instance ([start-notebook-instance-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-start-notebook-instance-input start-notebook-instance-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/start-notebook-instance-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "StartNotebookInstance", :http.request.spec/error-spec {"ResourceLimitExceeded" :portkey.aws.sagemaker/resource-limit-exceeded}})))))
+(clojure.core/defn start-notebook-instance ([start-notebook-instance-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-start-notebook-instance-input start-notebook-instance-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/start-notebook-instance-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "StartNotebookInstance", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {"ResourceLimitExceeded" :portkey.aws.sagemaker/resource-limit-exceeded}})))))
 (clojure.spec.alpha/fdef start-notebook-instance :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/start-notebook-instance-input) :ret clojure.core/true?)
 
-(clojure.core/defn update-endpoint ([update-endpoint-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-update-endpoint-input update-endpoint-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/update-endpoint-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/update-endpoint-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateEndpoint", :http.request.spec/error-spec {"ResourceLimitExceeded" :portkey.aws.sagemaker/resource-limit-exceeded}})))))
+(clojure.core/defn update-endpoint ([update-endpoint-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-update-endpoint-input update-endpoint-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/update-endpoint-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/update-endpoint-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateEndpoint", :http.request.configuration/output-deser-fn deser-update-endpoint-output, :http.request.spec/error-spec {"ResourceLimitExceeded" :portkey.aws.sagemaker/resource-limit-exceeded}})))))
 (clojure.spec.alpha/fdef update-endpoint :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/update-endpoint-input) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/update-endpoint-output))
 
-(clojure.core/defn delete-model ([delete-model-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-model-input delete-model-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/delete-model-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteModel", :http.request.spec/error-spec {}})))))
+(clojure.core/defn delete-model ([delete-model-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-model-input delete-model-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/delete-model-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteModel", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef delete-model :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/delete-model-input) :ret clojure.core/true?)
 
-(clojure.core/defn describe-training-job ([describe-training-job-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-training-job-request describe-training-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/describe-training-job-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/describe-training-job-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeTrainingJob", :http.request.spec/error-spec {"ResourceNotFound" :portkey.aws.sagemaker/resource-not-found}})))))
+(clojure.core/defn describe-training-job ([describe-training-job-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-training-job-request describe-training-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/describe-training-job-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/describe-training-job-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeTrainingJob", :http.request.configuration/output-deser-fn deser-describe-training-job-response, :http.request.spec/error-spec {"ResourceNotFound" :portkey.aws.sagemaker/resource-not-found}})))))
 (clojure.spec.alpha/fdef describe-training-job :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/describe-training-job-request) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/describe-training-job-response))
 
-(clojure.core/defn stop-transform-job ([stop-transform-job-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-stop-transform-job-request stop-transform-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/stop-transform-job-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "StopTransformJob", :http.request.spec/error-spec {"ResourceNotFound" :portkey.aws.sagemaker/resource-not-found}})))))
+(clojure.core/defn stop-transform-job ([stop-transform-job-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-stop-transform-job-request stop-transform-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/stop-transform-job-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "StopTransformJob", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {"ResourceNotFound" :portkey.aws.sagemaker/resource-not-found}})))))
 (clojure.spec.alpha/fdef stop-transform-job :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/stop-transform-job-request) :ret clojure.core/true?)
 
-(clojure.core/defn delete-notebook-instance ([delete-notebook-instance-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-notebook-instance-input delete-notebook-instance-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/delete-notebook-instance-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteNotebookInstance", :http.request.spec/error-spec {}})))))
+(clojure.core/defn delete-notebook-instance ([delete-notebook-instance-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-notebook-instance-input delete-notebook-instance-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/delete-notebook-instance-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteNotebookInstance", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef delete-notebook-instance :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/delete-notebook-instance-input) :ret clojure.core/true?)
 
-(clojure.core/defn create-endpoint-config ([create-endpoint-config-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-endpoint-config-input create-endpoint-config-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/create-endpoint-config-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/create-endpoint-config-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateEndpointConfig", :http.request.spec/error-spec {"ResourceLimitExceeded" :portkey.aws.sagemaker/resource-limit-exceeded}})))))
+(clojure.core/defn create-endpoint-config ([create-endpoint-config-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-create-endpoint-config-input create-endpoint-config-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/create-endpoint-config-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/create-endpoint-config-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateEndpointConfig", :http.request.configuration/output-deser-fn deser-create-endpoint-config-output, :http.request.spec/error-spec {"ResourceLimitExceeded" :portkey.aws.sagemaker/resource-limit-exceeded}})))))
 (clojure.spec.alpha/fdef create-endpoint-config :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/create-endpoint-config-input) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/create-endpoint-config-output))
 
-(clojure.core/defn delete-endpoint-config ([delete-endpoint-config-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-endpoint-config-input delete-endpoint-config-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/delete-endpoint-config-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteEndpointConfig", :http.request.spec/error-spec {}})))))
+(clojure.core/defn delete-endpoint-config ([delete-endpoint-config-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-endpoint-config-input delete-endpoint-config-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/delete-endpoint-config-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteEndpointConfig", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef delete-endpoint-config :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/delete-endpoint-config-input) :ret clojure.core/true?)
 
-(clojure.core/defn describe-model ([describe-model-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-model-input describe-model-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/describe-model-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/describe-model-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeModel", :http.request.spec/error-spec {}})))))
+(clojure.core/defn describe-model ([describe-model-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-model-input describe-model-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/describe-model-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/describe-model-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeModel", :http.request.configuration/output-deser-fn deser-describe-model-output, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef describe-model :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/describe-model-input) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/describe-model-output))
 
-(clojure.core/defn stop-training-job ([stop-training-job-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-stop-training-job-request stop-training-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/stop-training-job-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "StopTrainingJob", :http.request.spec/error-spec {"ResourceNotFound" :portkey.aws.sagemaker/resource-not-found}})))))
+(clojure.core/defn stop-training-job ([stop-training-job-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-stop-training-job-request stop-training-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/stop-training-job-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "StopTrainingJob", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {"ResourceNotFound" :portkey.aws.sagemaker/resource-not-found}})))))
 (clojure.spec.alpha/fdef stop-training-job :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/stop-training-job-request) :ret clojure.core/true?)
 
-(clojure.core/defn update-notebook-instance-lifecycle-config ([update-notebook-instance-lifecycle-config-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-update-notebook-instance-lifecycle-config-input update-notebook-instance-lifecycle-config-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/update-notebook-instance-lifecycle-config-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/update-notebook-instance-lifecycle-config-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateNotebookInstanceLifecycleConfig", :http.request.spec/error-spec {"ResourceLimitExceeded" :portkey.aws.sagemaker/resource-limit-exceeded}})))))
+(clojure.core/defn update-notebook-instance-lifecycle-config ([update-notebook-instance-lifecycle-config-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-update-notebook-instance-lifecycle-config-input update-notebook-instance-lifecycle-config-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/update-notebook-instance-lifecycle-config-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/update-notebook-instance-lifecycle-config-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateNotebookInstanceLifecycleConfig", :http.request.configuration/output-deser-fn deser-update-notebook-instance-lifecycle-config-output, :http.request.spec/error-spec {"ResourceLimitExceeded" :portkey.aws.sagemaker/resource-limit-exceeded}})))))
 (clojure.spec.alpha/fdef update-notebook-instance-lifecycle-config :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/update-notebook-instance-lifecycle-config-input) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/update-notebook-instance-lifecycle-config-output))
 
-(clojure.core/defn list-hyper-parameter-tuning-jobs ([] (list-hyper-parameter-tuning-jobs {})) ([list-hyper-parameter-tuning-jobs-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-hyper-parameter-tuning-jobs-request list-hyper-parameter-tuning-jobs-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/list-hyper-parameter-tuning-jobs-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/list-hyper-parameter-tuning-jobs-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListHyperParameterTuningJobs", :http.request.spec/error-spec {}})))))
+(clojure.core/defn list-hyper-parameter-tuning-jobs ([] (list-hyper-parameter-tuning-jobs {})) ([list-hyper-parameter-tuning-jobs-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-hyper-parameter-tuning-jobs-request list-hyper-parameter-tuning-jobs-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/list-hyper-parameter-tuning-jobs-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/list-hyper-parameter-tuning-jobs-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListHyperParameterTuningJobs", :http.request.configuration/output-deser-fn deser-list-hyper-parameter-tuning-jobs-response, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef list-hyper-parameter-tuning-jobs :args (clojure.spec.alpha/? :portkey.aws.sagemaker/list-hyper-parameter-tuning-jobs-request) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/list-hyper-parameter-tuning-jobs-response))
 
-(clojure.core/defn add-tags ([add-tags-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-add-tags-input add-tags-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/add-tags-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/add-tags-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AddTags", :http.request.spec/error-spec {}})))))
+(clojure.core/defn add-tags ([add-tags-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-add-tags-input add-tags-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/add-tags-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/add-tags-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "AddTags", :http.request.configuration/output-deser-fn deser-add-tags-output, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef add-tags :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/add-tags-input) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/add-tags-output))
 
-(clojure.core/defn describe-endpoint-config ([describe-endpoint-config-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-endpoint-config-input describe-endpoint-config-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/describe-endpoint-config-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/describe-endpoint-config-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeEndpointConfig", :http.request.spec/error-spec {}})))))
+(clojure.core/defn describe-endpoint-config ([describe-endpoint-config-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-endpoint-config-input describe-endpoint-config-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/describe-endpoint-config-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/describe-endpoint-config-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeEndpointConfig", :http.request.configuration/output-deser-fn deser-describe-endpoint-config-output, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef describe-endpoint-config :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/describe-endpoint-config-input) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/describe-endpoint-config-output))
 
-(clojure.core/defn list-transform-jobs ([] (list-transform-jobs {})) ([list-transform-jobs-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-transform-jobs-request list-transform-jobs-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/list-transform-jobs-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/list-transform-jobs-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListTransformJobs", :http.request.spec/error-spec {}})))))
+(clojure.core/defn list-transform-jobs ([] (list-transform-jobs {})) ([list-transform-jobs-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-transform-jobs-request list-transform-jobs-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/list-transform-jobs-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/list-transform-jobs-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListTransformJobs", :http.request.configuration/output-deser-fn deser-list-transform-jobs-response, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef list-transform-jobs :args (clojure.spec.alpha/? :portkey.aws.sagemaker/list-transform-jobs-request) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/list-transform-jobs-response))
 
-(clojure.core/defn describe-notebook-instance ([describe-notebook-instance-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-notebook-instance-input describe-notebook-instance-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/describe-notebook-instance-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/describe-notebook-instance-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeNotebookInstance", :http.request.spec/error-spec {}})))))
+(clojure.core/defn describe-notebook-instance ([describe-notebook-instance-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-notebook-instance-input describe-notebook-instance-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/describe-notebook-instance-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/describe-notebook-instance-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeNotebookInstance", :http.request.configuration/output-deser-fn deser-describe-notebook-instance-output, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef describe-notebook-instance :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/describe-notebook-instance-input) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/describe-notebook-instance-output))
 
-(clojure.core/defn delete-endpoint ([delete-endpoint-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-endpoint-input delete-endpoint-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/delete-endpoint-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteEndpoint", :http.request.spec/error-spec {}})))))
+(clojure.core/defn delete-endpoint ([delete-endpoint-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-endpoint-input delete-endpoint-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/delete-endpoint-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteEndpoint", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef delete-endpoint :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/delete-endpoint-input) :ret clojure.core/true?)
 
-(clojure.core/defn list-endpoints ([] (list-endpoints {})) ([list-endpoints-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-endpoints-input list-endpoints-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/list-endpoints-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/list-endpoints-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListEndpoints", :http.request.spec/error-spec {}})))))
+(clojure.core/defn list-endpoints ([] (list-endpoints {})) ([list-endpoints-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-list-endpoints-input list-endpoints-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/list-endpoints-output, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/list-endpoints-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ListEndpoints", :http.request.configuration/output-deser-fn deser-list-endpoints-output, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef list-endpoints :args (clojure.spec.alpha/? :portkey.aws.sagemaker/list-endpoints-input) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/list-endpoints-output))
 
-(clojure.core/defn delete-notebook-instance-lifecycle-config ([delete-notebook-instance-lifecycle-config-inputinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-notebook-instance-lifecycle-config-input delete-notebook-instance-lifecycle-config-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/delete-notebook-instance-lifecycle-config-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteNotebookInstanceLifecycleConfig", :http.request.spec/error-spec {}})))))
+(clojure.core/defn delete-notebook-instance-lifecycle-config ([delete-notebook-instance-lifecycle-config-inputinput] (clojure.core/let [request-function-result__28581__auto__ (req-delete-notebook-instance-lifecycle-config-input delete-notebook-instance-lifecycle-config-inputinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/delete-notebook-instance-lifecycle-config-input, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteNotebookInstanceLifecycleConfig", :http.request.configuration/output-deser-fn deser, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef delete-notebook-instance-lifecycle-config :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/delete-notebook-instance-lifecycle-config-input) :ret clojure.core/true?)
 
-(clojure.core/defn create-hyper-parameter-tuning-job ([create-hyper-parameter-tuning-job-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-hyper-parameter-tuning-job-request create-hyper-parameter-tuning-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/create-hyper-parameter-tuning-job-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/create-hyper-parameter-tuning-job-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateHyperParameterTuningJob", :http.request.spec/error-spec {"ResourceInUse" :portkey.aws.sagemaker/resource-in-use, "ResourceLimitExceeded" :portkey.aws.sagemaker/resource-limit-exceeded}})))))
+(clojure.core/defn create-hyper-parameter-tuning-job ([create-hyper-parameter-tuning-job-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-create-hyper-parameter-tuning-job-request create-hyper-parameter-tuning-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.sagemaker/endpoints, :http.request.configuration/target-prefix "SageMaker", :http.request.spec/output-spec :portkey.aws.sagemaker/create-hyper-parameter-tuning-job-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2017-07-24", :http.request.configuration/service-id "SageMaker", :http.request.spec/input-spec :portkey.aws.sagemaker/create-hyper-parameter-tuning-job-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateHyperParameterTuningJob", :http.request.configuration/output-deser-fn deser-create-hyper-parameter-tuning-job-response, :http.request.spec/error-spec {"ResourceInUse" :portkey.aws.sagemaker/resource-in-use, "ResourceLimitExceeded" :portkey.aws.sagemaker/resource-limit-exceeded}})))))
 (clojure.spec.alpha/fdef create-hyper-parameter-tuning-job :args (clojure.spec.alpha/tuple :portkey.aws.sagemaker/create-hyper-parameter-tuning-job-request) :ret (clojure.spec.alpha/and :portkey.aws.sagemaker/create-hyper-parameter-tuning-job-response))

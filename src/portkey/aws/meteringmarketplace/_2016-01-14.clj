@@ -153,6 +153,80 @@
 
 (clojure.core/defn- req-resolve-customer-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-non-empty-string (input :registration-token)) #:http.request.field{:name "RegistrationToken", :shape "NonEmptyString"})]}))
 
+(clojure.core/declare deser-usage-record-list)
+
+(clojure.core/declare deser-usage-record)
+
+(clojure.core/declare desererror-message)
+
+(clojure.core/declare deser-usage-dimension)
+
+(clojure.core/declare deser-customer-identifier)
+
+(clojure.core/declare deser-usage-record-result-status)
+
+(clojure.core/declare deser-usage-record-result)
+
+(clojure.core/declare deser-usage-quantity)
+
+(clojure.core/declare deser-usage-record-result-list)
+
+(clojure.core/declare deser-string)
+
+(clojure.core/declare deser-timestamp)
+
+(clojure.core/declare deser-product-code)
+
+(clojure.core/defn- deser-usage-record-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-usage-record coll))) input))
+
+(clojure.core/defn- deser-usage-record [input] (clojure.core/cond-> {:timestamp (deser-timestamp (input "Timestamp")), :customer-identifier (deser-customer-identifier (input "CustomerIdentifier")), :dimension (deser-usage-dimension (input "Dimension")), :quantity (deser-usage-quantity (input "Quantity"))}))
+
+(clojure.core/defn- desererror-message [input] input)
+
+(clojure.core/defn- deser-usage-dimension [input] input)
+
+(clojure.core/defn- deser-customer-identifier [input] input)
+
+(clojure.core/defn- deser-usage-record-result-status [input] (clojure.core/get {"Success" :success, "CustomerNotSubscribed" :customer-not-subscribed, "DuplicateRecord" :duplicate-record} input))
+
+(clojure.core/defn- deser-usage-record-result [input] (clojure.core/cond-> {} (clojure.core/contains? input "UsageRecord") (clojure.core/assoc :usage-record (deser-usage-record (input "UsageRecord"))) (clojure.core/contains? input "MeteringRecordId") (clojure.core/assoc :metering-record-id (deser-string (input "MeteringRecordId"))) (clojure.core/contains? input "Status") (clojure.core/assoc :status (deser-usage-record-result-status (input "Status")))))
+
+(clojure.core/defn- deser-usage-quantity [input] input)
+
+(clojure.core/defn- deser-usage-record-result-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-usage-record-result coll))) input))
+
+(clojure.core/defn- deser-string [input] input)
+
+(clojure.core/defn- deser-timestamp [input] input)
+
+(clojure.core/defn- deser-product-code [input] input)
+
+(clojure.core/defn- deser-invalid-token-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (desererror-message (input "message")))))
+
+(clojure.core/defn- deser-duplicate-request-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (desererror-message (input "message")))))
+
+(clojure.core/defn- deser-invalid-product-code-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (desererror-message (input "message")))))
+
+(clojure.core/defn- deser-internal-service-error-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (desererror-message (input "message")))))
+
+(clojure.core/defn- deser-invalid-usage-dimension-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (desererror-message (input "message")))))
+
+(clojure.core/defn- deser-invalid-customer-identifier-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (desererror-message (input "message")))))
+
+(clojure.core/defn- deser-batch-meter-usage-result [input] (clojure.core/cond-> {} (clojure.core/contains? input "Results") (clojure.core/assoc :results (deser-usage-record-result-list (input "Results"))) (clojure.core/contains? input "UnprocessedRecords") (clojure.core/assoc :unprocessed-records (deser-usage-record-list (input "UnprocessedRecords")))))
+
+(clojure.core/defn- deser-resolve-customer-result [input] (clojure.core/cond-> {} (clojure.core/contains? input "CustomerIdentifier") (clojure.core/assoc :customer-identifier (deser-customer-identifier (input "CustomerIdentifier"))) (clojure.core/contains? input "ProductCode") (clojure.core/assoc :product-code (deser-product-code (input "ProductCode")))))
+
+(clojure.core/defn- deser-throttling-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (desererror-message (input "message")))))
+
+(clojure.core/defn- deser-meter-usage-result [input] (clojure.core/cond-> {} (clojure.core/contains? input "MeteringRecordId") (clojure.core/assoc :metering-record-id (deser-string (input "MeteringRecordId")))))
+
+(clojure.core/defn- deser-expired-token-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (desererror-message (input "message")))))
+
+(clojure.core/defn- deser-invalid-endpoint-region-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (desererror-message (input "message")))))
+
+(clojure.core/defn- deser-timestamp-out-of-bounds-exception [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (desererror-message (input "message")))))
+
 (clojure.spec.alpha/def :portkey.aws.meteringmarketplace.-2016-01-14.invalid-token-exception/message (clojure.spec.alpha/and :portkey.aws.meteringmarketplace.-2016-01-14/error-message))
 (clojure.spec.alpha/def :portkey.aws.meteringmarketplace.-2016-01-14/invalid-token-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.meteringmarketplace.-2016-01-14.invalid-token-exception/message]))
 
@@ -164,7 +238,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.meteringmarketplace.-2016-01-14/usage-record-list (clojure.spec.alpha/coll-of :portkey.aws.meteringmarketplace.-2016-01-14/usage-record :min-count 0 :max-count 25))
 
-(clojure.spec.alpha/def :portkey.aws.meteringmarketplace.-2016-01-14/non-empty-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"\S+" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.meteringmarketplace.-2016-01-14/non-empty-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"\S+" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.meteringmarketplace.-2016-01-14.usage-record/dimension (clojure.spec.alpha/and :portkey.aws.meteringmarketplace.-2016-01-14/usage-dimension))
 (clojure.spec.alpha/def :portkey.aws.meteringmarketplace.-2016-01-14.usage-record/quantity (clojure.spec.alpha/and :portkey.aws.meteringmarketplace.-2016-01-14/usage-quantity))
@@ -175,9 +249,9 @@
 (clojure.spec.alpha/def :portkey.aws.meteringmarketplace.-2016-01-14.invalid-product-code-exception/message (clojure.spec.alpha/and :portkey.aws.meteringmarketplace.-2016-01-14/error-message))
 (clojure.spec.alpha/def :portkey.aws.meteringmarketplace.-2016-01-14/invalid-product-code-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.meteringmarketplace.-2016-01-14.invalid-product-code-exception/message]))
 
-(clojure.spec.alpha/def :portkey.aws.meteringmarketplace.-2016-01-14/usage-dimension (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255))))
+(clojure.spec.alpha/def :portkey.aws.meteringmarketplace.-2016-01-14/usage-dimension (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 255))))
 
-(clojure.spec.alpha/def :portkey.aws.meteringmarketplace.-2016-01-14/customer-identifier (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255))))
+(clojure.spec.alpha/def :portkey.aws.meteringmarketplace.-2016-01-14/customer-identifier (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 255))))
 
 (clojure.spec.alpha/def :portkey.aws.meteringmarketplace.-2016-01-14/usage-record-result-status #{:duplicate-record "CustomerNotSubscribed" :customer-not-subscribed "Success" "DuplicateRecord" :success})
 
@@ -211,7 +285,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.meteringmarketplace.-2016-01-14/timestamp clojure.core/inst?)
 
-(clojure.spec.alpha/def :portkey.aws.meteringmarketplace.-2016-01-14/product-code (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255))))
+(clojure.spec.alpha/def :portkey.aws.meteringmarketplace.-2016-01-14/product-code (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 1 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 255))))
 
 (clojure.spec.alpha/def :portkey.aws.meteringmarketplace.-2016-01-14.throttling-exception/message (clojure.spec.alpha/and :portkey.aws.meteringmarketplace.-2016-01-14/error-message))
 (clojure.spec.alpha/def :portkey.aws.meteringmarketplace.-2016-01-14/throttling-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.meteringmarketplace.-2016-01-14.throttling-exception/message]))
@@ -233,11 +307,11 @@
 
 (clojure.spec.alpha/def :portkey.aws.meteringmarketplace.-2016-01-14/boolean clojure.core/boolean?)
 
-(clojure.core/defn batch-meter-usage ([batch-meter-usage-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-batch-meter-usage-request batch-meter-usage-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.meteringmarketplace.-2016-01-14/endpoints, :http.request.configuration/target-prefix "AWSMPMeteringService", :http.request.spec/output-spec :portkey.aws.meteringmarketplace.-2016-01-14/batch-meter-usage-result, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-01-14", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.meteringmarketplace.-2016-01-14/batch-meter-usage-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "BatchMeterUsage", :http.request.spec/error-spec {"InternalServiceErrorException" :portkey.aws.meteringmarketplace.-2016-01-14/internal-service-error-exception, "InvalidProductCodeException" :portkey.aws.meteringmarketplace.-2016-01-14/invalid-product-code-exception, "InvalidUsageDimensionException" :portkey.aws.meteringmarketplace.-2016-01-14/invalid-usage-dimension-exception, "InvalidCustomerIdentifierException" :portkey.aws.meteringmarketplace.-2016-01-14/invalid-customer-identifier-exception, "TimestampOutOfBoundsException" :portkey.aws.meteringmarketplace.-2016-01-14/timestamp-out-of-bounds-exception, "ThrottlingException" :portkey.aws.meteringmarketplace.-2016-01-14/throttling-exception}})))))
+(clojure.core/defn batch-meter-usage ([batch-meter-usage-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-batch-meter-usage-request batch-meter-usage-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.meteringmarketplace.-2016-01-14/endpoints, :http.request.configuration/target-prefix "AWSMPMeteringService", :http.request.spec/output-spec :portkey.aws.meteringmarketplace.-2016-01-14/batch-meter-usage-result, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-01-14", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.meteringmarketplace.-2016-01-14/batch-meter-usage-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "BatchMeterUsage", :http.request.configuration/output-deser-fn deser-batch-meter-usage-result, :http.request.spec/error-spec {"InternalServiceErrorException" :portkey.aws.meteringmarketplace.-2016-01-14/internal-service-error-exception, "InvalidProductCodeException" :portkey.aws.meteringmarketplace.-2016-01-14/invalid-product-code-exception, "InvalidUsageDimensionException" :portkey.aws.meteringmarketplace.-2016-01-14/invalid-usage-dimension-exception, "InvalidCustomerIdentifierException" :portkey.aws.meteringmarketplace.-2016-01-14/invalid-customer-identifier-exception, "TimestampOutOfBoundsException" :portkey.aws.meteringmarketplace.-2016-01-14/timestamp-out-of-bounds-exception, "ThrottlingException" :portkey.aws.meteringmarketplace.-2016-01-14/throttling-exception}})))))
 (clojure.spec.alpha/fdef batch-meter-usage :args (clojure.spec.alpha/tuple :portkey.aws.meteringmarketplace.-2016-01-14/batch-meter-usage-request) :ret (clojure.spec.alpha/and :portkey.aws.meteringmarketplace.-2016-01-14/batch-meter-usage-result))
 
-(clojure.core/defn meter-usage ([meter-usage-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-meter-usage-request meter-usage-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.meteringmarketplace.-2016-01-14/endpoints, :http.request.configuration/target-prefix "AWSMPMeteringService", :http.request.spec/output-spec :portkey.aws.meteringmarketplace.-2016-01-14/meter-usage-result, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-01-14", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.meteringmarketplace.-2016-01-14/meter-usage-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "MeterUsage", :http.request.spec/error-spec {"InternalServiceErrorException" :portkey.aws.meteringmarketplace.-2016-01-14/internal-service-error-exception, "InvalidProductCodeException" :portkey.aws.meteringmarketplace.-2016-01-14/invalid-product-code-exception, "InvalidUsageDimensionException" :portkey.aws.meteringmarketplace.-2016-01-14/invalid-usage-dimension-exception, "InvalidEndpointRegionException" :portkey.aws.meteringmarketplace.-2016-01-14/invalid-endpoint-region-exception, "TimestampOutOfBoundsException" :portkey.aws.meteringmarketplace.-2016-01-14/timestamp-out-of-bounds-exception, "DuplicateRequestException" :portkey.aws.meteringmarketplace.-2016-01-14/duplicate-request-exception, "ThrottlingException" :portkey.aws.meteringmarketplace.-2016-01-14/throttling-exception}})))))
+(clojure.core/defn meter-usage ([meter-usage-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-meter-usage-request meter-usage-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.meteringmarketplace.-2016-01-14/endpoints, :http.request.configuration/target-prefix "AWSMPMeteringService", :http.request.spec/output-spec :portkey.aws.meteringmarketplace.-2016-01-14/meter-usage-result, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-01-14", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.meteringmarketplace.-2016-01-14/meter-usage-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "MeterUsage", :http.request.configuration/output-deser-fn deser-meter-usage-result, :http.request.spec/error-spec {"InternalServiceErrorException" :portkey.aws.meteringmarketplace.-2016-01-14/internal-service-error-exception, "InvalidProductCodeException" :portkey.aws.meteringmarketplace.-2016-01-14/invalid-product-code-exception, "InvalidUsageDimensionException" :portkey.aws.meteringmarketplace.-2016-01-14/invalid-usage-dimension-exception, "InvalidEndpointRegionException" :portkey.aws.meteringmarketplace.-2016-01-14/invalid-endpoint-region-exception, "TimestampOutOfBoundsException" :portkey.aws.meteringmarketplace.-2016-01-14/timestamp-out-of-bounds-exception, "DuplicateRequestException" :portkey.aws.meteringmarketplace.-2016-01-14/duplicate-request-exception, "ThrottlingException" :portkey.aws.meteringmarketplace.-2016-01-14/throttling-exception}})))))
 (clojure.spec.alpha/fdef meter-usage :args (clojure.spec.alpha/tuple :portkey.aws.meteringmarketplace.-2016-01-14/meter-usage-request) :ret (clojure.spec.alpha/and :portkey.aws.meteringmarketplace.-2016-01-14/meter-usage-result))
 
-(clojure.core/defn resolve-customer ([resolve-customer-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-resolve-customer-request resolve-customer-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.meteringmarketplace.-2016-01-14/endpoints, :http.request.configuration/target-prefix "AWSMPMeteringService", :http.request.spec/output-spec :portkey.aws.meteringmarketplace.-2016-01-14/resolve-customer-result, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-01-14", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.meteringmarketplace.-2016-01-14/resolve-customer-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ResolveCustomer", :http.request.spec/error-spec {"InvalidTokenException" :portkey.aws.meteringmarketplace.-2016-01-14/invalid-token-exception, "ExpiredTokenException" :portkey.aws.meteringmarketplace.-2016-01-14/expired-token-exception, "ThrottlingException" :portkey.aws.meteringmarketplace.-2016-01-14/throttling-exception, "InternalServiceErrorException" :portkey.aws.meteringmarketplace.-2016-01-14/internal-service-error-exception}})))))
+(clojure.core/defn resolve-customer ([resolve-customer-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-resolve-customer-request resolve-customer-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.meteringmarketplace.-2016-01-14/endpoints, :http.request.configuration/target-prefix "AWSMPMeteringService", :http.request.spec/output-spec :portkey.aws.meteringmarketplace.-2016-01-14/resolve-customer-result, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-01-14", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.meteringmarketplace.-2016-01-14/resolve-customer-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "ResolveCustomer", :http.request.configuration/output-deser-fn deser-resolve-customer-result, :http.request.spec/error-spec {"InvalidTokenException" :portkey.aws.meteringmarketplace.-2016-01-14/invalid-token-exception, "ExpiredTokenException" :portkey.aws.meteringmarketplace.-2016-01-14/expired-token-exception, "ThrottlingException" :portkey.aws.meteringmarketplace.-2016-01-14/throttling-exception, "InternalServiceErrorException" :portkey.aws.meteringmarketplace.-2016-01-14/internal-service-error-exception}})))))
 (clojure.spec.alpha/fdef resolve-customer :args (clojure.spec.alpha/tuple :portkey.aws.meteringmarketplace.-2016-01-14/resolve-customer-request) :ret (clojure.spec.alpha/and :portkey.aws.meteringmarketplace.-2016-01-14/resolve-customer-result))

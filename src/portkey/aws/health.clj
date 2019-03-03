@@ -172,7 +172,175 @@
 
 (clojure.core/defn- req-describe-event-aggregates-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (serevent-aggregate-field (input :aggregate-field)) #:http.request.field{:name "aggregateField", :shape "eventAggregateField"})]} (clojure.core/contains? input :filter) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-event-filter (input :filter)) #:http.request.field{:name "filter", :shape "EventFilter"})) (clojure.core/contains? input :max-results) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (sermax-results (input :max-results)) #:http.request.field{:name "maxResults", :shape "maxResults"})) (clojure.core/contains? input :next-token) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (sernext-token (input :next-token)) #:http.request.field{:name "nextToken", :shape "nextToken"}))))
 
-(clojure.spec.alpha/def :portkey.aws.health/entity-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256))))
+(clojure.core/declare deserentity-value)
+
+(clojure.core/declare desermetadata-value)
+
+(clojure.core/declare deser-event-details-error-item)
+
+(clojure.core/declare desertag-set)
+
+(clojure.core/declare deserstring)
+
+(clojure.core/declare desermetadata-key)
+
+(clojure.core/declare deseraccount-id)
+
+(clojure.core/declare deser-event-type-list)
+
+(clojure.core/declare deserentity-arn)
+
+(clojure.core/declare deser-entity-list)
+
+(clojure.core/declare deserevent-status-code)
+
+(clojure.core/declare deser-event-list)
+
+(clojure.core/declare desertimestamp)
+
+(clojure.core/declare deser-event)
+
+(clojure.core/declare deser-event-type)
+
+(clojure.core/declare deserevent-arn)
+
+(clojure.core/declare desercount)
+
+(clojure.core/declare deseraggregate-value)
+
+(clojure.core/declare deser-entity-aggregate)
+
+(clojure.core/declare desertag-value)
+
+(clojure.core/declare desernext-token)
+
+(clojure.core/declare deser-event-aggregate-list)
+
+(clojure.core/declare deserregion)
+
+(clojure.core/declare deseravailability-zone)
+
+(clojure.core/declare deser-event-details)
+
+(clojure.core/declare deserevent-type-category)
+
+(clojure.core/declare deserentity-status-code)
+
+(clojure.core/declare deser-entity-aggregate-list)
+
+(clojure.core/declare deser-event-description)
+
+(clojure.core/declare deserevent-metadata)
+
+(clojure.core/declare deser-describe-event-details-failed-set)
+
+(clojure.core/declare deserevent-type-code)
+
+(clojure.core/declare deserevent-description)
+
+(clojure.core/declare deserservice)
+
+(clojure.core/declare deser-event-aggregate)
+
+(clojure.core/declare desertag-key)
+
+(clojure.core/declare deser-affected-entity)
+
+(clojure.core/declare deser-describe-event-details-successful-set)
+
+(clojure.core/defn- deserentity-value [input] input)
+
+(clojure.core/defn- desermetadata-value [input] input)
+
+(clojure.core/defn- deser-event-details-error-item [input] (clojure.core/cond-> {} (clojure.core/contains? input "eventArn") (clojure.core/assoc :event-arn (deserevent-arn (input "eventArn"))) (clojure.core/contains? input "errorName") (clojure.core/assoc :error-name (deserstring (input "errorName"))) (clojure.core/contains? input "errorMessage") (clojure.core/assoc :error-message (deserstring (input "errorMessage")))))
+
+(clojure.core/defn- desertag-set [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(desertag-key k) (desertag-value v)])) input))
+
+(clojure.core/defn- deserstring [input] input)
+
+(clojure.core/defn- desermetadata-key [input] input)
+
+(clojure.core/defn- deseraccount-id [input] input)
+
+(clojure.core/defn- deser-event-type-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-event-type coll))) input))
+
+(clojure.core/defn- deserentity-arn [input] input)
+
+(clojure.core/defn- deser-entity-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-affected-entity coll))) input))
+
+(clojure.core/defn- deserevent-status-code [input] (clojure.core/get {"open" :open, "closed" :closed, "upcoming" :upcoming} input))
+
+(clojure.core/defn- deser-event-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-event coll))) input))
+
+(clojure.core/defn- desertimestamp [input] input)
+
+(clojure.core/defn- deser-event [input] (clojure.core/cond-> {} (clojure.core/contains? input "arn") (clojure.core/assoc :arn (deserevent-arn (input "arn"))) (clojure.core/contains? input "startTime") (clojure.core/assoc :start-time (desertimestamp (input "startTime"))) (clojure.core/contains? input "lastUpdatedTime") (clojure.core/assoc :last-updated-time (desertimestamp (input "lastUpdatedTime"))) (clojure.core/contains? input "statusCode") (clojure.core/assoc :status-code (deserevent-status-code (input "statusCode"))) (clojure.core/contains? input "region") (clojure.core/assoc :region (deserregion (input "region"))) (clojure.core/contains? input "availabilityZone") (clojure.core/assoc :availability-zone (deseravailability-zone (input "availabilityZone"))) (clojure.core/contains? input "eventTypeCategory") (clojure.core/assoc :event-type-category (deserevent-type-category (input "eventTypeCategory"))) (clojure.core/contains? input "eventTypeCode") (clojure.core/assoc :event-type-code (deserevent-type-code (input "eventTypeCode"))) (clojure.core/contains? input "endTime") (clojure.core/assoc :end-time (desertimestamp (input "endTime"))) (clojure.core/contains? input "service") (clojure.core/assoc :service (deserservice (input "service")))))
+
+(clojure.core/defn- deser-event-type [input] (clojure.core/cond-> {} (clojure.core/contains? input "service") (clojure.core/assoc :service (deserservice (input "service"))) (clojure.core/contains? input "code") (clojure.core/assoc :code (deserevent-type-code (input "code"))) (clojure.core/contains? input "category") (clojure.core/assoc :category (deserevent-type-category (input "category")))))
+
+(clojure.core/defn- deserevent-arn [input] input)
+
+(clojure.core/defn- desercount [input] input)
+
+(clojure.core/defn- deseraggregate-value [input] input)
+
+(clojure.core/defn- deser-entity-aggregate [input] (clojure.core/cond-> {} (clojure.core/contains? input "eventArn") (clojure.core/assoc :event-arn (deserevent-arn (input "eventArn"))) (clojure.core/contains? input "count") (clojure.core/assoc :count (desercount (input "count")))))
+
+(clojure.core/defn- desertag-value [input] input)
+
+(clojure.core/defn- desernext-token [input] input)
+
+(clojure.core/defn- deser-event-aggregate-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-event-aggregate coll))) input))
+
+(clojure.core/defn- deserregion [input] input)
+
+(clojure.core/defn- deseravailability-zone [input] input)
+
+(clojure.core/defn- deser-event-details [input] (clojure.core/cond-> {} (clojure.core/contains? input "event") (clojure.core/assoc :event (deser-event (input "event"))) (clojure.core/contains? input "eventDescription") (clojure.core/assoc :event-description (deser-event-description (input "eventDescription"))) (clojure.core/contains? input "eventMetadata") (clojure.core/assoc :event-metadata (deserevent-metadata (input "eventMetadata")))))
+
+(clojure.core/defn- deserevent-type-category [input] (clojure.core/get {"issue" :issue, "accountNotification" :account-notification, "scheduledChange" :scheduled-change} input))
+
+(clojure.core/defn- deserentity-status-code [input] (clojure.core/get {"IMPAIRED" :impaired, "UNIMPAIRED" :unimpaired, "UNKNOWN" :unknown} input))
+
+(clojure.core/defn- deser-entity-aggregate-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-entity-aggregate coll))) input))
+
+(clojure.core/defn- deser-event-description [input] (clojure.core/cond-> {} (clojure.core/contains? input "latestDescription") (clojure.core/assoc :latest-description (deserevent-description (input "latestDescription")))))
+
+(clojure.core/defn- deserevent-metadata [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(desermetadata-key k) (desermetadata-value v)])) input))
+
+(clojure.core/defn- deser-describe-event-details-failed-set [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-event-details-error-item coll))) input))
+
+(clojure.core/defn- deserevent-type-code [input] input)
+
+(clojure.core/defn- deserevent-description [input] input)
+
+(clojure.core/defn- deserservice [input] input)
+
+(clojure.core/defn- deser-event-aggregate [input] (clojure.core/cond-> {} (clojure.core/contains? input "aggregateValue") (clojure.core/assoc :aggregate-value (deseraggregate-value (input "aggregateValue"))) (clojure.core/contains? input "count") (clojure.core/assoc :count (desercount (input "count")))))
+
+(clojure.core/defn- desertag-key [input] input)
+
+(clojure.core/defn- deser-affected-entity [input] (clojure.core/cond-> {} (clojure.core/contains? input "entityArn") (clojure.core/assoc :entity-arn (deserentity-arn (input "entityArn"))) (clojure.core/contains? input "eventArn") (clojure.core/assoc :event-arn (deserevent-arn (input "eventArn"))) (clojure.core/contains? input "entityValue") (clojure.core/assoc :entity-value (deserentity-value (input "entityValue"))) (clojure.core/contains? input "awsAccountId") (clojure.core/assoc :aws-account-id (deseraccount-id (input "awsAccountId"))) (clojure.core/contains? input "lastUpdatedTime") (clojure.core/assoc :last-updated-time (desertimestamp (input "lastUpdatedTime"))) (clojure.core/contains? input "statusCode") (clojure.core/assoc :status-code (deserentity-status-code (input "statusCode"))) (clojure.core/contains? input "tags") (clojure.core/assoc :tags (desertag-set (input "tags")))))
+
+(clojure.core/defn- deser-describe-event-details-successful-set [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-event-details coll))) input))
+
+(clojure.core/defn- deser-unsupported-locale [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deserstring (input "message")))))
+
+(clojure.core/defn- deser-invalid-pagination-token [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deserstring (input "message")))))
+
+(clojure.core/defn- deser-describe-entity-aggregates-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "entityAggregates") (clojure.core/assoc :entity-aggregates (deser-entity-aggregate-list (input "entityAggregates")))))
+
+(clojure.core/defn- deser-describe-event-aggregates-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "eventAggregates") (clojure.core/assoc :event-aggregates (deser-event-aggregate-list (input "eventAggregates"))) (clojure.core/contains? input "nextToken") (clojure.core/assoc :next-token (desernext-token (input "nextToken")))))
+
+(clojure.core/defn- deser-describe-affected-entities-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "entities") (clojure.core/assoc :entities (deser-entity-list (input "entities"))) (clojure.core/contains? input "nextToken") (clojure.core/assoc :next-token (desernext-token (input "nextToken")))))
+
+(clojure.core/defn- deser-describe-event-details-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "successfulSet") (clojure.core/assoc :successful-set (deser-describe-event-details-successful-set (input "successfulSet"))) (clojure.core/contains? input "failedSet") (clojure.core/assoc :failed-set (deser-describe-event-details-failed-set (input "failedSet")))))
+
+(clojure.core/defn- deser-describe-event-types-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "eventTypes") (clojure.core/assoc :event-types (deser-event-type-list (input "eventTypes"))) (clojure.core/contains? input "nextToken") (clojure.core/assoc :next-token (desernext-token (input "nextToken")))))
+
+(clojure.core/defn- deser-describe-events-response [input] (clojure.core/cond-> {} (clojure.core/contains? input "events") (clojure.core/assoc :events (deser-event-list (input "events"))) (clojure.core/contains? input "nextToken") (clojure.core/assoc :next-token (desernext-token (input "nextToken")))))
+
+(clojure.spec.alpha/def :portkey.aws.health/entity-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 256))))
 
 (clojure.spec.alpha/def :portkey.aws.health/event-type-category-list (clojure.spec.alpha/coll-of :portkey.aws.health/event-type-category :min-count 1 :max-count 10))
 
@@ -182,7 +350,7 @@
 (clojure.spec.alpha/def :portkey.aws.health.invalid-pagination-token/message (clojure.spec.alpha/and :portkey.aws.health/string))
 (clojure.spec.alpha/def :portkey.aws.health/invalid-pagination-token (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.health.invalid-pagination-token/message]))
 
-(clojure.spec.alpha/def :portkey.aws.health/metadata-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 10240))))
+(clojure.spec.alpha/def :portkey.aws.health/metadata-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 10240))))
 
 (clojure.spec.alpha/def :portkey.aws.health.event-details-error-item/error-name (clojure.spec.alpha/and :portkey.aws.health/string))
 (clojure.spec.alpha/def :portkey.aws.health.event-details-error-item/error-message (clojure.spec.alpha/and :portkey.aws.health/string))
@@ -205,11 +373,11 @@
 (clojure.spec.alpha/def :portkey.aws.health.event-type-filter/event-type-categories (clojure.spec.alpha/and :portkey.aws.health/event-type-category-list))
 (clojure.spec.alpha/def :portkey.aws.health/event-type-filter (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.health.event-type-filter/event-type-codes :portkey.aws.health.event-type-filter/services :portkey.aws.health.event-type-filter/event-type-categories]))
 
-(clojure.spec.alpha/def :portkey.aws.health/account-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[0-9]{12}" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.health/account-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[0-9]{12}" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.health/event-type-list (clojure.spec.alpha/coll-of :portkey.aws.health/event-type))
 
-(clojure.spec.alpha/def :portkey.aws.health/entity-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1600))))
+(clojure.spec.alpha/def :portkey.aws.health/entity-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1600))))
 
 (clojure.spec.alpha/def :portkey.aws.health.describe-affected-entities-request/filter (clojure.spec.alpha/and :portkey.aws.health/entity-filter))
 (clojure.spec.alpha/def :portkey.aws.health/describe-affected-entities-request (clojure.spec.alpha/keys :req-un [:portkey.aws.health.describe-affected-entities-request/filter] :opt-un [:portkey.aws.health/locale :portkey.aws.health/next-token :portkey.aws.health/max-results]))
@@ -238,7 +406,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.health/event-status-code #{:open :closed "upcoming" "closed" :upcoming "open"})
 
-(clojure.spec.alpha/def :portkey.aws.health/event-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 3 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 100))))
+(clojure.spec.alpha/def :portkey.aws.health/event-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 3 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 100))))
 
 (clojure.spec.alpha/def :portkey.aws.health/event-list (clojure.spec.alpha/coll-of :portkey.aws.health/event))
 
@@ -257,7 +425,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.health/entity-status-code-list (clojure.spec.alpha/coll-of :portkey.aws.health/entity-status-code :min-count 1 :max-count 3))
 
-(clojure.spec.alpha/def :portkey.aws.health/event-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1600)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"arn:aws:health:[^:]*:[^:]*:event(?:/[\w-]+){1}((?:/[\w-]+){2})?" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.health/event-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 1600)) (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"arn:aws:health:[^:]*:[^:]*:event(?:/[\w-]+){1}((?:/[\w-]+){2})?" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.health/count clojure.core/int?)
 
@@ -270,20 +438,20 @@
 
 (clojure.spec.alpha/def :portkey.aws.health/max-results (clojure.spec.alpha/int-in 10 100))
 
-(clojure.spec.alpha/def :portkey.aws.health/tag-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255))))
+(clojure.spec.alpha/def :portkey.aws.health/tag-value (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 255))))
 
-(clojure.spec.alpha/def :portkey.aws.health/next-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-zA-Z0-9=/+_.-]{4,512}" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.health/next-token (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-zA-Z0-9=/+_.-]{4,512}" s__27881__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.health/locale (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 2 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256))))
+(clojure.spec.alpha/def :portkey.aws.health/locale (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 2 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 256))))
 
 (clojure.spec.alpha/def :portkey.aws.health.describe-event-types-request/filter (clojure.spec.alpha/and :portkey.aws.health/event-type-filter))
 (clojure.spec.alpha/def :portkey.aws.health/describe-event-types-request (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.health.describe-event-types-request/filter :portkey.aws.health/locale :portkey.aws.health/next-token :portkey.aws.health/max-results]))
 
 (clojure.spec.alpha/def :portkey.aws.health/event-aggregate-list (clojure.spec.alpha/coll-of :portkey.aws.health/event-aggregate))
 
-(clojure.spec.alpha/def :portkey.aws.health/region (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[^:/]{2,25}" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.health/region (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[^:/]{2,25}" s__27881__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.health/availability-zone (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"[a-z]{2}\-[0-9a-z\-]{4,16}" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.health/availability-zone (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/re-matches #"[a-z]{2}\-[0-9a-z\-]{4,16}" s__27881__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.health.event-details/event (clojure.spec.alpha/and :portkey.aws.health/event))
 (clojure.spec.alpha/def :portkey.aws.health.event-details/event-description (clojure.spec.alpha/and :portkey.aws.health/event-description))
@@ -319,7 +487,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.health/describe-event-details-failed-set (clojure.spec.alpha/coll-of :portkey.aws.health/event-details-error-item))
 
-(clojure.spec.alpha/def :portkey.aws.health/event-type-code (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 3 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 100))))
+(clojure.spec.alpha/def :portkey.aws.health/event-type-code (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 3 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 100))))
 
 (clojure.spec.alpha/def :portkey.aws.health/event-description (clojure.spec.alpha/and clojure.core/string?))
 
@@ -333,7 +501,7 @@
 (clojure.spec.alpha/def :portkey.aws.health.entity-filter/status-codes (clojure.spec.alpha/and :portkey.aws.health/entity-status-code-list))
 (clojure.spec.alpha/def :portkey.aws.health/entity-filter (clojure.spec.alpha/keys :req-un [:portkey.aws.health.entity-filter/event-arns] :opt-un [:portkey.aws.health.entity-filter/entity-arns :portkey.aws.health.entity-filter/entity-values :portkey.aws.health.entity-filter/last-updated-times :portkey.aws.health.entity-filter/tags :portkey.aws.health.entity-filter/status-codes]))
 
-(clojure.spec.alpha/def :portkey.aws.health/service (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 2 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 30))))
+(clojure.spec.alpha/def :portkey.aws.health/service (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27879__auto__] (clojure.core/<= 2 (clojure.core/count s__27879__auto__))) (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 30))))
 
 (clojure.spec.alpha/def :portkey.aws.health/event-arn-list (clojure.spec.alpha/coll-of :portkey.aws.health/event-arn :min-count 1 :max-count 10))
 
@@ -342,7 +510,7 @@
 (clojure.spec.alpha/def :portkey.aws.health.describe-event-types-response/event-types (clojure.spec.alpha/and :portkey.aws.health/event-type-list))
 (clojure.spec.alpha/def :portkey.aws.health/describe-event-types-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.health.describe-event-types-response/event-types :portkey.aws.health/next-token]))
 
-(clojure.spec.alpha/def :portkey.aws.health/tag-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 127))))
+(clojure.spec.alpha/def :portkey.aws.health/tag-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/< (clojure.core/count s__27880__auto__) 127))))
 
 (clojure.spec.alpha/def :portkey.aws.health.describe-event-aggregates-request/filter (clojure.spec.alpha/and :portkey.aws.health/event-filter))
 (clojure.spec.alpha/def :portkey.aws.health.describe-event-aggregates-request/aggregate-field (clojure.spec.alpha/and :portkey.aws.health/event-aggregate-field))
@@ -377,20 +545,20 @@
 
 (clojure.spec.alpha/def :portkey.aws.health/describe-event-details-successful-set (clojure.spec.alpha/coll-of :portkey.aws.health/event-details))
 
-(clojure.core/defn describe-affected-entities ([describe-affected-entities-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-affected-entities-request describe-affected-entities-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.health/endpoints, :http.request.configuration/target-prefix "AWSHealth_20160804", :http.request.spec/output-spec :portkey.aws.health/describe-affected-entities-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-08-04", :http.request.configuration/service-id "Health", :http.request.spec/input-spec :portkey.aws.health/describe-affected-entities-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeAffectedEntities", :http.request.spec/error-spec {"InvalidPaginationToken" :portkey.aws.health/invalid-pagination-token, "UnsupportedLocale" :portkey.aws.health/unsupported-locale}})))))
+(clojure.core/defn describe-affected-entities ([describe-affected-entities-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-affected-entities-request describe-affected-entities-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.health/endpoints, :http.request.configuration/target-prefix "AWSHealth_20160804", :http.request.spec/output-spec :portkey.aws.health/describe-affected-entities-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-08-04", :http.request.configuration/service-id "Health", :http.request.spec/input-spec :portkey.aws.health/describe-affected-entities-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeAffectedEntities", :http.request.configuration/output-deser-fn deser-describe-affected-entities-response, :http.request.spec/error-spec {"InvalidPaginationToken" :portkey.aws.health/invalid-pagination-token, "UnsupportedLocale" :portkey.aws.health/unsupported-locale}})))))
 (clojure.spec.alpha/fdef describe-affected-entities :args (clojure.spec.alpha/tuple :portkey.aws.health/describe-affected-entities-request) :ret (clojure.spec.alpha/and :portkey.aws.health/describe-affected-entities-response))
 
-(clojure.core/defn describe-entity-aggregates ([] (describe-entity-aggregates {})) ([describe-entity-aggregates-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-entity-aggregates-request describe-entity-aggregates-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.health/endpoints, :http.request.configuration/target-prefix "AWSHealth_20160804", :http.request.spec/output-spec :portkey.aws.health/describe-entity-aggregates-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-08-04", :http.request.configuration/service-id "Health", :http.request.spec/input-spec :portkey.aws.health/describe-entity-aggregates-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeEntityAggregates", :http.request.spec/error-spec {}})))))
+(clojure.core/defn describe-entity-aggregates ([] (describe-entity-aggregates {})) ([describe-entity-aggregates-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-entity-aggregates-request describe-entity-aggregates-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.health/endpoints, :http.request.configuration/target-prefix "AWSHealth_20160804", :http.request.spec/output-spec :portkey.aws.health/describe-entity-aggregates-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-08-04", :http.request.configuration/service-id "Health", :http.request.spec/input-spec :portkey.aws.health/describe-entity-aggregates-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeEntityAggregates", :http.request.configuration/output-deser-fn deser-describe-entity-aggregates-response, :http.request.spec/error-spec {}})))))
 (clojure.spec.alpha/fdef describe-entity-aggregates :args (clojure.spec.alpha/? :portkey.aws.health/describe-entity-aggregates-request) :ret (clojure.spec.alpha/and :portkey.aws.health/describe-entity-aggregates-response))
 
-(clojure.core/defn describe-event-aggregates ([describe-event-aggregates-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-event-aggregates-request describe-event-aggregates-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.health/endpoints, :http.request.configuration/target-prefix "AWSHealth_20160804", :http.request.spec/output-spec :portkey.aws.health/describe-event-aggregates-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-08-04", :http.request.configuration/service-id "Health", :http.request.spec/input-spec :portkey.aws.health/describe-event-aggregates-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeEventAggregates", :http.request.spec/error-spec {"InvalidPaginationToken" :portkey.aws.health/invalid-pagination-token}})))))
+(clojure.core/defn describe-event-aggregates ([describe-event-aggregates-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-event-aggregates-request describe-event-aggregates-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.health/endpoints, :http.request.configuration/target-prefix "AWSHealth_20160804", :http.request.spec/output-spec :portkey.aws.health/describe-event-aggregates-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-08-04", :http.request.configuration/service-id "Health", :http.request.spec/input-spec :portkey.aws.health/describe-event-aggregates-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeEventAggregates", :http.request.configuration/output-deser-fn deser-describe-event-aggregates-response, :http.request.spec/error-spec {"InvalidPaginationToken" :portkey.aws.health/invalid-pagination-token}})))))
 (clojure.spec.alpha/fdef describe-event-aggregates :args (clojure.spec.alpha/tuple :portkey.aws.health/describe-event-aggregates-request) :ret (clojure.spec.alpha/and :portkey.aws.health/describe-event-aggregates-response))
 
-(clojure.core/defn describe-event-details ([describe-event-details-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-event-details-request describe-event-details-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.health/endpoints, :http.request.configuration/target-prefix "AWSHealth_20160804", :http.request.spec/output-spec :portkey.aws.health/describe-event-details-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-08-04", :http.request.configuration/service-id "Health", :http.request.spec/input-spec :portkey.aws.health/describe-event-details-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeEventDetails", :http.request.spec/error-spec {"UnsupportedLocale" :portkey.aws.health/unsupported-locale}})))))
+(clojure.core/defn describe-event-details ([describe-event-details-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-event-details-request describe-event-details-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.health/endpoints, :http.request.configuration/target-prefix "AWSHealth_20160804", :http.request.spec/output-spec :portkey.aws.health/describe-event-details-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-08-04", :http.request.configuration/service-id "Health", :http.request.spec/input-spec :portkey.aws.health/describe-event-details-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeEventDetails", :http.request.configuration/output-deser-fn deser-describe-event-details-response, :http.request.spec/error-spec {"UnsupportedLocale" :portkey.aws.health/unsupported-locale}})))))
 (clojure.spec.alpha/fdef describe-event-details :args (clojure.spec.alpha/tuple :portkey.aws.health/describe-event-details-request) :ret (clojure.spec.alpha/and :portkey.aws.health/describe-event-details-response))
 
-(clojure.core/defn describe-event-types ([] (describe-event-types {})) ([describe-event-types-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-event-types-request describe-event-types-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.health/endpoints, :http.request.configuration/target-prefix "AWSHealth_20160804", :http.request.spec/output-spec :portkey.aws.health/describe-event-types-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-08-04", :http.request.configuration/service-id "Health", :http.request.spec/input-spec :portkey.aws.health/describe-event-types-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeEventTypes", :http.request.spec/error-spec {"InvalidPaginationToken" :portkey.aws.health/invalid-pagination-token, "UnsupportedLocale" :portkey.aws.health/unsupported-locale}})))))
+(clojure.core/defn describe-event-types ([] (describe-event-types {})) ([describe-event-types-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-event-types-request describe-event-types-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.health/endpoints, :http.request.configuration/target-prefix "AWSHealth_20160804", :http.request.spec/output-spec :portkey.aws.health/describe-event-types-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-08-04", :http.request.configuration/service-id "Health", :http.request.spec/input-spec :portkey.aws.health/describe-event-types-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeEventTypes", :http.request.configuration/output-deser-fn deser-describe-event-types-response, :http.request.spec/error-spec {"InvalidPaginationToken" :portkey.aws.health/invalid-pagination-token, "UnsupportedLocale" :portkey.aws.health/unsupported-locale}})))))
 (clojure.spec.alpha/fdef describe-event-types :args (clojure.spec.alpha/? :portkey.aws.health/describe-event-types-request) :ret (clojure.spec.alpha/and :portkey.aws.health/describe-event-types-response))
 
-(clojure.core/defn describe-events ([] (describe-events {})) ([describe-events-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-events-request describe-events-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.health/endpoints, :http.request.configuration/target-prefix "AWSHealth_20160804", :http.request.spec/output-spec :portkey.aws.health/describe-events-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-08-04", :http.request.configuration/service-id "Health", :http.request.spec/input-spec :portkey.aws.health/describe-events-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeEvents", :http.request.spec/error-spec {"InvalidPaginationToken" :portkey.aws.health/invalid-pagination-token, "UnsupportedLocale" :portkey.aws.health/unsupported-locale}})))))
+(clojure.core/defn describe-events ([] (describe-events {})) ([describe-events-requestinput] (clojure.core/let [request-function-result__28581__auto__ (req-describe-events-request describe-events-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28581__auto__ {:http.request.configuration/endpoints portkey.aws.health/endpoints, :http.request.configuration/target-prefix "AWSHealth_20160804", :http.request.spec/output-spec :portkey.aws.health/describe-events-response, :http.request.configuration/mime-type {"content-type" "application/x-amz-json-1.1"}, :http.request.configuration/request-uri "/", :http.request.configuration/version "2016-08-04", :http.request.configuration/service-id "Health", :http.request.spec/input-spec :portkey.aws.health/describe-events-request, :http.request.configuration/protocol "json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeEvents", :http.request.configuration/output-deser-fn deser-describe-events-response, :http.request.spec/error-spec {"InvalidPaginationToken" :portkey.aws.health/invalid-pagination-token, "UnsupportedLocale" :portkey.aws.health/unsupported-locale}})))))
 (clojure.spec.alpha/fdef describe-events :args (clojure.spec.alpha/? :portkey.aws.health/describe-events-request) :ret (clojure.spec.alpha/and :portkey.aws.health/describe-events-response))
