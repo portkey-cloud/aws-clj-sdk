@@ -461,15 +461,25 @@
     (base64-encode bytes')))
 
 
-(defn get-in-tag-from-xml-tree
-  "Look for tag from xml-tree, returns nil if not found."
-  [looking-for-tag xml-tree]
-  (if (seq? xml-tree)
-    (some (partial get-in-tag-from-xml-tree looking-for-tag) xml-tree)
-    (when (xml/element? xml-tree)
-      (if (= looking-for-tag (name (:tag xml-tree)))
-        xml-tree
-        (some (partial get-in-tag-from-xml-tree looking-for-tag) (:content xml-tree))))))
+(defn search-for-tag
+  "Returns xml-element with tag `tag` in `xml-tree`.
+  If `flattened?` is true, which happens in case of a
+  list, search for all occurences and don't stop at first match.
+  Returns `nil` if not found."
+  [xml-tree tag & {:keys [flattened? xmlAttribute?]
+                   :or   {flattened? false
+                          xmlAttribute? false}}]
+  (if xmlAttribute?
+    (some-> (some #(when (true? (:xmlAttribute? %)) %) xml-tree)
+            (dissoc :xmlAttribute?)
+            vals
+            first
+            name)
+    (let [xml-tree                          (if (xml/element? xml-tree) (:content xml-tree) xml-tree)
+          return-xml-element-when-equal-tag (fn [elem] (when (and (xml/element? elem) (= tag (name (:tag elem)))) elem))]
+      (if flattened?
+        (keep return-xml-element-when-equal-tag xml-tree)
+        (some return-xml-element-when-equal-tag xml-tree)))))
 
 
 (defn parse-xml-body
@@ -483,9 +493,14 @@
                              elem
                              (assoc elem :content
                                     (sequence (comp (map (fn [el]
-                                                           (if ((every-pred (complement xml/element?) string? (comp empty? str/trim)) el)
+                                                           (if (or ((every-pred (complement xml/element?) string? (comp empty? str/trim)) el)
+                                                                   ((every-pred xml/element? (comp empty? :content)) el))
                                                              nil
-                                                             (clean-xml-tree el))))
+                                                             (let [el    (clean-xml-tree el)
+                                                                   conj' (fnil conj [])]
+                                                               (if (not (empty? (:attrs el)))
+                                                                 (update el :content conj' (assoc (:attrs el) :xmlAttribute? true))
+                                                                 el)))))
                                                     (remove nil?))
                                               content))))]
       (-> body xml/parse-str clean-xml-tree))))
@@ -502,6 +517,8 @@
                                      :shape-name    "ContentMD5"
                                      :location-name "Content-MD5"}))
     req))
+
+
 
 
 ;; ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
