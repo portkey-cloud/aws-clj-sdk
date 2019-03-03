@@ -941,12 +941,12 @@
                                                                 :shape       (get-in api ["shapes" shape-name])}))
       `(defn- ~(shape-name->response-name shape-name) [~raw-response-input-symbol]
          (let [~transformed-response-input-symbol ~(case protocol
-                                                     "rest-xml" (when-let [payload-shape (get-in api ["shapes" shape-name "payload"])]
-                                                                  (if-let [streaming? (get-in api ["shapes" shape-name "members" payload-shape "streaming"])]
-                                                                    `(:body ~raw-response-input-symbol)
-                                                                    `(some-> ~raw-response-input-symbol
-                                                                             :body
-                                                                             aws/parse-xml-body))))
+                                                     "rest-xml" (if (true? (as-> (get-in api ["shapes" shape-name "payload"]) payload-shape
+                                                                             (get-in api ["shapes" shape-name "members" payload-shape "streaming"])))
+                                                                  `(:body ~raw-response-input-symbol)
+                                                                  `(some-> ~raw-response-input-symbol
+                                                                           :body
+                                                                           aws/parse-xml-body)))
                ~let-var-sym                       ~let-declaration]
            (cond-> ~required-function-body-part
              ~@optional-function-body-part))))))
