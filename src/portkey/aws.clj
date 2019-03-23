@@ -466,20 +466,31 @@
   If `flattened?` is true, which happens in case of a
   list, search for all occurences and don't stop at first match.
   Returns `nil` if not found."
-  [xml-tree tag & {:keys [flattened? xmlAttribute?]
-                   :or   {flattened? false
-                          xmlAttribute? false}}]
-  (if xmlAttribute?
-    (some-> (some #(when (true? (:xmlAttribute? %)) %) xml-tree)
-            (dissoc :xmlAttribute?)
-            vals
-            first
-            name)
-    (let [xml-tree                          (if (xml/element? xml-tree) (:content xml-tree) xml-tree)
-          return-xml-element-when-equal-tag (fn [elem] (when (and (xml/element? elem) (= tag (name (:tag elem)))) elem))]
-      (if flattened?
-        (keep return-xml-element-when-equal-tag xml-tree)
-        (some return-xml-element-when-equal-tag xml-tree)))))
+  [xml-tree tag & {:keys [flattened? xmlAttribute? result-wrapper]
+                   :or   {flattened?     false
+                          xmlAttribute?  false
+                          result-wrapper nil}}]
+  (cond
+    xmlAttribute?  (some-> (some #(when (true? (:xmlAttribute? %)) %) xml-tree)
+                           (dissoc :xmlAttribute?)
+                           vals
+                           first
+                           name)
+    result-wrapper (let [sub-tree (search-for-tag xml-tree result-wrapper)]
+                     (search-for-tag sub-tree tag))
+    :default       (let [xml-tree                          (if (xml/element? xml-tree) (:content xml-tree) xml-tree)
+                         return-xml-element-when-equal-tag (fn [elem] (when (and (xml/element? elem) (= tag (name (:tag elem)))) elem))]
+                     (if flattened?
+                       (keep return-xml-element-when-equal-tag xml-tree)
+                       (some return-xml-element-when-equal-tag xml-tree)))))
+
+(comment
+
+  (sc.api/letsc
+   1
+   result-wrapper)
+
+  )
 
 
 (defn parse-xml-body
@@ -621,6 +632,7 @@
            :http.request.configuration/method
            :http.request.configuration/request-uri
            :http.request.configuration/output-deser-fn
+           :http.request.configuration/result-wrapper
            :http.request.configuration/mime-type] :as req}]
   #_(spec/check-asserts true)
   #_(binding [spec/*compile-asserts* true]
@@ -643,6 +655,7 @@
      params-to-headers
      :ring.request
      (*http-client* (fn [resp]
-                      [:result (-> resp
-                                   output-deser-fn
-                                   (with-meta resp))])))))
+                      (let [output-deser-fn (if result-wrapper (partial output-deser-fn result-wrapper) output-deser-fn)]
+                        [:result (-> resp
+                                     output-deser-fn
+                                     (with-meta resp))]))))))
