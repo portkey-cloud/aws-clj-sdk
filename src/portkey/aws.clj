@@ -461,6 +461,19 @@
     (base64-encode bytes')))
 
 
+(def xml-element? xml/element?)
+
+
+(defn unbox-xml-primitive-value
+  "Unbox the content of an XML tree where primitive data is
+  stored (string, integer..) "
+  [value]
+  (let [value (if (xml-element? value) (:content value) value)]
+    (if (seq? value)
+      (first value)
+      value)))
+
+
 (defn search-for-tag
   "Returns xml-element with tag `tag` in `xml-tree`.
   If `flattened?` is true, which happens in case of a
@@ -478,7 +491,7 @@
                            name)
     result-wrapper (let [sub-tree (search-for-tag xml-tree result-wrapper)]
                      (search-for-tag sub-tree tag :flattened? flattened?))
-    :default       (let [xml-tree                          (if (xml/element? xml-tree) (:content xml-tree) xml-tree)
+    :default       (let [xml-tree                          (if (xml-element? xml-tree) (:content xml-tree) xml-tree)
                          return-xml-element-when-equal-tag (fn [elem] (when (and (xml/element? elem) (= tag (name (:tag elem)))) elem))]
                      (if flattened?
                        (keep return-xml-element-when-equal-tag xml-tree)
