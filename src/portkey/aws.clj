@@ -477,20 +477,12 @@
                            first
                            name)
     result-wrapper (let [sub-tree (search-for-tag xml-tree result-wrapper)]
-                     (search-for-tag sub-tree tag))
+                     (search-for-tag sub-tree tag :flattened? flattened?))
     :default       (let [xml-tree                          (if (xml/element? xml-tree) (:content xml-tree) xml-tree)
                          return-xml-element-when-equal-tag (fn [elem] (when (and (xml/element? elem) (= tag (name (:tag elem)))) elem))]
                      (if flattened?
                        (keep return-xml-element-when-equal-tag xml-tree)
                        (some return-xml-element-when-equal-tag xml-tree)))))
-
-(comment
-
-  (sc.api/letsc
-   1
-   result-wrapper)
-
-  )
 
 
 (defn parse-xml-body
