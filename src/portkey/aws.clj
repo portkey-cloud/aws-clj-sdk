@@ -425,19 +425,21 @@
     (assoc-in req
               [:ring.request :body]
               (-> (let [body->json-encoded (fn body->json-encoded [{:http.request.field/keys [type name shape value location-name parent-type]}]
-                                             (condp = type
-                                               "structure" (into {} (map (fn [item]
-                                                                           [(or location-name name shape) (into {} (map body->json-encoded) value)]))
-                                                                 value)
+                                             (cond
+                                               (and (= parent-type "list")
+                                                    (= type "structure")) (into {} (map body->json-encoded) value)
+                                               (= type "structure")       (into {} (map (fn [item]
+                                                                                          [(or location-name name shape) (into {} (map body->json-encoded) value)]))
+                                                                                value)
                                                ;; @TODO: handle jsonvalue at some point for pricing lib.
-                                               "list"      [(or location-name name shape) (into [] (comp (map #(assoc % :http.request.field/parent-type "list"))
-                                                                                                         (map body->json-encoded))
-                                                                                                value)]
-                                               "map"       (let [[key' val'] value]
-                                                             [(:http.request.field/value key') (body->json-encoded val')])
-                                               (if (= parent-type "list")
-                                                 value
-                                                 (hash-map (or location-name name shape) value))))]
+                                               (= type  "list")           [(or location-name name shape) (into [] (comp (map #(assoc % :http.request.field/parent-type "list"))
+                                                                                                                        (map body->json-encoded))
+                                                                                                               value)]
+                                               (= type "map")             (let [[key' val'] value]
+                                                                            [(:http.request.field/value key') (body->json-encoded val')])
+                                               :default                   (if (= "list" parent-type)
+                                                                            value
+                                                                            (hash-map (or location-name name shape) value))))]
                     (into {} (map body->json-encoded) body))
                   json/generate-string))
     req))
@@ -496,6 +498,9 @@
                      (if flattened?
                        (keep return-xml-element-when-equal-tag xml-tree)
                        (some return-xml-element-when-equal-tag xml-tree)))))
+
+
+(def parse-json-body json/parse-string)
 
 
 (defn parse-xml-body

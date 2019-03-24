@@ -914,7 +914,8 @@
                                                                                                  `(aws/search-for-tag ~transformed-response-input-symbol
                                                                                                                       ~locationName
                                                                                                                       :flattened? ~flattened
-                                                                                                                      :result-wrapper ~result-wrapper-symbol))))])
+                                                                                                                      :result-wrapper ~result-wrapper-symbol))
+                                                                    ("json")                   `(~transformed-response-input-symbol ~locationName)))])
                                                 (get-in api ["shapes" shape-name "members"]))
         let-var-sym                       (gensym "letvar")
         required-function-body-part       (into {}
@@ -934,6 +935,7 @@
                                                                                                            (= location "header")                            [locationName]
                                                                                                            (true? streaming)                                [locationName]
                                                                                                            (contains? #{"rest-xml" "query" "ec2"} protocol) (if flattened [locationName] [locationName :content])
+                                                                                                           (= "json" protocol)                              [locationName]
                                                                                                            :exception                                       (throw (ex-info "protocol or location not known :" {:protocol protocol})))))]))
                                                 required)
         optional-function-body-part       (into [] (comp (x/for [[optional-name {:strs [shape locationName location streaming] :as sh}] %
@@ -953,6 +955,7 @@
                                                                                                                  (= location "header")                            [locationName]
                                                                                                                  (true? streaming)                                [locationName]
                                                                                                                  (contains? #{"rest-xml" "ec2" "query"} protocol) (if flattened [locationName] [locationName :content])
+                                                                                                                 (= "json" protocol)                              [locationName]
                                                                                                                  :exception                                       (throw (ex-info "protocol or location not known :" {:protocol protocol}))))))]))
                                                          cat)
                                                 (get-in api ["shapes" shape-name "members"]))]
@@ -972,7 +975,10 @@
                                                                                    `(:body ~raw-response-input-symbol)
                                                                                    `(some-> ~raw-response-input-symbol
                                                                                             :body
-                                                                                            aws/parse-xml-body)))
+                                                                                            aws/parse-xml-body))
+                                                      ("json")                   `(some->  ~raw-response-input-symbol
+                                                                                           :body
+                                                                                           aws/parse-json-body))
                 ~let-var-sym                       ~let-declaration]
             (cond-> ~required-function-body-part
               ~@optional-function-body-part)))))))
@@ -1030,7 +1036,7 @@
   (case protocol
     ("rest-xml" "ec2" "query") {"content-type" "application/x-www-form-urlencoded; charset=utf-8"}
     "rest-json"                {"content-type" "application/json"}
-    "json"                     {"content-type" "application/x-amz-json-1.1"}))
+    "json"                     {"content-type" "application/x-amz-json-1.0"}))
 
 
 (defn generate-operation-function
