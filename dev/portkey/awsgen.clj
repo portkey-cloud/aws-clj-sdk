@@ -893,7 +893,7 @@
         raw-response-input-symbol         (symbol "input")
         transformed-response-input-symbol (gensym "rawinput")
         result-wrapper-symbol             (gensym "resultWrapper")
-        handled-attributes                #{"shape" "location" "locationName" "streaming"}
+        handled-attributes                #{"shape" "location" "locationName" "streaming" "deprecated"}
         let-declaration                   (into {}
                                                 (x/for [[sname {:strs [shape] :as sh}] %
                                                         :let [shape                           (get-in api ["shapes" shape-name "members" sname])
@@ -1032,11 +1032,11 @@
 
 (defn mime-type
   "Retourne the request mime type given it's protocol."
-  [protocol]
+  [protocol json-version]
   (case protocol
     ("rest-xml" "ec2" "query") {"content-type" "application/x-www-form-urlencoded; charset=utf-8"}
     "rest-json"                {"content-type" "application/json"}
-    "json"                     {"content-type" "application/x-amz-json-1.0"}))
+    "json"                     {"content-type" (str "application/x-amz-json-" (or json-version "1.1"))}))
 
 
 (defn generate-operation-function
@@ -1048,11 +1048,11 @@
   request informations from the operation shape."
 
   ;; @TODO : add the unused informations to the request map => e.g. : xmlNamespace / locationName / documentationUrl / alias / authtype / deprecated
-  [api ns [n {{:strs [method requestUri responseCode]} "http"
-              {input-shape-name "shape"}               "input"
+  [api ns [n {{:strs [method requestUri responseCode]}                  "http"
+              {input-shape-name "shape"}                                "input"
               {output-shape-name "shape" resultWrapper "resultWrapper"} "output"
-              :strs                                    [name errors]
-              :as                                      operation}]]
+              :strs                                                     [name errors]
+              :as                                                       operation}]]
   (spec/check-asserts true)
   (spec/assert ::operation operation)
   (let [varname                     (symbol (aws/dashed name))
@@ -1065,6 +1065,7 @@
                                                  [shape (keyword ns (aws/dashed shape))]))
                                           errors)
         protocol                    (get-in api ["metadata" "protocol"])
+        json-version                (get-in api ["metadata" "jsonVersion"])
         service-id                  (get-in api ["metadata" "serviceId"])
         version                     (get-in api ["metadata" "apiVersion"])
         target-prefix               (get-in api ["metadata" "targetPrefix"])]
@@ -1080,7 +1081,7 @@
                     :http.request.configuration/request-uri     ~requestUri
                     :http.request.configuration/response-code   ~responseCode
                     :http.request.configuration/endpoints       ~(symbol ns "endpoints")
-                    :http.request.configuration/mime-type       ~(mime-type protocol)
+                    :http.request.configuration/mime-type       ~(mime-type protocol json-version)
                     :http.request.configuration/protocol        ~protocol
                     :http.request.configuration/service-id      ~service-id
                     :http.request.configuration/version         ~version
