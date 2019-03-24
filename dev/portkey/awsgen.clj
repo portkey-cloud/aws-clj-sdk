@@ -108,7 +108,7 @@
 (defmethod compile-time-shape-spec "long" [_]
   (strict-strs
    :req {"type" string?}
-   :opt {"min" #(or (pos-int? %) (zero? %))
+   :opt {"min" int?
          "max" int?}))
 
 
@@ -156,6 +156,7 @@
                                        "locationName"                     string?
                                        "queryName"                        string?
                                        "deprecated"                       boolean?
+                                       "deprecatedMessage"                string?
                                        "eventpayload"                     boolean? ;; @TODO : validate what it does - rest-xml protocol / S3
                                        "idempotencyToken"                 boolean?
                                        "xmlNamespace"
@@ -508,7 +509,7 @@
                                                                      (map (fn [[k v]]
                                                                             [(keyword "http.request.field" (aws/dashed k)) v])))
                   {{:strs [shape] :as member} "member" :as sh} (get-in api ["shapes" shape-name])]
-              (if-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"type" "member" "flattened" "min" "sensitive" "max" "deprecated"}))
+              (if-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"type" "member" "flattened" "min" "sensitive" "max" "jsonvalue" "deprecated"}))
                            (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) member) #{"shape" "locationName"})))
                 (throw (ex-info "Type : list, aws-serialization-functions macro with sh and member : " {:sh     sh
                                                                                                         :member member}))
@@ -658,7 +659,7 @@
         [api shape-name input]
         (let [required                      (get-in api ["shapes" shape-name "required"])
               request-function-input-symbol (symbol "input")
-              handled-attributes            #{"shape" "exception" "fault" "synthetic" "box" "sensitive" #_"location" #_"locationName" "deprecatedMessage" "deprecated" #_"idempotencyToken" #_"streaming" #_"xmlNamespace" #_"box" #_"jsonvalue"}
+              handled-attributes            #{"shape" "exception" "fault" "synthetic" "box" "sensitive" "event" "eventstream" #_"location" #_"locationName" "deprecatedMessage" "deprecated" #_"idempotencyToken" #_"streaming" #_"xmlNamespace" #_"box" #_"jsonvalue"}
               required-function-body-part   (into {}
                                                   (x/for [required-name %
                                                           :let [shape                           (get-in api ["shapes" shape-name "members" required-name])
@@ -683,7 +684,7 @@
                                                            cat)
                                                   (get-in api ["shapes" shape-name "members"]))]
           (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) (get-in api ["shapes" shape-name]))
-                                                  #{"type" "exception" "synthetic" "members" "box" "fault" "required" "deprecatedMessage" #_"locationName" #_"xmlNamespace" #_"payload" "sensitive" "deprecated" #_"jsonvalue"}))
+                                                  #{"type" "exception" "synthetic" "members" "box" "fault" "required" "deprecatedMessage" "event" "eventstream" #_"locationName" #_"xmlNamespace" #_"payload" "sensitive" "deprecated" #_"jsonvalue"}))
             (throw (ex-info "deserialization attrs not recognized" {:shape (get-in api ["shapes" shape-name])}))
             `(cond-> ~required-function-body-part
                ~@optional-function-body-part))))
@@ -754,7 +755,7 @@
          (let [{{:strs [shape] :as member} "member"
                 flattened                  "flattened" :as sh} (get-in api ["shapes" shape-name])]
            (if-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"type" "member" "max" "min" "sensitive" "flattened"}))
-                        (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) member) #{"shape" "locationName"})))
+                        (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) member) #{"shape" "locationName" "jsonvalue"})))
              (throw (ex-info "LIST/deserialization, attrs not recognized " {:sh         sh
                                                                             :member     member
                                                                             :shape-name shape-name}))
@@ -768,7 +769,7 @@
             (let [{:strs [key value] :as sh} (get-in api ["shapes" shape-name])
                   key-shape-name             (key "shape")
                   value-shape-name           (value "shape")]
-              (when-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"shape" "type" "key" "value" "min" "max" #_"flattened" #_"locationName"}))
+              (when-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"shape" "type" "key" "value" "min" "max" "sensitive" #_"flattened" #_"locationName"}))
                              (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) key) #{"shape" #_"locationName"}))
                              (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) value) #{"shape" #_"locationName"})))
                 (throw (ex-info "map/deser, attrs not recognized" {:sh sh})))
@@ -894,7 +895,7 @@
         raw-response-input-symbol         (symbol "input")
         transformed-response-input-symbol (gensym "rawinput")
         result-wrapper-symbol             (gensym "resultWrapper")
-        handled-attributes                #{"shape" "location" "locationName" "streaming" "deprecated" "deprecatedMessage"}
+        handled-attributes                #{"shape" "location" "locationName" "streaming" "deprecated" "box" "deprecatedMessage"}
         let-declaration                   (into {}
                                                 (x/for [[sname {:strs [shape] :as sh}] %
                                                         :let [shape                           (get-in api ["shapes" shape-name "members" sname])
@@ -1028,6 +1029,7 @@
          "deprecated"                                        boolean?
          "deprecatedMessage"                                 string?
          "endpointdiscovery" (every-pred empty? map?)
+         "endpoint"          map? ;; from one operation of service-discovery - should not work as is as it is not exploited yet
          "endpointoperation" boolean?}))
 
 
