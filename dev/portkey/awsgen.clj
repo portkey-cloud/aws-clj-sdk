@@ -599,7 +599,7 @@
 ;;;;;;;;;;;;;;;;;;;;;
 
 (defserialization aws-deserialization-functions shape-name->deser-name
-  (JSON "string"
+  (REST-JSON JSON "string"
         [api shape-name input]
         (if-let [enums (get-in api ["shapes" shape-name "enum"])]
           `(get ~(into {}
@@ -616,15 +616,15 @@
                  (aws/unbox-xml-primitive-value ~input))
            `(aws/unbox-xml-primitive-value ~input)))
 
-  (JSON "float" "long" "integer" "boolean" "timestamp" "double" "boolean" [api shape-name input] input)
+  (REST-JSON JSON "float" "long" "integer" "boolean" "timestamp" "double" "boolean" [api shape-name input] input)
 
   (QUERY REST-XML EC2 "timestamp"
          [api shape-name input]
          `(aws/unbox-xml-primitive-value ~input))
 
   (QUERY REST-XML EC2 "float"
-            [api shape-name input]
-            `(Float. (aws/unbox-xml-primitive-value ~input)))
+         [api shape-name input]
+         `(Float. (aws/unbox-xml-primitive-value ~input)))
 
   (REST-XML EC2 QUERY "double"
             [api shape-name input]
@@ -645,7 +645,7 @@
               (= "true" boolstr#)  true
               (= "false" boolstr#) false)))
 
-  (JSON "blob"
+  (REST-JSON JSON "blob"
         [api shape-name input]
         `(aws/base64-decode ~input))
 
@@ -655,11 +655,11 @@
          ;;`(aws/base64-decode (first ~input))
          input)
 
-  (JSON "structure"
+  (REST-JSON JSON "structure"
         [api shape-name input]
         (let [required                      (get-in api ["shapes" shape-name "required"])
               request-function-input-symbol (symbol "input")
-              handled-attributes            #{"shape" "exception" "fault" "synthetic" "box" "sensitive" "event" "eventstream" #_"location" #_"locationName" "deprecatedMessage" "deprecated" #_"idempotencyToken" #_"streaming" #_"xmlNamespace" #_"box" #_"jsonvalue"}
+              handled-attributes            #{"shape"}
               required-function-body-part   (into {}
                                                   (x/for [required-name %
                                                           :let [shape                           (get-in api ["shapes" shape-name "members" required-name])
@@ -684,7 +684,7 @@
                                                            cat)
                                                   (get-in api ["shapes" shape-name "members"]))]
           (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) (get-in api ["shapes" shape-name]))
-                                                  #{"type" "exception" "synthetic" "members" "box" "fault" "required" "deprecatedMessage" "event" "eventstream" #_"locationName" #_"xmlNamespace" #_"payload" "sensitive" "deprecated" #_"jsonvalue"}))
+                                                  #{"type"  "members" "required"}))
             (throw (ex-info "deserialization attrs not recognized" {:shape (get-in api ["shapes" shape-name])}))
             `(cond-> ~required-function-body-part
                ~@optional-function-body-part))))
@@ -750,7 +750,7 @@
                 (cond-> ~required-function-body-part
                   ~@optional-function-body-part)))))
 
-  (QUERY REST-XML EC2 JSON "list"
+  (QUERY REST-XML EC2 JSON REST-JSON "list"
          [api shape-name input]
          (let [{{:strs [shape] :as member} "member"
                 flattened                  "flattened" :as sh} (get-in api ["shapes" shape-name])]
@@ -764,14 +764,14 @@
                            ~(list (shape-name->deser-name shape) (if flattened `(:content ~'coll) 'coll))))
                     ~'input))))
 
-  (REST-XML JSON "map"
+  (REST-XML JSON REST-JSON "map"
             [api shape-name input]
             (let [{:strs [key value] :as sh} (get-in api ["shapes" shape-name])
                   key-shape-name             (key "shape")
                   value-shape-name           (value "shape")]
-              (when-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"shape" "type" "key" "value" "min" "max" "sensitive" #_"flattened" #_"locationName"}))
-                             (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) key) #{"shape" #_"locationName"}))
-                             (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) value) #{"shape" #_"locationName"})))
+              (when-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"shape" "type" "key" "value" "sensitive"}))
+                             (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) key) #{"shape"}))
+                             (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) value) #{"shape"})))
                 (throw (ex-info "map/deser, attrs not recognized" {:sh sh})))
               `(into {}
                      (map (fn [[~'k ~'v]]
@@ -905,11 +905,12 @@
                                                               deser-name                      (shape-name->deser-name shape)
                                                               dashed-name                     (-> sname aws/dashed keyword)]]
                                                   [locationName (if location
-                                                                  (if (or (= location "header")  (= location "headers"))
-                                                                    `(get-in ~raw-response-input-symbol [:headers ~locationName])
-                                                                    (throw (ex-info "location no header" {:location   location
-                                                                                                          :shape-name shape-name
-                                                                                                          :shape      sh})))
+                                                                  (cond
+                                                                    (or (= location "header") (= location "headers")) `(get-in ~raw-response-input-symbol [:headers ~locationName])
+                                                                    (= location "statusCode")                         `(get-in ~raw-response-input-symbol [:status ~locationName])
+                                                                    :default                                          (throw (ex-info "location no header" {:location   location
+                                                                                                                                                            :shape-name shape-name
+                                                                                                                                                            :shape      sh})))
                                                                   (case protocol
                                                                     ("ec2" "query" "rest-xml") (if streaming
                                                                                                  transformed-response-input-symbol
@@ -917,7 +918,7 @@
                                                                                                                       ~locationName
                                                                                                                       :flattened? ~flattened
                                                                                                                       :result-wrapper ~result-wrapper-symbol))
-                                                                    ("json")                   `(~transformed-response-input-symbol ~locationName)))])
+                                                                    ("json" "rest-json")       `(~transformed-response-input-symbol ~locationName)))])
                                                 (get-in api ["shapes" shape-name "members"]))
         let-var-sym                       (gensym "letvar")
         required-function-body-part       (into {}
@@ -937,7 +938,7 @@
                                                                                                            (= location "header")                            [locationName]
                                                                                                            (true? streaming)                                [locationName]
                                                                                                            (contains? #{"rest-xml" "query" "ec2"} protocol) (if flattened [locationName] [locationName :content])
-                                                                                                           (= "json" protocol)                              [locationName]
+                                                                                                           (contains? #{"json" "rest-json"} protocol)       [locationName]
                                                                                                            :exception                                       (throw (ex-info "protocol or location not known :" {:protocol protocol})))))]))
                                                 required)
         optional-function-body-part       (into [] (comp (x/for [[optional-name {:strs [shape locationName location streaming] :as sh}] %
@@ -957,33 +958,33 @@
                                                                                                                  (= location "header")                            [locationName]
                                                                                                                  (true? streaming)                                [locationName]
                                                                                                                  (contains? #{"rest-xml" "ec2" "query"} protocol) (if flattened [locationName] [locationName :content])
-                                                                                                                 (= "json" protocol)                              [locationName]
+                                                                                                                 (contains? #{"json" "rest-json"} protocol)       [locationName]
                                                                                                                  :exception                                       (throw (ex-info "protocol or location not known :" {:protocol protocol}))))))]))
                                                          cat)
                                                 (get-in api ["shapes" shape-name "members"]))]
-    (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) (get-in api ["shapes" shape-name]))
-                                            #{"type" "event" "flattened" "eventstream" "error" "exception" "synthetic" "members" "box" "fault" "required" "deprecatedMessage"
-                                              "queryName" "location" "locationName" "eventpayload" "xmlOrder" "payload" "sensitive" "deprecated" #_"jsonvalue"}))
-      (throw (ex-info "generate-response-function / defn-part" {:output-root shape-name
-                                                                :shape-name  shape-name
-                                                                :shape       (get-in api ["shapes" shape-name])}))
-      `(defn- ~(shape-name->response-name shape-name)
-         ([~raw-response-input-symbol]
-          ~(list (shape-name->response-name shape-name) nil raw-response-input-symbol ))
-         ([~result-wrapper-symbol ~raw-response-input-symbol]
-          (let [~transformed-response-input-symbol ~(case protocol
-                                                      ("ec2" "rest-xml" "query") (if (true? (as-> (get-in api ["shapes" shape-name "payload"]) payload-shape
-                                                                                              (get-in api ["shapes" shape-name "members" payload-shape "streaming"])))
-                                                                                   `(:body ~raw-response-input-symbol)
-                                                                                   `(some-> ~raw-response-input-symbol
-                                                                                            :body
-                                                                                            aws/parse-xml-body))
-                                                      ("json")                   `(some->  ~raw-response-input-symbol
-                                                                                           :body
-                                                                                           aws/parse-json-body))
-                ~let-var-sym                       ~let-declaration]
-            (cond-> ~required-function-body-part
-              ~@optional-function-body-part)))))))
+      (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) (get-in api ["shapes" shape-name]))
+                                              #{"type" "event" "flattened" "eventstream" "error" "exception" "synthetic" "members" "box" "fault" "required" "deprecatedMessage"
+                                                "queryName" "location" "locationName" "eventpayload" "xmlOrder" "payload" "sensitive" "deprecated" #_"jsonvalue"}))
+        (throw (ex-info "generate-response-function / defn-part" {:output-root shape-name
+                                                                  :shape-name  shape-name
+                                                                  :shape       (get-in api ["shapes" shape-name])}))
+        `(defn- ~(shape-name->response-name shape-name)
+           ([~raw-response-input-symbol]
+            ~(list (shape-name->response-name shape-name) nil raw-response-input-symbol ))
+           ([~result-wrapper-symbol ~raw-response-input-symbol]
+            (let [~transformed-response-input-symbol ~(case protocol
+                                                        ("ec2" "rest-xml" "query") (if (true? (as-> (get-in api ["shapes" shape-name "payload"]) payload-shape
+                                                                                                (get-in api ["shapes" shape-name "members" payload-shape "streaming"])))
+                                                                                     `(:body ~raw-response-input-symbol)
+                                                                                     `(some-> ~raw-response-input-symbol
+                                                                                              :body
+                                                                                              aws/parse-xml-body))
+                                                        ("json" "rest-json")       `(some->  ~raw-response-input-symbol
+                                                                                             :body
+                                                                                             aws/parse-json-body))
+                  ~let-var-sym                       ~let-declaration]
+              (cond-> ~required-function-body-part
+                ~@optional-function-body-part)))))))
 
 
 

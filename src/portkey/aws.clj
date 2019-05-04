@@ -197,7 +197,7 @@
                                              uri)]
                              ;; @TODO : verify if url encoding is
                              ;; automatic with clj-http
-                             v
+                             (codec/url-encode v)
                              (throw (ex-info (str "Missing parameter " n)
                                              {:url url :uri uri})))))))
 
@@ -395,26 +395,42 @@
 
 
 (defn params-to-body-rest-json
-  [{:keys [:http.request.configuration/method
-           :http.request.configuration/body] :as req}]
+  [{:keys                                    [:http.request.configuration/method
+                                              :http.request.configuration/body] :as req}]
   (if (contains? #{:put :post :patch} method)
     (assoc-in req
               [:ring.request :body]
-              (-> (let [body->json-encoded (fn body->json-encoded [{:http.request.field/keys [type name shape value location-name parent-type]}]
-                                             (condp = type
-                                               "structure" (into {} (map (fn [item]
-                                                                           [(or location-name name shape) (into {} (map body->json-encoded) value)]))
-                                                                 value)
-                                               "list"      [(or location-name name shape) (into [] (comp (map #(assoc % :http.request.field/parent-type "list"))
-                                                                                                         (map body->json-encoded))
-                                                                                                value)]
-                                               "map"       (let [[key' val'] value]
-                                                             [(:http.request.field/value key') (body->json-encoded val')])
-                                               (if (= parent-type "list")
-                                                 value
-                                                 (hash-map (or location-name name shape) value))))]
-                    (into {} (map body->json-encoded) body))
-                  json/generate-string))
+              (let [body->json-encoded (fn body->json-encoded [{:http.request.field/keys [type name shape value location-name parent-type] :as field}]
+                                         (println field)
+                                         (clojure.core/cond
+                                           (= type "structure") (if (nil? parent-type)
+                                                                  (into {} (comp (map #(assoc % :http.request.field/parent-type "structure"))
+                                                                                 (map body->json-encoded))
+                                                                        value)
+                                                                  (into {} (map (fn [item]
+                                                                                  [(or location-name name shape) (into {} (comp (map #(assoc % :http.request.field/parent-type "structure"))
+                                                                                                                                (map body->json-encoded))
+                                                                                                                       value)]))
+                                                                        value))
+                                           (= type "list")      [(or location-name name shape) (into [] (comp (map #(assoc % :http.request.field/parent-type "list"))
+                                                                                                              (map body->json-encoded))
+                                                                                                     value)]
+                                           (= type "map")       [(or location-name name shape) (into {} (map (fn [[k v]]
+                                                                                                               [(body->json-encoded (let [k' (:http.request.field/value k)]
+                                                                                                                                      (if (coll? k')
+                                                                                                                                        (assoc k' :http.request.field/parent-type "map")
+                                                                                                                                        k')))
+                                                                                                                (body->json-encoded (let [v' (:http.request.field/value v)]
+                                                                                                                                      (if (coll? v')
+                                                                                                                                        (assoc v' :http.request.field/parent-type "map")
+                                                                                                                                        v')))]))
+                                                                                                     value)]
+                                           (not (coll? field)) field
+                                           (= parent-type "list") value
+                                           :default (hash-map (or location-name name shape) value)))]
+                (->> body
+                     (into {} (map body->json-encoded))
+                     json/generate-string)))
     req))
 
 
