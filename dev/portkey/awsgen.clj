@@ -600,12 +600,12 @@
 
 (defserialization aws-deserialization-functions shape-name->deser-name
   (REST-JSON JSON "string"
-        [api shape-name input]
-        (if-let [enums (get-in api ["shapes" shape-name "enum"])]
-          `(get ~(into {}
-                       (map (fn [s] [s (keyword (aws/dashed s))]))
-                       enums) ~input)
-          input))
+             [api shape-name input]
+             (if-let [enums (get-in api ["shapes" shape-name "enum"])]
+               `(get ~(into {}
+                            (map (fn [s] [s (keyword (aws/dashed s))]))
+                            enums) ~input)
+               input))
 
   (QUERY REST-XML EC2 "string"
          [api shape-name input]
@@ -646,8 +646,8 @@
               (= "false" boolstr#) false)))
 
   (REST-JSON JSON "blob"
-        [api shape-name input]
-        `(aws/base64-decode ~input))
+             [api shape-name input]
+             `(aws/base64-decode ~input))
 
   ;;@TODO : fix this blob stuff properly @dupuchba - Wed Mar  6 22:12:46 2019
   (QUERY REST-XML EC2 "blob"
@@ -656,38 +656,43 @@
          input)
 
   (REST-JSON JSON "structure"
-        [api shape-name input]
-        (let [required                      (get-in api ["shapes" shape-name "required"])
-              request-function-input-symbol (symbol "input")
-              handled-attributes            #{"shape"}
-              required-function-body-part   (into {}
-                                                  (x/for [required-name %
-                                                          :let [shape                           (get-in api ["shapes" shape-name "members" required-name])
-                                                                {:strs [shape location] :as sh} shape
-                                                                deser-name                      (shape-name->deser-name shape)
-                                                                dashed-name                     (-> required-name aws/dashed keyword)]]
-                                                    (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
-                                                                                            handled-attributes))
-                                                      (throw (ex-info "deserialization attrs not recognized" {:sh sh}))
-                                                      [dashed-name (list deser-name (list request-function-input-symbol required-name))]))
-                                                  required)
-              optional-function-body-part   (into [] (comp (x/for [[optional-name {:strs [shape location] :as sh}] %
-                                                                   :when (not (contains? (set required) optional-name))
-                                                                   :let [deser-name  (shape-name->deser-name shape)
-                                                                         dashed-name (-> optional-name aws/dashed keyword)]]
-                                                             (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
-                                                                                                     handled-attributes))
-                                                               (throw (ex-info "deserialization attrs not recognized" {:sh sh}))
-                                                               `[(contains? ~request-function-input-symbol ~optional-name)
-                                                                 (assoc ~dashed-name
-                                                                        ~(list deser-name (list request-function-input-symbol optional-name)))]))
-                                                           cat)
-                                                  (get-in api ["shapes" shape-name "members"]))]
-          (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) (get-in api ["shapes" shape-name]))
-                                                  #{"type"  "members" "required"}))
-            (throw (ex-info "deserialization attrs not recognized" {:shape (get-in api ["shapes" shape-name])}))
-            `(cond-> ~required-function-body-part
-               ~@optional-function-body-part))))
+             [api shape-name input]
+             (let [required                      (get-in api ["shapes" shape-name "required"])
+                   request-function-input-symbol (symbol "input")
+                   handled-attributes            #{"shape" "flattened" "eventpayload" "xmlAttribute" "error" "payload" "exception" "fault" "synthetic" "box" "sensitive" "deprecatedMessage"
+                                                   "location" "locationName" "queryName" "deprecated" "event" "eventstream" #_"idempotencyToken" #_"streaming" "xmlNamespace" #_"box" #_"jsonvalue"}
+                   required-function-body-part   (into {}
+                                                       (x/for [required-name %
+                                                               :let [shape                           (get-in api ["shapes" shape-name "members" required-name])
+                                                                     {:strs [shape locationName location] :as sh} shape
+                                                                     {:strs [type member flattened]} (get-in api ["shapes" shape])
+                                                                     location-name                    (or (and (= "list" type) flattened (member "locationName")) locationName required-name)
+                                                                     deser-name                      (shape-name->deser-name shape)
+                                                                     dashed-name                     (-> required-name aws/dashed keyword)]]
+                                                         (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
+                                                                                                 handled-attributes))
+                                                           (throw (ex-info "deserialization attrs not recognized" {:sh sh}))
+                                                           [dashed-name (list deser-name (list request-function-input-symbol location-name))]))
+                                                       required)
+                   optional-function-body-part   (into [] (comp (x/for [[optional-name {:strs [shape location locationName] :as sh}] %
+                                                                        :when (not (contains? (set required) optional-name))
+                                                                        :let [{:strs [type member flattened]} (get-in api ["shapes" shape])
+                                                                              location-name (or (and (= "list" type) flattened (member "locationName")) locationName optional-name)
+                                                                              deser-name   (shape-name->deser-name shape)
+                                                                              dashed-name  (-> optional-name aws/dashed keyword)]]
+                                                                  (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
+                                                                                                          handled-attributes))
+                                                                    (throw (ex-info "deserialization attrs not recognized" {:sh sh}))
+                                                                    `[(contains? ~request-function-input-symbol ~location-name)
+                                                                      (assoc ~dashed-name
+                                                                             ~(list deser-name (list request-function-input-symbol location-name)))]))
+                                                                cat)
+                                                       (get-in api ["shapes" shape-name "members"]))]
+               (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) (get-in api ["shapes" shape-name]))
+                                                       #{"type"  "members" "required"}))
+                 (throw (ex-info "deserialization attrs not recognized" {:shape (get-in api ["shapes" shape-name])}))
+                 `(cond-> ~required-function-body-part
+                    ~@optional-function-body-part))))
 
   (QUERY REST-XML EC2 "structure"
          [api shape-name input]
