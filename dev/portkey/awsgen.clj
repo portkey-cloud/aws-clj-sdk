@@ -995,6 +995,58 @@
                 ~@optional-function-body-part)))))))
 
 
+;; ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+;; ┃            ___                             _        _   _                    ┃
+;; ┃           |   \ ___  __ _  _ _ __  ___ _ _| |_ __ _| |_(_)___ _ _            ┃
+;; ┃           | |) / _ \/ _| || | '  \/ -_) ' \  _/ _` |  _| / _ \ ' \           ┃
+;; ┃           |___/\___/\__|\_,_|_|_|_\___|_||_\__\__,_|\__|_\___/_||_|          ┃
+;; ┃                                                                              ┃
+;; ┃                                              _   _                           ┃
+;; ┃                   __ _ ___ _ _  ___ _ _ __ _| |_(_)___ _ _                   ┃
+;; ┃                  / _` / -_) ' \/ -_) '_/ _` |  _| / _ \ ' \                  ┃
+;; ┃                  \__, \___|_||_\___|_| \__,_|\__|_\___/_||_|                 ┃
+;; ┃                  |___/                                                       ┃
+;; ┃                                                                              ┃
+;; ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+
+(defn split-line [n line]
+  (reduce
+   (fn [lines word]
+     (if (or (empty? lines)
+             (>= (+ (count (last lines)) (count word)) n))
+       (conj lines word)
+       (update lines (dec (count lines)) str " " word)))
+   []
+   (str/split line #"\s+")))
+
+
+(defn split-to-length [n text]
+  (str/join
+   "\n"
+   (mapcat (partial split-line n)
+           (str/split text #"\n"))))
+
+
+(defn generate-api-documentation [doc]
+  (let [acc     (StringBuilder.)
+        block   #{"br" "dd" "dt" "p" "h1" "h2" "h3" "h4" "h5"}
+        append  (fn [text] (.append acc text))
+        visitor (reify org.jsoup.select.NodeVisitor
+                  (head [this node depth]
+                    (when (instance? org.jsoup.nodes.TextNode node)
+                      (append (.text node)))
+                    (when (= "li" (.nodeName node))
+                      (append "\n *")))
+                  (tail [this node depth]
+                    (when (block (.nodeName node))
+                      (append "\n"))
+                    (when (and (= "a" (.nodeName node))
+                               (not (empty? (.absUrl node "href"))))
+                      (append (format " (%s)" (.absUrl node "href"))))))]
+    (org.jsoup.select.NodeTraversor/traverse visitor (org.jsoup.Jsoup/parseBodyFragment doc))
+    (split-to-length 80 (.toString acc))))
+
 
 ;; ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;; ┃     ___                     _   _                  ___          _     ____   ┃
@@ -1064,7 +1116,8 @@
               {input-shape-name "shape"}                                "input"
               {output-shape-name "shape" resultWrapper "resultWrapper"} "output"
               :strs                                                     [name errors]
-              :as                                                       operation}]]
+              :as                                                       operation}]
+   {:as docs :strs [operations]}]
   (spec/check-asserts true)
   (spec/assert ::operation operation)
   (let [varname                     (symbol (aws/dashed name))
@@ -1072,6 +1125,7 @@
         output-spec                 (some->> output-shape-name aws/dashed (keyword ns))
         operation-input             (or (some-> input-shape-name (str "-input") aws/dashed symbol) '_)
         operation-default-arguments (if input-spec (some #(when (spec/valid? input-spec %) %) [[] {}]) {})
+        documentation-string        (operations name)
         error-specs                 (into {}
                                           (map (fn [{:strs [shape] {:strs [httpStatusCode]} "error"}]
                                                  [shape (keyword ns (aws/dashed shape))]))
@@ -1083,6 +1137,7 @@
         target-prefix               (get-in api ["metadata" "targetPrefix"])]
     `(do
        (defn ~varname
+         ~@(when documentation-string [(generate-api-documentation documentation-string)])
          ~@(when operation-default-arguments `[([] ~(list varname operation-default-arguments))])
          ([~operation-input]
           (let [request-function-result# ~(if input-shape-name (list (shape-name->req-name input-shape-name) operation-input) {})]
@@ -1112,8 +1167,6 @@
          :ret ~(if output-spec `(spec/and ~output-spec) `true?)))))
 
 
-
-
 ;; ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
 ;; ┃       _   ___ ___    ___ ___ _  _ ___ ___    _ _____ ___ ___  _  _           ┃
 ;; ┃      /_\ | _ \_ _|  / __| __| \| | __| _ \  /_\_   _|_ _/ _ \| \| |  ___     ┃
@@ -1139,7 +1192,7 @@
 
   It gather specs + serialization + declares + request + operation
   functions."
-  [ns-sym {:strs [operations] :as api}]
+  [ns-sym {:strs [operations] :as api} documentation]
   (case (get-in api ["metadata" "protocol"])
     ("rest-xml" "ec2" "query" "rest-json" "json")
     (let [inputs+inputs-root            (shapes-by-usage api)
@@ -1155,7 +1208,7 @@
                                           (gen input-shape-name))
           runtime-specs+operation-defns (for [[k gen] {"shapes"     (comp #(doto % eval) (partial runtime-shape-type-spec (name ns-sym)) assert-shape-spec)
                                                        ;; @NOTE : eval to make specs available right away
-                                                       "operations" (partial generate-operation-function api (name ns-sym))}
+                                                       "operations" (fn [operation] (generate-operation-function api (name ns-sym) operation documentation))}
                                               desc    (api k)]
                                           (gen desc))]
       (concat serialization+request-defns
@@ -1199,53 +1252,51 @@
   It's the entry-point of the generation part."
   [& {:keys [verbose api-name protocol]
       :or   {verbose false api-name nil protocol nil}}]
-  (let [endpoints    (parse-endpoints! "api-resources/aws-sdk-ruby/gems/aws-partitions/partitions.json")
-        entries      (into []
-                           (comp
-                            (x/for [^java.io.File f %
-                                    :when (-> f .getName (.endsWith "api-2.json"))]
-                              [(-> f .getParentFile .getParentFile .getName)
-                               [(-> f .getParentFile .getName) (.getPath f)]])
-                            (x/by-key (x/into (sorted-map)))
-                            (x/sort))
-                           (file-seq (java.io.File. "api-resources/aws-sdk-ruby/apis/")))
-        gen-results  (for [[api versions]     entries
-                           :let               [apifile (str/replace api #"[-.]" "_")
-                                               apins (str/replace api #"[.]" "-")
-                                               [latest f] (first (rseq versions))]
-                           :when              (or (nil? api-name) (= apins api-name))
-                           [version api-json] (cons [nil f] versions)
-                           :when              (or (nil? protocol) (= protocol (get-in (with-open [r (io/reader api-json)] (json/parse-stream r)) ["metadata" "protocol"])))
-                           :let               [[file ns] (if version
-                                                           [(java.io.File. (str "src/portkey/aws/" apifile "/_" version ".clj"))
-                                                            (symbol (str "portkey.aws." apins ".-" version))]
-                                                           [(java.io.File. (str "src/portkey/aws/" apifile ".clj"))
-                                                            (symbol (str "portkey.aws." apins))])]]
-                       (try
-                         (prn 'generating api (or version 'LATEST))
-                         (with-open [w (io/writer (doto file (-> .getParentFile .mkdirs)))
-                                     ;; @TODO : rework on documentation
-                                     ;;docs-json (-> api-json io/file .getParentFile (io/file "docs-2.json") java.io.FileInputStream.)
-                                     ]
-                           (let [api-json'       (json/parse-stream (io/reader (java.io.FileInputStream. api-json)))
-                                 endpoint-prefix (get-in api-json'["metadata" "endpointPrefix"])]
-                             (binding [*out*          w
-                                       *print-length* 1000000]
-                               (prn (list 'ns ns '(:require [portkey.aws])))
-                               (newline)
-                               (clojure.pprint/pprint (list 'def 'endpoints (list 'quote (get endpoints endpoint-prefix))))
-                               ;; @TODO : rework on documentation.
-                               (doseq [form (generate-api-forms ns api-json' #_docs-json)]
-                                 (newline)
-                                 (if (and (seq? form) (= 'do (first form)))
-                                   (run! prn (next form))
-                                   (prn form))))))
-                         {:gen-status :ok}
-                         (catch Throwable t
-                           (println "Failed to generate" api (.getMessage t))
-                           #_(when verbose (println t))
-                           (println t)
-                           {:gen-status :fail :api api :file file})))
+  (let [endpoints   (parse-endpoints! "api-resources/aws-sdk-ruby/gems/aws-partitions/partitions.json")
+        entries     (into []
+                          (comp
+                           (x/for [^java.io.File f %
+                                   :when (-> f .getName (.endsWith "api-2.json"))]
+                             [(-> f .getParentFile .getParentFile .getName)
+                              [(-> f .getParentFile .getName) (.getPath f)]])
+                           (x/by-key (x/into (sorted-map)))
+                           (x/sort))
+                          (file-seq (java.io.File. "api-resources/aws-sdk-ruby/apis/")))
+        gen-results (for [[api versions]     entries
+                          :let               [apifile (str/replace api #"[-.]" "_")
+                                              apins (str/replace api #"[.]" "-")
+                                              [latest f] (first (rseq versions))]
+                          :when              (or (nil? api-name) (= apins api-name))
+                          [version api-json] (cons [nil f] versions)
+                          :when              (or (nil? protocol) (= protocol (get-in (with-open [r (io/reader api-json)] (json/parse-stream r)) ["metadata" "protocol"])))
+                          :let               [[file ns] (if version
+                                                          [(java.io.File. (str "src/portkey/aws/" apifile "/_" version ".clj"))
+                                                           (symbol (str "portkey.aws." apins ".-" version))]
+                                                          [(java.io.File. (str "src/portkey/aws/" apifile ".clj"))
+                                                           (symbol (str "portkey.aws." apins))])]]
+                      (try
+                        (prn 'generating api (or version 'LATEST))
+                        (with-open [w (io/writer (doto file (-> .getParentFile .mkdirs)))]
+                          (let [api-json'       (json/parse-stream (io/reader (java.io.FileInputStream. api-json)))
+                                docs-json       (-> api-json io/file .getParentFile (io/file "docs-2.json") java.io.FileInputStream. io/reader json/parse-stream)
+                                endpoint-prefix (get-in api-json' ["metadata" "endpointPrefix"])]
+                            (binding [*out*          w
+                                      *print-length* 1000000]
+                              (prn (list 'ns ns '(:require [portkey.aws])))
+                              (newline)
+                              (clojure.pprint/pprint (list 'def 'endpoints (list 'quote (get endpoints endpoint-prefix))))
+                              ;; @TODO : rework on documentation.
+                              (doseq [form (generate-api-forms ns api-json' docs-json)]
+                                (newline)
+                                (if (and (seq? form) (= 'do (first form)))
+                                  (run! prn (next form))
+                                  (prn form))))))
+                        {:gen-status :ok}
+                        (catch Throwable t
+                          (println "Failed to generate" api (.getMessage t))
+                          #_(when verbose (println t))
+                          (println t)
+                          {:gen-status :fail :api api :file file})))
         gen-failures (filter #(-> % :gen-status (= :fail)) gen-results)]
     (if (seq gen-failures)
       (do
@@ -1259,38 +1310,57 @@
 (comment
 
 
-  (do (require '[portkey.aws.budgets :as bu])
-      (require '[portkey.aws.sts :as sts])
+  (do
 
-      (require '[clojure.java.io :as io])
-      (require '[clojure.spec.alpha :as spec])
-      (require '[portkey.helpers :as h])
-      (use 'clojure.repl)
+    (require '[clojure.java.io :as io])
+    (require '[clojure.spec.alpha :as spec])
+    (require '[portkey.helpers :as h])
+    (use 'clojure.repl)
 
-      (h/def-api-2-json "ec2")
-      (require '[portkey.aws.ec2 :as ec2])
+    (h/def-api-2-json "rest-json")
 
-      )
+    )
   ;; @TODO: error management
 
-  (generate-files! :api-name "ec2")
-  (generate-files! :protocol "rest-xml")
 
-  (dir ec2)
+  (generate-files! :api-name "lambda")
+  ;; mediatailor, mediatailor, rds-data, rds-data, runtime.lex, runtime.lex
+  (generate-files! :protocol "rest-json")
+  ;;servicediscovery, servicediscovery, ssm, ssm
 
-  (apropos #".*spot.*")
-  (spec/exercise ::ec2/describe-spot-price-history-request)
-  (spec/exercise ::ec2/request-spot-instances-request)
 
-  (ec2/describe-spot-price-history {:instance-types [:c-1medium]})
+  (require '[portkey.aws.lambda :as lambda])
+  (require '[portkey.aws.apigateway :as ag])
+  (require '[portkey.aws.apigatewayv2 :as ag2])
 
-  (spec/exercise ::ec2/describe-regions-request)
-  (ec2/describe-regions)
+  rest-json-protocol-mediatailor-api-2-json
+
+  (dir ag2)
+
+  (doc lambda/list-aliases)
+
+  rest-json-protocol-appmesh-api-2-json
+  (lambda/list-functions){:functions [{:role "arn:aws:iam::122635563603:role/dev-lambda-function", :description "", :revision-id "ca106897-3b51-4e0f-a694-e0b2cc6b45cf", :code-size 1026, :function-arn "arn:aws:lambda:eu-west-1:122635563603:function:dev-cloud_watch_alarm_slack", :kms-key-arn "arn:aws:kms:eu-west-1:122635563603:key/10c9b0c3-2511-4599-8584-09f72b8c000e", :dead-letter-config {}, :master-arn nil, :last-modified "2019-04-29T11:55:30.644+0000", :runtime :python-36, :memory-size 128, :vpc-config {}, :layers [], :environment {:variables {"slackChannel" "ops", "slackWebHookUrl" "AQICAHhrDO/vgH6I1Us0C/TeYsrB4LTpIt0Qq+1wa+T6ExUUDQGFSYK72+6vuRF7f+Ud7MMaAAAApzCBpAYJKoZIhvcNAQcGoIGWMIGTAgEAMIGNBgkqhkiG9w0BBwEwHgYJYIZIAWUDBAEuMBEEDK2/9YXTlavEnH+8ngIBEIBgxxi+EneVbyHDZbf7LSG658OyOeBHZ6OvdUqnW9o2v+q4XpjSa/cg78dSAPlSdXsfg6ZTPl3eolzv4BNB6OJTAdogJtAFEogNberFK1w09nrG0VhPQly5VK2qW2TEM3QL"}, :error {}}, :tracing-config {:mode :pass-through}, :timeout 3, :version "$LATEST", :handler "cloudwatch-slack-notification.lambda_handler", :code-sha-256 "AWQ5hgWJ4bZEX4GCOSQotBqPXH3dBygQsErH75JQM24=", :function-name "dev-cloud_watch_alarm_slack"}]}
+  (lambda/list-tags {:resource "arn:aws:lambda:eu-west-1:122635563603:function:dev-cloud_watch_alarm_slack"})
+  (lambda/tag-resource {:resource "arn:aws:lambda:eu-west-1:122635563603:function:dev-cloud_watch_alarm_slack"
+                        :tags     {"retest" "revalue"}})
+
+
+
+  (meta (ag2/create-api {:route-selection-expression "/",
+                         :protocol-type                              "WEBSOCKET",
+                         :name                                       "Test",
+                         :disable-schema-validation                  true,
+                         :description                                "Ceci est un test",}))
+
+  (meta (ag2/get-apis))
+
+
 
 
 
   ;; chopper toutes les outputs et checker les locations
-  (let [api                    ec2-protocol-ec2-api-2-json
+  (let [api                    rest-json-protocol-lambda-api-2-json
         {:keys [output-roots]} (shapes-by-usage api)]
     (into #{} (for [shape-name                                       output-roots
                     :let                                             [shape (get-in api ["shapes" shape-name "members"])]
@@ -1298,15 +1368,113 @@
                     :when                                            location]
                 shape-name)))
 
-  (let [api ec2-protocol-ec2-api-2-json
+  (let [api               rest-json-protocol-lambda-api-2-json
         {:keys [outputs]} (shapes-by-usage api)]
     (into #{} (for [shape-name outputs
                     :let       [{:strs [type flattened] :as shape} (get-in api ["shapes" shape-name])]
-                    :when      (and (= "list" type) (not flattened))]
+                    :when      (= "map" type)]
                 shape-name)))
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+  )
+
+
+
+
+;; Correction livre de cgrand, datalog
+
+(comment
+
+  (defn match1 [bindings val-or-var val]
+    (if (symbol? val-or-var)
+      (if-some [bound-val (bindings val-or-var)]
+        (when (= bound-val val) bindings)
+        (assoc bindings val-or-var val))
+      (when (= val-or-var val) bindings)))
+
+  (match1 {} 1 2)      ;;nil
+  (match1 {'a 2} 'a 2) ;;{a 2}
+  (match1 {} 'a 2)     ;;{a 2}
+  (match1 {'a 1} 'a 2) ;;nil
+
+  (defn match [bindings pattern tuple]
+    (when (= (count tuple) (count pattern))
+      (reduce (fn [bindings [val-or-var val]]
+                (or (match1 bindings val-or-var val)
+                    (reduced nil)))
+              bindings
+              (map vector pattern tuple))))
+
+  (map vector '[a a] [1 2])
+  (match {'a 1} '[a b] [1 2])
+  (match1 {'a 1} 'b 2)
+
+  (match1 {'first-name "Christophe"} 'first-name "Baptiste")
+
+  (match {'first-name "Christophe"} '[first-name first-name] ["Christophe" "Baptiste"]) ;;nil
+  (match {'first-name "Christophe"} '[first-name first-name] ["Christophe" "Christophe"]) ;;{first-name "Christophe"}
+  (match {'first-name "Christophe"} '[first-name last-name] ["Christophe" "Grand"]) ;;{first-name "Christophe", last-name "Grand"}
+  (match {} '[first-name last-name] ["Christophe" "Grand"]) ;;{first-name "Christophe", last-name "Grand"}
+  (match1 {} 'a 1)
+
+  (defn instancy [bindings pattern]
+    (mapv #(bindings % %) pattern))
+
+  (instancy {'a 1} '[a 1 2 :a])
+  (instancy {'x :leia 'anc :anakin} [:ancestor 'x 'anc]) ;;[:ancestor :leia :anakin]
+
+  (defn apply-rule [db [head & body]]
+    (map #(instancy % head)
+         (reduce (fn [many-bindings pattern]
+                   (remove nil?
+                           (for [bindings many-bindings
+                                 tuple    db]
+                             (match bindings pattern tuple))))
+                 [{}]
+                 body)))
+
+
+
+  (match {} [:parent 'x 'anc] [:parent :leia :anakin])
+  (match {} ['parent] [:a])
+
+  (apply-rule
+   #{[:parent :leia :anakin]
+     [:parent :leia :padme]
+     [:parent :kylo :leia]
+     [:parent :kylo :han]}
+   '[[:ancestor x anc] [:parent x anc]])
+
+  (defn fixpoint [f init]
+    (let [x (f init)]
+      (if (= x init)
+        x
+        (recur f x))))
+
+  (defn naive [db rules]
+    (fixpoint
+     (fn [db]
+       (into db (mapcat #(apply-rule db %)) rules))
+     db))
+
+  (naive #{[:parent :leia :anakin]
+           [:parent :leia :padme]
+           [:parent :kylo :leia]
+           [:parent :kylo :han]}
+         '#{[[:ancestor x anc] [:parent x anc]]
+            [[:ancestor x anc] [:parent x p] [:ancestor p anc]]})
 
 
 
