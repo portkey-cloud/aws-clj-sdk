@@ -283,7 +283,6 @@
      (spec/coll-of ~(keyword ns (aws/dashed shape)) ~@(when min `[:min-count ~min]) ~@(when max `[:max-count ~max]))))
 
 
-;; @TODO : figure out what sensitive means
 (defmethod runtime-shape-type-spec "map" [ns [name {:strs [key value sensitive]}]]
   `(spec/def ~(runtime-spec-name ns name)
      (spec/map-of ~(keyword ns (aws/dashed (key "shape"))) ~(keyword ns (aws/dashed (value "shape"))))))
@@ -508,9 +507,6 @@
                                       :shape shape-name}
                  (into {} x-filter sh)))))
 
-  ;; @NOTE : flattened & locationName handled
-  ;; @NOTE : min & max not handled (should it be as it can be checked by specs
-  ;; @NOTE : deprecated & sensitive not found for rest-xml protocol
   (REST-XML REST-JSON JSON "list"
             [api shape-name input]
             (let [x-filter                                     (comp (filter (fn [[k v]]
@@ -560,10 +556,6 @@
                                       :shape shape-name}
                  (into {} x-filter sh))))
 
-
-  ;; @NOTE : key & value handled for the rest-xml protocol
-  ;; @NOTE : only used in headers for rest-xml
-  ;; @NOTE : others attributes not found for rest-xml
   (REST-XML REST-JSON JSON "map"
             [api shape-name input]
             (let [x-filter                   (comp (filter (fn [[k v]]
@@ -1106,7 +1098,7 @@
    :opt {"input"                                             (strict-strs :req {"shape" string?}
                                                                           :opt {"xmlNamespace"
                                                                                 (strict-strs :req {"uri" string?})
-                                                                                "locationName" string?}) ; TODO validate
+                                                                                "locationName" string?})
          "output"                                            (strict-strs :req {"shape" string?}
                                                                           :opt {"resultWrapper" string?})
          "idempotent"                                        boolean?
@@ -1144,8 +1136,6 @@
 
   It calls the req<-* function which is then merged with other http
   request informations from the operation shape."
-
-  ;; @TODO : add the unused informations to the request map => e.g. : xmlNamespace / locationName / documentationUrl / alias / authtype / deprecated
   [api ns [n {{:strs [method requestUri responseCode]}                  "http"
               {input-shape-name "shape"}                                "input"
               {output-shape-name "shape" resultWrapper "resultWrapper"} "output"

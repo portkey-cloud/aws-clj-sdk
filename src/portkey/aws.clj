@@ -520,7 +520,7 @@
 
 
 (defn- params-to-content-md5-header
-  "Add the Contente-MD5 header to the request for S3 service."
+  "Add the Content-MD5 header to the request for S3 service."
   [{:as req :http.request.configuration/keys [protocol method service-id]}]
   (if (and (= protocol "rest-xml") (= service-id "S3") (contains? #{:put :post :patch} method))
     (-> req
