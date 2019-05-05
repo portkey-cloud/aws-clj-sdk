@@ -128,6 +128,220 @@
 
 (clojure.core/defn- req-get-signing-platform-request [input] (clojure.core/cond-> #:http.request.configuration{:uri [(clojure.core/into (ser-platform-id (input :platform-id)) #:http.request.field{:name "platformId", :shape "PlatformId", :location "uri", :location-name "platformId"})]}))
 
+(clojure.core/declare deser-encryption-algorithms)
+
+(clojure.core/declare deser-signing-material)
+
+(clojure.core/declare deser-signing-jobs)
+
+(clojure.core/declare deserstring)
+
+(clojure.core/declare deser-platform-id)
+
+(clojure.core/declare deser-completed-at)
+
+(clojure.core/declare deser-signing-status)
+
+(clojure.core/declare deser-category)
+
+(clojure.core/declare deser-source)
+
+(clojure.core/declare deser-s-3-signed-object)
+
+(clojure.core/declare deser-hash-algorithms)
+
+(clojure.core/declare deserkey)
+
+(clojure.core/declare deser-s-3-source)
+
+(clojure.core/declare deser-signing-platform-overrides)
+
+(clojure.core/declare deser-signing-configuration)
+
+(clojure.core/declare deser-next-token)
+
+(clojure.core/declare deser-error-message)
+
+(clojure.core/declare deser-image-format)
+
+(clojure.core/declare deser-key)
+
+(clojure.core/declare deser-display-name)
+
+(clojure.core/declare deser-status-reason)
+
+(clojure.core/declare deser-signing-platform)
+
+(clojure.core/declare deser-signing-parameter-key)
+
+(clojure.core/declare deser-string)
+
+(clojure.core/declare deser-signing-profiles)
+
+(clojure.core/declare deser-encryption-algorithm-options)
+
+(clojure.core/declare deser-signing-parameter-value)
+
+(clojure.core/declare deser-signing-platforms)
+
+(clojure.core/declare deser-certificate-arn)
+
+(clojure.core/declare deser-created-at)
+
+(clojure.core/declare deser-signed-object)
+
+(clojure.core/declare deser-signing-image-format)
+
+(clojure.core/declare deser-signing-profile-status)
+
+(clojure.core/declare deser-max-size-in-mb)
+
+(clojure.core/declare deser-hash-algorithm)
+
+(clojure.core/declare deser-version)
+
+(clojure.core/declare deser-signing-profile)
+
+(clojure.core/declare deser-image-formats)
+
+(clojure.core/declare deser-encryption-algorithm)
+
+(clojure.core/declare deser-signing-job)
+
+(clojure.core/declare deser-hash-algorithm-options)
+
+(clojure.core/declare deser-bucket-name)
+
+(clojure.core/declare deser-profile-name)
+
+(clojure.core/declare deser-requested-by)
+
+(clojure.core/declare deser-signing-parameters)
+
+(clojure.core/declare deser-signing-configuration-overrides)
+
+(clojure.core/declare deser-job-id)
+
+(clojure.core/defn- deser-encryption-algorithms [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-encryption-algorithm coll))) input))
+
+(clojure.core/defn- deser-signing-material [input] (clojure.core/cond-> {:certificate-arn (deser-certificate-arn (input "certificateArn"))}))
+
+(clojure.core/defn- deser-signing-jobs [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-signing-job coll))) input))
+
+(clojure.core/defn- deserstring [input] input)
+
+(clojure.core/defn- deser-platform-id [input] input)
+
+(clojure.core/defn- deser-completed-at [input] input)
+
+(clojure.core/defn- deser-signing-status [input] (clojure.core/get {"InProgress" :in-progress, "Failed" :failed, "Succeeded" :succeeded} input))
+
+(clojure.core/defn- deser-category [input] (clojure.core/get {"AWSIoT" :aws-io-t} input))
+
+(clojure.core/defn- deser-source [input] (clojure.core/cond-> {} (clojure.core/contains? input "s3") (clojure.core/assoc :s-3 (deser-s-3-source (input "s3")))))
+
+(clojure.core/defn- deser-s-3-signed-object [input] (clojure.core/cond-> {} (clojure.core/contains? input "bucketName") (clojure.core/assoc :bucket-name (deser-bucket-name (input "bucketName"))) (clojure.core/contains? input "key") (clojure.core/assoc :key (deserkey (input "key")))))
+
+(clojure.core/defn- deser-hash-algorithms [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-hash-algorithm coll))) input))
+
+(clojure.core/defn- deserkey [input] input)
+
+(clojure.core/defn- deser-s-3-source [input] (clojure.core/cond-> {:bucket-name (deser-bucket-name (input "bucketName")), :key (deser-key (input "key")), :version (deser-version (input "version"))}))
+
+(clojure.core/defn- deser-signing-platform-overrides [input] (clojure.core/cond-> {} (clojure.core/contains? input "signingConfiguration") (clojure.core/assoc :signing-configuration (deser-signing-configuration-overrides (input "signingConfiguration")))))
+
+(clojure.core/defn- deser-signing-configuration [input] (clojure.core/cond-> {:encryption-algorithm-options (deser-encryption-algorithm-options (input "encryptionAlgorithmOptions")), :hash-algorithm-options (deser-hash-algorithm-options (input "hashAlgorithmOptions"))}))
+
+(clojure.core/defn- deser-next-token [input] input)
+
+(clojure.core/defn- deser-error-message [input] input)
+
+(clojure.core/defn- deser-image-format [input] (clojure.core/get {"JSON" :json} input))
+
+(clojure.core/defn- deser-key [input] input)
+
+(clojure.core/defn- deser-display-name [input] input)
+
+(clojure.core/defn- deser-status-reason [input] input)
+
+(clojure.core/defn- deser-signing-platform [input] (clojure.core/cond-> {} (clojure.core/contains? input "platformId") (clojure.core/assoc :platform-id (deser-string (input "platformId"))) (clojure.core/contains? input "displayName") (clojure.core/assoc :display-name (deser-string (input "displayName"))) (clojure.core/contains? input "partner") (clojure.core/assoc :partner (deser-string (input "partner"))) (clojure.core/contains? input "target") (clojure.core/assoc :target (deser-string (input "target"))) (clojure.core/contains? input "category") (clojure.core/assoc :category (deser-category (input "category"))) (clojure.core/contains? input "signingConfiguration") (clojure.core/assoc :signing-configuration (deser-signing-configuration (input "signingConfiguration"))) (clojure.core/contains? input "signingImageFormat") (clojure.core/assoc :signing-image-format (deser-signing-image-format (input "signingImageFormat"))) (clojure.core/contains? input "maxSizeInMB") (clojure.core/assoc :max-size-in-mb (deser-max-size-in-mb (input "maxSizeInMB")))))
+
+(clojure.core/defn- deser-signing-parameter-key [input] input)
+
+(clojure.core/defn- deser-string [input] input)
+
+(clojure.core/defn- deser-signing-profiles [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-signing-profile coll))) input))
+
+(clojure.core/defn- deser-encryption-algorithm-options [input] (clojure.core/cond-> {:allowed-values (deser-encryption-algorithms (input "allowedValues")), :default-value (deser-encryption-algorithm (input "defaultValue"))}))
+
+(clojure.core/defn- deser-signing-parameter-value [input] input)
+
+(clojure.core/defn- deser-signing-platforms [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-signing-platform coll))) input))
+
+(clojure.core/defn- deser-certificate-arn [input] input)
+
+(clojure.core/defn- deser-created-at [input] input)
+
+(clojure.core/defn- deser-signed-object [input] (clojure.core/cond-> {} (clojure.core/contains? input "s3") (clojure.core/assoc :s-3 (deser-s-3-signed-object (input "s3")))))
+
+(clojure.core/defn- deser-signing-image-format [input] (clojure.core/cond-> {:supported-formats (deser-image-formats (input "supportedFormats")), :default-format (deser-image-format (input "defaultFormat"))}))
+
+(clojure.core/defn- deser-signing-profile-status [input] (clojure.core/get {"Active" :active, "Canceled" :canceled} input))
+
+(clojure.core/defn- deser-max-size-in-mb [input] input)
+
+(clojure.core/defn- deser-hash-algorithm [input] (clojure.core/get {"SHA1" :sha-1, "SHA256" :sha-256} input))
+
+(clojure.core/defn- deser-version [input] input)
+
+(clojure.core/defn- deser-signing-profile [input] (clojure.core/cond-> {} (clojure.core/contains? input "profileName") (clojure.core/assoc :profile-name (deser-profile-name (input "profileName"))) (clojure.core/contains? input "signingMaterial") (clojure.core/assoc :signing-material (deser-signing-material (input "signingMaterial"))) (clojure.core/contains? input "platformId") (clojure.core/assoc :platform-id (deser-platform-id (input "platformId"))) (clojure.core/contains? input "signingParameters") (clojure.core/assoc :signing-parameters (deser-signing-parameters (input "signingParameters"))) (clojure.core/contains? input "status") (clojure.core/assoc :status (deser-signing-profile-status (input "status")))))
+
+(clojure.core/defn- deser-image-formats [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-image-format coll))) input))
+
+(clojure.core/defn- deser-encryption-algorithm [input] (clojure.core/get {"RSA" :rsa, "ECDSA" :ecdsa} input))
+
+(clojure.core/defn- deser-signing-job [input] (clojure.core/cond-> {} (clojure.core/contains? input "jobId") (clojure.core/assoc :job-id (deser-job-id (input "jobId"))) (clojure.core/contains? input "source") (clojure.core/assoc :source (deser-source (input "source"))) (clojure.core/contains? input "signedObject") (clojure.core/assoc :signed-object (deser-signed-object (input "signedObject"))) (clojure.core/contains? input "signingMaterial") (clojure.core/assoc :signing-material (deser-signing-material (input "signingMaterial"))) (clojure.core/contains? input "createdAt") (clojure.core/assoc :created-at (deser-created-at (input "createdAt"))) (clojure.core/contains? input "status") (clojure.core/assoc :status (deser-signing-status (input "status")))))
+
+(clojure.core/defn- deser-hash-algorithm-options [input] (clojure.core/cond-> {:allowed-values (deser-hash-algorithms (input "allowedValues")), :default-value (deser-hash-algorithm (input "defaultValue"))}))
+
+(clojure.core/defn- deser-bucket-name [input] input)
+
+(clojure.core/defn- deser-profile-name [input] input)
+
+(clojure.core/defn- deser-requested-by [input] input)
+
+(clojure.core/defn- deser-signing-parameters [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-signing-parameter-key k) (deser-signing-parameter-value v)])) input))
+
+(clojure.core/defn- deser-signing-configuration-overrides [input] (clojure.core/cond-> {} (clojure.core/contains? input "encryptionAlgorithm") (clojure.core/assoc :encryption-algorithm (deser-encryption-algorithm (input "encryptionAlgorithm"))) (clojure.core/contains? input "hashAlgorithm") (clojure.core/assoc :hash-algorithm (deser-hash-algorithm (input "hashAlgorithm")))))
+
+(clojure.core/defn- deser-job-id [input] input)
+
+(clojure.core/defn- response-list-signing-platforms-response ([input] (response-list-signing-platforms-response nil input)) ([resultWrapper1463933 input] (clojure.core/let [rawinput1463932 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1463934 {"platforms" (rawinput1463932 "platforms"), "nextToken" (rawinput1463932 "nextToken")}] (clojure.core/cond-> {} (letvar1463934 "platforms") (clojure.core/assoc :platforms (deser-signing-platforms (clojure.core/get-in letvar1463934 ["platforms"]))) (letvar1463934 "nextToken") (clojure.core/assoc :next-token (deser-string (clojure.core/get-in letvar1463934 ["nextToken"])))))))
+
+(clojure.core/defn- response-put-signing-profile-response ([input] (response-put-signing-profile-response nil input)) ([resultWrapper1463936 input] (clojure.core/let [rawinput1463935 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1463937 {"arn" (rawinput1463935 "arn")}] (clojure.core/cond-> {} (letvar1463937 "arn") (clojure.core/assoc :arn (deserstring (clojure.core/get-in letvar1463937 ["arn"])))))))
+
+(clojure.core/defn- response-validation-exception ([input] (response-validation-exception nil input)) ([resultWrapper1463939 input] (clojure.core/let [rawinput1463938 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1463940 {"message" (rawinput1463938 "message")}] (clojure.core/cond-> {} (letvar1463940 "message") (clojure.core/assoc :message (deser-error-message (clojure.core/get-in letvar1463940 ["message"])))))))
+
+(clojure.core/defn- response-internal-service-error-exception ([input] (response-internal-service-error-exception nil input)) ([resultWrapper1463942 input] (clojure.core/let [rawinput1463941 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1463943 {"message" (rawinput1463941 "message")}] (clojure.core/cond-> {} (letvar1463943 "message") (clojure.core/assoc :message (deser-error-message (clojure.core/get-in letvar1463943 ["message"])))))))
+
+(clojure.core/defn- response-start-signing-job-response ([input] (response-start-signing-job-response nil input)) ([resultWrapper1463945 input] (clojure.core/let [rawinput1463944 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1463946 {"jobId" (rawinput1463944 "jobId")}] (clojure.core/cond-> {} (letvar1463946 "jobId") (clojure.core/assoc :job-id (deser-job-id (clojure.core/get-in letvar1463946 ["jobId"])))))))
+
+(clojure.core/defn- response-get-signing-profile-response ([input] (response-get-signing-profile-response nil input)) ([resultWrapper1463948 input] (clojure.core/let [rawinput1463947 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1463949 {"profileName" (rawinput1463947 "profileName"), "signingMaterial" (rawinput1463947 "signingMaterial"), "platformId" (rawinput1463947 "platformId"), "overrides" (rawinput1463947 "overrides"), "signingParameters" (rawinput1463947 "signingParameters"), "status" (rawinput1463947 "status")}] (clojure.core/cond-> {} (letvar1463949 "profileName") (clojure.core/assoc :profile-name (deser-profile-name (clojure.core/get-in letvar1463949 ["profileName"]))) (letvar1463949 "signingMaterial") (clojure.core/assoc :signing-material (deser-signing-material (clojure.core/get-in letvar1463949 ["signingMaterial"]))) (letvar1463949 "platformId") (clojure.core/assoc :platform-id (deser-platform-id (clojure.core/get-in letvar1463949 ["platformId"]))) (letvar1463949 "overrides") (clojure.core/assoc :overrides (deser-signing-platform-overrides (clojure.core/get-in letvar1463949 ["overrides"]))) (letvar1463949 "signingParameters") (clojure.core/assoc :signing-parameters (deser-signing-parameters (clojure.core/get-in letvar1463949 ["signingParameters"]))) (letvar1463949 "status") (clojure.core/assoc :status (deser-signing-profile-status (clojure.core/get-in letvar1463949 ["status"])))))))
+
+(clojure.core/defn- response-list-signing-profiles-response ([input] (response-list-signing-profiles-response nil input)) ([resultWrapper1463951 input] (clojure.core/let [rawinput1463950 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1463952 {"profiles" (rawinput1463950 "profiles"), "nextToken" (rawinput1463950 "nextToken")}] (clojure.core/cond-> {} (letvar1463952 "profiles") (clojure.core/assoc :profiles (deser-signing-profiles (clojure.core/get-in letvar1463952 ["profiles"]))) (letvar1463952 "nextToken") (clojure.core/assoc :next-token (deser-next-token (clojure.core/get-in letvar1463952 ["nextToken"])))))))
+
+(clojure.core/defn- response-resource-not-found-exception ([input] (response-resource-not-found-exception nil input)) ([resultWrapper1463954 input] (clojure.core/let [rawinput1463953 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1463955 {"message" (rawinput1463953 "message")}] (clojure.core/cond-> {} (letvar1463955 "message") (clojure.core/assoc :message (deser-error-message (clojure.core/get-in letvar1463955 ["message"])))))))
+
+(clojure.core/defn- response-get-signing-platform-response ([input] (response-get-signing-platform-response nil input)) ([resultWrapper1463957 input] (clojure.core/let [rawinput1463956 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1463958 {"platformId" (rawinput1463956 "platformId"), "displayName" (rawinput1463956 "displayName"), "partner" (rawinput1463956 "partner"), "target" (rawinput1463956 "target"), "category" (rawinput1463956 "category"), "signingConfiguration" (rawinput1463956 "signingConfiguration"), "signingImageFormat" (rawinput1463956 "signingImageFormat"), "maxSizeInMB" (rawinput1463956 "maxSizeInMB")}] (clojure.core/cond-> {} (letvar1463958 "platformId") (clojure.core/assoc :platform-id (deser-platform-id (clojure.core/get-in letvar1463958 ["platformId"]))) (letvar1463958 "displayName") (clojure.core/assoc :display-name (deser-display-name (clojure.core/get-in letvar1463958 ["displayName"]))) (letvar1463958 "partner") (clojure.core/assoc :partner (deser-string (clojure.core/get-in letvar1463958 ["partner"]))) (letvar1463958 "target") (clojure.core/assoc :target (deser-string (clojure.core/get-in letvar1463958 ["target"]))) (letvar1463958 "category") (clojure.core/assoc :category (deser-category (clojure.core/get-in letvar1463958 ["category"]))) (letvar1463958 "signingConfiguration") (clojure.core/assoc :signing-configuration (deser-signing-configuration (clojure.core/get-in letvar1463958 ["signingConfiguration"]))) (letvar1463958 "signingImageFormat") (clojure.core/assoc :signing-image-format (deser-signing-image-format (clojure.core/get-in letvar1463958 ["signingImageFormat"]))) (letvar1463958 "maxSizeInMB") (clojure.core/assoc :max-size-in-mb (deser-max-size-in-mb (clojure.core/get-in letvar1463958 ["maxSizeInMB"])))))))
+
+(clojure.core/defn- response-access-denied-exception ([input] (response-access-denied-exception nil input)) ([resultWrapper1463960 input] (clojure.core/let [rawinput1463959 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1463961 {"message" (rawinput1463959 "message")}] (clojure.core/cond-> {} (letvar1463961 "message") (clojure.core/assoc :message (deser-error-message (clojure.core/get-in letvar1463961 ["message"])))))))
+
+(clojure.core/defn- response-describe-signing-job-response ([input] (response-describe-signing-job-response nil input)) ([resultWrapper1463963 input] (clojure.core/let [rawinput1463962 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1463964 {"overrides" (rawinput1463962 "overrides"), "signingParameters" (rawinput1463962 "signingParameters"), "createdAt" (rawinput1463962 "createdAt"), "completedAt" (rawinput1463962 "completedAt"), "signingMaterial" (rawinput1463962 "signingMaterial"), "status" (rawinput1463962 "status"), "requestedBy" (rawinput1463962 "requestedBy"), "source" (rawinput1463962 "source"), "signedObject" (rawinput1463962 "signedObject"), "profileName" (rawinput1463962 "profileName"), "statusReason" (rawinput1463962 "statusReason"), "platformId" (rawinput1463962 "platformId"), "jobId" (rawinput1463962 "jobId")}] (clojure.core/cond-> {} (letvar1463964 "overrides") (clojure.core/assoc :overrides (deser-signing-platform-overrides (clojure.core/get-in letvar1463964 ["overrides"]))) (letvar1463964 "signingParameters") (clojure.core/assoc :signing-parameters (deser-signing-parameters (clojure.core/get-in letvar1463964 ["signingParameters"]))) (letvar1463964 "createdAt") (clojure.core/assoc :created-at (deser-created-at (clojure.core/get-in letvar1463964 ["createdAt"]))) (letvar1463964 "completedAt") (clojure.core/assoc :completed-at (deser-completed-at (clojure.core/get-in letvar1463964 ["completedAt"]))) (letvar1463964 "signingMaterial") (clojure.core/assoc :signing-material (deser-signing-material (clojure.core/get-in letvar1463964 ["signingMaterial"]))) (letvar1463964 "status") (clojure.core/assoc :status (deser-signing-status (clojure.core/get-in letvar1463964 ["status"]))) (letvar1463964 "requestedBy") (clojure.core/assoc :requested-by (deser-requested-by (clojure.core/get-in letvar1463964 ["requestedBy"]))) (letvar1463964 "source") (clojure.core/assoc :source (deser-source (clojure.core/get-in letvar1463964 ["source"]))) (letvar1463964 "signedObject") (clojure.core/assoc :signed-object (deser-signed-object (clojure.core/get-in letvar1463964 ["signedObject"]))) (letvar1463964 "profileName") (clojure.core/assoc :profile-name (deser-profile-name (clojure.core/get-in letvar1463964 ["profileName"]))) (letvar1463964 "statusReason") (clojure.core/assoc :status-reason (deser-status-reason (clojure.core/get-in letvar1463964 ["statusReason"]))) (letvar1463964 "platformId") (clojure.core/assoc :platform-id (deser-platform-id (clojure.core/get-in letvar1463964 ["platformId"]))) (letvar1463964 "jobId") (clojure.core/assoc :job-id (deser-job-id (clojure.core/get-in letvar1463964 ["jobId"])))))))
+
+(clojure.core/defn- response-throttling-exception ([input] (response-throttling-exception nil input)) ([resultWrapper1463966 input] (clojure.core/let [rawinput1463965 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1463967 {"message" (rawinput1463965 "message")}] (clojure.core/cond-> {} (letvar1463967 "message") (clojure.core/assoc :message (deser-error-message (clojure.core/get-in letvar1463967 ["message"])))))))
+
+(clojure.core/defn- response-list-signing-jobs-response ([input] (response-list-signing-jobs-response nil input)) ([resultWrapper1463969 input] (clojure.core/let [rawinput1463968 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1463970 {"jobs" (rawinput1463968 "jobs"), "nextToken" (rawinput1463968 "nextToken")}] (clojure.core/cond-> {} (letvar1463970 "jobs") (clojure.core/assoc :jobs (deser-signing-jobs (clojure.core/get-in letvar1463970 ["jobs"]))) (letvar1463970 "nextToken") (clojure.core/assoc :next-token (deser-next-token (clojure.core/get-in letvar1463970 ["nextToken"])))))))
+
 (clojure.spec.alpha/def :portkey.aws.signer/encryption-algorithms (clojure.spec.alpha/coll-of :portkey.aws.signer/encryption-algorithm))
 
 (clojure.spec.alpha/def :portkey.aws.signer.list-signing-platforms-response/platforms (clojure.spec.alpha/and :portkey.aws.signer/signing-platforms))
@@ -368,7 +582,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.signer/bucket-name (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.spec.alpha/def :portkey.aws.signer/profile-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 2 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 20)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9_]{2,}" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.signer/profile-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012852__auto__] (clojure.core/<= 2 (clojure.core/count s__1012852__auto__))) (clojure.core/fn [s__1012853__auto__] (clojure.core/< (clojure.core/count s__1012853__auto__) 20)) (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"^[a-zA-Z0-9_]{2,}" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.signer/requested-by (clojure.spec.alpha/and clojure.core/string?))
 
@@ -384,29 +598,29 @@
 
 (clojure.spec.alpha/def :portkey.aws.signer/job-id (clojure.spec.alpha/and clojure.core/string?))
 
-(clojure.core/defn get-signing-profile ([get-signing-profile-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-signing-profile-request get-signing-profile-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.signer/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.signer/get-signing-profile-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/signing-profiles/{profileName}", :http.request.configuration/version "2017-08-25", :http.request.configuration/service-id "signer", :http.request.spec/input-spec :portkey.aws.signer/get-signing-profile-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/action "GetSigningProfile", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.signer/resource-not-found-exception, "AccessDeniedException" :portkey.aws.signer/access-denied-exception, "ThrottlingException" :portkey.aws.signer/throttling-exception, "InternalServiceErrorException" :portkey.aws.signer/internal-service-error-exception}})))))
+(clojure.core/defn get-signing-profile ([get-signing-profile-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-get-signing-profile-request get-signing-profile-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.signer/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.signer/get-signing-profile-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/signing-profiles/{profileName}", :http.request.configuration/version "2017-08-25", :http.request.configuration/service-id "signer", :http.request.spec/input-spec :portkey.aws.signer/get-signing-profile-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "GetSigningProfile", :http.request.configuration/output-deser-fn response-get-signing-profile-response, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.signer/resource-not-found-exception, "AccessDeniedException" :portkey.aws.signer/access-denied-exception, "ThrottlingException" :portkey.aws.signer/throttling-exception, "InternalServiceErrorException" :portkey.aws.signer/internal-service-error-exception}})))))
 (clojure.spec.alpha/fdef get-signing-profile :args (clojure.spec.alpha/tuple :portkey.aws.signer/get-signing-profile-request) :ret (clojure.spec.alpha/and :portkey.aws.signer/get-signing-profile-response))
 
-(clojure.core/defn get-signing-platform ([get-signing-platform-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-signing-platform-request get-signing-platform-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.signer/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.signer/get-signing-platform-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/signing-platforms/{platformId}", :http.request.configuration/version "2017-08-25", :http.request.configuration/service-id "signer", :http.request.spec/input-spec :portkey.aws.signer/get-signing-platform-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/action "GetSigningPlatform", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.signer/resource-not-found-exception, "AccessDeniedException" :portkey.aws.signer/access-denied-exception, "InternalServiceErrorException" :portkey.aws.signer/internal-service-error-exception}})))))
+(clojure.core/defn get-signing-platform ([get-signing-platform-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-get-signing-platform-request get-signing-platform-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.signer/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.signer/get-signing-platform-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/signing-platforms/{platformId}", :http.request.configuration/version "2017-08-25", :http.request.configuration/service-id "signer", :http.request.spec/input-spec :portkey.aws.signer/get-signing-platform-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "GetSigningPlatform", :http.request.configuration/output-deser-fn response-get-signing-platform-response, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.signer/resource-not-found-exception, "AccessDeniedException" :portkey.aws.signer/access-denied-exception, "InternalServiceErrorException" :portkey.aws.signer/internal-service-error-exception}})))))
 (clojure.spec.alpha/fdef get-signing-platform :args (clojure.spec.alpha/tuple :portkey.aws.signer/get-signing-platform-request) :ret (clojure.spec.alpha/and :portkey.aws.signer/get-signing-platform-response))
 
-(clojure.core/defn list-signing-profiles ([] (list-signing-profiles {})) ([list-signing-profiles-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-signing-profiles-request list-signing-profiles-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.signer/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.signer/list-signing-profiles-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/signing-profiles", :http.request.configuration/version "2017-08-25", :http.request.configuration/service-id "signer", :http.request.spec/input-spec :portkey.aws.signer/list-signing-profiles-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/action "ListSigningProfiles", :http.request.spec/error-spec {"AccessDeniedException" :portkey.aws.signer/access-denied-exception, "ThrottlingException" :portkey.aws.signer/throttling-exception, "InternalServiceErrorException" :portkey.aws.signer/internal-service-error-exception}})))))
+(clojure.core/defn list-signing-profiles ([] (list-signing-profiles {})) ([list-signing-profiles-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-list-signing-profiles-request list-signing-profiles-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.signer/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.signer/list-signing-profiles-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/signing-profiles", :http.request.configuration/version "2017-08-25", :http.request.configuration/service-id "signer", :http.request.spec/input-spec :portkey.aws.signer/list-signing-profiles-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "ListSigningProfiles", :http.request.configuration/output-deser-fn response-list-signing-profiles-response, :http.request.spec/error-spec {"AccessDeniedException" :portkey.aws.signer/access-denied-exception, "ThrottlingException" :portkey.aws.signer/throttling-exception, "InternalServiceErrorException" :portkey.aws.signer/internal-service-error-exception}})))))
 (clojure.spec.alpha/fdef list-signing-profiles :args (clojure.spec.alpha/? :portkey.aws.signer/list-signing-profiles-request) :ret (clojure.spec.alpha/and :portkey.aws.signer/list-signing-profiles-response))
 
-(clojure.core/defn list-signing-platforms ([] (list-signing-platforms {})) ([list-signing-platforms-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-signing-platforms-request list-signing-platforms-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.signer/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.signer/list-signing-platforms-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/signing-platforms", :http.request.configuration/version "2017-08-25", :http.request.configuration/service-id "signer", :http.request.spec/input-spec :portkey.aws.signer/list-signing-platforms-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/action "ListSigningPlatforms", :http.request.spec/error-spec {"ValidationException" :portkey.aws.signer/validation-exception, "AccessDeniedException" :portkey.aws.signer/access-denied-exception, "ThrottlingException" :portkey.aws.signer/throttling-exception, "InternalServiceErrorException" :portkey.aws.signer/internal-service-error-exception}})))))
+(clojure.core/defn list-signing-platforms ([] (list-signing-platforms {})) ([list-signing-platforms-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-list-signing-platforms-request list-signing-platforms-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.signer/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.signer/list-signing-platforms-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/signing-platforms", :http.request.configuration/version "2017-08-25", :http.request.configuration/service-id "signer", :http.request.spec/input-spec :portkey.aws.signer/list-signing-platforms-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "ListSigningPlatforms", :http.request.configuration/output-deser-fn response-list-signing-platforms-response, :http.request.spec/error-spec {"ValidationException" :portkey.aws.signer/validation-exception, "AccessDeniedException" :portkey.aws.signer/access-denied-exception, "ThrottlingException" :portkey.aws.signer/throttling-exception, "InternalServiceErrorException" :portkey.aws.signer/internal-service-error-exception}})))))
 (clojure.spec.alpha/fdef list-signing-platforms :args (clojure.spec.alpha/? :portkey.aws.signer/list-signing-platforms-request) :ret (clojure.spec.alpha/and :portkey.aws.signer/list-signing-platforms-response))
 
-(clojure.core/defn start-signing-job ([start-signing-job-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-start-signing-job-request start-signing-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.signer/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.signer/start-signing-job-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/signing-jobs", :http.request.configuration/version "2017-08-25", :http.request.configuration/service-id "signer", :http.request.spec/input-spec :portkey.aws.signer/start-signing-job-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "StartSigningJob", :http.request.spec/error-spec {"ValidationException" :portkey.aws.signer/validation-exception, "ResourceNotFoundException" :portkey.aws.signer/resource-not-found-exception, "AccessDeniedException" :portkey.aws.signer/access-denied-exception, "ThrottlingException" :portkey.aws.signer/throttling-exception, "InternalServiceErrorException" :portkey.aws.signer/internal-service-error-exception}})))))
+(clojure.core/defn start-signing-job ([start-signing-job-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-start-signing-job-request start-signing-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.signer/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.signer/start-signing-job-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/signing-jobs", :http.request.configuration/version "2017-08-25", :http.request.configuration/service-id "signer", :http.request.spec/input-spec :portkey.aws.signer/start-signing-job-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "StartSigningJob", :http.request.configuration/output-deser-fn response-start-signing-job-response, :http.request.spec/error-spec {"ValidationException" :portkey.aws.signer/validation-exception, "ResourceNotFoundException" :portkey.aws.signer/resource-not-found-exception, "AccessDeniedException" :portkey.aws.signer/access-denied-exception, "ThrottlingException" :portkey.aws.signer/throttling-exception, "InternalServiceErrorException" :portkey.aws.signer/internal-service-error-exception}})))))
 (clojure.spec.alpha/fdef start-signing-job :args (clojure.spec.alpha/tuple :portkey.aws.signer/start-signing-job-request) :ret (clojure.spec.alpha/and :portkey.aws.signer/start-signing-job-response))
 
-(clojure.core/defn list-signing-jobs ([] (list-signing-jobs {})) ([list-signing-jobs-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-signing-jobs-request list-signing-jobs-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.signer/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.signer/list-signing-jobs-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/signing-jobs", :http.request.configuration/version "2017-08-25", :http.request.configuration/service-id "signer", :http.request.spec/input-spec :portkey.aws.signer/list-signing-jobs-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/action "ListSigningJobs", :http.request.spec/error-spec {"ValidationException" :portkey.aws.signer/validation-exception, "AccessDeniedException" :portkey.aws.signer/access-denied-exception, "ThrottlingException" :portkey.aws.signer/throttling-exception, "InternalServiceErrorException" :portkey.aws.signer/internal-service-error-exception}})))))
+(clojure.core/defn list-signing-jobs ([] (list-signing-jobs {})) ([list-signing-jobs-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-list-signing-jobs-request list-signing-jobs-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.signer/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.signer/list-signing-jobs-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/signing-jobs", :http.request.configuration/version "2017-08-25", :http.request.configuration/service-id "signer", :http.request.spec/input-spec :portkey.aws.signer/list-signing-jobs-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "ListSigningJobs", :http.request.configuration/output-deser-fn response-list-signing-jobs-response, :http.request.spec/error-spec {"ValidationException" :portkey.aws.signer/validation-exception, "AccessDeniedException" :portkey.aws.signer/access-denied-exception, "ThrottlingException" :portkey.aws.signer/throttling-exception, "InternalServiceErrorException" :portkey.aws.signer/internal-service-error-exception}})))))
 (clojure.spec.alpha/fdef list-signing-jobs :args (clojure.spec.alpha/? :portkey.aws.signer/list-signing-jobs-request) :ret (clojure.spec.alpha/and :portkey.aws.signer/list-signing-jobs-response))
 
-(clojure.core/defn cancel-signing-profile ([cancel-signing-profile-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-cancel-signing-profile-request cancel-signing-profile-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.signer/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/signing-profiles/{profileName}", :http.request.configuration/version "2017-08-25", :http.request.configuration/service-id "signer", :http.request.spec/input-spec :portkey.aws.signer/cancel-signing-profile-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :delete, :http.request.configuration/response-code nil, :http.request.configuration/action "CancelSigningProfile", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.signer/resource-not-found-exception, "AccessDeniedException" :portkey.aws.signer/access-denied-exception, "ThrottlingException" :portkey.aws.signer/throttling-exception, "InternalServiceErrorException" :portkey.aws.signer/internal-service-error-exception}})))))
+(clojure.core/defn cancel-signing-profile ([cancel-signing-profile-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-cancel-signing-profile-request cancel-signing-profile-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.signer/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/signing-profiles/{profileName}", :http.request.configuration/version "2017-08-25", :http.request.configuration/service-id "signer", :http.request.spec/input-spec :portkey.aws.signer/cancel-signing-profile-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :delete, :http.request.configuration/response-code nil, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "CancelSigningProfile", :http.request.configuration/output-deser-fn (clojure.core/fn [& args__1013883__auto__] {}), :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.signer/resource-not-found-exception, "AccessDeniedException" :portkey.aws.signer/access-denied-exception, "ThrottlingException" :portkey.aws.signer/throttling-exception, "InternalServiceErrorException" :portkey.aws.signer/internal-service-error-exception}})))))
 (clojure.spec.alpha/fdef cancel-signing-profile :args (clojure.spec.alpha/tuple :portkey.aws.signer/cancel-signing-profile-request) :ret clojure.core/true?)
 
-(clojure.core/defn describe-signing-job ([describe-signing-job-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-signing-job-request describe-signing-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.signer/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.signer/describe-signing-job-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/signing-jobs/{jobId}", :http.request.configuration/version "2017-08-25", :http.request.configuration/service-id "signer", :http.request.spec/input-spec :portkey.aws.signer/describe-signing-job-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/action "DescribeSigningJob", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.signer/resource-not-found-exception, "AccessDeniedException" :portkey.aws.signer/access-denied-exception, "InternalServiceErrorException" :portkey.aws.signer/internal-service-error-exception}})))))
+(clojure.core/defn describe-signing-job ([describe-signing-job-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-describe-signing-job-request describe-signing-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.signer/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.signer/describe-signing-job-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/signing-jobs/{jobId}", :http.request.configuration/version "2017-08-25", :http.request.configuration/service-id "signer", :http.request.spec/input-spec :portkey.aws.signer/describe-signing-job-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "DescribeSigningJob", :http.request.configuration/output-deser-fn response-describe-signing-job-response, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.signer/resource-not-found-exception, "AccessDeniedException" :portkey.aws.signer/access-denied-exception, "InternalServiceErrorException" :portkey.aws.signer/internal-service-error-exception}})))))
 (clojure.spec.alpha/fdef describe-signing-job :args (clojure.spec.alpha/tuple :portkey.aws.signer/describe-signing-job-request) :ret (clojure.spec.alpha/and :portkey.aws.signer/describe-signing-job-response))
 
-(clojure.core/defn put-signing-profile ([put-signing-profile-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-put-signing-profile-request put-signing-profile-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.signer/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.signer/put-signing-profile-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/signing-profiles/{profileName}", :http.request.configuration/version "2017-08-25", :http.request.configuration/service-id "signer", :http.request.spec/input-spec :portkey.aws.signer/put-signing-profile-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :put, :http.request.configuration/response-code nil, :http.request.configuration/action "PutSigningProfile", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.signer/resource-not-found-exception, "AccessDeniedException" :portkey.aws.signer/access-denied-exception, "ValidationException" :portkey.aws.signer/validation-exception, "ThrottlingException" :portkey.aws.signer/throttling-exception, "InternalServiceErrorException" :portkey.aws.signer/internal-service-error-exception}})))))
+(clojure.core/defn put-signing-profile ([put-signing-profile-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-put-signing-profile-request put-signing-profile-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.signer/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.signer/put-signing-profile-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/signing-profiles/{profileName}", :http.request.configuration/version "2017-08-25", :http.request.configuration/service-id "signer", :http.request.spec/input-spec :portkey.aws.signer/put-signing-profile-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :put, :http.request.configuration/response-code nil, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "PutSigningProfile", :http.request.configuration/output-deser-fn response-put-signing-profile-response, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.signer/resource-not-found-exception, "AccessDeniedException" :portkey.aws.signer/access-denied-exception, "ValidationException" :portkey.aws.signer/validation-exception, "ThrottlingException" :portkey.aws.signer/throttling-exception, "InternalServiceErrorException" :portkey.aws.signer/internal-service-error-exception}})))))
 (clojure.spec.alpha/fdef put-signing-profile :args (clojure.spec.alpha/tuple :portkey.aws.signer/put-signing-profile-request) :ret (clojure.spec.alpha/and :portkey.aws.signer/put-signing-profile-response))

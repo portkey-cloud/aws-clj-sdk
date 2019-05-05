@@ -80,6 +80,116 @@
 
 (clojure.core/defn- req-suggest-request [input] (clojure.core/cond-> #:http.request.configuration{:querystring [(clojure.core/into (ser-query (input :query)) #:http.request.field{:name "query", :shape "Query", :location "querystring", :location-name "q"}) (clojure.core/into (ser-suggester (input :suggester)) #:http.request.field{:name "suggester", :shape "Suggester", :location "querystring", :location-name "suggester"})]} (clojure.core/contains? input :size) (clojure.core/update-in [:http.request.configuration/querystring] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-suggestions-size (input :size)) #:http.request.field{:name "size", :shape "SuggestionsSize", :location "querystring", :location-name "size"}))))
 
+(clojure.core/declare deser-bucket)
+
+(clojure.core/declare deser-double)
+
+(clojure.core/declare deser-deletes)
+
+(clojure.core/declare deser-bucket-list)
+
+(clojure.core/declare deser-fields)
+
+(clojure.core/declare deser-adds)
+
+(clojure.core/declare deser-hit-list)
+
+(clojure.core/declare deser-exprs)
+
+(clojure.core/declare deser-hits)
+
+(clojure.core/declare deser-string)
+
+(clojure.core/declare deser-search-status)
+
+(clojure.core/declare deser-field-stats)
+
+(clojure.core/declare deser-suggestions)
+
+(clojure.core/declare deser-long)
+
+(clojure.core/declare deser-stats)
+
+(clojure.core/declare deser-hit)
+
+(clojure.core/declare deser-bucket-info)
+
+(clojure.core/declare deser-suggestion-match)
+
+(clojure.core/declare deser-document-service-warnings)
+
+(clojure.core/declare deser-document-service-warning)
+
+(clojure.core/declare deser-field-value)
+
+(clojure.core/declare deser-suggest-model)
+
+(clojure.core/declare deser-suggest-status)
+
+(clojure.core/declare deser-highlights)
+
+(clojure.core/declare deser-facets)
+
+(clojure.core/defn- deser-bucket [input] (clojure.core/cond-> {} (clojure.core/contains? input "value") (clojure.core/assoc :value (deser-string (input "value"))) (clojure.core/contains? input "count") (clojure.core/assoc :count (deser-long (input "count")))))
+
+(clojure.core/defn- deser-double [input] input)
+
+(clojure.core/defn- deser-deletes [input] input)
+
+(clojure.core/defn- deser-bucket-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-bucket coll))) input))
+
+(clojure.core/defn- deser-fields [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-string k) (deser-field-value v)])) input))
+
+(clojure.core/defn- deser-adds [input] input)
+
+(clojure.core/defn- deser-hit-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-hit coll))) input))
+
+(clojure.core/defn- deser-exprs [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-string k) (deser-string v)])) input))
+
+(clojure.core/defn- deser-hits [input] (clojure.core/cond-> {} (clojure.core/contains? input "found") (clojure.core/assoc :found (deser-long (input "found"))) (clojure.core/contains? input "start") (clojure.core/assoc :start (deser-long (input "start"))) (clojure.core/contains? input "cursor") (clojure.core/assoc :cursor (deser-string (input "cursor"))) (clojure.core/contains? input "hit") (clojure.core/assoc :hit (deser-hit-list (input "hit")))))
+
+(clojure.core/defn- deser-string [input] input)
+
+(clojure.core/defn- deser-search-status [input] (clojure.core/cond-> {} (clojure.core/contains? input "timems") (clojure.core/assoc :timems (deser-long (input "timems"))) (clojure.core/contains? input "rid") (clojure.core/assoc :rid (deser-string (input "rid")))))
+
+(clojure.core/defn- deser-field-stats [input] (clojure.core/cond-> {} (clojure.core/contains? input "min") (clojure.core/assoc :min (deser-string (input "min"))) (clojure.core/contains? input "max") (clojure.core/assoc :max (deser-string (input "max"))) (clojure.core/contains? input "count") (clojure.core/assoc :count (deser-long (input "count"))) (clojure.core/contains? input "missing") (clojure.core/assoc :missing (deser-long (input "missing"))) (clojure.core/contains? input "sum") (clojure.core/assoc :sum (deser-double (input "sum"))) (clojure.core/contains? input "sumOfSquares") (clojure.core/assoc :sum-of-squares (deser-double (input "sumOfSquares"))) (clojure.core/contains? input "mean") (clojure.core/assoc :mean (deser-string (input "mean"))) (clojure.core/contains? input "stddev") (clojure.core/assoc :stddev (deser-double (input "stddev")))))
+
+(clojure.core/defn- deser-suggestions [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-suggestion-match coll))) input))
+
+(clojure.core/defn- deser-long [input] input)
+
+(clojure.core/defn- deser-stats [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-string k) (deser-field-stats v)])) input))
+
+(clojure.core/defn- deser-hit [input] (clojure.core/cond-> {} (clojure.core/contains? input "id") (clojure.core/assoc :id (deser-string (input "id"))) (clojure.core/contains? input "fields") (clojure.core/assoc :fields (deser-fields (input "fields"))) (clojure.core/contains? input "exprs") (clojure.core/assoc :exprs (deser-exprs (input "exprs"))) (clojure.core/contains? input "highlights") (clojure.core/assoc :highlights (deser-highlights (input "highlights")))))
+
+(clojure.core/defn- deser-bucket-info [input] (clojure.core/cond-> {} (clojure.core/contains? input "buckets") (clojure.core/assoc :buckets (deser-bucket-list (input "buckets")))))
+
+(clojure.core/defn- deser-suggestion-match [input] (clojure.core/cond-> {} (clojure.core/contains? input "suggestion") (clojure.core/assoc :suggestion (deser-string (input "suggestion"))) (clojure.core/contains? input "score") (clojure.core/assoc :score (deser-long (input "score"))) (clojure.core/contains? input "id") (clojure.core/assoc :id (deser-string (input "id")))))
+
+(clojure.core/defn- deser-document-service-warnings [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-document-service-warning coll))) input))
+
+(clojure.core/defn- deser-document-service-warning [input] (clojure.core/cond-> {} (clojure.core/contains? input "message") (clojure.core/assoc :message (deser-string (input "message")))))
+
+(clojure.core/defn- deser-field-value [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-string coll))) input))
+
+(clojure.core/defn- deser-suggest-model [input] (clojure.core/cond-> {} (clojure.core/contains? input "query") (clojure.core/assoc :query (deser-string (input "query"))) (clojure.core/contains? input "found") (clojure.core/assoc :found (deser-long (input "found"))) (clojure.core/contains? input "suggestions") (clojure.core/assoc :suggestions (deser-suggestions (input "suggestions")))))
+
+(clojure.core/defn- deser-suggest-status [input] (clojure.core/cond-> {} (clojure.core/contains? input "timems") (clojure.core/assoc :timems (deser-long (input "timems"))) (clojure.core/contains? input "rid") (clojure.core/assoc :rid (deser-string (input "rid")))))
+
+(clojure.core/defn- deser-highlights [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-string k) (deser-string v)])) input))
+
+(clojure.core/defn- deser-facets [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-string k) (deser-bucket-info v)])) input))
+
+(clojure.core/defn- response-document-service-exception ([input] (response-document-service-exception nil input)) ([resultWrapper1111413 input] (clojure.core/let [rawinput1111412 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1111414 {"status" (rawinput1111412 "status"), "message" (rawinput1111412 "message")}] (clojure.core/cond-> {} (letvar1111414 "status") (clojure.core/assoc :status (deser-string (clojure.core/get-in letvar1111414 ["status"]))) (letvar1111414 "message") (clojure.core/assoc :message (deser-string (clojure.core/get-in letvar1111414 ["message"])))))))
+
+(clojure.core/defn- response-suggest-response ([input] (response-suggest-response nil input)) ([resultWrapper1111416 input] (clojure.core/let [rawinput1111415 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1111417 {"status" (rawinput1111415 "status"), "suggest" (rawinput1111415 "suggest")}] (clojure.core/cond-> {} (letvar1111417 "status") (clojure.core/assoc :status (deser-suggest-status (clojure.core/get-in letvar1111417 ["status"]))) (letvar1111417 "suggest") (clojure.core/assoc :suggest (deser-suggest-model (clojure.core/get-in letvar1111417 ["suggest"])))))))
+
+(clojure.core/defn- response-search-exception ([input] (response-search-exception nil input)) ([resultWrapper1111419 input] (clojure.core/let [rawinput1111418 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1111420 {"message" (rawinput1111418 "message")}] (clojure.core/cond-> {} (letvar1111420 "message") (clojure.core/assoc :message (deser-string (clojure.core/get-in letvar1111420 ["message"])))))))
+
+(clojure.core/defn- response-upload-documents-response ([input] (response-upload-documents-response nil input)) ([resultWrapper1111422 input] (clojure.core/let [rawinput1111421 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1111423 {"status" (rawinput1111421 "status"), "adds" (rawinput1111421 "adds"), "deletes" (rawinput1111421 "deletes"), "warnings" (rawinput1111421 "warnings")}] (clojure.core/cond-> {} (letvar1111423 "status") (clojure.core/assoc :status (deser-string (clojure.core/get-in letvar1111423 ["status"]))) (letvar1111423 "adds") (clojure.core/assoc :adds (deser-adds (clojure.core/get-in letvar1111423 ["adds"]))) (letvar1111423 "deletes") (clojure.core/assoc :deletes (deser-deletes (clojure.core/get-in letvar1111423 ["deletes"]))) (letvar1111423 "warnings") (clojure.core/assoc :warnings (deser-document-service-warnings (clojure.core/get-in letvar1111423 ["warnings"])))))))
+
+(clojure.core/defn- response-search-response ([input] (response-search-response nil input)) ([resultWrapper1111425 input] (clojure.core/let [rawinput1111424 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1111426 {"status" (rawinput1111424 "status"), "hits" (rawinput1111424 "hits"), "facets" (rawinput1111424 "facets"), "stats" (rawinput1111424 "stats")}] (clojure.core/cond-> {} (letvar1111426 "status") (clojure.core/assoc :status (deser-search-status (clojure.core/get-in letvar1111426 ["status"]))) (letvar1111426 "hits") (clojure.core/assoc :hits (deser-hits (clojure.core/get-in letvar1111426 ["hits"]))) (letvar1111426 "facets") (clojure.core/assoc :facets (deser-facets (clojure.core/get-in letvar1111426 ["facets"]))) (letvar1111426 "stats") (clojure.core/assoc :stats (deser-stats (clojure.core/get-in letvar1111426 ["stats"])))))))
+
 (clojure.spec.alpha/def :portkey.aws.cloudsearchdomain.bucket/value (clojure.spec.alpha/and :portkey.aws.cloudsearchdomain/string))
 (clojure.spec.alpha/def :portkey.aws.cloudsearchdomain.bucket/count (clojure.spec.alpha/and :portkey.aws.cloudsearchdomain/long))
 (clojure.spec.alpha/def :portkey.aws.cloudsearchdomain/bucket (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.cloudsearchdomain.bucket/value :portkey.aws.cloudsearchdomain.bucket/count]))
@@ -244,11 +354,11 @@
 
 (clojure.spec.alpha/def :portkey.aws.cloudsearchdomain/facets (clojure.spec.alpha/map-of :portkey.aws.cloudsearchdomain/string :portkey.aws.cloudsearchdomain/bucket-info))
 
-(clojure.core/defn search ([search-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-search-request search-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.cloudsearchdomain/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.cloudsearchdomain/search-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2013-01-01/search?format=sdk&pretty=true", :http.request.configuration/version "2013-01-01", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.cloudsearchdomain/search-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/action "Search", :http.request.spec/error-spec {"SearchException" :portkey.aws.cloudsearchdomain/search-exception}})))))
+(clojure.core/defn search ([search-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-search-request search-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.cloudsearchdomain/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.cloudsearchdomain/search-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2013-01-01/search?format=sdk&pretty=true", :http.request.configuration/version "2013-01-01", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.cloudsearchdomain/search-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "Search", :http.request.configuration/output-deser-fn response-search-response, :http.request.spec/error-spec {"SearchException" :portkey.aws.cloudsearchdomain/search-exception}})))))
 (clojure.spec.alpha/fdef search :args (clojure.spec.alpha/tuple :portkey.aws.cloudsearchdomain/search-request) :ret (clojure.spec.alpha/and :portkey.aws.cloudsearchdomain/search-response))
 
-(clojure.core/defn suggest ([suggest-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-suggest-request suggest-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.cloudsearchdomain/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.cloudsearchdomain/suggest-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2013-01-01/suggest?format=sdk&pretty=true", :http.request.configuration/version "2013-01-01", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.cloudsearchdomain/suggest-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/action "Suggest", :http.request.spec/error-spec {"SearchException" :portkey.aws.cloudsearchdomain/search-exception}})))))
+(clojure.core/defn suggest ([suggest-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-suggest-request suggest-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.cloudsearchdomain/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.cloudsearchdomain/suggest-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2013-01-01/suggest?format=sdk&pretty=true", :http.request.configuration/version "2013-01-01", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.cloudsearchdomain/suggest-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "Suggest", :http.request.configuration/output-deser-fn response-suggest-response, :http.request.spec/error-spec {"SearchException" :portkey.aws.cloudsearchdomain/search-exception}})))))
 (clojure.spec.alpha/fdef suggest :args (clojure.spec.alpha/tuple :portkey.aws.cloudsearchdomain/suggest-request) :ret (clojure.spec.alpha/and :portkey.aws.cloudsearchdomain/suggest-response))
 
-(clojure.core/defn upload-documents ([upload-documents-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-upload-documents-request upload-documents-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.cloudsearchdomain/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.cloudsearchdomain/upload-documents-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2013-01-01/documents/batch?format=sdk", :http.request.configuration/version "2013-01-01", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.cloudsearchdomain/upload-documents-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UploadDocuments", :http.request.spec/error-spec {"DocumentServiceException" :portkey.aws.cloudsearchdomain/document-service-exception}})))))
+(clojure.core/defn upload-documents ([upload-documents-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-upload-documents-request upload-documents-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.cloudsearchdomain/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.cloudsearchdomain/upload-documents-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2013-01-01/documents/batch?format=sdk", :http.request.configuration/version "2013-01-01", :http.request.configuration/service-id nil, :http.request.spec/input-spec :portkey.aws.cloudsearchdomain/upload-documents-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "UploadDocuments", :http.request.configuration/output-deser-fn response-upload-documents-response, :http.request.spec/error-spec {"DocumentServiceException" :portkey.aws.cloudsearchdomain/document-service-exception}})))))
 (clojure.spec.alpha/fdef upload-documents :args (clojure.spec.alpha/tuple :portkey.aws.cloudsearchdomain/upload-documents-request) :ret (clojure.spec.alpha/and :portkey.aws.cloudsearchdomain/upload-documents-response))

@@ -541,7 +541,551 @@
 
 (clojure.core/defn- req-test-role-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-role (input :role)) #:http.request.field{:name "Role", :shape "Role"}) (clojure.core/into (ser-bucket-name (input :input-bucket)) #:http.request.field{:name "InputBucket", :shape "BucketName"}) (clojure.core/into (ser-bucket-name (input :output-bucket)) #:http.request.field{:name "OutputBucket", :shape "BucketName"}) (clojure.core/into (ser-sns-topics (input :topics)) #:http.request.field{:name "Topics", :shape "SnsTopics"})]}))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/fixed-gop (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^true$)|(^false$)" s__27882__auto__))))
+(clojure.core/declare deser-fixed-gop)
+
+(clojure.core/declare deser-artwork)
+
+(clojure.core/declare deser-sns-topic)
+
+(clojure.core/declare deser-caption-sources)
+
+(clojure.core/declare deser-exception-messages)
+
+(clojure.core/declare deser-presets)
+
+(clojure.core/declare deser-permissions)
+
+(clojure.core/declare deser-sizing-policy)
+
+(clojure.core/declare deser-codec-options)
+
+(clojure.core/declare deser-play-ready-drm)
+
+(clojure.core/declare deser-codec-option)
+
+(clojure.core/declare deser-job-status)
+
+(clojure.core/declare deser-access-controls)
+
+(clojure.core/declare deser-output-keys)
+
+(clojure.core/declare deser-video-parameters)
+
+(clojure.core/declare deser-playlist-format)
+
+(clojure.core/declare deser-warnings)
+
+(clojure.core/declare deser-job-watermarks)
+
+(clojure.core/declare deser-composition)
+
+(clojure.core/declare deser-playlists)
+
+(clojure.core/declare deser-play-ready-drm-format-string)
+
+(clojure.core/declare deser-permission)
+
+(clojure.core/declare deser-key-storage-policy)
+
+(clojure.core/declare deser-grantee-type)
+
+(clojure.core/declare deser-job-album-art)
+
+(clojure.core/declare deser-encryption-mode)
+
+(clojure.core/declare deser-jpg-or-png)
+
+(clojure.core/declare deser-captions)
+
+(clojure.core/declare deser-keyframes-max-dist)
+
+(clojure.core/declare deser-time-offset)
+
+(clojure.core/declare deser-audio-channels)
+
+(clojure.core/declare deser-caption-formats)
+
+(clojure.core/declare deser-job-watermark)
+
+(clojure.core/declare deser-pixels-or-percent)
+
+(clojure.core/declare deser-caption-merge-policy)
+
+(clojure.core/declare deser-pipeline)
+
+(clojure.core/declare deser-hls-content-protection-method)
+
+(clojure.core/declare deser-thumbnails)
+
+(clojure.core/declare deser-digits)
+
+(clojure.core/declare deser-watermark-sizing-policy)
+
+(clojure.core/declare deser-resolution)
+
+(clojure.core/declare deser-artworks)
+
+(clojure.core/declare deser-video-bit-rate)
+
+(clojure.core/declare deser-frame-rate)
+
+(clojure.core/declare deser-opacity)
+
+(clojure.core/declare deser-time-span)
+
+(clojure.core/declare deser-aspect-ratio)
+
+(clojure.core/declare deser-watermark-key)
+
+(clojure.core/declare deser-one-to-512-string)
+
+(clojure.core/declare deser-zero-to-512-string)
+
+(clojure.core/declare deser-thumbnail-pattern)
+
+(clojure.core/declare deser-pipeline-status)
+
+(clojure.core/declare deser-job-output)
+
+(clojure.core/declare deser-user-metadata)
+
+(clojure.core/declare deser-detected-properties)
+
+(clojure.core/declare deser-pipeline-output-config)
+
+(clojure.core/declare deser-key)
+
+(clojure.core/declare deser-role)
+
+(clojure.core/declare deser-interlaced)
+
+(clojure.core/declare deser-max-frame-rate)
+
+(clojure.core/declare deser-playlist)
+
+(clojure.core/declare deser-success)
+
+(clojure.core/declare deser-warning)
+
+(clojure.core/declare deser-audio-codec-options)
+
+(clojure.core/declare deser-float-string)
+
+(clojure.core/declare deser-timing)
+
+(clojure.core/declare deser-nullable-long)
+
+(clojure.core/declare deser-audio-sample-rate)
+
+(clojure.core/declare deser-audio-bit-depth)
+
+(clojure.core/declare deser-description)
+
+(clojure.core/declare deser-audio-packing-mode)
+
+(clojure.core/declare deser-audio-bit-order)
+
+(clojure.core/declare deser-preset-type)
+
+(clojure.core/declare deser-hls-content-protection)
+
+(clojure.core/declare deser-string)
+
+(clojure.core/declare deser-caption-source)
+
+(clojure.core/declare deser-digits-or-auto)
+
+(clojure.core/declare deser-input-captions)
+
+(clojure.core/declare deser-audio-parameters)
+
+(clojure.core/declare deser-access-control)
+
+(clojure.core/declare deser-audio-codec-profile)
+
+(clojure.core/declare deser-video-codec)
+
+(clojure.core/declare deser-vertical-align)
+
+(clojure.core/declare deser-rotate)
+
+(clojure.core/declare deser-audio-codec)
+
+(clojure.core/declare deser-pipelines)
+
+(clojure.core/declare deser-audio-signed)
+
+(clojure.core/declare deser-jobs)
+
+(clojure.core/declare deser-preset)
+
+(clojure.core/declare deser-filename)
+
+(clojure.core/declare deser-preset-watermarks)
+
+(clojure.core/declare deser-key-arn)
+
+(clojure.core/declare deser-clip)
+
+(clojure.core/declare deser-merge-policy)
+
+(clojure.core/declare deser-encryption)
+
+(clojure.core/declare deser-job-container)
+
+(clojure.core/declare deser-preset-container)
+
+(clojure.core/declare deser-job-input)
+
+(clojure.core/declare deser-thumbnail-resolution)
+
+(clojure.core/declare deser-nullable-integer)
+
+(clojure.core/declare deser-job)
+
+(clojure.core/declare deser-key-id-guid)
+
+(clojure.core/declare deser-target)
+
+(clojure.core/declare deser-name)
+
+(clojure.core/declare deser-preset-watermark-id)
+
+(clojure.core/declare deser-storage-class)
+
+(clojure.core/declare deser-grantee)
+
+(clojure.core/declare deser-caption-format-format)
+
+(clojure.core/declare deser-non-empty-base-64-encoded-string)
+
+(clojure.core/declare deser-preset-watermark)
+
+(clojure.core/declare deser-bucket-name)
+
+(clojure.core/declare deser-audio-bit-rate)
+
+(clojure.core/declare deser-notifications)
+
+(clojure.core/declare deser-job-inputs)
+
+(clojure.core/declare deser-caption-format)
+
+(clojure.core/declare deser-base-64-encoded-string)
+
+(clojure.core/declare deser-padding-policy)
+
+(clojure.core/declare deser-id)
+
+(clojure.core/declare deser-time)
+
+(clojure.core/declare deser-long-key)
+
+(clojure.core/declare deser-zero-to-255-string)
+
+(clojure.core/declare deser-job-outputs)
+
+(clojure.core/declare deser-caption-format-pattern)
+
+(clojure.core/declare deser-horizontal-align)
+
+(clojure.core/defn- deser-fixed-gop [input] input)
+
+(clojure.core/defn- deser-artwork [input] (clojure.core/cond-> {} (clojure.core/contains? input "InputKey") (clojure.core/assoc :input-key (deser-watermark-key (input "InputKey"))) (clojure.core/contains? input "MaxWidth") (clojure.core/assoc :max-width (deser-digits-or-auto (input "MaxWidth"))) (clojure.core/contains? input "MaxHeight") (clojure.core/assoc :max-height (deser-digits-or-auto (input "MaxHeight"))) (clojure.core/contains? input "SizingPolicy") (clojure.core/assoc :sizing-policy (deser-sizing-policy (input "SizingPolicy"))) (clojure.core/contains? input "PaddingPolicy") (clojure.core/assoc :padding-policy (deser-padding-policy (input "PaddingPolicy"))) (clojure.core/contains? input "AlbumArtFormat") (clojure.core/assoc :album-art-format (deser-jpg-or-png (input "AlbumArtFormat"))) (clojure.core/contains? input "Encryption") (clojure.core/assoc :encryption (deser-encryption (input "Encryption")))))
+
+(clojure.core/defn- deser-sns-topic [input] input)
+
+(clojure.core/defn- deser-caption-sources [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-caption-source coll))) input))
+
+(clojure.core/defn- deser-exception-messages [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-string coll))) input))
+
+(clojure.core/defn- deser-presets [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-preset coll))) input))
+
+(clojure.core/defn- deser-permissions [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-permission coll))) input))
+
+(clojure.core/defn- deser-sizing-policy [input] input)
+
+(clojure.core/defn- deser-codec-options [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-codec-option k) (deser-codec-option v)])) input))
+
+(clojure.core/defn- deser-play-ready-drm [input] (clojure.core/cond-> {} (clojure.core/contains? input "Format") (clojure.core/assoc :format (deser-play-ready-drm-format-string (input "Format"))) (clojure.core/contains? input "Key") (clojure.core/assoc :key (deser-non-empty-base-64-encoded-string (input "Key"))) (clojure.core/contains? input "KeyMd5") (clojure.core/assoc :key-md-5 (deser-non-empty-base-64-encoded-string (input "KeyMd5"))) (clojure.core/contains? input "KeyId") (clojure.core/assoc :key-id (deser-key-id-guid (input "KeyId"))) (clojure.core/contains? input "InitializationVector") (clojure.core/assoc :initialization-vector (deser-zero-to-255-string (input "InitializationVector"))) (clojure.core/contains? input "LicenseAcquisitionUrl") (clojure.core/assoc :license-acquisition-url (deser-one-to-512-string (input "LicenseAcquisitionUrl")))))
+
+(clojure.core/defn- deser-codec-option [input] input)
+
+(clojure.core/defn- deser-job-status [input] input)
+
+(clojure.core/defn- deser-access-controls [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-access-control coll))) input))
+
+(clojure.core/defn- deser-output-keys [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-key coll))) input))
+
+(clojure.core/defn- deser-video-parameters [input] (clojure.core/cond-> {} (clojure.core/contains? input "FixedGOP") (clojure.core/assoc :fixed-gop (deser-fixed-gop (input "FixedGOP"))) (clojure.core/contains? input "SizingPolicy") (clojure.core/assoc :sizing-policy (deser-sizing-policy (input "SizingPolicy"))) (clojure.core/contains? input "CodecOptions") (clojure.core/assoc :codec-options (deser-codec-options (input "CodecOptions"))) (clojure.core/contains? input "Codec") (clojure.core/assoc :codec (deser-video-codec (input "Codec"))) (clojure.core/contains? input "BitRate") (clojure.core/assoc :bit-rate (deser-video-bit-rate (input "BitRate"))) (clojure.core/contains? input "KeyframesMaxDist") (clojure.core/assoc :keyframes-max-dist (deser-keyframes-max-dist (input "KeyframesMaxDist"))) (clojure.core/contains? input "Resolution") (clojure.core/assoc :resolution (deser-resolution (input "Resolution"))) (clojure.core/contains? input "FrameRate") (clojure.core/assoc :frame-rate (deser-frame-rate (input "FrameRate"))) (clojure.core/contains? input "AspectRatio") (clojure.core/assoc :aspect-ratio (deser-aspect-ratio (input "AspectRatio"))) (clojure.core/contains? input "MaxFrameRate") (clojure.core/assoc :max-frame-rate (deser-max-frame-rate (input "MaxFrameRate"))) (clojure.core/contains? input "Watermarks") (clojure.core/assoc :watermarks (deser-preset-watermarks (input "Watermarks"))) (clojure.core/contains? input "MaxHeight") (clojure.core/assoc :max-height (deser-digits-or-auto (input "MaxHeight"))) (clojure.core/contains? input "DisplayAspectRatio") (clojure.core/assoc :display-aspect-ratio (deser-aspect-ratio (input "DisplayAspectRatio"))) (clojure.core/contains? input "MaxWidth") (clojure.core/assoc :max-width (deser-digits-or-auto (input "MaxWidth"))) (clojure.core/contains? input "PaddingPolicy") (clojure.core/assoc :padding-policy (deser-padding-policy (input "PaddingPolicy")))))
+
+(clojure.core/defn- deser-playlist-format [input] input)
+
+(clojure.core/defn- deser-warnings [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-warning coll))) input))
+
+(clojure.core/defn- deser-job-watermarks [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-job-watermark coll))) input))
+
+(clojure.core/defn- deser-composition [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-clip coll))) input))
+
+(clojure.core/defn- deser-playlists [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-playlist coll))) input))
+
+(clojure.core/defn- deser-play-ready-drm-format-string [input] input)
+
+(clojure.core/defn- deser-permission [input] (clojure.core/cond-> {} (clojure.core/contains? input "GranteeType") (clojure.core/assoc :grantee-type (deser-grantee-type (input "GranteeType"))) (clojure.core/contains? input "Grantee") (clojure.core/assoc :grantee (deser-grantee (input "Grantee"))) (clojure.core/contains? input "Access") (clojure.core/assoc :access (deser-access-controls (input "Access")))))
+
+(clojure.core/defn- deser-key-storage-policy [input] input)
+
+(clojure.core/defn- deser-grantee-type [input] input)
+
+(clojure.core/defn- deser-job-album-art [input] (clojure.core/cond-> {} (clojure.core/contains? input "MergePolicy") (clojure.core/assoc :merge-policy (deser-merge-policy (input "MergePolicy"))) (clojure.core/contains? input "Artwork") (clojure.core/assoc :artwork (deser-artworks (input "Artwork")))))
+
+(clojure.core/defn- deser-encryption-mode [input] input)
+
+(clojure.core/defn- deser-jpg-or-png [input] input)
+
+(clojure.core/defn- deser-captions [input] (clojure.core/cond-> {} (clojure.core/contains? input "MergePolicy") (clojure.core/assoc :merge-policy (deser-caption-merge-policy (input "MergePolicy"))) (clojure.core/contains? input "CaptionSources") (clojure.core/assoc :caption-sources (deser-caption-sources (input "CaptionSources"))) (clojure.core/contains? input "CaptionFormats") (clojure.core/assoc :caption-formats (deser-caption-formats (input "CaptionFormats")))))
+
+(clojure.core/defn- deser-keyframes-max-dist [input] input)
+
+(clojure.core/defn- deser-time-offset [input] input)
+
+(clojure.core/defn- deser-audio-channels [input] input)
+
+(clojure.core/defn- deser-caption-formats [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-caption-format coll))) input))
+
+(clojure.core/defn- deser-job-watermark [input] (clojure.core/cond-> {} (clojure.core/contains? input "PresetWatermarkId") (clojure.core/assoc :preset-watermark-id (deser-preset-watermark-id (input "PresetWatermarkId"))) (clojure.core/contains? input "InputKey") (clojure.core/assoc :input-key (deser-watermark-key (input "InputKey"))) (clojure.core/contains? input "Encryption") (clojure.core/assoc :encryption (deser-encryption (input "Encryption")))))
+
+(clojure.core/defn- deser-pixels-or-percent [input] input)
+
+(clojure.core/defn- deser-caption-merge-policy [input] input)
+
+(clojure.core/defn- deser-pipeline [input] (clojure.core/cond-> {} (clojure.core/contains? input "InputBucket") (clojure.core/assoc :input-bucket (deser-bucket-name (input "InputBucket"))) (clojure.core/contains? input "AwsKmsKeyArn") (clojure.core/assoc :aws-kms-key-arn (deser-key-arn (input "AwsKmsKeyArn"))) (clojure.core/contains? input "OutputBucket") (clojure.core/assoc :output-bucket (deser-bucket-name (input "OutputBucket"))) (clojure.core/contains? input "ContentConfig") (clojure.core/assoc :content-config (deser-pipeline-output-config (input "ContentConfig"))) (clojure.core/contains? input "ThumbnailConfig") (clojure.core/assoc :thumbnail-config (deser-pipeline-output-config (input "ThumbnailConfig"))) (clojure.core/contains? input "Status") (clojure.core/assoc :status (deser-pipeline-status (input "Status"))) (clojure.core/contains? input "Role") (clojure.core/assoc :role (deser-role (input "Role"))) (clojure.core/contains? input "Arn") (clojure.core/assoc :arn (deser-string (input "Arn"))) (clojure.core/contains? input "Name") (clojure.core/assoc :name (deser-name (input "Name"))) (clojure.core/contains? input "Notifications") (clojure.core/assoc :notifications (deser-notifications (input "Notifications"))) (clojure.core/contains? input "Id") (clojure.core/assoc :id (deser-id (input "Id")))))
+
+(clojure.core/defn- deser-hls-content-protection-method [input] input)
+
+(clojure.core/defn- deser-thumbnails [input] (clojure.core/cond-> {} (clojure.core/contains? input "Format") (clojure.core/assoc :format (deser-jpg-or-png (input "Format"))) (clojure.core/contains? input "Interval") (clojure.core/assoc :interval (deser-digits (input "Interval"))) (clojure.core/contains? input "Resolution") (clojure.core/assoc :resolution (deser-thumbnail-resolution (input "Resolution"))) (clojure.core/contains? input "AspectRatio") (clojure.core/assoc :aspect-ratio (deser-aspect-ratio (input "AspectRatio"))) (clojure.core/contains? input "MaxWidth") (clojure.core/assoc :max-width (deser-digits-or-auto (input "MaxWidth"))) (clojure.core/contains? input "MaxHeight") (clojure.core/assoc :max-height (deser-digits-or-auto (input "MaxHeight"))) (clojure.core/contains? input "SizingPolicy") (clojure.core/assoc :sizing-policy (deser-sizing-policy (input "SizingPolicy"))) (clojure.core/contains? input "PaddingPolicy") (clojure.core/assoc :padding-policy (deser-padding-policy (input "PaddingPolicy")))))
+
+(clojure.core/defn- deser-digits [input] input)
+
+(clojure.core/defn- deser-watermark-sizing-policy [input] input)
+
+(clojure.core/defn- deser-resolution [input] input)
+
+(clojure.core/defn- deser-artworks [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-artwork coll))) input))
+
+(clojure.core/defn- deser-video-bit-rate [input] input)
+
+(clojure.core/defn- deser-frame-rate [input] input)
+
+(clojure.core/defn- deser-opacity [input] input)
+
+(clojure.core/defn- deser-time-span [input] (clojure.core/cond-> {} (clojure.core/contains? input "StartTime") (clojure.core/assoc :start-time (deser-time (input "StartTime"))) (clojure.core/contains? input "Duration") (clojure.core/assoc :duration (deser-time (input "Duration")))))
+
+(clojure.core/defn- deser-aspect-ratio [input] input)
+
+(clojure.core/defn- deser-watermark-key [input] input)
+
+(clojure.core/defn- deser-one-to-512-string [input] input)
+
+(clojure.core/defn- deser-zero-to-512-string [input] input)
+
+(clojure.core/defn- deser-thumbnail-pattern [input] input)
+
+(clojure.core/defn- deser-pipeline-status [input] input)
+
+(clojure.core/defn- deser-job-output [input] (clojure.core/cond-> {} (clojure.core/contains? input "Composition") (clojure.core/assoc :composition (deser-composition (input "Composition"))) (clojure.core/contains? input "Captions") (clojure.core/assoc :captions (deser-captions (input "Captions"))) (clojure.core/contains? input "DurationMillis") (clojure.core/assoc :duration-millis (deser-nullable-long (input "DurationMillis"))) (clojure.core/contains? input "ThumbnailEncryption") (clojure.core/assoc :thumbnail-encryption (deser-encryption (input "ThumbnailEncryption"))) (clojure.core/contains? input "FrameRate") (clojure.core/assoc :frame-rate (deser-float-string (input "FrameRate"))) (clojure.core/contains? input "Status") (clojure.core/assoc :status (deser-job-status (input "Status"))) (clojure.core/contains? input "ThumbnailPattern") (clojure.core/assoc :thumbnail-pattern (deser-thumbnail-pattern (input "ThumbnailPattern"))) (clojure.core/contains? input "PresetId") (clojure.core/assoc :preset-id (deser-id (input "PresetId"))) (clojure.core/contains? input "Key") (clojure.core/assoc :key (deser-key (input "Key"))) (clojure.core/contains? input "StatusDetail") (clojure.core/assoc :status-detail (deser-description (input "StatusDetail"))) (clojure.core/contains? input "Width") (clojure.core/assoc :width (deser-nullable-integer (input "Width"))) (clojure.core/contains? input "Watermarks") (clojure.core/assoc :watermarks (deser-job-watermarks (input "Watermarks"))) (clojure.core/contains? input "AppliedColorSpaceConversion") (clojure.core/assoc :applied-color-space-conversion (deser-string (input "AppliedColorSpaceConversion"))) (clojure.core/contains? input "Duration") (clojure.core/assoc :duration (deser-nullable-long (input "Duration"))) (clojure.core/contains? input "Height") (clojure.core/assoc :height (deser-nullable-integer (input "Height"))) (clojure.core/contains? input "Rotate") (clojure.core/assoc :rotate (deser-rotate (input "Rotate"))) (clojure.core/contains? input "AlbumArt") (clojure.core/assoc :album-art (deser-job-album-art (input "AlbumArt"))) (clojure.core/contains? input "Encryption") (clojure.core/assoc :encryption (deser-encryption (input "Encryption"))) (clojure.core/contains? input "FileSize") (clojure.core/assoc :file-size (deser-nullable-long (input "FileSize"))) (clojure.core/contains? input "SegmentDuration") (clojure.core/assoc :segment-duration (deser-float-string (input "SegmentDuration"))) (clojure.core/contains? input "Id") (clojure.core/assoc :id (deser-string (input "Id")))))
+
+(clojure.core/defn- deser-user-metadata [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-string k) (deser-string v)])) input))
+
+(clojure.core/defn- deser-detected-properties [input] (clojure.core/cond-> {} (clojure.core/contains? input "Width") (clojure.core/assoc :width (deser-nullable-integer (input "Width"))) (clojure.core/contains? input "Height") (clojure.core/assoc :height (deser-nullable-integer (input "Height"))) (clojure.core/contains? input "FrameRate") (clojure.core/assoc :frame-rate (deser-float-string (input "FrameRate"))) (clojure.core/contains? input "FileSize") (clojure.core/assoc :file-size (deser-nullable-long (input "FileSize"))) (clojure.core/contains? input "DurationMillis") (clojure.core/assoc :duration-millis (deser-nullable-long (input "DurationMillis")))))
+
+(clojure.core/defn- deser-pipeline-output-config [input] (clojure.core/cond-> {} (clojure.core/contains? input "Bucket") (clojure.core/assoc :bucket (deser-bucket-name (input "Bucket"))) (clojure.core/contains? input "StorageClass") (clojure.core/assoc :storage-class (deser-storage-class (input "StorageClass"))) (clojure.core/contains? input "Permissions") (clojure.core/assoc :permissions (deser-permissions (input "Permissions")))))
+
+(clojure.core/defn- deser-key [input] input)
+
+(clojure.core/defn- deser-role [input] input)
+
+(clojure.core/defn- deser-interlaced [input] input)
+
+(clojure.core/defn- deser-max-frame-rate [input] input)
+
+(clojure.core/defn- deser-playlist [input] (clojure.core/cond-> {} (clojure.core/contains? input "Name") (clojure.core/assoc :name (deser-filename (input "Name"))) (clojure.core/contains? input "Format") (clojure.core/assoc :format (deser-playlist-format (input "Format"))) (clojure.core/contains? input "OutputKeys") (clojure.core/assoc :output-keys (deser-output-keys (input "OutputKeys"))) (clojure.core/contains? input "HlsContentProtection") (clojure.core/assoc :hls-content-protection (deser-hls-content-protection (input "HlsContentProtection"))) (clojure.core/contains? input "PlayReadyDrm") (clojure.core/assoc :play-ready-drm (deser-play-ready-drm (input "PlayReadyDrm"))) (clojure.core/contains? input "Status") (clojure.core/assoc :status (deser-job-status (input "Status"))) (clojure.core/contains? input "StatusDetail") (clojure.core/assoc :status-detail (deser-description (input "StatusDetail")))))
+
+(clojure.core/defn- deser-success [input] input)
+
+(clojure.core/defn- deser-warning [input] (clojure.core/cond-> {} (clojure.core/contains? input "Code") (clojure.core/assoc :code (deser-string (input "Code"))) (clojure.core/contains? input "Message") (clojure.core/assoc :message (deser-string (input "Message")))))
+
+(clojure.core/defn- deser-audio-codec-options [input] (clojure.core/cond-> {} (clojure.core/contains? input "Profile") (clojure.core/assoc :profile (deser-audio-codec-profile (input "Profile"))) (clojure.core/contains? input "BitDepth") (clojure.core/assoc :bit-depth (deser-audio-bit-depth (input "BitDepth"))) (clojure.core/contains? input "BitOrder") (clojure.core/assoc :bit-order (deser-audio-bit-order (input "BitOrder"))) (clojure.core/contains? input "Signed") (clojure.core/assoc :signed (deser-audio-signed (input "Signed")))))
+
+(clojure.core/defn- deser-float-string [input] input)
+
+(clojure.core/defn- deser-timing [input] (clojure.core/cond-> {} (clojure.core/contains? input "SubmitTimeMillis") (clojure.core/assoc :submit-time-millis (deser-nullable-long (input "SubmitTimeMillis"))) (clojure.core/contains? input "StartTimeMillis") (clojure.core/assoc :start-time-millis (deser-nullable-long (input "StartTimeMillis"))) (clojure.core/contains? input "FinishTimeMillis") (clojure.core/assoc :finish-time-millis (deser-nullable-long (input "FinishTimeMillis")))))
+
+(clojure.core/defn- deser-nullable-long [input] input)
+
+(clojure.core/defn- deser-audio-sample-rate [input] input)
+
+(clojure.core/defn- deser-audio-bit-depth [input] input)
+
+(clojure.core/defn- deser-description [input] input)
+
+(clojure.core/defn- deser-audio-packing-mode [input] input)
+
+(clojure.core/defn- deser-audio-bit-order [input] input)
+
+(clojure.core/defn- deser-preset-type [input] input)
+
+(clojure.core/defn- deser-hls-content-protection [input] (clojure.core/cond-> {} (clojure.core/contains? input "Method") (clojure.core/assoc :method (deser-hls-content-protection-method (input "Method"))) (clojure.core/contains? input "Key") (clojure.core/assoc :key (deser-base-64-encoded-string (input "Key"))) (clojure.core/contains? input "KeyMd5") (clojure.core/assoc :key-md-5 (deser-base-64-encoded-string (input "KeyMd5"))) (clojure.core/contains? input "InitializationVector") (clojure.core/assoc :initialization-vector (deser-zero-to-255-string (input "InitializationVector"))) (clojure.core/contains? input "LicenseAcquisitionUrl") (clojure.core/assoc :license-acquisition-url (deser-zero-to-512-string (input "LicenseAcquisitionUrl"))) (clojure.core/contains? input "KeyStoragePolicy") (clojure.core/assoc :key-storage-policy (deser-key-storage-policy (input "KeyStoragePolicy")))))
+
+(clojure.core/defn- deser-string [input] input)
+
+(clojure.core/defn- deser-caption-source [input] (clojure.core/cond-> {} (clojure.core/contains? input "Key") (clojure.core/assoc :key (deser-long-key (input "Key"))) (clojure.core/contains? input "Language") (clojure.core/assoc :language (deser-key (input "Language"))) (clojure.core/contains? input "TimeOffset") (clojure.core/assoc :time-offset (deser-time-offset (input "TimeOffset"))) (clojure.core/contains? input "Label") (clojure.core/assoc :label (deser-name (input "Label"))) (clojure.core/contains? input "Encryption") (clojure.core/assoc :encryption (deser-encryption (input "Encryption")))))
+
+(clojure.core/defn- deser-digits-or-auto [input] input)
+
+(clojure.core/defn- deser-input-captions [input] (clojure.core/cond-> {} (clojure.core/contains? input "MergePolicy") (clojure.core/assoc :merge-policy (deser-caption-merge-policy (input "MergePolicy"))) (clojure.core/contains? input "CaptionSources") (clojure.core/assoc :caption-sources (deser-caption-sources (input "CaptionSources")))))
+
+(clojure.core/defn- deser-audio-parameters [input] (clojure.core/cond-> {} (clojure.core/contains? input "Codec") (clojure.core/assoc :codec (deser-audio-codec (input "Codec"))) (clojure.core/contains? input "SampleRate") (clojure.core/assoc :sample-rate (deser-audio-sample-rate (input "SampleRate"))) (clojure.core/contains? input "BitRate") (clojure.core/assoc :bit-rate (deser-audio-bit-rate (input "BitRate"))) (clojure.core/contains? input "Channels") (clojure.core/assoc :channels (deser-audio-channels (input "Channels"))) (clojure.core/contains? input "AudioPackingMode") (clojure.core/assoc :audio-packing-mode (deser-audio-packing-mode (input "AudioPackingMode"))) (clojure.core/contains? input "CodecOptions") (clojure.core/assoc :codec-options (deser-audio-codec-options (input "CodecOptions")))))
+
+(clojure.core/defn- deser-access-control [input] input)
+
+(clojure.core/defn- deser-audio-codec-profile [input] input)
+
+(clojure.core/defn- deser-video-codec [input] input)
+
+(clojure.core/defn- deser-vertical-align [input] input)
+
+(clojure.core/defn- deser-rotate [input] input)
+
+(clojure.core/defn- deser-audio-codec [input] input)
+
+(clojure.core/defn- deser-pipelines [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-pipeline coll))) input))
+
+(clojure.core/defn- deser-audio-signed [input] input)
+
+(clojure.core/defn- deser-jobs [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-job coll))) input))
+
+(clojure.core/defn- deser-preset [input] (clojure.core/cond-> {} (clojure.core/contains? input "Type") (clojure.core/assoc :type (deser-preset-type (input "Type"))) (clojure.core/contains? input "Video") (clojure.core/assoc :video (deser-video-parameters (input "Video"))) (clojure.core/contains? input "Audio") (clojure.core/assoc :audio (deser-audio-parameters (input "Audio"))) (clojure.core/contains? input "Thumbnails") (clojure.core/assoc :thumbnails (deser-thumbnails (input "Thumbnails"))) (clojure.core/contains? input "Container") (clojure.core/assoc :container (deser-preset-container (input "Container"))) (clojure.core/contains? input "Description") (clojure.core/assoc :description (deser-description (input "Description"))) (clojure.core/contains? input "Arn") (clojure.core/assoc :arn (deser-string (input "Arn"))) (clojure.core/contains? input "Name") (clojure.core/assoc :name (deser-name (input "Name"))) (clojure.core/contains? input "Id") (clojure.core/assoc :id (deser-id (input "Id")))))
+
+(clojure.core/defn- deser-filename [input] input)
+
+(clojure.core/defn- deser-preset-watermarks [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-preset-watermark coll))) input))
+
+(clojure.core/defn- deser-key-arn [input] input)
+
+(clojure.core/defn- deser-clip [input] (clojure.core/cond-> {} (clojure.core/contains? input "TimeSpan") (clojure.core/assoc :time-span (deser-time-span (input "TimeSpan")))))
+
+(clojure.core/defn- deser-merge-policy [input] input)
+
+(clojure.core/defn- deser-encryption [input] (clojure.core/cond-> {} (clojure.core/contains? input "Mode") (clojure.core/assoc :mode (deser-encryption-mode (input "Mode"))) (clojure.core/contains? input "Key") (clojure.core/assoc :key (deser-base-64-encoded-string (input "Key"))) (clojure.core/contains? input "KeyMd5") (clojure.core/assoc :key-md-5 (deser-base-64-encoded-string (input "KeyMd5"))) (clojure.core/contains? input "InitializationVector") (clojure.core/assoc :initialization-vector (deser-zero-to-255-string (input "InitializationVector")))))
+
+(clojure.core/defn- deser-job-container [input] input)
+
+(clojure.core/defn- deser-preset-container [input] input)
+
+(clojure.core/defn- deser-job-input [input] (clojure.core/cond-> {} (clojure.core/contains? input "Resolution") (clojure.core/assoc :resolution (deser-resolution (input "Resolution"))) (clojure.core/contains? input "FrameRate") (clojure.core/assoc :frame-rate (deser-frame-rate (input "FrameRate"))) (clojure.core/contains? input "TimeSpan") (clojure.core/assoc :time-span (deser-time-span (input "TimeSpan"))) (clojure.core/contains? input "AspectRatio") (clojure.core/assoc :aspect-ratio (deser-aspect-ratio (input "AspectRatio"))) (clojure.core/contains? input "DetectedProperties") (clojure.core/assoc :detected-properties (deser-detected-properties (input "DetectedProperties"))) (clojure.core/contains? input "Key") (clojure.core/assoc :key (deser-long-key (input "Key"))) (clojure.core/contains? input "Interlaced") (clojure.core/assoc :interlaced (deser-interlaced (input "Interlaced"))) (clojure.core/contains? input "Container") (clojure.core/assoc :container (deser-job-container (input "Container"))) (clojure.core/contains? input "InputCaptions") (clojure.core/assoc :input-captions (deser-input-captions (input "InputCaptions"))) (clojure.core/contains? input "Encryption") (clojure.core/assoc :encryption (deser-encryption (input "Encryption")))))
+
+(clojure.core/defn- deser-thumbnail-resolution [input] input)
+
+(clojure.core/defn- deser-nullable-integer [input] input)
+
+(clojure.core/defn- deser-job [input] (clojure.core/cond-> {} (clojure.core/contains? input "Playlists") (clojure.core/assoc :playlists (deser-playlists (input "Playlists"))) (clojure.core/contains? input "Status") (clojure.core/assoc :status (deser-job-status (input "Status"))) (clojure.core/contains? input "Outputs") (clojure.core/assoc :outputs (deser-job-outputs (input "Outputs"))) (clojure.core/contains? input "UserMetadata") (clojure.core/assoc :user-metadata (deser-user-metadata (input "UserMetadata"))) (clojure.core/contains? input "PipelineId") (clojure.core/assoc :pipeline-id (deser-id (input "PipelineId"))) (clojure.core/contains? input "OutputKeyPrefix") (clojure.core/assoc :output-key-prefix (deser-key (input "OutputKeyPrefix"))) (clojure.core/contains? input "Timing") (clojure.core/assoc :timing (deser-timing (input "Timing"))) (clojure.core/contains? input "Inputs") (clojure.core/assoc :inputs (deser-job-inputs (input "Inputs"))) (clojure.core/contains? input "Input") (clojure.core/assoc :input (deser-job-input (input "Input"))) (clojure.core/contains? input "Arn") (clojure.core/assoc :arn (deser-string (input "Arn"))) (clojure.core/contains? input "Output") (clojure.core/assoc :output (deser-job-output (input "Output"))) (clojure.core/contains? input "Id") (clojure.core/assoc :id (deser-id (input "Id")))))
+
+(clojure.core/defn- deser-key-id-guid [input] input)
+
+(clojure.core/defn- deser-target [input] input)
+
+(clojure.core/defn- deser-name [input] input)
+
+(clojure.core/defn- deser-preset-watermark-id [input] input)
+
+(clojure.core/defn- deser-storage-class [input] input)
+
+(clojure.core/defn- deser-grantee [input] input)
+
+(clojure.core/defn- deser-caption-format-format [input] input)
+
+(clojure.core/defn- deser-non-empty-base-64-encoded-string [input] input)
+
+(clojure.core/defn- deser-preset-watermark [input] (clojure.core/cond-> {} (clojure.core/contains? input "SizingPolicy") (clojure.core/assoc :sizing-policy (deser-watermark-sizing-policy (input "SizingPolicy"))) (clojure.core/contains? input "Opacity") (clojure.core/assoc :opacity (deser-opacity (input "Opacity"))) (clojure.core/contains? input "HorizontalOffset") (clojure.core/assoc :horizontal-offset (deser-pixels-or-percent (input "HorizontalOffset"))) (clojure.core/contains? input "VerticalOffset") (clojure.core/assoc :vertical-offset (deser-pixels-or-percent (input "VerticalOffset"))) (clojure.core/contains? input "MaxHeight") (clojure.core/assoc :max-height (deser-pixels-or-percent (input "MaxHeight"))) (clojure.core/contains? input "VerticalAlign") (clojure.core/assoc :vertical-align (deser-vertical-align (input "VerticalAlign"))) (clojure.core/contains? input "Target") (clojure.core/assoc :target (deser-target (input "Target"))) (clojure.core/contains? input "MaxWidth") (clojure.core/assoc :max-width (deser-pixels-or-percent (input "MaxWidth"))) (clojure.core/contains? input "Id") (clojure.core/assoc :id (deser-preset-watermark-id (input "Id"))) (clojure.core/contains? input "HorizontalAlign") (clojure.core/assoc :horizontal-align (deser-horizontal-align (input "HorizontalAlign")))))
+
+(clojure.core/defn- deser-bucket-name [input] input)
+
+(clojure.core/defn- deser-audio-bit-rate [input] input)
+
+(clojure.core/defn- deser-notifications [input] (clojure.core/cond-> {} (clojure.core/contains? input "Progressing") (clojure.core/assoc :progressing (deser-sns-topic (input "Progressing"))) (clojure.core/contains? input "Completed") (clojure.core/assoc :completed (deser-sns-topic (input "Completed"))) (clojure.core/contains? input "Warning") (clojure.core/assoc :warning (deser-sns-topic (input "Warning"))) (clojure.core/contains? input "Error") (clojure.core/assoc :error (deser-sns-topic (input "Error")))))
+
+(clojure.core/defn- deser-job-inputs [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-job-input coll))) input))
+
+(clojure.core/defn- deser-caption-format [input] (clojure.core/cond-> {} (clojure.core/contains? input "Format") (clojure.core/assoc :format (deser-caption-format-format (input "Format"))) (clojure.core/contains? input "Pattern") (clojure.core/assoc :pattern (deser-caption-format-pattern (input "Pattern"))) (clojure.core/contains? input "Encryption") (clojure.core/assoc :encryption (deser-encryption (input "Encryption")))))
+
+(clojure.core/defn- deser-base-64-encoded-string [input] input)
+
+(clojure.core/defn- deser-padding-policy [input] input)
+
+(clojure.core/defn- deser-id [input] input)
+
+(clojure.core/defn- deser-time [input] input)
+
+(clojure.core/defn- deser-long-key [input] input)
+
+(clojure.core/defn- deser-zero-to-255-string [input] input)
+
+(clojure.core/defn- deser-job-outputs [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-job-output coll))) input))
+
+(clojure.core/defn- deser-caption-format-pattern [input] input)
+
+(clojure.core/defn- deser-horizontal-align [input] input)
+
+(clojure.core/defn- response-update-pipeline-status-response ([input] (response-update-pipeline-status-response nil input)) ([resultWrapper1142829 input] (clojure.core/let [rawinput1142828 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1142830 {"Pipeline" (rawinput1142828 "Pipeline")}] (clojure.core/cond-> {} (letvar1142830 "Pipeline") (clojure.core/assoc :pipeline (deser-pipeline (clojure.core/get-in letvar1142830 ["Pipeline"])))))))
+
+(clojure.core/defn- response-create-pipeline-response ([input] (response-create-pipeline-response nil input)) ([resultWrapper1142832 input] (clojure.core/let [rawinput1142831 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1142833 {"Pipeline" (rawinput1142831 "Pipeline"), "Warnings" (rawinput1142831 "Warnings")}] (clojure.core/cond-> {} (letvar1142833 "Pipeline") (clojure.core/assoc :pipeline (deser-pipeline (clojure.core/get-in letvar1142833 ["Pipeline"]))) (letvar1142833 "Warnings") (clojure.core/assoc :warnings (deser-warnings (clojure.core/get-in letvar1142833 ["Warnings"])))))))
+
+(clojure.core/defn- response-cancel-job-response ([input] (response-cancel-job-response nil input)) ([resultWrapper1142835 input] (clojure.core/let [rawinput1142834 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1142836 {}] (clojure.core/cond-> {}))))
+
+(clojure.core/defn- response-validation-exception ([input] (response-validation-exception nil input)) ([resultWrapper1142838 input] (clojure.core/let [rawinput1142837 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1142839 {}] (clojure.core/cond-> {}))))
+
+(clojure.core/defn- response-create-job-response ([input] (response-create-job-response nil input)) ([resultWrapper1142841 input] (clojure.core/let [rawinput1142840 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1142842 {"Job" (rawinput1142840 "Job")}] (clojure.core/cond-> {} (letvar1142842 "Job") (clojure.core/assoc :job (deser-job (clojure.core/get-in letvar1142842 ["Job"])))))))
+
+(clojure.core/defn- response-resource-in-use-exception ([input] (response-resource-in-use-exception nil input)) ([resultWrapper1142844 input] (clojure.core/let [rawinput1142843 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1142845 {}] (clojure.core/cond-> {}))))
+
+(clojure.core/defn- response-limit-exceeded-exception ([input] (response-limit-exceeded-exception nil input)) ([resultWrapper1142847 input] (clojure.core/let [rawinput1142846 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1142848 {}] (clojure.core/cond-> {}))))
+
+(clojure.core/defn- response-read-job-response ([input] (response-read-job-response nil input)) ([resultWrapper1142850 input] (clojure.core/let [rawinput1142849 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1142851 {"Job" (rawinput1142849 "Job")}] (clojure.core/cond-> {} (letvar1142851 "Job") (clojure.core/assoc :job (deser-job (clojure.core/get-in letvar1142851 ["Job"])))))))
+
+(clojure.core/defn- response-incompatible-version-exception ([input] (response-incompatible-version-exception nil input)) ([resultWrapper1142853 input] (clojure.core/let [rawinput1142852 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1142854 {}] (clojure.core/cond-> {}))))
+
+(clojure.core/defn- response-test-role-response ([input] (response-test-role-response nil input)) ([resultWrapper1142856 input] (clojure.core/let [rawinput1142855 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1142857 {"Success" (rawinput1142855 "Success"), "Messages" (rawinput1142855 "Messages")}] (clojure.core/cond-> {} (letvar1142857 "Success") (clojure.core/assoc :success (deser-success (clojure.core/get-in letvar1142857 ["Success"]))) (letvar1142857 "Messages") (clojure.core/assoc :messages (deser-exception-messages (clojure.core/get-in letvar1142857 ["Messages"])))))))
+
+(clojure.core/defn- response-delete-pipeline-response ([input] (response-delete-pipeline-response nil input)) ([resultWrapper1142859 input] (clojure.core/let [rawinput1142858 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1142860 {}] (clojure.core/cond-> {}))))
+
+(clojure.core/defn- response-resource-not-found-exception ([input] (response-resource-not-found-exception nil input)) ([resultWrapper1142862 input] (clojure.core/let [rawinput1142861 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1142863 {}] (clojure.core/cond-> {}))))
+
+(clojure.core/defn- response-read-preset-response ([input] (response-read-preset-response nil input)) ([resultWrapper1142865 input] (clojure.core/let [rawinput1142864 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1142866 {"Preset" (rawinput1142864 "Preset")}] (clojure.core/cond-> {} (letvar1142866 "Preset") (clojure.core/assoc :preset (deser-preset (clojure.core/get-in letvar1142866 ["Preset"])))))))
+
+(clojure.core/defn- response-create-preset-response ([input] (response-create-preset-response nil input)) ([resultWrapper1142868 input] (clojure.core/let [rawinput1142867 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1142869 {"Preset" (rawinput1142867 "Preset"), "Warning" (rawinput1142867 "Warning")}] (clojure.core/cond-> {} (letvar1142869 "Preset") (clojure.core/assoc :preset (deser-preset (clojure.core/get-in letvar1142869 ["Preset"]))) (letvar1142869 "Warning") (clojure.core/assoc :warning (deser-string (clojure.core/get-in letvar1142869 ["Warning"])))))))
+
+(clojure.core/defn- response-access-denied-exception ([input] (response-access-denied-exception nil input)) ([resultWrapper1142871 input] (clojure.core/let [rawinput1142870 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1142872 {}] (clojure.core/cond-> {}))))
+
+(clojure.core/defn- response-list-jobs-by-pipeline-response ([input] (response-list-jobs-by-pipeline-response nil input)) ([resultWrapper1142874 input] (clojure.core/let [rawinput1142873 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1142875 {"Jobs" (rawinput1142873 "Jobs"), "NextPageToken" (rawinput1142873 "NextPageToken")}] (clojure.core/cond-> {} (letvar1142875 "Jobs") (clojure.core/assoc :jobs (deser-jobs (clojure.core/get-in letvar1142875 ["Jobs"]))) (letvar1142875 "NextPageToken") (clojure.core/assoc :next-page-token (deser-id (clojure.core/get-in letvar1142875 ["NextPageToken"])))))))
+
+(clojure.core/defn- response-list-jobs-by-status-response ([input] (response-list-jobs-by-status-response nil input)) ([resultWrapper1142877 input] (clojure.core/let [rawinput1142876 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1142878 {"Jobs" (rawinput1142876 "Jobs"), "NextPageToken" (rawinput1142876 "NextPageToken")}] (clojure.core/cond-> {} (letvar1142878 "Jobs") (clojure.core/assoc :jobs (deser-jobs (clojure.core/get-in letvar1142878 ["Jobs"]))) (letvar1142878 "NextPageToken") (clojure.core/assoc :next-page-token (deser-id (clojure.core/get-in letvar1142878 ["NextPageToken"])))))))
+
+(clojure.core/defn- response-update-pipeline-response ([input] (response-update-pipeline-response nil input)) ([resultWrapper1142880 input] (clojure.core/let [rawinput1142879 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1142881 {"Pipeline" (rawinput1142879 "Pipeline"), "Warnings" (rawinput1142879 "Warnings")}] (clojure.core/cond-> {} (letvar1142881 "Pipeline") (clojure.core/assoc :pipeline (deser-pipeline (clojure.core/get-in letvar1142881 ["Pipeline"]))) (letvar1142881 "Warnings") (clojure.core/assoc :warnings (deser-warnings (clojure.core/get-in letvar1142881 ["Warnings"])))))))
+
+(clojure.core/defn- response-list-pipelines-response ([input] (response-list-pipelines-response nil input)) ([resultWrapper1142883 input] (clojure.core/let [rawinput1142882 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1142884 {"Pipelines" (rawinput1142882 "Pipelines"), "NextPageToken" (rawinput1142882 "NextPageToken")}] (clojure.core/cond-> {} (letvar1142884 "Pipelines") (clojure.core/assoc :pipelines (deser-pipelines (clojure.core/get-in letvar1142884 ["Pipelines"]))) (letvar1142884 "NextPageToken") (clojure.core/assoc :next-page-token (deser-id (clojure.core/get-in letvar1142884 ["NextPageToken"])))))))
+
+(clojure.core/defn- response-list-presets-response ([input] (response-list-presets-response nil input)) ([resultWrapper1142886 input] (clojure.core/let [rawinput1142885 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1142887 {"Presets" (rawinput1142885 "Presets"), "NextPageToken" (rawinput1142885 "NextPageToken")}] (clojure.core/cond-> {} (letvar1142887 "Presets") (clojure.core/assoc :presets (deser-presets (clojure.core/get-in letvar1142887 ["Presets"]))) (letvar1142887 "NextPageToken") (clojure.core/assoc :next-page-token (deser-id (clojure.core/get-in letvar1142887 ["NextPageToken"])))))))
+
+(clojure.core/defn- response-internal-service-exception ([input] (response-internal-service-exception nil input)) ([resultWrapper1142889 input] (clojure.core/let [rawinput1142888 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1142890 {}] (clojure.core/cond-> {}))))
+
+(clojure.core/defn- response-read-pipeline-response ([input] (response-read-pipeline-response nil input)) ([resultWrapper1142892 input] (clojure.core/let [rawinput1142891 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1142893 {"Pipeline" (rawinput1142891 "Pipeline"), "Warnings" (rawinput1142891 "Warnings")}] (clojure.core/cond-> {} (letvar1142893 "Pipeline") (clojure.core/assoc :pipeline (deser-pipeline (clojure.core/get-in letvar1142893 ["Pipeline"]))) (letvar1142893 "Warnings") (clojure.core/assoc :warnings (deser-warnings (clojure.core/get-in letvar1142893 ["Warnings"])))))))
+
+(clojure.core/defn- response-delete-preset-response ([input] (response-delete-preset-response nil input)) ([resultWrapper1142895 input] (clojure.core/let [rawinput1142894 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1142896 {}] (clojure.core/cond-> {}))))
+
+(clojure.core/defn- response-update-pipeline-notifications-response ([input] (response-update-pipeline-notifications-response nil input)) ([resultWrapper1142898 input] (clojure.core/let [rawinput1142897 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1142899 {"Pipeline" (rawinput1142897 "Pipeline")}] (clojure.core/cond-> {} (letvar1142899 "Pipeline") (clojure.core/assoc :pipeline (deser-pipeline (clojure.core/get-in letvar1142899 ["Pipeline"])))))))
+
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/fixed-gop (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^true$)|(^false$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.update-pipeline-status-request/status (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/pipeline-status))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/update-pipeline-status-request (clojure.spec.alpha/keys :req-un [:portkey.aws.elastictranscoder.-2012-09-25/id :portkey.aws.elastictranscoder.-2012-09-25.update-pipeline-status-request/status] :opt-un []))
@@ -557,7 +1101,7 @@
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.artwork/album-art-format (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/jpg-or-png))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/artwork (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25.artwork/input-key :portkey.aws.elastictranscoder.-2012-09-25.artwork/max-width :portkey.aws.elastictranscoder.-2012-09-25.artwork/max-height :portkey.aws.elastictranscoder.-2012-09-25/sizing-policy :portkey.aws.elastictranscoder.-2012-09-25/padding-policy :portkey.aws.elastictranscoder.-2012-09-25.artwork/album-art-format :portkey.aws.elastictranscoder.-2012-09-25/encryption]))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/sns-topic (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^$)|(^arn:aws:sns:.*:\w{12}:.+$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/sns-topic (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^$)|(^arn:aws:sns:.*:\w{12}:.+$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/caption-sources (clojure.spec.alpha/coll-of :portkey.aws.elastictranscoder.-2012-09-25/caption-source :max-count 20))
 
@@ -569,7 +1113,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/permissions (clojure.spec.alpha/coll-of :portkey.aws.elastictranscoder.-2012-09-25/permission :max-count 30))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/sizing-policy (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^Fit$)|(^Fill$)|(^Stretch$)|(^Keep$)|(^ShrinkToFit$)|(^ShrinkToFill$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/sizing-policy (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^Fit$)|(^Fill$)|(^Stretch$)|(^Keep$)|(^ShrinkToFit$)|(^ShrinkToFill$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/create-pipeline-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25/pipeline :portkey.aws.elastictranscoder.-2012-09-25/warnings]))
 
@@ -583,13 +1127,13 @@
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.play-ready-drm/license-acquisition-url (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/one-to-512-string))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/play-ready-drm (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25.play-ready-drm/format :portkey.aws.elastictranscoder.-2012-09-25.play-ready-drm/key :portkey.aws.elastictranscoder.-2012-09-25.play-ready-drm/key-md-5 :portkey.aws.elastictranscoder.-2012-09-25.play-ready-drm/key-id :portkey.aws.elastictranscoder.-2012-09-25.play-ready-drm/initialization-vector :portkey.aws.elastictranscoder.-2012-09-25.play-ready-drm/license-acquisition-url]))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/codec-option (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/codec-option (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012852__auto__] (clojure.core/<= 1 (clojure.core/count s__1012852__auto__))) (clojure.core/fn [s__1012853__auto__] (clojure.core/< (clojure.core/count s__1012853__auto__) 255))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/cancel-job-response (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/validation-exception (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/job-status (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^Submitted$)|(^Progressing$)|(^Complete$)|(^Canceled$)|(^Error$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/job-status (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^Submitted$)|(^Progressing$)|(^Complete$)|(^Canceled$)|(^Error$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/access-controls (clojure.spec.alpha/coll-of :portkey.aws.elastictranscoder.-2012-09-25/access-control :max-count 30))
 
@@ -606,7 +1150,7 @@
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.list-pipelines-request/page-token (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/id))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/list-pipelines-request (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25/ascending :portkey.aws.elastictranscoder.-2012-09-25.list-pipelines-request/page-token]))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/playlist-format (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^HLSv3$)|(^HLSv4$)|(^Smooth$)|(^MPEG-DASH$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/playlist-format (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^HLSv3$)|(^HLSv4$)|(^Smooth$)|(^MPEG-DASH$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/warnings (clojure.spec.alpha/coll-of :portkey.aws.elastictranscoder.-2012-09-25/warning))
 
@@ -616,19 +1160,19 @@
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/playlists (clojure.spec.alpha/coll-of :portkey.aws.elastictranscoder.-2012-09-25/playlist))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/play-ready-drm-format-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^microsoft$)|(^discretix-3.0$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/play-ready-drm-format-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^microsoft$)|(^discretix-3.0$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.permission/access (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/access-controls))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/permission (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25/grantee-type :portkey.aws.elastictranscoder.-2012-09-25/grantee :portkey.aws.elastictranscoder.-2012-09-25.permission/access]))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/key-storage-policy (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^NoStore$)|(^WithVariantPlaylists$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/key-storage-policy (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^NoStore$)|(^WithVariantPlaylists$)" s__1012854__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/grantee-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^Canonical$)|(^Email$)|(^Group$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/grantee-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^Canonical$)|(^Email$)|(^Group$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.job-album-art/artwork (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/artworks))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/job-album-art (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25/merge-policy :portkey.aws.elastictranscoder.-2012-09-25.job-album-art/artwork]))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/encryption-mode (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^s3$)|(^s3-aws-kms$)|(^aes-cbc-pkcs7$)|(^aes-ctr$)|(^aes-gcm$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/encryption-mode (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^s3$)|(^s3-aws-kms$)|(^aes-cbc-pkcs7$)|(^aes-ctr$)|(^aes-gcm$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.create-pipeline-request/input-bucket (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/bucket-name))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.create-pipeline-request/output-bucket (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/bucket-name))
@@ -637,16 +1181,16 @@
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.create-pipeline-request/thumbnail-config (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/pipeline-output-config))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/create-pipeline-request (clojure.spec.alpha/keys :req-un [:portkey.aws.elastictranscoder.-2012-09-25/name :portkey.aws.elastictranscoder.-2012-09-25.create-pipeline-request/input-bucket :portkey.aws.elastictranscoder.-2012-09-25/role] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25.create-pipeline-request/output-bucket :portkey.aws.elastictranscoder.-2012-09-25.create-pipeline-request/aws-kms-key-arn :portkey.aws.elastictranscoder.-2012-09-25/notifications :portkey.aws.elastictranscoder.-2012-09-25.create-pipeline-request/content-config :portkey.aws.elastictranscoder.-2012-09-25.create-pipeline-request/thumbnail-config]))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/jpg-or-png (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^jpg$)|(^png$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/jpg-or-png (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^jpg$)|(^png$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.captions/merge-policy (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/caption-merge-policy))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/captions (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25.captions/merge-policy :portkey.aws.elastictranscoder.-2012-09-25/caption-sources :portkey.aws.elastictranscoder.-2012-09-25/caption-formats]))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/keyframes-max-dist (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^\d{1,6}$" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/keyframes-max-dist (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"^\d{1,6}$" s__1012854__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/time-offset (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^[+-]?\d{1,5}(\.\d{0,3})?$)|(^[+-]?([0-1]?[0-9]:|2[0-3]:)?([0-5]?[0-9]:)?[0-5]?[0-9](\.\d{0,3})?$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/time-offset (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^[+-]?\d{1,5}(\.\d{0,3})?$)|(^[+-]?([0-1]?[0-9]:|2[0-3]:)?([0-5]?[0-9]:)?[0-5]?[0-9](\.\d{0,3})?$)" s__1012854__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/audio-channels (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^auto$)|(^0$)|(^1$)|(^2$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/audio-channels (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^auto$)|(^0$)|(^1$)|(^2$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/caption-formats (clojure.spec.alpha/coll-of :portkey.aws.elastictranscoder.-2012-09-25/caption-format :max-count 4))
 
@@ -655,9 +1199,9 @@
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/create-job-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25/job]))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/pixels-or-percent (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^\d{1,3}(\.\d{0,5})?%$)|(^\d{1,4}?px$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/pixels-or-percent (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^\d{1,3}(\.\d{0,5})?%$)|(^\d{1,4}?px$)" s__1012854__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/caption-merge-policy (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^MergeOverride$)|(^MergeRetain$)|(^Override$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/caption-merge-policy (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^MergeOverride$)|(^MergeRetain$)|(^Override$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.pipeline/input-bucket (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/bucket-name))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.pipeline/aws-kms-key-arn (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/key-arn))
@@ -668,7 +1212,7 @@
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.pipeline/arn (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/string))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/pipeline (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25.pipeline/input-bucket :portkey.aws.elastictranscoder.-2012-09-25.pipeline/aws-kms-key-arn :portkey.aws.elastictranscoder.-2012-09-25.pipeline/output-bucket :portkey.aws.elastictranscoder.-2012-09-25.pipeline/content-config :portkey.aws.elastictranscoder.-2012-09-25.pipeline/thumbnail-config :portkey.aws.elastictranscoder.-2012-09-25.pipeline/status :portkey.aws.elastictranscoder.-2012-09-25/role :portkey.aws.elastictranscoder.-2012-09-25.pipeline/arn :portkey.aws.elastictranscoder.-2012-09-25/name :portkey.aws.elastictranscoder.-2012-09-25/notifications :portkey.aws.elastictranscoder.-2012-09-25/id]))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/hls-content-protection-method (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^aes-128$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/hls-content-protection-method (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^aes-128$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.thumbnails/format (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/jpg-or-png))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.thumbnails/interval (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/digits))
@@ -677,43 +1221,43 @@
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.thumbnails/max-height (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/digits-or-auto))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/thumbnails (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25.thumbnails/format :portkey.aws.elastictranscoder.-2012-09-25.thumbnails/interval :portkey.aws.elastictranscoder.-2012-09-25.thumbnails/resolution :portkey.aws.elastictranscoder.-2012-09-25/aspect-ratio :portkey.aws.elastictranscoder.-2012-09-25.thumbnails/max-width :portkey.aws.elastictranscoder.-2012-09-25.thumbnails/max-height :portkey.aws.elastictranscoder.-2012-09-25/sizing-policy :portkey.aws.elastictranscoder.-2012-09-25/padding-policy]))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/digits (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^\d{1,5}$" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/digits (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"^\d{1,5}$" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/resource-in-use-exception (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/watermark-sizing-policy (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^Fit$)|(^Stretch$)|(^ShrinkToFit$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/watermark-sizing-policy (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^Fit$)|(^Stretch$)|(^ShrinkToFit$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/limit-exceeded-exception (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/resolution (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^auto$)|(^\d{1,5}x\d{1,5}$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/resolution (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^auto$)|(^\d{1,5}x\d{1,5}$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/cancel-job-request (clojure.spec.alpha/keys :req-un [:portkey.aws.elastictranscoder.-2012-09-25/id] :opt-un []))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/artworks (clojure.spec.alpha/coll-of :portkey.aws.elastictranscoder.-2012-09-25/artwork))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/video-bit-rate (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^\d{2,5}$)|(^auto$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/video-bit-rate (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^\d{2,5}$)|(^auto$)" s__1012854__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/frame-rate (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^auto$)|(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^50$)|(^60$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/frame-rate (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^auto$)|(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^50$)|(^60$)" s__1012854__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/opacity (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^\d{1,3}(\.\d{0,20})?$" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/opacity (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"^\d{1,3}(\.\d{0,20})?$" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.time-span/start-time (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/time))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.time-span/duration (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/time))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/time-span (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25.time-span/start-time :portkey.aws.elastictranscoder.-2012-09-25.time-span/duration]))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/aspect-ratio (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^auto$)|(^1:1$)|(^4:3$)|(^3:2$)|(^16:9$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/aspect-ratio (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^auto$)|(^1:1$)|(^4:3$)|(^3:2$)|(^16:9$)" s__1012854__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/watermark-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1024)) (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^.{1,1020}.jpg$)|(^.{1,1019}.jpeg$)|(^.{1,1020}.png$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/watermark-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012852__auto__] (clojure.core/<= 1 (clojure.core/count s__1012852__auto__))) (clojure.core/fn [s__1012853__auto__] (clojure.core/< (clojure.core/count s__1012853__auto__) 1024)) (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^.{1,1020}.jpg$)|(^.{1,1019}.jpeg$)|(^.{1,1020}.png$)" s__1012854__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/one-to-512-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 512))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/one-to-512-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012852__auto__] (clojure.core/<= 1 (clojure.core/count s__1012852__auto__))) (clojure.core/fn [s__1012853__auto__] (clojure.core/< (clojure.core/count s__1012853__auto__) 512))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/zero-to-512-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 0 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 512))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/zero-to-512-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012852__auto__] (clojure.core/<= 0 (clojure.core/count s__1012852__auto__))) (clojure.core/fn [s__1012853__auto__] (clojure.core/< (clojure.core/count s__1012853__auto__) 512))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/thumbnail-pattern (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^$)|(^.*\{count\}.*$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/thumbnail-pattern (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^$)|(^.*\{count\}.*$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/read-job-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25/job]))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/pipeline-status (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^Active$)|(^Paused$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/pipeline-status (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^Active$)|(^Paused$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.job-output/duration-millis (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/nullable-long))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.job-output/thumbnail-encryption (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/encryption))
@@ -734,7 +1278,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/user-metadata (clojure.spec.alpha/map-of :portkey.aws.elastictranscoder.-2012-09-25/string :portkey.aws.elastictranscoder.-2012-09-25/string))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/ascending (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^true$)|(^false$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/ascending (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^true$)|(^false$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.detected-properties/width (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/nullable-integer))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.detected-properties/height (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/nullable-integer))
@@ -748,7 +1292,7 @@
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.pipeline-output-config/bucket (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/bucket-name))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/pipeline-output-config (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25.pipeline-output-config/bucket :portkey.aws.elastictranscoder.-2012-09-25/storage-class :portkey.aws.elastictranscoder.-2012-09-25/permissions]))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012852__auto__] (clojure.core/<= 1 (clojure.core/count s__1012852__auto__))) (clojure.core/fn [s__1012853__auto__] (clojure.core/< (clojure.core/count s__1012853__auto__) 255))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.test-role-response/messages (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/exception-messages))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/test-role-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25/success :portkey.aws.elastictranscoder.-2012-09-25.test-role-response/messages]))
@@ -757,11 +1301,11 @@
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/delete-pipeline-response (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/role (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^arn:aws:iam::\w{12}:role/.+$" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/role (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"^arn:aws:iam::\w{12}:role/.+$" s__1012854__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/interlaced (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^auto$)|(^true$)|(^false$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/interlaced (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^auto$)|(^true$)|(^false$)" s__1012854__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/max-frame-rate (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^50$)|(^60$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/max-frame-rate (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^10$)|(^15$)|(^23.97$)|(^24$)|(^25$)|(^29.97$)|(^30$)|(^50$)|(^60$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.playlist/name (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/filename))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.playlist/format (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/playlist-format))
@@ -771,7 +1315,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/delete-pipeline-request (clojure.spec.alpha/keys :req-un [:portkey.aws.elastictranscoder.-2012-09-25/id] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/success (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^true$)|(^false$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/success (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^true$)|(^false$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.list-jobs-by-status-request/status (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/job-status))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.list-jobs-by-status-request/page-token (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/id))
@@ -798,7 +1342,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/float-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^\d{1,5}(\.\d{0,5})?$" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/float-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"^\d{1,5}(\.\d{0,5})?$" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.timing/submit-time-millis (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/nullable-long))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.timing/start-time-millis (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/nullable-long))
@@ -809,25 +1353,25 @@
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/read-preset-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25/preset]))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/audio-sample-rate (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^auto$)|(^22050$)|(^32000$)|(^44100$)|(^48000$)|(^96000$)|(^192000$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/audio-sample-rate (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^auto$)|(^22050$)|(^32000$)|(^44100$)|(^48000$)|(^96000$)|(^192000$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.list-presets-request/page-token (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/id))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/list-presets-request (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25/ascending :portkey.aws.elastictranscoder.-2012-09-25.list-presets-request/page-token]))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/audio-bit-depth (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^8$)|(^16$)|(^24$)|(^32$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/audio-bit-depth (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^8$)|(^16$)|(^24$)|(^32$)" s__1012854__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/description (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 0 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/description (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012852__auto__] (clojure.core/<= 0 (clojure.core/count s__1012852__auto__))) (clojure.core/fn [s__1012853__auto__] (clojure.core/< (clojure.core/count s__1012853__auto__) 255))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.create-preset-response/warning (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/string))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/create-preset-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25/preset :portkey.aws.elastictranscoder.-2012-09-25.create-preset-response/warning]))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/audio-packing-mode (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^SingleTrack$)|(^OneChannelPerTrack$)|(^OneChannelPerTrackWithMosTo8Tracks$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/audio-packing-mode (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^SingleTrack$)|(^OneChannelPerTrack$)|(^OneChannelPerTrackWithMosTo8Tracks$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/read-job-request (clojure.spec.alpha/keys :req-un [:portkey.aws.elastictranscoder.-2012-09-25/id] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/audio-bit-order (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^LittleEndian$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/audio-bit-order (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^LittleEndian$)" s__1012854__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/preset-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^System$)|(^Custom$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/preset-type (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^System$)|(^Custom$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.hls-content-protection/method (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/hls-content-protection-method))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.hls-content-protection/key (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/base-64-encoded-string))
@@ -848,7 +1392,7 @@
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.list-jobs-by-pipeline-response/next-page-token (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/id))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/list-jobs-by-pipeline-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25/jobs :portkey.aws.elastictranscoder.-2012-09-25.list-jobs-by-pipeline-response/next-page-token]))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/digits-or-auto (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^auto$)|(^\d{2,4}$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/digits-or-auto (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^auto$)|(^\d{2,4}$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.input-captions/merge-policy (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/caption-merge-policy))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/input-captions (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25.input-captions/merge-policy :portkey.aws.elastictranscoder.-2012-09-25/caption-sources]))
@@ -862,26 +1406,26 @@
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.audio-parameters/codec-options (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/audio-codec-options))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/audio-parameters (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25.audio-parameters/codec :portkey.aws.elastictranscoder.-2012-09-25.audio-parameters/sample-rate :portkey.aws.elastictranscoder.-2012-09-25.audio-parameters/bit-rate :portkey.aws.elastictranscoder.-2012-09-25.audio-parameters/channels :portkey.aws.elastictranscoder.-2012-09-25/audio-packing-mode :portkey.aws.elastictranscoder.-2012-09-25.audio-parameters/codec-options]))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/access-control (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^FullControl$)|(^Read$)|(^ReadAcp$)|(^WriteAcp$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/access-control (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^FullControl$)|(^Read$)|(^ReadAcp$)|(^WriteAcp$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.list-jobs-by-status-response/next-page-token (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/id))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/list-jobs-by-status-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25/jobs :portkey.aws.elastictranscoder.-2012-09-25.list-jobs-by-status-response/next-page-token]))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/update-pipeline-notifications-request (clojure.spec.alpha/keys :req-un [:portkey.aws.elastictranscoder.-2012-09-25/id :portkey.aws.elastictranscoder.-2012-09-25/notifications] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/audio-codec-profile (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^auto$)|(^AAC-LC$)|(^HE-AAC$)|(^HE-AACv2$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/audio-codec-profile (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^auto$)|(^AAC-LC$)|(^HE-AAC$)|(^HE-AACv2$)" s__1012854__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/video-codec (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^H\.264$)|(^vp8$)|(^vp9$)|(^mpeg2$)|(^gif$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/video-codec (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^H\.264$)|(^vp8$)|(^vp9$)|(^mpeg2$)|(^gif$)" s__1012854__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/vertical-align (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^Top$)|(^Bottom$)|(^Center$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/vertical-align (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^Top$)|(^Bottom$)|(^Center$)" s__1012854__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/rotate (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^auto$)|(^0$)|(^90$)|(^180$)|(^270$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/rotate (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^auto$)|(^0$)|(^90$)|(^180$)|(^270$)" s__1012854__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/audio-codec (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^AAC$)|(^vorbis$)|(^mp3$)|(^mp2$)|(^pcm$)|(^flac$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/audio-codec (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^AAC$)|(^vorbis$)|(^mp3$)|(^mp2$)|(^pcm$)|(^flac$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/pipelines (clojure.spec.alpha/coll-of :portkey.aws.elastictranscoder.-2012-09-25/pipeline))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/audio-signed (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^Unsigned$)|(^Signed$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/audio-signed (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^Unsigned$)|(^Signed$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/jobs (clojure.spec.alpha/coll-of :portkey.aws.elastictranscoder.-2012-09-25/job))
 
@@ -898,17 +1442,17 @@
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.update-pipeline-request/thumbnail-config (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/pipeline-output-config))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/update-pipeline-request (clojure.spec.alpha/keys :req-un [:portkey.aws.elastictranscoder.-2012-09-25/id] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25/name :portkey.aws.elastictranscoder.-2012-09-25.update-pipeline-request/input-bucket :portkey.aws.elastictranscoder.-2012-09-25/role :portkey.aws.elastictranscoder.-2012-09-25.update-pipeline-request/aws-kms-key-arn :portkey.aws.elastictranscoder.-2012-09-25/notifications :portkey.aws.elastictranscoder.-2012-09-25.update-pipeline-request/content-config :portkey.aws.elastictranscoder.-2012-09-25.update-pipeline-request/thumbnail-config]))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/filename (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/filename (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012852__auto__] (clojure.core/<= 1 (clojure.core/count s__1012852__auto__))) (clojure.core/fn [s__1012853__auto__] (clojure.core/< (clojure.core/count s__1012853__auto__) 255))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/update-pipeline-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25/pipeline :portkey.aws.elastictranscoder.-2012-09-25/warnings]))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/preset-watermarks (clojure.spec.alpha/coll-of :portkey.aws.elastictranscoder.-2012-09-25/preset-watermark))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/key-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 0 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/key-arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012852__auto__] (clojure.core/<= 0 (clojure.core/count s__1012852__auto__))) (clojure.core/fn [s__1012853__auto__] (clojure.core/< (clojure.core/count s__1012853__auto__) 255))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/clip (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25/time-span]))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/merge-policy (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^Replace$)|(^Prepend$)|(^Append$)|(^Fallback$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/merge-policy (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^Replace$)|(^Prepend$)|(^Append$)|(^Fallback$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.encryption/mode (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/encryption-mode))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.encryption/key (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/base-64-encoded-string))
@@ -919,15 +1463,15 @@
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.list-pipelines-response/next-page-token (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/id))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/list-pipelines-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25/pipelines :portkey.aws.elastictranscoder.-2012-09-25.list-pipelines-response/next-page-token]))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/job-container (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^auto$)|(^3gp$)|(^asf$)|(^avi$)|(^divx$)|(^flv$)|(^mkv$)|(^mov$)|(^mp4$)|(^mpeg$)|(^mpeg-ps$)|(^mpeg-ts$)|(^mxf$)|(^ogg$)|(^ts$)|(^vob$)|(^wav$)|(^webm$)|(^mp3$)|(^m4a$)|(^aac$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/job-container (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^auto$)|(^3gp$)|(^asf$)|(^avi$)|(^divx$)|(^flv$)|(^mkv$)|(^mov$)|(^mp4$)|(^mpeg$)|(^mpeg-ps$)|(^mpeg-ts$)|(^mxf$)|(^ogg$)|(^ts$)|(^vob$)|(^wav$)|(^webm$)|(^mp3$)|(^m4a$)|(^aac$)" s__1012854__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/preset-container (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^mp4$)|(^ts$)|(^webm$)|(^mp3$)|(^flac$)|(^oga$)|(^ogg$)|(^fmp4$)|(^mpg$)|(^flv$)|(^gif$)|(^mxf$)|(^wav$)|(^mp2$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/preset-container (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^mp4$)|(^ts$)|(^webm$)|(^mp3$)|(^flac$)|(^oga$)|(^ogg$)|(^fmp4$)|(^mpg$)|(^flv$)|(^gif$)|(^mxf$)|(^wav$)|(^mp2$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.job-input/key (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/long-key))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.job-input/container (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/job-container))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/job-input (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25/resolution :portkey.aws.elastictranscoder.-2012-09-25/frame-rate :portkey.aws.elastictranscoder.-2012-09-25/time-span :portkey.aws.elastictranscoder.-2012-09-25/aspect-ratio :portkey.aws.elastictranscoder.-2012-09-25/detected-properties :portkey.aws.elastictranscoder.-2012-09-25.job-input/key :portkey.aws.elastictranscoder.-2012-09-25/interlaced :portkey.aws.elastictranscoder.-2012-09-25.job-input/container :portkey.aws.elastictranscoder.-2012-09-25/input-captions :portkey.aws.elastictranscoder.-2012-09-25/encryption]))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/thumbnail-resolution (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^\d{1,5}x\d{1,5}$" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/thumbnail-resolution (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"^\d{1,5}x\d{1,5}$" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/read-pipeline-request (clojure.spec.alpha/keys :req-un [:portkey.aws.elastictranscoder.-2012-09-25/id] :opt-un []))
 
@@ -946,27 +1490,27 @@
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.job/output (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/job-output))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/job (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25/playlists :portkey.aws.elastictranscoder.-2012-09-25.job/status :portkey.aws.elastictranscoder.-2012-09-25.job/outputs :portkey.aws.elastictranscoder.-2012-09-25/user-metadata :portkey.aws.elastictranscoder.-2012-09-25.job/pipeline-id :portkey.aws.elastictranscoder.-2012-09-25.job/output-key-prefix :portkey.aws.elastictranscoder.-2012-09-25/timing :portkey.aws.elastictranscoder.-2012-09-25.job/inputs :portkey.aws.elastictranscoder.-2012-09-25.job/input :portkey.aws.elastictranscoder.-2012-09-25.job/arn :portkey.aws.elastictranscoder.-2012-09-25.job/output :portkey.aws.elastictranscoder.-2012-09-25/id]))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/key-id-guid (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$)|(^[0-9A-Fa-f]{32}$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/key-id-guid (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$)|(^[0-9A-Fa-f]{32}$)" s__1012854__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/target (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^Content$)|(^Frame$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/target (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^Content$)|(^Frame$)" s__1012854__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 40))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012852__auto__] (clojure.core/<= 1 (clojure.core/count s__1012852__auto__))) (clojure.core/fn [s__1012853__auto__] (clojure.core/< (clojure.core/count s__1012853__auto__) 40))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/create-job-outputs (clojure.spec.alpha/coll-of :portkey.aws.elastictranscoder.-2012-09-25/create-job-output :max-count 30))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/preset-watermark-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 40))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/preset-watermark-id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012852__auto__] (clojure.core/<= 1 (clojure.core/count s__1012852__auto__))) (clojure.core/fn [s__1012853__auto__] (clojure.core/< (clojure.core/count s__1012853__auto__) 40))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/storage-class (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^ReducedRedundancy$)|(^Standard$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/storage-class (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^ReducedRedundancy$)|(^Standard$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.list-jobs-by-pipeline-request/pipeline-id (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/id))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.list-jobs-by-pipeline-request/page-token (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/id))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/list-jobs-by-pipeline-request (clojure.spec.alpha/keys :req-un [:portkey.aws.elastictranscoder.-2012-09-25.list-jobs-by-pipeline-request/pipeline-id] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25/ascending :portkey.aws.elastictranscoder.-2012-09-25.list-jobs-by-pipeline-request/page-token]))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/grantee (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/grantee (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012852__auto__] (clojure.core/<= 1 (clojure.core/count s__1012852__auto__))) (clojure.core/fn [s__1012853__auto__] (clojure.core/< (clojure.core/count s__1012853__auto__) 255))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/caption-format-format (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^mov-text$)|(^srt$)|(^scc$)|(^webvtt$)|(^dfxp$)|(^cea-708$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/caption-format-format (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^mov-text$)|(^srt$)|(^scc$)|(^webvtt$)|(^dfxp$)|(^cea-708$)" s__1012854__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/non-empty-base-64-encoded-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^(?:[A-Za-z0-9\+/]{4})*(?:[A-Za-z0-9\+/]{2}==|[A-Za-z0-9\+/]{3}=)?$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/non-empty-base-64-encoded-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^(?:[A-Za-z0-9\+/]{4})*(?:[A-Za-z0-9\+/]{2}==|[A-Za-z0-9\+/]{3}=)?$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.preset-watermark/sizing-policy (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/watermark-sizing-policy))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.preset-watermark/horizontal-offset (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/pixels-or-percent))
@@ -976,9 +1520,9 @@
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.preset-watermark/id (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/preset-watermark-id))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/preset-watermark (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25.preset-watermark/sizing-policy :portkey.aws.elastictranscoder.-2012-09-25/opacity :portkey.aws.elastictranscoder.-2012-09-25.preset-watermark/horizontal-offset :portkey.aws.elastictranscoder.-2012-09-25.preset-watermark/vertical-offset :portkey.aws.elastictranscoder.-2012-09-25.preset-watermark/max-height :portkey.aws.elastictranscoder.-2012-09-25/vertical-align :portkey.aws.elastictranscoder.-2012-09-25/target :portkey.aws.elastictranscoder.-2012-09-25.preset-watermark/max-width :portkey.aws.elastictranscoder.-2012-09-25.preset-watermark/id :portkey.aws.elastictranscoder.-2012-09-25/horizontal-align]))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/bucket-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^(\w|\.|-){1,255}$" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/bucket-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"^(\w|\.|-){1,255}$" s__1012854__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/audio-bit-rate (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^\d{1,3}$" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/audio-bit-rate (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"^\d{1,3}$" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.notifications/progressing (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/sns-topic))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.notifications/completed (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/sns-topic))
@@ -1001,21 +1545,21 @@
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.caption-format/pattern (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/caption-format-pattern))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/caption-format (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25.caption-format/format :portkey.aws.elastictranscoder.-2012-09-25.caption-format/pattern :portkey.aws.elastictranscoder.-2012-09-25/encryption]))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/base-64-encoded-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^$|(^(?:[A-Za-z0-9\+/]{4})*(?:[A-Za-z0-9\+/]{2}==|[A-Za-z0-9\+/]{3}=)?$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/base-64-encoded-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"^$|(^(?:[A-Za-z0-9\+/]{4})*(?:[A-Za-z0-9\+/]{2}==|[A-Za-z0-9\+/]{3}=)?$)" s__1012854__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/padding-policy (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^Pad$)|(^NoPad$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/padding-policy (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^Pad$)|(^NoPad$)" s__1012854__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^\d{13}-\w{6}$" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/id (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"^\d{13}-\w{6}$" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/read-pipeline-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25/pipeline :portkey.aws.elastictranscoder.-2012-09-25/warnings]))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/delete-preset-response (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/time (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^\d{1,5}(\.\d{0,3})?$)|(^([0-1]?[0-9]:|2[0-3]:)?([0-5]?[0-9]:)?[0-5]?[0-9](\.\d{0,3})?$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/time (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^\d{1,5}(\.\d{0,3})?$)|(^([0-1]?[0-9]:|2[0-3]:)?([0-5]?[0-9]:)?[0-5]?[0-9](\.\d{0,3})?$)" s__1012854__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/long-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 1024))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/long-key (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012852__auto__] (clojure.core/<= 1 (clojure.core/count s__1012852__auto__))) (clojure.core/fn [s__1012853__auto__] (clojure.core/< (clojure.core/count s__1012853__auto__) 1024))))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/zero-to-255-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 0 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/zero-to-255-string (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012852__auto__] (clojure.core/<= 0 (clojure.core/count s__1012852__auto__))) (clojure.core/fn [s__1012853__auto__] (clojure.core/< (clojure.core/count s__1012853__auto__) 255))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/job-outputs (clojure.spec.alpha/coll-of :portkey.aws.elastictranscoder.-2012-09-25/job-output))
 
@@ -1025,7 +1569,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/create-job-playlists (clojure.spec.alpha/coll-of :portkey.aws.elastictranscoder.-2012-09-25/create-job-playlist :max-count 30))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/caption-format-pattern (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^$)|(^.*\{language\}.*$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/caption-format-pattern (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^$)|(^.*\{language\}.*$)" s__1012854__auto__))))
 
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/update-pipeline-notifications-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25/pipeline]))
 
@@ -1036,55 +1580,55 @@
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25.create-job-output/segment-duration (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/float-string))
 (clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/create-job-output (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.elastictranscoder.-2012-09-25/composition :portkey.aws.elastictranscoder.-2012-09-25/captions :portkey.aws.elastictranscoder.-2012-09-25.create-job-output/thumbnail-encryption :portkey.aws.elastictranscoder.-2012-09-25/thumbnail-pattern :portkey.aws.elastictranscoder.-2012-09-25.create-job-output/preset-id :portkey.aws.elastictranscoder.-2012-09-25/key :portkey.aws.elastictranscoder.-2012-09-25.create-job-output/watermarks :portkey.aws.elastictranscoder.-2012-09-25/rotate :portkey.aws.elastictranscoder.-2012-09-25.create-job-output/album-art :portkey.aws.elastictranscoder.-2012-09-25/encryption :portkey.aws.elastictranscoder.-2012-09-25.create-job-output/segment-duration]))
 
-(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/horizontal-align (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"(^Left$)|(^Right$)|(^Center$)" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.elastictranscoder.-2012-09-25/horizontal-align (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"(^Left$)|(^Right$)|(^Center$)" s__1012854__auto__))))
 
-(clojure.core/defn create-pipeline ([create-pipeline-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-pipeline-request create-pipeline-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/create-pipeline-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/pipelines", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/create-pipeline-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code 201, :http.request.configuration/action "CreatePipeline", :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "LimitExceededException" :portkey.aws.elastictranscoder.-2012-09-25/limit-exceeded-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
+(clojure.core/defn create-pipeline ([create-pipeline-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-create-pipeline-request create-pipeline-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/create-pipeline-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/pipelines", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/create-pipeline-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code 201, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "CreatePipeline", :http.request.configuration/output-deser-fn response-create-pipeline-response, :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "LimitExceededException" :portkey.aws.elastictranscoder.-2012-09-25/limit-exceeded-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
 (clojure.spec.alpha/fdef create-pipeline :args (clojure.spec.alpha/tuple :portkey.aws.elastictranscoder.-2012-09-25/create-pipeline-request) :ret (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/create-pipeline-response))
 
-(clojure.core/defn list-pipelines ([] (list-pipelines {})) ([list-pipelines-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-pipelines-request list-pipelines-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/list-pipelines-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/pipelines", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/list-pipelines-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/action "ListPipelines", :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
+(clojure.core/defn list-pipelines ([] (list-pipelines {})) ([list-pipelines-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-list-pipelines-request list-pipelines-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/list-pipelines-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/pipelines", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/list-pipelines-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "ListPipelines", :http.request.configuration/output-deser-fn response-list-pipelines-response, :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
 (clojure.spec.alpha/fdef list-pipelines :args (clojure.spec.alpha/? :portkey.aws.elastictranscoder.-2012-09-25/list-pipelines-request) :ret (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/list-pipelines-response))
 
-(clojure.core/defn read-preset ([read-preset-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-read-preset-request read-preset-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/read-preset-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/presets/{Id}", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/read-preset-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/action "ReadPreset", :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
+(clojure.core/defn read-preset ([read-preset-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-read-preset-request read-preset-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/read-preset-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/presets/{Id}", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/read-preset-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "ReadPreset", :http.request.configuration/output-deser-fn response-read-preset-response, :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
 (clojure.spec.alpha/fdef read-preset :args (clojure.spec.alpha/tuple :portkey.aws.elastictranscoder.-2012-09-25/read-preset-request) :ret (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/read-preset-response))
 
-(clojure.core/defn read-pipeline ([read-pipeline-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-read-pipeline-request read-pipeline-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/read-pipeline-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/pipelines/{Id}", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/read-pipeline-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/action "ReadPipeline", :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
+(clojure.core/defn read-pipeline ([read-pipeline-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-read-pipeline-request read-pipeline-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/read-pipeline-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/pipelines/{Id}", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/read-pipeline-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "ReadPipeline", :http.request.configuration/output-deser-fn response-read-pipeline-response, :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
 (clojure.spec.alpha/fdef read-pipeline :args (clojure.spec.alpha/tuple :portkey.aws.elastictranscoder.-2012-09-25/read-pipeline-request) :ret (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/read-pipeline-response))
 
-(clojure.core/defn list-jobs-by-pipeline ([list-jobs-by-pipeline-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-jobs-by-pipeline-request list-jobs-by-pipeline-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/list-jobs-by-pipeline-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/jobsByPipeline/{PipelineId}", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/list-jobs-by-pipeline-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/action "ListJobsByPipeline", :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
+(clojure.core/defn list-jobs-by-pipeline ([list-jobs-by-pipeline-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-list-jobs-by-pipeline-request list-jobs-by-pipeline-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/list-jobs-by-pipeline-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/jobsByPipeline/{PipelineId}", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/list-jobs-by-pipeline-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "ListJobsByPipeline", :http.request.configuration/output-deser-fn response-list-jobs-by-pipeline-response, :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
 (clojure.spec.alpha/fdef list-jobs-by-pipeline :args (clojure.spec.alpha/tuple :portkey.aws.elastictranscoder.-2012-09-25/list-jobs-by-pipeline-request) :ret (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/list-jobs-by-pipeline-response))
 
-(clojure.core/defn update-pipeline-notifications ([update-pipeline-notifications-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-update-pipeline-notifications-request update-pipeline-notifications-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/update-pipeline-notifications-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/pipelines/{Id}/notifications", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/update-pipeline-notifications-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdatePipelineNotifications", :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "ResourceInUseException" :portkey.aws.elastictranscoder.-2012-09-25/resource-in-use-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
+(clojure.core/defn update-pipeline-notifications ([update-pipeline-notifications-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-update-pipeline-notifications-request update-pipeline-notifications-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/update-pipeline-notifications-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/pipelines/{Id}/notifications", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/update-pipeline-notifications-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "UpdatePipelineNotifications", :http.request.configuration/output-deser-fn response-update-pipeline-notifications-response, :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "ResourceInUseException" :portkey.aws.elastictranscoder.-2012-09-25/resource-in-use-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
 (clojure.spec.alpha/fdef update-pipeline-notifications :args (clojure.spec.alpha/tuple :portkey.aws.elastictranscoder.-2012-09-25/update-pipeline-notifications-request) :ret (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/update-pipeline-notifications-response))
 
-(clojure.core/defn create-preset ([create-preset-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-preset-request create-preset-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/create-preset-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/presets", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/create-preset-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code 201, :http.request.configuration/action "CreatePreset", :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "LimitExceededException" :portkey.aws.elastictranscoder.-2012-09-25/limit-exceeded-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
+(clojure.core/defn create-preset ([create-preset-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-create-preset-request create-preset-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/create-preset-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/presets", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/create-preset-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code 201, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "CreatePreset", :http.request.configuration/output-deser-fn response-create-preset-response, :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "LimitExceededException" :portkey.aws.elastictranscoder.-2012-09-25/limit-exceeded-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
 (clojure.spec.alpha/fdef create-preset :args (clojure.spec.alpha/tuple :portkey.aws.elastictranscoder.-2012-09-25/create-preset-request) :ret (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/create-preset-response))
 
-(clojure.core/defn delete-pipeline ([delete-pipeline-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-pipeline-request delete-pipeline-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/delete-pipeline-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/pipelines/{Id}", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/delete-pipeline-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :delete, :http.request.configuration/response-code 202, :http.request.configuration/action "DeletePipeline", :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "ResourceInUseException" :portkey.aws.elastictranscoder.-2012-09-25/resource-in-use-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
+(clojure.core/defn delete-pipeline ([delete-pipeline-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-delete-pipeline-request delete-pipeline-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/delete-pipeline-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/pipelines/{Id}", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/delete-pipeline-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :delete, :http.request.configuration/response-code 202, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "DeletePipeline", :http.request.configuration/output-deser-fn response-delete-pipeline-response, :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "ResourceInUseException" :portkey.aws.elastictranscoder.-2012-09-25/resource-in-use-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
 (clojure.spec.alpha/fdef delete-pipeline :args (clojure.spec.alpha/tuple :portkey.aws.elastictranscoder.-2012-09-25/delete-pipeline-request) :ret (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/delete-pipeline-response))
 
-(clojure.core/defn list-jobs-by-status ([list-jobs-by-status-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-jobs-by-status-request list-jobs-by-status-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/list-jobs-by-status-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/jobsByStatus/{Status}", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/list-jobs-by-status-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/action "ListJobsByStatus", :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
+(clojure.core/defn list-jobs-by-status ([list-jobs-by-status-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-list-jobs-by-status-request list-jobs-by-status-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/list-jobs-by-status-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/jobsByStatus/{Status}", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/list-jobs-by-status-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "ListJobsByStatus", :http.request.configuration/output-deser-fn response-list-jobs-by-status-response, :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
 (clojure.spec.alpha/fdef list-jobs-by-status :args (clojure.spec.alpha/tuple :portkey.aws.elastictranscoder.-2012-09-25/list-jobs-by-status-request) :ret (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/list-jobs-by-status-response))
 
-(clojure.core/defn create-job ([create-job-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-job-request create-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/create-job-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/jobs", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/create-job-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code 201, :http.request.configuration/action "CreateJob", :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "LimitExceededException" :portkey.aws.elastictranscoder.-2012-09-25/limit-exceeded-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
+(clojure.core/defn create-job ([create-job-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-create-job-request create-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/create-job-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/jobs", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/create-job-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code 201, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "CreateJob", :http.request.configuration/output-deser-fn response-create-job-response, :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "LimitExceededException" :portkey.aws.elastictranscoder.-2012-09-25/limit-exceeded-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
 (clojure.spec.alpha/fdef create-job :args (clojure.spec.alpha/tuple :portkey.aws.elastictranscoder.-2012-09-25/create-job-request) :ret (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/create-job-response))
 
-(clojure.core/defn delete-preset ([delete-preset-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-preset-request delete-preset-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/delete-preset-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/presets/{Id}", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/delete-preset-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :delete, :http.request.configuration/response-code 202, :http.request.configuration/action "DeletePreset", :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
+(clojure.core/defn delete-preset ([delete-preset-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-delete-preset-request delete-preset-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/delete-preset-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/presets/{Id}", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/delete-preset-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :delete, :http.request.configuration/response-code 202, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "DeletePreset", :http.request.configuration/output-deser-fn response-delete-preset-response, :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
 (clojure.spec.alpha/fdef delete-preset :args (clojure.spec.alpha/tuple :portkey.aws.elastictranscoder.-2012-09-25/delete-preset-request) :ret (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/delete-preset-response))
 
-(clojure.core/defn update-pipeline ([update-pipeline-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-update-pipeline-request update-pipeline-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/update-pipeline-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/pipelines/{Id}", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/update-pipeline-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :put, :http.request.configuration/response-code 200, :http.request.configuration/action "UpdatePipeline", :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "ResourceInUseException" :portkey.aws.elastictranscoder.-2012-09-25/resource-in-use-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
+(clojure.core/defn update-pipeline ([update-pipeline-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-update-pipeline-request update-pipeline-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/update-pipeline-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/pipelines/{Id}", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/update-pipeline-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :put, :http.request.configuration/response-code 200, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "UpdatePipeline", :http.request.configuration/output-deser-fn response-update-pipeline-response, :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "ResourceInUseException" :portkey.aws.elastictranscoder.-2012-09-25/resource-in-use-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
 (clojure.spec.alpha/fdef update-pipeline :args (clojure.spec.alpha/tuple :portkey.aws.elastictranscoder.-2012-09-25/update-pipeline-request) :ret (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/update-pipeline-response))
 
-(clojure.core/defn read-job ([read-job-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-read-job-request read-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/read-job-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/jobs/{Id}", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/read-job-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/action "ReadJob", :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
+(clojure.core/defn read-job ([read-job-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-read-job-request read-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/read-job-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/jobs/{Id}", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/read-job-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "ReadJob", :http.request.configuration/output-deser-fn response-read-job-response, :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
 (clojure.spec.alpha/fdef read-job :args (clojure.spec.alpha/tuple :portkey.aws.elastictranscoder.-2012-09-25/read-job-request) :ret (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/read-job-response))
 
-(clojure.core/defn update-pipeline-status ([update-pipeline-status-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-update-pipeline-status-request update-pipeline-status-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/update-pipeline-status-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/pipelines/{Id}/status", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/update-pipeline-status-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdatePipelineStatus", :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "ResourceInUseException" :portkey.aws.elastictranscoder.-2012-09-25/resource-in-use-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
+(clojure.core/defn update-pipeline-status ([update-pipeline-status-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-update-pipeline-status-request update-pipeline-status-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/update-pipeline-status-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/pipelines/{Id}/status", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/update-pipeline-status-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "UpdatePipelineStatus", :http.request.configuration/output-deser-fn response-update-pipeline-status-response, :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "ResourceInUseException" :portkey.aws.elastictranscoder.-2012-09-25/resource-in-use-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
 (clojure.spec.alpha/fdef update-pipeline-status :args (clojure.spec.alpha/tuple :portkey.aws.elastictranscoder.-2012-09-25/update-pipeline-status-request) :ret (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/update-pipeline-status-response))
 
-(clojure.core/defn test-role ([test-role-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-test-role-request test-role-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/test-role-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/roleTests", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/test-role-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code 200, :http.request.configuration/action "TestRole", :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
+(clojure.core/defn test-role ([test-role-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-test-role-request test-role-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/test-role-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/roleTests", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/test-role-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code 200, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "TestRole", :http.request.configuration/output-deser-fn response-test-role-response, :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
 (clojure.spec.alpha/fdef test-role :args (clojure.spec.alpha/tuple :portkey.aws.elastictranscoder.-2012-09-25/test-role-request) :ret (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/test-role-response))
 
-(clojure.core/defn list-presets ([] (list-presets {})) ([list-presets-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-presets-request list-presets-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/list-presets-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/presets", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/list-presets-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/action "ListPresets", :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
+(clojure.core/defn list-presets ([] (list-presets {})) ([list-presets-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-list-presets-request list-presets-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/list-presets-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/presets", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/list-presets-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "ListPresets", :http.request.configuration/output-deser-fn response-list-presets-response, :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
 (clojure.spec.alpha/fdef list-presets :args (clojure.spec.alpha/? :portkey.aws.elastictranscoder.-2012-09-25/list-presets-request) :ret (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/list-presets-response))
 
-(clojure.core/defn cancel-job ([cancel-job-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-cancel-job-request cancel-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/cancel-job-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/jobs/{Id}", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/cancel-job-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :delete, :http.request.configuration/response-code 202, :http.request.configuration/action "CancelJob", :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "ResourceInUseException" :portkey.aws.elastictranscoder.-2012-09-25/resource-in-use-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
+(clojure.core/defn cancel-job ([cancel-job-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-cancel-job-request cancel-job-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.elastictranscoder.-2012-09-25/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.elastictranscoder.-2012-09-25/cancel-job-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/2012-09-25/jobs/{Id}", :http.request.configuration/version "2012-09-25", :http.request.configuration/service-id "Elastic Transcoder", :http.request.spec/input-spec :portkey.aws.elastictranscoder.-2012-09-25/cancel-job-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :delete, :http.request.configuration/response-code 202, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "CancelJob", :http.request.configuration/output-deser-fn response-cancel-job-response, :http.request.spec/error-spec {"ValidationException" :portkey.aws.elastictranscoder.-2012-09-25/validation-exception, "IncompatibleVersionException" :portkey.aws.elastictranscoder.-2012-09-25/incompatible-version-exception, "ResourceNotFoundException" :portkey.aws.elastictranscoder.-2012-09-25/resource-not-found-exception, "ResourceInUseException" :portkey.aws.elastictranscoder.-2012-09-25/resource-in-use-exception, "AccessDeniedException" :portkey.aws.elastictranscoder.-2012-09-25/access-denied-exception, "InternalServiceException" :portkey.aws.elastictranscoder.-2012-09-25/internal-service-exception}})))))
 (clojure.spec.alpha/fdef cancel-job :args (clojure.spec.alpha/tuple :portkey.aws.elastictranscoder.-2012-09-25/cancel-job-request) :ret (clojure.spec.alpha/and :portkey.aws.elastictranscoder.-2012-09-25/cancel-job-response))

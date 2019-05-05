@@ -147,6 +147,8 @@
 
 (clojure.core/declare ser-hls-directory-structure)
 
+(clojure.core/declare ser-frame-capture-output-settings)
+
 (clojure.core/declare ser-m-2ts-ebp-placement)
 
 (clojure.core/declare ser-dvb-sub-destination-teletext-grid-control)
@@ -155,13 +157,19 @@
 
 (clojure.core/declare ser-audio-normalization-algorithm)
 
+(clojure.core/declare ser-follow-mode-schedule-action-start-settings)
+
 (clojure.core/declare ser-rtmp-caption-data)
 
 (clojure.core/declare ser-hls-mode)
 
 (clojure.core/declare ser-log-level)
 
+(clojure.core/declare ser-follow-point)
+
 (clojure.core/declare ser-integer-min-0-max-500)
+
+(clojure.core/declare ser-i-frame-only-playlist-type)
 
 (clojure.core/declare ser-input-loss-behavior)
 
@@ -186,6 +194,8 @@
 (clojure.core/declare ser-video-selector-program-id)
 
 (clojure.core/declare ser-archive-group-settings)
+
+(clojure.core/declare ser-hls-timed-metadata-schedule-action-settings)
 
 (clojure.core/declare ser-udp-output-settings)
 
@@ -241,6 +251,8 @@
 
 (clojure.core/declare ser-burn-in-font-color)
 
+(clojure.core/declare ser-pause-state-schedule-action-settings)
+
 (clojure.core/declare ser-input-source-request)
 
 (clojure.core/declare ser-eac-3-metadata-control)
@@ -267,6 +279,8 @@
 
 (clojure.core/declare ser-m-2ts-timed-metadata-behavior)
 
+(clojure.core/declare ser-tags)
+
 (clojure.core/declare ser-fec-output-include-fec)
 
 (clojure.core/declare ser-scte-35-segmentation-cancel-indicator)
@@ -276,6 +290,8 @@
 (clojure.core/declare ser-ac-3-drc-profile)
 
 (clojure.core/declare ser-eac-3-lfe-control)
+
+(clojure.core/declare ser-media-connect-flow-request)
 
 (clojure.core/declare ser-teletext-source-settings)
 
@@ -294,6 +310,8 @@
 (clojure.core/declare ser-h-264-look-ahead-rate-control)
 
 (clojure.core/declare ser-hls-akamai-http-transfer-mode)
+
+(clojure.core/declare ser-h-264-sub-gop-length)
 
 (clojure.core/declare ser-ms-smooth-output-settings)
 
@@ -314,6 +332,8 @@
 (clojure.core/declare ser-list-of-output-destination)
 
 (clojure.core/declare ser-video-selector)
+
+(clojure.core/declare ser-input-vpc-request)
 
 (clojure.core/declare ser-ac-3-metadata-control)
 
@@ -393,6 +413,8 @@
 
 (clojure.core/declare ser-smooth-group-audio-only-timecode-control)
 
+(clojure.core/declare ser-pipeline-id)
+
 (clojure.core/declare ser-video-description)
 
 (clojure.core/declare ser-integer-min-0-max-15)
@@ -400,6 +422,8 @@
 (clojure.core/declare ser-global-configuration-output-timing-source)
 
 (clojure.core/declare ser-scte-35-no-regional-blackout-flag)
+
+(clojure.core/declare ser-integer-min-1-max-10)
 
 (clojure.core/declare ser-audio-language-selection)
 
@@ -471,6 +495,8 @@
 
 (clojure.core/declare ser-m-2ts-cc-descriptor)
 
+(clojure.core/declare ser-list-of-pipeline-pause-state-settings)
+
 (clojure.core/declare ser-string-min-1-max-256)
 
 (clojure.core/declare ser-dvb-sub-destination-outline-color)
@@ -499,6 +525,8 @@
 
 (clojure.core/declare ser-network-input-server-validation)
 
+(clojure.core/declare ser-hls-redundant-manifest)
+
 (clojure.core/declare ser-rtmp-caption-info-destination-settings)
 
 (clojure.core/declare ser-aac-coding-mode)
@@ -507,11 +535,15 @@
 
 (clojure.core/declare ser-scte-27-source-settings)
 
+(clojure.core/declare ser-integer-min-1-max-3600)
+
 (clojure.core/declare ser-webvtt-destination-settings)
 
 (clojure.core/declare ser-output-settings)
 
 (clojure.core/declare ser-caption-language-mapping)
+
+(clojure.core/declare ser-input-loss-action-for-rtmp-out)
 
 (clojure.core/declare ser-schedule-action-start-settings)
 
@@ -520,6 +552,8 @@
 (clojure.core/declare ser-encoder-settings)
 
 (clojure.core/declare ser-static-key-settings)
+
+(clojure.core/declare ser-frame-capture-group-settings)
 
 (clojure.core/declare ser-video-description-respond-to-afd)
 
@@ -566,6 +600,8 @@
 (clojure.core/declare ser-double)
 
 (clojure.core/declare ser-ac-3-coding-mode)
+
+(clojure.core/declare ser-input-switch-schedule-action-settings)
 
 (clojure.core/declare ser-integer-min-0-max-10)
 
@@ -657,6 +693,10 @@
 
 (clojure.core/declare ser-hls-media-store-storage-class)
 
+(clojure.core/declare ser-pipeline-pause-state-settings)
+
+(clojure.core/declare ser-frame-capture-settings)
+
 (clojure.core/declare ser-hls-program-date-time)
 
 (clojure.core/declare ser-output-destination-settings)
@@ -722,6 +762,8 @@
 (clojure.core/declare ser-string-min-1-max-255)
 
 (clojure.core/declare ser-list-of-audio-channel-mapping)
+
+(clojure.core/declare ser-list-of-media-connect-flow-request)
 
 (clojure.core/declare ser-eac-3-stereo-downmix)
 
@@ -817,7 +859,7 @@
 
 (clojure.core/defn- ser-integer-min-0-max-1099511627775 [input] #:http.request.field{:value input, :shape "__integerMin0Max1099511627775"})
 
-(clojure.core/defn- ser-fixed-mode-schedule-action-start-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "FixedModeScheduleActionStartSettings", :type "structure"} (clojure.core/contains? input :time) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :time)) #:http.request.field{:name "Time", :shape "__string", :location-name "time"}))))
+(clojure.core/defn- ser-fixed-mode-schedule-action-start-settings [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-string (:time input)) #:http.request.field{:name "Time", :shape "__string", :location-name "time"})], :shape "FixedModeScheduleActionStartSettings", :type "structure"}))
 
 (clojure.core/defn- ser-burn-in-destination-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "BurnInDestinationSettings", :type "structure"} (clojure.core/contains? input :outline-color) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-burn-in-outline-color (input :outline-color)) #:http.request.field{:name "OutlineColor", :shape "BurnInOutlineColor", :location-name "outlineColor"})) (clojure.core/contains? input :outline-size) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0-max-10 (input :outline-size)) #:http.request.field{:name "OutlineSize", :shape "__integerMin0Max10", :location-name "outlineSize"})) (clojure.core/contains? input :shadow-color) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-burn-in-shadow-color (input :shadow-color)) #:http.request.field{:name "ShadowColor", :shape "BurnInShadowColor", :location-name "shadowColor"})) (clojure.core/contains? input :shadow-opacity) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0-max-255 (input :shadow-opacity)) #:http.request.field{:name "ShadowOpacity", :shape "__integerMin0Max255", :location-name "shadowOpacity"})) (clojure.core/contains? input :shadow-y-offset) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer (input :shadow-y-offset)) #:http.request.field{:name "ShadowYOffset", :shape "__integer", :location-name "shadowYOffset"})) (clojure.core/contains? input :background-color) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-burn-in-background-color (input :background-color)) #:http.request.field{:name "BackgroundColor", :shape "BurnInBackgroundColor", :location-name "backgroundColor"})) (clojure.core/contains? input :teletext-grid-control) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-burn-in-teletext-grid-control (input :teletext-grid-control)) #:http.request.field{:name "TeletextGridControl", :shape "BurnInTeletextGridControl", :location-name "teletextGridControl"})) (clojure.core/contains? input :y-position) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0 (input :y-position)) #:http.request.field{:name "YPosition", :shape "__integerMin0", :location-name "yPosition"})) (clojure.core/contains? input :font-color) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-burn-in-font-color (input :font-color)) #:http.request.field{:name "FontColor", :shape "BurnInFontColor", :location-name "fontColor"})) (clojure.core/contains? input :x-position) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0 (input :x-position)) #:http.request.field{:name "XPosition", :shape "__integerMin0", :location-name "xPosition"})) (clojure.core/contains? input :font) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-input-location (input :font)) #:http.request.field{:name "Font", :shape "InputLocation", :location-name "font"})) (clojure.core/contains? input :font-resolution) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-96-max-600 (input :font-resolution)) #:http.request.field{:name "FontResolution", :shape "__integerMin96Max600", :location-name "fontResolution"})) (clojure.core/contains? input :font-size) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :font-size)) #:http.request.field{:name "FontSize", :shape "__string", :location-name "fontSize"})) (clojure.core/contains? input :background-opacity) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0-max-255 (input :background-opacity)) #:http.request.field{:name "BackgroundOpacity", :shape "__integerMin0Max255", :location-name "backgroundOpacity"})) (clojure.core/contains? input :font-opacity) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0-max-255 (input :font-opacity)) #:http.request.field{:name "FontOpacity", :shape "__integerMin0Max255", :location-name "fontOpacity"})) (clojure.core/contains? input :shadow-x-offset) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer (input :shadow-x-offset)) #:http.request.field{:name "ShadowXOffset", :shape "__integer", :location-name "shadowXOffset"})) (clojure.core/contains? input :alignment) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-burn-in-alignment (input :alignment)) #:http.request.field{:name "Alignment", :shape "BurnInAlignment", :location-name "alignment"}))))
 
@@ -847,6 +889,8 @@
 
 (clojure.core/defn- ser-hls-directory-structure [input] #:http.request.field{:value (clojure.core/get {"SINGLE_DIRECTORY" "SINGLE_DIRECTORY", :single-directory "SINGLE_DIRECTORY", "SUBDIRECTORY_PER_STREAM" "SUBDIRECTORY_PER_STREAM", :subdirectory-per-stream "SUBDIRECTORY_PER_STREAM"} input), :shape "HlsDirectoryStructure"})
 
+(clojure.core/defn- ser-frame-capture-output-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "FrameCaptureOutputSettings", :type "structure"} (clojure.core/contains? input :name-modifier) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :name-modifier)) #:http.request.field{:name "NameModifier", :shape "__string", :location-name "nameModifier"}))))
+
 (clojure.core/defn- ser-m-2ts-ebp-placement [input] #:http.request.field{:value (clojure.core/get {"VIDEO_AND_AUDIO_PIDS" "VIDEO_AND_AUDIO_PIDS", :video-and-audio-pids "VIDEO_AND_AUDIO_PIDS", "VIDEO_PID" "VIDEO_PID", :video-pid "VIDEO_PID"} input), :shape "M2tsEbpPlacement"})
 
 (clojure.core/defn- ser-dvb-sub-destination-teletext-grid-control [input] #:http.request.field{:value (clojure.core/get {"FIXED" "FIXED", :fixed "FIXED", "SCALED" "SCALED", :scaled "SCALED"} input), :shape "DvbSubDestinationTeletextGridControl"})
@@ -855,13 +899,19 @@
 
 (clojure.core/defn- ser-audio-normalization-algorithm [input] #:http.request.field{:value (clojure.core/get {"ITU_1770_1" "ITU_1770_1", :itu-1770-1 "ITU_1770_1", "ITU_1770_2" "ITU_1770_2", :itu-1770-2 "ITU_1770_2"} input), :shape "AudioNormalizationAlgorithm"})
 
+(clojure.core/defn- ser-follow-mode-schedule-action-start-settings [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-string (:reference-action-name input)) #:http.request.field{:name "ReferenceActionName", :shape "__string", :location-name "referenceActionName"}) (clojure.core/into (ser-follow-point (:follow-point input)) #:http.request.field{:name "FollowPoint", :shape "FollowPoint", :location-name "followPoint"})], :shape "FollowModeScheduleActionStartSettings", :type "structure"}))
+
 (clojure.core/defn- ser-rtmp-caption-data [input] #:http.request.field{:value (clojure.core/get {"ALL" "ALL", :all "ALL", "FIELD1_608" "FIELD1_608", :field-1-608 "FIELD1_608", "FIELD1_AND_FIELD2_608" "FIELD1_AND_FIELD2_608", :field-1-and-field-2-608 "FIELD1_AND_FIELD2_608"} input), :shape "RtmpCaptionData"})
 
 (clojure.core/defn- ser-hls-mode [input] #:http.request.field{:value (clojure.core/get {"LIVE" "LIVE", :live "LIVE", "VOD" "VOD", :vod "VOD"} input), :shape "HlsMode"})
 
 (clojure.core/defn- ser-log-level [input] #:http.request.field{:value (clojure.core/get {"DISABLED" "DISABLED", "WARNING" "WARNING", :disabled "DISABLED", :debug "DEBUG", "ERROR" "ERROR", :warning "WARNING", "DEBUG" "DEBUG", :info "INFO", :error "ERROR", "INFO" "INFO"} input), :shape "LogLevel"})
 
+(clojure.core/defn- ser-follow-point [input] #:http.request.field{:value (clojure.core/get {"END" "END", :end "END", "START" "START", :start "START"} input), :shape "FollowPoint"})
+
 (clojure.core/defn- ser-integer-min-0-max-500 [input] #:http.request.field{:value input, :shape "__integerMin0Max500"})
+
+(clojure.core/defn- ser-i-frame-only-playlist-type [input] #:http.request.field{:value (clojure.core/get {"DISABLED" "DISABLED", :disabled "DISABLED", "STANDARD" "STANDARD", :standard "STANDARD"} input), :shape "IFrameOnlyPlaylistType"})
 
 (clojure.core/defn- ser-input-loss-behavior [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "InputLossBehavior", :type "structure"} (clojure.core/contains? input :black-frame-msec) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0-max-1000000 (input :black-frame-msec)) #:http.request.field{:name "BlackFrameMsec", :shape "__integerMin0Max1000000", :location-name "blackFrameMsec"})) (clojure.core/contains? input :input-loss-image-color) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string-min-6-max-6 (input :input-loss-image-color)) #:http.request.field{:name "InputLossImageColor", :shape "__stringMin6Max6", :location-name "inputLossImageColor"})) (clojure.core/contains? input :input-loss-image-slate) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-input-location (input :input-loss-image-slate)) #:http.request.field{:name "InputLossImageSlate", :shape "InputLocation", :location-name "inputLossImageSlate"})) (clojure.core/contains? input :input-loss-image-type) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-input-loss-image-type (input :input-loss-image-type)) #:http.request.field{:name "InputLossImageType", :shape "InputLossImageType", :location-name "inputLossImageType"})) (clojure.core/contains? input :repeat-frame-msec) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0-max-1000000 (input :repeat-frame-msec)) #:http.request.field{:name "RepeatFrameMsec", :shape "__integerMin0Max1000000", :location-name "repeatFrameMsec"}))))
 
@@ -877,7 +927,7 @@
 
 (clojure.core/defn- ser-dvb-sub-destination-font-color [input] #:http.request.field{:value (clojure.core/get {:white "WHITE", :yellow "YELLOW", :green "GREEN", "GREEN" "GREEN", "BLUE" "BLUE", :red "RED", :blue "BLUE", "WHITE" "WHITE", "YELLOW" "YELLOW", "BLACK" "BLACK", "RED" "RED", :black "BLACK"} input), :shape "DvbSubDestinationFontColor"})
 
-(clojure.core/defn- ser-input-type [input] #:http.request.field{:value (clojure.core/get {:rtmp-pull "RTMP_PULL", :url-pull "URL_PULL", :rtmp-push "RTMP_PUSH", "RTMP_PULL" "RTMP_PULL", "UDP_PUSH" "UDP_PUSH", "URL_PULL" "URL_PULL", :rtp-push "RTP_PUSH", :udp-push "UDP_PUSH", "RTP_PUSH" "RTP_PUSH", "RTMP_PUSH" "RTMP_PUSH"} input), :shape "InputType"})
+(clojure.core/defn- ser-input-type [input] #:http.request.field{:value (clojure.core/get {:mediaconnect "MEDIACONNECT", :rtmp-pull "RTMP_PULL", "MP4_FILE" "MP4_FILE", :url-pull "URL_PULL", :mp-4-file "MP4_FILE", :rtmp-push "RTMP_PUSH", "RTMP_PULL" "RTMP_PULL", "UDP_PUSH" "UDP_PUSH", "URL_PULL" "URL_PULL", :rtp-push "RTP_PUSH", :udp-push "UDP_PUSH", "RTP_PUSH" "RTP_PUSH", "MEDIACONNECT" "MEDIACONNECT", "RTMP_PUSH" "RTMP_PUSH"} input), :shape "InputType"})
 
 (clojure.core/defn- ser-dvb-sdt-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "DvbSdtSettings", :type "structure"} (clojure.core/contains? input :output-sdt) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-dvb-sdt-output-sdt (input :output-sdt)) #:http.request.field{:name "OutputSdt", :shape "DvbSdtOutputSdt", :location-name "outputSdt"})) (clojure.core/contains? input :rep-interval) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-25-max-2000 (input :rep-interval)) #:http.request.field{:name "RepInterval", :shape "__integerMin25Max2000", :location-name "repInterval"})) (clojure.core/contains? input :service-name) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string-min-1-max-256 (input :service-name)) #:http.request.field{:name "ServiceName", :shape "__stringMin1Max256", :location-name "serviceName"})) (clojure.core/contains? input :service-provider-name) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string-min-1-max-256 (input :service-provider-name)) #:http.request.field{:name "ServiceProviderName", :shape "__stringMin1Max256", :location-name "serviceProviderName"}))))
 
@@ -886,6 +936,8 @@
 (clojure.core/defn- ser-video-selector-program-id [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "VideoSelectorProgramId", :type "structure"} (clojure.core/contains? input :program-id) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0-max-65536 (input :program-id)) #:http.request.field{:name "ProgramId", :shape "__integerMin0Max65536", :location-name "programId"}))))
 
 (clojure.core/defn- ser-archive-group-settings [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-output-location-ref (:destination input)) #:http.request.field{:name "Destination", :shape "OutputLocationRef", :location-name "destination"})], :shape "ArchiveGroupSettings", :type "structure"} (clojure.core/contains? input :rollover-interval) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-1 (input :rollover-interval)) #:http.request.field{:name "RolloverInterval", :shape "__integerMin1", :location-name "rolloverInterval"}))))
+
+(clojure.core/defn- ser-hls-timed-metadata-schedule-action-settings [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-string (:id-3 input)) #:http.request.field{:name "Id3", :shape "__string", :location-name "id3"})], :shape "HlsTimedMetadataScheduleActionSettings", :type "structure"}))
 
 (clojure.core/defn- ser-udp-output-settings [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-output-location-ref (:destination input)) #:http.request.field{:name "Destination", :shape "OutputLocationRef", :location-name "destination"}) (clojure.core/into (ser-udp-container-settings (:container-settings input)) #:http.request.field{:name "ContainerSettings", :shape "UdpContainerSettings", :location-name "containerSettings"})], :shape "UdpOutputSettings", :type "structure"} (clojure.core/contains? input :buffer-msec) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0-max-10000 (input :buffer-msec)) #:http.request.field{:name "BufferMsec", :shape "__integerMin0Max10000", :location-name "bufferMsec"})) (clojure.core/contains? input :fec-output-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-fec-output-settings (input :fec-output-settings)) #:http.request.field{:name "FecOutputSettings", :shape "FecOutputSettings", :location-name "fecOutputSettings"}))))
 
@@ -941,6 +993,8 @@
 
 (clojure.core/defn- ser-burn-in-font-color [input] #:http.request.field{:value (clojure.core/get {:white "WHITE", :yellow "YELLOW", :green "GREEN", "GREEN" "GREEN", "BLUE" "BLUE", :red "RED", :blue "BLUE", "WHITE" "WHITE", "YELLOW" "YELLOW", "BLACK" "BLACK", "RED" "RED", :black "BLACK"} input), :shape "BurnInFontColor"})
 
+(clojure.core/defn- ser-pause-state-schedule-action-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "PauseStateScheduleActionSettings", :type "structure"} (clojure.core/contains? input :pipelines) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-pipeline-pause-state-settings (input :pipelines)) #:http.request.field{:name "Pipelines", :shape "__listOfPipelinePauseStateSettings", :location-name "pipelines"}))))
+
 (clojure.core/defn- ser-input-source-request [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "InputSourceRequest", :type "structure"} (clojure.core/contains? input :password-param) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :password-param)) #:http.request.field{:name "PasswordParam", :shape "__string", :location-name "passwordParam"})) (clojure.core/contains? input :url) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :url)) #:http.request.field{:name "Url", :shape "__string", :location-name "url"})) (clojure.core/contains? input :username) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :username)) #:http.request.field{:name "Username", :shape "__string", :location-name "username"}))))
 
 (clojure.core/defn- ser-eac-3-metadata-control [input] #:http.request.field{:value (clojure.core/get {"FOLLOW_INPUT" "FOLLOW_INPUT", :follow-input "FOLLOW_INPUT", "USE_CONFIGURED" "USE_CONFIGURED", :use-configured "USE_CONFIGURED"} input), :shape "Eac3MetadataControl"})
@@ -967,6 +1021,8 @@
 
 (clojure.core/defn- ser-m-2ts-timed-metadata-behavior [input] #:http.request.field{:value (clojure.core/get {"NO_PASSTHROUGH" "NO_PASSTHROUGH", :no-passthrough "NO_PASSTHROUGH", "PASSTHROUGH" "PASSTHROUGH", :passthrough "PASSTHROUGH"} input), :shape "M2tsTimedMetadataBehavior"})
 
+(clojure.core/defn- ser-tags [input] #:http.request.field{:value (clojure.core/into [] (clojure.core/map (clojure.core/fn [[k v]] [(clojure.core/into (ser-string k) #:http.request.field{:map-info "key", :shape "__string"}) (clojure.core/into (ser-string v) #:http.request.field{:map-info "value", :shape "__string"})])) input), :shape "Tags", :type "map"})
+
 (clojure.core/defn- ser-fec-output-include-fec [input] #:http.request.field{:value (clojure.core/get {"COLUMN" "COLUMN", :column "COLUMN", "COLUMN_AND_ROW" "COLUMN_AND_ROW", :column-and-row "COLUMN_AND_ROW"} input), :shape "FecOutputIncludeFec"})
 
 (clojure.core/defn- ser-scte-35-segmentation-cancel-indicator [input] #:http.request.field{:value (clojure.core/get {"SEGMENTATION_EVENT_NOT_CANCELED" "SEGMENTATION_EVENT_NOT_CANCELED", :segmentation-event-not-canceled "SEGMENTATION_EVENT_NOT_CANCELED", "SEGMENTATION_EVENT_CANCELED" "SEGMENTATION_EVENT_CANCELED", :segmentation-event-canceled "SEGMENTATION_EVENT_CANCELED"} input), :shape "Scte35SegmentationCancelIndicator"})
@@ -976,6 +1032,8 @@
 (clojure.core/defn- ser-ac-3-drc-profile [input] #:http.request.field{:value (clojure.core/get {"FILM_STANDARD" "FILM_STANDARD", :film-standard "FILM_STANDARD", "NONE" "NONE", :none "NONE"} input), :shape "Ac3DrcProfile"})
 
 (clojure.core/defn- ser-eac-3-lfe-control [input] #:http.request.field{:value (clojure.core/get {"LFE" "LFE", :lfe "LFE", "NO_LFE" "NO_LFE", :no-lfe "NO_LFE"} input), :shape "Eac3LfeControl"})
+
+(clojure.core/defn- ser-media-connect-flow-request [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "MediaConnectFlowRequest", :type "structure"} (clojure.core/contains? input :flow-arn) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :flow-arn)) #:http.request.field{:name "FlowArn", :shape "__string", :location-name "flowArn"}))))
 
 (clojure.core/defn- ser-teletext-source-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "TeletextSourceSettings", :type "structure"} (clojure.core/contains? input :page-number) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :page-number)) #:http.request.field{:name "PageNumber", :shape "__string", :location-name "pageNumber"}))))
 
@@ -995,6 +1053,8 @@
 
 (clojure.core/defn- ser-hls-akamai-http-transfer-mode [input] #:http.request.field{:value (clojure.core/get {"CHUNKED" "CHUNKED", :chunked "CHUNKED", "NON_CHUNKED" "NON_CHUNKED", :non-chunked "NON_CHUNKED"} input), :shape "HlsAkamaiHttpTransferMode"})
 
+(clojure.core/defn- ser-h-264-sub-gop-length [input] #:http.request.field{:value (clojure.core/get {"DYNAMIC" "DYNAMIC", :dynamic "DYNAMIC", "FIXED" "FIXED", :fixed "FIXED"} input), :shape "H264SubGopLength"})
+
 (clojure.core/defn- ser-ms-smooth-output-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "MsSmoothOutputSettings", :type "structure"} (clojure.core/contains? input :name-modifier) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :name-modifier)) #:http.request.field{:name "NameModifier", :shape "__string", :location-name "nameModifier"}))))
 
 (clojure.core/defn- ser-video-selector-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "VideoSelectorSettings", :type "structure"} (clojure.core/contains? input :video-selector-pid) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-video-selector-pid (input :video-selector-pid)) #:http.request.field{:name "VideoSelectorPid", :shape "VideoSelectorPid", :location-name "videoSelectorPid"})) (clojure.core/contains? input :video-selector-program-id) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-video-selector-program-id (input :video-selector-program-id)) #:http.request.field{:name "VideoSelectorProgramId", :shape "VideoSelectorProgramId", :location-name "videoSelectorProgramId"}))))
@@ -1007,13 +1067,15 @@
 
 (clojure.core/defn- ser-list-of-input-channel-level [input] #:http.request.field{:value (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (clojure.core/merge (ser-input-channel-level coll) #:http.request.field{:shape "InputChannelLevel"}))) input), :shape "__listOfInputChannelLevel", :type "list"})
 
-(clojure.core/defn- ser-h-264-rate-control-mode [input] #:http.request.field{:value (clojure.core/get {"CBR" "CBR", :cbr "CBR", "VBR" "VBR", :vbr "VBR"} input), :shape "H264RateControlMode"})
+(clojure.core/defn- ser-h-264-rate-control-mode [input] #:http.request.field{:value (clojure.core/get {"CBR" "CBR", :cbr "CBR", "QVBR" "QVBR", :qvbr "QVBR", "VBR" "VBR", :vbr "VBR"} input), :shape "H264RateControlMode"})
 
 (clojure.core/defn- ser-integer-min-0-max-255 [input] #:http.request.field{:value input, :shape "__integerMin0Max255"})
 
 (clojure.core/defn- ser-list-of-output-destination [input] #:http.request.field{:value (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (clojure.core/merge (ser-output-destination coll) #:http.request.field{:shape "OutputDestination"}))) input), :shape "__listOfOutputDestination", :type "list"})
 
 (clojure.core/defn- ser-video-selector [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "VideoSelector", :type "structure"} (clojure.core/contains? input :color-space) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-video-selector-color-space (input :color-space)) #:http.request.field{:name "ColorSpace", :shape "VideoSelectorColorSpace", :location-name "colorSpace"})) (clojure.core/contains? input :color-space-usage) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-video-selector-color-space-usage (input :color-space-usage)) #:http.request.field{:name "ColorSpaceUsage", :shape "VideoSelectorColorSpaceUsage", :location-name "colorSpaceUsage"})) (clojure.core/contains? input :selector-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-video-selector-settings (input :selector-settings)) #:http.request.field{:name "SelectorSettings", :shape "VideoSelectorSettings", :location-name "selectorSettings"}))))
+
+(clojure.core/defn- ser-input-vpc-request [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-list-of-string (:subnet-ids input)) #:http.request.field{:name "SubnetIds", :shape "__listOf__string", :location-name "subnetIds"})], :shape "InputVpcRequest", :type "structure"} (clojure.core/contains? input :security-group-ids) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-string (input :security-group-ids)) #:http.request.field{:name "SecurityGroupIds", :shape "__listOf__string", :location-name "securityGroupIds"}))))
 
 (clojure.core/defn- ser-ac-3-metadata-control [input] #:http.request.field{:value (clojure.core/get {"FOLLOW_INPUT" "FOLLOW_INPUT", :follow-input "FOLLOW_INPUT", "USE_CONFIGURED" "USE_CONFIGURED", :use-configured "USE_CONFIGURED"} input), :shape "Ac3MetadataControl"})
 
@@ -1039,7 +1101,7 @@
 
 (clojure.core/defn- ser-m-2ts-audio-interval [input] #:http.request.field{:value (clojure.core/get {"VIDEO_AND_FIXED_INTERVALS" "VIDEO_AND_FIXED_INTERVALS", :video-and-fixed-intervals "VIDEO_AND_FIXED_INTERVALS", "VIDEO_INTERVAL" "VIDEO_INTERVAL", :video-interval "VIDEO_INTERVAL"} input), :shape "M2tsAudioInterval"})
 
-(clojure.core/defn- ser-schedule-action-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "ScheduleActionSettings", :type "structure"} (clojure.core/contains? input :scte-35-return-to-network-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-scte-35-return-to-network-schedule-action-settings (input :scte-35-return-to-network-settings)) #:http.request.field{:name "Scte35ReturnToNetworkSettings", :shape "Scte35ReturnToNetworkScheduleActionSettings", :location-name "scte35ReturnToNetworkSettings"})) (clojure.core/contains? input :scte-35-splice-insert-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-scte-35-splice-insert-schedule-action-settings (input :scte-35-splice-insert-settings)) #:http.request.field{:name "Scte35SpliceInsertSettings", :shape "Scte35SpliceInsertScheduleActionSettings", :location-name "scte35SpliceInsertSettings"})) (clojure.core/contains? input :scte-35-time-signal-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-scte-35-time-signal-schedule-action-settings (input :scte-35-time-signal-settings)) #:http.request.field{:name "Scte35TimeSignalSettings", :shape "Scte35TimeSignalScheduleActionSettings", :location-name "scte35TimeSignalSettings"})) (clojure.core/contains? input :static-image-activate-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-static-image-activate-schedule-action-settings (input :static-image-activate-settings)) #:http.request.field{:name "StaticImageActivateSettings", :shape "StaticImageActivateScheduleActionSettings", :location-name "staticImageActivateSettings"})) (clojure.core/contains? input :static-image-deactivate-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-static-image-deactivate-schedule-action-settings (input :static-image-deactivate-settings)) #:http.request.field{:name "StaticImageDeactivateSettings", :shape "StaticImageDeactivateScheduleActionSettings", :location-name "staticImageDeactivateSettings"}))))
+(clojure.core/defn- ser-schedule-action-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "ScheduleActionSettings", :type "structure"} (clojure.core/contains? input :hls-timed-metadata-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-timed-metadata-schedule-action-settings (input :hls-timed-metadata-settings)) #:http.request.field{:name "HlsTimedMetadataSettings", :shape "HlsTimedMetadataScheduleActionSettings", :location-name "hlsTimedMetadataSettings"})) (clojure.core/contains? input :input-switch-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-input-switch-schedule-action-settings (input :input-switch-settings)) #:http.request.field{:name "InputSwitchSettings", :shape "InputSwitchScheduleActionSettings", :location-name "inputSwitchSettings"})) (clojure.core/contains? input :pause-state-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-pause-state-schedule-action-settings (input :pause-state-settings)) #:http.request.field{:name "PauseStateSettings", :shape "PauseStateScheduleActionSettings", :location-name "pauseStateSettings"})) (clojure.core/contains? input :scte-35-return-to-network-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-scte-35-return-to-network-schedule-action-settings (input :scte-35-return-to-network-settings)) #:http.request.field{:name "Scte35ReturnToNetworkSettings", :shape "Scte35ReturnToNetworkScheduleActionSettings", :location-name "scte35ReturnToNetworkSettings"})) (clojure.core/contains? input :scte-35-splice-insert-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-scte-35-splice-insert-schedule-action-settings (input :scte-35-splice-insert-settings)) #:http.request.field{:name "Scte35SpliceInsertSettings", :shape "Scte35SpliceInsertScheduleActionSettings", :location-name "scte35SpliceInsertSettings"})) (clojure.core/contains? input :scte-35-time-signal-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-scte-35-time-signal-schedule-action-settings (input :scte-35-time-signal-settings)) #:http.request.field{:name "Scte35TimeSignalSettings", :shape "Scte35TimeSignalScheduleActionSettings", :location-name "scte35TimeSignalSettings"})) (clojure.core/contains? input :static-image-activate-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-static-image-activate-schedule-action-settings (input :static-image-activate-settings)) #:http.request.field{:name "StaticImageActivateSettings", :shape "StaticImageActivateScheduleActionSettings", :location-name "staticImageActivateSettings"})) (clojure.core/contains? input :static-image-deactivate-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-static-image-deactivate-schedule-action-settings (input :static-image-deactivate-settings)) #:http.request.field{:name "StaticImageDeactivateSettings", :shape "StaticImageDeactivateScheduleActionSettings", :location-name "staticImageDeactivateSettings"}))))
 
 (clojure.core/defn- ser-audio-pid-selection [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-integer-min-0-max-8191 (:pid input)) #:http.request.field{:name "Pid", :shape "__integerMin0Max8191", :location-name "pid"})], :shape "AudioPidSelection", :type "structure"}))
 
@@ -1093,6 +1155,8 @@
 
 (clojure.core/defn- ser-smooth-group-audio-only-timecode-control [input] #:http.request.field{:value (clojure.core/get {"PASSTHROUGH" "PASSTHROUGH", :passthrough "PASSTHROUGH", "USE_CONFIGURED_CLOCK" "USE_CONFIGURED_CLOCK", :use-configured-clock "USE_CONFIGURED_CLOCK"} input), :shape "SmoothGroupAudioOnlyTimecodeControl"})
 
+(clojure.core/defn- ser-pipeline-id [input] #:http.request.field{:value (clojure.core/get {"PIPELINE_0" "PIPELINE_0", :pipeline-0 "PIPELINE_0", "PIPELINE_1" "PIPELINE_1", :pipeline-1 "PIPELINE_1"} input), :shape "PipelineId"})
+
 (clojure.core/defn- ser-video-description [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-string (:name input)) #:http.request.field{:name "Name", :shape "__string", :location-name "name"})], :shape "VideoDescription", :type "structure"} (clojure.core/contains? input :codec-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-video-codec-settings (input :codec-settings)) #:http.request.field{:name "CodecSettings", :shape "VideoCodecSettings", :location-name "codecSettings"})) (clojure.core/contains? input :height) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer (input :height)) #:http.request.field{:name "Height", :shape "__integer", :location-name "height"})) (clojure.core/contains? input :respond-to-afd) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-video-description-respond-to-afd (input :respond-to-afd)) #:http.request.field{:name "RespondToAfd", :shape "VideoDescriptionRespondToAfd", :location-name "respondToAfd"})) (clojure.core/contains? input :scaling-behavior) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-video-description-scaling-behavior (input :scaling-behavior)) #:http.request.field{:name "ScalingBehavior", :shape "VideoDescriptionScalingBehavior", :location-name "scalingBehavior"})) (clojure.core/contains? input :sharpness) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0-max-100 (input :sharpness)) #:http.request.field{:name "Sharpness", :shape "__integerMin0Max100", :location-name "sharpness"})) (clojure.core/contains? input :width) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer (input :width)) #:http.request.field{:name "Width", :shape "__integer", :location-name "width"}))))
 
 (clojure.core/defn- ser-integer-min-0-max-15 [input] #:http.request.field{:value input, :shape "__integerMin0Max15"})
@@ -1101,9 +1165,11 @@
 
 (clojure.core/defn- ser-scte-35-no-regional-blackout-flag [input] #:http.request.field{:value (clojure.core/get {"REGIONAL_BLACKOUT" "REGIONAL_BLACKOUT", :regional-blackout "REGIONAL_BLACKOUT", "NO_REGIONAL_BLACKOUT" "NO_REGIONAL_BLACKOUT", :no-regional-blackout "NO_REGIONAL_BLACKOUT"} input), :shape "Scte35NoRegionalBlackoutFlag"})
 
+(clojure.core/defn- ser-integer-min-1-max-10 [input] #:http.request.field{:value input, :shape "__integerMin1Max10"})
+
 (clojure.core/defn- ser-audio-language-selection [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-string (:language-code input)) #:http.request.field{:name "LanguageCode", :shape "__string", :location-name "languageCode"})], :shape "AudioLanguageSelection", :type "structure"} (clojure.core/contains? input :language-selection-policy) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-audio-language-selection-policy (input :language-selection-policy)) #:http.request.field{:name "LanguageSelectionPolicy", :shape "AudioLanguageSelectionPolicy", :location-name "languageSelectionPolicy"}))))
 
-(clojure.core/defn- ser-output-group-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "OutputGroupSettings", :type "structure"} (clojure.core/contains? input :archive-group-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-archive-group-settings (input :archive-group-settings)) #:http.request.field{:name "ArchiveGroupSettings", :shape "ArchiveGroupSettings", :location-name "archiveGroupSettings"})) (clojure.core/contains? input :hls-group-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-group-settings (input :hls-group-settings)) #:http.request.field{:name "HlsGroupSettings", :shape "HlsGroupSettings", :location-name "hlsGroupSettings"})) (clojure.core/contains? input :ms-smooth-group-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-ms-smooth-group-settings (input :ms-smooth-group-settings)) #:http.request.field{:name "MsSmoothGroupSettings", :shape "MsSmoothGroupSettings", :location-name "msSmoothGroupSettings"})) (clojure.core/contains? input :rtmp-group-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-rtmp-group-settings (input :rtmp-group-settings)) #:http.request.field{:name "RtmpGroupSettings", :shape "RtmpGroupSettings", :location-name "rtmpGroupSettings"})) (clojure.core/contains? input :udp-group-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-udp-group-settings (input :udp-group-settings)) #:http.request.field{:name "UdpGroupSettings", :shape "UdpGroupSettings", :location-name "udpGroupSettings"}))))
+(clojure.core/defn- ser-output-group-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "OutputGroupSettings", :type "structure"} (clojure.core/contains? input :archive-group-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-archive-group-settings (input :archive-group-settings)) #:http.request.field{:name "ArchiveGroupSettings", :shape "ArchiveGroupSettings", :location-name "archiveGroupSettings"})) (clojure.core/contains? input :frame-capture-group-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-frame-capture-group-settings (input :frame-capture-group-settings)) #:http.request.field{:name "FrameCaptureGroupSettings", :shape "FrameCaptureGroupSettings", :location-name "frameCaptureGroupSettings"})) (clojure.core/contains? input :hls-group-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-group-settings (input :hls-group-settings)) #:http.request.field{:name "HlsGroupSettings", :shape "HlsGroupSettings", :location-name "hlsGroupSettings"})) (clojure.core/contains? input :ms-smooth-group-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-ms-smooth-group-settings (input :ms-smooth-group-settings)) #:http.request.field{:name "MsSmoothGroupSettings", :shape "MsSmoothGroupSettings", :location-name "msSmoothGroupSettings"})) (clojure.core/contains? input :rtmp-group-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-rtmp-group-settings (input :rtmp-group-settings)) #:http.request.field{:name "RtmpGroupSettings", :shape "RtmpGroupSettings", :location-name "rtmpGroupSettings"})) (clojure.core/contains? input :udp-group-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-udp-group-settings (input :udp-group-settings)) #:http.request.field{:name "UdpGroupSettings", :shape "UdpGroupSettings", :location-name "udpGroupSettings"}))))
 
 (clojure.core/defn- ser-integer-min-96-max-600 [input] #:http.request.field{:value input, :shape "__integerMin96Max600"})
 
@@ -1171,6 +1237,8 @@
 
 (clojure.core/defn- ser-m-2ts-cc-descriptor [input] #:http.request.field{:value (clojure.core/get {"DISABLED" "DISABLED", :disabled "DISABLED", "ENABLED" "ENABLED", :enabled "ENABLED"} input), :shape "M2tsCcDescriptor"})
 
+(clojure.core/defn- ser-list-of-pipeline-pause-state-settings [input] #:http.request.field{:value (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (clojure.core/merge (ser-pipeline-pause-state-settings coll) #:http.request.field{:shape "PipelinePauseStateSettings"}))) input), :shape "__listOfPipelinePauseStateSettings", :type "list"})
+
 (clojure.core/defn- ser-string-min-1-max-256 [input] #:http.request.field{:value input, :shape "__stringMin1Max256"})
 
 (clojure.core/defn- ser-dvb-sub-destination-outline-color [input] #:http.request.field{:value (clojure.core/get {:white "WHITE", :yellow "YELLOW", :green "GREEN", "GREEN" "GREEN", "BLUE" "BLUE", :red "RED", :blue "BLUE", "WHITE" "WHITE", "YELLOW" "YELLOW", "BLACK" "BLACK", "RED" "RED", :black "BLACK"} input), :shape "DvbSubDestinationOutlineColor"})
@@ -1179,7 +1247,7 @@
 
 (clojure.core/defn- ser-static-image-deactivate-schedule-action-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "StaticImageDeactivateScheduleActionSettings", :type "structure"} (clojure.core/contains? input :fade-out) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0 (input :fade-out)) #:http.request.field{:name "FadeOut", :shape "__integerMin0", :location-name "fadeOut"})) (clojure.core/contains? input :layer) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0-max-7 (input :layer)) #:http.request.field{:name "Layer", :shape "__integerMin0Max7", :location-name "layer"}))))
 
-(clojure.core/defn- ser-video-codec-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "VideoCodecSettings", :type "structure"} (clojure.core/contains? input :h-264-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-settings (input :h-264-settings)) #:http.request.field{:name "H264Settings", :shape "H264Settings", :location-name "h264Settings"}))))
+(clojure.core/defn- ser-video-codec-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "VideoCodecSettings", :type "structure"} (clojure.core/contains? input :frame-capture-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-frame-capture-settings (input :frame-capture-settings)) #:http.request.field{:name "FrameCaptureSettings", :shape "FrameCaptureSettings", :location-name "frameCaptureSettings"})) (clojure.core/contains? input :h-264-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-settings (input :h-264-settings)) #:http.request.field{:name "H264Settings", :shape "H264Settings", :location-name "h264Settings"}))))
 
 (clojure.core/defn- ser-string-max-32 [input] #:http.request.field{:value input, :shape "__stringMax32"})
 
@@ -1199,6 +1267,8 @@
 
 (clojure.core/defn- ser-network-input-server-validation [input] #:http.request.field{:value (clojure.core/get {"CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME" "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", :check-cryptography-and-validate-name "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME", "CHECK_CRYPTOGRAPHY_ONLY" "CHECK_CRYPTOGRAPHY_ONLY", :check-cryptography-only "CHECK_CRYPTOGRAPHY_ONLY"} input), :shape "NetworkInputServerValidation"})
 
+(clojure.core/defn- ser-hls-redundant-manifest [input] #:http.request.field{:value (clojure.core/get {"DISABLED" "DISABLED", :disabled "DISABLED", "ENABLED" "ENABLED", :enabled "ENABLED"} input), :shape "HlsRedundantManifest"})
+
 (clojure.core/defn- ser-rtmp-caption-info-destination-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "RtmpCaptionInfoDestinationSettings", :type "structure"}))
 
 (clojure.core/defn- ser-aac-coding-mode [input] #:http.request.field{:value (clojure.core/get {"AD_RECEIVER_MIX" "AD_RECEIVER_MIX", "CODING_MODE_1_0" "CODING_MODE_1_0", :ad-receiver-mix "AD_RECEIVER_MIX", :coding-mode-1-0 "CODING_MODE_1_0", :coding-mode-2-0 "CODING_MODE_2_0", :coding-mode-5-1 "CODING_MODE_5_1", "CODING_MODE_1_1" "CODING_MODE_1_1", "CODING_MODE_2_0" "CODING_MODE_2_0", :coding-mode-1-1 "CODING_MODE_1_1", "CODING_MODE_5_1" "CODING_MODE_5_1"} input), :shape "AacCodingMode"})
@@ -1207,19 +1277,25 @@
 
 (clojure.core/defn- ser-scte-27-source-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "Scte27SourceSettings", :type "structure"} (clojure.core/contains? input :pid) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-1 (input :pid)) #:http.request.field{:name "Pid", :shape "__integerMin1", :location-name "pid"}))))
 
+(clojure.core/defn- ser-integer-min-1-max-3600 [input] #:http.request.field{:value input, :shape "__integerMin1Max3600"})
+
 (clojure.core/defn- ser-webvtt-destination-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "WebvttDestinationSettings", :type "structure"}))
 
-(clojure.core/defn- ser-output-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "OutputSettings", :type "structure"} (clojure.core/contains? input :archive-output-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-archive-output-settings (input :archive-output-settings)) #:http.request.field{:name "ArchiveOutputSettings", :shape "ArchiveOutputSettings", :location-name "archiveOutputSettings"})) (clojure.core/contains? input :hls-output-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-output-settings (input :hls-output-settings)) #:http.request.field{:name "HlsOutputSettings", :shape "HlsOutputSettings", :location-name "hlsOutputSettings"})) (clojure.core/contains? input :ms-smooth-output-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-ms-smooth-output-settings (input :ms-smooth-output-settings)) #:http.request.field{:name "MsSmoothOutputSettings", :shape "MsSmoothOutputSettings", :location-name "msSmoothOutputSettings"})) (clojure.core/contains? input :rtmp-output-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-rtmp-output-settings (input :rtmp-output-settings)) #:http.request.field{:name "RtmpOutputSettings", :shape "RtmpOutputSettings", :location-name "rtmpOutputSettings"})) (clojure.core/contains? input :udp-output-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-udp-output-settings (input :udp-output-settings)) #:http.request.field{:name "UdpOutputSettings", :shape "UdpOutputSettings", :location-name "udpOutputSettings"}))))
+(clojure.core/defn- ser-output-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "OutputSettings", :type "structure"} (clojure.core/contains? input :archive-output-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-archive-output-settings (input :archive-output-settings)) #:http.request.field{:name "ArchiveOutputSettings", :shape "ArchiveOutputSettings", :location-name "archiveOutputSettings"})) (clojure.core/contains? input :frame-capture-output-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-frame-capture-output-settings (input :frame-capture-output-settings)) #:http.request.field{:name "FrameCaptureOutputSettings", :shape "FrameCaptureOutputSettings", :location-name "frameCaptureOutputSettings"})) (clojure.core/contains? input :hls-output-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-output-settings (input :hls-output-settings)) #:http.request.field{:name "HlsOutputSettings", :shape "HlsOutputSettings", :location-name "hlsOutputSettings"})) (clojure.core/contains? input :ms-smooth-output-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-ms-smooth-output-settings (input :ms-smooth-output-settings)) #:http.request.field{:name "MsSmoothOutputSettings", :shape "MsSmoothOutputSettings", :location-name "msSmoothOutputSettings"})) (clojure.core/contains? input :rtmp-output-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-rtmp-output-settings (input :rtmp-output-settings)) #:http.request.field{:name "RtmpOutputSettings", :shape "RtmpOutputSettings", :location-name "rtmpOutputSettings"})) (clojure.core/contains? input :udp-output-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-udp-output-settings (input :udp-output-settings)) #:http.request.field{:name "UdpOutputSettings", :shape "UdpOutputSettings", :location-name "udpOutputSettings"}))))
 
 (clojure.core/defn- ser-caption-language-mapping [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-string-min-3-max-3 (:language-code input)) #:http.request.field{:name "LanguageCode", :shape "__stringMin3Max3", :location-name "languageCode"}) (clojure.core/into (ser-string-min-1 (:language-description input)) #:http.request.field{:name "LanguageDescription", :shape "__stringMin1", :location-name "languageDescription"}) (clojure.core/into (ser-integer-min-1-max-4 (:caption-channel input)) #:http.request.field{:name "CaptionChannel", :shape "__integerMin1Max4", :location-name "captionChannel"})], :shape "CaptionLanguageMapping", :type "structure"}))
 
-(clojure.core/defn- ser-schedule-action-start-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "ScheduleActionStartSettings", :type "structure"} (clojure.core/contains? input :fixed-mode-schedule-action-start-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-fixed-mode-schedule-action-start-settings (input :fixed-mode-schedule-action-start-settings)) #:http.request.field{:name "FixedModeScheduleActionStartSettings", :shape "FixedModeScheduleActionStartSettings", :location-name "fixedModeScheduleActionStartSettings"}))))
+(clojure.core/defn- ser-input-loss-action-for-rtmp-out [input] #:http.request.field{:value (clojure.core/get {"EMIT_OUTPUT" "EMIT_OUTPUT", :emit-output "EMIT_OUTPUT", "PAUSE_OUTPUT" "PAUSE_OUTPUT", :pause-output "PAUSE_OUTPUT"} input), :shape "InputLossActionForRtmpOut"})
+
+(clojure.core/defn- ser-schedule-action-start-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "ScheduleActionStartSettings", :type "structure"} (clojure.core/contains? input :fixed-mode-schedule-action-start-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-fixed-mode-schedule-action-start-settings (input :fixed-mode-schedule-action-start-settings)) #:http.request.field{:name "FixedModeScheduleActionStartSettings", :shape "FixedModeScheduleActionStartSettings", :location-name "fixedModeScheduleActionStartSettings"})) (clojure.core/contains? input :follow-mode-schedule-action-start-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-follow-mode-schedule-action-start-settings (input :follow-mode-schedule-action-start-settings)) #:http.request.field{:name "FollowModeScheduleActionStartSettings", :shape "FollowModeScheduleActionStartSettings", :location-name "followModeScheduleActionStartSettings"}))))
 
 (clojure.core/defn- ser-list-of-output [input] #:http.request.field{:value (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (clojure.core/merge (ser-output coll) #:http.request.field{:shape "Output"}))) input), :shape "__listOfOutput", :type "list"})
 
 (clojure.core/defn- ser-encoder-settings [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-list-of-video-description (:video-descriptions input)) #:http.request.field{:name "VideoDescriptions", :shape "__listOfVideoDescription", :location-name "videoDescriptions"}) (clojure.core/into (ser-list-of-audio-description (:audio-descriptions input)) #:http.request.field{:name "AudioDescriptions", :shape "__listOfAudioDescription", :location-name "audioDescriptions"}) (clojure.core/into (ser-list-of-output-group (:output-groups input)) #:http.request.field{:name "OutputGroups", :shape "__listOfOutputGroup", :location-name "outputGroups"}) (clojure.core/into (ser-timecode-config (:timecode-config input)) #:http.request.field{:name "TimecodeConfig", :shape "TimecodeConfig", :location-name "timecodeConfig"})], :shape "EncoderSettings", :type "structure"} (clojure.core/contains? input :global-configuration) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-global-configuration (input :global-configuration)) #:http.request.field{:name "GlobalConfiguration", :shape "GlobalConfiguration", :location-name "globalConfiguration"})) (clojure.core/contains? input :caption-descriptions) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-caption-description (input :caption-descriptions)) #:http.request.field{:name "CaptionDescriptions", :shape "__listOfCaptionDescription", :location-name "captionDescriptions"})) (clojure.core/contains? input :avail-configuration) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-avail-configuration (input :avail-configuration)) #:http.request.field{:name "AvailConfiguration", :shape "AvailConfiguration", :location-name "availConfiguration"})) (clojure.core/contains? input :blackout-slate) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-blackout-slate (input :blackout-slate)) #:http.request.field{:name "BlackoutSlate", :shape "BlackoutSlate", :location-name "blackoutSlate"})) (clojure.core/contains? input :avail-blanking) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-avail-blanking (input :avail-blanking)) #:http.request.field{:name "AvailBlanking", :shape "AvailBlanking", :location-name "availBlanking"}))))
 
-(clojure.core/defn- ser-static-key-settings [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-input-location (:key-provider-server input)) #:http.request.field{:name "KeyProviderServer", :shape "InputLocation", :location-name "keyProviderServer"}) (clojure.core/into (ser-string-min-32-max-32 (:static-key-value input)) #:http.request.field{:name "StaticKeyValue", :shape "__stringMin32Max32", :location-name "staticKeyValue"})], :shape "StaticKeySettings", :type "structure"}))
+(clojure.core/defn- ser-static-key-settings [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-string-min-32-max-32 (:static-key-value input)) #:http.request.field{:name "StaticKeyValue", :shape "__stringMin32Max32", :location-name "staticKeyValue"})], :shape "StaticKeySettings", :type "structure"} (clojure.core/contains? input :key-provider-server) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-input-location (input :key-provider-server)) #:http.request.field{:name "KeyProviderServer", :shape "InputLocation", :location-name "keyProviderServer"}))))
+
+(clojure.core/defn- ser-frame-capture-group-settings [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-output-location-ref (:destination input)) #:http.request.field{:name "Destination", :shape "OutputLocationRef", :location-name "destination"})], :shape "FrameCaptureGroupSettings", :type "structure"}))
 
 (clojure.core/defn- ser-video-description-respond-to-afd [input] #:http.request.field{:value (clojure.core/get {"NONE" "NONE", :none "NONE", "PASSTHROUGH" "PASSTHROUGH", :passthrough "PASSTHROUGH", "RESPOND" "RESPOND", :respond "RESPOND"} input), :shape "VideoDescriptionRespondToAfd"})
 
@@ -1227,7 +1303,7 @@
 
 (clojure.core/defn- ser-output-group [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-list-of-output (:outputs input)) #:http.request.field{:name "Outputs", :shape "__listOfOutput", :location-name "outputs"}) (clojure.core/into (ser-output-group-settings (:output-group-settings input)) #:http.request.field{:name "OutputGroupSettings", :shape "OutputGroupSettings", :location-name "outputGroupSettings"})], :shape "OutputGroup", :type "structure"} (clojure.core/contains? input :name) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string-max-32 (input :name)) #:http.request.field{:name "Name", :shape "__stringMax32", :location-name "name"}))))
 
-(clojure.core/defn- ser-input-attachment [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "InputAttachment", :type "structure"} (clojure.core/contains? input :input-id) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :input-id)) #:http.request.field{:name "InputId", :shape "__string", :location-name "inputId"})) (clojure.core/contains? input :input-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-input-settings (input :input-settings)) #:http.request.field{:name "InputSettings", :shape "InputSettings", :location-name "inputSettings"}))))
+(clojure.core/defn- ser-input-attachment [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "InputAttachment", :type "structure"} (clojure.core/contains? input :input-attachment-name) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :input-attachment-name)) #:http.request.field{:name "InputAttachmentName", :shape "__string", :location-name "inputAttachmentName"})) (clojure.core/contains? input :input-id) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :input-id)) #:http.request.field{:name "InputId", :shape "__string", :location-name "inputId"})) (clojure.core/contains? input :input-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-input-settings (input :input-settings)) #:http.request.field{:name "InputSettings", :shape "InputSettings", :location-name "inputSettings"}))))
 
 (clojure.core/defn- ser-hls-client-cache [input] #:http.request.field{:value (clojure.core/get {"DISABLED" "DISABLED", :disabled "DISABLED", "ENABLED" "ENABLED", :enabled "ENABLED"} input), :shape "HlsClientCache"})
 
@@ -1266,6 +1342,8 @@
 (clojure.core/defn- ser-double [input] #:http.request.field{:value input, :shape "__double"})
 
 (clojure.core/defn- ser-ac-3-coding-mode [input] #:http.request.field{:value (clojure.core/get {"CODING_MODE_1_0" "CODING_MODE_1_0", :coding-mode-1-0 "CODING_MODE_1_0", "CODING_MODE_1_1" "CODING_MODE_1_1", :coding-mode-1-1 "CODING_MODE_1_1", "CODING_MODE_2_0" "CODING_MODE_2_0", :coding-mode-2-0 "CODING_MODE_2_0", "CODING_MODE_3_2_LFE" "CODING_MODE_3_2_LFE", :coding-mode-3-2-lfe "CODING_MODE_3_2_LFE"} input), :shape "Ac3CodingMode"})
+
+(clojure.core/defn- ser-input-switch-schedule-action-settings [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-string (:input-attachment-name-reference input)) #:http.request.field{:name "InputAttachmentNameReference", :shape "__string", :location-name "inputAttachmentNameReference"})], :shape "InputSwitchScheduleActionSettings", :type "structure"}))
 
 (clojure.core/defn- ser-integer-min-0-max-10 [input] #:http.request.field{:value input, :shape "__integerMin0Max10"})
 
@@ -1329,7 +1407,7 @@
 
 (clojure.core/defn- ser-integer-min-0-max-4294967295 [input] #:http.request.field{:value input, :shape "__integerMin0Max4294967295"})
 
-(clojure.core/defn- ser-rtmp-group-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "RtmpGroupSettings", :type "structure"} (clojure.core/contains? input :authentication-scheme) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-authentication-scheme (input :authentication-scheme)) #:http.request.field{:name "AuthenticationScheme", :shape "AuthenticationScheme", :location-name "authenticationScheme"})) (clojure.core/contains? input :cache-full-behavior) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-rtmp-cache-full-behavior (input :cache-full-behavior)) #:http.request.field{:name "CacheFullBehavior", :shape "RtmpCacheFullBehavior", :location-name "cacheFullBehavior"})) (clojure.core/contains? input :cache-length) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-30 (input :cache-length)) #:http.request.field{:name "CacheLength", :shape "__integerMin30", :location-name "cacheLength"})) (clojure.core/contains? input :caption-data) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-rtmp-caption-data (input :caption-data)) #:http.request.field{:name "CaptionData", :shape "RtmpCaptionData", :location-name "captionData"})) (clojure.core/contains? input :restart-delay) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0 (input :restart-delay)) #:http.request.field{:name "RestartDelay", :shape "__integerMin0", :location-name "restartDelay"}))))
+(clojure.core/defn- ser-rtmp-group-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "RtmpGroupSettings", :type "structure"} (clojure.core/contains? input :authentication-scheme) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-authentication-scheme (input :authentication-scheme)) #:http.request.field{:name "AuthenticationScheme", :shape "AuthenticationScheme", :location-name "authenticationScheme"})) (clojure.core/contains? input :cache-full-behavior) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-rtmp-cache-full-behavior (input :cache-full-behavior)) #:http.request.field{:name "CacheFullBehavior", :shape "RtmpCacheFullBehavior", :location-name "cacheFullBehavior"})) (clojure.core/contains? input :cache-length) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-30 (input :cache-length)) #:http.request.field{:name "CacheLength", :shape "__integerMin30", :location-name "cacheLength"})) (clojure.core/contains? input :caption-data) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-rtmp-caption-data (input :caption-data)) #:http.request.field{:name "CaptionData", :shape "RtmpCaptionData", :location-name "captionData"})) (clojure.core/contains? input :input-loss-action) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-input-loss-action-for-rtmp-out (input :input-loss-action)) #:http.request.field{:name "InputLossAction", :shape "InputLossActionForRtmpOut", :location-name "inputLossAction"})) (clojure.core/contains? input :restart-delay) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0 (input :restart-delay)) #:http.request.field{:name "RestartDelay", :shape "__integerMin0", :location-name "restartDelay"}))))
 
 (clojure.core/defn- ser-burn-in-alignment [input] #:http.request.field{:value (clojure.core/get {"CENTERED" "CENTERED", :centered "CENTERED", "LEFT" "LEFT", :left "LEFT", "SMART" "SMART", :smart "SMART"} input), :shape "BurnInAlignment"})
 
@@ -1337,11 +1415,11 @@
 
 (clojure.core/defn- ser-embedded-destination-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "EmbeddedDestinationSettings", :type "structure"}))
 
-(clojure.core/defn- ser-caption-selector [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-string (:name input)) #:http.request.field{:name "Name", :shape "__string", :location-name "name"})], :shape "CaptionSelector", :type "structure"} (clojure.core/contains? input :language-code) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :language-code)) #:http.request.field{:name "LanguageCode", :shape "__string", :location-name "languageCode"})) (clojure.core/contains? input :selector-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-caption-selector-settings (input :selector-settings)) #:http.request.field{:name "SelectorSettings", :shape "CaptionSelectorSettings", :location-name "selectorSettings"}))))
+(clojure.core/defn- ser-caption-selector [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-string-min-1 (:name input)) #:http.request.field{:name "Name", :shape "__stringMin1", :location-name "name"})], :shape "CaptionSelector", :type "structure"} (clojure.core/contains? input :language-code) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :language-code)) #:http.request.field{:name "LanguageCode", :shape "__string", :location-name "languageCode"})) (clojure.core/contains? input :selector-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-caption-selector-settings (input :selector-settings)) #:http.request.field{:name "SelectorSettings", :shape "CaptionSelectorSettings", :location-name "selectorSettings"}))))
 
 (clojure.core/defn- ser-embedded-plus-scte-20-destination-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "EmbeddedPlusScte20DestinationSettings", :type "structure"}))
 
-(clojure.core/defn- ser-hls-group-settings [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-output-location-ref (:destination input)) #:http.request.field{:name "Destination", :shape "OutputLocationRef", :location-name "destination"})], :shape "HlsGroupSettings", :type "structure"} (clojure.core/contains? input :segment-length) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-1 (input :segment-length)) #:http.request.field{:name "SegmentLength", :shape "__integerMin1", :location-name "segmentLength"})) (clojure.core/contains? input :ts-file-mode) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-ts-file-mode (input :ts-file-mode)) #:http.request.field{:name "TsFileMode", :shape "HlsTsFileMode", :location-name "tsFileMode"})) (clojure.core/contains? input :timestamp-delta-milliseconds) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0 (input :timestamp-delta-milliseconds)) #:http.request.field{:name "TimestampDeltaMilliseconds", :shape "__integerMin0", :location-name "timestampDeltaMilliseconds"})) (clojure.core/contains? input :program-date-time-period) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0-max-3600 (input :program-date-time-period)) #:http.request.field{:name "ProgramDateTimePeriod", :shape "__integerMin0Max3600", :location-name "programDateTimePeriod"})) (clojure.core/contains? input :constant-iv) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string-min-32-max-32 (input :constant-iv)) #:http.request.field{:name "ConstantIv", :shape "__stringMin32Max32", :location-name "constantIv"})) (clojure.core/contains? input :key-format-versions) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :key-format-versions)) #:http.request.field{:name "KeyFormatVersions", :shape "__string", :location-name "keyFormatVersions"})) (clojure.core/contains? input :input-loss-action) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-input-loss-action-for-hls-out (input :input-loss-action)) #:http.request.field{:name "InputLossAction", :shape "InputLossActionForHlsOut", :location-name "inputLossAction"})) (clojure.core/contains? input :ad-markers) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-hls-ad-markers (input :ad-markers)) #:http.request.field{:name "AdMarkers", :shape "__listOfHlsAdMarkers", :location-name "adMarkers"})) (clojure.core/contains? input :caption-language-mappings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-caption-language-mapping (input :caption-language-mappings)) #:http.request.field{:name "CaptionLanguageMappings", :shape "__listOfCaptionLanguageMapping", :location-name "captionLanguageMappings"})) (clojure.core/contains? input :timed-metadata-id-3-frame) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-timed-metadata-id-3-frame (input :timed-metadata-id-3-frame)) #:http.request.field{:name "TimedMetadataId3Frame", :shape "HlsTimedMetadataId3Frame", :location-name "timedMetadataId3Frame"})) (clojure.core/contains? input :mode) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-mode (input :mode)) #:http.request.field{:name "Mode", :shape "HlsMode", :location-name "mode"})) (clojure.core/contains? input :directory-structure) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-directory-structure (input :directory-structure)) #:http.request.field{:name "DirectoryStructure", :shape "HlsDirectoryStructure", :location-name "directoryStructure"})) (clojure.core/contains? input :encryption-type) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-encryption-type (input :encryption-type)) #:http.request.field{:name "EncryptionType", :shape "HlsEncryptionType", :location-name "encryptionType"})) (clojure.core/contains? input :index-n-segments) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-3 (input :index-n-segments)) #:http.request.field{:name "IndexNSegments", :shape "__integerMin3", :location-name "indexNSegments"})) (clojure.core/contains? input :keep-segments) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-1 (input :keep-segments)) #:http.request.field{:name "KeepSegments", :shape "__integerMin1", :location-name "keepSegments"})) (clojure.core/contains? input :min-segment-length) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0 (input :min-segment-length)) #:http.request.field{:name "MinSegmentLength", :shape "__integerMin0", :location-name "minSegmentLength"})) (clojure.core/contains? input :iv-in-manifest) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-iv-in-manifest (input :iv-in-manifest)) #:http.request.field{:name "IvInManifest", :shape "HlsIvInManifest", :location-name "ivInManifest"})) (clojure.core/contains? input :stream-inf-resolution) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-stream-inf-resolution (input :stream-inf-resolution)) #:http.request.field{:name "StreamInfResolution", :shape "HlsStreamInfResolution", :location-name "streamInfResolution"})) (clojure.core/contains? input :hls-cdn-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-cdn-settings (input :hls-cdn-settings)) #:http.request.field{:name "HlsCdnSettings", :shape "HlsCdnSettings", :location-name "hlsCdnSettings"})) (clojure.core/contains? input :program-date-time) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-program-date-time (input :program-date-time)) #:http.request.field{:name "ProgramDateTime", :shape "HlsProgramDateTime", :location-name "programDateTime"})) (clojure.core/contains? input :output-selection) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-output-selection (input :output-selection)) #:http.request.field{:name "OutputSelection", :shape "HlsOutputSelection", :location-name "outputSelection"})) (clojure.core/contains? input :base-url-content) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :base-url-content)) #:http.request.field{:name "BaseUrlContent", :shape "__string", :location-name "baseUrlContent"})) (clojure.core/contains? input :caption-language-setting) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-caption-language-setting (input :caption-language-setting)) #:http.request.field{:name "CaptionLanguageSetting", :shape "HlsCaptionLanguageSetting", :location-name "captionLanguageSetting"})) (clojure.core/contains? input :manifest-duration-format) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-manifest-duration-format (input :manifest-duration-format)) #:http.request.field{:name "ManifestDurationFormat", :shape "HlsManifestDurationFormat", :location-name "manifestDurationFormat"})) (clojure.core/contains? input :segmentation-mode) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-segmentation-mode (input :segmentation-mode)) #:http.request.field{:name "SegmentationMode", :shape "HlsSegmentationMode", :location-name "segmentationMode"})) (clojure.core/contains? input :timed-metadata-id-3-period) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0 (input :timed-metadata-id-3-period)) #:http.request.field{:name "TimedMetadataId3Period", :shape "__integerMin0", :location-name "timedMetadataId3Period"})) (clojure.core/contains? input :manifest-compression) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-manifest-compression (input :manifest-compression)) #:http.request.field{:name "ManifestCompression", :shape "HlsManifestCompression", :location-name "manifestCompression"})) (clojure.core/contains? input :segments-per-subdirectory) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-1 (input :segments-per-subdirectory)) #:http.request.field{:name "SegmentsPerSubdirectory", :shape "__integerMin1", :location-name "segmentsPerSubdirectory"})) (clojure.core/contains? input :key-format) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :key-format)) #:http.request.field{:name "KeyFormat", :shape "__string", :location-name "keyFormat"})) (clojure.core/contains? input :iv-source) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-iv-source (input :iv-source)) #:http.request.field{:name "IvSource", :shape "HlsIvSource", :location-name "ivSource"})) (clojure.core/contains? input :codec-specification) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-codec-specification (input :codec-specification)) #:http.request.field{:name "CodecSpecification", :shape "HlsCodecSpecification", :location-name "codecSpecification"})) (clojure.core/contains? input :key-provider-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-key-provider-settings (input :key-provider-settings)) #:http.request.field{:name "KeyProviderSettings", :shape "KeyProviderSettings", :location-name "keyProviderSettings"})) (clojure.core/contains? input :base-url-manifest) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :base-url-manifest)) #:http.request.field{:name "BaseUrlManifest", :shape "__string", :location-name "baseUrlManifest"})) (clojure.core/contains? input :client-cache) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-client-cache (input :client-cache)) #:http.request.field{:name "ClientCache", :shape "HlsClientCache", :location-name "clientCache"}))))
+(clojure.core/defn- ser-hls-group-settings [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-output-location-ref (:destination input)) #:http.request.field{:name "Destination", :shape "OutputLocationRef", :location-name "destination"})], :shape "HlsGroupSettings", :type "structure"} (clojure.core/contains? input :segment-length) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-1 (input :segment-length)) #:http.request.field{:name "SegmentLength", :shape "__integerMin1", :location-name "segmentLength"})) (clojure.core/contains? input :ts-file-mode) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-ts-file-mode (input :ts-file-mode)) #:http.request.field{:name "TsFileMode", :shape "HlsTsFileMode", :location-name "tsFileMode"})) (clojure.core/contains? input :timestamp-delta-milliseconds) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0 (input :timestamp-delta-milliseconds)) #:http.request.field{:name "TimestampDeltaMilliseconds", :shape "__integerMin0", :location-name "timestampDeltaMilliseconds"})) (clojure.core/contains? input :program-date-time-period) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0-max-3600 (input :program-date-time-period)) #:http.request.field{:name "ProgramDateTimePeriod", :shape "__integerMin0Max3600", :location-name "programDateTimePeriod"})) (clojure.core/contains? input :constant-iv) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string-min-32-max-32 (input :constant-iv)) #:http.request.field{:name "ConstantIv", :shape "__stringMin32Max32", :location-name "constantIv"})) (clojure.core/contains? input :key-format-versions) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :key-format-versions)) #:http.request.field{:name "KeyFormatVersions", :shape "__string", :location-name "keyFormatVersions"})) (clojure.core/contains? input :input-loss-action) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-input-loss-action-for-hls-out (input :input-loss-action)) #:http.request.field{:name "InputLossAction", :shape "InputLossActionForHlsOut", :location-name "inputLossAction"})) (clojure.core/contains? input :ad-markers) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-hls-ad-markers (input :ad-markers)) #:http.request.field{:name "AdMarkers", :shape "__listOfHlsAdMarkers", :location-name "adMarkers"})) (clojure.core/contains? input :caption-language-mappings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-caption-language-mapping (input :caption-language-mappings)) #:http.request.field{:name "CaptionLanguageMappings", :shape "__listOfCaptionLanguageMapping", :location-name "captionLanguageMappings"})) (clojure.core/contains? input :timed-metadata-id-3-frame) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-timed-metadata-id-3-frame (input :timed-metadata-id-3-frame)) #:http.request.field{:name "TimedMetadataId3Frame", :shape "HlsTimedMetadataId3Frame", :location-name "timedMetadataId3Frame"})) (clojure.core/contains? input :mode) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-mode (input :mode)) #:http.request.field{:name "Mode", :shape "HlsMode", :location-name "mode"})) (clojure.core/contains? input :directory-structure) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-directory-structure (input :directory-structure)) #:http.request.field{:name "DirectoryStructure", :shape "HlsDirectoryStructure", :location-name "directoryStructure"})) (clojure.core/contains? input :encryption-type) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-encryption-type (input :encryption-type)) #:http.request.field{:name "EncryptionType", :shape "HlsEncryptionType", :location-name "encryptionType"})) (clojure.core/contains? input :index-n-segments) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-3 (input :index-n-segments)) #:http.request.field{:name "IndexNSegments", :shape "__integerMin3", :location-name "indexNSegments"})) (clojure.core/contains? input :keep-segments) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-1 (input :keep-segments)) #:http.request.field{:name "KeepSegments", :shape "__integerMin1", :location-name "keepSegments"})) (clojure.core/contains? input :min-segment-length) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0 (input :min-segment-length)) #:http.request.field{:name "MinSegmentLength", :shape "__integerMin0", :location-name "minSegmentLength"})) (clojure.core/contains? input :iv-in-manifest) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-iv-in-manifest (input :iv-in-manifest)) #:http.request.field{:name "IvInManifest", :shape "HlsIvInManifest", :location-name "ivInManifest"})) (clojure.core/contains? input :stream-inf-resolution) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-stream-inf-resolution (input :stream-inf-resolution)) #:http.request.field{:name "StreamInfResolution", :shape "HlsStreamInfResolution", :location-name "streamInfResolution"})) (clojure.core/contains? input :hls-cdn-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-cdn-settings (input :hls-cdn-settings)) #:http.request.field{:name "HlsCdnSettings", :shape "HlsCdnSettings", :location-name "hlsCdnSettings"})) (clojure.core/contains? input :redundant-manifest) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-redundant-manifest (input :redundant-manifest)) #:http.request.field{:name "RedundantManifest", :shape "HlsRedundantManifest", :location-name "redundantManifest"})) (clojure.core/contains? input :program-date-time) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-program-date-time (input :program-date-time)) #:http.request.field{:name "ProgramDateTime", :shape "HlsProgramDateTime", :location-name "programDateTime"})) (clojure.core/contains? input :i-frame-only-playlists) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-i-frame-only-playlist-type (input :i-frame-only-playlists)) #:http.request.field{:name "IFrameOnlyPlaylists", :shape "IFrameOnlyPlaylistType", :location-name "iFrameOnlyPlaylists"})) (clojure.core/contains? input :output-selection) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-output-selection (input :output-selection)) #:http.request.field{:name "OutputSelection", :shape "HlsOutputSelection", :location-name "outputSelection"})) (clojure.core/contains? input :base-url-content) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :base-url-content)) #:http.request.field{:name "BaseUrlContent", :shape "__string", :location-name "baseUrlContent"})) (clojure.core/contains? input :caption-language-setting) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-caption-language-setting (input :caption-language-setting)) #:http.request.field{:name "CaptionLanguageSetting", :shape "HlsCaptionLanguageSetting", :location-name "captionLanguageSetting"})) (clojure.core/contains? input :manifest-duration-format) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-manifest-duration-format (input :manifest-duration-format)) #:http.request.field{:name "ManifestDurationFormat", :shape "HlsManifestDurationFormat", :location-name "manifestDurationFormat"})) (clojure.core/contains? input :segmentation-mode) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-segmentation-mode (input :segmentation-mode)) #:http.request.field{:name "SegmentationMode", :shape "HlsSegmentationMode", :location-name "segmentationMode"})) (clojure.core/contains? input :timed-metadata-id-3-period) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0 (input :timed-metadata-id-3-period)) #:http.request.field{:name "TimedMetadataId3Period", :shape "__integerMin0", :location-name "timedMetadataId3Period"})) (clojure.core/contains? input :manifest-compression) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-manifest-compression (input :manifest-compression)) #:http.request.field{:name "ManifestCompression", :shape "HlsManifestCompression", :location-name "manifestCompression"})) (clojure.core/contains? input :segments-per-subdirectory) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-1 (input :segments-per-subdirectory)) #:http.request.field{:name "SegmentsPerSubdirectory", :shape "__integerMin1", :location-name "segmentsPerSubdirectory"})) (clojure.core/contains? input :key-format) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :key-format)) #:http.request.field{:name "KeyFormat", :shape "__string", :location-name "keyFormat"})) (clojure.core/contains? input :iv-source) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-iv-source (input :iv-source)) #:http.request.field{:name "IvSource", :shape "HlsIvSource", :location-name "ivSource"})) (clojure.core/contains? input :codec-specification) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-codec-specification (input :codec-specification)) #:http.request.field{:name "CodecSpecification", :shape "HlsCodecSpecification", :location-name "codecSpecification"})) (clojure.core/contains? input :key-provider-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-key-provider-settings (input :key-provider-settings)) #:http.request.field{:name "KeyProviderSettings", :shape "KeyProviderSettings", :location-name "keyProviderSettings"})) (clojure.core/contains? input :base-url-manifest) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :base-url-manifest)) #:http.request.field{:name "BaseUrlManifest", :shape "__string", :location-name "baseUrlManifest"})) (clojure.core/contains? input :client-cache) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-hls-client-cache (input :client-cache)) #:http.request.field{:name "ClientCache", :shape "HlsClientCache", :location-name "clientCache"}))))
 
 (clojure.core/defn- ser-input-loss-action-for-ms-smooth-out [input] #:http.request.field{:value (clojure.core/get {"EMIT_OUTPUT" "EMIT_OUTPUT", :emit-output "EMIT_OUTPUT", "PAUSE_OUTPUT" "PAUSE_OUTPUT", :pause-output "PAUSE_OUTPUT"} input), :shape "InputLossActionForMsSmoothOut"})
 
@@ -1356,6 +1434,10 @@
 (clojure.core/defn- ser-smooth-group-timestamp-offset-mode [input] #:http.request.field{:value (clojure.core/get {"USE_CONFIGURED_OFFSET" "USE_CONFIGURED_OFFSET", :use-configured-offset "USE_CONFIGURED_OFFSET", "USE_EVENT_START_DATE" "USE_EVENT_START_DATE", :use-event-start-date "USE_EVENT_START_DATE"} input), :shape "SmoothGroupTimestampOffsetMode"})
 
 (clojure.core/defn- ser-hls-media-store-storage-class [input] #:http.request.field{:value (clojure.core/get {"TEMPORAL" "TEMPORAL", :temporal "TEMPORAL"} input), :shape "HlsMediaStoreStorageClass"})
+
+(clojure.core/defn- ser-pipeline-pause-state-settings [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-pipeline-id (:pipeline-id input)) #:http.request.field{:name "PipelineId", :shape "PipelineId", :location-name "pipelineId"})], :shape "PipelinePauseStateSettings", :type "structure"}))
+
+(clojure.core/defn- ser-frame-capture-settings [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-integer-min-1-max-3600 (:capture-interval input)) #:http.request.field{:name "CaptureInterval", :shape "__integerMin1Max3600", :location-name "captureInterval"})], :shape "FrameCaptureSettings", :type "structure"}))
 
 (clojure.core/defn- ser-hls-program-date-time [input] #:http.request.field{:value (clojure.core/get {"EXCLUDE" "EXCLUDE", :exclude "EXCLUDE", "INCLUDE" "INCLUDE", :include "INCLUDE"} input), :shape "HlsProgramDateTime"})
 
@@ -1399,7 +1481,7 @@
 
 (clojure.core/defn- ser-caption-selector-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "CaptionSelectorSettings", :type "structure"} (clojure.core/contains? input :arib-source-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-arib-source-settings (input :arib-source-settings)) #:http.request.field{:name "AribSourceSettings", :shape "AribSourceSettings", :location-name "aribSourceSettings"})) (clojure.core/contains? input :dvb-sub-source-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-dvb-sub-source-settings (input :dvb-sub-source-settings)) #:http.request.field{:name "DvbSubSourceSettings", :shape "DvbSubSourceSettings", :location-name "dvbSubSourceSettings"})) (clojure.core/contains? input :embedded-source-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-embedded-source-settings (input :embedded-source-settings)) #:http.request.field{:name "EmbeddedSourceSettings", :shape "EmbeddedSourceSettings", :location-name "embeddedSourceSettings"})) (clojure.core/contains? input :scte-20-source-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-scte-20-source-settings (input :scte-20-source-settings)) #:http.request.field{:name "Scte20SourceSettings", :shape "Scte20SourceSettings", :location-name "scte20SourceSettings"})) (clojure.core/contains? input :scte-27-source-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-scte-27-source-settings (input :scte-27-source-settings)) #:http.request.field{:name "Scte27SourceSettings", :shape "Scte27SourceSettings", :location-name "scte27SourceSettings"})) (clojure.core/contains? input :teletext-source-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-teletext-source-settings (input :teletext-source-settings)) #:http.request.field{:name "TeletextSourceSettings", :shape "TeletextSourceSettings", :location-name "teletextSourceSettings"}))))
 
-(clojure.core/defn- ser-h-264-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "H264Settings", :type "structure"} (clojure.core/contains? input :level) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-level (input :level)) #:http.request.field{:name "Level", :shape "H264Level", :location-name "level"})) (clojure.core/contains? input :rate-control-mode) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-rate-control-mode (input :rate-control-mode)) #:http.request.field{:name "RateControlMode", :shape "H264RateControlMode", :location-name "rateControlMode"})) (clojure.core/contains? input :min-i-interval) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0-max-30 (input :min-i-interval)) #:http.request.field{:name "MinIInterval", :shape "__integerMin0Max30", :location-name "minIInterval"})) (clojure.core/contains? input :temporal-aq) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-temporal-aq (input :temporal-aq)) #:http.request.field{:name "TemporalAq", :shape "H264TemporalAq", :location-name "temporalAq"})) (clojure.core/contains? input :par-denominator) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-1 (input :par-denominator)) #:http.request.field{:name "ParDenominator", :shape "__integerMin1", :location-name "parDenominator"})) (clojure.core/contains? input :num-ref-frames) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-1-max-6 (input :num-ref-frames)) #:http.request.field{:name "NumRefFrames", :shape "__integerMin1Max6", :location-name "numRefFrames"})) (clojure.core/contains? input :gop-b-reference) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-gop-b-reference (input :gop-b-reference)) #:http.request.field{:name "GopBReference", :shape "H264GopBReference", :location-name "gopBReference"})) (clojure.core/contains? input :timecode-insertion) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-timecode-insertion-behavior (input :timecode-insertion)) #:http.request.field{:name "TimecodeInsertion", :shape "H264TimecodeInsertionBehavior", :location-name "timecodeInsertion"})) (clojure.core/contains? input :scan-type) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-scan-type (input :scan-type)) #:http.request.field{:name "ScanType", :shape "H264ScanType", :location-name "scanType"})) (clojure.core/contains? input :adaptive-quantization) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-adaptive-quantization (input :adaptive-quantization)) #:http.request.field{:name "AdaptiveQuantization", :shape "H264AdaptiveQuantization", :location-name "adaptiveQuantization"})) (clojure.core/contains? input :afd-signaling) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-afd-signaling (input :afd-signaling)) #:http.request.field{:name "AfdSignaling", :shape "AfdSignaling", :location-name "afdSignaling"})) (clojure.core/contains? input :buf-fill-pct) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0-max-100 (input :buf-fill-pct)) #:http.request.field{:name "BufFillPct", :shape "__integerMin0Max100", :location-name "bufFillPct"})) (clojure.core/contains? input :framerate-denominator) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer (input :framerate-denominator)) #:http.request.field{:name "FramerateDenominator", :shape "__integer", :location-name "framerateDenominator"})) (clojure.core/contains? input :spatial-aq) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-spatial-aq (input :spatial-aq)) #:http.request.field{:name "SpatialAq", :shape "H264SpatialAq", :location-name "spatialAq"})) (clojure.core/contains? input :framerate-control) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-framerate-control (input :framerate-control)) #:http.request.field{:name "FramerateControl", :shape "H264FramerateControl", :location-name "framerateControl"})) (clojure.core/contains? input :gop-num-b-frames) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0-max-7 (input :gop-num-b-frames)) #:http.request.field{:name "GopNumBFrames", :shape "__integerMin0Max7", :location-name "gopNumBFrames"})) (clojure.core/contains? input :buf-size) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0 (input :buf-size)) #:http.request.field{:name "BufSize", :shape "__integerMin0", :location-name "bufSize"})) (clojure.core/contains? input :profile) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-profile (input :profile)) #:http.request.field{:name "Profile", :shape "H264Profile", :location-name "profile"})) (clojure.core/contains? input :color-metadata) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-color-metadata (input :color-metadata)) #:http.request.field{:name "ColorMetadata", :shape "H264ColorMetadata", :location-name "colorMetadata"})) (clojure.core/contains? input :look-ahead-rate-control) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-look-ahead-rate-control (input :look-ahead-rate-control)) #:http.request.field{:name "LookAheadRateControl", :shape "H264LookAheadRateControl", :location-name "lookAheadRateControl"})) (clojure.core/contains? input :syntax) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-syntax (input :syntax)) #:http.request.field{:name "Syntax", :shape "H264Syntax", :location-name "syntax"})) (clojure.core/contains? input :gop-closed-cadence) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0 (input :gop-closed-cadence)) #:http.request.field{:name "GopClosedCadence", :shape "__integerMin0", :location-name "gopClosedCadence"})) (clojure.core/contains? input :flicker-aq) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-flicker-aq (input :flicker-aq)) #:http.request.field{:name "FlickerAq", :shape "H264FlickerAq", :location-name "flickerAq"})) (clojure.core/contains? input :framerate-numerator) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer (input :framerate-numerator)) #:http.request.field{:name "FramerateNumerator", :shape "__integer", :location-name "framerateNumerator"})) (clojure.core/contains? input :softness) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0-max-128 (input :softness)) #:http.request.field{:name "Softness", :shape "__integerMin0Max128", :location-name "softness"})) (clojure.core/contains? input :gop-size-units) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-gop-size-units (input :gop-size-units)) #:http.request.field{:name "GopSizeUnits", :shape "H264GopSizeUnits", :location-name "gopSizeUnits"})) (clojure.core/contains? input :max-bitrate) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-1000 (input :max-bitrate)) #:http.request.field{:name "MaxBitrate", :shape "__integerMin1000", :location-name "maxBitrate"})) (clojure.core/contains? input :par-numerator) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer (input :par-numerator)) #:http.request.field{:name "ParNumerator", :shape "__integer", :location-name "parNumerator"})) (clojure.core/contains? input :gop-size) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-double-min-1 (input :gop-size)) #:http.request.field{:name "GopSize", :shape "__doubleMin1", :location-name "gopSize"})) (clojure.core/contains? input :par-control) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-par-control (input :par-control)) #:http.request.field{:name "ParControl", :shape "H264ParControl", :location-name "parControl"})) (clojure.core/contains? input :slices) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-1-max-32 (input :slices)) #:http.request.field{:name "Slices", :shape "__integerMin1Max32", :location-name "slices"})) (clojure.core/contains? input :fixed-afd) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-fixed-afd (input :fixed-afd)) #:http.request.field{:name "FixedAfd", :shape "FixedAfd", :location-name "fixedAfd"})) (clojure.core/contains? input :entropy-encoding) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-entropy-encoding (input :entropy-encoding)) #:http.request.field{:name "EntropyEncoding", :shape "H264EntropyEncoding", :location-name "entropyEncoding"})) (clojure.core/contains? input :scene-change-detect) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-scene-change-detect (input :scene-change-detect)) #:http.request.field{:name "SceneChangeDetect", :shape "H264SceneChangeDetect", :location-name "sceneChangeDetect"})) (clojure.core/contains? input :bitrate) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-1000 (input :bitrate)) #:http.request.field{:name "Bitrate", :shape "__integerMin1000", :location-name "bitrate"}))))
+(clojure.core/defn- ser-h-264-settings [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "H264Settings", :type "structure"} (clojure.core/contains? input :level) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-level (input :level)) #:http.request.field{:name "Level", :shape "H264Level", :location-name "level"})) (clojure.core/contains? input :rate-control-mode) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-rate-control-mode (input :rate-control-mode)) #:http.request.field{:name "RateControlMode", :shape "H264RateControlMode", :location-name "rateControlMode"})) (clojure.core/contains? input :subgop-length) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-sub-gop-length (input :subgop-length)) #:http.request.field{:name "SubgopLength", :shape "H264SubGopLength", :location-name "subgopLength"})) (clojure.core/contains? input :min-i-interval) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0-max-30 (input :min-i-interval)) #:http.request.field{:name "MinIInterval", :shape "__integerMin0Max30", :location-name "minIInterval"})) (clojure.core/contains? input :temporal-aq) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-temporal-aq (input :temporal-aq)) #:http.request.field{:name "TemporalAq", :shape "H264TemporalAq", :location-name "temporalAq"})) (clojure.core/contains? input :par-denominator) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-1 (input :par-denominator)) #:http.request.field{:name "ParDenominator", :shape "__integerMin1", :location-name "parDenominator"})) (clojure.core/contains? input :qvbr-quality-level) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-1-max-10 (input :qvbr-quality-level)) #:http.request.field{:name "QvbrQualityLevel", :shape "__integerMin1Max10", :location-name "qvbrQualityLevel"})) (clojure.core/contains? input :num-ref-frames) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-1-max-6 (input :num-ref-frames)) #:http.request.field{:name "NumRefFrames", :shape "__integerMin1Max6", :location-name "numRefFrames"})) (clojure.core/contains? input :gop-b-reference) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-gop-b-reference (input :gop-b-reference)) #:http.request.field{:name "GopBReference", :shape "H264GopBReference", :location-name "gopBReference"})) (clojure.core/contains? input :timecode-insertion) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-timecode-insertion-behavior (input :timecode-insertion)) #:http.request.field{:name "TimecodeInsertion", :shape "H264TimecodeInsertionBehavior", :location-name "timecodeInsertion"})) (clojure.core/contains? input :scan-type) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-scan-type (input :scan-type)) #:http.request.field{:name "ScanType", :shape "H264ScanType", :location-name "scanType"})) (clojure.core/contains? input :adaptive-quantization) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-adaptive-quantization (input :adaptive-quantization)) #:http.request.field{:name "AdaptiveQuantization", :shape "H264AdaptiveQuantization", :location-name "adaptiveQuantization"})) (clojure.core/contains? input :afd-signaling) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-afd-signaling (input :afd-signaling)) #:http.request.field{:name "AfdSignaling", :shape "AfdSignaling", :location-name "afdSignaling"})) (clojure.core/contains? input :buf-fill-pct) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0-max-100 (input :buf-fill-pct)) #:http.request.field{:name "BufFillPct", :shape "__integerMin0Max100", :location-name "bufFillPct"})) (clojure.core/contains? input :framerate-denominator) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-1 (input :framerate-denominator)) #:http.request.field{:name "FramerateDenominator", :shape "__integerMin1", :location-name "framerateDenominator"})) (clojure.core/contains? input :spatial-aq) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-spatial-aq (input :spatial-aq)) #:http.request.field{:name "SpatialAq", :shape "H264SpatialAq", :location-name "spatialAq"})) (clojure.core/contains? input :framerate-control) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-framerate-control (input :framerate-control)) #:http.request.field{:name "FramerateControl", :shape "H264FramerateControl", :location-name "framerateControl"})) (clojure.core/contains? input :gop-num-b-frames) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0-max-7 (input :gop-num-b-frames)) #:http.request.field{:name "GopNumBFrames", :shape "__integerMin0Max7", :location-name "gopNumBFrames"})) (clojure.core/contains? input :buf-size) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0 (input :buf-size)) #:http.request.field{:name "BufSize", :shape "__integerMin0", :location-name "bufSize"})) (clojure.core/contains? input :profile) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-profile (input :profile)) #:http.request.field{:name "Profile", :shape "H264Profile", :location-name "profile"})) (clojure.core/contains? input :color-metadata) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-color-metadata (input :color-metadata)) #:http.request.field{:name "ColorMetadata", :shape "H264ColorMetadata", :location-name "colorMetadata"})) (clojure.core/contains? input :look-ahead-rate-control) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-look-ahead-rate-control (input :look-ahead-rate-control)) #:http.request.field{:name "LookAheadRateControl", :shape "H264LookAheadRateControl", :location-name "lookAheadRateControl"})) (clojure.core/contains? input :syntax) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-syntax (input :syntax)) #:http.request.field{:name "Syntax", :shape "H264Syntax", :location-name "syntax"})) (clojure.core/contains? input :gop-closed-cadence) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0 (input :gop-closed-cadence)) #:http.request.field{:name "GopClosedCadence", :shape "__integerMin0", :location-name "gopClosedCadence"})) (clojure.core/contains? input :flicker-aq) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-flicker-aq (input :flicker-aq)) #:http.request.field{:name "FlickerAq", :shape "H264FlickerAq", :location-name "flickerAq"})) (clojure.core/contains? input :framerate-numerator) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-1 (input :framerate-numerator)) #:http.request.field{:name "FramerateNumerator", :shape "__integerMin1", :location-name "framerateNumerator"})) (clojure.core/contains? input :softness) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-0-max-128 (input :softness)) #:http.request.field{:name "Softness", :shape "__integerMin0Max128", :location-name "softness"})) (clojure.core/contains? input :gop-size-units) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-gop-size-units (input :gop-size-units)) #:http.request.field{:name "GopSizeUnits", :shape "H264GopSizeUnits", :location-name "gopSizeUnits"})) (clojure.core/contains? input :max-bitrate) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-1000 (input :max-bitrate)) #:http.request.field{:name "MaxBitrate", :shape "__integerMin1000", :location-name "maxBitrate"})) (clojure.core/contains? input :par-numerator) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer (input :par-numerator)) #:http.request.field{:name "ParNumerator", :shape "__integer", :location-name "parNumerator"})) (clojure.core/contains? input :gop-size) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-double-min-1 (input :gop-size)) #:http.request.field{:name "GopSize", :shape "__doubleMin1", :location-name "gopSize"})) (clojure.core/contains? input :par-control) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-par-control (input :par-control)) #:http.request.field{:name "ParControl", :shape "H264ParControl", :location-name "parControl"})) (clojure.core/contains? input :slices) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-1-max-32 (input :slices)) #:http.request.field{:name "Slices", :shape "__integerMin1Max32", :location-name "slices"})) (clojure.core/contains? input :fixed-afd) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-fixed-afd (input :fixed-afd)) #:http.request.field{:name "FixedAfd", :shape "FixedAfd", :location-name "fixedAfd"})) (clojure.core/contains? input :entropy-encoding) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-entropy-encoding (input :entropy-encoding)) #:http.request.field{:name "EntropyEncoding", :shape "H264EntropyEncoding", :location-name "entropyEncoding"})) (clojure.core/contains? input :scene-change-detect) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-h-264-scene-change-detect (input :scene-change-detect)) #:http.request.field{:name "SceneChangeDetect", :shape "H264SceneChangeDetect", :location-name "sceneChangeDetect"})) (clojure.core/contains? input :bitrate) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-1000 (input :bitrate)) #:http.request.field{:name "Bitrate", :shape "__integerMin1000", :location-name "bitrate"}))))
 
 (clojure.core/defn- ser-hls-timed-metadata-id-3-frame [input] #:http.request.field{:value (clojure.core/get {"NONE" "NONE", :none "NONE", "PRIV" "PRIV", :priv "PRIV", "TDRL" "TDRL", :tdrl "TDRL"} input), :shape "HlsTimedMetadataId3Frame"})
 
@@ -1422,6 +1504,8 @@
 (clojure.core/defn- ser-string-min-1-max-255 [input] #:http.request.field{:value input, :shape "__stringMin1Max255"})
 
 (clojure.core/defn- ser-list-of-audio-channel-mapping [input] #:http.request.field{:value (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (clojure.core/merge (ser-audio-channel-mapping coll) #:http.request.field{:shape "AudioChannelMapping"}))) input), :shape "__listOfAudioChannelMapping", :type "list"})
+
+(clojure.core/defn- ser-list-of-media-connect-flow-request [input] #:http.request.field{:value (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (clojure.core/merge (ser-media-connect-flow-request coll) #:http.request.field{:shape "MediaConnectFlowRequest"}))) input), :shape "__listOfMediaConnectFlowRequest", :type "list"})
 
 (clojure.core/defn- ser-eac-3-stereo-downmix [input] #:http.request.field{:value (clojure.core/get {"DPL2" "DPL2", :dpl-2 "DPL2", "LO_RO" "LO_RO", :lo-ro "LO_RO", "LT_RT" "LT_RT", :lt-rt "LT_RT", "NOT_INDICATED" "NOT_INDICATED", :not-indicated "NOT_INDICATED"} input), :shape "Eac3StereoDownmix"})
 
@@ -1447,7 +1531,7 @@
 
 (clojure.core/defn- ser-string-min-34-max-34 [input] #:http.request.field{:value input, :shape "__stringMin34Max34"})
 
-(clojure.core/defn- ser-audio-selector [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-string (:name input)) #:http.request.field{:name "Name", :shape "__string", :location-name "name"})], :shape "AudioSelector", :type "structure"} (clojure.core/contains? input :selector-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-audio-selector-settings (input :selector-settings)) #:http.request.field{:name "SelectorSettings", :shape "AudioSelectorSettings", :location-name "selectorSettings"}))))
+(clojure.core/defn- ser-audio-selector [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-string-min-1 (:name input)) #:http.request.field{:name "Name", :shape "__stringMin1", :location-name "name"})], :shape "AudioSelector", :type "structure"} (clojure.core/contains? input :selector-settings) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-audio-selector-settings (input :selector-settings)) #:http.request.field{:name "SelectorSettings", :shape "AudioSelectorSettings", :location-name "selectorSettings"}))))
 
 (clojure.core/defn- ser-integer-min-1-max-16 [input] #:http.request.field{:value input, :shape "__integerMin1Max16"})
 
@@ -1457,13 +1541,17 @@
 
 (clojure.core/defn- req-update-channel-request [input] (clojure.core/cond-> #:http.request.configuration{:uri [(clojure.core/into (ser-string (input :channel-id)) #:http.request.field{:name "ChannelId", :shape "__string", :location "uri", :location-name "channelId"})]} (clojure.core/contains? input :destinations) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-output-destination (input :destinations)) #:http.request.field{:name "Destinations", :shape "__listOfOutputDestination", :location-name "destinations"})) (clojure.core/contains? input :encoder-settings) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-encoder-settings (input :encoder-settings)) #:http.request.field{:name "EncoderSettings", :shape "EncoderSettings", :location-name "encoderSettings"})) (clojure.core/contains? input :input-attachments) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-input-attachment (input :input-attachments)) #:http.request.field{:name "InputAttachments", :shape "__listOfInputAttachment", :location-name "inputAttachments"})) (clojure.core/contains? input :input-specification) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-input-specification (input :input-specification)) #:http.request.field{:name "InputSpecification", :shape "InputSpecification", :location-name "inputSpecification"})) (clojure.core/contains? input :log-level) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-log-level (input :log-level)) #:http.request.field{:name "LogLevel", :shape "LogLevel", :location-name "logLevel"})) (clojure.core/contains? input :name) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :name)) #:http.request.field{:name "Name", :shape "__string", :location-name "name"})) (clojure.core/contains? input :role-arn) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :role-arn)) #:http.request.field{:name "RoleArn", :shape "__string", :location-name "roleArn"}))))
 
-(clojure.core/defn- req-update-input-security-group-request [input] (clojure.core/cond-> #:http.request.configuration{:uri [(clojure.core/into (ser-string (input :input-security-group-id)) #:http.request.field{:name "InputSecurityGroupId", :shape "__string", :location "uri", :location-name "inputSecurityGroupId"})]} (clojure.core/contains? input :whitelist-rules) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-input-whitelist-rule-cidr (input :whitelist-rules)) #:http.request.field{:name "WhitelistRules", :shape "__listOfInputWhitelistRuleCidr", :location-name "whitelistRules"}))))
+(clojure.core/defn- req-update-input-security-group-request [input] (clojure.core/cond-> #:http.request.configuration{:uri [(clojure.core/into (ser-string (input :input-security-group-id)) #:http.request.field{:name "InputSecurityGroupId", :shape "__string", :location "uri", :location-name "inputSecurityGroupId"})]} (clojure.core/contains? input :tags) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-tags (input :tags)) #:http.request.field{:name "Tags", :shape "Tags", :location-name "tags"})) (clojure.core/contains? input :whitelist-rules) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-input-whitelist-rule-cidr (input :whitelist-rules)) #:http.request.field{:name "WhitelistRules", :shape "__listOfInputWhitelistRuleCidr", :location-name "whitelistRules"}))))
 
 (clojure.core/defn- req-describe-input-security-group-request [input] (clojure.core/cond-> #:http.request.configuration{:uri [(clojure.core/into (ser-string (input :input-security-group-id)) #:http.request.field{:name "InputSecurityGroupId", :shape "__string", :location "uri", :location-name "inputSecurityGroupId"})]}))
 
 (clojure.core/defn- req-delete-reservation-request [input] (clojure.core/cond-> #:http.request.configuration{:uri [(clojure.core/into (ser-string (input :reservation-id)) #:http.request.field{:name "ReservationId", :shape "__string", :location "uri", :location-name "reservationId"})]}))
 
-(clojure.core/defn- req-update-input-request [input] (clojure.core/cond-> #:http.request.configuration{:uri [(clojure.core/into (ser-string (input :input-id)) #:http.request.field{:name "InputId", :shape "__string", :location "uri", :location-name "inputId"})]} (clojure.core/contains? input :destinations) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-input-destination-request (input :destinations)) #:http.request.field{:name "Destinations", :shape "__listOfInputDestinationRequest", :location-name "destinations"})) (clojure.core/contains? input :input-security-groups) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-string (input :input-security-groups)) #:http.request.field{:name "InputSecurityGroups", :shape "__listOf__string", :location-name "inputSecurityGroups"})) (clojure.core/contains? input :name) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :name)) #:http.request.field{:name "Name", :shape "__string", :location-name "name"})) (clojure.core/contains? input :sources) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-input-source-request (input :sources)) #:http.request.field{:name "Sources", :shape "__listOfInputSourceRequest", :location-name "sources"}))))
+(clojure.core/defn- req-list-tags-for-resource-request [input] (clojure.core/cond-> #:http.request.configuration{:uri [(clojure.core/into (ser-string (input :resource-arn)) #:http.request.field{:name "ResourceArn", :shape "__string", :location "uri", :location-name "resource-arn"})]}))
+
+(clojure.core/defn- req-delete-tags-request [input] (clojure.core/cond-> #:http.request.configuration{:querystring [(clojure.core/into (ser-list-of-string (input :tag-keys)) #:http.request.field{:name "TagKeys", :shape "__listOf__string", :location "querystring", :location-name "tagKeys"})], :uri [(clojure.core/into (ser-string (input :resource-arn)) #:http.request.field{:name "ResourceArn", :shape "__string", :location "uri", :location-name "resource-arn"})]}))
+
+(clojure.core/defn- req-update-input-request [input] (clojure.core/cond-> #:http.request.configuration{:uri [(clojure.core/into (ser-string (input :input-id)) #:http.request.field{:name "InputId", :shape "__string", :location "uri", :location-name "inputId"})]} (clojure.core/contains? input :destinations) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-input-destination-request (input :destinations)) #:http.request.field{:name "Destinations", :shape "__listOfInputDestinationRequest", :location-name "destinations"})) (clojure.core/contains? input :input-security-groups) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-string (input :input-security-groups)) #:http.request.field{:name "InputSecurityGroups", :shape "__listOf__string", :location-name "inputSecurityGroups"})) (clojure.core/contains? input :media-connect-flows) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-media-connect-flow-request (input :media-connect-flows)) #:http.request.field{:name "MediaConnectFlows", :shape "__listOfMediaConnectFlowRequest", :location-name "mediaConnectFlows"})) (clojure.core/contains? input :name) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :name)) #:http.request.field{:name "Name", :shape "__string", :location-name "name"})) (clojure.core/contains? input :role-arn) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :role-arn)) #:http.request.field{:name "RoleArn", :shape "__string", :location-name "roleArn"})) (clojure.core/contains? input :sources) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-input-source-request (input :sources)) #:http.request.field{:name "Sources", :shape "__listOfInputSourceRequest", :location-name "sources"}))))
 
 (clojure.core/defn- req-delete-input-security-group-request [input] (clojure.core/cond-> #:http.request.configuration{:uri [(clojure.core/into (ser-string (input :input-security-group-id)) #:http.request.field{:name "InputSecurityGroupId", :shape "__string", :location "uri", :location-name "inputSecurityGroupId"})]}))
 
@@ -1473,9 +1561,11 @@
 
 (clojure.core/defn- req-list-input-security-groups-request [input] (clojure.core/cond-> {} (clojure.core/contains? input :max-results) (clojure.core/update-in [:http.request.configuration/querystring] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-max-results (input :max-results)) #:http.request.field{:name "MaxResults", :shape "MaxResults", :location "querystring", :location-name "maxResults"})) (clojure.core/contains? input :next-token) (clojure.core/update-in [:http.request.configuration/querystring] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :next-token)) #:http.request.field{:name "NextToken", :shape "__string", :location "querystring", :location-name "nextToken"}))))
 
-(clojure.core/defn- req-create-channel-request [input] (clojure.core/cond-> {} (clojure.core/contains? input :reserved) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :reserved)) #:http.request.field{:name "Reserved", :shape "__string", :location-name "reserved", :deprecated true})) (clojure.core/contains? input :input-attachments) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-input-attachment (input :input-attachments)) #:http.request.field{:name "InputAttachments", :shape "__listOfInputAttachment", :location-name "inputAttachments"})) (clojure.core/contains? input :request-id) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :request-id)) #:http.request.field{:name "RequestId", :shape "__string", :location-name "requestId", :idempotency-token true})) (clojure.core/contains? input :log-level) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-log-level (input :log-level)) #:http.request.field{:name "LogLevel", :shape "LogLevel", :location-name "logLevel"})) (clojure.core/contains? input :role-arn) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :role-arn)) #:http.request.field{:name "RoleArn", :shape "__string", :location-name "roleArn"})) (clojure.core/contains? input :encoder-settings) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-encoder-settings (input :encoder-settings)) #:http.request.field{:name "EncoderSettings", :shape "EncoderSettings", :location-name "encoderSettings"})) (clojure.core/contains? input :input-specification) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-input-specification (input :input-specification)) #:http.request.field{:name "InputSpecification", :shape "InputSpecification", :location-name "inputSpecification"})) (clojure.core/contains? input :destinations) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-output-destination (input :destinations)) #:http.request.field{:name "Destinations", :shape "__listOfOutputDestination", :location-name "destinations"})) (clojure.core/contains? input :name) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :name)) #:http.request.field{:name "Name", :shape "__string", :location-name "name"}))))
+(clojure.core/defn- req-create-channel-request [input] (clojure.core/cond-> {} (clojure.core/contains? input :reserved) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :reserved)) #:http.request.field{:name "Reserved", :shape "__string", :location-name "reserved", :deprecated true})) (clojure.core/contains? input :input-attachments) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-input-attachment (input :input-attachments)) #:http.request.field{:name "InputAttachments", :shape "__listOfInputAttachment", :location-name "inputAttachments"})) (clojure.core/contains? input :request-id) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :request-id)) #:http.request.field{:name "RequestId", :shape "__string", :location-name "requestId", :idempotency-token true})) (clojure.core/contains? input :log-level) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-log-level (input :log-level)) #:http.request.field{:name "LogLevel", :shape "LogLevel", :location-name "logLevel"})) (clojure.core/contains? input :role-arn) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :role-arn)) #:http.request.field{:name "RoleArn", :shape "__string", :location-name "roleArn"})) (clojure.core/contains? input :tags) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-tags (input :tags)) #:http.request.field{:name "Tags", :shape "Tags", :location-name "tags"})) (clojure.core/contains? input :encoder-settings) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-encoder-settings (input :encoder-settings)) #:http.request.field{:name "EncoderSettings", :shape "EncoderSettings", :location-name "encoderSettings"})) (clojure.core/contains? input :input-specification) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-input-specification (input :input-specification)) #:http.request.field{:name "InputSpecification", :shape "InputSpecification", :location-name "inputSpecification"})) (clojure.core/contains? input :destinations) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-output-destination (input :destinations)) #:http.request.field{:name "Destinations", :shape "__listOfOutputDestination", :location-name "destinations"})) (clojure.core/contains? input :name) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :name)) #:http.request.field{:name "Name", :shape "__string", :location-name "name"}))))
 
 (clojure.core/defn- req-describe-input-request [input] (clojure.core/cond-> #:http.request.configuration{:uri [(clojure.core/into (ser-string (input :input-id)) #:http.request.field{:name "InputId", :shape "__string", :location "uri", :location-name "inputId"})]}))
+
+(clojure.core/defn- req-create-tags-request [input] (clojure.core/cond-> #:http.request.configuration{:uri [(clojure.core/into (ser-string (input :resource-arn)) #:http.request.field{:name "ResourceArn", :shape "__string", :location "uri", :location-name "resource-arn"})]} (clojure.core/contains? input :tags) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-tags (input :tags)) #:http.request.field{:name "Tags", :shape "Tags", :location-name "tags"}))))
 
 (clojure.core/defn- req-delete-input-request [input] (clojure.core/cond-> #:http.request.configuration{:uri [(clojure.core/into (ser-string (input :input-id)) #:http.request.field{:name "InputId", :shape "__string", :location "uri", :location-name "inputId"})]}))
 
@@ -1483,7 +1573,7 @@
 
 (clojure.core/defn- req-list-inputs-request [input] (clojure.core/cond-> {} (clojure.core/contains? input :max-results) (clojure.core/update-in [:http.request.configuration/querystring] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-max-results (input :max-results)) #:http.request.field{:name "MaxResults", :shape "MaxResults", :location "querystring", :location-name "maxResults"})) (clojure.core/contains? input :next-token) (clojure.core/update-in [:http.request.configuration/querystring] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :next-token)) #:http.request.field{:name "NextToken", :shape "__string", :location "querystring", :location-name "nextToken"}))))
 
-(clojure.core/defn- req-purchase-offering-request [input] (clojure.core/cond-> #:http.request.configuration{:uri [(clojure.core/into (ser-string (input :offering-id)) #:http.request.field{:name "OfferingId", :shape "__string", :location "uri", :location-name "offeringId"})]} (clojure.core/contains? input :count) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-integer-min-1 (input :count)) #:http.request.field{:name "Count", :shape "__integerMin1", :location-name "count"})) (clojure.core/contains? input :name) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :name)) #:http.request.field{:name "Name", :shape "__string", :location-name "name"})) (clojure.core/contains? input :request-id) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :request-id)) #:http.request.field{:name "RequestId", :shape "__string", :location-name "requestId", :idempotency-token true}))))
+(clojure.core/defn- req-purchase-offering-request [input] (clojure.core/cond-> #:http.request.configuration{:uri [(clojure.core/into (ser-string (input :offering-id)) #:http.request.field{:name "OfferingId", :shape "__string", :location "uri", :location-name "offeringId"})], :body [(clojure.core/into (ser-integer-min-1 (input :count)) #:http.request.field{:name "Count", :shape "__integerMin1", :location-name "count"})]} (clojure.core/contains? input :name) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :name)) #:http.request.field{:name "Name", :shape "__string", :location-name "name"})) (clojure.core/contains? input :request-id) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :request-id)) #:http.request.field{:name "RequestId", :shape "__string", :location-name "requestId", :idempotency-token true})) (clojure.core/contains? input :start) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :start)) #:http.request.field{:name "Start", :shape "__string", :location-name "start"}))))
 
 (clojure.core/defn- req-delete-channel-request [input] (clojure.core/cond-> #:http.request.configuration{:uri [(clojure.core/into (ser-string (input :channel-id)) #:http.request.field{:name "ChannelId", :shape "__string", :location "uri", :location-name "channelId"})]}))
 
@@ -1499,9 +1589,1675 @@
 
 (clojure.core/defn- req-start-channel-request [input] (clojure.core/cond-> #:http.request.configuration{:uri [(clojure.core/into (ser-string (input :channel-id)) #:http.request.field{:name "ChannelId", :shape "__string", :location "uri", :location-name "channelId"})]}))
 
-(clojure.core/defn- req-create-input-request [input] (clojure.core/cond-> {} (clojure.core/contains? input :destinations) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-input-destination-request (input :destinations)) #:http.request.field{:name "Destinations", :shape "__listOfInputDestinationRequest", :location-name "destinations"})) (clojure.core/contains? input :input-security-groups) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-string (input :input-security-groups)) #:http.request.field{:name "InputSecurityGroups", :shape "__listOf__string", :location-name "inputSecurityGroups"})) (clojure.core/contains? input :name) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :name)) #:http.request.field{:name "Name", :shape "__string", :location-name "name"})) (clojure.core/contains? input :request-id) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :request-id)) #:http.request.field{:name "RequestId", :shape "__string", :location-name "requestId", :idempotency-token true})) (clojure.core/contains? input :sources) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-input-source-request (input :sources)) #:http.request.field{:name "Sources", :shape "__listOfInputSourceRequest", :location-name "sources"})) (clojure.core/contains? input :type) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-input-type (input :type)) #:http.request.field{:name "Type", :shape "InputType", :location-name "type"}))))
+(clojure.core/defn- req-create-input-request [input] (clojure.core/cond-> {} (clojure.core/contains? input :media-connect-flows) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-media-connect-flow-request (input :media-connect-flows)) #:http.request.field{:name "MediaConnectFlows", :shape "__listOfMediaConnectFlowRequest", :location-name "mediaConnectFlows"})) (clojure.core/contains? input :request-id) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :request-id)) #:http.request.field{:name "RequestId", :shape "__string", :location-name "requestId", :idempotency-token true})) (clojure.core/contains? input :type) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-input-type (input :type)) #:http.request.field{:name "Type", :shape "InputType", :location-name "type"})) (clojure.core/contains? input :input-security-groups) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-string (input :input-security-groups)) #:http.request.field{:name "InputSecurityGroups", :shape "__listOf__string", :location-name "inputSecurityGroups"})) (clojure.core/contains? input :role-arn) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :role-arn)) #:http.request.field{:name "RoleArn", :shape "__string", :location-name "roleArn"})) (clojure.core/contains? input :tags) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-tags (input :tags)) #:http.request.field{:name "Tags", :shape "Tags", :location-name "tags"})) (clojure.core/contains? input :vpc) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-input-vpc-request (input :vpc)) #:http.request.field{:name "Vpc", :shape "InputVpcRequest", :location-name "vpc"})) (clojure.core/contains? input :destinations) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-input-destination-request (input :destinations)) #:http.request.field{:name "Destinations", :shape "__listOfInputDestinationRequest", :location-name "destinations"})) (clojure.core/contains? input :name) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-string (input :name)) #:http.request.field{:name "Name", :shape "__string", :location-name "name"})) (clojure.core/contains? input :sources) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-input-source-request (input :sources)) #:http.request.field{:name "Sources", :shape "__listOfInputSourceRequest", :location-name "sources"}))))
 
-(clojure.core/defn- req-create-input-security-group-request [input] (clojure.core/cond-> {} (clojure.core/contains? input :whitelist-rules) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-input-whitelist-rule-cidr (input :whitelist-rules)) #:http.request.field{:name "WhitelistRules", :shape "__listOfInputWhitelistRuleCidr", :location-name "whitelistRules"}))))
+(clojure.core/defn- req-create-input-security-group-request [input] (clojure.core/cond-> {} (clojure.core/contains? input :tags) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-tags (input :tags)) #:http.request.field{:name "Tags", :shape "Tags", :location-name "tags"})) (clojure.core/contains? input :whitelist-rules) (clojure.core/update-in [:http.request.configuration/body] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-list-of-input-whitelist-rule-cidr (input :whitelist-rules)) #:http.request.field{:name "WhitelistRules", :shape "__listOfInputWhitelistRuleCidr", :location-name "whitelistRules"}))))
+
+(clojure.core/declare deser-hls-manifest-compression)
+
+(clojure.core/declare deser-hls-encryption-type)
+
+(clojure.core/declare deser-integer-min-0-max-600)
+
+(clojure.core/declare deser-output-location-ref)
+
+(clojure.core/declare deser-hls-manifest-duration-format)
+
+(clojure.core/declare deser-integer-min-1000)
+
+(clojure.core/declare deser-integer-min-negative-60-max-6)
+
+(clojure.core/declare deser-scte-35-apos-no-regional-blackout-behavior)
+
+(clojure.core/declare deser-input-filter)
+
+(clojure.core/declare deser-audio-selector-settings)
+
+(clojure.core/declare deser-audio-description-audio-type-control)
+
+(clojure.core/declare deser-list-of-video-description)
+
+(clojure.core/declare deser-integer-min-0-max-1000)
+
+(clojure.core/declare deser-integer-min-0-max-65536)
+
+(clojure.core/declare deser-h-264-adaptive-quantization)
+
+(clojure.core/declare deser-integer-min-1-max-1000000)
+
+(clojure.core/declare deser-integer-min-25-max-2000)
+
+(clojure.core/declare deser-input-loss-action-for-hls-out)
+
+(clojure.core/declare deser-input-source-end-behavior)
+
+(clojure.core/declare deser-ttml-destination-style-control)
+
+(clojure.core/declare deser-dvb-sdt-output-sdt)
+
+(clojure.core/declare deser-ttml-destination-settings)
+
+(clojure.core/declare deser-integer-min-1-max-4)
+
+(clojure.core/declare deser-m-2ts-pcr-control)
+
+(clojure.core/declare deser-input-state)
+
+(clojure.core/declare deser-batch-schedule-action-create-result)
+
+(clojure.core/declare deser-h-264-scan-type)
+
+(clojure.core/declare deser-scte-35-device-restrictions)
+
+(clojure.core/declare deser-remix-settings)
+
+(clojure.core/declare deser-dvb-tdt-settings)
+
+(clojure.core/declare deser-scte-35-time-signal-schedule-action-settings)
+
+(clojure.core/declare deser-audio-type)
+
+(clojure.core/declare deser-audio-normalization-algorithm-control)
+
+(clojure.core/declare deser-integer-min-0-max-1099511627775)
+
+(clojure.core/declare deser-list-of-channel-egress-endpoint)
+
+(clojure.core/declare deser-fixed-mode-schedule-action-start-settings)
+
+(clojure.core/declare deser-burn-in-destination-settings)
+
+(clojure.core/declare deser-eac-3-drc-rf)
+
+(clojure.core/declare deser-list-of-offering)
+
+(clojure.core/declare deser-input-security-group-state)
+
+(clojure.core/declare deser-audio-description)
+
+(clojure.core/declare deser-aac-vbr-quality)
+
+(clojure.core/declare deser-list-of-input-source)
+
+(clojure.core/declare deser-hls-basic-put-settings)
+
+(clojure.core/declare deser-m-2ts-klv)
+
+(clojure.core/declare deser-global-configuration)
+
+(clojure.core/declare deser-m-3u-8-pcr-control)
+
+(clojure.core/declare deser-archive-output-settings)
+
+(clojure.core/declare deser-string-min-6-max-6)
+
+(clojure.core/declare deser-m-2ts-audio-buffer-model)
+
+(clojure.core/declare deser-validation-error)
+
+(clojure.core/declare deser-h-264-gop-size-units)
+
+(clojure.core/declare deser-hls-directory-structure)
+
+(clojure.core/declare deser-frame-capture-output-settings)
+
+(clojure.core/declare deser-m-2ts-ebp-placement)
+
+(clojure.core/declare deser-dvb-sub-destination-teletext-grid-control)
+
+(clojure.core/declare deser-eac-3-settings)
+
+(clojure.core/declare deser-audio-normalization-algorithm)
+
+(clojure.core/declare deser-follow-mode-schedule-action-start-settings)
+
+(clojure.core/declare deser-rtmp-caption-data)
+
+(clojure.core/declare deser-hls-mode)
+
+(clojure.core/declare deser-log-level)
+
+(clojure.core/declare deser-follow-point)
+
+(clojure.core/declare deser-integer-min-0-max-500)
+
+(clojure.core/declare deser-i-frame-only-playlist-type)
+
+(clojure.core/declare deser-input-loss-behavior)
+
+(clojure.core/declare deser-input-loss-image-type)
+
+(clojure.core/declare deser-list-of-output-destination-settings)
+
+(clojure.core/declare deser-udp-group-settings)
+
+(clojure.core/declare deser-m-2ts-arib)
+
+(clojure.core/declare deser-dvb-sub-destination-font-color)
+
+(clojure.core/declare deser-input-type)
+
+(clojure.core/declare deser-dvb-sdt-settings)
+
+(clojure.core/declare deser-burn-in-background-color)
+
+(clojure.core/declare deser-video-selector-program-id)
+
+(clojure.core/declare deser-archive-group-settings)
+
+(clojure.core/declare deser-hls-timed-metadata-schedule-action-settings)
+
+(clojure.core/declare deser-udp-output-settings)
+
+(clojure.core/declare deser-udp-timed-metadata-id-3-frame)
+
+(clojure.core/declare deser-integer-min-0)
+
+(clojure.core/declare deser-hls-settings)
+
+(clojure.core/declare deser-scte-35-splice-insert-schedule-action-settings)
+
+(clojure.core/declare deser-ac-3-lfe-filter)
+
+(clojure.core/declare deser-burn-in-teletext-grid-control)
+
+(clojure.core/declare deser-scte-27-destination-settings)
+
+(clojure.core/declare deser-schedule-action)
+
+(clojure.core/declare deser-video-selector-color-space-usage)
+
+(clojure.core/declare deser-scte-20-source-settings)
+
+(clojure.core/declare deser-hls-stream-inf-resolution)
+
+(clojure.core/declare deser-list-of-schedule-action)
+
+(clojure.core/declare deser-hls-caption-language-setting)
+
+(clojure.core/declare deser-m-2ts-settings)
+
+(clojure.core/declare deser-string)
+
+(clojure.core/declare deser-scte-35-splice-insert-no-regional-blackout-behavior)
+
+(clojure.core/declare deser-dvb-sub-source-settings)
+
+(clojure.core/declare deser-input-denoise-filter)
+
+(clojure.core/declare deser-video-selector-pid)
+
+(clojure.core/declare deser-scte-35-descriptor-settings)
+
+(clojure.core/declare deser-afd-signaling)
+
+(clojure.core/declare deser-list-of-audio-selector)
+
+(clojure.core/declare deser-aac-profile)
+
+(clojure.core/declare deser-burn-in-font-color)
+
+(clojure.core/declare deser-pause-state-schedule-action-settings)
+
+(clojure.core/declare deser-eac-3-metadata-control)
+
+(clojure.core/declare deser-fec-output-settings)
+
+(clojure.core/declare deser-global-configuration-input-end-action)
+
+(clojure.core/declare deser-integer-min-0-max-65535)
+
+(clojure.core/declare deser-hls-webdav-http-transfer-mode)
+
+(clojure.core/declare deser-offering-duration-units)
+
+(clojure.core/declare deser-hls-webdav-settings)
+
+(clojure.core/declare deser-double-min-1)
+
+(clojure.core/declare deser-dvb-sub-destination-background-color)
+
+(clojure.core/declare deser-mp-2-coding-mode)
+
+(clojure.core/declare deser-list-of-output-group)
+
+(clojure.core/declare deser-reservation-resource-specification)
+
+(clojure.core/declare deser-scte-35-delivery-restrictions)
+
+(clojure.core/declare deser-m-2ts-timed-metadata-behavior)
+
+(clojure.core/declare deser-tags)
+
+(clojure.core/declare deser-fec-output-include-fec)
+
+(clojure.core/declare deser-scte-35-segmentation-cancel-indicator)
+
+(clojure.core/declare deser-rtmp-output-certificate-mode)
+
+(clojure.core/declare deser-ac-3-drc-profile)
+
+(clojure.core/declare deser-eac-3-lfe-control)
+
+(clojure.core/declare deser-teletext-source-settings)
+
+(clojure.core/declare deser-m-3u-8-scte-35-behavior)
+
+(clojure.core/declare deser-rtmp-output-settings)
+
+(clojure.core/declare deser-global-configuration-low-framerate-inputs)
+
+(clojure.core/declare deser-eac-3-surround-mode)
+
+(clojure.core/declare deser-avail-blanking-state)
+
+(clojure.core/declare deser-audio-channel-mapping)
+
+(clojure.core/declare deser-reservation-resolution)
+
+(clojure.core/declare deser-h-264-look-ahead-rate-control)
+
+(clojure.core/declare deser-input-source)
+
+(clojure.core/declare deser-hls-akamai-http-transfer-mode)
+
+(clojure.core/declare deser-reservation)
+
+(clojure.core/declare deser-h-264-sub-gop-length)
+
+(clojure.core/declare deser-ms-smooth-output-settings)
+
+(clojure.core/declare deser-video-selector-settings)
+
+(clojure.core/declare deser-eac-3-lfe-filter)
+
+(clojure.core/declare deser-reservation-maximum-bitrate)
+
+(clojure.core/declare deser-offering)
+
+(clojure.core/declare deser-integer-min-negative-60-max-60)
+
+(clojure.core/declare deser-integer-min-0-max-8589934591)
+
+(clojure.core/declare deser-list-of-input-channel-level)
+
+(clojure.core/declare deser-h-264-rate-control-mode)
+
+(clojure.core/declare deser-integer-min-0-max-255)
+
+(clojure.core/declare deser-list-of-output-destination)
+
+(clojure.core/declare deser-video-selector)
+
+(clojure.core/declare deser-ac-3-metadata-control)
+
+(clojure.core/declare deser-double-min-0)
+
+(clojure.core/declare deser-m-2ts-buffer-model)
+
+(clojure.core/declare deser-udp-container-settings)
+
+(clojure.core/declare deser-channel-summary)
+
+(clojure.core/declare deser-integer-min-25-max-10000)
+
+(clojure.core/declare deser-eac-3-coding-mode)
+
+(clojure.core/declare deser-m-2ts-ebif-control)
+
+(clojure.core/declare deser-caption-description)
+
+(clojure.core/declare deser-hls-media-store-settings)
+
+(clojure.core/declare deser-smooth-group-stream-manifest-behavior)
+
+(clojure.core/declare deser-timecode-config-source)
+
+(clojure.core/declare deser-m-2ts-audio-interval)
+
+(clojure.core/declare deser-schedule-action-settings)
+
+(clojure.core/declare deser-audio-pid-selection)
+
+(clojure.core/declare deser-hls-output-selection)
+
+(clojure.core/declare deser-input-loss-action-for-udp-out)
+
+(clojure.core/declare deser-ac-3-bitstream-mode)
+
+(clojure.core/declare deser-scte-35-time-signal-apos)
+
+(clojure.core/declare deser-h-264-spatial-aq)
+
+(clojure.core/declare deser-aac-raw-format)
+
+(clojure.core/declare deser-static-image-activate-schedule-action-settings)
+
+(clojure.core/declare deser-list-of-input-security-group)
+
+(clojure.core/declare deser-output-destination)
+
+(clojure.core/declare deser-integer-min-30)
+
+(clojure.core/declare deser-reservation-special-feature)
+
+(clojure.core/declare deser-input-maximum-bitrate)
+
+(clojure.core/declare deser-reservation-video-quality)
+
+(clojure.core/declare deser-integer-min-0-max-3600)
+
+(clojure.core/declare deser-video-selector-color-space)
+
+(clojure.core/declare deser-audio-only-hls-settings)
+
+(clojure.core/declare deser-m-2ts-segmentation-markers)
+
+(clojure.core/declare deser-eac-3-drc-line)
+
+(clojure.core/declare deser-dvb-sub-destination-alignment)
+
+(clojure.core/declare deser-m-2ts-scte-35-control)
+
+(clojure.core/declare deser-input-location)
+
+(clojure.core/declare deser-m-2ts-absent-input-audio-behavior)
+
+(clojure.core/declare deser-integer-min-3)
+
+(clojure.core/declare deser-h-264-level)
+
+(clojure.core/declare deser-avail-settings)
+
+(clojure.core/declare deser-h-264-par-control)
+
+(clojure.core/declare deser-input-security-group)
+
+(clojure.core/declare deser-smooth-group-audio-only-timecode-control)
+
+(clojure.core/declare deser-pipeline-id)
+
+(clojure.core/declare deser-video-description)
+
+(clojure.core/declare deser-integer-min-0-max-15)
+
+(clojure.core/declare deser-global-configuration-output-timing-source)
+
+(clojure.core/declare deser-scte-35-no-regional-blackout-flag)
+
+(clojure.core/declare deser-integer-min-1-max-10)
+
+(clojure.core/declare deser-audio-language-selection)
+
+(clojure.core/declare deser-reservation-codec)
+
+(clojure.core/declare deser-output-group-settings)
+
+(clojure.core/declare deser-integer-min-96-max-600)
+
+(clojure.core/declare deser-rtmp-cache-full-behavior)
+
+(clojure.core/declare deser-input-destination-vpc)
+
+(clojure.core/declare deser-avail-configuration)
+
+(clojure.core/declare deser-archive-container-settings)
+
+(clojure.core/declare deser-list-of-hls-ad-markers)
+
+(clojure.core/declare deser-blackout-slate-state)
+
+(clojure.core/declare deser-mp-2-settings)
+
+(clojure.core/declare deser-arib-destination-settings)
+
+(clojure.core/declare deser-reservation-maximum-framerate)
+
+(clojure.core/declare deser-smooth-group-sparse-track-type)
+
+(clojure.core/declare deser-m-2ts-es-rate-in-pes)
+
+(clojure.core/declare deser-caption-destination-settings)
+
+(clojure.core/declare deser-integer-min-1000-max-30000)
+
+(clojure.core/declare deser-hls-input-settings)
+
+(clojure.core/declare deser-hls-ad-markers)
+
+(clojure.core/declare deser-list-of-input-whitelist-rule)
+
+(clojure.core/declare deser-list-of-string)
+
+(clojure.core/declare deser-channel-state)
+
+(clojure.core/declare deser-m-2ts-segmentation-style)
+
+(clojure.core/declare deser-integer-min-0-max-30)
+
+(clojure.core/declare deser-hls-iv-source)
+
+(clojure.core/declare deser-authentication-scheme)
+
+(clojure.core/declare deser-standard-hls-settings)
+
+(clojure.core/declare deser-list-of-input-attachment)
+
+(clojure.core/declare deser-hls-cdn-settings)
+
+(clojure.core/declare deser-scte-35-descriptor)
+
+(clojure.core/declare deser-smooth-group-event-stop-behavior)
+
+(clojure.core/declare deser-list-of-input-destination)
+
+(clojure.core/declare deser-scte-35-splice-insert)
+
+(clojure.core/declare deser-m-2ts-rate-mode)
+
+(clojure.core/declare deser-eac-3-bitstream-mode)
+
+(clojure.core/declare deser-input-channel-level)
+
+(clojure.core/declare deser-h-264-profile)
+
+(clojure.core/declare deser-batch-schedule-action-delete-result)
+
+(clojure.core/declare deser-m-2ts-arib-captions-pid-control)
+
+(clojure.core/declare deser-integer-min-0-max-100)
+
+(clojure.core/declare deser-integer-min-1-max-6)
+
+(clojure.core/declare deser-input)
+
+(clojure.core/declare deser-m-2ts-cc-descriptor)
+
+(clojure.core/declare deser-list-of-pipeline-pause-state-settings)
+
+(clojure.core/declare deser-string-min-1-max-256)
+
+(clojure.core/declare deser-dvb-sub-destination-outline-color)
+
+(clojure.core/declare deser-double-min-negative-59-max-0)
+
+(clojure.core/declare deser-static-image-deactivate-schedule-action-settings)
+
+(clojure.core/declare deser-video-codec-settings)
+
+(clojure.core/declare deser-string-max-32)
+
+(clojure.core/declare deser-eac-3-dc-filter)
+
+(clojure.core/declare deser-m-3u-8-timed-metadata-behavior)
+
+(clojure.core/declare deser-integer-min-1-max-5)
+
+(clojure.core/declare deser-h-264-scene-change-detect)
+
+(clojure.core/declare deser-aac-spec)
+
+(clojure.core/declare deser-scte-35-apos-web-delivery-allowed-behavior)
+
+(clojure.core/declare deser-blackout-slate-network-end-blackout)
+
+(clojure.core/declare deser-network-input-server-validation)
+
+(clojure.core/declare deser-hls-redundant-manifest)
+
+(clojure.core/declare deser-input-destination)
+
+(clojure.core/declare deser-rtmp-caption-info-destination-settings)
+
+(clojure.core/declare deser-aac-coding-mode)
+
+(clojure.core/declare deser-smooth-group-event-id-mode)
+
+(clojure.core/declare deser-scte-27-source-settings)
+
+(clojure.core/declare deser-integer-min-1-max-3600)
+
+(clojure.core/declare deser-webvtt-destination-settings)
+
+(clojure.core/declare deser-output-settings)
+
+(clojure.core/declare deser-caption-language-mapping)
+
+(clojure.core/declare deser-input-loss-action-for-rtmp-out)
+
+(clojure.core/declare deser-schedule-action-start-settings)
+
+(clojure.core/declare deser-list-of-output)
+
+(clojure.core/declare deser-encoder-settings)
+
+(clojure.core/declare deser-static-key-settings)
+
+(clojure.core/declare deser-frame-capture-group-settings)
+
+(clojure.core/declare deser-video-description-respond-to-afd)
+
+(clojure.core/declare deser-teletext-destination-settings)
+
+(clojure.core/declare deser-output-group)
+
+(clojure.core/declare deser-list-of-channel-summary)
+
+(clojure.core/declare deser-input-attachment)
+
+(clojure.core/declare deser-hls-client-cache)
+
+(clojure.core/declare deser-integer-min-0-max-10000)
+
+(clojure.core/declare deser-h-264-temporal-aq)
+
+(clojure.core/declare deser-smpte-tt-destination-settings)
+
+(clojure.core/declare deser-embedded-source-settings)
+
+(clojure.core/declare deser-h-264-gop-b-reference)
+
+(clojure.core/declare deser-list-of-input)
+
+(clojure.core/declare deser-network-input-settings)
+
+(clojure.core/declare deser-input-whitelist-rule)
+
+(clojure.core/declare deser-string-min-3-max-3)
+
+(clojure.core/declare deser-smooth-group-certificate-mode)
+
+(clojure.core/declare deser-input-specification)
+
+(clojure.core/declare deser-reservation-resource-type)
+
+(clojure.core/declare deser-input-deblock-filter)
+
+(clojure.core/declare deser-embedded-scte-20-detection)
+
+(clojure.core/declare deser-input-codec)
+
+(clojure.core/declare deser-integer-min-4-max-20)
+
+(clojure.core/declare deser-arib-source-settings)
+
+(clojure.core/declare deser-audio-description-language-code-control)
+
+(clojure.core/declare deser-double)
+
+(clojure.core/declare deser-ac-3-coding-mode)
+
+(clojure.core/declare deser-input-switch-schedule-action-settings)
+
+(clojure.core/declare deser-integer-min-0-max-10)
+
+(clojure.core/declare deser-aac-rate-control-mode)
+
+(clojure.core/declare deser-integer-min-negative-1000-max-1000)
+
+(clojure.core/declare deser-hls-segmentation-mode)
+
+(clojure.core/declare deser-dvb-sub-destination-shadow-color)
+
+(clojure.core/declare deser-list-of-reservation)
+
+(clojure.core/declare deser-pass-through-settings)
+
+(clojure.core/declare deser-media-connect-flow)
+
+(clojure.core/declare deser-video-description-scaling-behavior)
+
+(clojure.core/declare deser-scte-35-archive-allowed-flag)
+
+(clojure.core/declare deser-eac-3-attenuation-control)
+
+(clojure.core/declare deser-h-264-framerate-control)
+
+(clojure.core/declare deser-aac-input-type)
+
+(clojure.core/declare deser-channel)
+
+(clojure.core/declare deser-timecode-config)
+
+(clojure.core/declare deser-dvb-sub-destination-settings)
+
+(clojure.core/declare deser-embedded-convert-608-to-708)
+
+(clojure.core/declare deser-audio-only-hls-track-type)
+
+(clojure.core/declare deser-h-264-color-metadata)
+
+(clojure.core/declare deser-string-min-1)
+
+(clojure.core/declare deser-blackout-slate)
+
+(clojure.core/declare deser-ac-3-settings)
+
+(clojure.core/declare deser-ms-smooth-group-settings)
+
+(clojure.core/declare deser-integer-min-0-max-7)
+
+(clojure.core/declare deser-h-264-entropy-encoding)
+
+(clojure.core/declare deser-output)
+
+(clojure.core/declare deser-burn-in-shadow-color)
+
+(clojure.core/declare deser-audio-language-selection-policy)
+
+(clojure.core/declare deser-integer)
+
+(clojure.core/declare deser-aac-settings)
+
+(clojure.core/declare deser-integer-min-1)
+
+(clojure.core/declare deser-list-of-caption-selector)
+
+(clojure.core/declare deser-integer-min-0-max-4294967295)
+
+(clojure.core/declare deser-rtmp-group-settings)
+
+(clojure.core/declare deser-burn-in-alignment)
+
+(clojure.core/declare deser-list-of-caption-description)
+
+(clojure.core/declare deser-embedded-destination-settings)
+
+(clojure.core/declare deser-caption-selector)
+
+(clojure.core/declare deser-embedded-plus-scte-20-destination-settings)
+
+(clojure.core/declare deser-channel-egress-endpoint)
+
+(clojure.core/declare deser-hls-group-settings)
+
+(clojure.core/declare deser-input-loss-action-for-ms-smooth-out)
+
+(clojure.core/declare deser-dvb-nit-settings)
+
+(clojure.core/declare deser-integer-min-1-max-20)
+
+(clojure.core/declare deser-offering-type)
+
+(clojure.core/declare deser-integer-min-0-max-8191)
+
+(clojure.core/declare deser-smooth-group-timestamp-offset-mode)
+
+(clojure.core/declare deser-hls-media-store-storage-class)
+
+(clojure.core/declare deser-pipeline-pause-state-settings)
+
+(clojure.core/declare deser-frame-capture-settings)
+
+(clojure.core/declare deser-hls-program-date-time)
+
+(clojure.core/declare deser-list-of-validation-error)
+
+(clojure.core/declare deser-output-destination-settings)
+
+(clojure.core/declare deser-fixed-afd)
+
+(clojure.core/declare deser-hls-ts-file-mode)
+
+(clojure.core/declare deser-scte-35-segmentation-descriptor)
+
+(clojure.core/declare deser-hls-iv-in-manifest)
+
+(clojure.core/declare deser-list-of-caption-language-mapping)
+
+(clojure.core/declare deser-audio-codec-settings)
+
+(clojure.core/declare deser-scte-20-plus-embedded-destination-settings)
+
+(clojure.core/declare deser-scte-35-web-delivery-allowed-flag)
+
+(clojure.core/declare deser-scte-35-return-to-network-schedule-action-settings)
+
+(clojure.core/declare deser-integer-min-1-max-32)
+
+(clojure.core/declare deser-burn-in-outline-color)
+
+(clojure.core/declare deser-h-264-timecode-insertion-behavior)
+
+(clojure.core/declare deser-eac-3-passthrough-control)
+
+(clojure.core/declare deser-input-settings)
+
+(clojure.core/declare deser-integer-min-1-max-31)
+
+(clojure.core/declare deser-audio-normalization-settings)
+
+(clojure.core/declare deser-key-provider-settings)
+
+(clojure.core/declare deser-list-of-scte-35-descriptor)
+
+(clojure.core/declare deser-caption-selector-settings)
+
+(clojure.core/declare deser-h-264-settings)
+
+(clojure.core/declare deser-hls-timed-metadata-id-3-frame)
+
+(clojure.core/declare deser-list-of-media-connect-flow)
+
+(clojure.core/declare deser-eac-3-phase-control)
+
+(clojure.core/declare deser-eac-3-surround-ex-mode)
+
+(clojure.core/declare deser-integer-min-1-max-8)
+
+(clojure.core/declare deser-smooth-group-segmentation-mode)
+
+(clojure.core/declare deser-list-of-audio-description)
+
+(clojure.core/declare deser-hls-output-settings)
+
+(clojure.core/declare deser-scte-35-splice-insert-web-delivery-allowed-behavior)
+
+(clojure.core/declare deser-m-3u-8-settings)
+
+(clojure.core/declare deser-string-min-1-max-255)
+
+(clojure.core/declare deser-list-of-audio-channel-mapping)
+
+(clojure.core/declare deser-eac-3-stereo-downmix)
+
+(clojure.core/declare deser-integer-min-0-max-128)
+
+(clojure.core/declare deser-integer-min-0-max-1000000)
+
+(clojure.core/declare deser-h-264-syntax)
+
+(clojure.core/declare deser-string-min-32-max-32)
+
+(clojure.core/declare deser-input-resolution)
+
+(clojure.core/declare deser-scte-20-convert-608-to-708)
+
+(clojure.core/declare deser-h-264-flicker-aq)
+
+(clojure.core/declare deser-hls-codec-specification)
+
+(clojure.core/declare deser-avail-blanking)
+
+(clojure.core/declare deser-m-2ts-audio-stream-type)
+
+(clojure.core/declare deser-string-min-34-max-34)
+
+(clojure.core/declare deser-audio-selector)
+
+(clojure.core/declare deser-integer-min-1-max-16)
+
+(clojure.core/declare deser-hls-akamai-settings)
+
+(clojure.core/declare deser-reservation-state)
+
+(clojure.core/defn- deser-hls-manifest-compression [input] (clojure.core/get {"GZIP" :gzip, "NONE" :none} input))
+
+(clojure.core/defn- deser-hls-encryption-type [input] (clojure.core/get {"AES128" :aes-128, "SAMPLE_AES" :sample-aes} input))
+
+(clojure.core/defn- deser-integer-min-0-max-600 [input] input)
+
+(clojure.core/defn- deser-output-location-ref [input] (clojure.core/cond-> {} (clojure.core/contains? input "destinationRefId") (clojure.core/assoc :destination-ref-id (deser-string (input "destinationRefId")))))
+
+(clojure.core/defn- deser-hls-manifest-duration-format [input] (clojure.core/get {"FLOATING_POINT" :floating-point, "INTEGER" :integer} input))
+
+(clojure.core/defn- deser-integer-min-1000 [input] input)
+
+(clojure.core/defn- deser-integer-min-negative-60-max-6 [input] input)
+
+(clojure.core/defn- deser-scte-35-apos-no-regional-blackout-behavior [input] (clojure.core/get {"FOLLOW" :follow, "IGNORE" :ignore} input))
+
+(clojure.core/defn- deser-input-filter [input] (clojure.core/get {"AUTO" :auto, "DISABLED" :disabled, "FORCED" :forced} input))
+
+(clojure.core/defn- deser-audio-selector-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "audioLanguageSelection") (clojure.core/assoc :audio-language-selection (deser-audio-language-selection (input "audioLanguageSelection"))) (clojure.core/contains? input "audioPidSelection") (clojure.core/assoc :audio-pid-selection (deser-audio-pid-selection (input "audioPidSelection")))))
+
+(clojure.core/defn- deser-audio-description-audio-type-control [input] (clojure.core/get {"FOLLOW_INPUT" :follow-input, "USE_CONFIGURED" :use-configured} input))
+
+(clojure.core/defn- deser-list-of-video-description [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-video-description coll))) input))
+
+(clojure.core/defn- deser-integer-min-0-max-1000 [input] input)
+
+(clojure.core/defn- deser-integer-min-0-max-65536 [input] input)
+
+(clojure.core/defn- deser-h-264-adaptive-quantization [input] (clojure.core/get {"HIGH" :high, "HIGHER" :higher, "LOW" :low, "MAX" :max, "MEDIUM" :medium, "OFF" :off} input))
+
+(clojure.core/defn- deser-integer-min-1-max-1000000 [input] input)
+
+(clojure.core/defn- deser-integer-min-25-max-2000 [input] input)
+
+(clojure.core/defn- deser-input-loss-action-for-hls-out [input] (clojure.core/get {"EMIT_OUTPUT" :emit-output, "PAUSE_OUTPUT" :pause-output} input))
+
+(clojure.core/defn- deser-input-source-end-behavior [input] (clojure.core/get {"CONTINUE" :continue, "LOOP" :loop} input))
+
+(clojure.core/defn- deser-ttml-destination-style-control [input] (clojure.core/get {"PASSTHROUGH" :passthrough, "USE_CONFIGURED" :use-configured} input))
+
+(clojure.core/defn- deser-dvb-sdt-output-sdt [input] (clojure.core/get {"SDT_FOLLOW" :sdt-follow, "SDT_FOLLOW_IF_PRESENT" :sdt-follow-if-present, "SDT_MANUAL" :sdt-manual, "SDT_NONE" :sdt-none} input))
+
+(clojure.core/defn- deser-ttml-destination-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "styleControl") (clojure.core/assoc :style-control (deser-ttml-destination-style-control (input "styleControl")))))
+
+(clojure.core/defn- deser-integer-min-1-max-4 [input] input)
+
+(clojure.core/defn- deser-m-2ts-pcr-control [input] (clojure.core/get {"CONFIGURED_PCR_PERIOD" :configured-pcr-period, "PCR_EVERY_PES_PACKET" :pcr-every-pes-packet} input))
+
+(clojure.core/defn- deser-input-state [input] (clojure.core/get {"CREATING" :creating, "DETACHED" :detached, "ATTACHED" :attached, "DELETING" :deleting, "DELETED" :deleted} input))
+
+(clojure.core/defn- deser-batch-schedule-action-create-result [input] (clojure.core/cond-> {:schedule-actions (deser-list-of-schedule-action (input "scheduleActions"))}))
+
+(clojure.core/defn- deser-h-264-scan-type [input] (clojure.core/get {"INTERLACED" :interlaced, "PROGRESSIVE" :progressive} input))
+
+(clojure.core/defn- deser-scte-35-device-restrictions [input] (clojure.core/get {"NONE" :none, "RESTRICT_GROUP0" :restrict-group-0, "RESTRICT_GROUP1" :restrict-group-1, "RESTRICT_GROUP2" :restrict-group-2} input))
+
+(clojure.core/defn- deser-remix-settings [input] (clojure.core/cond-> {:channel-mappings (deser-list-of-audio-channel-mapping (input "channelMappings"))} (clojure.core/contains? input "channelsIn") (clojure.core/assoc :channels-in (deser-integer-min-1-max-16 (input "channelsIn"))) (clojure.core/contains? input "channelsOut") (clojure.core/assoc :channels-out (deser-integer-min-1-max-8 (input "channelsOut")))))
+
+(clojure.core/defn- deser-dvb-tdt-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "repInterval") (clojure.core/assoc :rep-interval (deser-integer-min-1000-max-30000 (input "repInterval")))))
+
+(clojure.core/defn- deser-scte-35-time-signal-schedule-action-settings [input] (clojure.core/cond-> {:scte-35-descriptors (deser-list-of-scte-35-descriptor (input "scte35Descriptors"))}))
+
+(clojure.core/defn- deser-audio-type [input] (clojure.core/get {"CLEAN_EFFECTS" :clean-effects, "HEARING_IMPAIRED" :hearing-impaired, "UNDEFINED" :undefined, "VISUAL_IMPAIRED_COMMENTARY" :visual-impaired-commentary} input))
+
+(clojure.core/defn- deser-audio-normalization-algorithm-control [input] (clojure.core/get {"CORRECT_AUDIO" :correct-audio} input))
+
+(clojure.core/defn- deser-integer-min-0-max-1099511627775 [input] input)
+
+(clojure.core/defn- deser-list-of-channel-egress-endpoint [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-channel-egress-endpoint coll))) input))
+
+(clojure.core/defn- deser-fixed-mode-schedule-action-start-settings [input] (clojure.core/cond-> {:time (deser-string (input "time"))}))
+
+(clojure.core/defn- deser-burn-in-destination-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "outlineColor") (clojure.core/assoc :outline-color (deser-burn-in-outline-color (input "outlineColor"))) (clojure.core/contains? input "outlineSize") (clojure.core/assoc :outline-size (deser-integer-min-0-max-10 (input "outlineSize"))) (clojure.core/contains? input "shadowColor") (clojure.core/assoc :shadow-color (deser-burn-in-shadow-color (input "shadowColor"))) (clojure.core/contains? input "shadowOpacity") (clojure.core/assoc :shadow-opacity (deser-integer-min-0-max-255 (input "shadowOpacity"))) (clojure.core/contains? input "shadowYOffset") (clojure.core/assoc :shadow-y-offset (deser-integer (input "shadowYOffset"))) (clojure.core/contains? input "backgroundColor") (clojure.core/assoc :background-color (deser-burn-in-background-color (input "backgroundColor"))) (clojure.core/contains? input "teletextGridControl") (clojure.core/assoc :teletext-grid-control (deser-burn-in-teletext-grid-control (input "teletextGridControl"))) (clojure.core/contains? input "yPosition") (clojure.core/assoc :y-position (deser-integer-min-0 (input "yPosition"))) (clojure.core/contains? input "fontColor") (clojure.core/assoc :font-color (deser-burn-in-font-color (input "fontColor"))) (clojure.core/contains? input "xPosition") (clojure.core/assoc :x-position (deser-integer-min-0 (input "xPosition"))) (clojure.core/contains? input "font") (clojure.core/assoc :font (deser-input-location (input "font"))) (clojure.core/contains? input "fontResolution") (clojure.core/assoc :font-resolution (deser-integer-min-96-max-600 (input "fontResolution"))) (clojure.core/contains? input "fontSize") (clojure.core/assoc :font-size (deser-string (input "fontSize"))) (clojure.core/contains? input "backgroundOpacity") (clojure.core/assoc :background-opacity (deser-integer-min-0-max-255 (input "backgroundOpacity"))) (clojure.core/contains? input "fontOpacity") (clojure.core/assoc :font-opacity (deser-integer-min-0-max-255 (input "fontOpacity"))) (clojure.core/contains? input "shadowXOffset") (clojure.core/assoc :shadow-x-offset (deser-integer (input "shadowXOffset"))) (clojure.core/contains? input "alignment") (clojure.core/assoc :alignment (deser-burn-in-alignment (input "alignment")))))
+
+(clojure.core/defn- deser-eac-3-drc-rf [input] (clojure.core/get {"FILM_LIGHT" :film-light, "FILM_STANDARD" :film-standard, "MUSIC_LIGHT" :music-light, "MUSIC_STANDARD" :music-standard, "NONE" :none, "SPEECH" :speech} input))
+
+(clojure.core/defn- deser-list-of-offering [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-offering coll))) input))
+
+(clojure.core/defn- deser-input-security-group-state [input] (clojure.core/get {"IDLE" :idle, "IN_USE" :in-use, "UPDATING" :updating, "DELETED" :deleted} input))
+
+(clojure.core/defn- deser-audio-description [input] (clojure.core/cond-> {:audio-selector-name (deser-string (input "audioSelectorName")), :name (deser-string (input "name"))} (clojure.core/contains? input "streamName") (clojure.core/assoc :stream-name (deser-string (input "streamName"))) (clojure.core/contains? input "remixSettings") (clojure.core/assoc :remix-settings (deser-remix-settings (input "remixSettings"))) (clojure.core/contains? input "audioType") (clojure.core/assoc :audio-type (deser-audio-type (input "audioType"))) (clojure.core/contains? input "codecSettings") (clojure.core/assoc :codec-settings (deser-audio-codec-settings (input "codecSettings"))) (clojure.core/contains? input "languageCodeControl") (clojure.core/assoc :language-code-control (deser-audio-description-language-code-control (input "languageCodeControl"))) (clojure.core/contains? input "audioTypeControl") (clojure.core/assoc :audio-type-control (deser-audio-description-audio-type-control (input "audioTypeControl"))) (clojure.core/contains? input "languageCode") (clojure.core/assoc :language-code (deser-string-min-3-max-3 (input "languageCode"))) (clojure.core/contains? input "audioNormalizationSettings") (clojure.core/assoc :audio-normalization-settings (deser-audio-normalization-settings (input "audioNormalizationSettings")))))
+
+(clojure.core/defn- deser-aac-vbr-quality [input] (clojure.core/get {"HIGH" :high, "LOW" :low, "MEDIUM_HIGH" :medium-high, "MEDIUM_LOW" :medium-low} input))
+
+(clojure.core/defn- deser-list-of-input-source [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-input-source coll))) input))
+
+(clojure.core/defn- deser-hls-basic-put-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "connectionRetryInterval") (clojure.core/assoc :connection-retry-interval (deser-integer-min-0 (input "connectionRetryInterval"))) (clojure.core/contains? input "filecacheDuration") (clojure.core/assoc :filecache-duration (deser-integer-min-0-max-600 (input "filecacheDuration"))) (clojure.core/contains? input "numRetries") (clojure.core/assoc :num-retries (deser-integer-min-0 (input "numRetries"))) (clojure.core/contains? input "restartDelay") (clojure.core/assoc :restart-delay (deser-integer-min-0-max-15 (input "restartDelay")))))
+
+(clojure.core/defn- deser-m-2ts-klv [input] (clojure.core/get {"NONE" :none, "PASSTHROUGH" :passthrough} input))
+
+(clojure.core/defn- deser-global-configuration [input] (clojure.core/cond-> {} (clojure.core/contains? input "initialAudioGain") (clojure.core/assoc :initial-audio-gain (deser-integer-min-negative-60-max-60 (input "initialAudioGain"))) (clojure.core/contains? input "inputEndAction") (clojure.core/assoc :input-end-action (deser-global-configuration-input-end-action (input "inputEndAction"))) (clojure.core/contains? input "inputLossBehavior") (clojure.core/assoc :input-loss-behavior (deser-input-loss-behavior (input "inputLossBehavior"))) (clojure.core/contains? input "outputTimingSource") (clojure.core/assoc :output-timing-source (deser-global-configuration-output-timing-source (input "outputTimingSource"))) (clojure.core/contains? input "supportLowFramerateInputs") (clojure.core/assoc :support-low-framerate-inputs (deser-global-configuration-low-framerate-inputs (input "supportLowFramerateInputs")))))
+
+(clojure.core/defn- deser-m-3u-8-pcr-control [input] (clojure.core/get {"CONFIGURED_PCR_PERIOD" :configured-pcr-period, "PCR_EVERY_PES_PACKET" :pcr-every-pes-packet} input))
+
+(clojure.core/defn- deser-archive-output-settings [input] (clojure.core/cond-> {:container-settings (deser-archive-container-settings (input "containerSettings"))} (clojure.core/contains? input "extension") (clojure.core/assoc :extension (deser-string (input "extension"))) (clojure.core/contains? input "nameModifier") (clojure.core/assoc :name-modifier (deser-string (input "nameModifier")))))
+
+(clojure.core/defn- deser-string-min-6-max-6 [input] input)
+
+(clojure.core/defn- deser-m-2ts-audio-buffer-model [input] (clojure.core/get {"ATSC" :atsc, "DVB" :dvb} input))
+
+(clojure.core/defn- deser-validation-error [input] (clojure.core/cond-> {} (clojure.core/contains? input "elementPath") (clojure.core/assoc :element-path (deser-string (input "elementPath"))) (clojure.core/contains? input "errorMessage") (clojure.core/assoc :error-message (deser-string (input "errorMessage")))))
+
+(clojure.core/defn- deser-h-264-gop-size-units [input] (clojure.core/get {"FRAMES" :frames, "SECONDS" :seconds} input))
+
+(clojure.core/defn- deser-hls-directory-structure [input] (clojure.core/get {"SINGLE_DIRECTORY" :single-directory, "SUBDIRECTORY_PER_STREAM" :subdirectory-per-stream} input))
+
+(clojure.core/defn- deser-frame-capture-output-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "nameModifier") (clojure.core/assoc :name-modifier (deser-string (input "nameModifier")))))
+
+(clojure.core/defn- deser-m-2ts-ebp-placement [input] (clojure.core/get {"VIDEO_AND_AUDIO_PIDS" :video-and-audio-pids, "VIDEO_PID" :video-pid} input))
+
+(clojure.core/defn- deser-dvb-sub-destination-teletext-grid-control [input] (clojure.core/get {"FIXED" :fixed, "SCALED" :scaled} input))
+
+(clojure.core/defn- deser-eac-3-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "ltRtSurroundMixLevel") (clojure.core/assoc :lt-rt-surround-mix-level (deser-double (input "ltRtSurroundMixLevel"))) (clojure.core/contains? input "codingMode") (clojure.core/assoc :coding-mode (deser-eac-3-coding-mode (input "codingMode"))) (clojure.core/contains? input "phaseControl") (clojure.core/assoc :phase-control (deser-eac-3-phase-control (input "phaseControl"))) (clojure.core/contains? input "passthroughControl") (clojure.core/assoc :passthrough-control (deser-eac-3-passthrough-control (input "passthroughControl"))) (clojure.core/contains? input "surroundMode") (clojure.core/assoc :surround-mode (deser-eac-3-surround-mode (input "surroundMode"))) (clojure.core/contains? input "attenuationControl") (clojure.core/assoc :attenuation-control (deser-eac-3-attenuation-control (input "attenuationControl"))) (clojure.core/contains? input "drcLine") (clojure.core/assoc :drc-line (deser-eac-3-drc-line (input "drcLine"))) (clojure.core/contains? input "dcFilter") (clojure.core/assoc :dc-filter (deser-eac-3-dc-filter (input "dcFilter"))) (clojure.core/contains? input "lfeFilter") (clojure.core/assoc :lfe-filter (deser-eac-3-lfe-filter (input "lfeFilter"))) (clojure.core/contains? input "lfeControl") (clojure.core/assoc :lfe-control (deser-eac-3-lfe-control (input "lfeControl"))) (clojure.core/contains? input "loRoCenterMixLevel") (clojure.core/assoc :lo-ro-center-mix-level (deser-double (input "loRoCenterMixLevel"))) (clojure.core/contains? input "stereoDownmix") (clojure.core/assoc :stereo-downmix (deser-eac-3-stereo-downmix (input "stereoDownmix"))) (clojure.core/contains? input "ltRtCenterMixLevel") (clojure.core/assoc :lt-rt-center-mix-level (deser-double (input "ltRtCenterMixLevel"))) (clojure.core/contains? input "surroundExMode") (clojure.core/assoc :surround-ex-mode (deser-eac-3-surround-ex-mode (input "surroundExMode"))) (clojure.core/contains? input "metadataControl") (clojure.core/assoc :metadata-control (deser-eac-3-metadata-control (input "metadataControl"))) (clojure.core/contains? input "loRoSurroundMixLevel") (clojure.core/assoc :lo-ro-surround-mix-level (deser-double (input "loRoSurroundMixLevel"))) (clojure.core/contains? input "drcRf") (clojure.core/assoc :drc-rf (deser-eac-3-drc-rf (input "drcRf"))) (clojure.core/contains? input "bitstreamMode") (clojure.core/assoc :bitstream-mode (deser-eac-3-bitstream-mode (input "bitstreamMode"))) (clojure.core/contains? input "dialnorm") (clojure.core/assoc :dialnorm (deser-integer-min-1-max-31 (input "dialnorm"))) (clojure.core/contains? input "bitrate") (clojure.core/assoc :bitrate (deser-double (input "bitrate")))))
+
+(clojure.core/defn- deser-audio-normalization-algorithm [input] (clojure.core/get {"ITU_1770_1" :itu-1770-1, "ITU_1770_2" :itu-1770-2} input))
+
+(clojure.core/defn- deser-follow-mode-schedule-action-start-settings [input] (clojure.core/cond-> {:reference-action-name (deser-string (input "referenceActionName")), :follow-point (deser-follow-point (input "followPoint"))}))
+
+(clojure.core/defn- deser-rtmp-caption-data [input] (clojure.core/get {"ALL" :all, "FIELD1_608" :field-1-608, "FIELD1_AND_FIELD2_608" :field-1-and-field-2-608} input))
+
+(clojure.core/defn- deser-hls-mode [input] (clojure.core/get {"LIVE" :live, "VOD" :vod} input))
+
+(clojure.core/defn- deser-log-level [input] (clojure.core/get {"ERROR" :error, "WARNING" :warning, "INFO" :info, "DEBUG" :debug, "DISABLED" :disabled} input))
+
+(clojure.core/defn- deser-follow-point [input] (clojure.core/get {"END" :end, "START" :start} input))
+
+(clojure.core/defn- deser-integer-min-0-max-500 [input] input)
+
+(clojure.core/defn- deser-i-frame-only-playlist-type [input] (clojure.core/get {"DISABLED" :disabled, "STANDARD" :standard} input))
+
+(clojure.core/defn- deser-input-loss-behavior [input] (clojure.core/cond-> {} (clojure.core/contains? input "blackFrameMsec") (clojure.core/assoc :black-frame-msec (deser-integer-min-0-max-1000000 (input "blackFrameMsec"))) (clojure.core/contains? input "inputLossImageColor") (clojure.core/assoc :input-loss-image-color (deser-string-min-6-max-6 (input "inputLossImageColor"))) (clojure.core/contains? input "inputLossImageSlate") (clojure.core/assoc :input-loss-image-slate (deser-input-location (input "inputLossImageSlate"))) (clojure.core/contains? input "inputLossImageType") (clojure.core/assoc :input-loss-image-type (deser-input-loss-image-type (input "inputLossImageType"))) (clojure.core/contains? input "repeatFrameMsec") (clojure.core/assoc :repeat-frame-msec (deser-integer-min-0-max-1000000 (input "repeatFrameMsec")))))
+
+(clojure.core/defn- deser-input-loss-image-type [input] (clojure.core/get {"COLOR" :color, "SLATE" :slate} input))
+
+(clojure.core/defn- deser-list-of-output-destination-settings [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-output-destination-settings coll))) input))
+
+(clojure.core/defn- deser-udp-group-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "inputLossAction") (clojure.core/assoc :input-loss-action (deser-input-loss-action-for-udp-out (input "inputLossAction"))) (clojure.core/contains? input "timedMetadataId3Frame") (clojure.core/assoc :timed-metadata-id-3-frame (deser-udp-timed-metadata-id-3-frame (input "timedMetadataId3Frame"))) (clojure.core/contains? input "timedMetadataId3Period") (clojure.core/assoc :timed-metadata-id-3-period (deser-integer-min-0 (input "timedMetadataId3Period")))))
+
+(clojure.core/defn- deser-m-2ts-arib [input] (clojure.core/get {"DISABLED" :disabled, "ENABLED" :enabled} input))
+
+(clojure.core/defn- deser-dvb-sub-destination-font-color [input] (clojure.core/get {"BLACK" :black, "BLUE" :blue, "GREEN" :green, "RED" :red, "WHITE" :white, "YELLOW" :yellow} input))
+
+(clojure.core/defn- deser-input-type [input] (clojure.core/get {"UDP_PUSH" :udp-push, "RTP_PUSH" :rtp-push, "RTMP_PUSH" :rtmp-push, "RTMP_PULL" :rtmp-pull, "URL_PULL" :url-pull, "MP4_FILE" :mp-4-file, "MEDIACONNECT" :mediaconnect} input))
+
+(clojure.core/defn- deser-dvb-sdt-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "outputSdt") (clojure.core/assoc :output-sdt (deser-dvb-sdt-output-sdt (input "outputSdt"))) (clojure.core/contains? input "repInterval") (clojure.core/assoc :rep-interval (deser-integer-min-25-max-2000 (input "repInterval"))) (clojure.core/contains? input "serviceName") (clojure.core/assoc :service-name (deser-string-min-1-max-256 (input "serviceName"))) (clojure.core/contains? input "serviceProviderName") (clojure.core/assoc :service-provider-name (deser-string-min-1-max-256 (input "serviceProviderName")))))
+
+(clojure.core/defn- deser-burn-in-background-color [input] (clojure.core/get {"BLACK" :black, "NONE" :none, "WHITE" :white} input))
+
+(clojure.core/defn- deser-video-selector-program-id [input] (clojure.core/cond-> {} (clojure.core/contains? input "programId") (clojure.core/assoc :program-id (deser-integer-min-0-max-65536 (input "programId")))))
+
+(clojure.core/defn- deser-archive-group-settings [input] (clojure.core/cond-> {:destination (deser-output-location-ref (input "destination"))} (clojure.core/contains? input "rolloverInterval") (clojure.core/assoc :rollover-interval (deser-integer-min-1 (input "rolloverInterval")))))
+
+(clojure.core/defn- deser-hls-timed-metadata-schedule-action-settings [input] (clojure.core/cond-> {:id-3 (deser-string (input "id3"))}))
+
+(clojure.core/defn- deser-udp-output-settings [input] (clojure.core/cond-> {:destination (deser-output-location-ref (input "destination")), :container-settings (deser-udp-container-settings (input "containerSettings"))} (clojure.core/contains? input "bufferMsec") (clojure.core/assoc :buffer-msec (deser-integer-min-0-max-10000 (input "bufferMsec"))) (clojure.core/contains? input "fecOutputSettings") (clojure.core/assoc :fec-output-settings (deser-fec-output-settings (input "fecOutputSettings")))))
+
+(clojure.core/defn- deser-udp-timed-metadata-id-3-frame [input] (clojure.core/get {"NONE" :none, "PRIV" :priv, "TDRL" :tdrl} input))
+
+(clojure.core/defn- deser-integer-min-0 [input] input)
+
+(clojure.core/defn- deser-hls-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "audioOnlyHlsSettings") (clojure.core/assoc :audio-only-hls-settings (deser-audio-only-hls-settings (input "audioOnlyHlsSettings"))) (clojure.core/contains? input "standardHlsSettings") (clojure.core/assoc :standard-hls-settings (deser-standard-hls-settings (input "standardHlsSettings")))))
+
+(clojure.core/defn- deser-scte-35-splice-insert-schedule-action-settings [input] (clojure.core/cond-> {:splice-event-id (deser-integer-min-0-max-4294967295 (input "spliceEventId"))} (clojure.core/contains? input "duration") (clojure.core/assoc :duration (deser-integer-min-0-max-8589934591 (input "duration")))))
+
+(clojure.core/defn- deser-ac-3-lfe-filter [input] (clojure.core/get {"DISABLED" :disabled, "ENABLED" :enabled} input))
+
+(clojure.core/defn- deser-burn-in-teletext-grid-control [input] (clojure.core/get {"FIXED" :fixed, "SCALED" :scaled} input))
+
+(clojure.core/defn- deser-scte-27-destination-settings [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-schedule-action [input] (clojure.core/cond-> {:action-name (deser-string (input "actionName")), :schedule-action-start-settings (deser-schedule-action-start-settings (input "scheduleActionStartSettings")), :schedule-action-settings (deser-schedule-action-settings (input "scheduleActionSettings"))}))
+
+(clojure.core/defn- deser-video-selector-color-space-usage [input] (clojure.core/get {"FALLBACK" :fallback, "FORCE" :force} input))
+
+(clojure.core/defn- deser-scte-20-source-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "convert608To708") (clojure.core/assoc :convert-608-to-708 (deser-scte-20-convert-608-to-708 (input "convert608To708"))) (clojure.core/contains? input "source608ChannelNumber") (clojure.core/assoc :source-608-channel-number (deser-integer-min-1-max-4 (input "source608ChannelNumber")))))
+
+(clojure.core/defn- deser-hls-stream-inf-resolution [input] (clojure.core/get {"EXCLUDE" :exclude, "INCLUDE" :include} input))
+
+(clojure.core/defn- deser-list-of-schedule-action [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-schedule-action coll))) input))
+
+(clojure.core/defn- deser-hls-caption-language-setting [input] (clojure.core/get {"INSERT" :insert, "NONE" :none, "OMIT" :omit} input))
+
+(clojure.core/defn- deser-m-2ts-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "patInterval") (clojure.core/assoc :pat-interval (deser-integer-min-0-max-1000 (input "patInterval"))) (clojure.core/contains? input "bufferModel") (clojure.core/assoc :buffer-model (deser-m-2ts-buffer-model (input "bufferModel"))) (clojure.core/contains? input "dvbTdtSettings") (clojure.core/assoc :dvb-tdt-settings (deser-dvb-tdt-settings (input "dvbTdtSettings"))) (clojure.core/contains? input "audioFramesPerPes") (clojure.core/assoc :audio-frames-per-pes (deser-integer-min-0 (input "audioFramesPerPes"))) (clojure.core/contains? input "fragmentTime") (clojure.core/assoc :fragment-time (deser-double-min-0 (input "fragmentTime"))) (clojure.core/contains? input "transportStreamId") (clojure.core/assoc :transport-stream-id (deser-integer-min-0-max-65535 (input "transportStreamId"))) (clojure.core/contains? input "timedMetadataBehavior") (clojure.core/assoc :timed-metadata-behavior (deser-m-2ts-timed-metadata-behavior (input "timedMetadataBehavior"))) (clojure.core/contains? input "dvbSdtSettings") (clojure.core/assoc :dvb-sdt-settings (deser-dvb-sdt-settings (input "dvbSdtSettings"))) (clojure.core/contains? input "absentInputAudioBehavior") (clojure.core/assoc :absent-input-audio-behavior (deser-m-2ts-absent-input-audio-behavior (input "absentInputAudioBehavior"))) (clojure.core/contains? input "pcrControl") (clojure.core/assoc :pcr-control (deser-m-2ts-pcr-control (input "pcrControl"))) (clojure.core/contains? input "scte35Pid") (clojure.core/assoc :scte-35-pid (deser-string (input "scte35Pid"))) (clojure.core/contains? input "pcrPid") (clojure.core/assoc :pcr-pid (deser-string (input "pcrPid"))) (clojure.core/contains? input "pmtPid") (clojure.core/assoc :pmt-pid (deser-string (input "pmtPid"))) (clojure.core/contains? input "videoPid") (clojure.core/assoc :video-pid (deser-string (input "videoPid"))) (clojure.core/contains? input "rateMode") (clojure.core/assoc :rate-mode (deser-m-2ts-rate-mode (input "rateMode"))) (clojure.core/contains? input "audioPids") (clojure.core/assoc :audio-pids (deser-string (input "audioPids"))) (clojure.core/contains? input "etvPlatformPid") (clojure.core/assoc :etv-platform-pid (deser-string (input "etvPlatformPid"))) (clojure.core/contains? input "ebpLookaheadMs") (clojure.core/assoc :ebp-lookahead-ms (deser-integer-min-0-max-10000 (input "ebpLookaheadMs"))) (clojure.core/contains? input "arib") (clojure.core/assoc :arib (deser-m-2ts-arib (input "arib"))) (clojure.core/contains? input "ebif") (clojure.core/assoc :ebif (deser-m-2ts-ebif-control (input "ebif"))) (clojure.core/contains? input "pcrPeriod") (clojure.core/assoc :pcr-period (deser-integer-min-0-max-500 (input "pcrPeriod"))) (clojure.core/contains? input "ccDescriptor") (clojure.core/assoc :cc-descriptor (deser-m-2ts-cc-descriptor (input "ccDescriptor"))) (clojure.core/contains? input "etvSignalPid") (clojure.core/assoc :etv-signal-pid (deser-string (input "etvSignalPid"))) (clojure.core/contains? input "pmtInterval") (clojure.core/assoc :pmt-interval (deser-integer-min-0-max-1000 (input "pmtInterval"))) (clojure.core/contains? input "segmentationStyle") (clojure.core/assoc :segmentation-style (deser-m-2ts-segmentation-style (input "segmentationStyle"))) (clojure.core/contains? input "nullPacketBitrate") (clojure.core/assoc :null-packet-bitrate (deser-double-min-0 (input "nullPacketBitrate"))) (clojure.core/contains? input "segmentationMarkers") (clojure.core/assoc :segmentation-markers (deser-m-2ts-segmentation-markers (input "segmentationMarkers"))) (clojure.core/contains? input "ebpPlacement") (clojure.core/assoc :ebp-placement (deser-m-2ts-ebp-placement (input "ebpPlacement"))) (clojure.core/contains? input "scte35Control") (clojure.core/assoc :scte-35-control (deser-m-2ts-scte-35-control (input "scte35Control"))) (clojure.core/contains? input "audioBufferModel") (clojure.core/assoc :audio-buffer-model (deser-m-2ts-audio-buffer-model (input "audioBufferModel"))) (clojure.core/contains? input "esRateInPes") (clojure.core/assoc :es-rate-in-pes (deser-m-2ts-es-rate-in-pes (input "esRateInPes"))) (clojure.core/contains? input "klv") (clojure.core/assoc :klv (deser-m-2ts-klv (input "klv"))) (clojure.core/contains? input "programNum") (clojure.core/assoc :program-num (deser-integer-min-0-max-65535 (input "programNum"))) (clojure.core/contains? input "timedMetadataPid") (clojure.core/assoc :timed-metadata-pid (deser-string (input "timedMetadataPid"))) (clojure.core/contains? input "audioStreamType") (clojure.core/assoc :audio-stream-type (deser-m-2ts-audio-stream-type (input "audioStreamType"))) (clojure.core/contains? input "scte27Pids") (clojure.core/assoc :scte-27-pids (deser-string (input "scte27Pids"))) (clojure.core/contains? input "aribCaptionsPidControl") (clojure.core/assoc :arib-captions-pid-control (deser-m-2ts-arib-captions-pid-control (input "aribCaptionsPidControl"))) (clojure.core/contains? input "klvDataPids") (clojure.core/assoc :klv-data-pids (deser-string (input "klvDataPids"))) (clojure.core/contains? input "dvbSubPids") (clojure.core/assoc :dvb-sub-pids (deser-string (input "dvbSubPids"))) (clojure.core/contains? input "ebpAudioInterval") (clojure.core/assoc :ebp-audio-interval (deser-m-2ts-audio-interval (input "ebpAudioInterval"))) (clojure.core/contains? input "ecmPid") (clojure.core/assoc :ecm-pid (deser-string (input "ecmPid"))) (clojure.core/contains? input "dvbNitSettings") (clojure.core/assoc :dvb-nit-settings (deser-dvb-nit-settings (input "dvbNitSettings"))) (clojure.core/contains? input "dvbTeletextPid") (clojure.core/assoc :dvb-teletext-pid (deser-string (input "dvbTeletextPid"))) (clojure.core/contains? input "aribCaptionsPid") (clojure.core/assoc :arib-captions-pid (deser-string (input "aribCaptionsPid"))) (clojure.core/contains? input "bitrate") (clojure.core/assoc :bitrate (deser-integer-min-0 (input "bitrate"))) (clojure.core/contains? input "segmentationTime") (clojure.core/assoc :segmentation-time (deser-double-min-1 (input "segmentationTime")))))
+
+(clojure.core/defn- deser-string [input] input)
+
+(clojure.core/defn- deser-scte-35-splice-insert-no-regional-blackout-behavior [input] (clojure.core/get {"FOLLOW" :follow, "IGNORE" :ignore} input))
+
+(clojure.core/defn- deser-dvb-sub-source-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "pid") (clojure.core/assoc :pid (deser-integer-min-1 (input "pid")))))
+
+(clojure.core/defn- deser-input-denoise-filter [input] (clojure.core/get {"DISABLED" :disabled, "ENABLED" :enabled} input))
+
+(clojure.core/defn- deser-video-selector-pid [input] (clojure.core/cond-> {} (clojure.core/contains? input "pid") (clojure.core/assoc :pid (deser-integer-min-0-max-8191 (input "pid")))))
+
+(clojure.core/defn- deser-scte-35-descriptor-settings [input] (clojure.core/cond-> {:segmentation-descriptor-scte-35-descriptor-settings (deser-scte-35-segmentation-descriptor (input "segmentationDescriptorScte35DescriptorSettings"))}))
+
+(clojure.core/defn- deser-afd-signaling [input] (clojure.core/get {"AUTO" :auto, "FIXED" :fixed, "NONE" :none} input))
+
+(clojure.core/defn- deser-list-of-audio-selector [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-audio-selector coll))) input))
+
+(clojure.core/defn- deser-aac-profile [input] (clojure.core/get {"HEV1" :hev-1, "HEV2" :hev-2, "LC" :lc} input))
+
+(clojure.core/defn- deser-burn-in-font-color [input] (clojure.core/get {"BLACK" :black, "BLUE" :blue, "GREEN" :green, "RED" :red, "WHITE" :white, "YELLOW" :yellow} input))
+
+(clojure.core/defn- deser-pause-state-schedule-action-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "pipelines") (clojure.core/assoc :pipelines (deser-list-of-pipeline-pause-state-settings (input "pipelines")))))
+
+(clojure.core/defn- deser-eac-3-metadata-control [input] (clojure.core/get {"FOLLOW_INPUT" :follow-input, "USE_CONFIGURED" :use-configured} input))
+
+(clojure.core/defn- deser-fec-output-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "columnDepth") (clojure.core/assoc :column-depth (deser-integer-min-4-max-20 (input "columnDepth"))) (clojure.core/contains? input "includeFec") (clojure.core/assoc :include-fec (deser-fec-output-include-fec (input "includeFec"))) (clojure.core/contains? input "rowLength") (clojure.core/assoc :row-length (deser-integer-min-1-max-20 (input "rowLength")))))
+
+(clojure.core/defn- deser-global-configuration-input-end-action [input] (clojure.core/get {"NONE" :none, "SWITCH_AND_LOOP_INPUTS" :switch-and-loop-inputs} input))
+
+(clojure.core/defn- deser-integer-min-0-max-65535 [input] input)
+
+(clojure.core/defn- deser-hls-webdav-http-transfer-mode [input] (clojure.core/get {"CHUNKED" :chunked, "NON_CHUNKED" :non-chunked} input))
+
+(clojure.core/defn- deser-offering-duration-units [input] (clojure.core/get {"MONTHS" :months} input))
+
+(clojure.core/defn- deser-hls-webdav-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "connectionRetryInterval") (clojure.core/assoc :connection-retry-interval (deser-integer-min-0 (input "connectionRetryInterval"))) (clojure.core/contains? input "filecacheDuration") (clojure.core/assoc :filecache-duration (deser-integer-min-0-max-600 (input "filecacheDuration"))) (clojure.core/contains? input "httpTransferMode") (clojure.core/assoc :http-transfer-mode (deser-hls-webdav-http-transfer-mode (input "httpTransferMode"))) (clojure.core/contains? input "numRetries") (clojure.core/assoc :num-retries (deser-integer-min-0 (input "numRetries"))) (clojure.core/contains? input "restartDelay") (clojure.core/assoc :restart-delay (deser-integer-min-0-max-15 (input "restartDelay")))))
+
+(clojure.core/defn- deser-double-min-1 [input] input)
+
+(clojure.core/defn- deser-dvb-sub-destination-background-color [input] (clojure.core/get {"BLACK" :black, "NONE" :none, "WHITE" :white} input))
+
+(clojure.core/defn- deser-mp-2-coding-mode [input] (clojure.core/get {"CODING_MODE_1_0" :coding-mode-1-0, "CODING_MODE_2_0" :coding-mode-2-0} input))
+
+(clojure.core/defn- deser-list-of-output-group [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-output-group coll))) input))
+
+(clojure.core/defn- deser-reservation-resource-specification [input] (clojure.core/cond-> {} (clojure.core/contains? input "codec") (clojure.core/assoc :codec (deser-reservation-codec (input "codec"))) (clojure.core/contains? input "maximumBitrate") (clojure.core/assoc :maximum-bitrate (deser-reservation-maximum-bitrate (input "maximumBitrate"))) (clojure.core/contains? input "maximumFramerate") (clojure.core/assoc :maximum-framerate (deser-reservation-maximum-framerate (input "maximumFramerate"))) (clojure.core/contains? input "resolution") (clojure.core/assoc :resolution (deser-reservation-resolution (input "resolution"))) (clojure.core/contains? input "resourceType") (clojure.core/assoc :resource-type (deser-reservation-resource-type (input "resourceType"))) (clojure.core/contains? input "specialFeature") (clojure.core/assoc :special-feature (deser-reservation-special-feature (input "specialFeature"))) (clojure.core/contains? input "videoQuality") (clojure.core/assoc :video-quality (deser-reservation-video-quality (input "videoQuality")))))
+
+(clojure.core/defn- deser-scte-35-delivery-restrictions [input] (clojure.core/cond-> {:device-restrictions (deser-scte-35-device-restrictions (input "deviceRestrictions")), :archive-allowed-flag (deser-scte-35-archive-allowed-flag (input "archiveAllowedFlag")), :web-delivery-allowed-flag (deser-scte-35-web-delivery-allowed-flag (input "webDeliveryAllowedFlag")), :no-regional-blackout-flag (deser-scte-35-no-regional-blackout-flag (input "noRegionalBlackoutFlag"))}))
+
+(clojure.core/defn- deser-m-2ts-timed-metadata-behavior [input] (clojure.core/get {"NO_PASSTHROUGH" :no-passthrough, "PASSTHROUGH" :passthrough} input))
+
+(clojure.core/defn- deser-tags [input] (clojure.core/into {} (clojure.core/map (clojure.core/fn [[k v]] [(deser-string k) (deser-string v)])) input))
+
+(clojure.core/defn- deser-fec-output-include-fec [input] (clojure.core/get {"COLUMN" :column, "COLUMN_AND_ROW" :column-and-row} input))
+
+(clojure.core/defn- deser-scte-35-segmentation-cancel-indicator [input] (clojure.core/get {"SEGMENTATION_EVENT_NOT_CANCELED" :segmentation-event-not-canceled, "SEGMENTATION_EVENT_CANCELED" :segmentation-event-canceled} input))
+
+(clojure.core/defn- deser-rtmp-output-certificate-mode [input] (clojure.core/get {"SELF_SIGNED" :self-signed, "VERIFY_AUTHENTICITY" :verify-authenticity} input))
+
+(clojure.core/defn- deser-ac-3-drc-profile [input] (clojure.core/get {"FILM_STANDARD" :film-standard, "NONE" :none} input))
+
+(clojure.core/defn- deser-eac-3-lfe-control [input] (clojure.core/get {"LFE" :lfe, "NO_LFE" :no-lfe} input))
+
+(clojure.core/defn- deser-teletext-source-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "pageNumber") (clojure.core/assoc :page-number (deser-string (input "pageNumber")))))
+
+(clojure.core/defn- deser-m-3u-8-scte-35-behavior [input] (clojure.core/get {"NO_PASSTHROUGH" :no-passthrough, "PASSTHROUGH" :passthrough} input))
+
+(clojure.core/defn- deser-rtmp-output-settings [input] (clojure.core/cond-> {:destination (deser-output-location-ref (input "destination"))} (clojure.core/contains? input "certificateMode") (clojure.core/assoc :certificate-mode (deser-rtmp-output-certificate-mode (input "certificateMode"))) (clojure.core/contains? input "connectionRetryInterval") (clojure.core/assoc :connection-retry-interval (deser-integer-min-1 (input "connectionRetryInterval"))) (clojure.core/contains? input "numRetries") (clojure.core/assoc :num-retries (deser-integer-min-0 (input "numRetries")))))
+
+(clojure.core/defn- deser-global-configuration-low-framerate-inputs [input] (clojure.core/get {"DISABLED" :disabled, "ENABLED" :enabled} input))
+
+(clojure.core/defn- deser-eac-3-surround-mode [input] (clojure.core/get {"DISABLED" :disabled, "ENABLED" :enabled, "NOT_INDICATED" :not-indicated} input))
+
+(clojure.core/defn- deser-avail-blanking-state [input] (clojure.core/get {"DISABLED" :disabled, "ENABLED" :enabled} input))
+
+(clojure.core/defn- deser-audio-channel-mapping [input] (clojure.core/cond-> {:output-channel (deser-integer-min-0-max-7 (input "outputChannel")), :input-channel-levels (deser-list-of-input-channel-level (input "inputChannelLevels"))}))
+
+(clojure.core/defn- deser-reservation-resolution [input] (clojure.core/get {"SD" :sd, "HD" :hd, "UHD" :uhd} input))
+
+(clojure.core/defn- deser-h-264-look-ahead-rate-control [input] (clojure.core/get {"HIGH" :high, "LOW" :low, "MEDIUM" :medium} input))
+
+(clojure.core/defn- deser-input-source [input] (clojure.core/cond-> {} (clojure.core/contains? input "passwordParam") (clojure.core/assoc :password-param (deser-string (input "passwordParam"))) (clojure.core/contains? input "url") (clojure.core/assoc :url (deser-string (input "url"))) (clojure.core/contains? input "username") (clojure.core/assoc :username (deser-string (input "username")))))
+
+(clojure.core/defn- deser-hls-akamai-http-transfer-mode [input] (clojure.core/get {"CHUNKED" :chunked, "NON_CHUNKED" :non-chunked} input))
+
+(clojure.core/defn- deser-reservation [input] (clojure.core/cond-> {} (clojure.core/contains? input "durationUnits") (clojure.core/assoc :duration-units (deser-offering-duration-units (input "durationUnits"))) (clojure.core/contains? input "currencyCode") (clojure.core/assoc :currency-code (deser-string (input "currencyCode"))) (clojure.core/contains? input "offeringDescription") (clojure.core/assoc :offering-description (deser-string (input "offeringDescription"))) (clojure.core/contains? input "resourceSpecification") (clojure.core/assoc :resource-specification (deser-reservation-resource-specification (input "resourceSpecification"))) (clojure.core/contains? input "start") (clojure.core/assoc :start (deser-string (input "start"))) (clojure.core/contains? input "fixedPrice") (clojure.core/assoc :fixed-price (deser-double (input "fixedPrice"))) (clojure.core/contains? input "end") (clojure.core/assoc :end (deser-string (input "end"))) (clojure.core/contains? input "count") (clojure.core/assoc :count (deser-integer (input "count"))) (clojure.core/contains? input "offeringId") (clojure.core/assoc :offering-id (deser-string (input "offeringId"))) (clojure.core/contains? input "duration") (clojure.core/assoc :duration (deser-integer (input "duration"))) (clojure.core/contains? input "usagePrice") (clojure.core/assoc :usage-price (deser-double (input "usagePrice"))) (clojure.core/contains? input "arn") (clojure.core/assoc :arn (deser-string (input "arn"))) (clojure.core/contains? input "state") (clojure.core/assoc :state (deser-reservation-state (input "state"))) (clojure.core/contains? input "offeringType") (clojure.core/assoc :offering-type (deser-offering-type (input "offeringType"))) (clojure.core/contains? input "name") (clojure.core/assoc :name (deser-string (input "name"))) (clojure.core/contains? input "reservationId") (clojure.core/assoc :reservation-id (deser-string (input "reservationId"))) (clojure.core/contains? input "region") (clojure.core/assoc :region (deser-string (input "region")))))
+
+(clojure.core/defn- deser-h-264-sub-gop-length [input] (clojure.core/get {"DYNAMIC" :dynamic, "FIXED" :fixed} input))
+
+(clojure.core/defn- deser-ms-smooth-output-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "nameModifier") (clojure.core/assoc :name-modifier (deser-string (input "nameModifier")))))
+
+(clojure.core/defn- deser-video-selector-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "videoSelectorPid") (clojure.core/assoc :video-selector-pid (deser-video-selector-pid (input "videoSelectorPid"))) (clojure.core/contains? input "videoSelectorProgramId") (clojure.core/assoc :video-selector-program-id (deser-video-selector-program-id (input "videoSelectorProgramId")))))
+
+(clojure.core/defn- deser-eac-3-lfe-filter [input] (clojure.core/get {"DISABLED" :disabled, "ENABLED" :enabled} input))
+
+(clojure.core/defn- deser-reservation-maximum-bitrate [input] (clojure.core/get {"MAX_10_MBPS" :max-10-mbps, "MAX_20_MBPS" :max-20-mbps, "MAX_50_MBPS" :max-50-mbps} input))
+
+(clojure.core/defn- deser-offering [input] (clojure.core/cond-> {} (clojure.core/contains? input "durationUnits") (clojure.core/assoc :duration-units (deser-offering-duration-units (input "durationUnits"))) (clojure.core/contains? input "currencyCode") (clojure.core/assoc :currency-code (deser-string (input "currencyCode"))) (clojure.core/contains? input "offeringDescription") (clojure.core/assoc :offering-description (deser-string (input "offeringDescription"))) (clojure.core/contains? input "resourceSpecification") (clojure.core/assoc :resource-specification (deser-reservation-resource-specification (input "resourceSpecification"))) (clojure.core/contains? input "fixedPrice") (clojure.core/assoc :fixed-price (deser-double (input "fixedPrice"))) (clojure.core/contains? input "offeringId") (clojure.core/assoc :offering-id (deser-string (input "offeringId"))) (clojure.core/contains? input "duration") (clojure.core/assoc :duration (deser-integer (input "duration"))) (clojure.core/contains? input "usagePrice") (clojure.core/assoc :usage-price (deser-double (input "usagePrice"))) (clojure.core/contains? input "arn") (clojure.core/assoc :arn (deser-string (input "arn"))) (clojure.core/contains? input "offeringType") (clojure.core/assoc :offering-type (deser-offering-type (input "offeringType"))) (clojure.core/contains? input "region") (clojure.core/assoc :region (deser-string (input "region")))))
+
+(clojure.core/defn- deser-integer-min-negative-60-max-60 [input] input)
+
+(clojure.core/defn- deser-integer-min-0-max-8589934591 [input] input)
+
+(clojure.core/defn- deser-list-of-input-channel-level [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-input-channel-level coll))) input))
+
+(clojure.core/defn- deser-h-264-rate-control-mode [input] (clojure.core/get {"CBR" :cbr, "QVBR" :qvbr, "VBR" :vbr} input))
+
+(clojure.core/defn- deser-integer-min-0-max-255 [input] input)
+
+(clojure.core/defn- deser-list-of-output-destination [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-output-destination coll))) input))
+
+(clojure.core/defn- deser-video-selector [input] (clojure.core/cond-> {} (clojure.core/contains? input "colorSpace") (clojure.core/assoc :color-space (deser-video-selector-color-space (input "colorSpace"))) (clojure.core/contains? input "colorSpaceUsage") (clojure.core/assoc :color-space-usage (deser-video-selector-color-space-usage (input "colorSpaceUsage"))) (clojure.core/contains? input "selectorSettings") (clojure.core/assoc :selector-settings (deser-video-selector-settings (input "selectorSettings")))))
+
+(clojure.core/defn- deser-ac-3-metadata-control [input] (clojure.core/get {"FOLLOW_INPUT" :follow-input, "USE_CONFIGURED" :use-configured} input))
+
+(clojure.core/defn- deser-double-min-0 [input] input)
+
+(clojure.core/defn- deser-m-2ts-buffer-model [input] (clojure.core/get {"MULTIPLEX" :multiplex, "NONE" :none} input))
+
+(clojure.core/defn- deser-udp-container-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "m2tsSettings") (clojure.core/assoc :m-2ts-settings (deser-m-2ts-settings (input "m2tsSettings")))))
+
+(clojure.core/defn- deser-channel-summary [input] (clojure.core/cond-> {} (clojure.core/contains? input "inputAttachments") (clojure.core/assoc :input-attachments (deser-list-of-input-attachment (input "inputAttachments"))) (clojure.core/contains? input "pipelinesRunningCount") (clojure.core/assoc :pipelines-running-count (deser-integer (input "pipelinesRunningCount"))) (clojure.core/contains? input "logLevel") (clojure.core/assoc :log-level (deser-log-level (input "logLevel"))) (clojure.core/contains? input "roleArn") (clojure.core/assoc :role-arn (deser-string (input "roleArn"))) (clojure.core/contains? input "tags") (clojure.core/assoc :tags (deser-tags (input "tags"))) (clojure.core/contains? input "egressEndpoints") (clojure.core/assoc :egress-endpoints (deser-list-of-channel-egress-endpoint (input "egressEndpoints"))) (clojure.core/contains? input "arn") (clojure.core/assoc :arn (deser-string (input "arn"))) (clojure.core/contains? input "inputSpecification") (clojure.core/assoc :input-specification (deser-input-specification (input "inputSpecification"))) (clojure.core/contains? input "state") (clojure.core/assoc :state (deser-channel-state (input "state"))) (clojure.core/contains? input "destinations") (clojure.core/assoc :destinations (deser-list-of-output-destination (input "destinations"))) (clojure.core/contains? input "name") (clojure.core/assoc :name (deser-string (input "name"))) (clojure.core/contains? input "id") (clojure.core/assoc :id (deser-string (input "id")))))
+
+(clojure.core/defn- deser-integer-min-25-max-10000 [input] input)
+
+(clojure.core/defn- deser-eac-3-coding-mode [input] (clojure.core/get {"CODING_MODE_1_0" :coding-mode-1-0, "CODING_MODE_2_0" :coding-mode-2-0, "CODING_MODE_3_2" :coding-mode-3-2} input))
+
+(clojure.core/defn- deser-m-2ts-ebif-control [input] (clojure.core/get {"NONE" :none, "PASSTHROUGH" :passthrough} input))
+
+(clojure.core/defn- deser-caption-description [input] (clojure.core/cond-> {:caption-selector-name (deser-string (input "captionSelectorName")), :name (deser-string (input "name"))} (clojure.core/contains? input "destinationSettings") (clojure.core/assoc :destination-settings (deser-caption-destination-settings (input "destinationSettings"))) (clojure.core/contains? input "languageCode") (clojure.core/assoc :language-code (deser-string (input "languageCode"))) (clojure.core/contains? input "languageDescription") (clojure.core/assoc :language-description (deser-string (input "languageDescription")))))
+
+(clojure.core/defn- deser-hls-media-store-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "connectionRetryInterval") (clojure.core/assoc :connection-retry-interval (deser-integer-min-0 (input "connectionRetryInterval"))) (clojure.core/contains? input "filecacheDuration") (clojure.core/assoc :filecache-duration (deser-integer-min-0-max-600 (input "filecacheDuration"))) (clojure.core/contains? input "mediaStoreStorageClass") (clojure.core/assoc :media-store-storage-class (deser-hls-media-store-storage-class (input "mediaStoreStorageClass"))) (clojure.core/contains? input "numRetries") (clojure.core/assoc :num-retries (deser-integer-min-0 (input "numRetries"))) (clojure.core/contains? input "restartDelay") (clojure.core/assoc :restart-delay (deser-integer-min-0-max-15 (input "restartDelay")))))
+
+(clojure.core/defn- deser-smooth-group-stream-manifest-behavior [input] (clojure.core/get {"DO_NOT_SEND" :do-not-send, "SEND" :send} input))
+
+(clojure.core/defn- deser-timecode-config-source [input] (clojure.core/get {"EMBEDDED" :embedded, "SYSTEMCLOCK" :systemclock, "ZEROBASED" :zerobased} input))
+
+(clojure.core/defn- deser-m-2ts-audio-interval [input] (clojure.core/get {"VIDEO_AND_FIXED_INTERVALS" :video-and-fixed-intervals, "VIDEO_INTERVAL" :video-interval} input))
+
+(clojure.core/defn- deser-schedule-action-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "hlsTimedMetadataSettings") (clojure.core/assoc :hls-timed-metadata-settings (deser-hls-timed-metadata-schedule-action-settings (input "hlsTimedMetadataSettings"))) (clojure.core/contains? input "inputSwitchSettings") (clojure.core/assoc :input-switch-settings (deser-input-switch-schedule-action-settings (input "inputSwitchSettings"))) (clojure.core/contains? input "pauseStateSettings") (clojure.core/assoc :pause-state-settings (deser-pause-state-schedule-action-settings (input "pauseStateSettings"))) (clojure.core/contains? input "scte35ReturnToNetworkSettings") (clojure.core/assoc :scte-35-return-to-network-settings (deser-scte-35-return-to-network-schedule-action-settings (input "scte35ReturnToNetworkSettings"))) (clojure.core/contains? input "scte35SpliceInsertSettings") (clojure.core/assoc :scte-35-splice-insert-settings (deser-scte-35-splice-insert-schedule-action-settings (input "scte35SpliceInsertSettings"))) (clojure.core/contains? input "scte35TimeSignalSettings") (clojure.core/assoc :scte-35-time-signal-settings (deser-scte-35-time-signal-schedule-action-settings (input "scte35TimeSignalSettings"))) (clojure.core/contains? input "staticImageActivateSettings") (clojure.core/assoc :static-image-activate-settings (deser-static-image-activate-schedule-action-settings (input "staticImageActivateSettings"))) (clojure.core/contains? input "staticImageDeactivateSettings") (clojure.core/assoc :static-image-deactivate-settings (deser-static-image-deactivate-schedule-action-settings (input "staticImageDeactivateSettings")))))
+
+(clojure.core/defn- deser-audio-pid-selection [input] (clojure.core/cond-> {:pid (deser-integer-min-0-max-8191 (input "pid"))}))
+
+(clojure.core/defn- deser-hls-output-selection [input] (clojure.core/get {"MANIFESTS_AND_SEGMENTS" :manifests-and-segments, "SEGMENTS_ONLY" :segments-only} input))
+
+(clojure.core/defn- deser-input-loss-action-for-udp-out [input] (clojure.core/get {"DROP_PROGRAM" :drop-program, "DROP_TS" :drop-ts, "EMIT_PROGRAM" :emit-program} input))
+
+(clojure.core/defn- deser-ac-3-bitstream-mode [input] (clojure.core/get {"COMMENTARY" :commentary, "COMPLETE_MAIN" :complete-main, "DIALOGUE" :dialogue, "EMERGENCY" :emergency, "HEARING_IMPAIRED" :hearing-impaired, "MUSIC_AND_EFFECTS" :music-and-effects, "VISUALLY_IMPAIRED" :visually-impaired, "VOICE_OVER" :voice-over} input))
+
+(clojure.core/defn- deser-scte-35-time-signal-apos [input] (clojure.core/cond-> {} (clojure.core/contains? input "adAvailOffset") (clojure.core/assoc :ad-avail-offset (deser-integer-min-negative-1000-max-1000 (input "adAvailOffset"))) (clojure.core/contains? input "noRegionalBlackoutFlag") (clojure.core/assoc :no-regional-blackout-flag (deser-scte-35-apos-no-regional-blackout-behavior (input "noRegionalBlackoutFlag"))) (clojure.core/contains? input "webDeliveryAllowedFlag") (clojure.core/assoc :web-delivery-allowed-flag (deser-scte-35-apos-web-delivery-allowed-behavior (input "webDeliveryAllowedFlag")))))
+
+(clojure.core/defn- deser-h-264-spatial-aq [input] (clojure.core/get {"DISABLED" :disabled, "ENABLED" :enabled} input))
+
+(clojure.core/defn- deser-aac-raw-format [input] (clojure.core/get {"LATM_LOAS" :latm-loas, "NONE" :none} input))
+
+(clojure.core/defn- deser-static-image-activate-schedule-action-settings [input] (clojure.core/cond-> {:image (deser-input-location (input "image"))} (clojure.core/contains? input "opacity") (clojure.core/assoc :opacity (deser-integer-min-0-max-100 (input "opacity"))) (clojure.core/contains? input "imageX") (clojure.core/assoc :image-x (deser-integer-min-0 (input "imageX"))) (clojure.core/contains? input "width") (clojure.core/assoc :width (deser-integer-min-1 (input "width"))) (clojure.core/contains? input "layer") (clojure.core/assoc :layer (deser-integer-min-0-max-7 (input "layer"))) (clojure.core/contains? input "duration") (clojure.core/assoc :duration (deser-integer-min-0 (input "duration"))) (clojure.core/contains? input "fadeIn") (clojure.core/assoc :fade-in (deser-integer-min-0 (input "fadeIn"))) (clojure.core/contains? input "height") (clojure.core/assoc :height (deser-integer-min-1 (input "height"))) (clojure.core/contains? input "imageY") (clojure.core/assoc :image-y (deser-integer-min-0 (input "imageY"))) (clojure.core/contains? input "fadeOut") (clojure.core/assoc :fade-out (deser-integer-min-0 (input "fadeOut")))))
+
+(clojure.core/defn- deser-list-of-input-security-group [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-input-security-group coll))) input))
+
+(clojure.core/defn- deser-output-destination [input] (clojure.core/cond-> {} (clojure.core/contains? input "id") (clojure.core/assoc :id (deser-string (input "id"))) (clojure.core/contains? input "settings") (clojure.core/assoc :settings (deser-list-of-output-destination-settings (input "settings")))))
+
+(clojure.core/defn- deser-integer-min-30 [input] input)
+
+(clojure.core/defn- deser-reservation-special-feature [input] (clojure.core/get {"ADVANCED_AUDIO" :advanced-audio, "AUDIO_NORMALIZATION" :audio-normalization} input))
+
+(clojure.core/defn- deser-input-maximum-bitrate [input] (clojure.core/get {"MAX_10_MBPS" :max-10-mbps, "MAX_20_MBPS" :max-20-mbps, "MAX_50_MBPS" :max-50-mbps} input))
+
+(clojure.core/defn- deser-reservation-video-quality [input] (clojure.core/get {"STANDARD" :standard, "ENHANCED" :enhanced, "PREMIUM" :premium} input))
+
+(clojure.core/defn- deser-integer-min-0-max-3600 [input] input)
+
+(clojure.core/defn- deser-video-selector-color-space [input] (clojure.core/get {"FOLLOW" :follow, "REC_601" :rec-601, "REC_709" :rec-709} input))
+
+(clojure.core/defn- deser-audio-only-hls-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "audioGroupId") (clojure.core/assoc :audio-group-id (deser-string (input "audioGroupId"))) (clojure.core/contains? input "audioOnlyImage") (clojure.core/assoc :audio-only-image (deser-input-location (input "audioOnlyImage"))) (clojure.core/contains? input "audioTrackType") (clojure.core/assoc :audio-track-type (deser-audio-only-hls-track-type (input "audioTrackType")))))
+
+(clojure.core/defn- deser-m-2ts-segmentation-markers [input] (clojure.core/get {"EBP" :ebp, "EBP_LEGACY" :ebp-legacy, "NONE" :none, "PSI_SEGSTART" :psi-segstart, "RAI_ADAPT" :rai-adapt, "RAI_SEGSTART" :rai-segstart} input))
+
+(clojure.core/defn- deser-eac-3-drc-line [input] (clojure.core/get {"FILM_LIGHT" :film-light, "FILM_STANDARD" :film-standard, "MUSIC_LIGHT" :music-light, "MUSIC_STANDARD" :music-standard, "NONE" :none, "SPEECH" :speech} input))
+
+(clojure.core/defn- deser-dvb-sub-destination-alignment [input] (clojure.core/get {"CENTERED" :centered, "LEFT" :left, "SMART" :smart} input))
+
+(clojure.core/defn- deser-m-2ts-scte-35-control [input] (clojure.core/get {"NONE" :none, "PASSTHROUGH" :passthrough} input))
+
+(clojure.core/defn- deser-input-location [input] (clojure.core/cond-> {:uri (deser-string (input "uri"))} (clojure.core/contains? input "passwordParam") (clojure.core/assoc :password-param (deser-string (input "passwordParam"))) (clojure.core/contains? input "username") (clojure.core/assoc :username (deser-string (input "username")))))
+
+(clojure.core/defn- deser-m-2ts-absent-input-audio-behavior [input] (clojure.core/get {"DROP" :drop, "ENCODE_SILENCE" :encode-silence} input))
+
+(clojure.core/defn- deser-integer-min-3 [input] input)
+
+(clojure.core/defn- deser-h-264-level [input] (clojure.core/get {"H264_LEVEL_4_2" :h-264-level-4-2, "H264_LEVEL_2_2" :h-264-level-2-2, "H264_LEVEL_2" :h-264-level-2, "H264_LEVEL_1_1" :h-264-level-1-1, "H264_LEVEL_5" :h-264-level-5, "H264_LEVEL_1_3" :h-264-level-1-3, "H264_LEVEL_3" :h-264-level-3, "H264_LEVEL_2_1" :h-264-level-2-1, "H264_LEVEL_1_2" :h-264-level-1-2, "H264_LEVEL_1" :h-264-level-1, "H264_LEVEL_3_2" :h-264-level-3-2, "H264_LEVEL_4" :h-264-level-4, "H264_LEVEL_5_1" :h-264-level-5-1, "H264_LEVEL_3_1" :h-264-level-3-1, "H264_LEVEL_AUTO" :h-264-level-auto, "H264_LEVEL_5_2" :h-264-level-5-2, "H264_LEVEL_4_1" :h-264-level-4-1} input))
+
+(clojure.core/defn- deser-avail-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "scte35SpliceInsert") (clojure.core/assoc :scte-35-splice-insert (deser-scte-35-splice-insert (input "scte35SpliceInsert"))) (clojure.core/contains? input "scte35TimeSignalApos") (clojure.core/assoc :scte-35-time-signal-apos (deser-scte-35-time-signal-apos (input "scte35TimeSignalApos")))))
+
+(clojure.core/defn- deser-h-264-par-control [input] (clojure.core/get {"INITIALIZE_FROM_SOURCE" :initialize-from-source, "SPECIFIED" :specified} input))
+
+(clojure.core/defn- deser-input-security-group [input] (clojure.core/cond-> {} (clojure.core/contains? input "arn") (clojure.core/assoc :arn (deser-string (input "arn"))) (clojure.core/contains? input "id") (clojure.core/assoc :id (deser-string (input "id"))) (clojure.core/contains? input "inputs") (clojure.core/assoc :inputs (deser-list-of-string (input "inputs"))) (clojure.core/contains? input "state") (clojure.core/assoc :state (deser-input-security-group-state (input "state"))) (clojure.core/contains? input "tags") (clojure.core/assoc :tags (deser-tags (input "tags"))) (clojure.core/contains? input "whitelistRules") (clojure.core/assoc :whitelist-rules (deser-list-of-input-whitelist-rule (input "whitelistRules")))))
+
+(clojure.core/defn- deser-smooth-group-audio-only-timecode-control [input] (clojure.core/get {"PASSTHROUGH" :passthrough, "USE_CONFIGURED_CLOCK" :use-configured-clock} input))
+
+(clojure.core/defn- deser-pipeline-id [input] (clojure.core/get {"PIPELINE_0" :pipeline-0, "PIPELINE_1" :pipeline-1} input))
+
+(clojure.core/defn- deser-video-description [input] (clojure.core/cond-> {:name (deser-string (input "name"))} (clojure.core/contains? input "codecSettings") (clojure.core/assoc :codec-settings (deser-video-codec-settings (input "codecSettings"))) (clojure.core/contains? input "height") (clojure.core/assoc :height (deser-integer (input "height"))) (clojure.core/contains? input "respondToAfd") (clojure.core/assoc :respond-to-afd (deser-video-description-respond-to-afd (input "respondToAfd"))) (clojure.core/contains? input "scalingBehavior") (clojure.core/assoc :scaling-behavior (deser-video-description-scaling-behavior (input "scalingBehavior"))) (clojure.core/contains? input "sharpness") (clojure.core/assoc :sharpness (deser-integer-min-0-max-100 (input "sharpness"))) (clojure.core/contains? input "width") (clojure.core/assoc :width (deser-integer (input "width")))))
+
+(clojure.core/defn- deser-integer-min-0-max-15 [input] input)
+
+(clojure.core/defn- deser-global-configuration-output-timing-source [input] (clojure.core/get {"INPUT_CLOCK" :input-clock, "SYSTEM_CLOCK" :system-clock} input))
+
+(clojure.core/defn- deser-scte-35-no-regional-blackout-flag [input] (clojure.core/get {"REGIONAL_BLACKOUT" :regional-blackout, "NO_REGIONAL_BLACKOUT" :no-regional-blackout} input))
+
+(clojure.core/defn- deser-integer-min-1-max-10 [input] input)
+
+(clojure.core/defn- deser-audio-language-selection [input] (clojure.core/cond-> {:language-code (deser-string (input "languageCode"))} (clojure.core/contains? input "languageSelectionPolicy") (clojure.core/assoc :language-selection-policy (deser-audio-language-selection-policy (input "languageSelectionPolicy")))))
+
+(clojure.core/defn- deser-reservation-codec [input] (clojure.core/get {"MPEG2" :mpeg-2, "AVC" :avc, "HEVC" :hevc, "AUDIO" :audio} input))
+
+(clojure.core/defn- deser-output-group-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "archiveGroupSettings") (clojure.core/assoc :archive-group-settings (deser-archive-group-settings (input "archiveGroupSettings"))) (clojure.core/contains? input "frameCaptureGroupSettings") (clojure.core/assoc :frame-capture-group-settings (deser-frame-capture-group-settings (input "frameCaptureGroupSettings"))) (clojure.core/contains? input "hlsGroupSettings") (clojure.core/assoc :hls-group-settings (deser-hls-group-settings (input "hlsGroupSettings"))) (clojure.core/contains? input "msSmoothGroupSettings") (clojure.core/assoc :ms-smooth-group-settings (deser-ms-smooth-group-settings (input "msSmoothGroupSettings"))) (clojure.core/contains? input "rtmpGroupSettings") (clojure.core/assoc :rtmp-group-settings (deser-rtmp-group-settings (input "rtmpGroupSettings"))) (clojure.core/contains? input "udpGroupSettings") (clojure.core/assoc :udp-group-settings (deser-udp-group-settings (input "udpGroupSettings")))))
+
+(clojure.core/defn- deser-integer-min-96-max-600 [input] input)
+
+(clojure.core/defn- deser-rtmp-cache-full-behavior [input] (clojure.core/get {"DISCONNECT_IMMEDIATELY" :disconnect-immediately, "WAIT_FOR_SERVER" :wait-for-server} input))
+
+(clojure.core/defn- deser-input-destination-vpc [input] (clojure.core/cond-> {} (clojure.core/contains? input "availabilityZone") (clojure.core/assoc :availability-zone (deser-string (input "availabilityZone"))) (clojure.core/contains? input "networkInterfaceId") (clojure.core/assoc :network-interface-id (deser-string (input "networkInterfaceId")))))
+
+(clojure.core/defn- deser-avail-configuration [input] (clojure.core/cond-> {} (clojure.core/contains? input "availSettings") (clojure.core/assoc :avail-settings (deser-avail-settings (input "availSettings")))))
+
+(clojure.core/defn- deser-archive-container-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "m2tsSettings") (clojure.core/assoc :m-2ts-settings (deser-m-2ts-settings (input "m2tsSettings")))))
+
+(clojure.core/defn- deser-list-of-hls-ad-markers [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-hls-ad-markers coll))) input))
+
+(clojure.core/defn- deser-blackout-slate-state [input] (clojure.core/get {"DISABLED" :disabled, "ENABLED" :enabled} input))
+
+(clojure.core/defn- deser-mp-2-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "bitrate") (clojure.core/assoc :bitrate (deser-double (input "bitrate"))) (clojure.core/contains? input "codingMode") (clojure.core/assoc :coding-mode (deser-mp-2-coding-mode (input "codingMode"))) (clojure.core/contains? input "sampleRate") (clojure.core/assoc :sample-rate (deser-double (input "sampleRate")))))
+
+(clojure.core/defn- deser-arib-destination-settings [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-reservation-maximum-framerate [input] (clojure.core/get {"MAX_30_FPS" :max-30-fps, "MAX_60_FPS" :max-60-fps} input))
+
+(clojure.core/defn- deser-smooth-group-sparse-track-type [input] (clojure.core/get {"NONE" :none, "SCTE_35" :scte-35} input))
+
+(clojure.core/defn- deser-m-2ts-es-rate-in-pes [input] (clojure.core/get {"EXCLUDE" :exclude, "INCLUDE" :include} input))
+
+(clojure.core/defn- deser-caption-destination-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "ttmlDestinationSettings") (clojure.core/assoc :ttml-destination-settings (deser-ttml-destination-settings (input "ttmlDestinationSettings"))) (clojure.core/contains? input "burnInDestinationSettings") (clojure.core/assoc :burn-in-destination-settings (deser-burn-in-destination-settings (input "burnInDestinationSettings"))) (clojure.core/contains? input "scte27DestinationSettings") (clojure.core/assoc :scte-27-destination-settings (deser-scte-27-destination-settings (input "scte27DestinationSettings"))) (clojure.core/contains? input "aribDestinationSettings") (clojure.core/assoc :arib-destination-settings (deser-arib-destination-settings (input "aribDestinationSettings"))) (clojure.core/contains? input "rtmpCaptionInfoDestinationSettings") (clojure.core/assoc :rtmp-caption-info-destination-settings (deser-rtmp-caption-info-destination-settings (input "rtmpCaptionInfoDestinationSettings"))) (clojure.core/contains? input "webvttDestinationSettings") (clojure.core/assoc :webvtt-destination-settings (deser-webvtt-destination-settings (input "webvttDestinationSettings"))) (clojure.core/contains? input "teletextDestinationSettings") (clojure.core/assoc :teletext-destination-settings (deser-teletext-destination-settings (input "teletextDestinationSettings"))) (clojure.core/contains? input "smpteTtDestinationSettings") (clojure.core/assoc :smpte-tt-destination-settings (deser-smpte-tt-destination-settings (input "smpteTtDestinationSettings"))) (clojure.core/contains? input "dvbSubDestinationSettings") (clojure.core/assoc :dvb-sub-destination-settings (deser-dvb-sub-destination-settings (input "dvbSubDestinationSettings"))) (clojure.core/contains? input "embeddedDestinationSettings") (clojure.core/assoc :embedded-destination-settings (deser-embedded-destination-settings (input "embeddedDestinationSettings"))) (clojure.core/contains? input "embeddedPlusScte20DestinationSettings") (clojure.core/assoc :embedded-plus-scte-20-destination-settings (deser-embedded-plus-scte-20-destination-settings (input "embeddedPlusScte20DestinationSettings"))) (clojure.core/contains? input "scte20PlusEmbeddedDestinationSettings") (clojure.core/assoc :scte-20-plus-embedded-destination-settings (deser-scte-20-plus-embedded-destination-settings (input "scte20PlusEmbeddedDestinationSettings")))))
+
+(clojure.core/defn- deser-integer-min-1000-max-30000 [input] input)
+
+(clojure.core/defn- deser-hls-input-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "bandwidth") (clojure.core/assoc :bandwidth (deser-integer-min-0 (input "bandwidth"))) (clojure.core/contains? input "bufferSegments") (clojure.core/assoc :buffer-segments (deser-integer-min-0 (input "bufferSegments"))) (clojure.core/contains? input "retries") (clojure.core/assoc :retries (deser-integer-min-0 (input "retries"))) (clojure.core/contains? input "retryInterval") (clojure.core/assoc :retry-interval (deser-integer-min-0 (input "retryInterval")))))
+
+(clojure.core/defn- deser-hls-ad-markers [input] (clojure.core/get {"ADOBE" :adobe, "ELEMENTAL" :elemental, "ELEMENTAL_SCTE35" :elemental-scte-35} input))
+
+(clojure.core/defn- deser-list-of-input-whitelist-rule [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-input-whitelist-rule coll))) input))
+
+(clojure.core/defn- deser-list-of-string [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-string coll))) input))
+
+(clojure.core/defn- deser-channel-state [input] (clojure.core/get {"IDLE" :idle, "CREATE_FAILED" :create-failed, "STARTING" :starting, "DELETING" :deleting, "CREATING" :creating, "DELETED" :deleted, "RECOVERING" :recovering, "STOPPING" :stopping, "RUNNING" :running} input))
+
+(clojure.core/defn- deser-m-2ts-segmentation-style [input] (clojure.core/get {"MAINTAIN_CADENCE" :maintain-cadence, "RESET_CADENCE" :reset-cadence} input))
+
+(clojure.core/defn- deser-integer-min-0-max-30 [input] input)
+
+(clojure.core/defn- deser-hls-iv-source [input] (clojure.core/get {"EXPLICIT" :explicit, "FOLLOWS_SEGMENT_NUMBER" :follows-segment-number} input))
+
+(clojure.core/defn- deser-authentication-scheme [input] (clojure.core/get {"AKAMAI" :akamai, "COMMON" :common} input))
+
+(clojure.core/defn- deser-standard-hls-settings [input] (clojure.core/cond-> {:m-3u-8-settings (deser-m-3u-8-settings (input "m3u8Settings"))} (clojure.core/contains? input "audioRenditionSets") (clojure.core/assoc :audio-rendition-sets (deser-string (input "audioRenditionSets")))))
+
+(clojure.core/defn- deser-list-of-input-attachment [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-input-attachment coll))) input))
+
+(clojure.core/defn- deser-hls-cdn-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "hlsAkamaiSettings") (clojure.core/assoc :hls-akamai-settings (deser-hls-akamai-settings (input "hlsAkamaiSettings"))) (clojure.core/contains? input "hlsBasicPutSettings") (clojure.core/assoc :hls-basic-put-settings (deser-hls-basic-put-settings (input "hlsBasicPutSettings"))) (clojure.core/contains? input "hlsMediaStoreSettings") (clojure.core/assoc :hls-media-store-settings (deser-hls-media-store-settings (input "hlsMediaStoreSettings"))) (clojure.core/contains? input "hlsWebdavSettings") (clojure.core/assoc :hls-webdav-settings (deser-hls-webdav-settings (input "hlsWebdavSettings")))))
+
+(clojure.core/defn- deser-scte-35-descriptor [input] (clojure.core/cond-> {:scte-35-descriptor-settings (deser-scte-35-descriptor-settings (input "scte35DescriptorSettings"))}))
+
+(clojure.core/defn- deser-smooth-group-event-stop-behavior [input] (clojure.core/get {"NONE" :none, "SEND_EOS" :send-eos} input))
+
+(clojure.core/defn- deser-list-of-input-destination [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-input-destination coll))) input))
+
+(clojure.core/defn- deser-scte-35-splice-insert [input] (clojure.core/cond-> {} (clojure.core/contains? input "adAvailOffset") (clojure.core/assoc :ad-avail-offset (deser-integer-min-negative-1000-max-1000 (input "adAvailOffset"))) (clojure.core/contains? input "noRegionalBlackoutFlag") (clojure.core/assoc :no-regional-blackout-flag (deser-scte-35-splice-insert-no-regional-blackout-behavior (input "noRegionalBlackoutFlag"))) (clojure.core/contains? input "webDeliveryAllowedFlag") (clojure.core/assoc :web-delivery-allowed-flag (deser-scte-35-splice-insert-web-delivery-allowed-behavior (input "webDeliveryAllowedFlag")))))
+
+(clojure.core/defn- deser-m-2ts-rate-mode [input] (clojure.core/get {"CBR" :cbr, "VBR" :vbr} input))
+
+(clojure.core/defn- deser-eac-3-bitstream-mode [input] (clojure.core/get {"COMMENTARY" :commentary, "COMPLETE_MAIN" :complete-main, "EMERGENCY" :emergency, "HEARING_IMPAIRED" :hearing-impaired, "VISUALLY_IMPAIRED" :visually-impaired} input))
+
+(clojure.core/defn- deser-input-channel-level [input] (clojure.core/cond-> {:input-channel (deser-integer-min-0-max-15 (input "inputChannel")), :gain (deser-integer-min-negative-60-max-6 (input "gain"))}))
+
+(clojure.core/defn- deser-h-264-profile [input] (clojure.core/get {"BASELINE" :baseline, "HIGH" :high, "HIGH_10BIT" :high-10-bit, "HIGH_422" :high-422, "HIGH_422_10BIT" :high-422-10-bit, "MAIN" :main} input))
+
+(clojure.core/defn- deser-batch-schedule-action-delete-result [input] (clojure.core/cond-> {:schedule-actions (deser-list-of-schedule-action (input "scheduleActions"))}))
+
+(clojure.core/defn- deser-m-2ts-arib-captions-pid-control [input] (clojure.core/get {"AUTO" :auto, "USE_CONFIGURED" :use-configured} input))
+
+(clojure.core/defn- deser-integer-min-0-max-100 [input] input)
+
+(clojure.core/defn- deser-integer-min-1-max-6 [input] input)
+
+(clojure.core/defn- deser-input [input] (clojure.core/cond-> {} (clojure.core/contains? input "mediaConnectFlows") (clojure.core/assoc :media-connect-flows (deser-list-of-media-connect-flow (input "mediaConnectFlows"))) (clojure.core/contains? input "type") (clojure.core/assoc :type (deser-input-type (input "type"))) (clojure.core/contains? input "securityGroups") (clojure.core/assoc :security-groups (deser-list-of-string (input "securityGroups"))) (clojure.core/contains? input "roleArn") (clojure.core/assoc :role-arn (deser-string (input "roleArn"))) (clojure.core/contains? input "tags") (clojure.core/assoc :tags (deser-tags (input "tags"))) (clojure.core/contains? input "arn") (clojure.core/assoc :arn (deser-string (input "arn"))) (clojure.core/contains? input "state") (clojure.core/assoc :state (deser-input-state (input "state"))) (clojure.core/contains? input "destinations") (clojure.core/assoc :destinations (deser-list-of-input-destination (input "destinations"))) (clojure.core/contains? input "name") (clojure.core/assoc :name (deser-string (input "name"))) (clojure.core/contains? input "sources") (clojure.core/assoc :sources (deser-list-of-input-source (input "sources"))) (clojure.core/contains? input "attachedChannels") (clojure.core/assoc :attached-channels (deser-list-of-string (input "attachedChannels"))) (clojure.core/contains? input "id") (clojure.core/assoc :id (deser-string (input "id")))))
+
+(clojure.core/defn- deser-m-2ts-cc-descriptor [input] (clojure.core/get {"DISABLED" :disabled, "ENABLED" :enabled} input))
+
+(clojure.core/defn- deser-list-of-pipeline-pause-state-settings [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-pipeline-pause-state-settings coll))) input))
+
+(clojure.core/defn- deser-string-min-1-max-256 [input] input)
+
+(clojure.core/defn- deser-dvb-sub-destination-outline-color [input] (clojure.core/get {"BLACK" :black, "BLUE" :blue, "GREEN" :green, "RED" :red, "WHITE" :white, "YELLOW" :yellow} input))
+
+(clojure.core/defn- deser-double-min-negative-59-max-0 [input] input)
+
+(clojure.core/defn- deser-static-image-deactivate-schedule-action-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "fadeOut") (clojure.core/assoc :fade-out (deser-integer-min-0 (input "fadeOut"))) (clojure.core/contains? input "layer") (clojure.core/assoc :layer (deser-integer-min-0-max-7 (input "layer")))))
+
+(clojure.core/defn- deser-video-codec-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "frameCaptureSettings") (clojure.core/assoc :frame-capture-settings (deser-frame-capture-settings (input "frameCaptureSettings"))) (clojure.core/contains? input "h264Settings") (clojure.core/assoc :h-264-settings (deser-h-264-settings (input "h264Settings")))))
+
+(clojure.core/defn- deser-string-max-32 [input] input)
+
+(clojure.core/defn- deser-eac-3-dc-filter [input] (clojure.core/get {"DISABLED" :disabled, "ENABLED" :enabled} input))
+
+(clojure.core/defn- deser-m-3u-8-timed-metadata-behavior [input] (clojure.core/get {"NO_PASSTHROUGH" :no-passthrough, "PASSTHROUGH" :passthrough} input))
+
+(clojure.core/defn- deser-integer-min-1-max-5 [input] input)
+
+(clojure.core/defn- deser-h-264-scene-change-detect [input] (clojure.core/get {"DISABLED" :disabled, "ENABLED" :enabled} input))
+
+(clojure.core/defn- deser-aac-spec [input] (clojure.core/get {"MPEG2" :mpeg-2, "MPEG4" :mpeg-4} input))
+
+(clojure.core/defn- deser-scte-35-apos-web-delivery-allowed-behavior [input] (clojure.core/get {"FOLLOW" :follow, "IGNORE" :ignore} input))
+
+(clojure.core/defn- deser-blackout-slate-network-end-blackout [input] (clojure.core/get {"DISABLED" :disabled, "ENABLED" :enabled} input))
+
+(clojure.core/defn- deser-network-input-server-validation [input] (clojure.core/get {"CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME" :check-cryptography-and-validate-name, "CHECK_CRYPTOGRAPHY_ONLY" :check-cryptography-only} input))
+
+(clojure.core/defn- deser-hls-redundant-manifest [input] (clojure.core/get {"DISABLED" :disabled, "ENABLED" :enabled} input))
+
+(clojure.core/defn- deser-input-destination [input] (clojure.core/cond-> {} (clojure.core/contains? input "ip") (clojure.core/assoc :ip (deser-string (input "ip"))) (clojure.core/contains? input "port") (clojure.core/assoc :port (deser-string (input "port"))) (clojure.core/contains? input "url") (clojure.core/assoc :url (deser-string (input "url"))) (clojure.core/contains? input "vpc") (clojure.core/assoc :vpc (deser-input-destination-vpc (input "vpc")))))
+
+(clojure.core/defn- deser-rtmp-caption-info-destination-settings [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-aac-coding-mode [input] (clojure.core/get {"AD_RECEIVER_MIX" :ad-receiver-mix, "CODING_MODE_1_0" :coding-mode-1-0, "CODING_MODE_1_1" :coding-mode-1-1, "CODING_MODE_2_0" :coding-mode-2-0, "CODING_MODE_5_1" :coding-mode-5-1} input))
+
+(clojure.core/defn- deser-smooth-group-event-id-mode [input] (clojure.core/get {"NO_EVENT_ID" :no-event-id, "USE_CONFIGURED" :use-configured, "USE_TIMESTAMP" :use-timestamp} input))
+
+(clojure.core/defn- deser-scte-27-source-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "pid") (clojure.core/assoc :pid (deser-integer-min-1 (input "pid")))))
+
+(clojure.core/defn- deser-integer-min-1-max-3600 [input] input)
+
+(clojure.core/defn- deser-webvtt-destination-settings [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-output-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "archiveOutputSettings") (clojure.core/assoc :archive-output-settings (deser-archive-output-settings (input "archiveOutputSettings"))) (clojure.core/contains? input "frameCaptureOutputSettings") (clojure.core/assoc :frame-capture-output-settings (deser-frame-capture-output-settings (input "frameCaptureOutputSettings"))) (clojure.core/contains? input "hlsOutputSettings") (clojure.core/assoc :hls-output-settings (deser-hls-output-settings (input "hlsOutputSettings"))) (clojure.core/contains? input "msSmoothOutputSettings") (clojure.core/assoc :ms-smooth-output-settings (deser-ms-smooth-output-settings (input "msSmoothOutputSettings"))) (clojure.core/contains? input "rtmpOutputSettings") (clojure.core/assoc :rtmp-output-settings (deser-rtmp-output-settings (input "rtmpOutputSettings"))) (clojure.core/contains? input "udpOutputSettings") (clojure.core/assoc :udp-output-settings (deser-udp-output-settings (input "udpOutputSettings")))))
+
+(clojure.core/defn- deser-caption-language-mapping [input] (clojure.core/cond-> {:language-code (deser-string-min-3-max-3 (input "languageCode")), :language-description (deser-string-min-1 (input "languageDescription")), :caption-channel (deser-integer-min-1-max-4 (input "captionChannel"))}))
+
+(clojure.core/defn- deser-input-loss-action-for-rtmp-out [input] (clojure.core/get {"EMIT_OUTPUT" :emit-output, "PAUSE_OUTPUT" :pause-output} input))
+
+(clojure.core/defn- deser-schedule-action-start-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "fixedModeScheduleActionStartSettings") (clojure.core/assoc :fixed-mode-schedule-action-start-settings (deser-fixed-mode-schedule-action-start-settings (input "fixedModeScheduleActionStartSettings"))) (clojure.core/contains? input "followModeScheduleActionStartSettings") (clojure.core/assoc :follow-mode-schedule-action-start-settings (deser-follow-mode-schedule-action-start-settings (input "followModeScheduleActionStartSettings")))))
+
+(clojure.core/defn- deser-list-of-output [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-output coll))) input))
+
+(clojure.core/defn- deser-encoder-settings [input] (clojure.core/cond-> {:video-descriptions (deser-list-of-video-description (input "videoDescriptions")), :audio-descriptions (deser-list-of-audio-description (input "audioDescriptions")), :output-groups (deser-list-of-output-group (input "outputGroups")), :timecode-config (deser-timecode-config (input "timecodeConfig"))} (clojure.core/contains? input "globalConfiguration") (clojure.core/assoc :global-configuration (deser-global-configuration (input "globalConfiguration"))) (clojure.core/contains? input "captionDescriptions") (clojure.core/assoc :caption-descriptions (deser-list-of-caption-description (input "captionDescriptions"))) (clojure.core/contains? input "availConfiguration") (clojure.core/assoc :avail-configuration (deser-avail-configuration (input "availConfiguration"))) (clojure.core/contains? input "blackoutSlate") (clojure.core/assoc :blackout-slate (deser-blackout-slate (input "blackoutSlate"))) (clojure.core/contains? input "availBlanking") (clojure.core/assoc :avail-blanking (deser-avail-blanking (input "availBlanking")))))
+
+(clojure.core/defn- deser-static-key-settings [input] (clojure.core/cond-> {:static-key-value (deser-string-min-32-max-32 (input "staticKeyValue"))} (clojure.core/contains? input "keyProviderServer") (clojure.core/assoc :key-provider-server (deser-input-location (input "keyProviderServer")))))
+
+(clojure.core/defn- deser-frame-capture-group-settings [input] (clojure.core/cond-> {:destination (deser-output-location-ref (input "destination"))}))
+
+(clojure.core/defn- deser-video-description-respond-to-afd [input] (clojure.core/get {"NONE" :none, "PASSTHROUGH" :passthrough, "RESPOND" :respond} input))
+
+(clojure.core/defn- deser-teletext-destination-settings [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-output-group [input] (clojure.core/cond-> {:outputs (deser-list-of-output (input "outputs")), :output-group-settings (deser-output-group-settings (input "outputGroupSettings"))} (clojure.core/contains? input "name") (clojure.core/assoc :name (deser-string-max-32 (input "name")))))
+
+(clojure.core/defn- deser-list-of-channel-summary [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-channel-summary coll))) input))
+
+(clojure.core/defn- deser-input-attachment [input] (clojure.core/cond-> {} (clojure.core/contains? input "inputAttachmentName") (clojure.core/assoc :input-attachment-name (deser-string (input "inputAttachmentName"))) (clojure.core/contains? input "inputId") (clojure.core/assoc :input-id (deser-string (input "inputId"))) (clojure.core/contains? input "inputSettings") (clojure.core/assoc :input-settings (deser-input-settings (input "inputSettings")))))
+
+(clojure.core/defn- deser-hls-client-cache [input] (clojure.core/get {"DISABLED" :disabled, "ENABLED" :enabled} input))
+
+(clojure.core/defn- deser-integer-min-0-max-10000 [input] input)
+
+(clojure.core/defn- deser-h-264-temporal-aq [input] (clojure.core/get {"DISABLED" :disabled, "ENABLED" :enabled} input))
+
+(clojure.core/defn- deser-smpte-tt-destination-settings [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-embedded-source-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "convert608To708") (clojure.core/assoc :convert-608-to-708 (deser-embedded-convert-608-to-708 (input "convert608To708"))) (clojure.core/contains? input "scte20Detection") (clojure.core/assoc :scte-20-detection (deser-embedded-scte-20-detection (input "scte20Detection"))) (clojure.core/contains? input "source608ChannelNumber") (clojure.core/assoc :source-608-channel-number (deser-integer-min-1-max-4 (input "source608ChannelNumber"))) (clojure.core/contains? input "source608TrackNumber") (clojure.core/assoc :source-608-track-number (deser-integer-min-1-max-5 (input "source608TrackNumber")))))
+
+(clojure.core/defn- deser-h-264-gop-b-reference [input] (clojure.core/get {"DISABLED" :disabled, "ENABLED" :enabled} input))
+
+(clojure.core/defn- deser-list-of-input [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-input coll))) input))
+
+(clojure.core/defn- deser-network-input-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "hlsInputSettings") (clojure.core/assoc :hls-input-settings (deser-hls-input-settings (input "hlsInputSettings"))) (clojure.core/contains? input "serverValidation") (clojure.core/assoc :server-validation (deser-network-input-server-validation (input "serverValidation")))))
+
+(clojure.core/defn- deser-input-whitelist-rule [input] (clojure.core/cond-> {} (clojure.core/contains? input "cidr") (clojure.core/assoc :cidr (deser-string (input "cidr")))))
+
+(clojure.core/defn- deser-string-min-3-max-3 [input] input)
+
+(clojure.core/defn- deser-smooth-group-certificate-mode [input] (clojure.core/get {"SELF_SIGNED" :self-signed, "VERIFY_AUTHENTICITY" :verify-authenticity} input))
+
+(clojure.core/defn- deser-input-specification [input] (clojure.core/cond-> {} (clojure.core/contains? input "codec") (clojure.core/assoc :codec (deser-input-codec (input "codec"))) (clojure.core/contains? input "maximumBitrate") (clojure.core/assoc :maximum-bitrate (deser-input-maximum-bitrate (input "maximumBitrate"))) (clojure.core/contains? input "resolution") (clojure.core/assoc :resolution (deser-input-resolution (input "resolution")))))
+
+(clojure.core/defn- deser-reservation-resource-type [input] (clojure.core/get {"INPUT" :input, "OUTPUT" :output, "CHANNEL" :channel} input))
+
+(clojure.core/defn- deser-input-deblock-filter [input] (clojure.core/get {"DISABLED" :disabled, "ENABLED" :enabled} input))
+
+(clojure.core/defn- deser-embedded-scte-20-detection [input] (clojure.core/get {"AUTO" :auto, "OFF" :off} input))
+
+(clojure.core/defn- deser-input-codec [input] (clojure.core/get {"MPEG2" :mpeg-2, "AVC" :avc, "HEVC" :hevc} input))
+
+(clojure.core/defn- deser-integer-min-4-max-20 [input] input)
+
+(clojure.core/defn- deser-arib-source-settings [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-audio-description-language-code-control [input] (clojure.core/get {"FOLLOW_INPUT" :follow-input, "USE_CONFIGURED" :use-configured} input))
+
+(clojure.core/defn- deser-double [input] input)
+
+(clojure.core/defn- deser-ac-3-coding-mode [input] (clojure.core/get {"CODING_MODE_1_0" :coding-mode-1-0, "CODING_MODE_1_1" :coding-mode-1-1, "CODING_MODE_2_0" :coding-mode-2-0, "CODING_MODE_3_2_LFE" :coding-mode-3-2-lfe} input))
+
+(clojure.core/defn- deser-input-switch-schedule-action-settings [input] (clojure.core/cond-> {:input-attachment-name-reference (deser-string (input "inputAttachmentNameReference"))}))
+
+(clojure.core/defn- deser-integer-min-0-max-10 [input] input)
+
+(clojure.core/defn- deser-aac-rate-control-mode [input] (clojure.core/get {"CBR" :cbr, "VBR" :vbr} input))
+
+(clojure.core/defn- deser-integer-min-negative-1000-max-1000 [input] input)
+
+(clojure.core/defn- deser-hls-segmentation-mode [input] (clojure.core/get {"USE_INPUT_SEGMENTATION" :use-input-segmentation, "USE_SEGMENT_DURATION" :use-segment-duration} input))
+
+(clojure.core/defn- deser-dvb-sub-destination-shadow-color [input] (clojure.core/get {"BLACK" :black, "NONE" :none, "WHITE" :white} input))
+
+(clojure.core/defn- deser-list-of-reservation [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-reservation coll))) input))
+
+(clojure.core/defn- deser-pass-through-settings [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-media-connect-flow [input] (clojure.core/cond-> {} (clojure.core/contains? input "flowArn") (clojure.core/assoc :flow-arn (deser-string (input "flowArn")))))
+
+(clojure.core/defn- deser-video-description-scaling-behavior [input] (clojure.core/get {"DEFAULT" :default, "STRETCH_TO_OUTPUT" :stretch-to-output} input))
+
+(clojure.core/defn- deser-scte-35-archive-allowed-flag [input] (clojure.core/get {"ARCHIVE_NOT_ALLOWED" :archive-not-allowed, "ARCHIVE_ALLOWED" :archive-allowed} input))
+
+(clojure.core/defn- deser-eac-3-attenuation-control [input] (clojure.core/get {"ATTENUATE_3_DB" :attenuate-3-db, "NONE" :none} input))
+
+(clojure.core/defn- deser-h-264-framerate-control [input] (clojure.core/get {"INITIALIZE_FROM_SOURCE" :initialize-from-source, "SPECIFIED" :specified} input))
+
+(clojure.core/defn- deser-aac-input-type [input] (clojure.core/get {"BROADCASTER_MIXED_AD" :broadcaster-mixed-ad, "NORMAL" :normal} input))
+
+(clojure.core/defn- deser-channel [input] (clojure.core/cond-> {} (clojure.core/contains? input "inputAttachments") (clojure.core/assoc :input-attachments (deser-list-of-input-attachment (input "inputAttachments"))) (clojure.core/contains? input "pipelinesRunningCount") (clojure.core/assoc :pipelines-running-count (deser-integer (input "pipelinesRunningCount"))) (clojure.core/contains? input "logLevel") (clojure.core/assoc :log-level (deser-log-level (input "logLevel"))) (clojure.core/contains? input "roleArn") (clojure.core/assoc :role-arn (deser-string (input "roleArn"))) (clojure.core/contains? input "tags") (clojure.core/assoc :tags (deser-tags (input "tags"))) (clojure.core/contains? input "egressEndpoints") (clojure.core/assoc :egress-endpoints (deser-list-of-channel-egress-endpoint (input "egressEndpoints"))) (clojure.core/contains? input "encoderSettings") (clojure.core/assoc :encoder-settings (deser-encoder-settings (input "encoderSettings"))) (clojure.core/contains? input "arn") (clojure.core/assoc :arn (deser-string (input "arn"))) (clojure.core/contains? input "inputSpecification") (clojure.core/assoc :input-specification (deser-input-specification (input "inputSpecification"))) (clojure.core/contains? input "state") (clojure.core/assoc :state (deser-channel-state (input "state"))) (clojure.core/contains? input "destinations") (clojure.core/assoc :destinations (deser-list-of-output-destination (input "destinations"))) (clojure.core/contains? input "name") (clojure.core/assoc :name (deser-string (input "name"))) (clojure.core/contains? input "id") (clojure.core/assoc :id (deser-string (input "id")))))
+
+(clojure.core/defn- deser-timecode-config [input] (clojure.core/cond-> {:source (deser-timecode-config-source (input "source"))} (clojure.core/contains? input "syncThreshold") (clojure.core/assoc :sync-threshold (deser-integer-min-1-max-1000000 (input "syncThreshold")))))
+
+(clojure.core/defn- deser-dvb-sub-destination-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "outlineColor") (clojure.core/assoc :outline-color (deser-dvb-sub-destination-outline-color (input "outlineColor"))) (clojure.core/contains? input "outlineSize") (clojure.core/assoc :outline-size (deser-integer-min-0-max-10 (input "outlineSize"))) (clojure.core/contains? input "shadowColor") (clojure.core/assoc :shadow-color (deser-dvb-sub-destination-shadow-color (input "shadowColor"))) (clojure.core/contains? input "shadowOpacity") (clojure.core/assoc :shadow-opacity (deser-integer-min-0-max-255 (input "shadowOpacity"))) (clojure.core/contains? input "shadowYOffset") (clojure.core/assoc :shadow-y-offset (deser-integer (input "shadowYOffset"))) (clojure.core/contains? input "backgroundColor") (clojure.core/assoc :background-color (deser-dvb-sub-destination-background-color (input "backgroundColor"))) (clojure.core/contains? input "teletextGridControl") (clojure.core/assoc :teletext-grid-control (deser-dvb-sub-destination-teletext-grid-control (input "teletextGridControl"))) (clojure.core/contains? input "yPosition") (clojure.core/assoc :y-position (deser-integer-min-0 (input "yPosition"))) (clojure.core/contains? input "fontColor") (clojure.core/assoc :font-color (deser-dvb-sub-destination-font-color (input "fontColor"))) (clojure.core/contains? input "xPosition") (clojure.core/assoc :x-position (deser-integer-min-0 (input "xPosition"))) (clojure.core/contains? input "font") (clojure.core/assoc :font (deser-input-location (input "font"))) (clojure.core/contains? input "fontResolution") (clojure.core/assoc :font-resolution (deser-integer-min-96-max-600 (input "fontResolution"))) (clojure.core/contains? input "fontSize") (clojure.core/assoc :font-size (deser-string (input "fontSize"))) (clojure.core/contains? input "backgroundOpacity") (clojure.core/assoc :background-opacity (deser-integer-min-0-max-255 (input "backgroundOpacity"))) (clojure.core/contains? input "fontOpacity") (clojure.core/assoc :font-opacity (deser-integer-min-0-max-255 (input "fontOpacity"))) (clojure.core/contains? input "shadowXOffset") (clojure.core/assoc :shadow-x-offset (deser-integer (input "shadowXOffset"))) (clojure.core/contains? input "alignment") (clojure.core/assoc :alignment (deser-dvb-sub-destination-alignment (input "alignment")))))
+
+(clojure.core/defn- deser-embedded-convert-608-to-708 [input] (clojure.core/get {"DISABLED" :disabled, "UPCONVERT" :upconvert} input))
+
+(clojure.core/defn- deser-audio-only-hls-track-type [input] (clojure.core/get {"ALTERNATE_AUDIO_AUTO_SELECT" :alternate-audio-auto-select, "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT" :alternate-audio-auto-select-default, "ALTERNATE_AUDIO_NOT_AUTO_SELECT" :alternate-audio-not-auto-select, "AUDIO_ONLY_VARIANT_STREAM" :audio-only-variant-stream} input))
+
+(clojure.core/defn- deser-h-264-color-metadata [input] (clojure.core/get {"IGNORE" :ignore, "INSERT" :insert} input))
+
+(clojure.core/defn- deser-string-min-1 [input] input)
+
+(clojure.core/defn- deser-blackout-slate [input] (clojure.core/cond-> {} (clojure.core/contains? input "blackoutSlateImage") (clojure.core/assoc :blackout-slate-image (deser-input-location (input "blackoutSlateImage"))) (clojure.core/contains? input "networkEndBlackout") (clojure.core/assoc :network-end-blackout (deser-blackout-slate-network-end-blackout (input "networkEndBlackout"))) (clojure.core/contains? input "networkEndBlackoutImage") (clojure.core/assoc :network-end-blackout-image (deser-input-location (input "networkEndBlackoutImage"))) (clojure.core/contains? input "networkId") (clojure.core/assoc :network-id (deser-string-min-34-max-34 (input "networkId"))) (clojure.core/contains? input "state") (clojure.core/assoc :state (deser-blackout-slate-state (input "state")))))
+
+(clojure.core/defn- deser-ac-3-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "bitrate") (clojure.core/assoc :bitrate (deser-double (input "bitrate"))) (clojure.core/contains? input "bitstreamMode") (clojure.core/assoc :bitstream-mode (deser-ac-3-bitstream-mode (input "bitstreamMode"))) (clojure.core/contains? input "codingMode") (clojure.core/assoc :coding-mode (deser-ac-3-coding-mode (input "codingMode"))) (clojure.core/contains? input "dialnorm") (clojure.core/assoc :dialnorm (deser-integer-min-1-max-31 (input "dialnorm"))) (clojure.core/contains? input "drcProfile") (clojure.core/assoc :drc-profile (deser-ac-3-drc-profile (input "drcProfile"))) (clojure.core/contains? input "lfeFilter") (clojure.core/assoc :lfe-filter (deser-ac-3-lfe-filter (input "lfeFilter"))) (clojure.core/contains? input "metadataControl") (clojure.core/assoc :metadata-control (deser-ac-3-metadata-control (input "metadataControl")))))
+
+(clojure.core/defn- deser-ms-smooth-group-settings [input] (clojure.core/cond-> {:destination (deser-output-location-ref (input "destination"))} (clojure.core/contains? input "fragmentLength") (clojure.core/assoc :fragment-length (deser-integer-min-1 (input "fragmentLength"))) (clojure.core/contains? input "inputLossAction") (clojure.core/assoc :input-loss-action (deser-input-loss-action-for-ms-smooth-out (input "inputLossAction"))) (clojure.core/contains? input "eventStopBehavior") (clojure.core/assoc :event-stop-behavior (deser-smooth-group-event-stop-behavior (input "eventStopBehavior"))) (clojure.core/contains? input "acquisitionPointId") (clojure.core/assoc :acquisition-point-id (deser-string (input "acquisitionPointId"))) (clojure.core/contains? input "streamManifestBehavior") (clojure.core/assoc :stream-manifest-behavior (deser-smooth-group-stream-manifest-behavior (input "streamManifestBehavior"))) (clojure.core/contains? input "numRetries") (clojure.core/assoc :num-retries (deser-integer-min-0 (input "numRetries"))) (clojure.core/contains? input "filecacheDuration") (clojure.core/assoc :filecache-duration (deser-integer-min-0 (input "filecacheDuration"))) (clojure.core/contains? input "sparseTrackType") (clojure.core/assoc :sparse-track-type (deser-smooth-group-sparse-track-type (input "sparseTrackType"))) (clojure.core/contains? input "certificateMode") (clojure.core/assoc :certificate-mode (deser-smooth-group-certificate-mode (input "certificateMode"))) (clojure.core/contains? input "sendDelayMs") (clojure.core/assoc :send-delay-ms (deser-integer-min-0-max-10000 (input "sendDelayMs"))) (clojure.core/contains? input "eventIdMode") (clojure.core/assoc :event-id-mode (deser-smooth-group-event-id-mode (input "eventIdMode"))) (clojure.core/contains? input "segmentationMode") (clojure.core/assoc :segmentation-mode (deser-smooth-group-segmentation-mode (input "segmentationMode"))) (clojure.core/contains? input "audioOnlyTimecodeControl") (clojure.core/assoc :audio-only-timecode-control (deser-smooth-group-audio-only-timecode-control (input "audioOnlyTimecodeControl"))) (clojure.core/contains? input "timestampOffset") (clojure.core/assoc :timestamp-offset (deser-string (input "timestampOffset"))) (clojure.core/contains? input "eventId") (clojure.core/assoc :event-id (deser-string (input "eventId"))) (clojure.core/contains? input "connectionRetryInterval") (clojure.core/assoc :connection-retry-interval (deser-integer-min-0 (input "connectionRetryInterval"))) (clojure.core/contains? input "timestampOffsetMode") (clojure.core/assoc :timestamp-offset-mode (deser-smooth-group-timestamp-offset-mode (input "timestampOffsetMode"))) (clojure.core/contains? input "restartDelay") (clojure.core/assoc :restart-delay (deser-integer-min-0 (input "restartDelay")))))
+
+(clojure.core/defn- deser-integer-min-0-max-7 [input] input)
+
+(clojure.core/defn- deser-h-264-entropy-encoding [input] (clojure.core/get {"CABAC" :cabac, "CAVLC" :cavlc} input))
+
+(clojure.core/defn- deser-output [input] (clojure.core/cond-> {:output-settings (deser-output-settings (input "outputSettings"))} (clojure.core/contains? input "audioDescriptionNames") (clojure.core/assoc :audio-description-names (deser-list-of-string (input "audioDescriptionNames"))) (clojure.core/contains? input "captionDescriptionNames") (clojure.core/assoc :caption-description-names (deser-list-of-string (input "captionDescriptionNames"))) (clojure.core/contains? input "outputName") (clojure.core/assoc :output-name (deser-string-min-1-max-255 (input "outputName"))) (clojure.core/contains? input "videoDescriptionName") (clojure.core/assoc :video-description-name (deser-string (input "videoDescriptionName")))))
+
+(clojure.core/defn- deser-burn-in-shadow-color [input] (clojure.core/get {"BLACK" :black, "NONE" :none, "WHITE" :white} input))
+
+(clojure.core/defn- deser-audio-language-selection-policy [input] (clojure.core/get {"LOOSE" :loose, "STRICT" :strict} input))
+
+(clojure.core/defn- deser-integer [input] input)
+
+(clojure.core/defn- deser-aac-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "rateControlMode") (clojure.core/assoc :rate-control-mode (deser-aac-rate-control-mode (input "rateControlMode"))) (clojure.core/contains? input "codingMode") (clojure.core/assoc :coding-mode (deser-aac-coding-mode (input "codingMode"))) (clojure.core/contains? input "inputType") (clojure.core/assoc :input-type (deser-aac-input-type (input "inputType"))) (clojure.core/contains? input "sampleRate") (clojure.core/assoc :sample-rate (deser-double (input "sampleRate"))) (clojure.core/contains? input "spec") (clojure.core/assoc :spec (deser-aac-spec (input "spec"))) (clojure.core/contains? input "vbrQuality") (clojure.core/assoc :vbr-quality (deser-aac-vbr-quality (input "vbrQuality"))) (clojure.core/contains? input "profile") (clojure.core/assoc :profile (deser-aac-profile (input "profile"))) (clojure.core/contains? input "rawFormat") (clojure.core/assoc :raw-format (deser-aac-raw-format (input "rawFormat"))) (clojure.core/contains? input "bitrate") (clojure.core/assoc :bitrate (deser-double (input "bitrate")))))
+
+(clojure.core/defn- deser-integer-min-1 [input] input)
+
+(clojure.core/defn- deser-list-of-caption-selector [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-caption-selector coll))) input))
+
+(clojure.core/defn- deser-integer-min-0-max-4294967295 [input] input)
+
+(clojure.core/defn- deser-rtmp-group-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "authenticationScheme") (clojure.core/assoc :authentication-scheme (deser-authentication-scheme (input "authenticationScheme"))) (clojure.core/contains? input "cacheFullBehavior") (clojure.core/assoc :cache-full-behavior (deser-rtmp-cache-full-behavior (input "cacheFullBehavior"))) (clojure.core/contains? input "cacheLength") (clojure.core/assoc :cache-length (deser-integer-min-30 (input "cacheLength"))) (clojure.core/contains? input "captionData") (clojure.core/assoc :caption-data (deser-rtmp-caption-data (input "captionData"))) (clojure.core/contains? input "inputLossAction") (clojure.core/assoc :input-loss-action (deser-input-loss-action-for-rtmp-out (input "inputLossAction"))) (clojure.core/contains? input "restartDelay") (clojure.core/assoc :restart-delay (deser-integer-min-0 (input "restartDelay")))))
+
+(clojure.core/defn- deser-burn-in-alignment [input] (clojure.core/get {"CENTERED" :centered, "LEFT" :left, "SMART" :smart} input))
+
+(clojure.core/defn- deser-list-of-caption-description [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-caption-description coll))) input))
+
+(clojure.core/defn- deser-embedded-destination-settings [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-caption-selector [input] (clojure.core/cond-> {:name (deser-string-min-1 (input "name"))} (clojure.core/contains? input "languageCode") (clojure.core/assoc :language-code (deser-string (input "languageCode"))) (clojure.core/contains? input "selectorSettings") (clojure.core/assoc :selector-settings (deser-caption-selector-settings (input "selectorSettings")))))
+
+(clojure.core/defn- deser-embedded-plus-scte-20-destination-settings [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-channel-egress-endpoint [input] (clojure.core/cond-> {} (clojure.core/contains? input "sourceIp") (clojure.core/assoc :source-ip (deser-string (input "sourceIp")))))
+
+(clojure.core/defn- deser-hls-group-settings [input] (clojure.core/cond-> {:destination (deser-output-location-ref (input "destination"))} (clojure.core/contains? input "segmentLength") (clojure.core/assoc :segment-length (deser-integer-min-1 (input "segmentLength"))) (clojure.core/contains? input "tsFileMode") (clojure.core/assoc :ts-file-mode (deser-hls-ts-file-mode (input "tsFileMode"))) (clojure.core/contains? input "timestampDeltaMilliseconds") (clojure.core/assoc :timestamp-delta-milliseconds (deser-integer-min-0 (input "timestampDeltaMilliseconds"))) (clojure.core/contains? input "programDateTimePeriod") (clojure.core/assoc :program-date-time-period (deser-integer-min-0-max-3600 (input "programDateTimePeriod"))) (clojure.core/contains? input "constantIv") (clojure.core/assoc :constant-iv (deser-string-min-32-max-32 (input "constantIv"))) (clojure.core/contains? input "keyFormatVersions") (clojure.core/assoc :key-format-versions (deser-string (input "keyFormatVersions"))) (clojure.core/contains? input "inputLossAction") (clojure.core/assoc :input-loss-action (deser-input-loss-action-for-hls-out (input "inputLossAction"))) (clojure.core/contains? input "adMarkers") (clojure.core/assoc :ad-markers (deser-list-of-hls-ad-markers (input "adMarkers"))) (clojure.core/contains? input "captionLanguageMappings") (clojure.core/assoc :caption-language-mappings (deser-list-of-caption-language-mapping (input "captionLanguageMappings"))) (clojure.core/contains? input "timedMetadataId3Frame") (clojure.core/assoc :timed-metadata-id-3-frame (deser-hls-timed-metadata-id-3-frame (input "timedMetadataId3Frame"))) (clojure.core/contains? input "mode") (clojure.core/assoc :mode (deser-hls-mode (input "mode"))) (clojure.core/contains? input "directoryStructure") (clojure.core/assoc :directory-structure (deser-hls-directory-structure (input "directoryStructure"))) (clojure.core/contains? input "encryptionType") (clojure.core/assoc :encryption-type (deser-hls-encryption-type (input "encryptionType"))) (clojure.core/contains? input "indexNSegments") (clojure.core/assoc :index-n-segments (deser-integer-min-3 (input "indexNSegments"))) (clojure.core/contains? input "keepSegments") (clojure.core/assoc :keep-segments (deser-integer-min-1 (input "keepSegments"))) (clojure.core/contains? input "minSegmentLength") (clojure.core/assoc :min-segment-length (deser-integer-min-0 (input "minSegmentLength"))) (clojure.core/contains? input "ivInManifest") (clojure.core/assoc :iv-in-manifest (deser-hls-iv-in-manifest (input "ivInManifest"))) (clojure.core/contains? input "streamInfResolution") (clojure.core/assoc :stream-inf-resolution (deser-hls-stream-inf-resolution (input "streamInfResolution"))) (clojure.core/contains? input "hlsCdnSettings") (clojure.core/assoc :hls-cdn-settings (deser-hls-cdn-settings (input "hlsCdnSettings"))) (clojure.core/contains? input "redundantManifest") (clojure.core/assoc :redundant-manifest (deser-hls-redundant-manifest (input "redundantManifest"))) (clojure.core/contains? input "programDateTime") (clojure.core/assoc :program-date-time (deser-hls-program-date-time (input "programDateTime"))) (clojure.core/contains? input "iFrameOnlyPlaylists") (clojure.core/assoc :i-frame-only-playlists (deser-i-frame-only-playlist-type (input "iFrameOnlyPlaylists"))) (clojure.core/contains? input "outputSelection") (clojure.core/assoc :output-selection (deser-hls-output-selection (input "outputSelection"))) (clojure.core/contains? input "baseUrlContent") (clojure.core/assoc :base-url-content (deser-string (input "baseUrlContent"))) (clojure.core/contains? input "captionLanguageSetting") (clojure.core/assoc :caption-language-setting (deser-hls-caption-language-setting (input "captionLanguageSetting"))) (clojure.core/contains? input "manifestDurationFormat") (clojure.core/assoc :manifest-duration-format (deser-hls-manifest-duration-format (input "manifestDurationFormat"))) (clojure.core/contains? input "segmentationMode") (clojure.core/assoc :segmentation-mode (deser-hls-segmentation-mode (input "segmentationMode"))) (clojure.core/contains? input "timedMetadataId3Period") (clojure.core/assoc :timed-metadata-id-3-period (deser-integer-min-0 (input "timedMetadataId3Period"))) (clojure.core/contains? input "manifestCompression") (clojure.core/assoc :manifest-compression (deser-hls-manifest-compression (input "manifestCompression"))) (clojure.core/contains? input "segmentsPerSubdirectory") (clojure.core/assoc :segments-per-subdirectory (deser-integer-min-1 (input "segmentsPerSubdirectory"))) (clojure.core/contains? input "keyFormat") (clojure.core/assoc :key-format (deser-string (input "keyFormat"))) (clojure.core/contains? input "ivSource") (clojure.core/assoc :iv-source (deser-hls-iv-source (input "ivSource"))) (clojure.core/contains? input "codecSpecification") (clojure.core/assoc :codec-specification (deser-hls-codec-specification (input "codecSpecification"))) (clojure.core/contains? input "keyProviderSettings") (clojure.core/assoc :key-provider-settings (deser-key-provider-settings (input "keyProviderSettings"))) (clojure.core/contains? input "baseUrlManifest") (clojure.core/assoc :base-url-manifest (deser-string (input "baseUrlManifest"))) (clojure.core/contains? input "clientCache") (clojure.core/assoc :client-cache (deser-hls-client-cache (input "clientCache")))))
+
+(clojure.core/defn- deser-input-loss-action-for-ms-smooth-out [input] (clojure.core/get {"EMIT_OUTPUT" :emit-output, "PAUSE_OUTPUT" :pause-output} input))
+
+(clojure.core/defn- deser-dvb-nit-settings [input] (clojure.core/cond-> {:network-name (deser-string-min-1-max-256 (input "networkName")), :network-id (deser-integer-min-0-max-65536 (input "networkId"))} (clojure.core/contains? input "repInterval") (clojure.core/assoc :rep-interval (deser-integer-min-25-max-10000 (input "repInterval")))))
+
+(clojure.core/defn- deser-integer-min-1-max-20 [input] input)
+
+(clojure.core/defn- deser-offering-type [input] (clojure.core/get {"NO_UPFRONT" :no-upfront} input))
+
+(clojure.core/defn- deser-integer-min-0-max-8191 [input] input)
+
+(clojure.core/defn- deser-smooth-group-timestamp-offset-mode [input] (clojure.core/get {"USE_CONFIGURED_OFFSET" :use-configured-offset, "USE_EVENT_START_DATE" :use-event-start-date} input))
+
+(clojure.core/defn- deser-hls-media-store-storage-class [input] (clojure.core/get {"TEMPORAL" :temporal} input))
+
+(clojure.core/defn- deser-pipeline-pause-state-settings [input] (clojure.core/cond-> {:pipeline-id (deser-pipeline-id (input "pipelineId"))}))
+
+(clojure.core/defn- deser-frame-capture-settings [input] (clojure.core/cond-> {:capture-interval (deser-integer-min-1-max-3600 (input "captureInterval"))}))
+
+(clojure.core/defn- deser-hls-program-date-time [input] (clojure.core/get {"EXCLUDE" :exclude, "INCLUDE" :include} input))
+
+(clojure.core/defn- deser-list-of-validation-error [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-validation-error coll))) input))
+
+(clojure.core/defn- deser-output-destination-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "passwordParam") (clojure.core/assoc :password-param (deser-string (input "passwordParam"))) (clojure.core/contains? input "streamName") (clojure.core/assoc :stream-name (deser-string (input "streamName"))) (clojure.core/contains? input "url") (clojure.core/assoc :url (deser-string (input "url"))) (clojure.core/contains? input "username") (clojure.core/assoc :username (deser-string (input "username")))))
+
+(clojure.core/defn- deser-fixed-afd [input] (clojure.core/get {"AFD_0010" :afd-0010, "AFD_1101" :afd-1101, "AFD_1000" :afd-1000, "AFD_1111" :afd-1111, "AFD_0000" :afd-0000, "AFD_1011" :afd-1011, "AFD_0011" :afd-0011, "AFD_1001" :afd-1001, "AFD_0100" :afd-0100, "AFD_1010" :afd-1010, "AFD_1110" :afd-1110} input))
+
+(clojure.core/defn- deser-hls-ts-file-mode [input] (clojure.core/get {"SEGMENTED_FILES" :segmented-files, "SINGLE_FILE" :single-file} input))
+
+(clojure.core/defn- deser-scte-35-segmentation-descriptor [input] (clojure.core/cond-> {:segmentation-event-id (deser-integer-min-0-max-4294967295 (input "segmentationEventId")), :segmentation-cancel-indicator (deser-scte-35-segmentation-cancel-indicator (input "segmentationCancelIndicator"))} (clojure.core/contains? input "subSegmentNum") (clojure.core/assoc :sub-segment-num (deser-integer-min-0-max-255 (input "subSegmentNum"))) (clojure.core/contains? input "segmentationDuration") (clojure.core/assoc :segmentation-duration (deser-integer-min-0-max-1099511627775 (input "segmentationDuration"))) (clojure.core/contains? input "segmentationTypeId") (clojure.core/assoc :segmentation-type-id (deser-integer-min-0-max-255 (input "segmentationTypeId"))) (clojure.core/contains? input "segmentationUpid") (clojure.core/assoc :segmentation-upid (deser-string (input "segmentationUpid"))) (clojure.core/contains? input "segmentationUpidType") (clojure.core/assoc :segmentation-upid-type (deser-integer-min-0-max-255 (input "segmentationUpidType"))) (clojure.core/contains? input "segmentsExpected") (clojure.core/assoc :segments-expected (deser-integer-min-0-max-255 (input "segmentsExpected"))) (clojure.core/contains? input "subSegmentsExpected") (clojure.core/assoc :sub-segments-expected (deser-integer-min-0-max-255 (input "subSegmentsExpected"))) (clojure.core/contains? input "segmentNum") (clojure.core/assoc :segment-num (deser-integer-min-0-max-255 (input "segmentNum"))) (clojure.core/contains? input "deliveryRestrictions") (clojure.core/assoc :delivery-restrictions (deser-scte-35-delivery-restrictions (input "deliveryRestrictions")))))
+
+(clojure.core/defn- deser-hls-iv-in-manifest [input] (clojure.core/get {"EXCLUDE" :exclude, "INCLUDE" :include} input))
+
+(clojure.core/defn- deser-list-of-caption-language-mapping [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-caption-language-mapping coll))) input))
+
+(clojure.core/defn- deser-audio-codec-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "aacSettings") (clojure.core/assoc :aac-settings (deser-aac-settings (input "aacSettings"))) (clojure.core/contains? input "ac3Settings") (clojure.core/assoc :ac-3-settings (deser-ac-3-settings (input "ac3Settings"))) (clojure.core/contains? input "eac3Settings") (clojure.core/assoc :eac-3-settings (deser-eac-3-settings (input "eac3Settings"))) (clojure.core/contains? input "mp2Settings") (clojure.core/assoc :mp-2-settings (deser-mp-2-settings (input "mp2Settings"))) (clojure.core/contains? input "passThroughSettings") (clojure.core/assoc :pass-through-settings (deser-pass-through-settings (input "passThroughSettings")))))
+
+(clojure.core/defn- deser-scte-20-plus-embedded-destination-settings [input] (clojure.core/cond-> {}))
+
+(clojure.core/defn- deser-scte-35-web-delivery-allowed-flag [input] (clojure.core/get {"WEB_DELIVERY_NOT_ALLOWED" :web-delivery-not-allowed, "WEB_DELIVERY_ALLOWED" :web-delivery-allowed} input))
+
+(clojure.core/defn- deser-scte-35-return-to-network-schedule-action-settings [input] (clojure.core/cond-> {:splice-event-id (deser-integer-min-0-max-4294967295 (input "spliceEventId"))}))
+
+(clojure.core/defn- deser-integer-min-1-max-32 [input] input)
+
+(clojure.core/defn- deser-burn-in-outline-color [input] (clojure.core/get {"BLACK" :black, "BLUE" :blue, "GREEN" :green, "RED" :red, "WHITE" :white, "YELLOW" :yellow} input))
+
+(clojure.core/defn- deser-h-264-timecode-insertion-behavior [input] (clojure.core/get {"DISABLED" :disabled, "PIC_TIMING_SEI" :pic-timing-sei} input))
+
+(clojure.core/defn- deser-eac-3-passthrough-control [input] (clojure.core/get {"NO_PASSTHROUGH" :no-passthrough, "WHEN_POSSIBLE" :when-possible} input))
+
+(clojure.core/defn- deser-input-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "inputFilter") (clojure.core/assoc :input-filter (deser-input-filter (input "inputFilter"))) (clojure.core/contains? input "denoiseFilter") (clojure.core/assoc :denoise-filter (deser-input-denoise-filter (input "denoiseFilter"))) (clojure.core/contains? input "sourceEndBehavior") (clojure.core/assoc :source-end-behavior (deser-input-source-end-behavior (input "sourceEndBehavior"))) (clojure.core/contains? input "filterStrength") (clojure.core/assoc :filter-strength (deser-integer-min-1-max-5 (input "filterStrength"))) (clojure.core/contains? input "captionSelectors") (clojure.core/assoc :caption-selectors (deser-list-of-caption-selector (input "captionSelectors"))) (clojure.core/contains? input "videoSelector") (clojure.core/assoc :video-selector (deser-video-selector (input "videoSelector"))) (clojure.core/contains? input "networkInputSettings") (clojure.core/assoc :network-input-settings (deser-network-input-settings (input "networkInputSettings"))) (clojure.core/contains? input "audioSelectors") (clojure.core/assoc :audio-selectors (deser-list-of-audio-selector (input "audioSelectors"))) (clojure.core/contains? input "deblockFilter") (clojure.core/assoc :deblock-filter (deser-input-deblock-filter (input "deblockFilter")))))
+
+(clojure.core/defn- deser-integer-min-1-max-31 [input] input)
+
+(clojure.core/defn- deser-audio-normalization-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "algorithm") (clojure.core/assoc :algorithm (deser-audio-normalization-algorithm (input "algorithm"))) (clojure.core/contains? input "algorithmControl") (clojure.core/assoc :algorithm-control (deser-audio-normalization-algorithm-control (input "algorithmControl"))) (clojure.core/contains? input "targetLkfs") (clojure.core/assoc :target-lkfs (deser-double-min-negative-59-max-0 (input "targetLkfs")))))
+
+(clojure.core/defn- deser-key-provider-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "staticKeySettings") (clojure.core/assoc :static-key-settings (deser-static-key-settings (input "staticKeySettings")))))
+
+(clojure.core/defn- deser-list-of-scte-35-descriptor [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-scte-35-descriptor coll))) input))
+
+(clojure.core/defn- deser-caption-selector-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "aribSourceSettings") (clojure.core/assoc :arib-source-settings (deser-arib-source-settings (input "aribSourceSettings"))) (clojure.core/contains? input "dvbSubSourceSettings") (clojure.core/assoc :dvb-sub-source-settings (deser-dvb-sub-source-settings (input "dvbSubSourceSettings"))) (clojure.core/contains? input "embeddedSourceSettings") (clojure.core/assoc :embedded-source-settings (deser-embedded-source-settings (input "embeddedSourceSettings"))) (clojure.core/contains? input "scte20SourceSettings") (clojure.core/assoc :scte-20-source-settings (deser-scte-20-source-settings (input "scte20SourceSettings"))) (clojure.core/contains? input "scte27SourceSettings") (clojure.core/assoc :scte-27-source-settings (deser-scte-27-source-settings (input "scte27SourceSettings"))) (clojure.core/contains? input "teletextSourceSettings") (clojure.core/assoc :teletext-source-settings (deser-teletext-source-settings (input "teletextSourceSettings")))))
+
+(clojure.core/defn- deser-h-264-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "level") (clojure.core/assoc :level (deser-h-264-level (input "level"))) (clojure.core/contains? input "rateControlMode") (clojure.core/assoc :rate-control-mode (deser-h-264-rate-control-mode (input "rateControlMode"))) (clojure.core/contains? input "subgopLength") (clojure.core/assoc :subgop-length (deser-h-264-sub-gop-length (input "subgopLength"))) (clojure.core/contains? input "minIInterval") (clojure.core/assoc :min-i-interval (deser-integer-min-0-max-30 (input "minIInterval"))) (clojure.core/contains? input "temporalAq") (clojure.core/assoc :temporal-aq (deser-h-264-temporal-aq (input "temporalAq"))) (clojure.core/contains? input "parDenominator") (clojure.core/assoc :par-denominator (deser-integer-min-1 (input "parDenominator"))) (clojure.core/contains? input "qvbrQualityLevel") (clojure.core/assoc :qvbr-quality-level (deser-integer-min-1-max-10 (input "qvbrQualityLevel"))) (clojure.core/contains? input "numRefFrames") (clojure.core/assoc :num-ref-frames (deser-integer-min-1-max-6 (input "numRefFrames"))) (clojure.core/contains? input "gopBReference") (clojure.core/assoc :gop-b-reference (deser-h-264-gop-b-reference (input "gopBReference"))) (clojure.core/contains? input "timecodeInsertion") (clojure.core/assoc :timecode-insertion (deser-h-264-timecode-insertion-behavior (input "timecodeInsertion"))) (clojure.core/contains? input "scanType") (clojure.core/assoc :scan-type (deser-h-264-scan-type (input "scanType"))) (clojure.core/contains? input "adaptiveQuantization") (clojure.core/assoc :adaptive-quantization (deser-h-264-adaptive-quantization (input "adaptiveQuantization"))) (clojure.core/contains? input "afdSignaling") (clojure.core/assoc :afd-signaling (deser-afd-signaling (input "afdSignaling"))) (clojure.core/contains? input "bufFillPct") (clojure.core/assoc :buf-fill-pct (deser-integer-min-0-max-100 (input "bufFillPct"))) (clojure.core/contains? input "framerateDenominator") (clojure.core/assoc :framerate-denominator (deser-integer-min-1 (input "framerateDenominator"))) (clojure.core/contains? input "spatialAq") (clojure.core/assoc :spatial-aq (deser-h-264-spatial-aq (input "spatialAq"))) (clojure.core/contains? input "framerateControl") (clojure.core/assoc :framerate-control (deser-h-264-framerate-control (input "framerateControl"))) (clojure.core/contains? input "gopNumBFrames") (clojure.core/assoc :gop-num-b-frames (deser-integer-min-0-max-7 (input "gopNumBFrames"))) (clojure.core/contains? input "bufSize") (clojure.core/assoc :buf-size (deser-integer-min-0 (input "bufSize"))) (clojure.core/contains? input "profile") (clojure.core/assoc :profile (deser-h-264-profile (input "profile"))) (clojure.core/contains? input "colorMetadata") (clojure.core/assoc :color-metadata (deser-h-264-color-metadata (input "colorMetadata"))) (clojure.core/contains? input "lookAheadRateControl") (clojure.core/assoc :look-ahead-rate-control (deser-h-264-look-ahead-rate-control (input "lookAheadRateControl"))) (clojure.core/contains? input "syntax") (clojure.core/assoc :syntax (deser-h-264-syntax (input "syntax"))) (clojure.core/contains? input "gopClosedCadence") (clojure.core/assoc :gop-closed-cadence (deser-integer-min-0 (input "gopClosedCadence"))) (clojure.core/contains? input "flickerAq") (clojure.core/assoc :flicker-aq (deser-h-264-flicker-aq (input "flickerAq"))) (clojure.core/contains? input "framerateNumerator") (clojure.core/assoc :framerate-numerator (deser-integer-min-1 (input "framerateNumerator"))) (clojure.core/contains? input "softness") (clojure.core/assoc :softness (deser-integer-min-0-max-128 (input "softness"))) (clojure.core/contains? input "gopSizeUnits") (clojure.core/assoc :gop-size-units (deser-h-264-gop-size-units (input "gopSizeUnits"))) (clojure.core/contains? input "maxBitrate") (clojure.core/assoc :max-bitrate (deser-integer-min-1000 (input "maxBitrate"))) (clojure.core/contains? input "parNumerator") (clojure.core/assoc :par-numerator (deser-integer (input "parNumerator"))) (clojure.core/contains? input "gopSize") (clojure.core/assoc :gop-size (deser-double-min-1 (input "gopSize"))) (clojure.core/contains? input "parControl") (clojure.core/assoc :par-control (deser-h-264-par-control (input "parControl"))) (clojure.core/contains? input "slices") (clojure.core/assoc :slices (deser-integer-min-1-max-32 (input "slices"))) (clojure.core/contains? input "fixedAfd") (clojure.core/assoc :fixed-afd (deser-fixed-afd (input "fixedAfd"))) (clojure.core/contains? input "entropyEncoding") (clojure.core/assoc :entropy-encoding (deser-h-264-entropy-encoding (input "entropyEncoding"))) (clojure.core/contains? input "sceneChangeDetect") (clojure.core/assoc :scene-change-detect (deser-h-264-scene-change-detect (input "sceneChangeDetect"))) (clojure.core/contains? input "bitrate") (clojure.core/assoc :bitrate (deser-integer-min-1000 (input "bitrate")))))
+
+(clojure.core/defn- deser-hls-timed-metadata-id-3-frame [input] (clojure.core/get {"NONE" :none, "PRIV" :priv, "TDRL" :tdrl} input))
+
+(clojure.core/defn- deser-list-of-media-connect-flow [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-media-connect-flow coll))) input))
+
+(clojure.core/defn- deser-eac-3-phase-control [input] (clojure.core/get {"NO_SHIFT" :no-shift, "SHIFT_90_DEGREES" :shift-90-degrees} input))
+
+(clojure.core/defn- deser-eac-3-surround-ex-mode [input] (clojure.core/get {"DISABLED" :disabled, "ENABLED" :enabled, "NOT_INDICATED" :not-indicated} input))
+
+(clojure.core/defn- deser-integer-min-1-max-8 [input] input)
+
+(clojure.core/defn- deser-smooth-group-segmentation-mode [input] (clojure.core/get {"USE_INPUT_SEGMENTATION" :use-input-segmentation, "USE_SEGMENT_DURATION" :use-segment-duration} input))
+
+(clojure.core/defn- deser-list-of-audio-description [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-audio-description coll))) input))
+
+(clojure.core/defn- deser-hls-output-settings [input] (clojure.core/cond-> {:hls-settings (deser-hls-settings (input "hlsSettings"))} (clojure.core/contains? input "nameModifier") (clojure.core/assoc :name-modifier (deser-string-min-1 (input "nameModifier"))) (clojure.core/contains? input "segmentModifier") (clojure.core/assoc :segment-modifier (deser-string (input "segmentModifier")))))
+
+(clojure.core/defn- deser-scte-35-splice-insert-web-delivery-allowed-behavior [input] (clojure.core/get {"FOLLOW" :follow, "IGNORE" :ignore} input))
+
+(clojure.core/defn- deser-m-3u-8-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "patInterval") (clojure.core/assoc :pat-interval (deser-integer-min-0-max-1000 (input "patInterval"))) (clojure.core/contains? input "audioFramesPerPes") (clojure.core/assoc :audio-frames-per-pes (deser-integer-min-0 (input "audioFramesPerPes"))) (clojure.core/contains? input "transportStreamId") (clojure.core/assoc :transport-stream-id (deser-integer-min-0-max-65535 (input "transportStreamId"))) (clojure.core/contains? input "scte35Behavior") (clojure.core/assoc :scte-35-behavior (deser-m-3u-8-scte-35-behavior (input "scte35Behavior"))) (clojure.core/contains? input "timedMetadataBehavior") (clojure.core/assoc :timed-metadata-behavior (deser-m-3u-8-timed-metadata-behavior (input "timedMetadataBehavior"))) (clojure.core/contains? input "pcrControl") (clojure.core/assoc :pcr-control (deser-m-3u-8-pcr-control (input "pcrControl"))) (clojure.core/contains? input "scte35Pid") (clojure.core/assoc :scte-35-pid (deser-string (input "scte35Pid"))) (clojure.core/contains? input "pcrPid") (clojure.core/assoc :pcr-pid (deser-string (input "pcrPid"))) (clojure.core/contains? input "pmtPid") (clojure.core/assoc :pmt-pid (deser-string (input "pmtPid"))) (clojure.core/contains? input "videoPid") (clojure.core/assoc :video-pid (deser-string (input "videoPid"))) (clojure.core/contains? input "audioPids") (clojure.core/assoc :audio-pids (deser-string (input "audioPids"))) (clojure.core/contains? input "pcrPeriod") (clojure.core/assoc :pcr-period (deser-integer-min-0-max-500 (input "pcrPeriod"))) (clojure.core/contains? input "pmtInterval") (clojure.core/assoc :pmt-interval (deser-integer-min-0-max-1000 (input "pmtInterval"))) (clojure.core/contains? input "programNum") (clojure.core/assoc :program-num (deser-integer-min-0-max-65535 (input "programNum"))) (clojure.core/contains? input "timedMetadataPid") (clojure.core/assoc :timed-metadata-pid (deser-string (input "timedMetadataPid"))) (clojure.core/contains? input "ecmPid") (clojure.core/assoc :ecm-pid (deser-string (input "ecmPid")))))
+
+(clojure.core/defn- deser-string-min-1-max-255 [input] input)
+
+(clojure.core/defn- deser-list-of-audio-channel-mapping [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-audio-channel-mapping coll))) input))
+
+(clojure.core/defn- deser-eac-3-stereo-downmix [input] (clojure.core/get {"DPL2" :dpl-2, "LO_RO" :lo-ro, "LT_RT" :lt-rt, "NOT_INDICATED" :not-indicated} input))
+
+(clojure.core/defn- deser-integer-min-0-max-128 [input] input)
+
+(clojure.core/defn- deser-integer-min-0-max-1000000 [input] input)
+
+(clojure.core/defn- deser-h-264-syntax [input] (clojure.core/get {"DEFAULT" :default, "RP2027" :rp-2027} input))
+
+(clojure.core/defn- deser-string-min-32-max-32 [input] input)
+
+(clojure.core/defn- deser-input-resolution [input] (clojure.core/get {"SD" :sd, "HD" :hd, "UHD" :uhd} input))
+
+(clojure.core/defn- deser-scte-20-convert-608-to-708 [input] (clojure.core/get {"DISABLED" :disabled, "UPCONVERT" :upconvert} input))
+
+(clojure.core/defn- deser-h-264-flicker-aq [input] (clojure.core/get {"DISABLED" :disabled, "ENABLED" :enabled} input))
+
+(clojure.core/defn- deser-hls-codec-specification [input] (clojure.core/get {"RFC_4281" :rfc-4281, "RFC_6381" :rfc-6381} input))
+
+(clojure.core/defn- deser-avail-blanking [input] (clojure.core/cond-> {} (clojure.core/contains? input "availBlankingImage") (clojure.core/assoc :avail-blanking-image (deser-input-location (input "availBlankingImage"))) (clojure.core/contains? input "state") (clojure.core/assoc :state (deser-avail-blanking-state (input "state")))))
+
+(clojure.core/defn- deser-m-2ts-audio-stream-type [input] (clojure.core/get {"ATSC" :atsc, "DVB" :dvb} input))
+
+(clojure.core/defn- deser-string-min-34-max-34 [input] input)
+
+(clojure.core/defn- deser-audio-selector [input] (clojure.core/cond-> {:name (deser-string-min-1 (input "name"))} (clojure.core/contains? input "selectorSettings") (clojure.core/assoc :selector-settings (deser-audio-selector-settings (input "selectorSettings")))))
+
+(clojure.core/defn- deser-integer-min-1-max-16 [input] input)
+
+(clojure.core/defn- deser-hls-akamai-settings [input] (clojure.core/cond-> {} (clojure.core/contains? input "connectionRetryInterval") (clojure.core/assoc :connection-retry-interval (deser-integer-min-0 (input "connectionRetryInterval"))) (clojure.core/contains? input "filecacheDuration") (clojure.core/assoc :filecache-duration (deser-integer-min-0-max-600 (input "filecacheDuration"))) (clojure.core/contains? input "httpTransferMode") (clojure.core/assoc :http-transfer-mode (deser-hls-akamai-http-transfer-mode (input "httpTransferMode"))) (clojure.core/contains? input "numRetries") (clojure.core/assoc :num-retries (deser-integer-min-0 (input "numRetries"))) (clojure.core/contains? input "restartDelay") (clojure.core/assoc :restart-delay (deser-integer-min-0-max-15 (input "restartDelay"))) (clojure.core/contains? input "salt") (clojure.core/assoc :salt (deser-string (input "salt"))) (clojure.core/contains? input "token") (clojure.core/assoc :token (deser-string (input "token")))))
+
+(clojure.core/defn- deser-reservation-state [input] (clojure.core/get {"ACTIVE" :active, "EXPIRED" :expired, "CANCELED" :canceled, "DELETED" :deleted} input))
+
+(clojure.core/defn- response-internal-server-error-exception ([input] (response-internal-server-error-exception nil input)) ([resultWrapper1369019 input] (clojure.core/let [rawinput1369018 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369020 {"message" (rawinput1369018 "message")}] (clojure.core/cond-> {} (letvar1369020 "message") (clojure.core/assoc :message (deser-string (clojure.core/get-in letvar1369020 ["message"])))))))
+
+(clojure.core/defn- response-delete-input-security-group-response ([input] (response-delete-input-security-group-response nil input)) ([resultWrapper1369022 input] (clojure.core/let [rawinput1369021 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369023 {}] (clojure.core/cond-> {}))))
+
+(clojure.core/defn- response-bad-request-exception ([input] (response-bad-request-exception nil input)) ([resultWrapper1369025 input] (clojure.core/let [rawinput1369024 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369026 {"message" (rawinput1369024 "message")}] (clojure.core/cond-> {} (letvar1369026 "message") (clojure.core/assoc :message (deser-string (clojure.core/get-in letvar1369026 ["message"])))))))
+
+(clojure.core/defn- response-list-tags-for-resource-response ([input] (response-list-tags-for-resource-response nil input)) ([resultWrapper1369028 input] (clojure.core/let [rawinput1369027 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369029 {"tags" (rawinput1369027 "tags")}] (clojure.core/cond-> {} (letvar1369029 "tags") (clojure.core/assoc :tags (deser-tags (clojure.core/get-in letvar1369029 ["tags"])))))))
+
+(clojure.core/defn- response-list-offerings-response ([input] (response-list-offerings-response nil input)) ([resultWrapper1369031 input] (clojure.core/let [rawinput1369030 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369032 {"nextToken" (rawinput1369030 "nextToken"), "offerings" (rawinput1369030 "offerings")}] (clojure.core/cond-> {} (letvar1369032 "nextToken") (clojure.core/assoc :next-token (deser-string (clojure.core/get-in letvar1369032 ["nextToken"]))) (letvar1369032 "offerings") (clojure.core/assoc :offerings (deser-list-of-offering (clojure.core/get-in letvar1369032 ["offerings"])))))))
+
+(clojure.core/defn- response-create-input-security-group-response ([input] (response-create-input-security-group-response nil input)) ([resultWrapper1369034 input] (clojure.core/let [rawinput1369033 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369035 {"securityGroup" (rawinput1369033 "securityGroup")}] (clojure.core/cond-> {} (letvar1369035 "securityGroup") (clojure.core/assoc :security-group (deser-input-security-group (clojure.core/get-in letvar1369035 ["securityGroup"])))))))
+
+(clojure.core/defn- response-forbidden-exception ([input] (response-forbidden-exception nil input)) ([resultWrapper1369037 input] (clojure.core/let [rawinput1369036 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369038 {"message" (rawinput1369036 "message")}] (clojure.core/cond-> {} (letvar1369038 "message") (clojure.core/assoc :message (deser-string (clojure.core/get-in letvar1369038 ["message"])))))))
+
+(clojure.core/defn- response-delete-input-response ([input] (response-delete-input-response nil input)) ([resultWrapper1369040 input] (clojure.core/let [rawinput1369039 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369041 {}] (clojure.core/cond-> {}))))
+
+(clojure.core/defn- response-create-channel-response ([input] (response-create-channel-response nil input)) ([resultWrapper1369043 input] (clojure.core/let [rawinput1369042 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369044 {"channel" (rawinput1369042 "channel")}] (clojure.core/cond-> {} (letvar1369044 "channel") (clojure.core/assoc :channel (deser-channel (clojure.core/get-in letvar1369044 ["channel"])))))))
+
+(clojure.core/defn- response-unprocessable-entity-exception ([input] (response-unprocessable-entity-exception nil input)) ([resultWrapper1369046 input] (clojure.core/let [rawinput1369045 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369047 {"message" (rawinput1369045 "message"), "validationErrors" (rawinput1369045 "validationErrors")}] (clojure.core/cond-> {} (letvar1369047 "message") (clojure.core/assoc :message (deser-string (clojure.core/get-in letvar1369047 ["message"]))) (letvar1369047 "validationErrors") (clojure.core/assoc :validation-errors (deser-list-of-validation-error (clojure.core/get-in letvar1369047 ["validationErrors"])))))))
+
+(clojure.core/defn- response-update-input-security-group-response ([input] (response-update-input-security-group-response nil input)) ([resultWrapper1369049 input] (clojure.core/let [rawinput1369048 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369050 {"securityGroup" (rawinput1369048 "securityGroup")}] (clojure.core/cond-> {} (letvar1369050 "securityGroup") (clojure.core/assoc :security-group (deser-input-security-group (clojure.core/get-in letvar1369050 ["securityGroup"])))))))
+
+(clojure.core/defn- response-purchase-offering-response ([input] (response-purchase-offering-response nil input)) ([resultWrapper1369052 input] (clojure.core/let [rawinput1369051 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369053 {"reservation" (rawinput1369051 "reservation")}] (clojure.core/cond-> {} (letvar1369053 "reservation") (clojure.core/assoc :reservation (deser-reservation (clojure.core/get-in letvar1369053 ["reservation"])))))))
+
+(clojure.core/defn- response-describe-channel-response ([input] (response-describe-channel-response nil input)) ([resultWrapper1369055 input] (clojure.core/let [rawinput1369054 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369056 {"egressEndpoints" (rawinput1369054 "egressEndpoints"), "logLevel" (rawinput1369054 "logLevel"), "arn" (rawinput1369054 "arn"), "inputAttachments" (rawinput1369054 "inputAttachments"), "tags" (rawinput1369054 "tags"), "roleArn" (rawinput1369054 "roleArn"), "id" (rawinput1369054 "id"), "name" (rawinput1369054 "name"), "destinations" (rawinput1369054 "destinations"), "state" (rawinput1369054 "state"), "pipelinesRunningCount" (rawinput1369054 "pipelinesRunningCount"), "inputSpecification" (rawinput1369054 "inputSpecification"), "encoderSettings" (rawinput1369054 "encoderSettings")}] (clojure.core/cond-> {} (letvar1369056 "inputAttachments") (clojure.core/assoc :input-attachments (deser-list-of-input-attachment (clojure.core/get-in letvar1369056 ["inputAttachments"]))) (letvar1369056 "pipelinesRunningCount") (clojure.core/assoc :pipelines-running-count (deser-integer (clojure.core/get-in letvar1369056 ["pipelinesRunningCount"]))) (letvar1369056 "logLevel") (clojure.core/assoc :log-level (deser-log-level (clojure.core/get-in letvar1369056 ["logLevel"]))) (letvar1369056 "roleArn") (clojure.core/assoc :role-arn (deser-string (clojure.core/get-in letvar1369056 ["roleArn"]))) (letvar1369056 "tags") (clojure.core/assoc :tags (deser-tags (clojure.core/get-in letvar1369056 ["tags"]))) (letvar1369056 "egressEndpoints") (clojure.core/assoc :egress-endpoints (deser-list-of-channel-egress-endpoint (clojure.core/get-in letvar1369056 ["egressEndpoints"]))) (letvar1369056 "encoderSettings") (clojure.core/assoc :encoder-settings (deser-encoder-settings (clojure.core/get-in letvar1369056 ["encoderSettings"]))) (letvar1369056 "arn") (clojure.core/assoc :arn (deser-string (clojure.core/get-in letvar1369056 ["arn"]))) (letvar1369056 "inputSpecification") (clojure.core/assoc :input-specification (deser-input-specification (clojure.core/get-in letvar1369056 ["inputSpecification"]))) (letvar1369056 "state") (clojure.core/assoc :state (deser-channel-state (clojure.core/get-in letvar1369056 ["state"]))) (letvar1369056 "destinations") (clojure.core/assoc :destinations (deser-list-of-output-destination (clojure.core/get-in letvar1369056 ["destinations"]))) (letvar1369056 "name") (clojure.core/assoc :name (deser-string (clojure.core/get-in letvar1369056 ["name"]))) (letvar1369056 "id") (clojure.core/assoc :id (deser-string (clojure.core/get-in letvar1369056 ["id"])))))))
+
+(clojure.core/defn- response-describe-input-security-group-response ([input] (response-describe-input-security-group-response nil input)) ([resultWrapper1369058 input] (clojure.core/let [rawinput1369057 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369059 {"arn" (rawinput1369057 "arn"), "id" (rawinput1369057 "id"), "inputs" (rawinput1369057 "inputs"), "state" (rawinput1369057 "state"), "tags" (rawinput1369057 "tags"), "whitelistRules" (rawinput1369057 "whitelistRules")}] (clojure.core/cond-> {} (letvar1369059 "arn") (clojure.core/assoc :arn (deser-string (clojure.core/get-in letvar1369059 ["arn"]))) (letvar1369059 "id") (clojure.core/assoc :id (deser-string (clojure.core/get-in letvar1369059 ["id"]))) (letvar1369059 "inputs") (clojure.core/assoc :inputs (deser-list-of-string (clojure.core/get-in letvar1369059 ["inputs"]))) (letvar1369059 "state") (clojure.core/assoc :state (deser-input-security-group-state (clojure.core/get-in letvar1369059 ["state"]))) (letvar1369059 "tags") (clojure.core/assoc :tags (deser-tags (clojure.core/get-in letvar1369059 ["tags"]))) (letvar1369059 "whitelistRules") (clojure.core/assoc :whitelist-rules (deser-list-of-input-whitelist-rule (clojure.core/get-in letvar1369059 ["whitelistRules"])))))))
+
+(clojure.core/defn- response-batch-update-schedule-response ([input] (response-batch-update-schedule-response nil input)) ([resultWrapper1369061 input] (clojure.core/let [rawinput1369060 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369062 {"creates" (rawinput1369060 "creates"), "deletes" (rawinput1369060 "deletes")}] (clojure.core/cond-> {} (letvar1369062 "creates") (clojure.core/assoc :creates (deser-batch-schedule-action-create-result (clojure.core/get-in letvar1369062 ["creates"]))) (letvar1369062 "deletes") (clojure.core/assoc :deletes (deser-batch-schedule-action-delete-result (clojure.core/get-in letvar1369062 ["deletes"])))))))
+
+(clojure.core/defn- response-delete-channel-response ([input] (response-delete-channel-response nil input)) ([resultWrapper1369064 input] (clojure.core/let [rawinput1369063 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369065 {"egressEndpoints" (rawinput1369063 "egressEndpoints"), "logLevel" (rawinput1369063 "logLevel"), "arn" (rawinput1369063 "arn"), "inputAttachments" (rawinput1369063 "inputAttachments"), "tags" (rawinput1369063 "tags"), "roleArn" (rawinput1369063 "roleArn"), "id" (rawinput1369063 "id"), "name" (rawinput1369063 "name"), "destinations" (rawinput1369063 "destinations"), "state" (rawinput1369063 "state"), "pipelinesRunningCount" (rawinput1369063 "pipelinesRunningCount"), "inputSpecification" (rawinput1369063 "inputSpecification"), "encoderSettings" (rawinput1369063 "encoderSettings")}] (clojure.core/cond-> {} (letvar1369065 "inputAttachments") (clojure.core/assoc :input-attachments (deser-list-of-input-attachment (clojure.core/get-in letvar1369065 ["inputAttachments"]))) (letvar1369065 "pipelinesRunningCount") (clojure.core/assoc :pipelines-running-count (deser-integer (clojure.core/get-in letvar1369065 ["pipelinesRunningCount"]))) (letvar1369065 "logLevel") (clojure.core/assoc :log-level (deser-log-level (clojure.core/get-in letvar1369065 ["logLevel"]))) (letvar1369065 "roleArn") (clojure.core/assoc :role-arn (deser-string (clojure.core/get-in letvar1369065 ["roleArn"]))) (letvar1369065 "tags") (clojure.core/assoc :tags (deser-tags (clojure.core/get-in letvar1369065 ["tags"]))) (letvar1369065 "egressEndpoints") (clojure.core/assoc :egress-endpoints (deser-list-of-channel-egress-endpoint (clojure.core/get-in letvar1369065 ["egressEndpoints"]))) (letvar1369065 "encoderSettings") (clojure.core/assoc :encoder-settings (deser-encoder-settings (clojure.core/get-in letvar1369065 ["encoderSettings"]))) (letvar1369065 "arn") (clojure.core/assoc :arn (deser-string (clojure.core/get-in letvar1369065 ["arn"]))) (letvar1369065 "inputSpecification") (clojure.core/assoc :input-specification (deser-input-specification (clojure.core/get-in letvar1369065 ["inputSpecification"]))) (letvar1369065 "state") (clojure.core/assoc :state (deser-channel-state (clojure.core/get-in letvar1369065 ["state"]))) (letvar1369065 "destinations") (clojure.core/assoc :destinations (deser-list-of-output-destination (clojure.core/get-in letvar1369065 ["destinations"]))) (letvar1369065 "name") (clojure.core/assoc :name (deser-string (clojure.core/get-in letvar1369065 ["name"]))) (letvar1369065 "id") (clojure.core/assoc :id (deser-string (clojure.core/get-in letvar1369065 ["id"])))))))
+
+(clojure.core/defn- response-too-many-requests-exception ([input] (response-too-many-requests-exception nil input)) ([resultWrapper1369067 input] (clojure.core/let [rawinput1369066 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369068 {"message" (rawinput1369066 "message")}] (clojure.core/cond-> {} (letvar1369068 "message") (clojure.core/assoc :message (deser-string (clojure.core/get-in letvar1369068 ["message"])))))))
+
+(clojure.core/defn- response-list-inputs-response ([input] (response-list-inputs-response nil input)) ([resultWrapper1369070 input] (clojure.core/let [rawinput1369069 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369071 {"inputs" (rawinput1369069 "inputs"), "nextToken" (rawinput1369069 "nextToken")}] (clojure.core/cond-> {} (letvar1369071 "inputs") (clojure.core/assoc :inputs (deser-list-of-input (clojure.core/get-in letvar1369071 ["inputs"]))) (letvar1369071 "nextToken") (clojure.core/assoc :next-token (deser-string (clojure.core/get-in letvar1369071 ["nextToken"])))))))
+
+(clojure.core/defn- response-start-channel-response ([input] (response-start-channel-response nil input)) ([resultWrapper1369073 input] (clojure.core/let [rawinput1369072 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369074 {"egressEndpoints" (rawinput1369072 "egressEndpoints"), "logLevel" (rawinput1369072 "logLevel"), "arn" (rawinput1369072 "arn"), "inputAttachments" (rawinput1369072 "inputAttachments"), "tags" (rawinput1369072 "tags"), "roleArn" (rawinput1369072 "roleArn"), "id" (rawinput1369072 "id"), "name" (rawinput1369072 "name"), "destinations" (rawinput1369072 "destinations"), "state" (rawinput1369072 "state"), "pipelinesRunningCount" (rawinput1369072 "pipelinesRunningCount"), "inputSpecification" (rawinput1369072 "inputSpecification"), "encoderSettings" (rawinput1369072 "encoderSettings")}] (clojure.core/cond-> {} (letvar1369074 "inputAttachments") (clojure.core/assoc :input-attachments (deser-list-of-input-attachment (clojure.core/get-in letvar1369074 ["inputAttachments"]))) (letvar1369074 "pipelinesRunningCount") (clojure.core/assoc :pipelines-running-count (deser-integer (clojure.core/get-in letvar1369074 ["pipelinesRunningCount"]))) (letvar1369074 "logLevel") (clojure.core/assoc :log-level (deser-log-level (clojure.core/get-in letvar1369074 ["logLevel"]))) (letvar1369074 "roleArn") (clojure.core/assoc :role-arn (deser-string (clojure.core/get-in letvar1369074 ["roleArn"]))) (letvar1369074 "tags") (clojure.core/assoc :tags (deser-tags (clojure.core/get-in letvar1369074 ["tags"]))) (letvar1369074 "egressEndpoints") (clojure.core/assoc :egress-endpoints (deser-list-of-channel-egress-endpoint (clojure.core/get-in letvar1369074 ["egressEndpoints"]))) (letvar1369074 "encoderSettings") (clojure.core/assoc :encoder-settings (deser-encoder-settings (clojure.core/get-in letvar1369074 ["encoderSettings"]))) (letvar1369074 "arn") (clojure.core/assoc :arn (deser-string (clojure.core/get-in letvar1369074 ["arn"]))) (letvar1369074 "inputSpecification") (clojure.core/assoc :input-specification (deser-input-specification (clojure.core/get-in letvar1369074 ["inputSpecification"]))) (letvar1369074 "state") (clojure.core/assoc :state (deser-channel-state (clojure.core/get-in letvar1369074 ["state"]))) (letvar1369074 "destinations") (clojure.core/assoc :destinations (deser-list-of-output-destination (clojure.core/get-in letvar1369074 ["destinations"]))) (letvar1369074 "name") (clojure.core/assoc :name (deser-string (clojure.core/get-in letvar1369074 ["name"]))) (letvar1369074 "id") (clojure.core/assoc :id (deser-string (clojure.core/get-in letvar1369074 ["id"])))))))
+
+(clojure.core/defn- response-list-channels-response ([input] (response-list-channels-response nil input)) ([resultWrapper1369076 input] (clojure.core/let [rawinput1369075 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369077 {"channels" (rawinput1369075 "channels"), "nextToken" (rawinput1369075 "nextToken")}] (clojure.core/cond-> {} (letvar1369077 "channels") (clojure.core/assoc :channels (deser-list-of-channel-summary (clojure.core/get-in letvar1369077 ["channels"]))) (letvar1369077 "nextToken") (clojure.core/assoc :next-token (deser-string (clojure.core/get-in letvar1369077 ["nextToken"])))))))
+
+(clojure.core/defn- response-conflict-exception ([input] (response-conflict-exception nil input)) ([resultWrapper1369079 input] (clojure.core/let [rawinput1369078 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369080 {"message" (rawinput1369078 "message")}] (clojure.core/cond-> {} (letvar1369080 "message") (clojure.core/assoc :message (deser-string (clojure.core/get-in letvar1369080 ["message"])))))))
+
+(clojure.core/defn- response-stop-channel-response ([input] (response-stop-channel-response nil input)) ([resultWrapper1369082 input] (clojure.core/let [rawinput1369081 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369083 {"egressEndpoints" (rawinput1369081 "egressEndpoints"), "logLevel" (rawinput1369081 "logLevel"), "arn" (rawinput1369081 "arn"), "inputAttachments" (rawinput1369081 "inputAttachments"), "tags" (rawinput1369081 "tags"), "roleArn" (rawinput1369081 "roleArn"), "id" (rawinput1369081 "id"), "name" (rawinput1369081 "name"), "destinations" (rawinput1369081 "destinations"), "state" (rawinput1369081 "state"), "pipelinesRunningCount" (rawinput1369081 "pipelinesRunningCount"), "inputSpecification" (rawinput1369081 "inputSpecification"), "encoderSettings" (rawinput1369081 "encoderSettings")}] (clojure.core/cond-> {} (letvar1369083 "inputAttachments") (clojure.core/assoc :input-attachments (deser-list-of-input-attachment (clojure.core/get-in letvar1369083 ["inputAttachments"]))) (letvar1369083 "pipelinesRunningCount") (clojure.core/assoc :pipelines-running-count (deser-integer (clojure.core/get-in letvar1369083 ["pipelinesRunningCount"]))) (letvar1369083 "logLevel") (clojure.core/assoc :log-level (deser-log-level (clojure.core/get-in letvar1369083 ["logLevel"]))) (letvar1369083 "roleArn") (clojure.core/assoc :role-arn (deser-string (clojure.core/get-in letvar1369083 ["roleArn"]))) (letvar1369083 "tags") (clojure.core/assoc :tags (deser-tags (clojure.core/get-in letvar1369083 ["tags"]))) (letvar1369083 "egressEndpoints") (clojure.core/assoc :egress-endpoints (deser-list-of-channel-egress-endpoint (clojure.core/get-in letvar1369083 ["egressEndpoints"]))) (letvar1369083 "encoderSettings") (clojure.core/assoc :encoder-settings (deser-encoder-settings (clojure.core/get-in letvar1369083 ["encoderSettings"]))) (letvar1369083 "arn") (clojure.core/assoc :arn (deser-string (clojure.core/get-in letvar1369083 ["arn"]))) (letvar1369083 "inputSpecification") (clojure.core/assoc :input-specification (deser-input-specification (clojure.core/get-in letvar1369083 ["inputSpecification"]))) (letvar1369083 "state") (clojure.core/assoc :state (deser-channel-state (clojure.core/get-in letvar1369083 ["state"]))) (letvar1369083 "destinations") (clojure.core/assoc :destinations (deser-list-of-output-destination (clojure.core/get-in letvar1369083 ["destinations"]))) (letvar1369083 "name") (clojure.core/assoc :name (deser-string (clojure.core/get-in letvar1369083 ["name"]))) (letvar1369083 "id") (clojure.core/assoc :id (deser-string (clojure.core/get-in letvar1369083 ["id"])))))))
+
+(clojure.core/defn- response-not-found-exception ([input] (response-not-found-exception nil input)) ([resultWrapper1369085 input] (clojure.core/let [rawinput1369084 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369086 {"message" (rawinput1369084 "message")}] (clojure.core/cond-> {} (letvar1369086 "message") (clojure.core/assoc :message (deser-string (clojure.core/get-in letvar1369086 ["message"])))))))
+
+(clojure.core/defn- response-delete-reservation-response ([input] (response-delete-reservation-response nil input)) ([resultWrapper1369088 input] (clojure.core/let [rawinput1369087 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369089 {"offeringDescription" (rawinput1369087 "offeringDescription"), "arn" (rawinput1369087 "arn"), "resourceSpecification" (rawinput1369087 "resourceSpecification"), "offeringType" (rawinput1369087 "offeringType"), "count" (rawinput1369087 "count"), "fixedPrice" (rawinput1369087 "fixedPrice"), "name" (rawinput1369087 "name"), "start" (rawinput1369087 "start"), "region" (rawinput1369087 "region"), "currencyCode" (rawinput1369087 "currencyCode"), "duration" (rawinput1369087 "duration"), "state" (rawinput1369087 "state"), "reservationId" (rawinput1369087 "reservationId"), "usagePrice" (rawinput1369087 "usagePrice"), "offeringId" (rawinput1369087 "offeringId"), "end" (rawinput1369087 "end"), "durationUnits" (rawinput1369087 "durationUnits")}] (clojure.core/cond-> {} (letvar1369089 "durationUnits") (clojure.core/assoc :duration-units (deser-offering-duration-units (clojure.core/get-in letvar1369089 ["durationUnits"]))) (letvar1369089 "currencyCode") (clojure.core/assoc :currency-code (deser-string (clojure.core/get-in letvar1369089 ["currencyCode"]))) (letvar1369089 "offeringDescription") (clojure.core/assoc :offering-description (deser-string (clojure.core/get-in letvar1369089 ["offeringDescription"]))) (letvar1369089 "resourceSpecification") (clojure.core/assoc :resource-specification (deser-reservation-resource-specification (clojure.core/get-in letvar1369089 ["resourceSpecification"]))) (letvar1369089 "start") (clojure.core/assoc :start (deser-string (clojure.core/get-in letvar1369089 ["start"]))) (letvar1369089 "fixedPrice") (clojure.core/assoc :fixed-price (deser-double (clojure.core/get-in letvar1369089 ["fixedPrice"]))) (letvar1369089 "end") (clojure.core/assoc :end (deser-string (clojure.core/get-in letvar1369089 ["end"]))) (letvar1369089 "count") (clojure.core/assoc :count (deser-integer (clojure.core/get-in letvar1369089 ["count"]))) (letvar1369089 "offeringId") (clojure.core/assoc :offering-id (deser-string (clojure.core/get-in letvar1369089 ["offeringId"]))) (letvar1369089 "duration") (clojure.core/assoc :duration (deser-integer (clojure.core/get-in letvar1369089 ["duration"]))) (letvar1369089 "usagePrice") (clojure.core/assoc :usage-price (deser-double (clojure.core/get-in letvar1369089 ["usagePrice"]))) (letvar1369089 "arn") (clojure.core/assoc :arn (deser-string (clojure.core/get-in letvar1369089 ["arn"]))) (letvar1369089 "state") (clojure.core/assoc :state (deser-reservation-state (clojure.core/get-in letvar1369089 ["state"]))) (letvar1369089 "offeringType") (clojure.core/assoc :offering-type (deser-offering-type (clojure.core/get-in letvar1369089 ["offeringType"]))) (letvar1369089 "name") (clojure.core/assoc :name (deser-string (clojure.core/get-in letvar1369089 ["name"]))) (letvar1369089 "reservationId") (clojure.core/assoc :reservation-id (deser-string (clojure.core/get-in letvar1369089 ["reservationId"]))) (letvar1369089 "region") (clojure.core/assoc :region (deser-string (clojure.core/get-in letvar1369089 ["region"])))))))
+
+(clojure.core/defn- response-update-input-response ([input] (response-update-input-response nil input)) ([resultWrapper1369091 input] (clojure.core/let [rawinput1369090 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369092 {"input" (rawinput1369090 "input")}] (clojure.core/cond-> {} (letvar1369092 "input") (clojure.core/assoc :input (deser-input (clojure.core/get-in letvar1369092 ["input"])))))))
+
+(clojure.core/defn- response-describe-reservation-response ([input] (response-describe-reservation-response nil input)) ([resultWrapper1369094 input] (clojure.core/let [rawinput1369093 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369095 {"offeringDescription" (rawinput1369093 "offeringDescription"), "arn" (rawinput1369093 "arn"), "resourceSpecification" (rawinput1369093 "resourceSpecification"), "offeringType" (rawinput1369093 "offeringType"), "count" (rawinput1369093 "count"), "fixedPrice" (rawinput1369093 "fixedPrice"), "name" (rawinput1369093 "name"), "start" (rawinput1369093 "start"), "region" (rawinput1369093 "region"), "currencyCode" (rawinput1369093 "currencyCode"), "duration" (rawinput1369093 "duration"), "state" (rawinput1369093 "state"), "reservationId" (rawinput1369093 "reservationId"), "usagePrice" (rawinput1369093 "usagePrice"), "offeringId" (rawinput1369093 "offeringId"), "end" (rawinput1369093 "end"), "durationUnits" (rawinput1369093 "durationUnits")}] (clojure.core/cond-> {} (letvar1369095 "durationUnits") (clojure.core/assoc :duration-units (deser-offering-duration-units (clojure.core/get-in letvar1369095 ["durationUnits"]))) (letvar1369095 "currencyCode") (clojure.core/assoc :currency-code (deser-string (clojure.core/get-in letvar1369095 ["currencyCode"]))) (letvar1369095 "offeringDescription") (clojure.core/assoc :offering-description (deser-string (clojure.core/get-in letvar1369095 ["offeringDescription"]))) (letvar1369095 "resourceSpecification") (clojure.core/assoc :resource-specification (deser-reservation-resource-specification (clojure.core/get-in letvar1369095 ["resourceSpecification"]))) (letvar1369095 "start") (clojure.core/assoc :start (deser-string (clojure.core/get-in letvar1369095 ["start"]))) (letvar1369095 "fixedPrice") (clojure.core/assoc :fixed-price (deser-double (clojure.core/get-in letvar1369095 ["fixedPrice"]))) (letvar1369095 "end") (clojure.core/assoc :end (deser-string (clojure.core/get-in letvar1369095 ["end"]))) (letvar1369095 "count") (clojure.core/assoc :count (deser-integer (clojure.core/get-in letvar1369095 ["count"]))) (letvar1369095 "offeringId") (clojure.core/assoc :offering-id (deser-string (clojure.core/get-in letvar1369095 ["offeringId"]))) (letvar1369095 "duration") (clojure.core/assoc :duration (deser-integer (clojure.core/get-in letvar1369095 ["duration"]))) (letvar1369095 "usagePrice") (clojure.core/assoc :usage-price (deser-double (clojure.core/get-in letvar1369095 ["usagePrice"]))) (letvar1369095 "arn") (clojure.core/assoc :arn (deser-string (clojure.core/get-in letvar1369095 ["arn"]))) (letvar1369095 "state") (clojure.core/assoc :state (deser-reservation-state (clojure.core/get-in letvar1369095 ["state"]))) (letvar1369095 "offeringType") (clojure.core/assoc :offering-type (deser-offering-type (clojure.core/get-in letvar1369095 ["offeringType"]))) (letvar1369095 "name") (clojure.core/assoc :name (deser-string (clojure.core/get-in letvar1369095 ["name"]))) (letvar1369095 "reservationId") (clojure.core/assoc :reservation-id (deser-string (clojure.core/get-in letvar1369095 ["reservationId"]))) (letvar1369095 "region") (clojure.core/assoc :region (deser-string (clojure.core/get-in letvar1369095 ["region"])))))))
+
+(clojure.core/defn- response-describe-input-response ([input] (response-describe-input-response nil input)) ([resultWrapper1369097 input] (clojure.core/let [rawinput1369096 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369098 {"sources" (rawinput1369096 "sources"), "arn" (rawinput1369096 "arn"), "tags" (rawinput1369096 "tags"), "roleArn" (rawinput1369096 "roleArn"), "id" (rawinput1369096 "id"), "securityGroups" (rawinput1369096 "securityGroups"), "name" (rawinput1369096 "name"), "destinations" (rawinput1369096 "destinations"), "mediaConnectFlows" (rawinput1369096 "mediaConnectFlows"), "type" (rawinput1369096 "type"), "state" (rawinput1369096 "state"), "attachedChannels" (rawinput1369096 "attachedChannels")}] (clojure.core/cond-> {} (letvar1369098 "mediaConnectFlows") (clojure.core/assoc :media-connect-flows (deser-list-of-media-connect-flow (clojure.core/get-in letvar1369098 ["mediaConnectFlows"]))) (letvar1369098 "type") (clojure.core/assoc :type (deser-input-type (clojure.core/get-in letvar1369098 ["type"]))) (letvar1369098 "securityGroups") (clojure.core/assoc :security-groups (deser-list-of-string (clojure.core/get-in letvar1369098 ["securityGroups"]))) (letvar1369098 "roleArn") (clojure.core/assoc :role-arn (deser-string (clojure.core/get-in letvar1369098 ["roleArn"]))) (letvar1369098 "tags") (clojure.core/assoc :tags (deser-tags (clojure.core/get-in letvar1369098 ["tags"]))) (letvar1369098 "arn") (clojure.core/assoc :arn (deser-string (clojure.core/get-in letvar1369098 ["arn"]))) (letvar1369098 "state") (clojure.core/assoc :state (deser-input-state (clojure.core/get-in letvar1369098 ["state"]))) (letvar1369098 "destinations") (clojure.core/assoc :destinations (deser-list-of-input-destination (clojure.core/get-in letvar1369098 ["destinations"]))) (letvar1369098 "name") (clojure.core/assoc :name (deser-string (clojure.core/get-in letvar1369098 ["name"]))) (letvar1369098 "sources") (clojure.core/assoc :sources (deser-list-of-input-source (clojure.core/get-in letvar1369098 ["sources"]))) (letvar1369098 "attachedChannels") (clojure.core/assoc :attached-channels (deser-list-of-string (clojure.core/get-in letvar1369098 ["attachedChannels"]))) (letvar1369098 "id") (clojure.core/assoc :id (deser-string (clojure.core/get-in letvar1369098 ["id"])))))))
+
+(clojure.core/defn- response-list-input-security-groups-response ([input] (response-list-input-security-groups-response nil input)) ([resultWrapper1369100 input] (clojure.core/let [rawinput1369099 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369101 {"inputSecurityGroups" (rawinput1369099 "inputSecurityGroups"), "nextToken" (rawinput1369099 "nextToken")}] (clojure.core/cond-> {} (letvar1369101 "inputSecurityGroups") (clojure.core/assoc :input-security-groups (deser-list-of-input-security-group (clojure.core/get-in letvar1369101 ["inputSecurityGroups"]))) (letvar1369101 "nextToken") (clojure.core/assoc :next-token (deser-string (clojure.core/get-in letvar1369101 ["nextToken"])))))))
+
+(clojure.core/defn- response-bad-gateway-exception ([input] (response-bad-gateway-exception nil input)) ([resultWrapper1369103 input] (clojure.core/let [rawinput1369102 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369104 {"message" (rawinput1369102 "message")}] (clojure.core/cond-> {} (letvar1369104 "message") (clojure.core/assoc :message (deser-string (clojure.core/get-in letvar1369104 ["message"])))))))
+
+(clojure.core/defn- response-describe-offering-response ([input] (response-describe-offering-response nil input)) ([resultWrapper1369106 input] (clojure.core/let [rawinput1369105 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369107 {"offeringDescription" (rawinput1369105 "offeringDescription"), "arn" (rawinput1369105 "arn"), "resourceSpecification" (rawinput1369105 "resourceSpecification"), "offeringType" (rawinput1369105 "offeringType"), "fixedPrice" (rawinput1369105 "fixedPrice"), "region" (rawinput1369105 "region"), "currencyCode" (rawinput1369105 "currencyCode"), "duration" (rawinput1369105 "duration"), "usagePrice" (rawinput1369105 "usagePrice"), "offeringId" (rawinput1369105 "offeringId"), "durationUnits" (rawinput1369105 "durationUnits")}] (clojure.core/cond-> {} (letvar1369107 "durationUnits") (clojure.core/assoc :duration-units (deser-offering-duration-units (clojure.core/get-in letvar1369107 ["durationUnits"]))) (letvar1369107 "currencyCode") (clojure.core/assoc :currency-code (deser-string (clojure.core/get-in letvar1369107 ["currencyCode"]))) (letvar1369107 "offeringDescription") (clojure.core/assoc :offering-description (deser-string (clojure.core/get-in letvar1369107 ["offeringDescription"]))) (letvar1369107 "resourceSpecification") (clojure.core/assoc :resource-specification (deser-reservation-resource-specification (clojure.core/get-in letvar1369107 ["resourceSpecification"]))) (letvar1369107 "fixedPrice") (clojure.core/assoc :fixed-price (deser-double (clojure.core/get-in letvar1369107 ["fixedPrice"]))) (letvar1369107 "offeringId") (clojure.core/assoc :offering-id (deser-string (clojure.core/get-in letvar1369107 ["offeringId"]))) (letvar1369107 "duration") (clojure.core/assoc :duration (deser-integer (clojure.core/get-in letvar1369107 ["duration"]))) (letvar1369107 "usagePrice") (clojure.core/assoc :usage-price (deser-double (clojure.core/get-in letvar1369107 ["usagePrice"]))) (letvar1369107 "arn") (clojure.core/assoc :arn (deser-string (clojure.core/get-in letvar1369107 ["arn"]))) (letvar1369107 "offeringType") (clojure.core/assoc :offering-type (deser-offering-type (clojure.core/get-in letvar1369107 ["offeringType"]))) (letvar1369107 "region") (clojure.core/assoc :region (deser-string (clojure.core/get-in letvar1369107 ["region"])))))))
+
+(clojure.core/defn- response-describe-schedule-response ([input] (response-describe-schedule-response nil input)) ([resultWrapper1369109 input] (clojure.core/let [rawinput1369108 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369110 {"nextToken" (rawinput1369108 "nextToken"), "scheduleActions" (rawinput1369108 "scheduleActions")}] (clojure.core/cond-> {} (letvar1369110 "nextToken") (clojure.core/assoc :next-token (deser-string (clojure.core/get-in letvar1369110 ["nextToken"]))) (letvar1369110 "scheduleActions") (clojure.core/assoc :schedule-actions (deser-list-of-schedule-action (clojure.core/get-in letvar1369110 ["scheduleActions"])))))))
+
+(clojure.core/defn- response-gateway-timeout-exception ([input] (response-gateway-timeout-exception nil input)) ([resultWrapper1369112 input] (clojure.core/let [rawinput1369111 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369113 {"message" (rawinput1369111 "message")}] (clojure.core/cond-> {} (letvar1369113 "message") (clojure.core/assoc :message (deser-string (clojure.core/get-in letvar1369113 ["message"])))))))
+
+(clojure.core/defn- response-list-reservations-response ([input] (response-list-reservations-response nil input)) ([resultWrapper1369115 input] (clojure.core/let [rawinput1369114 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369116 {"nextToken" (rawinput1369114 "nextToken"), "reservations" (rawinput1369114 "reservations")}] (clojure.core/cond-> {} (letvar1369116 "nextToken") (clojure.core/assoc :next-token (deser-string (clojure.core/get-in letvar1369116 ["nextToken"]))) (letvar1369116 "reservations") (clojure.core/assoc :reservations (deser-list-of-reservation (clojure.core/get-in letvar1369116 ["reservations"])))))))
+
+(clojure.core/defn- response-create-input-response ([input] (response-create-input-response nil input)) ([resultWrapper1369118 input] (clojure.core/let [rawinput1369117 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369119 {"input" (rawinput1369117 "input")}] (clojure.core/cond-> {} (letvar1369119 "input") (clojure.core/assoc :input (deser-input (clojure.core/get-in letvar1369119 ["input"])))))))
+
+(clojure.core/defn- response-update-channel-response ([input] (response-update-channel-response nil input)) ([resultWrapper1369121 input] (clojure.core/let [rawinput1369120 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1369122 {"channel" (rawinput1369120 "channel")}] (clojure.core/cond-> {} (letvar1369122 "channel") (clojure.core/assoc :channel (deser-channel (clojure.core/get-in letvar1369122 ["channel"])))))))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/hls-manifest-compression #{"GZIP" "NONE" :gzip :none})
 
@@ -1598,7 +3354,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.update-input-security-group-request/input-security-group-id (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.update-input-security-group-request/whitelist-rules (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-input-whitelist-rule-cidr))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/update-input-security-group-request (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.update-input-security-group-request/input-security-group-id] :opt-un [:portkey.aws.medialive.-2017-10-14.update-input-security-group-request/whitelist-rules]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/update-input-security-group-request (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.update-input-security-group-request/input-security-group-id] :opt-un [:portkey.aws.medialive.-2017-10-14/tags :portkey.aws.medialive.-2017-10-14.update-input-security-group-request/whitelist-rules]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/audio-type #{:hearing-impaired :visual-impaired-commentary "VISUAL_IMPAIRED_COMMENTARY" "UNDEFINED" :undefined :clean-effects "HEARING_IMPAIRED" "CLEAN_EFFECTS"})
 
@@ -1609,7 +3365,7 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/list-of-channel-egress-endpoint (clojure.spec.alpha/coll-of :portkey.aws.medialive.-2017-10-14/channel-egress-endpoint))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.fixed-mode-schedule-action-start-settings/time (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/fixed-mode-schedule-action-start-settings (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.fixed-mode-schedule-action-start-settings/time]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/fixed-mode-schedule-action-start-settings (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.fixed-mode-schedule-action-start-settings/time] :opt-un []))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.burn-in-destination-settings/outline-color (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/burn-in-outline-color))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.burn-in-destination-settings/outline-size (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer-min-0-max-10))
@@ -1668,6 +3424,8 @@
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/m-2ts-klv #{"PASSTHROUGH" "NONE" :passthrough :none})
 
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/list-tags-for-resource-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14/tags]))
+
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.global-configuration/initial-audio-gain (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer-min-negative-60-max-60))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.global-configuration/input-end-action (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/global-configuration-input-end-action))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.global-configuration/output-timing-source (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/global-configuration-output-timing-source))
@@ -1681,7 +3439,7 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.archive-output-settings/name-modifier (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/archive-output-settings (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.archive-output-settings/container-settings] :opt-un [:portkey.aws.medialive.-2017-10-14.archive-output-settings/extension :portkey.aws.medialive.-2017-10-14.archive-output-settings/name-modifier]))
 
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/string-min-6-max-6 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 6 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 6))))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/string-min-6-max-6 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012852__auto__] (clojure.core/<= 6 (clojure.core/count s__1012852__auto__))) (clojure.core/fn [s__1012853__auto__] (clojure.core/< (clojure.core/count s__1012853__auto__) 6))))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/m-2ts-audio-buffer-model #{:atsc :dvb "DVB" "ATSC"})
 
@@ -1692,6 +3450,9 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/h-264-gop-size-units #{"SECONDS" :frames :seconds "FRAMES"})
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/hls-directory-structure #{:single-directory "SINGLE_DIRECTORY" "SUBDIRECTORY_PER_STREAM" :subdirectory-per-stream})
+
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.frame-capture-output-settings/name-modifier (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/frame-capture-output-settings (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.frame-capture-output-settings/name-modifier]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/m-2ts-ebp-placement #{:video-and-audio-pids "VIDEO_AND_AUDIO_PIDS" "VIDEO_PID" :video-pid})
 
@@ -1728,13 +3489,20 @@
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/audio-normalization-algorithm #{:itu-1770-2 :itu-1770-1 "ITU_1770_1" "ITU_1770_2"})
 
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.follow-mode-schedule-action-start-settings/reference-action-name (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/follow-mode-schedule-action-start-settings (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.follow-mode-schedule-action-start-settings/reference-action-name :portkey.aws.medialive.-2017-10-14/follow-point] :opt-un []))
+
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/rtmp-caption-data #{"FIELD1_608" :field-1-and-field-2-608 :all "FIELD1_AND_FIELD2_608" "ALL" :field-1-608})
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/hls-mode #{"VOD" "LIVE" :vod :live})
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/log-level #{"DISABLED" "WARNING" :disabled :debug "ERROR" :warning "DEBUG" :info :error "INFO"})
 
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/follow-point #{:start "END" "START" :end})
+
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/integer-min-0-max-500 (clojure.spec.alpha/int-in 0 500))
+
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/i-frame-only-playlist-type #{"DISABLED" :disabled "STANDARD" :standard})
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input-loss-behavior/black-frame-msec (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer-min-0-max-1000000))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input-loss-behavior/input-loss-image-color (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string-min-6-max-6))
@@ -1764,7 +3532,10 @@
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/dvb-sub-destination-font-color #{:white :yellow :green "GREEN" "BLUE" :red :blue "WHITE" "YELLOW" "BLACK" "RED" :black})
 
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/input-type #{:rtmp-pull :url-pull :rtmp-push "RTMP_PULL" "UDP_PUSH" "URL_PULL" :rtp-push :udp-push "RTP_PUSH" "RTMP_PUSH"})
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/input-type #{:mediaconnect :rtmp-pull "MP4_FILE" :url-pull :mp-4-file :rtmp-push "RTMP_PULL" "UDP_PUSH" "URL_PULL" :rtp-push :udp-push "RTP_PUSH" "MEDIACONNECT" "RTMP_PUSH"})
+
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.list-tags-for-resource-request/resource-arn (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/list-tags-for-resource-request (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.list-tags-for-resource-request/resource-arn] :opt-un []))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.dvb-sdt-settings/output-sdt (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/dvb-sdt-output-sdt))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.dvb-sdt-settings/rep-interval (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer-min-25-max-2000))
@@ -1791,6 +3562,9 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.update-channel/name (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.update-channel/role-arn (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/update-channel (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.update-channel/destinations :portkey.aws.medialive.-2017-10-14/encoder-settings :portkey.aws.medialive.-2017-10-14.update-channel/input-attachments :portkey.aws.medialive.-2017-10-14/input-specification :portkey.aws.medialive.-2017-10-14/log-level :portkey.aws.medialive.-2017-10-14.update-channel/name :portkey.aws.medialive.-2017-10-14.update-channel/role-arn]))
+
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.hls-timed-metadata-schedule-action-settings/id-3 (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/hls-timed-metadata-schedule-action-settings (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.hls-timed-metadata-schedule-action-settings/id-3] :opt-un []))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.udp-output-settings/buffer-msec (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer-min-0-max-10000))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.udp-output-settings/container-settings (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/udp-container-settings))
@@ -1916,6 +3690,9 @@
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/purchase-offering-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14/reservation]))
 
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.pause-state-schedule-action-settings/pipelines (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-pipeline-pause-state-settings))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/pause-state-schedule-action-settings (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.pause-state-schedule-action-settings/pipelines]))
+
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input-source-request/password-param (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input-source-request/url (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input-source-request/username (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
@@ -1933,6 +3710,10 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/integer-min-0-max-65535 (clojure.spec.alpha/int-in 0 65535))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/hls-webdav-http-transfer-mode #{"NON_CHUNKED" "CHUNKED" :chunked :non-chunked})
+
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.delete-tags-request/resource-arn (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.delete-tags-request/tag-keys (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/delete-tags-request (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.delete-tags-request/tag-keys :portkey.aws.medialive.-2017-10-14.delete-tags-request/resource-arn] :opt-un []))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/offering-duration-units #{:months "MONTHS"})
 
@@ -1979,6 +3760,8 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input-security-group-result-model/security-group (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/input-security-group))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/create-input-security-group-result-model (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.create-input-security-group-result-model/security-group]))
 
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/tags (clojure.spec.alpha/map-of :portkey.aws.medialive.-2017-10-14/string :portkey.aws.medialive.-2017-10-14/string))
+
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/fec-output-include-fec #{:column :column-and-row "COLUMN_AND_ROW" "COLUMN"})
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/scte-35-segmentation-cancel-indicator #{:segmentation-event-canceled "SEGMENTATION_EVENT_NOT_CANCELED" "SEGMENTATION_EVENT_CANCELED" :segmentation-event-not-canceled})
@@ -1994,11 +3777,14 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.describe-channel-response/destinations (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-output-destination))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.describe-channel-response/name (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.describe-channel-response/id (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/describe-channel-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.describe-channel-response/input-attachments :portkey.aws.medialive.-2017-10-14.describe-channel-response/pipelines-running-count :portkey.aws.medialive.-2017-10-14/log-level :portkey.aws.medialive.-2017-10-14.describe-channel-response/role-arn :portkey.aws.medialive.-2017-10-14.describe-channel-response/egress-endpoints :portkey.aws.medialive.-2017-10-14/encoder-settings :portkey.aws.medialive.-2017-10-14.describe-channel-response/arn :portkey.aws.medialive.-2017-10-14/input-specification :portkey.aws.medialive.-2017-10-14.describe-channel-response/state :portkey.aws.medialive.-2017-10-14.describe-channel-response/destinations :portkey.aws.medialive.-2017-10-14.describe-channel-response/name :portkey.aws.medialive.-2017-10-14.describe-channel-response/id]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/describe-channel-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.describe-channel-response/input-attachments :portkey.aws.medialive.-2017-10-14.describe-channel-response/pipelines-running-count :portkey.aws.medialive.-2017-10-14/log-level :portkey.aws.medialive.-2017-10-14.describe-channel-response/role-arn :portkey.aws.medialive.-2017-10-14/tags :portkey.aws.medialive.-2017-10-14.describe-channel-response/egress-endpoints :portkey.aws.medialive.-2017-10-14/encoder-settings :portkey.aws.medialive.-2017-10-14.describe-channel-response/arn :portkey.aws.medialive.-2017-10-14/input-specification :portkey.aws.medialive.-2017-10-14.describe-channel-response/state :portkey.aws.medialive.-2017-10-14.describe-channel-response/destinations :portkey.aws.medialive.-2017-10-14.describe-channel-response/name :portkey.aws.medialive.-2017-10-14.describe-channel-response/id]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/ac-3-drc-profile #{:film-standard "FILM_STANDARD" "NONE" :none})
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/eac-3-lfe-control #{:no-lfe "NO_LFE" "LFE" :lfe})
+
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.media-connect-flow-request/flow-arn (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/media-connect-flow-request (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.media-connect-flow-request/flow-arn]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.teletext-source-settings/page-number (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/teletext-source-settings (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.teletext-source-settings/page-number]))
@@ -2014,9 +3800,11 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.update-input-request/destinations (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-input-destination-request))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.update-input-request/input-id (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.update-input-request/input-security-groups (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.update-input-request/media-connect-flows (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-media-connect-flow-request))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.update-input-request/name (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.update-input-request/role-arn (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.update-input-request/sources (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-input-source-request))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/update-input-request (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.update-input-request/input-id] :opt-un [:portkey.aws.medialive.-2017-10-14.update-input-request/destinations :portkey.aws.medialive.-2017-10-14.update-input-request/input-security-groups :portkey.aws.medialive.-2017-10-14.update-input-request/name :portkey.aws.medialive.-2017-10-14.update-input-request/sources]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/update-input-request (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.update-input-request/input-id] :opt-un [:portkey.aws.medialive.-2017-10-14.update-input-request/destinations :portkey.aws.medialive.-2017-10-14.update-input-request/input-security-groups :portkey.aws.medialive.-2017-10-14.update-input-request/media-connect-flows :portkey.aws.medialive.-2017-10-14.update-input-request/name :portkey.aws.medialive.-2017-10-14.update-input-request/role-arn :portkey.aws.medialive.-2017-10-14.update-input-request/sources]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/global-configuration-low-framerate-inputs #{"DISABLED" :disabled "ENABLED" :enabled})
 
@@ -2059,6 +3847,8 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.reservation/region (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/reservation (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.reservation/duration-units :portkey.aws.medialive.-2017-10-14.reservation/currency-code :portkey.aws.medialive.-2017-10-14.reservation/offering-description :portkey.aws.medialive.-2017-10-14.reservation/resource-specification :portkey.aws.medialive.-2017-10-14.reservation/start :portkey.aws.medialive.-2017-10-14.reservation/fixed-price :portkey.aws.medialive.-2017-10-14.reservation/end :portkey.aws.medialive.-2017-10-14.reservation/count :portkey.aws.medialive.-2017-10-14.reservation/offering-id :portkey.aws.medialive.-2017-10-14.reservation/duration :portkey.aws.medialive.-2017-10-14.reservation/usage-price :portkey.aws.medialive.-2017-10-14.reservation/arn :portkey.aws.medialive.-2017-10-14.reservation/state :portkey.aws.medialive.-2017-10-14/offering-type :portkey.aws.medialive.-2017-10-14.reservation/name :portkey.aws.medialive.-2017-10-14.reservation/reservation-id :portkey.aws.medialive.-2017-10-14.reservation/region]))
 
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/h-264-sub-gop-length #{"FIXED" :dynamic :fixed "DYNAMIC"})
+
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.ms-smooth-output-settings/name-modifier (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/ms-smooth-output-settings (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.ms-smooth-output-settings/name-modifier]))
 
@@ -2092,7 +3882,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/list-of-input-channel-level (clojure.spec.alpha/coll-of :portkey.aws.medialive.-2017-10-14/input-channel-level))
 
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/h-264-rate-control-mode #{"VBR" :cbr :vbr "CBR"})
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/h-264-rate-control-mode #{"VBR" :cbr :vbr :qvbr "CBR" "QVBR"})
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/integer-min-0-max-255 (clojure.spec.alpha/int-in 0 255))
 
@@ -2102,6 +3892,10 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.video-selector/color-space-usage (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/video-selector-color-space-usage))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.video-selector/selector-settings (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/video-selector-settings))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/video-selector (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.video-selector/color-space :portkey.aws.medialive.-2017-10-14.video-selector/color-space-usage :portkey.aws.medialive.-2017-10-14.video-selector/selector-settings]))
+
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input-vpc-request/security-group-ids (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input-vpc-request/subnet-ids (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/input-vpc-request (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.input-vpc-request/subnet-ids] :opt-un [:portkey.aws.medialive.-2017-10-14.input-vpc-request/security-group-ids]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/ac-3-metadata-control #{"FOLLOW_INPUT" :follow-input "USE_CONFIGURED" :use-configured})
 
@@ -2122,7 +3916,7 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.channel-summary/destinations (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-output-destination))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.channel-summary/name (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.channel-summary/id (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/channel-summary (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.channel-summary/input-attachments :portkey.aws.medialive.-2017-10-14.channel-summary/pipelines-running-count :portkey.aws.medialive.-2017-10-14/log-level :portkey.aws.medialive.-2017-10-14.channel-summary/role-arn :portkey.aws.medialive.-2017-10-14.channel-summary/egress-endpoints :portkey.aws.medialive.-2017-10-14.channel-summary/arn :portkey.aws.medialive.-2017-10-14/input-specification :portkey.aws.medialive.-2017-10-14.channel-summary/state :portkey.aws.medialive.-2017-10-14.channel-summary/destinations :portkey.aws.medialive.-2017-10-14.channel-summary/name :portkey.aws.medialive.-2017-10-14.channel-summary/id]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/channel-summary (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.channel-summary/input-attachments :portkey.aws.medialive.-2017-10-14.channel-summary/pipelines-running-count :portkey.aws.medialive.-2017-10-14/log-level :portkey.aws.medialive.-2017-10-14.channel-summary/role-arn :portkey.aws.medialive.-2017-10-14/tags :portkey.aws.medialive.-2017-10-14.channel-summary/egress-endpoints :portkey.aws.medialive.-2017-10-14.channel-summary/arn :portkey.aws.medialive.-2017-10-14/input-specification :portkey.aws.medialive.-2017-10-14.channel-summary/state :portkey.aws.medialive.-2017-10-14.channel-summary/destinations :portkey.aws.medialive.-2017-10-14.channel-summary/name :portkey.aws.medialive.-2017-10-14.channel-summary/id]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/integer-min-25-max-10000 (clojure.spec.alpha/int-in 25 10000))
 
@@ -2151,7 +3945,7 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.describe-input-security-group-response/inputs (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.describe-input-security-group-response/state (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/input-security-group-state))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.describe-input-security-group-response/whitelist-rules (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-input-whitelist-rule))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/describe-input-security-group-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.describe-input-security-group-response/arn :portkey.aws.medialive.-2017-10-14.describe-input-security-group-response/id :portkey.aws.medialive.-2017-10-14.describe-input-security-group-response/inputs :portkey.aws.medialive.-2017-10-14.describe-input-security-group-response/state :portkey.aws.medialive.-2017-10-14.describe-input-security-group-response/whitelist-rules]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/describe-input-security-group-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.describe-input-security-group-response/arn :portkey.aws.medialive.-2017-10-14.describe-input-security-group-response/id :portkey.aws.medialive.-2017-10-14.describe-input-security-group-response/inputs :portkey.aws.medialive.-2017-10-14.describe-input-security-group-response/state :portkey.aws.medialive.-2017-10-14/tags :portkey.aws.medialive.-2017-10-14.describe-input-security-group-response/whitelist-rules]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.stop-channel-request/channel-id (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/stop-channel-request (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.stop-channel-request/channel-id] :opt-un []))
@@ -2164,12 +3958,15 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.list-reservations-result-model/reservations (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-reservation))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/list-reservations-result-model (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.list-reservations-result-model/next-token :portkey.aws.medialive.-2017-10-14.list-reservations-result-model/reservations]))
 
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.schedule-action-settings/hls-timed-metadata-settings (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/hls-timed-metadata-schedule-action-settings))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.schedule-action-settings/input-switch-settings (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/input-switch-schedule-action-settings))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.schedule-action-settings/pause-state-settings (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/pause-state-schedule-action-settings))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.schedule-action-settings/scte-35-return-to-network-settings (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/scte-35-return-to-network-schedule-action-settings))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.schedule-action-settings/scte-35-splice-insert-settings (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/scte-35-splice-insert-schedule-action-settings))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.schedule-action-settings/scte-35-time-signal-settings (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/scte-35-time-signal-schedule-action-settings))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.schedule-action-settings/static-image-activate-settings (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/static-image-activate-schedule-action-settings))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.schedule-action-settings/static-image-deactivate-settings (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/static-image-deactivate-schedule-action-settings))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/schedule-action-settings (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.schedule-action-settings/scte-35-return-to-network-settings :portkey.aws.medialive.-2017-10-14.schedule-action-settings/scte-35-splice-insert-settings :portkey.aws.medialive.-2017-10-14.schedule-action-settings/scte-35-time-signal-settings :portkey.aws.medialive.-2017-10-14.schedule-action-settings/static-image-activate-settings :portkey.aws.medialive.-2017-10-14.schedule-action-settings/static-image-deactivate-settings]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/schedule-action-settings (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.schedule-action-settings/hls-timed-metadata-settings :portkey.aws.medialive.-2017-10-14.schedule-action-settings/input-switch-settings :portkey.aws.medialive.-2017-10-14.schedule-action-settings/pause-state-settings :portkey.aws.medialive.-2017-10-14.schedule-action-settings/scte-35-return-to-network-settings :portkey.aws.medialive.-2017-10-14.schedule-action-settings/scte-35-splice-insert-settings :portkey.aws.medialive.-2017-10-14.schedule-action-settings/scte-35-time-signal-settings :portkey.aws.medialive.-2017-10-14.schedule-action-settings/static-image-activate-settings :portkey.aws.medialive.-2017-10-14.schedule-action-settings/static-image-deactivate-settings]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.batch-update-schedule-response/creates (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/batch-schedule-action-create-result))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.batch-update-schedule-response/deletes (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/batch-schedule-action-delete-result))
@@ -2191,7 +3988,7 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.delete-channel-response/destinations (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-output-destination))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.delete-channel-response/name (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.delete-channel-response/id (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/delete-channel-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.delete-channel-response/input-attachments :portkey.aws.medialive.-2017-10-14.delete-channel-response/pipelines-running-count :portkey.aws.medialive.-2017-10-14/log-level :portkey.aws.medialive.-2017-10-14.delete-channel-response/role-arn :portkey.aws.medialive.-2017-10-14.delete-channel-response/egress-endpoints :portkey.aws.medialive.-2017-10-14/encoder-settings :portkey.aws.medialive.-2017-10-14.delete-channel-response/arn :portkey.aws.medialive.-2017-10-14/input-specification :portkey.aws.medialive.-2017-10-14.delete-channel-response/state :portkey.aws.medialive.-2017-10-14.delete-channel-response/destinations :portkey.aws.medialive.-2017-10-14.delete-channel-response/name :portkey.aws.medialive.-2017-10-14.delete-channel-response/id]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/delete-channel-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.delete-channel-response/input-attachments :portkey.aws.medialive.-2017-10-14.delete-channel-response/pipelines-running-count :portkey.aws.medialive.-2017-10-14/log-level :portkey.aws.medialive.-2017-10-14.delete-channel-response/role-arn :portkey.aws.medialive.-2017-10-14/tags :portkey.aws.medialive.-2017-10-14.delete-channel-response/egress-endpoints :portkey.aws.medialive.-2017-10-14/encoder-settings :portkey.aws.medialive.-2017-10-14.delete-channel-response/arn :portkey.aws.medialive.-2017-10-14/input-specification :portkey.aws.medialive.-2017-10-14.delete-channel-response/state :portkey.aws.medialive.-2017-10-14.delete-channel-response/destinations :portkey.aws.medialive.-2017-10-14.delete-channel-response/name :portkey.aws.medialive.-2017-10-14.delete-channel-response/id]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.list-input-security-groups-request/next-token (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/list-input-security-groups-request (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14/max-results :portkey.aws.medialive.-2017-10-14.list-input-security-groups-request/next-token]))
@@ -2242,7 +4039,7 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-channel-request/role-arn (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-channel-request/destinations (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-output-destination))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-channel-request/name (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/create-channel-request (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.create-channel-request/reserved :portkey.aws.medialive.-2017-10-14.create-channel-request/input-attachments :portkey.aws.medialive.-2017-10-14.create-channel-request/request-id :portkey.aws.medialive.-2017-10-14/log-level :portkey.aws.medialive.-2017-10-14.create-channel-request/role-arn :portkey.aws.medialive.-2017-10-14/encoder-settings :portkey.aws.medialive.-2017-10-14/input-specification :portkey.aws.medialive.-2017-10-14.create-channel-request/destinations :portkey.aws.medialive.-2017-10-14.create-channel-request/name]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/create-channel-request (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.create-channel-request/reserved :portkey.aws.medialive.-2017-10-14.create-channel-request/input-attachments :portkey.aws.medialive.-2017-10-14.create-channel-request/request-id :portkey.aws.medialive.-2017-10-14/log-level :portkey.aws.medialive.-2017-10-14.create-channel-request/role-arn :portkey.aws.medialive.-2017-10-14/tags :portkey.aws.medialive.-2017-10-14/encoder-settings :portkey.aws.medialive.-2017-10-14/input-specification :portkey.aws.medialive.-2017-10-14.create-channel-request/destinations :portkey.aws.medialive.-2017-10-14.create-channel-request/name]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.list-inputs-response/inputs (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-input))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.list-inputs-response/next-token (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
@@ -2293,16 +4090,18 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.start-channel-response/destinations (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-output-destination))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.start-channel-response/name (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.start-channel-response/id (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/start-channel-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.start-channel-response/input-attachments :portkey.aws.medialive.-2017-10-14.start-channel-response/pipelines-running-count :portkey.aws.medialive.-2017-10-14/log-level :portkey.aws.medialive.-2017-10-14.start-channel-response/role-arn :portkey.aws.medialive.-2017-10-14.start-channel-response/egress-endpoints :portkey.aws.medialive.-2017-10-14/encoder-settings :portkey.aws.medialive.-2017-10-14.start-channel-response/arn :portkey.aws.medialive.-2017-10-14/input-specification :portkey.aws.medialive.-2017-10-14.start-channel-response/state :portkey.aws.medialive.-2017-10-14.start-channel-response/destinations :portkey.aws.medialive.-2017-10-14.start-channel-response/name :portkey.aws.medialive.-2017-10-14.start-channel-response/id]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/start-channel-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.start-channel-response/input-attachments :portkey.aws.medialive.-2017-10-14.start-channel-response/pipelines-running-count :portkey.aws.medialive.-2017-10-14/log-level :portkey.aws.medialive.-2017-10-14.start-channel-response/role-arn :portkey.aws.medialive.-2017-10-14/tags :portkey.aws.medialive.-2017-10-14.start-channel-response/egress-endpoints :portkey.aws.medialive.-2017-10-14/encoder-settings :portkey.aws.medialive.-2017-10-14.start-channel-response/arn :portkey.aws.medialive.-2017-10-14/input-specification :portkey.aws.medialive.-2017-10-14.start-channel-response/state :portkey.aws.medialive.-2017-10-14.start-channel-response/destinations :portkey.aws.medialive.-2017-10-14.start-channel-response/name :portkey.aws.medialive.-2017-10-14.start-channel-response/id]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input-security-group/arn (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input-security-group/id (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input-security-group/inputs (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input-security-group/state (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/input-security-group-state))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input-security-group/whitelist-rules (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-input-whitelist-rule))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/input-security-group (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.input-security-group/arn :portkey.aws.medialive.-2017-10-14.input-security-group/id :portkey.aws.medialive.-2017-10-14.input-security-group/inputs :portkey.aws.medialive.-2017-10-14.input-security-group/state :portkey.aws.medialive.-2017-10-14.input-security-group/whitelist-rules]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/input-security-group (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.input-security-group/arn :portkey.aws.medialive.-2017-10-14.input-security-group/id :portkey.aws.medialive.-2017-10-14.input-security-group/inputs :portkey.aws.medialive.-2017-10-14.input-security-group/state :portkey.aws.medialive.-2017-10-14/tags :portkey.aws.medialive.-2017-10-14.input-security-group/whitelist-rules]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/smooth-group-audio-only-timecode-control #{"PASSTHROUGH" :passthrough :use-configured-clock "USE_CONFIGURED_CLOCK"})
+
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/pipeline-id #{"PIPELINE_0" :pipeline-1 :pipeline-0 "PIPELINE_1"})
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.video-description/codec-settings (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/video-codec-settings))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.video-description/height (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer))
@@ -2319,17 +4118,23 @@
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/scte-35-no-regional-blackout-flag #{:regional-blackout "REGIONAL_BLACKOUT" :no-regional-blackout "NO_REGIONAL_BLACKOUT"})
 
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/integer-min-1-max-10 (clojure.spec.alpha/int-in 1 10))
+
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.audio-language-selection/language-code (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.audio-language-selection/language-selection-policy (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/audio-language-selection-policy))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/audio-language-selection (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.audio-language-selection/language-code] :opt-un [:portkey.aws.medialive.-2017-10-14.audio-language-selection/language-selection-policy]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/reservation-codec #{:mpeg-2 :hevc "HEVC" "MPEG2" :audio "AUDIO" :avc "AVC"})
 
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/output-group-settings (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14/archive-group-settings :portkey.aws.medialive.-2017-10-14/hls-group-settings :portkey.aws.medialive.-2017-10-14/ms-smooth-group-settings :portkey.aws.medialive.-2017-10-14/rtmp-group-settings :portkey.aws.medialive.-2017-10-14/udp-group-settings]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/output-group-settings (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14/archive-group-settings :portkey.aws.medialive.-2017-10-14/frame-capture-group-settings :portkey.aws.medialive.-2017-10-14/hls-group-settings :portkey.aws.medialive.-2017-10-14/ms-smooth-group-settings :portkey.aws.medialive.-2017-10-14/rtmp-group-settings :portkey.aws.medialive.-2017-10-14/udp-group-settings]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/integer-min-96-max-600 (clojure.spec.alpha/int-in 96 600))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/rtmp-cache-full-behavior #{:wait-for-server "WAIT_FOR_SERVER" :disconnect-immediately "DISCONNECT_IMMEDIATELY"})
+
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input-destination-vpc/availability-zone (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input-destination-vpc/network-interface-id (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/input-destination-vpc (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.input-destination-vpc/availability-zone :portkey.aws.medialive.-2017-10-14.input-destination-vpc/network-interface-id]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.describe-input-request/input-id (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/describe-input-request (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.describe-input-request/input-id] :opt-un []))
@@ -2376,6 +4181,9 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/list-of-string (clojure.spec.alpha/coll-of :portkey.aws.medialive.-2017-10-14/string))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/channel-state #{"IDLE" :deleted :idle :starting :creating "CREATE_FAILED" :deleting :running :stopping :create-failed "STARTING" "DELETING" "CREATING" :recovering "DELETED" "RECOVERING" "STOPPING" "RUNNING"})
+
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-tags-request/resource-arn (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/create-tags-request (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.create-tags-request/resource-arn] :opt-un [:portkey.aws.medialive.-2017-10-14/tags]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/m-2ts-segmentation-style #{:reset-cadence :maintain-cadence "MAINTAIN_CADENCE" "RESET_CADENCE"})
 
@@ -2426,17 +4234,20 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.stop-channel-response/destinations (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-output-destination))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.stop-channel-response/name (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.stop-channel-response/id (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/stop-channel-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.stop-channel-response/input-attachments :portkey.aws.medialive.-2017-10-14.stop-channel-response/pipelines-running-count :portkey.aws.medialive.-2017-10-14/log-level :portkey.aws.medialive.-2017-10-14.stop-channel-response/role-arn :portkey.aws.medialive.-2017-10-14.stop-channel-response/egress-endpoints :portkey.aws.medialive.-2017-10-14/encoder-settings :portkey.aws.medialive.-2017-10-14.stop-channel-response/arn :portkey.aws.medialive.-2017-10-14/input-specification :portkey.aws.medialive.-2017-10-14.stop-channel-response/state :portkey.aws.medialive.-2017-10-14.stop-channel-response/destinations :portkey.aws.medialive.-2017-10-14.stop-channel-response/name :portkey.aws.medialive.-2017-10-14.stop-channel-response/id]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/stop-channel-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.stop-channel-response/input-attachments :portkey.aws.medialive.-2017-10-14.stop-channel-response/pipelines-running-count :portkey.aws.medialive.-2017-10-14/log-level :portkey.aws.medialive.-2017-10-14.stop-channel-response/role-arn :portkey.aws.medialive.-2017-10-14/tags :portkey.aws.medialive.-2017-10-14.stop-channel-response/egress-endpoints :portkey.aws.medialive.-2017-10-14/encoder-settings :portkey.aws.medialive.-2017-10-14.stop-channel-response/arn :portkey.aws.medialive.-2017-10-14/input-specification :portkey.aws.medialive.-2017-10-14.stop-channel-response/state :portkey.aws.medialive.-2017-10-14.stop-channel-response/destinations :portkey.aws.medialive.-2017-10-14.stop-channel-response/name :portkey.aws.medialive.-2017-10-14.stop-channel-response/id]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/smooth-group-event-stop-behavior #{"SEND_EOS" :send-eos "NONE" :none})
 
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input/destinations (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-input-destination-request))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input/input-security-groups (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-string))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input/name (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input/media-connect-flows (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-media-connect-flow-request))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input/request-id (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input/sources (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-input-source-request))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input/type (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/input-type))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/create-input (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.create-input/destinations :portkey.aws.medialive.-2017-10-14.create-input/input-security-groups :portkey.aws.medialive.-2017-10-14.create-input/name :portkey.aws.medialive.-2017-10-14.create-input/request-id :portkey.aws.medialive.-2017-10-14.create-input/sources :portkey.aws.medialive.-2017-10-14.create-input/type]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input/input-security-groups (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input/role-arn (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input/vpc (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/input-vpc-request))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input/destinations (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-input-destination-request))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input/name (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input/sources (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-input-source-request))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/create-input (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.create-input/media-connect-flows :portkey.aws.medialive.-2017-10-14.create-input/request-id :portkey.aws.medialive.-2017-10-14.create-input/type :portkey.aws.medialive.-2017-10-14.create-input/input-security-groups :portkey.aws.medialive.-2017-10-14.create-input/role-arn :portkey.aws.medialive.-2017-10-14/tags :portkey.aws.medialive.-2017-10-14.create-input/vpc :portkey.aws.medialive.-2017-10-14.create-input/destinations :portkey.aws.medialive.-2017-10-14.create-input/name :portkey.aws.medialive.-2017-10-14.create-input/sources]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/list-of-input-destination (clojure.spec.alpha/coll-of :portkey.aws.medialive.-2017-10-14/input-destination))
 
@@ -2464,8 +4275,10 @@
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/integer-min-1-max-6 (clojure.spec.alpha/int-in 1 6))
 
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input/media-connect-flows (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-media-connect-flow))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input/type (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/input-type))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input/security-groups (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input/role-arn (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input/arn (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input/state (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/input-state))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input/destinations (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-input-destination))
@@ -2473,12 +4286,14 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input/sources (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-input-source))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input/attached-channels (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input/id (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/input (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.input/type :portkey.aws.medialive.-2017-10-14.input/security-groups :portkey.aws.medialive.-2017-10-14.input/arn :portkey.aws.medialive.-2017-10-14.input/state :portkey.aws.medialive.-2017-10-14.input/destinations :portkey.aws.medialive.-2017-10-14.input/name :portkey.aws.medialive.-2017-10-14.input/sources :portkey.aws.medialive.-2017-10-14.input/attached-channels :portkey.aws.medialive.-2017-10-14.input/id]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/input (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.input/media-connect-flows :portkey.aws.medialive.-2017-10-14.input/type :portkey.aws.medialive.-2017-10-14.input/security-groups :portkey.aws.medialive.-2017-10-14.input/role-arn :portkey.aws.medialive.-2017-10-14/tags :portkey.aws.medialive.-2017-10-14.input/arn :portkey.aws.medialive.-2017-10-14.input/state :portkey.aws.medialive.-2017-10-14.input/destinations :portkey.aws.medialive.-2017-10-14.input/name :portkey.aws.medialive.-2017-10-14.input/sources :portkey.aws.medialive.-2017-10-14.input/attached-channels :portkey.aws.medialive.-2017-10-14.input/id]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.not-found-exception/message (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/not-found-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.not-found-exception/message]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/m-2ts-cc-descriptor #{"DISABLED" :disabled "ENABLED" :enabled})
+
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/list-of-pipeline-pause-state-settings (clojure.spec.alpha/coll-of :portkey.aws.medialive.-2017-10-14/pipeline-pause-state-settings))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.list-inputs-request/next-token (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/list-inputs-request (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14/max-results :portkey.aws.medialive.-2017-10-14.list-inputs-request/next-token]))
@@ -2505,9 +4320,10 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.purchase-offering-request/name (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.purchase-offering-request/offering-id (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.purchase-offering-request/request-id (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/purchase-offering-request (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.purchase-offering-request/offering-id] :opt-un [:portkey.aws.medialive.-2017-10-14.purchase-offering-request/count :portkey.aws.medialive.-2017-10-14.purchase-offering-request/name :portkey.aws.medialive.-2017-10-14.purchase-offering-request/request-id]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.purchase-offering-request/start (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/purchase-offering-request (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.purchase-offering-request/offering-id :portkey.aws.medialive.-2017-10-14.purchase-offering-request/count] :opt-un [:portkey.aws.medialive.-2017-10-14.purchase-offering-request/name :portkey.aws.medialive.-2017-10-14.purchase-offering-request/request-id :portkey.aws.medialive.-2017-10-14.purchase-offering-request/start]))
 
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/string-min-1-max-256 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 256))))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/string-min-1-max-256 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012852__auto__] (clojure.core/<= 1 (clojure.core/count s__1012852__auto__))) (clojure.core/fn [s__1012853__auto__] (clojure.core/< (clojure.core/count s__1012853__auto__) 256))))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.delete-channel-request/channel-id (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/delete-channel-request (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.delete-channel-request/channel-id] :opt-un []))
@@ -2530,9 +4346,9 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.static-image-deactivate-schedule-action-settings/layer (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer-min-0-max-7))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/static-image-deactivate-schedule-action-settings (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.static-image-deactivate-schedule-action-settings/fade-out :portkey.aws.medialive.-2017-10-14.static-image-deactivate-schedule-action-settings/layer]))
 
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/video-codec-settings (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14/h-264-settings]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/video-codec-settings (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14/frame-capture-settings :portkey.aws.medialive.-2017-10-14/h-264-settings]))
 
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/string-max-32 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 32))))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/string-max-32 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012853__auto__] (clojure.core/< (clojure.core/count s__1012853__auto__) 32))))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.describe-channel-request/channel-id (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/describe-channel-request (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.describe-channel-request/channel-id] :opt-un []))
@@ -2566,10 +4382,13 @@
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/network-input-server-validation #{:check-cryptography-only "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME" "CHECK_CRYPTOGRAPHY_ONLY" :check-cryptography-and-validate-name})
 
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/hls-redundant-manifest #{"DISABLED" :disabled "ENABLED" :enabled})
+
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input-destination/ip (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input-destination/port (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input-destination/url (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/input-destination (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.input-destination/ip :portkey.aws.medialive.-2017-10-14.input-destination/port :portkey.aws.medialive.-2017-10-14.input-destination/url]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input-destination/vpc (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/input-destination-vpc))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/input-destination (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.input-destination/ip :portkey.aws.medialive.-2017-10-14.input-destination/port :portkey.aws.medialive.-2017-10-14.input-destination/url :portkey.aws.medialive.-2017-10-14.input-destination/vpc]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/rtmp-caption-info-destination-settings (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
@@ -2581,23 +4400,27 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-channel/role-arn (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-channel/destinations (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-output-destination))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-channel/name (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/create-channel (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.create-channel/reserved :portkey.aws.medialive.-2017-10-14.create-channel/input-attachments :portkey.aws.medialive.-2017-10-14.create-channel/request-id :portkey.aws.medialive.-2017-10-14/log-level :portkey.aws.medialive.-2017-10-14.create-channel/role-arn :portkey.aws.medialive.-2017-10-14/encoder-settings :portkey.aws.medialive.-2017-10-14/input-specification :portkey.aws.medialive.-2017-10-14.create-channel/destinations :portkey.aws.medialive.-2017-10-14.create-channel/name]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/create-channel (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.create-channel/reserved :portkey.aws.medialive.-2017-10-14.create-channel/input-attachments :portkey.aws.medialive.-2017-10-14.create-channel/request-id :portkey.aws.medialive.-2017-10-14/log-level :portkey.aws.medialive.-2017-10-14.create-channel/role-arn :portkey.aws.medialive.-2017-10-14/tags :portkey.aws.medialive.-2017-10-14/encoder-settings :portkey.aws.medialive.-2017-10-14/input-specification :portkey.aws.medialive.-2017-10-14.create-channel/destinations :portkey.aws.medialive.-2017-10-14.create-channel/name]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/smooth-group-event-id-mode #{"USE_CONFIGURED" :no-event-id :use-timestamp :use-configured "NO_EVENT_ID" "USE_TIMESTAMP"})
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.scte-27-source-settings/pid (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer-min-1))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/scte-27-source-settings (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.scte-27-source-settings/pid]))
 
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/integer-min-1-max-3600 (clojure.spec.alpha/int-in 1 3600))
+
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/webvtt-destination-settings (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/output-settings (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14/archive-output-settings :portkey.aws.medialive.-2017-10-14/hls-output-settings :portkey.aws.medialive.-2017-10-14/ms-smooth-output-settings :portkey.aws.medialive.-2017-10-14/rtmp-output-settings :portkey.aws.medialive.-2017-10-14/udp-output-settings]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/output-settings (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14/archive-output-settings :portkey.aws.medialive.-2017-10-14/frame-capture-output-settings :portkey.aws.medialive.-2017-10-14/hls-output-settings :portkey.aws.medialive.-2017-10-14/ms-smooth-output-settings :portkey.aws.medialive.-2017-10-14/rtmp-output-settings :portkey.aws.medialive.-2017-10-14/udp-output-settings]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.caption-language-mapping/caption-channel (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer-min-1-max-4))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.caption-language-mapping/language-code (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string-min-3-max-3))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.caption-language-mapping/language-description (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string-min-1))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/caption-language-mapping (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.caption-language-mapping/language-code :portkey.aws.medialive.-2017-10-14.caption-language-mapping/language-description :portkey.aws.medialive.-2017-10-14.caption-language-mapping/caption-channel] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/schedule-action-start-settings (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14/fixed-mode-schedule-action-start-settings]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/input-loss-action-for-rtmp-out #{:emit-output :pause-output "PAUSE_OUTPUT" "EMIT_OUTPUT"})
+
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/schedule-action-start-settings (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14/fixed-mode-schedule-action-start-settings :portkey.aws.medialive.-2017-10-14/follow-mode-schedule-action-start-settings]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.describe-offering-request/offering-id (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/describe-offering-request (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.describe-offering-request/offering-id] :opt-un []))
@@ -2614,12 +4437,15 @@
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.static-key-settings/key-provider-server (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/input-location))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.static-key-settings/static-key-value (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string-min-32-max-32))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/static-key-settings (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.static-key-settings/key-provider-server :portkey.aws.medialive.-2017-10-14.static-key-settings/static-key-value] :opt-un []))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/static-key-settings (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.static-key-settings/static-key-value] :opt-un [:portkey.aws.medialive.-2017-10-14.static-key-settings/key-provider-server]))
+
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.frame-capture-group-settings/destination (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/output-location-ref))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/frame-capture-group-settings (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.frame-capture-group-settings/destination] :opt-un []))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/video-description-respond-to-afd #{:respond "PASSTHROUGH" "NONE" :passthrough "RESPOND" :none})
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input-security-group-whitelist-request/whitelist-rules (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-input-whitelist-rule-cidr))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/input-security-group-whitelist-request (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.input-security-group-whitelist-request/whitelist-rules]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/input-security-group-whitelist-request (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14/tags :portkey.aws.medialive.-2017-10-14.input-security-group-whitelist-request/whitelist-rules]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/teletext-destination-settings (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
@@ -2631,8 +4457,9 @@
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/list-of-channel-summary (clojure.spec.alpha/coll-of :portkey.aws.medialive.-2017-10-14/channel-summary))
 
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input-attachment/input-attachment-name (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input-attachment/input-id (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/input-attachment (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.input-attachment/input-id :portkey.aws.medialive.-2017-10-14/input-settings]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/input-attachment (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.input-attachment/input-attachment-name :portkey.aws.medialive.-2017-10-14.input-attachment/input-id :portkey.aws.medialive.-2017-10-14/input-settings]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/hls-client-cache #{"DISABLED" :disabled "ENABLED" :enabled})
 
@@ -2676,7 +4503,7 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input-whitelist-rule/cidr (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/input-whitelist-rule (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.input-whitelist-rule/cidr]))
 
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/string-min-3-max-3 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 3 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 3))))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/string-min-3-max-3 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012852__auto__] (clojure.core/<= 3 (clojure.core/count s__1012852__auto__))) (clojure.core/fn [s__1012853__auto__] (clojure.core/< (clojure.core/count s__1012853__auto__) 3))))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/smooth-group-certificate-mode #{:verify-authenticity "VERIFY_AUTHENTICITY" "SELF_SIGNED" :self-signed})
 
@@ -2692,8 +4519,10 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.list-channels-request/next-token (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/list-channels-request (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14/max-results :portkey.aws.medialive.-2017-10-14.list-channels-request/next-token]))
 
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.describe-input-response/media-connect-flows (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-media-connect-flow))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.describe-input-response/type (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/input-type))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.describe-input-response/security-groups (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.describe-input-response/role-arn (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.describe-input-response/arn (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.describe-input-response/state (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/input-state))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.describe-input-response/destinations (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-input-destination))
@@ -2701,7 +4530,7 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.describe-input-response/sources (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-input-source))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.describe-input-response/attached-channels (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.describe-input-response/id (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/describe-input-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.describe-input-response/type :portkey.aws.medialive.-2017-10-14.describe-input-response/security-groups :portkey.aws.medialive.-2017-10-14.describe-input-response/arn :portkey.aws.medialive.-2017-10-14.describe-input-response/state :portkey.aws.medialive.-2017-10-14.describe-input-response/destinations :portkey.aws.medialive.-2017-10-14.describe-input-response/name :portkey.aws.medialive.-2017-10-14.describe-input-response/sources :portkey.aws.medialive.-2017-10-14.describe-input-response/attached-channels :portkey.aws.medialive.-2017-10-14.describe-input-response/id]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/describe-input-response (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.describe-input-response/media-connect-flows :portkey.aws.medialive.-2017-10-14.describe-input-response/type :portkey.aws.medialive.-2017-10-14.describe-input-response/security-groups :portkey.aws.medialive.-2017-10-14.describe-input-response/role-arn :portkey.aws.medialive.-2017-10-14/tags :portkey.aws.medialive.-2017-10-14.describe-input-response/arn :portkey.aws.medialive.-2017-10-14.describe-input-response/state :portkey.aws.medialive.-2017-10-14.describe-input-response/destinations :portkey.aws.medialive.-2017-10-14.describe-input-response/name :portkey.aws.medialive.-2017-10-14.describe-input-response/sources :portkey.aws.medialive.-2017-10-14.describe-input-response/attached-channels :portkey.aws.medialive.-2017-10-14.describe-input-response/id]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.batch-schedule-action-delete-request/action-names (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/batch-schedule-action-delete-request (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.batch-schedule-action-delete-request/action-names] :opt-un []))
@@ -2720,9 +4549,14 @@
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/audio-description-language-code-control #{"FOLLOW_INPUT" :follow-input "USE_CONFIGURED" :use-configured})
 
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/timestamp-iso-8601 clojure.core/inst?)
+
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/double clojure.core/double?)
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/ac-3-coding-mode #{:coding-mode-3-2-lfe "CODING_MODE_1_0" :coding-mode-1-0 :coding-mode-2-0 "CODING_MODE_3_2_LFE" "CODING_MODE_1_1" "CODING_MODE_2_0" :coding-mode-1-1})
+
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.input-switch-schedule-action-settings/input-attachment-name-reference (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/input-switch-schedule-action-settings (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.input-switch-schedule-action-settings/input-attachment-name-reference] :opt-un []))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/integer-min-0-max-10 (clojure.spec.alpha/int-in 0 10))
 
@@ -2737,6 +4571,9 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/list-of-reservation (clojure.spec.alpha/coll-of :portkey.aws.medialive.-2017-10-14/reservation))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/pass-through-settings (clojure.spec.alpha/keys :req-un [] :opt-un []))
+
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.media-connect-flow/flow-arn (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/media-connect-flow (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.media-connect-flow/flow-arn]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/video-description-scaling-behavior #{"STRETCH_TO_OUTPUT" :default :stretch-to-output "DEFAULT"})
 
@@ -2757,7 +4594,7 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.channel/destinations (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-output-destination))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.channel/name (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.channel/id (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/channel (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.channel/input-attachments :portkey.aws.medialive.-2017-10-14.channel/pipelines-running-count :portkey.aws.medialive.-2017-10-14/log-level :portkey.aws.medialive.-2017-10-14.channel/role-arn :portkey.aws.medialive.-2017-10-14.channel/egress-endpoints :portkey.aws.medialive.-2017-10-14/encoder-settings :portkey.aws.medialive.-2017-10-14.channel/arn :portkey.aws.medialive.-2017-10-14/input-specification :portkey.aws.medialive.-2017-10-14.channel/state :portkey.aws.medialive.-2017-10-14.channel/destinations :portkey.aws.medialive.-2017-10-14.channel/name :portkey.aws.medialive.-2017-10-14.channel/id]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/channel (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.channel/input-attachments :portkey.aws.medialive.-2017-10-14.channel/pipelines-running-count :portkey.aws.medialive.-2017-10-14/log-level :portkey.aws.medialive.-2017-10-14.channel/role-arn :portkey.aws.medialive.-2017-10-14/tags :portkey.aws.medialive.-2017-10-14.channel/egress-endpoints :portkey.aws.medialive.-2017-10-14/encoder-settings :portkey.aws.medialive.-2017-10-14.channel/arn :portkey.aws.medialive.-2017-10-14/input-specification :portkey.aws.medialive.-2017-10-14.channel/state :portkey.aws.medialive.-2017-10-14.channel/destinations :portkey.aws.medialive.-2017-10-14.channel/name :portkey.aws.medialive.-2017-10-14.channel/id]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.update-input-security-group-result-model/security-group (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/input-security-group))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/update-input-security-group-result-model (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.update-input-security-group-result-model/security-group]))
@@ -2794,7 +4631,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/h-264-color-metadata #{:insert :ignore "INSERT" "IGNORE"})
 
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/string-min-1 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__)))))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/string-min-1 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012852__auto__] (clojure.core/<= 1 (clojure.core/count s__1012852__auto__)))))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.describe-offering-response/duration-units (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/offering-duration-units))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.describe-offering-response/currency-code (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
@@ -2867,7 +4704,8 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.purchase-offering/count (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer-min-1))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.purchase-offering/name (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.purchase-offering/request-id (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/purchase-offering (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.purchase-offering/count :portkey.aws.medialive.-2017-10-14.purchase-offering/name :portkey.aws.medialive.-2017-10-14.purchase-offering/request-id]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.purchase-offering/start (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/purchase-offering (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.purchase-offering/count] :opt-un [:portkey.aws.medialive.-2017-10-14.purchase-offering/name :portkey.aws.medialive.-2017-10-14.purchase-offering/request-id :portkey.aws.medialive.-2017-10-14.purchase-offering/start]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/burn-in-shadow-color #{:white "NONE" "WHITE" "BLACK" :none :black})
 
@@ -2902,8 +4740,9 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.rtmp-group-settings/cache-full-behavior (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/rtmp-cache-full-behavior))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.rtmp-group-settings/cache-length (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer-min-30))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.rtmp-group-settings/caption-data (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/rtmp-caption-data))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.rtmp-group-settings/input-loss-action (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/input-loss-action-for-rtmp-out))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.rtmp-group-settings/restart-delay (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer-min-0))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/rtmp-group-settings (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14/authentication-scheme :portkey.aws.medialive.-2017-10-14.rtmp-group-settings/cache-full-behavior :portkey.aws.medialive.-2017-10-14.rtmp-group-settings/cache-length :portkey.aws.medialive.-2017-10-14.rtmp-group-settings/caption-data :portkey.aws.medialive.-2017-10-14.rtmp-group-settings/restart-delay]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/rtmp-group-settings (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14/authentication-scheme :portkey.aws.medialive.-2017-10-14.rtmp-group-settings/cache-full-behavior :portkey.aws.medialive.-2017-10-14.rtmp-group-settings/cache-length :portkey.aws.medialive.-2017-10-14.rtmp-group-settings/caption-data :portkey.aws.medialive.-2017-10-14.rtmp-group-settings/input-loss-action :portkey.aws.medialive.-2017-10-14.rtmp-group-settings/restart-delay]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/burn-in-alignment #{"LEFT" "CENTERED" :smart :centered "SMART" :left})
 
@@ -2911,8 +4750,10 @@
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/embedded-destination-settings (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/timestamp-unix clojure.core/inst?)
+
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.caption-selector/language-code (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.caption-selector/name (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.caption-selector/name (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string-min-1))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.caption-selector/selector-settings (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/caption-selector-settings))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/caption-selector (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.caption-selector/name] :opt-un [:portkey.aws.medialive.-2017-10-14.caption-selector/language-code :portkey.aws.medialive.-2017-10-14.caption-selector/selector-settings]))
 
@@ -2940,7 +4781,9 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.hls-group-settings/min-segment-length (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer-min-0))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.hls-group-settings/iv-in-manifest (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/hls-iv-in-manifest))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.hls-group-settings/stream-inf-resolution (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/hls-stream-inf-resolution))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.hls-group-settings/redundant-manifest (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/hls-redundant-manifest))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.hls-group-settings/program-date-time (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/hls-program-date-time))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.hls-group-settings/i-frame-only-playlists (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/i-frame-only-playlist-type))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.hls-group-settings/output-selection (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/hls-output-selection))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.hls-group-settings/base-url-content (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.hls-group-settings/caption-language-setting (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/hls-caption-language-setting))
@@ -2954,7 +4797,7 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.hls-group-settings/codec-specification (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/hls-codec-specification))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.hls-group-settings/base-url-manifest (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.hls-group-settings/client-cache (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/hls-client-cache))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/hls-group-settings (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.hls-group-settings/destination] :opt-un [:portkey.aws.medialive.-2017-10-14.hls-group-settings/segment-length :portkey.aws.medialive.-2017-10-14.hls-group-settings/ts-file-mode :portkey.aws.medialive.-2017-10-14.hls-group-settings/timestamp-delta-milliseconds :portkey.aws.medialive.-2017-10-14.hls-group-settings/program-date-time-period :portkey.aws.medialive.-2017-10-14.hls-group-settings/constant-iv :portkey.aws.medialive.-2017-10-14.hls-group-settings/key-format-versions :portkey.aws.medialive.-2017-10-14.hls-group-settings/input-loss-action :portkey.aws.medialive.-2017-10-14.hls-group-settings/ad-markers :portkey.aws.medialive.-2017-10-14.hls-group-settings/caption-language-mappings :portkey.aws.medialive.-2017-10-14.hls-group-settings/timed-metadata-id-3-frame :portkey.aws.medialive.-2017-10-14.hls-group-settings/mode :portkey.aws.medialive.-2017-10-14.hls-group-settings/directory-structure :portkey.aws.medialive.-2017-10-14.hls-group-settings/encryption-type :portkey.aws.medialive.-2017-10-14.hls-group-settings/index-n-segments :portkey.aws.medialive.-2017-10-14.hls-group-settings/keep-segments :portkey.aws.medialive.-2017-10-14.hls-group-settings/min-segment-length :portkey.aws.medialive.-2017-10-14.hls-group-settings/iv-in-manifest :portkey.aws.medialive.-2017-10-14.hls-group-settings/stream-inf-resolution :portkey.aws.medialive.-2017-10-14/hls-cdn-settings :portkey.aws.medialive.-2017-10-14.hls-group-settings/program-date-time :portkey.aws.medialive.-2017-10-14.hls-group-settings/output-selection :portkey.aws.medialive.-2017-10-14.hls-group-settings/base-url-content :portkey.aws.medialive.-2017-10-14.hls-group-settings/caption-language-setting :portkey.aws.medialive.-2017-10-14.hls-group-settings/manifest-duration-format :portkey.aws.medialive.-2017-10-14.hls-group-settings/segmentation-mode :portkey.aws.medialive.-2017-10-14.hls-group-settings/timed-metadata-id-3-period :portkey.aws.medialive.-2017-10-14.hls-group-settings/manifest-compression :portkey.aws.medialive.-2017-10-14.hls-group-settings/segments-per-subdirectory :portkey.aws.medialive.-2017-10-14.hls-group-settings/key-format :portkey.aws.medialive.-2017-10-14.hls-group-settings/iv-source :portkey.aws.medialive.-2017-10-14.hls-group-settings/codec-specification :portkey.aws.medialive.-2017-10-14/key-provider-settings :portkey.aws.medialive.-2017-10-14.hls-group-settings/base-url-manifest :portkey.aws.medialive.-2017-10-14.hls-group-settings/client-cache]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/hls-group-settings (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.hls-group-settings/destination] :opt-un [:portkey.aws.medialive.-2017-10-14.hls-group-settings/segment-length :portkey.aws.medialive.-2017-10-14.hls-group-settings/ts-file-mode :portkey.aws.medialive.-2017-10-14.hls-group-settings/timestamp-delta-milliseconds :portkey.aws.medialive.-2017-10-14.hls-group-settings/program-date-time-period :portkey.aws.medialive.-2017-10-14.hls-group-settings/constant-iv :portkey.aws.medialive.-2017-10-14.hls-group-settings/key-format-versions :portkey.aws.medialive.-2017-10-14.hls-group-settings/input-loss-action :portkey.aws.medialive.-2017-10-14.hls-group-settings/ad-markers :portkey.aws.medialive.-2017-10-14.hls-group-settings/caption-language-mappings :portkey.aws.medialive.-2017-10-14.hls-group-settings/timed-metadata-id-3-frame :portkey.aws.medialive.-2017-10-14.hls-group-settings/mode :portkey.aws.medialive.-2017-10-14.hls-group-settings/directory-structure :portkey.aws.medialive.-2017-10-14.hls-group-settings/encryption-type :portkey.aws.medialive.-2017-10-14.hls-group-settings/index-n-segments :portkey.aws.medialive.-2017-10-14.hls-group-settings/keep-segments :portkey.aws.medialive.-2017-10-14.hls-group-settings/min-segment-length :portkey.aws.medialive.-2017-10-14.hls-group-settings/iv-in-manifest :portkey.aws.medialive.-2017-10-14.hls-group-settings/stream-inf-resolution :portkey.aws.medialive.-2017-10-14/hls-cdn-settings :portkey.aws.medialive.-2017-10-14.hls-group-settings/redundant-manifest :portkey.aws.medialive.-2017-10-14.hls-group-settings/program-date-time :portkey.aws.medialive.-2017-10-14.hls-group-settings/i-frame-only-playlists :portkey.aws.medialive.-2017-10-14.hls-group-settings/output-selection :portkey.aws.medialive.-2017-10-14.hls-group-settings/base-url-content :portkey.aws.medialive.-2017-10-14.hls-group-settings/caption-language-setting :portkey.aws.medialive.-2017-10-14.hls-group-settings/manifest-duration-format :portkey.aws.medialive.-2017-10-14.hls-group-settings/segmentation-mode :portkey.aws.medialive.-2017-10-14.hls-group-settings/timed-metadata-id-3-period :portkey.aws.medialive.-2017-10-14.hls-group-settings/manifest-compression :portkey.aws.medialive.-2017-10-14.hls-group-settings/segments-per-subdirectory :portkey.aws.medialive.-2017-10-14.hls-group-settings/key-format :portkey.aws.medialive.-2017-10-14.hls-group-settings/iv-source :portkey.aws.medialive.-2017-10-14.hls-group-settings/codec-specification :portkey.aws.medialive.-2017-10-14/key-provider-settings :portkey.aws.medialive.-2017-10-14.hls-group-settings/base-url-manifest :portkey.aws.medialive.-2017-10-14.hls-group-settings/client-cache]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/input-loss-action-for-ms-smooth-out #{:emit-output :pause-output "PAUSE_OUTPUT" "EMIT_OUTPUT"})
 
@@ -2974,6 +4817,11 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/smooth-group-timestamp-offset-mode #{"USE_EVENT_START_DATE" :use-configured-offset "USE_CONFIGURED_OFFSET" :use-event-start-date})
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/hls-media-store-storage-class #{"TEMPORAL" :temporal})
+
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/pipeline-pause-state-settings (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14/pipeline-id] :opt-un []))
+
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.frame-capture-settings/capture-interval (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer-min-1-max-3600))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/frame-capture-settings (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.frame-capture-settings/capture-interval] :opt-un []))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.start-channel-request/channel-id (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/start-channel-request (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.start-channel-request/channel-id] :opt-un []))
@@ -3037,13 +4885,16 @@
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/h-264-timecode-insertion-behavior #{"DISABLED" "PIC_TIMING_SEI" :disabled :pic-timing-sei})
 
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input-request/destinations (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-input-destination-request))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input-request/input-security-groups (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-string))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input-request/name (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input-request/media-connect-flows (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-media-connect-flow-request))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input-request/request-id (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input-request/sources (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-input-source-request))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input-request/type (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/input-type))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/create-input-request (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.create-input-request/destinations :portkey.aws.medialive.-2017-10-14.create-input-request/input-security-groups :portkey.aws.medialive.-2017-10-14.create-input-request/name :portkey.aws.medialive.-2017-10-14.create-input-request/request-id :portkey.aws.medialive.-2017-10-14.create-input-request/sources :portkey.aws.medialive.-2017-10-14.create-input-request/type]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input-request/input-security-groups (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input-request/role-arn (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input-request/vpc (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/input-vpc-request))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input-request/destinations (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-input-destination-request))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input-request/name (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input-request/sources (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-input-source-request))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/create-input-request (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.create-input-request/media-connect-flows :portkey.aws.medialive.-2017-10-14.create-input-request/request-id :portkey.aws.medialive.-2017-10-14.create-input-request/type :portkey.aws.medialive.-2017-10-14.create-input-request/input-security-groups :portkey.aws.medialive.-2017-10-14.create-input-request/role-arn :portkey.aws.medialive.-2017-10-14/tags :portkey.aws.medialive.-2017-10-14.create-input-request/vpc :portkey.aws.medialive.-2017-10-14.create-input-request/destinations :portkey.aws.medialive.-2017-10-14.create-input-request/name :portkey.aws.medialive.-2017-10-14.create-input-request/sources]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/eac-3-passthrough-control #{:when-possible "WHEN_POSSIBLE" "NO_PASSTHROUGH" :no-passthrough})
 
@@ -3057,12 +4908,14 @@
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.update-input/destinations (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-input-destination-request))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.update-input/input-security-groups (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.update-input/media-connect-flows (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-media-connect-flow-request))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.update-input/name (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.update-input/role-arn (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.update-input/sources (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-input-source-request))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/update-input (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.update-input/destinations :portkey.aws.medialive.-2017-10-14.update-input/input-security-groups :portkey.aws.medialive.-2017-10-14.update-input/name :portkey.aws.medialive.-2017-10-14.update-input/sources]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/update-input (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.update-input/destinations :portkey.aws.medialive.-2017-10-14.update-input/input-security-groups :portkey.aws.medialive.-2017-10-14.update-input/media-connect-flows :portkey.aws.medialive.-2017-10-14.update-input/name :portkey.aws.medialive.-2017-10-14.update-input/role-arn :portkey.aws.medialive.-2017-10-14.update-input/sources]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.create-input-security-group-request/whitelist-rules (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-of-input-whitelist-rule-cidr))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/create-input-security-group-request (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.create-input-security-group-request/whitelist-rules]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/create-input-security-group-request (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14/tags :portkey.aws.medialive.-2017-10-14.create-input-security-group-request/whitelist-rules]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/integer-min-1-max-31 (clojure.spec.alpha/int-in 1 31))
 
@@ -3079,18 +4932,22 @@
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/caption-selector-settings (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14/arib-source-settings :portkey.aws.medialive.-2017-10-14/dvb-sub-source-settings :portkey.aws.medialive.-2017-10-14/embedded-source-settings :portkey.aws.medialive.-2017-10-14/scte-20-source-settings :portkey.aws.medialive.-2017-10-14/scte-27-source-settings :portkey.aws.medialive.-2017-10-14/teletext-source-settings]))
 
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/tags-model (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14/tags]))
+
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/level (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/h-264-level))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/rate-control-mode (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/h-264-rate-control-mode))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/subgop-length (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/h-264-sub-gop-length))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/min-i-interval (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer-min-0-max-30))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/temporal-aq (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/h-264-temporal-aq))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/par-denominator (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer-min-1))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/qvbr-quality-level (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer-min-1-max-10))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/num-ref-frames (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer-min-1-max-6))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/gop-b-reference (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/h-264-gop-b-reference))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/timecode-insertion (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/h-264-timecode-insertion-behavior))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/scan-type (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/h-264-scan-type))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/adaptive-quantization (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/h-264-adaptive-quantization))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/buf-fill-pct (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer-min-0-max-100))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/framerate-denominator (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/framerate-denominator (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer-min-1))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/spatial-aq (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/h-264-spatial-aq))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/framerate-control (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/h-264-framerate-control))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/gop-num-b-frames (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer-min-0-max-7))
@@ -3101,7 +4958,7 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/syntax (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/h-264-syntax))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/gop-closed-cadence (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer-min-0))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/flicker-aq (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/h-264-flicker-aq))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/framerate-numerator (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/framerate-numerator (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer-min-1))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/softness (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer-min-0-max-128))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/gop-size-units (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/h-264-gop-size-units))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/max-bitrate (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer-min-1000))
@@ -3112,9 +4969,11 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/entropy-encoding (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/h-264-entropy-encoding))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/scene-change-detect (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/h-264-scene-change-detect))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.h-264-settings/bitrate (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/integer-min-1000))
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/h-264-settings (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.h-264-settings/level :portkey.aws.medialive.-2017-10-14.h-264-settings/rate-control-mode :portkey.aws.medialive.-2017-10-14.h-264-settings/min-i-interval :portkey.aws.medialive.-2017-10-14.h-264-settings/temporal-aq :portkey.aws.medialive.-2017-10-14.h-264-settings/par-denominator :portkey.aws.medialive.-2017-10-14.h-264-settings/num-ref-frames :portkey.aws.medialive.-2017-10-14.h-264-settings/gop-b-reference :portkey.aws.medialive.-2017-10-14.h-264-settings/timecode-insertion :portkey.aws.medialive.-2017-10-14.h-264-settings/scan-type :portkey.aws.medialive.-2017-10-14.h-264-settings/adaptive-quantization :portkey.aws.medialive.-2017-10-14/afd-signaling :portkey.aws.medialive.-2017-10-14.h-264-settings/buf-fill-pct :portkey.aws.medialive.-2017-10-14.h-264-settings/framerate-denominator :portkey.aws.medialive.-2017-10-14.h-264-settings/spatial-aq :portkey.aws.medialive.-2017-10-14.h-264-settings/framerate-control :portkey.aws.medialive.-2017-10-14.h-264-settings/gop-num-b-frames :portkey.aws.medialive.-2017-10-14.h-264-settings/buf-size :portkey.aws.medialive.-2017-10-14.h-264-settings/profile :portkey.aws.medialive.-2017-10-14.h-264-settings/color-metadata :portkey.aws.medialive.-2017-10-14.h-264-settings/look-ahead-rate-control :portkey.aws.medialive.-2017-10-14.h-264-settings/syntax :portkey.aws.medialive.-2017-10-14.h-264-settings/gop-closed-cadence :portkey.aws.medialive.-2017-10-14.h-264-settings/flicker-aq :portkey.aws.medialive.-2017-10-14.h-264-settings/framerate-numerator :portkey.aws.medialive.-2017-10-14.h-264-settings/softness :portkey.aws.medialive.-2017-10-14.h-264-settings/gop-size-units :portkey.aws.medialive.-2017-10-14.h-264-settings/max-bitrate :portkey.aws.medialive.-2017-10-14.h-264-settings/par-numerator :portkey.aws.medialive.-2017-10-14.h-264-settings/gop-size :portkey.aws.medialive.-2017-10-14.h-264-settings/par-control :portkey.aws.medialive.-2017-10-14.h-264-settings/slices :portkey.aws.medialive.-2017-10-14/fixed-afd :portkey.aws.medialive.-2017-10-14.h-264-settings/entropy-encoding :portkey.aws.medialive.-2017-10-14.h-264-settings/scene-change-detect :portkey.aws.medialive.-2017-10-14.h-264-settings/bitrate]))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/h-264-settings (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.h-264-settings/level :portkey.aws.medialive.-2017-10-14.h-264-settings/rate-control-mode :portkey.aws.medialive.-2017-10-14.h-264-settings/subgop-length :portkey.aws.medialive.-2017-10-14.h-264-settings/min-i-interval :portkey.aws.medialive.-2017-10-14.h-264-settings/temporal-aq :portkey.aws.medialive.-2017-10-14.h-264-settings/par-denominator :portkey.aws.medialive.-2017-10-14.h-264-settings/qvbr-quality-level :portkey.aws.medialive.-2017-10-14.h-264-settings/num-ref-frames :portkey.aws.medialive.-2017-10-14.h-264-settings/gop-b-reference :portkey.aws.medialive.-2017-10-14.h-264-settings/timecode-insertion :portkey.aws.medialive.-2017-10-14.h-264-settings/scan-type :portkey.aws.medialive.-2017-10-14.h-264-settings/adaptive-quantization :portkey.aws.medialive.-2017-10-14/afd-signaling :portkey.aws.medialive.-2017-10-14.h-264-settings/buf-fill-pct :portkey.aws.medialive.-2017-10-14.h-264-settings/framerate-denominator :portkey.aws.medialive.-2017-10-14.h-264-settings/spatial-aq :portkey.aws.medialive.-2017-10-14.h-264-settings/framerate-control :portkey.aws.medialive.-2017-10-14.h-264-settings/gop-num-b-frames :portkey.aws.medialive.-2017-10-14.h-264-settings/buf-size :portkey.aws.medialive.-2017-10-14.h-264-settings/profile :portkey.aws.medialive.-2017-10-14.h-264-settings/color-metadata :portkey.aws.medialive.-2017-10-14.h-264-settings/look-ahead-rate-control :portkey.aws.medialive.-2017-10-14.h-264-settings/syntax :portkey.aws.medialive.-2017-10-14.h-264-settings/gop-closed-cadence :portkey.aws.medialive.-2017-10-14.h-264-settings/flicker-aq :portkey.aws.medialive.-2017-10-14.h-264-settings/framerate-numerator :portkey.aws.medialive.-2017-10-14.h-264-settings/softness :portkey.aws.medialive.-2017-10-14.h-264-settings/gop-size-units :portkey.aws.medialive.-2017-10-14.h-264-settings/max-bitrate :portkey.aws.medialive.-2017-10-14.h-264-settings/par-numerator :portkey.aws.medialive.-2017-10-14.h-264-settings/gop-size :portkey.aws.medialive.-2017-10-14.h-264-settings/par-control :portkey.aws.medialive.-2017-10-14.h-264-settings/slices :portkey.aws.medialive.-2017-10-14/fixed-afd :portkey.aws.medialive.-2017-10-14.h-264-settings/entropy-encoding :portkey.aws.medialive.-2017-10-14.h-264-settings/scene-change-detect :portkey.aws.medialive.-2017-10-14.h-264-settings/bitrate]))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/hls-timed-metadata-id-3-frame #{"TDRL" "NONE" "PRIV" :priv :none :tdrl})
+
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/list-of-media-connect-flow (clojure.spec.alpha/coll-of :portkey.aws.medialive.-2017-10-14/media-connect-flow))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/eac-3-phase-control #{:shift-90-degrees "SHIFT_90_DEGREES" "NO_SHIFT" :no-shift})
 
@@ -3152,9 +5011,11 @@
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.m-3u-8-settings/ecm-pid (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/m-3u-8-settings (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.medialive.-2017-10-14.m-3u-8-settings/pat-interval :portkey.aws.medialive.-2017-10-14.m-3u-8-settings/audio-frames-per-pes :portkey.aws.medialive.-2017-10-14.m-3u-8-settings/transport-stream-id :portkey.aws.medialive.-2017-10-14.m-3u-8-settings/scte-35-behavior :portkey.aws.medialive.-2017-10-14.m-3u-8-settings/timed-metadata-behavior :portkey.aws.medialive.-2017-10-14.m-3u-8-settings/pcr-control :portkey.aws.medialive.-2017-10-14.m-3u-8-settings/scte-35-pid :portkey.aws.medialive.-2017-10-14.m-3u-8-settings/pcr-pid :portkey.aws.medialive.-2017-10-14.m-3u-8-settings/pmt-pid :portkey.aws.medialive.-2017-10-14.m-3u-8-settings/video-pid :portkey.aws.medialive.-2017-10-14.m-3u-8-settings/audio-pids :portkey.aws.medialive.-2017-10-14.m-3u-8-settings/pcr-period :portkey.aws.medialive.-2017-10-14.m-3u-8-settings/pmt-interval :portkey.aws.medialive.-2017-10-14.m-3u-8-settings/program-num :portkey.aws.medialive.-2017-10-14.m-3u-8-settings/timed-metadata-pid :portkey.aws.medialive.-2017-10-14.m-3u-8-settings/ecm-pid]))
 
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/string-min-1-max-255 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 1 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 255))))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/string-min-1-max-255 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012852__auto__] (clojure.core/<= 1 (clojure.core/count s__1012852__auto__))) (clojure.core/fn [s__1012853__auto__] (clojure.core/< (clojure.core/count s__1012853__auto__) 255))))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/list-of-audio-channel-mapping (clojure.spec.alpha/coll-of :portkey.aws.medialive.-2017-10-14/audio-channel-mapping))
+
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/list-of-media-connect-flow-request (clojure.spec.alpha/coll-of :portkey.aws.medialive.-2017-10-14/media-connect-flow-request))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/eac-3-stereo-downmix #{"NOT_INDICATED" :not-indicated "LO_RO" :lo-ro "LT_RT" :lt-rt "DPL2" :dpl-2})
 
@@ -3164,7 +5025,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/h-264-syntax #{"RP2027" :default "DEFAULT" :rp-2027})
 
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/string-min-32-max-32 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 32 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 32))))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/string-min-32-max-32 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012852__auto__] (clojure.core/<= 32 (clojure.core/count s__1012852__auto__))) (clojure.core/fn [s__1012853__auto__] (clojure.core/< (clojure.core/count s__1012853__auto__) 32))))
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/input-resolution #{:uhd "UHD" "SD" "HD" :sd :hd})
 
@@ -3180,9 +5041,9 @@
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/m-2ts-audio-stream-type #{:atsc :dvb "DVB" "ATSC"})
 
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/string-min-34-max-34 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 34 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 34))))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/string-min-34-max-34 (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012852__auto__] (clojure.core/<= 34 (clojure.core/count s__1012852__auto__))) (clojure.core/fn [s__1012853__auto__] (clojure.core/< (clojure.core/count s__1012853__auto__) 34))))
 
-(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.audio-selector/name (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string))
+(clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.audio-selector/name (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/string-min-1))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14.audio-selector/selector-settings (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/audio-selector-settings))
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/audio-selector (clojure.spec.alpha/keys :req-un [:portkey.aws.medialive.-2017-10-14.audio-selector/name] :opt-un [:portkey.aws.medialive.-2017-10-14.audio-selector/selector-settings]))
 
@@ -3199,77 +5060,86 @@
 
 (clojure.spec.alpha/def :portkey.aws.medialive.-2017-10-14/reservation-state #{"CANCELED" :deleted "EXPIRED" :canceled :active "ACTIVE" :expired "DELETED"})
 
-(clojure.core/defn update-input-security-group ([update-input-security-group-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-update-input-security-group-request update-input-security-group-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/update-input-security-group-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/inputSecurityGroups/{inputSecurityGroupId}", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/update-input-security-group-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :put, :http.request.configuration/response-code 200, :http.request.configuration/action "UpdateInputSecurityGroup", :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "ConflictException" :portkey.aws.medialive.-2017-10-14/conflict-exception}})))))
+(clojure.core/defn update-input-security-group ([update-input-security-group-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-update-input-security-group-request update-input-security-group-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/update-input-security-group-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/inputSecurityGroups/{inputSecurityGroupId}", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/update-input-security-group-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :put, :http.request.configuration/response-code 200, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "UpdateInputSecurityGroup", :http.request.configuration/output-deser-fn response-update-input-security-group-response, :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "ConflictException" :portkey.aws.medialive.-2017-10-14/conflict-exception}})))))
 (clojure.spec.alpha/fdef update-input-security-group :args (clojure.spec.alpha/tuple :portkey.aws.medialive.-2017-10-14/update-input-security-group-request) :ret (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/update-input-security-group-response))
 
-(clojure.core/defn delete-channel ([delete-channel-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-channel-request delete-channel-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/delete-channel-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/channels/{channelId}", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/delete-channel-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :delete, :http.request.configuration/response-code 200, :http.request.configuration/action "DeleteChannel", :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception, "ConflictException" :portkey.aws.medialive.-2017-10-14/conflict-exception}})))))
+(clojure.core/defn delete-channel ([delete-channel-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-delete-channel-request delete-channel-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/delete-channel-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/channels/{channelId}", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/delete-channel-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :delete, :http.request.configuration/response-code 200, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "DeleteChannel", :http.request.configuration/output-deser-fn response-delete-channel-response, :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception, "ConflictException" :portkey.aws.medialive.-2017-10-14/conflict-exception}})))))
 (clojure.spec.alpha/fdef delete-channel :args (clojure.spec.alpha/tuple :portkey.aws.medialive.-2017-10-14/delete-channel-request) :ret (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/delete-channel-response))
 
-(clojure.core/defn delete-input-security-group ([delete-input-security-group-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-input-security-group-request delete-input-security-group-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/delete-input-security-group-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/inputSecurityGroups/{inputSecurityGroupId}", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/delete-input-security-group-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :delete, :http.request.configuration/response-code 200, :http.request.configuration/action "DeleteInputSecurityGroup", :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
+(clojure.core/defn delete-tags ([delete-tags-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-delete-tags-request delete-tags-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/tags/{resource-arn}", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/delete-tags-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :delete, :http.request.configuration/response-code 204, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "DeleteTags", :http.request.configuration/output-deser-fn (clojure.core/fn [& args__1013883__auto__] {}), :http.request.spec/error-spec {"NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception}})))))
+(clojure.spec.alpha/fdef delete-tags :args (clojure.spec.alpha/tuple :portkey.aws.medialive.-2017-10-14/delete-tags-request) :ret clojure.core/true?)
+
+(clojure.core/defn delete-input-security-group ([delete-input-security-group-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-delete-input-security-group-request delete-input-security-group-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/delete-input-security-group-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/inputSecurityGroups/{inputSecurityGroupId}", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/delete-input-security-group-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :delete, :http.request.configuration/response-code 200, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "DeleteInputSecurityGroup", :http.request.configuration/output-deser-fn response-delete-input-security-group-response, :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
 (clojure.spec.alpha/fdef delete-input-security-group :args (clojure.spec.alpha/tuple :portkey.aws.medialive.-2017-10-14/delete-input-security-group-request) :ret (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/delete-input-security-group-response))
 
-(clojure.core/defn update-channel ([update-channel-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-update-channel-request update-channel-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/update-channel-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/channels/{channelId}", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/update-channel-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :put, :http.request.configuration/response-code 200, :http.request.configuration/action "UpdateChannel", :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "UnprocessableEntityException" :portkey.aws.medialive.-2017-10-14/unprocessable-entity-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "ConflictException" :portkey.aws.medialive.-2017-10-14/conflict-exception}})))))
+(clojure.core/defn update-channel ([update-channel-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-update-channel-request update-channel-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/update-channel-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/channels/{channelId}", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/update-channel-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :put, :http.request.configuration/response-code 200, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "UpdateChannel", :http.request.configuration/output-deser-fn response-update-channel-response, :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "UnprocessableEntityException" :portkey.aws.medialive.-2017-10-14/unprocessable-entity-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "ConflictException" :portkey.aws.medialive.-2017-10-14/conflict-exception}})))))
 (clojure.spec.alpha/fdef update-channel :args (clojure.spec.alpha/tuple :portkey.aws.medialive.-2017-10-14/update-channel-request) :ret (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/update-channel-response))
 
-(clojure.core/defn list-reservations ([] (list-reservations {})) ([list-reservations-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-reservations-request list-reservations-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/list-reservations-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/reservations", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/list-reservations-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code 200, :http.request.configuration/action "ListReservations", :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
+(clojure.core/defn create-tags ([create-tags-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-create-tags-request create-tags-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec nil, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/tags/{resource-arn}", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/create-tags-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code 204, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "CreateTags", :http.request.configuration/output-deser-fn (clojure.core/fn [& args__1013883__auto__] {}), :http.request.spec/error-spec {"NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception}})))))
+(clojure.spec.alpha/fdef create-tags :args (clojure.spec.alpha/tuple :portkey.aws.medialive.-2017-10-14/create-tags-request) :ret clojure.core/true?)
+
+(clojure.core/defn list-reservations ([] (list-reservations {})) ([list-reservations-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-list-reservations-request list-reservations-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/list-reservations-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/reservations", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/list-reservations-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code 200, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "ListReservations", :http.request.configuration/output-deser-fn response-list-reservations-response, :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
 (clojure.spec.alpha/fdef list-reservations :args (clojure.spec.alpha/? :portkey.aws.medialive.-2017-10-14/list-reservations-request) :ret (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-reservations-response))
 
-(clojure.core/defn delete-input ([delete-input-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-input-request delete-input-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/delete-input-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/inputs/{inputId}", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/delete-input-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :delete, :http.request.configuration/response-code 200, :http.request.configuration/action "DeleteInput", :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception, "ConflictException" :portkey.aws.medialive.-2017-10-14/conflict-exception}})))))
+(clojure.core/defn delete-input ([delete-input-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-delete-input-request delete-input-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/delete-input-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/inputs/{inputId}", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/delete-input-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :delete, :http.request.configuration/response-code 200, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "DeleteInput", :http.request.configuration/output-deser-fn response-delete-input-response, :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception, "ConflictException" :portkey.aws.medialive.-2017-10-14/conflict-exception}})))))
 (clojure.spec.alpha/fdef delete-input :args (clojure.spec.alpha/tuple :portkey.aws.medialive.-2017-10-14/delete-input-request) :ret (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/delete-input-response))
 
-(clojure.core/defn describe-input ([describe-input-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-input-request describe-input-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/describe-input-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/inputs/{inputId}", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/describe-input-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code 200, :http.request.configuration/action "DescribeInput", :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
+(clojure.core/defn describe-input ([describe-input-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-describe-input-request describe-input-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/describe-input-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/inputs/{inputId}", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/describe-input-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code 200, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "DescribeInput", :http.request.configuration/output-deser-fn response-describe-input-response, :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
 (clojure.spec.alpha/fdef describe-input :args (clojure.spec.alpha/tuple :portkey.aws.medialive.-2017-10-14/describe-input-request) :ret (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/describe-input-response))
 
-(clojure.core/defn describe-offering ([describe-offering-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-offering-request describe-offering-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/describe-offering-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/offerings/{offeringId}", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/describe-offering-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code 200, :http.request.configuration/action "DescribeOffering", :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
+(clojure.core/defn list-tags-for-resource ([list-tags-for-resource-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-list-tags-for-resource-request list-tags-for-resource-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/list-tags-for-resource-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/tags/{resource-arn}", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/list-tags-for-resource-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code 200, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "ListTagsForResource", :http.request.configuration/output-deser-fn response-list-tags-for-resource-response, :http.request.spec/error-spec {"NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception}})))))
+(clojure.spec.alpha/fdef list-tags-for-resource :args (clojure.spec.alpha/tuple :portkey.aws.medialive.-2017-10-14/list-tags-for-resource-request) :ret (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-tags-for-resource-response))
+
+(clojure.core/defn describe-offering ([describe-offering-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-describe-offering-request describe-offering-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/describe-offering-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/offerings/{offeringId}", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/describe-offering-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code 200, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "DescribeOffering", :http.request.configuration/output-deser-fn response-describe-offering-response, :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
 (clojure.spec.alpha/fdef describe-offering :args (clojure.spec.alpha/tuple :portkey.aws.medialive.-2017-10-14/describe-offering-request) :ret (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/describe-offering-response))
 
-(clojure.core/defn list-inputs ([] (list-inputs {})) ([list-inputs-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-inputs-request list-inputs-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/list-inputs-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/inputs", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/list-inputs-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code 200, :http.request.configuration/action "ListInputs", :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
+(clojure.core/defn list-inputs ([] (list-inputs {})) ([list-inputs-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-list-inputs-request list-inputs-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/list-inputs-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/inputs", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/list-inputs-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code 200, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "ListInputs", :http.request.configuration/output-deser-fn response-list-inputs-response, :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
 (clojure.spec.alpha/fdef list-inputs :args (clojure.spec.alpha/? :portkey.aws.medialive.-2017-10-14/list-inputs-request) :ret (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-inputs-response))
 
-(clojure.core/defn create-input ([] (create-input {})) ([create-input-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-input-request create-input-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/create-input-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/inputs", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/create-input-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code 201, :http.request.configuration/action "CreateInput", :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
+(clojure.core/defn create-input ([] (create-input {})) ([create-input-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-create-input-request create-input-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/create-input-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/inputs", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/create-input-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code 201, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "CreateInput", :http.request.configuration/output-deser-fn response-create-input-response, :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
 (clojure.spec.alpha/fdef create-input :args (clojure.spec.alpha/? :portkey.aws.medialive.-2017-10-14/create-input-request) :ret (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/create-input-response))
 
-(clojure.core/defn create-channel ([] (create-channel {})) ([create-channel-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-channel-request create-channel-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/create-channel-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/channels", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/create-channel-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code 201, :http.request.configuration/action "CreateChannel", :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "UnprocessableEntityException" :portkey.aws.medialive.-2017-10-14/unprocessable-entity-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception, "ConflictException" :portkey.aws.medialive.-2017-10-14/conflict-exception}})))))
+(clojure.core/defn create-channel ([] (create-channel {})) ([create-channel-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-create-channel-request create-channel-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/create-channel-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/channels", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/create-channel-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code 201, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "CreateChannel", :http.request.configuration/output-deser-fn response-create-channel-response, :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "UnprocessableEntityException" :portkey.aws.medialive.-2017-10-14/unprocessable-entity-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception, "ConflictException" :portkey.aws.medialive.-2017-10-14/conflict-exception}})))))
 (clojure.spec.alpha/fdef create-channel :args (clojure.spec.alpha/? :portkey.aws.medialive.-2017-10-14/create-channel-request) :ret (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/create-channel-response))
 
-(clojure.core/defn describe-channel ([describe-channel-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-channel-request describe-channel-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/describe-channel-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/channels/{channelId}", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/describe-channel-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code 200, :http.request.configuration/action "DescribeChannel", :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
+(clojure.core/defn describe-channel ([describe-channel-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-describe-channel-request describe-channel-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/describe-channel-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/channels/{channelId}", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/describe-channel-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code 200, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "DescribeChannel", :http.request.configuration/output-deser-fn response-describe-channel-response, :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
 (clojure.spec.alpha/fdef describe-channel :args (clojure.spec.alpha/tuple :portkey.aws.medialive.-2017-10-14/describe-channel-request) :ret (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/describe-channel-response))
 
-(clojure.core/defn list-channels ([] (list-channels {})) ([list-channels-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-channels-request list-channels-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/list-channels-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/channels", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/list-channels-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code 200, :http.request.configuration/action "ListChannels", :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
+(clojure.core/defn list-channels ([] (list-channels {})) ([list-channels-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-list-channels-request list-channels-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/list-channels-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/channels", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/list-channels-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code 200, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "ListChannels", :http.request.configuration/output-deser-fn response-list-channels-response, :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
 (clojure.spec.alpha/fdef list-channels :args (clojure.spec.alpha/? :portkey.aws.medialive.-2017-10-14/list-channels-request) :ret (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-channels-response))
 
-(clojure.core/defn describe-reservation ([describe-reservation-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-reservation-request describe-reservation-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/describe-reservation-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/reservations/{reservationId}", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/describe-reservation-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code 200, :http.request.configuration/action "DescribeReservation", :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
+(clojure.core/defn describe-reservation ([describe-reservation-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-describe-reservation-request describe-reservation-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/describe-reservation-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/reservations/{reservationId}", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/describe-reservation-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code 200, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "DescribeReservation", :http.request.configuration/output-deser-fn response-describe-reservation-response, :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
 (clojure.spec.alpha/fdef describe-reservation :args (clojure.spec.alpha/tuple :portkey.aws.medialive.-2017-10-14/describe-reservation-request) :ret (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/describe-reservation-response))
 
-(clojure.core/defn describe-input-security-group ([describe-input-security-group-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-input-security-group-request describe-input-security-group-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/describe-input-security-group-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/inputSecurityGroups/{inputSecurityGroupId}", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/describe-input-security-group-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code 200, :http.request.configuration/action "DescribeInputSecurityGroup", :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
+(clojure.core/defn describe-input-security-group ([describe-input-security-group-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-describe-input-security-group-request describe-input-security-group-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/describe-input-security-group-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/inputSecurityGroups/{inputSecurityGroupId}", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/describe-input-security-group-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code 200, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "DescribeInputSecurityGroup", :http.request.configuration/output-deser-fn response-describe-input-security-group-response, :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
 (clojure.spec.alpha/fdef describe-input-security-group :args (clojure.spec.alpha/tuple :portkey.aws.medialive.-2017-10-14/describe-input-security-group-request) :ret (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/describe-input-security-group-response))
 
-(clojure.core/defn batch-update-schedule ([batch-update-schedule-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-batch-update-schedule-request batch-update-schedule-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/batch-update-schedule-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/channels/{channelId}/schedule", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/batch-update-schedule-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :put, :http.request.configuration/response-code 200, :http.request.configuration/action "BatchUpdateSchedule", :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "UnprocessableEntityException" :portkey.aws.medialive.-2017-10-14/unprocessable-entity-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
+(clojure.core/defn batch-update-schedule ([batch-update-schedule-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-batch-update-schedule-request batch-update-schedule-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/batch-update-schedule-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/channels/{channelId}/schedule", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/batch-update-schedule-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :put, :http.request.configuration/response-code 200, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "BatchUpdateSchedule", :http.request.configuration/output-deser-fn response-batch-update-schedule-response, :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "UnprocessableEntityException" :portkey.aws.medialive.-2017-10-14/unprocessable-entity-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
 (clojure.spec.alpha/fdef batch-update-schedule :args (clojure.spec.alpha/tuple :portkey.aws.medialive.-2017-10-14/batch-update-schedule-request) :ret (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/batch-update-schedule-response))
 
-(clojure.core/defn list-input-security-groups ([] (list-input-security-groups {})) ([list-input-security-groups-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-input-security-groups-request list-input-security-groups-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/list-input-security-groups-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/inputSecurityGroups", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/list-input-security-groups-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code 200, :http.request.configuration/action "ListInputSecurityGroups", :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
+(clojure.core/defn list-input-security-groups ([] (list-input-security-groups {})) ([list-input-security-groups-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-list-input-security-groups-request list-input-security-groups-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/list-input-security-groups-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/inputSecurityGroups", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/list-input-security-groups-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code 200, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "ListInputSecurityGroups", :http.request.configuration/output-deser-fn response-list-input-security-groups-response, :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
 (clojure.spec.alpha/fdef list-input-security-groups :args (clojure.spec.alpha/? :portkey.aws.medialive.-2017-10-14/list-input-security-groups-request) :ret (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-input-security-groups-response))
 
-(clojure.core/defn purchase-offering ([purchase-offering-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-purchase-offering-request purchase-offering-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/purchase-offering-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/offerings/{offeringId}/purchase", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/purchase-offering-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code 201, :http.request.configuration/action "PurchaseOffering", :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception, "ConflictException" :portkey.aws.medialive.-2017-10-14/conflict-exception}})))))
+(clojure.core/defn purchase-offering ([purchase-offering-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-purchase-offering-request purchase-offering-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/purchase-offering-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/offerings/{offeringId}/purchase", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/purchase-offering-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code 201, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "PurchaseOffering", :http.request.configuration/output-deser-fn response-purchase-offering-response, :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception, "ConflictException" :portkey.aws.medialive.-2017-10-14/conflict-exception}})))))
 (clojure.spec.alpha/fdef purchase-offering :args (clojure.spec.alpha/tuple :portkey.aws.medialive.-2017-10-14/purchase-offering-request) :ret (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/purchase-offering-response))
 
-(clojure.core/defn list-offerings ([] (list-offerings {})) ([list-offerings-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-list-offerings-request list-offerings-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/list-offerings-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/offerings", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/list-offerings-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code 200, :http.request.configuration/action "ListOfferings", :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
+(clojure.core/defn list-offerings ([] (list-offerings {})) ([list-offerings-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-list-offerings-request list-offerings-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/list-offerings-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/offerings", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/list-offerings-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code 200, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "ListOfferings", :http.request.configuration/output-deser-fn response-list-offerings-response, :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
 (clojure.spec.alpha/fdef list-offerings :args (clojure.spec.alpha/? :portkey.aws.medialive.-2017-10-14/list-offerings-request) :ret (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/list-offerings-response))
 
-(clojure.core/defn stop-channel ([stop-channel-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-stop-channel-request stop-channel-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/stop-channel-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/channels/{channelId}/stop", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/stop-channel-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code 200, :http.request.configuration/action "StopChannel", :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception, "ConflictException" :portkey.aws.medialive.-2017-10-14/conflict-exception}})))))
+(clojure.core/defn stop-channel ([stop-channel-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-stop-channel-request stop-channel-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/stop-channel-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/channels/{channelId}/stop", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/stop-channel-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code 200, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "StopChannel", :http.request.configuration/output-deser-fn response-stop-channel-response, :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception, "ConflictException" :portkey.aws.medialive.-2017-10-14/conflict-exception}})))))
 (clojure.spec.alpha/fdef stop-channel :args (clojure.spec.alpha/tuple :portkey.aws.medialive.-2017-10-14/stop-channel-request) :ret (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/stop-channel-response))
 
-(clojure.core/defn update-input ([update-input-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-update-input-request update-input-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/update-input-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/inputs/{inputId}", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/update-input-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :put, :http.request.configuration/response-code 200, :http.request.configuration/action "UpdateInput", :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "ConflictException" :portkey.aws.medialive.-2017-10-14/conflict-exception}})))))
+(clojure.core/defn update-input ([update-input-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-update-input-request update-input-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/update-input-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/inputs/{inputId}", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/update-input-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :put, :http.request.configuration/response-code 200, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "UpdateInput", :http.request.configuration/output-deser-fn response-update-input-response, :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "ConflictException" :portkey.aws.medialive.-2017-10-14/conflict-exception}})))))
 (clojure.spec.alpha/fdef update-input :args (clojure.spec.alpha/tuple :portkey.aws.medialive.-2017-10-14/update-input-request) :ret (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/update-input-response))
 
-(clojure.core/defn delete-reservation ([delete-reservation-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-reservation-request delete-reservation-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/delete-reservation-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/reservations/{reservationId}", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/delete-reservation-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :delete, :http.request.configuration/response-code 200, :http.request.configuration/action "DeleteReservation", :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception, "ConflictException" :portkey.aws.medialive.-2017-10-14/conflict-exception}})))))
+(clojure.core/defn delete-reservation ([delete-reservation-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-delete-reservation-request delete-reservation-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/delete-reservation-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/reservations/{reservationId}", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/delete-reservation-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :delete, :http.request.configuration/response-code 200, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "DeleteReservation", :http.request.configuration/output-deser-fn response-delete-reservation-response, :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception, "ConflictException" :portkey.aws.medialive.-2017-10-14/conflict-exception}})))))
 (clojure.spec.alpha/fdef delete-reservation :args (clojure.spec.alpha/tuple :portkey.aws.medialive.-2017-10-14/delete-reservation-request) :ret (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/delete-reservation-response))
 
-(clojure.core/defn create-input-security-group ([] (create-input-security-group {})) ([create-input-security-group-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-input-security-group-request create-input-security-group-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/create-input-security-group-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/inputSecurityGroups", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/create-input-security-group-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code 200, :http.request.configuration/action "CreateInputSecurityGroup", :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
+(clojure.core/defn create-input-security-group ([] (create-input-security-group {})) ([create-input-security-group-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-create-input-security-group-request create-input-security-group-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/create-input-security-group-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/inputSecurityGroups", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/create-input-security-group-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code 200, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "CreateInputSecurityGroup", :http.request.configuration/output-deser-fn response-create-input-security-group-response, :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
 (clojure.spec.alpha/fdef create-input-security-group :args (clojure.spec.alpha/? :portkey.aws.medialive.-2017-10-14/create-input-security-group-request) :ret (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/create-input-security-group-response))
 
-(clojure.core/defn start-channel ([start-channel-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-start-channel-request start-channel-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/start-channel-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/channels/{channelId}/start", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/start-channel-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code 200, :http.request.configuration/action "StartChannel", :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception, "ConflictException" :portkey.aws.medialive.-2017-10-14/conflict-exception}})))))
+(clojure.core/defn start-channel ([start-channel-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-start-channel-request start-channel-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/start-channel-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/channels/{channelId}/start", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/start-channel-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code 200, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "StartChannel", :http.request.configuration/output-deser-fn response-start-channel-response, :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception, "ConflictException" :portkey.aws.medialive.-2017-10-14/conflict-exception}})))))
 (clojure.spec.alpha/fdef start-channel :args (clojure.spec.alpha/tuple :portkey.aws.medialive.-2017-10-14/start-channel-request) :ret (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/start-channel-response))
 
-(clojure.core/defn describe-schedule ([describe-schedule-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-describe-schedule-request describe-schedule-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/describe-schedule-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/channels/{channelId}/schedule", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/describe-schedule-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code 200, :http.request.configuration/action "DescribeSchedule", :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
+(clojure.core/defn describe-schedule ([describe-schedule-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-describe-schedule-request describe-schedule-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.medialive.-2017-10-14/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.medialive.-2017-10-14/describe-schedule-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/prod/channels/{channelId}/schedule", :http.request.configuration/version "2017-10-14", :http.request.configuration/service-id "MediaLive", :http.request.spec/input-spec :portkey.aws.medialive.-2017-10-14/describe-schedule-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code 200, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "DescribeSchedule", :http.request.configuration/output-deser-fn response-describe-schedule-response, :http.request.spec/error-spec {"BadRequestException" :portkey.aws.medialive.-2017-10-14/bad-request-exception, "InternalServerErrorException" :portkey.aws.medialive.-2017-10-14/internal-server-error-exception, "ForbiddenException" :portkey.aws.medialive.-2017-10-14/forbidden-exception, "BadGatewayException" :portkey.aws.medialive.-2017-10-14/bad-gateway-exception, "NotFoundException" :portkey.aws.medialive.-2017-10-14/not-found-exception, "GatewayTimeoutException" :portkey.aws.medialive.-2017-10-14/gateway-timeout-exception, "TooManyRequestsException" :portkey.aws.medialive.-2017-10-14/too-many-requests-exception}})))))
 (clojure.spec.alpha/fdef describe-schedule :args (clojure.spec.alpha/tuple :portkey.aws.medialive.-2017-10-14/describe-schedule-request) :ret (clojure.spec.alpha/and :portkey.aws.medialive.-2017-10-14/describe-schedule-response))

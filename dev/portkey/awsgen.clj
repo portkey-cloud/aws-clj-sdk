@@ -102,6 +102,7 @@
   (strict-strs
    :req {"type" string?}
    :opt {"min" int?
+         "box" boolean?
          "max" int?}))
 
 
@@ -109,6 +110,7 @@
   (strict-strs
    :req {"type" string?}
    :opt {"min" int?
+         "box" boolean?
          "max" int?}))
 
 
@@ -148,7 +150,8 @@
 ;;a payload if present
 (defmethod compile-time-shape-spec "structure" [_]
   (strict-strs
-   :req {"type"    string?
+   :req {"type"    string?}
+   :opt {;;@NOTE : members is almost always required but there are few exceptions shapes without it, see mediatailor service
          "members" (spec/map-of string?
                                 (strict-strs
                                  :req {"shape" string?}
@@ -166,11 +169,11 @@
                                        "jsonValue"                        boolean?
                                        "jsonvalue"                        boolean?
                                        "streaming"                        boolean?
-                                       "flattened"                        boolean?}))}
-   :opt {"required"          (spec/coll-of string?)
+                                       "flattened"                        boolean?}))
+         "required"          (spec/coll-of string?)
          "error"             (strict-strs
                               :req {"httpStatusCode" int?}
-                              :opt {"code" string? "senderFault" boolean?})
+                              :opt {"code" string? "senderFault" boolean? "fault" boolean?})
          "exception"         boolean?
          "fault"             boolean?
          "payload"           string?
@@ -689,7 +692,7 @@
                                                                 cat)
                                                        (get-in api ["shapes" shape-name "members"]))]
                (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) (get-in api ["shapes" shape-name]))
-                                                       #{"type"  "members" "required"}))
+                                                       #{"type"  "members" "required" "deprecated"}))
                  (throw (ex-info "deserialization attrs not recognized" {:shape (get-in api ["shapes" shape-name])}))
                  `(cond-> ~required-function-body-part
                     ~@optional-function-body-part))))
@@ -759,7 +762,7 @@
          [api shape-name input]
          (let [{{:strs [shape] :as member} "member"
                 flattened                  "flattened" :as sh} (get-in api ["shapes" shape-name])]
-           (if-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"type" "member" "max" "min" "sensitive" "flattened"}))
+           (if-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"type" "member" "max" "min" "sensitive" "flattened" "deprecated"}))
                         (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) member) #{"shape" "locationName" "jsonvalue"})))
              (throw (ex-info "LIST/deserialization, attrs not recognized " {:sh         sh
                                                                             :member     member
@@ -774,7 +777,7 @@
             (let [{:strs [key value] :as sh} (get-in api ["shapes" shape-name])
                   key-shape-name             (key "shape")
                   value-shape-name           (value "shape")]
-              (when-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"shape" "type" "key" "value" "sensitive"}))
+              (when-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"shape" "type" "key" "value" "sensitive" "max" "min"}))
                              (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) key) #{"shape"}))
                              (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) value) #{"shape"})))
                 (throw (ex-info "map/deser, attrs not recognized" {:sh sh})))
@@ -900,7 +903,7 @@
         raw-response-input-symbol         (symbol "input")
         transformed-response-input-symbol (gensym "rawinput")
         result-wrapper-symbol             (gensym "resultWrapper")
-        handled-attributes                #{"shape" "location" "locationName" "streaming" "deprecated" "box" "deprecatedMessage"}
+        handled-attributes                #{"shape" "location" "locationName" "streaming" "deprecated" "box" "deprecatedMessage" "jsonvalue"}
         let-declaration                   (into {}
                                                 (x/for [[sname {:strs [shape] :as sh}] %
                                                         :let [shape                           (get-in api ["shapes" shape-name "members" sname])
@@ -969,7 +972,7 @@
                                                 (get-in api ["shapes" shape-name "members"]))]
       (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) (get-in api ["shapes" shape-name]))
                                               #{"type" "event" "flattened" "eventstream" "error" "exception" "synthetic" "members" "box" "fault" "required" "deprecatedMessage"
-                                                "queryName" "location" "locationName" "eventpayload" "xmlOrder" "payload" "sensitive" "deprecated" #_"jsonvalue"}))
+                                                "queryName" "location" "locationName" "eventpayload" "xmlOrder" "payload" "sensitive" "deprecated" "jsonvalue"}))
         (throw (ex-info "generate-response-function / defn-part" {:output-root shape-name
                                                                   :shape-name  shape-name
                                                                   :shape       (get-in api ["shapes" shape-name])}))

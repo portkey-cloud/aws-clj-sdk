@@ -14,6 +14,8 @@
 
 (clojure.core/declare ser-count)
 
+(clojure.core/declare ser-copy-tags)
+
 (clojure.core/declare ser-interval)
 
 (clojure.core/declare ser-create-rule)
@@ -66,6 +68,8 @@
 
 (clojure.core/defn- ser-count [input] #:http.request.field{:value input, :shape "Count"})
 
+(clojure.core/defn- ser-copy-tags [input] #:http.request.field{:value input, :shape "CopyTags"})
+
 (clojure.core/defn- ser-interval [input] #:http.request.field{:value input, :shape "Interval"})
 
 (clojure.core/defn- ser-create-rule [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-interval (:interval input)) #:http.request.field{:name "Interval", :shape "Interval"}) (clojure.core/into (ser-interval-unit-values (:interval-unit input)) #:http.request.field{:name "IntervalUnit", :shape "IntervalUnitValues"})], :shape "CreateRule", :type "structure"} (clojure.core/contains? input :times) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-times-list (input :times)) #:http.request.field{:name "Times", :shape "TimesList"}))))
@@ -94,7 +98,7 @@
 
 (clojure.core/defn- ser-tag [input] (clojure.core/cond-> #:http.request.field{:value [(clojure.core/into (ser-string (:key input)) #:http.request.field{:name "Key", :shape "String"}) (clojure.core/into (ser-string (:value input)) #:http.request.field{:name "Value", :shape "String"})], :shape "Tag", :type "structure"}))
 
-(clojure.core/defn- ser-schedule [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "Schedule", :type "structure"} (clojure.core/contains? input :name) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-schedule-name (input :name)) #:http.request.field{:name "Name", :shape "ScheduleName"})) (clojure.core/contains? input :tags-to-add) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-tags-to-add-list (input :tags-to-add)) #:http.request.field{:name "TagsToAdd", :shape "TagsToAddList"})) (clojure.core/contains? input :create-rule) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-create-rule (input :create-rule)) #:http.request.field{:name "CreateRule", :shape "CreateRule"})) (clojure.core/contains? input :retain-rule) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-retain-rule (input :retain-rule)) #:http.request.field{:name "RetainRule", :shape "RetainRule"}))))
+(clojure.core/defn- ser-schedule [input] (clojure.core/cond-> #:http.request.field{:value [], :shape "Schedule", :type "structure"} (clojure.core/contains? input :name) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-schedule-name (input :name)) #:http.request.field{:name "Name", :shape "ScheduleName"})) (clojure.core/contains? input :copy-tags) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-copy-tags (input :copy-tags)) #:http.request.field{:name "CopyTags", :shape "CopyTags"})) (clojure.core/contains? input :tags-to-add) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-tags-to-add-list (input :tags-to-add)) #:http.request.field{:name "TagsToAdd", :shape "TagsToAddList"})) (clojure.core/contains? input :create-rule) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-create-rule (input :create-rule)) #:http.request.field{:name "CreateRule", :shape "CreateRule"})) (clojure.core/contains? input :retain-rule) (clojure.core/update-in [:http.request.field/value] (clojure.core/fnil clojure.core/conj []) (clojure.core/into (ser-retain-rule (input :retain-rule)) #:http.request.field{:name "RetainRule", :shape "RetainRule"}))))
 
 (clojure.core/defn- ser-gettable-policy-state-values [input] #:http.request.field{:value (clojure.core/get {"ENABLED" "ENABLED", :enabled "ENABLED", "DISABLED" "DISABLED", :disabled "DISABLED", "ERROR" "ERROR", :error "ERROR"} input), :shape "GettablePolicyStateValues"})
 
@@ -116,6 +120,148 @@
 
 (clojure.core/defn- req-create-lifecycle-policy-request [input] (clojure.core/cond-> #:http.request.configuration{:body [(clojure.core/into (ser-execution-role-arn (input :execution-role-arn)) #:http.request.field{:name "ExecutionRoleArn", :shape "ExecutionRoleArn"}) (clojure.core/into (ser-policy-description (input :description)) #:http.request.field{:name "Description", :shape "PolicyDescription"}) (clojure.core/into (ser-settable-policy-state-values (input :state)) #:http.request.field{:name "State", :shape "SettablePolicyStateValues"}) (clojure.core/into (ser-policy-details (input :policy-details)) #:http.request.field{:name "PolicyDetails", :shape "PolicyDetails"})]}))
 
+(clojure.core/declare deser-retain-rule)
+
+(clojure.core/declare deser-policy-details)
+
+(clojure.core/declare deser-target-tag-list)
+
+(clojure.core/declare deser-resource-type-values-list)
+
+(clojure.core/declare deser-policy-description)
+
+(clojure.core/declare deser-count)
+
+(clojure.core/declare deser-copy-tags)
+
+(clojure.core/declare deser-lifecycle-policy-summary)
+
+(clojure.core/declare deser-error-message)
+
+(clojure.core/declare deser-interval)
+
+(clojure.core/declare deser-create-rule)
+
+(clojure.core/declare deser-resource-type-values)
+
+(clojure.core/declare deser-parameter-list)
+
+(clojure.core/declare deser-policy-id)
+
+(clojure.core/declare deser-lifecycle-policy-summary-list)
+
+(clojure.core/declare deser-error-code)
+
+(clojure.core/declare deser-string)
+
+(clojure.core/declare deser-parameter)
+
+(clojure.core/declare deser-policy-id-list)
+
+(clojure.core/declare deser-tags-to-add-list)
+
+(clojure.core/declare deser-execution-role-arn)
+
+(clojure.core/declare deser-timestamp)
+
+(clojure.core/declare deser-interval-unit-values)
+
+(clojure.core/declare deser-tag)
+
+(clojure.core/declare deser-schedule)
+
+(clojure.core/declare deser-gettable-policy-state-values)
+
+(clojure.core/declare deser-schedule-list)
+
+(clojure.core/declare deser-times-list)
+
+(clojure.core/declare deser-time)
+
+(clojure.core/declare deser-schedule-name)
+
+(clojure.core/declare deser-lifecycle-policy)
+
+(clojure.core/defn- deser-retain-rule [input] (clojure.core/cond-> {:count (deser-count (input "Count"))}))
+
+(clojure.core/defn- deser-policy-details [input] (clojure.core/cond-> {} (clojure.core/contains? input "ResourceTypes") (clojure.core/assoc :resource-types (deser-resource-type-values-list (input "ResourceTypes"))) (clojure.core/contains? input "TargetTags") (clojure.core/assoc :target-tags (deser-target-tag-list (input "TargetTags"))) (clojure.core/contains? input "Schedules") (clojure.core/assoc :schedules (deser-schedule-list (input "Schedules")))))
+
+(clojure.core/defn- deser-target-tag-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-tag coll))) input))
+
+(clojure.core/defn- deser-resource-type-values-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-resource-type-values coll))) input))
+
+(clojure.core/defn- deser-policy-description [input] input)
+
+(clojure.core/defn- deser-count [input] input)
+
+(clojure.core/defn- deser-copy-tags [input] input)
+
+(clojure.core/defn- deser-lifecycle-policy-summary [input] (clojure.core/cond-> {} (clojure.core/contains? input "PolicyId") (clojure.core/assoc :policy-id (deser-policy-id (input "PolicyId"))) (clojure.core/contains? input "Description") (clojure.core/assoc :description (deser-policy-description (input "Description"))) (clojure.core/contains? input "State") (clojure.core/assoc :state (deser-gettable-policy-state-values (input "State")))))
+
+(clojure.core/defn- deser-error-message [input] input)
+
+(clojure.core/defn- deser-interval [input] input)
+
+(clojure.core/defn- deser-create-rule [input] (clojure.core/cond-> {:interval (deser-interval (input "Interval")), :interval-unit (deser-interval-unit-values (input "IntervalUnit"))} (clojure.core/contains? input "Times") (clojure.core/assoc :times (deser-times-list (input "Times")))))
+
+(clojure.core/defn- deser-resource-type-values [input] (clojure.core/get {"VOLUME" :volume} input))
+
+(clojure.core/defn- deser-parameter-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-parameter coll))) input))
+
+(clojure.core/defn- deser-policy-id [input] input)
+
+(clojure.core/defn- deser-lifecycle-policy-summary-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-lifecycle-policy-summary coll))) input))
+
+(clojure.core/defn- deser-error-code [input] input)
+
+(clojure.core/defn- deser-string [input] input)
+
+(clojure.core/defn- deser-parameter [input] input)
+
+(clojure.core/defn- deser-policy-id-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-policy-id coll))) input))
+
+(clojure.core/defn- deser-tags-to-add-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-tag coll))) input))
+
+(clojure.core/defn- deser-execution-role-arn [input] input)
+
+(clojure.core/defn- deser-timestamp [input] input)
+
+(clojure.core/defn- deser-interval-unit-values [input] (clojure.core/get {"HOURS" :hours} input))
+
+(clojure.core/defn- deser-tag [input] (clojure.core/cond-> {:key (deser-string (input "Key")), :value (deser-string (input "Value"))}))
+
+(clojure.core/defn- deser-schedule [input] (clojure.core/cond-> {} (clojure.core/contains? input "Name") (clojure.core/assoc :name (deser-schedule-name (input "Name"))) (clojure.core/contains? input "CopyTags") (clojure.core/assoc :copy-tags (deser-copy-tags (input "CopyTags"))) (clojure.core/contains? input "TagsToAdd") (clojure.core/assoc :tags-to-add (deser-tags-to-add-list (input "TagsToAdd"))) (clojure.core/contains? input "CreateRule") (clojure.core/assoc :create-rule (deser-create-rule (input "CreateRule"))) (clojure.core/contains? input "RetainRule") (clojure.core/assoc :retain-rule (deser-retain-rule (input "RetainRule")))))
+
+(clojure.core/defn- deser-gettable-policy-state-values [input] (clojure.core/get {"ENABLED" :enabled, "DISABLED" :disabled, "ERROR" :error} input))
+
+(clojure.core/defn- deser-schedule-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-schedule coll))) input))
+
+(clojure.core/defn- deser-times-list [input] (clojure.core/into [] (clojure.core/map (clojure.core/fn [coll] (deser-time coll))) input))
+
+(clojure.core/defn- deser-time [input] input)
+
+(clojure.core/defn- deser-schedule-name [input] input)
+
+(clojure.core/defn- deser-lifecycle-policy [input] (clojure.core/cond-> {} (clojure.core/contains? input "PolicyId") (clojure.core/assoc :policy-id (deser-policy-id (input "PolicyId"))) (clojure.core/contains? input "Description") (clojure.core/assoc :description (deser-policy-description (input "Description"))) (clojure.core/contains? input "State") (clojure.core/assoc :state (deser-gettable-policy-state-values (input "State"))) (clojure.core/contains? input "ExecutionRoleArn") (clojure.core/assoc :execution-role-arn (deser-execution-role-arn (input "ExecutionRoleArn"))) (clojure.core/contains? input "DateCreated") (clojure.core/assoc :date-created (deser-timestamp (input "DateCreated"))) (clojure.core/contains? input "DateModified") (clojure.core/assoc :date-modified (deser-timestamp (input "DateModified"))) (clojure.core/contains? input "PolicyDetails") (clojure.core/assoc :policy-details (deser-policy-details (input "PolicyDetails")))))
+
+(clojure.core/defn- response-invalid-request-exception ([input] (response-invalid-request-exception nil input)) ([resultWrapper1124420 input] (clojure.core/let [rawinput1124419 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1124421 {"Message" (rawinput1124419 "Message"), "Code" (rawinput1124419 "Code"), "RequiredParameters" (rawinput1124419 "RequiredParameters"), "MutuallyExclusiveParameters" (rawinput1124419 "MutuallyExclusiveParameters")}] (clojure.core/cond-> {} (letvar1124421 "Message") (clojure.core/assoc :message (deser-error-message (clojure.core/get-in letvar1124421 ["Message"]))) (letvar1124421 "Code") (clojure.core/assoc :code (deser-error-code (clojure.core/get-in letvar1124421 ["Code"]))) (letvar1124421 "RequiredParameters") (clojure.core/assoc :required-parameters (deser-parameter-list (clojure.core/get-in letvar1124421 ["RequiredParameters"]))) (letvar1124421 "MutuallyExclusiveParameters") (clojure.core/assoc :mutually-exclusive-parameters (deser-parameter-list (clojure.core/get-in letvar1124421 ["MutuallyExclusiveParameters"])))))))
+
+(clojure.core/defn- response-update-lifecycle-policy-response ([input] (response-update-lifecycle-policy-response nil input)) ([resultWrapper1124423 input] (clojure.core/let [rawinput1124422 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1124424 {}] (clojure.core/cond-> {}))))
+
+(clojure.core/defn- response-delete-lifecycle-policy-response ([input] (response-delete-lifecycle-policy-response nil input)) ([resultWrapper1124426 input] (clojure.core/let [rawinput1124425 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1124427 {}] (clojure.core/cond-> {}))))
+
+(clojure.core/defn- response-limit-exceeded-exception ([input] (response-limit-exceeded-exception nil input)) ([resultWrapper1124429 input] (clojure.core/let [rawinput1124428 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1124430 {"Message" (rawinput1124428 "Message"), "Code" (rawinput1124428 "Code"), "ResourceType" (rawinput1124428 "ResourceType")}] (clojure.core/cond-> {} (letvar1124430 "Message") (clojure.core/assoc :message (deser-error-message (clojure.core/get-in letvar1124430 ["Message"]))) (letvar1124430 "Code") (clojure.core/assoc :code (deser-error-code (clojure.core/get-in letvar1124430 ["Code"]))) (letvar1124430 "ResourceType") (clojure.core/assoc :resource-type (deser-string (clojure.core/get-in letvar1124430 ["ResourceType"])))))))
+
+(clojure.core/defn- response-resource-not-found-exception ([input] (response-resource-not-found-exception nil input)) ([resultWrapper1124432 input] (clojure.core/let [rawinput1124431 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1124433 {"Message" (rawinput1124431 "Message"), "Code" (rawinput1124431 "Code"), "ResourceType" (rawinput1124431 "ResourceType"), "ResourceIds" (rawinput1124431 "ResourceIds")}] (clojure.core/cond-> {} (letvar1124433 "Message") (clojure.core/assoc :message (deser-error-message (clojure.core/get-in letvar1124433 ["Message"]))) (letvar1124433 "Code") (clojure.core/assoc :code (deser-error-code (clojure.core/get-in letvar1124433 ["Code"]))) (letvar1124433 "ResourceType") (clojure.core/assoc :resource-type (deser-string (clojure.core/get-in letvar1124433 ["ResourceType"]))) (letvar1124433 "ResourceIds") (clojure.core/assoc :resource-ids (deser-policy-id-list (clojure.core/get-in letvar1124433 ["ResourceIds"])))))))
+
+(clojure.core/defn- response-internal-server-exception ([input] (response-internal-server-exception nil input)) ([resultWrapper1124435 input] (clojure.core/let [rawinput1124434 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1124436 {"Message" (rawinput1124434 "Message"), "Code" (rawinput1124434 "Code")}] (clojure.core/cond-> {} (letvar1124436 "Message") (clojure.core/assoc :message (deser-error-message (clojure.core/get-in letvar1124436 ["Message"]))) (letvar1124436 "Code") (clojure.core/assoc :code (deser-error-code (clojure.core/get-in letvar1124436 ["Code"])))))))
+
+(clojure.core/defn- response-get-lifecycle-policies-response ([input] (response-get-lifecycle-policies-response nil input)) ([resultWrapper1124438 input] (clojure.core/let [rawinput1124437 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1124439 {"Policies" (rawinput1124437 "Policies")}] (clojure.core/cond-> {} (letvar1124439 "Policies") (clojure.core/assoc :policies (deser-lifecycle-policy-summary-list (clojure.core/get-in letvar1124439 ["Policies"])))))))
+
+(clojure.core/defn- response-get-lifecycle-policy-response ([input] (response-get-lifecycle-policy-response nil input)) ([resultWrapper1124441 input] (clojure.core/let [rawinput1124440 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1124442 {"Policy" (rawinput1124440 "Policy")}] (clojure.core/cond-> {} (letvar1124442 "Policy") (clojure.core/assoc :policy (deser-lifecycle-policy (clojure.core/get-in letvar1124442 ["Policy"])))))))
+
+(clojure.core/defn- response-create-lifecycle-policy-response ([input] (response-create-lifecycle-policy-response nil input)) ([resultWrapper1124444 input] (clojure.core/let [rawinput1124443 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1124445 {"PolicyId" (rawinput1124443 "PolicyId")}] (clojure.core/cond-> {} (letvar1124445 "PolicyId") (clojure.core/assoc :policy-id (deser-policy-id (clojure.core/get-in letvar1124445 ["PolicyId"])))))))
+
 (clojure.spec.alpha/def :portkey.aws.dlm/retain-rule (clojure.spec.alpha/keys :req-un [:portkey.aws.dlm/count] :opt-un []))
 
 (clojure.spec.alpha/def :portkey.aws.dlm.policy-details/resource-types (clojure.spec.alpha/and :portkey.aws.dlm/resource-type-values-list))
@@ -135,7 +281,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.dlm/resource-type-values-list (clojure.spec.alpha/coll-of :portkey.aws.dlm/resource-type-values :min-count 1 :max-count 1))
 
-(clojure.spec.alpha/def :portkey.aws.dlm/policy-description (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 0 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 500))))
+(clojure.spec.alpha/def :portkey.aws.dlm/policy-description (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012852__auto__] (clojure.core/<= 0 (clojure.core/count s__1012852__auto__))) (clojure.core/fn [s__1012853__auto__] (clojure.core/< (clojure.core/count s__1012853__auto__) 500))))
 
 (clojure.spec.alpha/def :portkey.aws.dlm/count (clojure.spec.alpha/int-in 1 1000))
 
@@ -147,6 +293,8 @@
 (clojure.spec.alpha/def :portkey.aws.dlm/limit-exceeded-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.dlm.limit-exceeded-exception/message :portkey.aws.dlm.limit-exceeded-exception/code :portkey.aws.dlm.limit-exceeded-exception/resource-type]))
 
 (clojure.spec.alpha/def :portkey.aws.dlm/get-lifecycle-policy-request (clojure.spec.alpha/keys :req-un [:portkey.aws.dlm/policy-id] :opt-un []))
+
+(clojure.spec.alpha/def :portkey.aws.dlm/copy-tags clojure.core/boolean?)
 
 (clojure.spec.alpha/def :portkey.aws.dlm.lifecycle-policy-summary/description (clojure.spec.alpha/and :portkey.aws.dlm/policy-description))
 (clojure.spec.alpha/def :portkey.aws.dlm.lifecycle-policy-summary/state (clojure.spec.alpha/and :portkey.aws.dlm/gettable-policy-state-values))
@@ -233,7 +381,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.dlm.schedule/name (clojure.spec.alpha/and :portkey.aws.dlm/schedule-name))
 (clojure.spec.alpha/def :portkey.aws.dlm.schedule/tags-to-add (clojure.spec.alpha/and :portkey.aws.dlm/tags-to-add-list))
-(clojure.spec.alpha/def :portkey.aws.dlm/schedule (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.dlm.schedule/name :portkey.aws.dlm.schedule/tags-to-add :portkey.aws.dlm/create-rule :portkey.aws.dlm/retain-rule]))
+(clojure.spec.alpha/def :portkey.aws.dlm/schedule (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.dlm.schedule/name :portkey.aws.dlm/copy-tags :portkey.aws.dlm.schedule/tags-to-add :portkey.aws.dlm/create-rule :portkey.aws.dlm/retain-rule]))
 
 (clojure.spec.alpha/def :portkey.aws.dlm/gettable-policy-state-values #{"DISABLED" :disabled "ERROR" :error "ENABLED" :enabled})
 
@@ -241,9 +389,9 @@
 
 (clojure.spec.alpha/def :portkey.aws.dlm/times-list (clojure.spec.alpha/coll-of :portkey.aws.dlm/time :max-count 1))
 
-(clojure.spec.alpha/def :portkey.aws.dlm/time (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27882__auto__] (clojure.core/re-matches #"^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" s__27882__auto__))))
+(clojure.spec.alpha/def :portkey.aws.dlm/time (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012854__auto__] (clojure.core/re-matches #"^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" s__1012854__auto__))))
 
-(clojure.spec.alpha/def :portkey.aws.dlm/schedule-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__27880__auto__] (clojure.core/<= 0 (clojure.core/count s__27880__auto__))) (clojure.core/fn [s__27881__auto__] (clojure.core/< (clojure.core/count s__27881__auto__) 500))))
+(clojure.spec.alpha/def :portkey.aws.dlm/schedule-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012852__auto__] (clojure.core/<= 0 (clojure.core/count s__1012852__auto__))) (clojure.core/fn [s__1012853__auto__] (clojure.core/< (clojure.core/count s__1012853__auto__) 500))))
 
 (clojure.spec.alpha/def :portkey.aws.dlm.lifecycle-policy/description (clojure.spec.alpha/and :portkey.aws.dlm/policy-description))
 (clojure.spec.alpha/def :portkey.aws.dlm.lifecycle-policy/state (clojure.spec.alpha/and :portkey.aws.dlm/gettable-policy-state-values))
@@ -251,17 +399,17 @@
 (clojure.spec.alpha/def :portkey.aws.dlm.lifecycle-policy/date-modified (clojure.spec.alpha/and :portkey.aws.dlm/timestamp))
 (clojure.spec.alpha/def :portkey.aws.dlm/lifecycle-policy (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.dlm/policy-id :portkey.aws.dlm.lifecycle-policy/description :portkey.aws.dlm.lifecycle-policy/state :portkey.aws.dlm/execution-role-arn :portkey.aws.dlm.lifecycle-policy/date-created :portkey.aws.dlm.lifecycle-policy/date-modified :portkey.aws.dlm/policy-details]))
 
-(clojure.core/defn create-lifecycle-policy ([create-lifecycle-policy-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-create-lifecycle-policy-request create-lifecycle-policy-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dlm/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.dlm/create-lifecycle-policy-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/policies", :http.request.configuration/version "2018-01-12", :http.request.configuration/service-id "DLM", :http.request.spec/input-spec :portkey.aws.dlm/create-lifecycle-policy-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/action "CreateLifecyclePolicy", :http.request.spec/error-spec {"InvalidRequestException" :portkey.aws.dlm/invalid-request-exception, "LimitExceededException" :portkey.aws.dlm/limit-exceeded-exception, "InternalServerException" :portkey.aws.dlm/internal-server-exception}})))))
+(clojure.core/defn create-lifecycle-policy ([create-lifecycle-policy-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-create-lifecycle-policy-request create-lifecycle-policy-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.dlm/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.dlm/create-lifecycle-policy-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/policies", :http.request.configuration/version "2018-01-12", :http.request.configuration/service-id "DLM", :http.request.spec/input-spec :portkey.aws.dlm/create-lifecycle-policy-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code nil, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "CreateLifecyclePolicy", :http.request.configuration/output-deser-fn response-create-lifecycle-policy-response, :http.request.spec/error-spec {"InvalidRequestException" :portkey.aws.dlm/invalid-request-exception, "LimitExceededException" :portkey.aws.dlm/limit-exceeded-exception, "InternalServerException" :portkey.aws.dlm/internal-server-exception}})))))
 (clojure.spec.alpha/fdef create-lifecycle-policy :args (clojure.spec.alpha/tuple :portkey.aws.dlm/create-lifecycle-policy-request) :ret (clojure.spec.alpha/and :portkey.aws.dlm/create-lifecycle-policy-response))
 
-(clojure.core/defn delete-lifecycle-policy ([delete-lifecycle-policy-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-delete-lifecycle-policy-request delete-lifecycle-policy-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dlm/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.dlm/delete-lifecycle-policy-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/policies/{policyId}/", :http.request.configuration/version "2018-01-12", :http.request.configuration/service-id "DLM", :http.request.spec/input-spec :portkey.aws.dlm/delete-lifecycle-policy-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :delete, :http.request.configuration/response-code nil, :http.request.configuration/action "DeleteLifecyclePolicy", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.dlm/resource-not-found-exception, "InternalServerException" :portkey.aws.dlm/internal-server-exception, "LimitExceededException" :portkey.aws.dlm/limit-exceeded-exception}})))))
+(clojure.core/defn delete-lifecycle-policy ([delete-lifecycle-policy-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-delete-lifecycle-policy-request delete-lifecycle-policy-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.dlm/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.dlm/delete-lifecycle-policy-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/policies/{policyId}/", :http.request.configuration/version "2018-01-12", :http.request.configuration/service-id "DLM", :http.request.spec/input-spec :portkey.aws.dlm/delete-lifecycle-policy-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :delete, :http.request.configuration/response-code nil, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "DeleteLifecyclePolicy", :http.request.configuration/output-deser-fn response-delete-lifecycle-policy-response, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.dlm/resource-not-found-exception, "InternalServerException" :portkey.aws.dlm/internal-server-exception, "LimitExceededException" :portkey.aws.dlm/limit-exceeded-exception}})))))
 (clojure.spec.alpha/fdef delete-lifecycle-policy :args (clojure.spec.alpha/tuple :portkey.aws.dlm/delete-lifecycle-policy-request) :ret (clojure.spec.alpha/and :portkey.aws.dlm/delete-lifecycle-policy-response))
 
-(clojure.core/defn get-lifecycle-policies ([] (get-lifecycle-policies {})) ([get-lifecycle-policies-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-lifecycle-policies-request get-lifecycle-policies-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dlm/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.dlm/get-lifecycle-policies-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/policies", :http.request.configuration/version "2018-01-12", :http.request.configuration/service-id "DLM", :http.request.spec/input-spec :portkey.aws.dlm/get-lifecycle-policies-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/action "GetLifecyclePolicies", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.dlm/resource-not-found-exception, "InvalidRequestException" :portkey.aws.dlm/invalid-request-exception, "InternalServerException" :portkey.aws.dlm/internal-server-exception, "LimitExceededException" :portkey.aws.dlm/limit-exceeded-exception}})))))
+(clojure.core/defn get-lifecycle-policies ([] (get-lifecycle-policies {})) ([get-lifecycle-policies-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-get-lifecycle-policies-request get-lifecycle-policies-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.dlm/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.dlm/get-lifecycle-policies-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/policies", :http.request.configuration/version "2018-01-12", :http.request.configuration/service-id "DLM", :http.request.spec/input-spec :portkey.aws.dlm/get-lifecycle-policies-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "GetLifecyclePolicies", :http.request.configuration/output-deser-fn response-get-lifecycle-policies-response, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.dlm/resource-not-found-exception, "InvalidRequestException" :portkey.aws.dlm/invalid-request-exception, "InternalServerException" :portkey.aws.dlm/internal-server-exception, "LimitExceededException" :portkey.aws.dlm/limit-exceeded-exception}})))))
 (clojure.spec.alpha/fdef get-lifecycle-policies :args (clojure.spec.alpha/? :portkey.aws.dlm/get-lifecycle-policies-request) :ret (clojure.spec.alpha/and :portkey.aws.dlm/get-lifecycle-policies-response))
 
-(clojure.core/defn get-lifecycle-policy ([get-lifecycle-policy-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-get-lifecycle-policy-request get-lifecycle-policy-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dlm/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.dlm/get-lifecycle-policy-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/policies/{policyId}/", :http.request.configuration/version "2018-01-12", :http.request.configuration/service-id "DLM", :http.request.spec/input-spec :portkey.aws.dlm/get-lifecycle-policy-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/action "GetLifecyclePolicy", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.dlm/resource-not-found-exception, "InternalServerException" :portkey.aws.dlm/internal-server-exception, "LimitExceededException" :portkey.aws.dlm/limit-exceeded-exception}})))))
+(clojure.core/defn get-lifecycle-policy ([get-lifecycle-policy-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-get-lifecycle-policy-request get-lifecycle-policy-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.dlm/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.dlm/get-lifecycle-policy-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/policies/{policyId}/", :http.request.configuration/version "2018-01-12", :http.request.configuration/service-id "DLM", :http.request.spec/input-spec :portkey.aws.dlm/get-lifecycle-policy-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :get, :http.request.configuration/response-code nil, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "GetLifecyclePolicy", :http.request.configuration/output-deser-fn response-get-lifecycle-policy-response, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.dlm/resource-not-found-exception, "InternalServerException" :portkey.aws.dlm/internal-server-exception, "LimitExceededException" :portkey.aws.dlm/limit-exceeded-exception}})))))
 (clojure.spec.alpha/fdef get-lifecycle-policy :args (clojure.spec.alpha/tuple :portkey.aws.dlm/get-lifecycle-policy-request) :ret (clojure.spec.alpha/and :portkey.aws.dlm/get-lifecycle-policy-response))
 
-(clojure.core/defn update-lifecycle-policy ([update-lifecycle-policy-requestinput] (clojure.core/let [request-function-result__28521__auto__ (req-update-lifecycle-policy-request update-lifecycle-policy-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__28521__auto__ {:http.request.configuration/endpoints portkey.aws.dlm/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.dlm/update-lifecycle-policy-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/policies/{policyId}", :http.request.configuration/version "2018-01-12", :http.request.configuration/service-id "DLM", :http.request.spec/input-spec :portkey.aws.dlm/update-lifecycle-policy-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :patch, :http.request.configuration/response-code nil, :http.request.configuration/action "UpdateLifecyclePolicy", :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.dlm/resource-not-found-exception, "InvalidRequestException" :portkey.aws.dlm/invalid-request-exception, "InternalServerException" :portkey.aws.dlm/internal-server-exception, "LimitExceededException" :portkey.aws.dlm/limit-exceeded-exception}})))))
+(clojure.core/defn update-lifecycle-policy ([update-lifecycle-policy-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-update-lifecycle-policy-request update-lifecycle-policy-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.dlm/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.dlm/update-lifecycle-policy-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/policies/{policyId}", :http.request.configuration/version "2018-01-12", :http.request.configuration/service-id "DLM", :http.request.spec/input-spec :portkey.aws.dlm/update-lifecycle-policy-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :patch, :http.request.configuration/response-code nil, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "UpdateLifecyclePolicy", :http.request.configuration/output-deser-fn response-update-lifecycle-policy-response, :http.request.spec/error-spec {"ResourceNotFoundException" :portkey.aws.dlm/resource-not-found-exception, "InvalidRequestException" :portkey.aws.dlm/invalid-request-exception, "InternalServerException" :portkey.aws.dlm/internal-server-exception, "LimitExceededException" :portkey.aws.dlm/limit-exceeded-exception}})))))
 (clojure.spec.alpha/fdef update-lifecycle-policy :args (clojure.spec.alpha/tuple :portkey.aws.dlm/update-lifecycle-policy-request) :ret (clojure.spec.alpha/and :portkey.aws.dlm/update-lifecycle-policy-response))
