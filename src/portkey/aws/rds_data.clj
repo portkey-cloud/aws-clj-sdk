@@ -92,15 +92,15 @@
 
 (clojure.core/defn- deser-boolean [input] input)
 
-(clojure.core/defn- response-internal-server-error-exception ([input] (response-internal-server-error-exception nil input)) ([resultWrapper1430448 input] (clojure.core/let [rawinput1430447 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1430449 {}] (clojure.core/cond-> {}))))
+(clojure.core/defn- response-internal-server-error-exception ([input] (response-internal-server-error-exception nil input)) ([resultWrapper437451 input] (clojure.core/let [rawinput437450 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar437452 {}] (clojure.core/cond-> {}))))
 
-(clojure.core/defn- response-bad-request-exception ([input] (response-bad-request-exception nil input)) ([resultWrapper1430451 input] (clojure.core/let [rawinput1430450 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1430452 {"message" (rawinput1430450 "message")}] (clojure.core/cond-> {} (letvar1430452 "message") (clojure.core/assoc :message (deser-string (clojure.core/get-in letvar1430452 ["message"])))))))
+(clojure.core/defn- response-bad-request-exception ([input] (response-bad-request-exception nil input)) ([resultWrapper437454 input] (clojure.core/let [rawinput437453 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar437455 {"message" (rawinput437453 "message")}] (clojure.core/cond-> {} (letvar437455 "message") (clojure.core/assoc :message (deser-string (clojure.core/get-in letvar437455 ["message"])))))))
 
-(clojure.core/defn- response-forbidden-exception ([input] (response-forbidden-exception nil input)) ([resultWrapper1430454 input] (clojure.core/let [rawinput1430453 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1430455 {"message" (rawinput1430453 "message")}] (clojure.core/cond-> {} (letvar1430455 "message") (clojure.core/assoc :message (deser-string (clojure.core/get-in letvar1430455 ["message"])))))))
+(clojure.core/defn- response-forbidden-exception ([input] (response-forbidden-exception nil input)) ([resultWrapper437457 input] (clojure.core/let [rawinput437456 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar437458 {"message" (rawinput437456 "message")}] (clojure.core/cond-> {} (letvar437458 "message") (clojure.core/assoc :message (deser-string (clojure.core/get-in letvar437458 ["message"])))))))
 
-(clojure.core/defn- response-service-unavailable-error ([input] (response-service-unavailable-error nil input)) ([resultWrapper1430457 input] (clojure.core/let [rawinput1430456 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1430458 {}] (clojure.core/cond-> {}))))
+(clojure.core/defn- response-service-unavailable-error ([input] (response-service-unavailable-error nil input)) ([resultWrapper437460 input] (clojure.core/let [rawinput437459 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar437461 {}] (clojure.core/cond-> {}))))
 
-(clojure.core/defn- response-execute-sql-response ([input] (response-execute-sql-response nil input)) ([resultWrapper1430460 input] (clojure.core/let [rawinput1430459 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar1430461 {"sqlStatementResults" (rawinput1430459 "sqlStatementResults")}] (clojure.core/cond-> {:sql-statement-results (deser-sql-statement-results (clojure.core/get-in letvar1430461 ["sqlStatementResults"]))}))))
+(clojure.core/defn- response-execute-sql-response ([input] (response-execute-sql-response nil input)) ([resultWrapper437463 input] (clojure.core/let [rawinput437462 (clojure.core/some-> input :body portkey.aws/parse-json-body) letvar437464 {"sqlStatementResults" (rawinput437462 "sqlStatementResults")}] (clojure.core/cond-> {:sql-statement-results (deser-sql-statement-results (clojure.core/get-in letvar437464 ["sqlStatementResults"]))}))))
 
 (clojure.spec.alpha/def :portkey.aws.rds-data/internal-server-error-exception (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
@@ -112,7 +112,7 @@
 (clojure.spec.alpha/def :portkey.aws.rds-data.forbidden-exception/message (clojure.spec.alpha/and :portkey.aws.rds-data/string))
 (clojure.spec.alpha/def :portkey.aws.rds-data/forbidden-exception (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.rds-data.forbidden-exception/message]))
 
-(clojure.spec.alpha/def :portkey.aws.rds-data/db-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012853__auto__] (clojure.core/< (clojure.core/count s__1012853__auto__) 64))))
+(clojure.spec.alpha/def :portkey.aws.rds-data/db-name (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__21111__auto__] (clojure.core/< (clojure.core/count s__21111__auto__) 64))))
 
 (clojure.spec.alpha/def :portkey.aws.rds-data.execute-sql-request/aws-secret-store-arn (clojure.spec.alpha/and :portkey.aws.rds-data/arn))
 (clojure.spec.alpha/def :portkey.aws.rds-data.execute-sql-request/database (clojure.spec.alpha/and :portkey.aws.rds-data/db-name))
@@ -137,7 +137,7 @@
 (clojure.spec.alpha/def :portkey.aws.rds-data.value/string-value (clojure.spec.alpha/and :portkey.aws.rds-data/string))
 (clojure.spec.alpha/def :portkey.aws.rds-data/value (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.rds-data.value/struct-value :portkey.aws.rds-data.value/double-value :portkey.aws.rds-data.value/is-null :portkey.aws.rds-data.value/big-int-value :portkey.aws.rds-data.value/real-value :portkey.aws.rds-data.value/bit-value :portkey.aws.rds-data.value/array-values :portkey.aws.rds-data.value/int-value :portkey.aws.rds-data.value/blob-value :portkey.aws.rds-data.value/string-value]))
 
-(clojure.spec.alpha/def :portkey.aws.rds-data/sql-statement (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012853__auto__] (clojure.core/< (clojure.core/count s__1012853__auto__) 65536))))
+(clojure.spec.alpha/def :portkey.aws.rds-data/sql-statement (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__21111__auto__] (clojure.core/< (clojure.core/count s__21111__auto__) 65536))))
 
 (clojure.spec.alpha/def :portkey.aws.rds-data.result-set-metadata/column-count (clojure.spec.alpha/and :portkey.aws.rds-data/long))
 (clojure.spec.alpha/def :portkey.aws.rds-data.result-set-metadata/column-metadata (clojure.spec.alpha/and :portkey.aws.rds-data/column-metadata-list))
@@ -152,7 +152,7 @@
 
 (clojure.spec.alpha/def :portkey.aws.rds-data/service-unavailable-error (clojure.spec.alpha/keys :req-un [] :opt-un []))
 
-(clojure.spec.alpha/def :portkey.aws.rds-data/arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__1012853__auto__] (clojure.core/< (clojure.core/count s__1012853__auto__) 1024))))
+(clojure.spec.alpha/def :portkey.aws.rds-data/arn (clojure.spec.alpha/and clojure.core/string? (clojure.core/fn [s__21111__auto__] (clojure.core/< (clojure.core/count s__21111__auto__) 1024))))
 
 (clojure.spec.alpha/def :portkey.aws.rds-data.struct-value/attributes (clojure.spec.alpha/and :portkey.aws.rds-data/array-values))
 (clojure.spec.alpha/def :portkey.aws.rds-data/struct-value (clojure.spec.alpha/keys :req-un [] :opt-un [:portkey.aws.rds-data.struct-value/attributes]))
@@ -198,5 +198,5 @@
 
 (clojure.spec.alpha/def :portkey.aws.rds-data/boolean clojure.core/boolean?)
 
-(clojure.core/defn execute-sql ([execute-sql-requestinput] (clojure.core/let [request-function-result__1013884__auto__ (req-execute-sql-request execute-sql-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__1013884__auto__ {:http.request.configuration/endpoints portkey.aws.rds-data/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.rds-data/execute-sql-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/ExecuteSql", :http.request.configuration/version "2018-08-01", :http.request.configuration/service-id "RDS Data", :http.request.spec/input-spec :portkey.aws.rds-data/execute-sql-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code 200, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "ExecuteSql", :http.request.configuration/output-deser-fn response-execute-sql-response, :http.request.spec/error-spec {"BadRequestException" :portkey.aws.rds-data/bad-request-exception, "ForbiddenException" :portkey.aws.rds-data/forbidden-exception, "InternalServerErrorException" :portkey.aws.rds-data/internal-server-error-exception, "ServiceUnavailableError" :portkey.aws.rds-data/service-unavailable-error}})))))
+(clojure.core/defn execute-sql "Executes any SQL statement on the target database synchronously" ([execute-sql-requestinput] (clojure.core/let [request-function-result__22153__auto__ (req-execute-sql-request execute-sql-requestinput)] (portkey.aws/-call-http (clojure.core/into request-function-result__22153__auto__ {:http.request.configuration/endpoints portkey.aws.rds-data/endpoints, :http.request.configuration/target-prefix nil, :http.request.spec/output-spec :portkey.aws.rds-data/execute-sql-response, :http.request.configuration/mime-type {"content-type" "application/json"}, :http.request.configuration/request-uri "/ExecuteSql", :http.request.configuration/version "2018-08-01", :http.request.configuration/service-id "RDS Data", :http.request.spec/input-spec :portkey.aws.rds-data/execute-sql-request, :http.request.configuration/protocol "rest-json", :http.request.configuration/method :post, :http.request.configuration/response-code 200, :http.request.configuration/result-wrapper nil, :http.request.configuration/action "ExecuteSql", :http.request.configuration/output-deser-fn response-execute-sql-response, :http.request.spec/error-spec {"BadRequestException" :portkey.aws.rds-data/bad-request-exception, "ForbiddenException" :portkey.aws.rds-data/forbidden-exception, "InternalServerErrorException" :portkey.aws.rds-data/internal-server-error-exception, "ServiceUnavailableError" :portkey.aws.rds-data/service-unavailable-error}})))))
 (clojure.spec.alpha/fdef execute-sql :args (clojure.spec.alpha/tuple :portkey.aws.rds-data/execute-sql-request) :ret (clojure.spec.alpha/and :portkey.aws.rds-data/execute-sql-response))

@@ -447,7 +447,9 @@
                                                            (not (contains? #{"members" "required"} k))))
                                                  (map (fn [[k v]]
                                                         [(keyword "http.request.field" (aws/dashed k)) v])))
-             handled-attributes            #{"shape" "box" "locationName" "deprecated" "deprecatedMessage" "sensitive" "flattened" "xmlAttribute" "streaming" "queryName"}
+             handled-attributes            #{"shape" "locationName" "flattened" "xmlAttribute" "streaming" "box" "sensitive"
+                                             ;; @NOTE : these are note handled attributes but we don't throw errors when encountered
+                                             "deprecated" "deprecatedMessage" "queryName"}
              required-function-body-part   (into [] (comp (x/for [required-name %
                                                                   :let [{:strs [shape] :as sh} (get-in api ["shapes" shape-name "members" required-name])
                                                                         ser-name               (shape-name->ser-name shape)
@@ -455,7 +457,7 @@
                                                                         test-form#             `(~dashed-name ~request-function-input-symbol)]]
                                                             (if-not  (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
                                                                                                      handled-attributes))
-                                                              (throw (ex-info "Structure Type / REST-XML : Field not handled" {:sh sh}))
+                                                              (throw (ex-info "[aws-serialization-functions]item-1 Attribute not handled" {:sh sh}))
                                                               `(into ~(list ser-name test-form#)
                                                                      ~(into {:http.request.field/name required-name}
                                                                             x-filter sh)))))
@@ -466,7 +468,7 @@
                                                                         dashed-name (-> optional-name aws/dashed keyword)]]
                                                             (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
                                                                                                     handled-attributes))
-                                                              (throw (ex-info "Structure Type / REST-XML : Field not handled" {:sh sh}))
+                                                              (throw (ex-info "[aws-serialization-functions]item-2 Attribute not handled" {:sh sh}))
                                                               `[(contains? ~request-function-input-symbol ~dashed-name)
                                                                 (update-in [:http.request.field/value]
                                                                            (fnil conj [])
@@ -476,8 +478,10 @@
                                                           cat)
                                                  (get-in api ["shapes" shape-name "members"]))]
          (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) (get-in api ["shapes" shape-name]))
-                                                 #{"type" "members" "required" "deprecated" "sensitive" "locationName" "xmlNamespace" "deprecatedMessage" "xmlOrder"}))
-           (throw (ex-info "Structure REST-XML protocol does not handle type" {:shape (get-in api ["shapes" shape-name])}))
+                                                 #{"type" "members" "required" "sensitive" "locationName" "xmlNamespace"
+                                                   ;; @NOTE : these are note handled attributes but we don't throw errors when encountered
+                                                   "deprecatedMessage" "xmlOrder" "deprecated"}))
+           (throw (ex-info "[aws-serialization-functions]item-3 Attribute not handled" {:shape (get-in api ["shapes" shape-name])}))
            `(cond-> ~(into {:http.request.field/value required-function-body-part
                             :http.request.field/shape shape-name}
                            (into {} x-filter (get-in api ["shapes" shape-name])))
@@ -490,10 +494,12 @@
                                                                 (map (fn [[k v]]
                                                                        [(keyword "http.request.field" (aws/dashed k)) v])))
              {{:strs [shape] :as member} "member" :as sh} (get-in api ["shapes" shape-name])]
-         (if-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"type" "member" "max" "min" "flattened"}))
+         (if-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"type" "member" "flattened"
+                                                                                           ;; @NOTE : these are note handled attributes but we don't throw errors when encountered
+                                                                                           "max" "min"}))
                       (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) member) #{"shape" "locationName"})))
-           (throw (ex-info "Type : list, aws-serialization-functions macro with sh and member : " {:sh     sh
-                                                                                                   :member member}))
+           (throw (ex-info "[aws-serialization-functions]item-4 Attribute not handled" {:sh     sh
+                                                                                        :member member}))
            (into #:http.request.field{:value `(into []
                                                     (map (fn [~'coll]
                                                            (merge ~(list (shape-name->ser-name shape) 'coll)
@@ -512,10 +518,12 @@
                                                                      (map (fn [[k v]]
                                                                             [(keyword "http.request.field" (aws/dashed k)) v])))
                   {{:strs [shape] :as member} "member" :as sh} (get-in api ["shapes" shape-name])]
-              (if-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"type" "member" "flattened" "min" "sensitive" "max" "jsonvalue" "deprecated"}))
+              (if-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"type" "member" "flattened"
+                                                                                                ;; @NOTE : these are note handled attributes but we don't throw errors when encountered
+                                                                                                "min" "sensitive" "max" "jsonvalue" "deprecated"}))
                            (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) member) #{"shape" "locationName"})))
-                (throw (ex-info "Type : list, aws-serialization-functions macro with sh and member : " {:sh     sh
-                                                                                                        :member member}))
+                (throw (ex-info "[aws-serialization-functions]item-5 Attribute not handled" {:sh     sh
+                                                                                             :member member}))
                 (into #:http.request.field{:value `(into []
                                                          (map (fn [~'coll]
                                                                 (merge ~(list (shape-name->ser-name shape) 'coll)
@@ -541,7 +549,7 @@
            (when-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"shape" "type" "key" "value" "flattened" "locationName"}))
                           (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) key) #{"shape" "locationName"}))
                           (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) value) #{"shape" "locationName"})))
-             (throw (ex-info "Map type / QUERY : Sensitive/flattened not handled" {:sh sh})))
+             (throw (ex-info "[aws-serialization-functions]item-6 Attribute not handled" {:sh sh})))
            (into #:http.request.field{:value `(into []
                                                     (map (fn [[~'k ~'v]]
                                                            [(into ~(list (shape-name->ser-name key-shape-name) 'k)
@@ -565,10 +573,12 @@
                   {:strs [key value] :as sh} (get-in api ["shapes" shape-name])
                   key-shape-name             (key "shape")
                   value-shape-name           (value "shape")]
-              (when-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"shape" "type" "key" "value" "max" "min" "sensitive"}))
+              (when-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"shape" "type" "key" "value"
+                                                                                                  ;; @NOTE : these are note handled attributes but we don't throw errors when encountered
+                                                                                                  "max" "min" "sensitive"}))
                              (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) key) #{"shape"}))
                              (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) value) #{"shape"})))
-                (throw (ex-info "Map type / REST-XML : Sensitive/flattened not handled" {:sh sh})))
+                (throw (ex-info "[aws-serialization-functions]item-7 Attribute not handled" {:sh sh})))
               (into #:http.request.field{:value `(into []
                                                        (map (fn [[~'k ~'v]]
                                                               [(into ~(list (shape-name->ser-name key-shape-name) 'k)
@@ -662,8 +672,10 @@
              [api shape-name input]
              (let [required                      (get-in api ["shapes" shape-name "required"])
                    request-function-input-symbol (symbol "input")
-                   handled-attributes            #{"shape" "flattened" "eventpayload" "xmlAttribute" "error" "payload" "exception" "fault" "synthetic" "box" "sensitive" "deprecatedMessage"
-                                                   "location" "locationName" "queryName" "deprecated" "event" "eventstream" #_"idempotencyToken" #_"streaming" "xmlNamespace" #_"box" #_"jsonvalue"}
+                   handled-attributes            #{"shape" "flattened" "location" "locationName" "xmlNamespace"
+                                                   ;; @NOTE : these are note handled attributes but we don't throw errors when encountered
+                                                   "eventpayload" "xmlAttribute" "error" "payload" "exception" "fault" "synthetic" "box" "sensitive" "deprecatedMessage"
+                                                   "queryName" "deprecated" "event" "events" "eventstream" #_"idempotencyToken" #_"streaming" #_"box" #_"jsonvalue"}
                    required-function-body-part   (into {}
                                                        (x/for [required-name %
                                                                :let [shape                           (get-in api ["shapes" shape-name "members" required-name])
@@ -674,7 +686,7 @@
                                                                      dashed-name                     (-> required-name aws/dashed keyword)]]
                                                          (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
                                                                                                  handled-attributes))
-                                                           (throw (ex-info "deserialization attrs not recognized" {:sh sh}))
+                                                           (throw (ex-info "[aws-deserialization-functions]item-8 Attribute not handled" {:sh sh}))
                                                            [dashed-name (list deser-name (list request-function-input-symbol location-name))]))
                                                        required)
                    optional-function-body-part   (into [] (comp (x/for [[optional-name {:strs [shape location locationName] :as sh}] %
@@ -685,15 +697,17 @@
                                                                               dashed-name  (-> optional-name aws/dashed keyword)]]
                                                                   (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
                                                                                                           handled-attributes))
-                                                                    (throw (ex-info "deserialization attrs not recognized" {:sh sh}))
+                                                                    (throw (ex-info "[aws-deserialization-functions]item-9 Attribute not handled" {:sh sh}))
                                                                     `[(contains? ~request-function-input-symbol ~location-name)
                                                                       (assoc ~dashed-name
                                                                              ~(list deser-name (list request-function-input-symbol location-name)))]))
                                                                 cat)
                                                        (get-in api ["shapes" shape-name "members"]))]
                (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) (get-in api ["shapes" shape-name]))
-                                                       #{"type"  "members" "required" "deprecated"}))
-                 (throw (ex-info "deserialization attrs not recognized" {:shape (get-in api ["shapes" shape-name])}))
+                                                       #{"type"  "members" "required"
+                                                         ;; @NOTE : these are note handled attributes but we don't throw errors when encountered
+                                                         "deprecated" "deprecatedMessage" "events" "eventstream" "sensitive" "exception" "fault" "event"}))
+                 (throw (ex-info "[aws-deserialization-functions]item-10 Attribute not handled" {:shape (get-in api ["shapes" shape-name])}))
                  `(cond-> ~required-function-body-part
                     ~@optional-function-body-part))))
 
@@ -701,8 +715,10 @@
          [api shape-name input]
          (let [required                      (get-in api ["shapes" shape-name "required"])
                request-function-input-symbol (symbol "input")
-               handled-attributes            #{"shape" "flattened" "eventpayload" "xmlAttribute" "error" "payload" "exception" "fault" "synthetic" "box" "sensitive" "deprecatedMessage"
-                                               "location" "locationName" "queryName" "deprecated" "event" "eventstream" #_"idempotencyToken" #_"streaming" "xmlNamespace" #_"box" #_"jsonvalue"}
+               handled-attributes            #{"shape" "flattened" "location" "locationName" "xmlNamespace" "xmlAttribute"
+                                               ;; @NOTE : these are note handled attributes but we don't throw errors when encountered
+                                               "eventpayload"  "error" "payload" "exception" "fault" "synthetic" "box" "sensitive" "deprecatedMessage"
+                                               "queryName" "deprecated" "event" "eventstream"}
                let-declaration               (into {}
                                                    (x/for [[sname {:strs [shape locationName] :as sh}] %
                                                            :let [shape                           (get-in api ["shapes" shape-name "members" sname])
@@ -727,7 +743,7 @@
                                                                  dashed-name                     (-> required-name aws/dashed keyword)]]
                                                      (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
                                                                                              handled-attributes))
-                                                       (throw (ex-info "AAAA deserialization attrs not recognized" {:sh sh}))
+                                                       (throw (ex-info "[aws-deserialization-functions]item-11 Attribute not handled" {:sh sh}))
                                                        [dashed-name (list deser-name `(get-in ~let-var-sym ~(cond
                                                                                                               flattened            [locationName]
                                                                                                               (true? xmlAttribute) [locationName]
@@ -741,7 +757,7 @@
                                                                           dashed-name  (-> optional-name aws/dashed keyword)]]
                                                               (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
                                                                                                       handled-attributes))
-                                                                (throw (ex-info "deserialization attrs not recognized" {:sh sh}))
+                                                                (throw (ex-info "[aws-deserialization-functions]item-12 Attribute not handled" {:sh sh}))
                                                                 `[(~let-var-sym ~locationName)
                                                                   (assoc ~dashed-name
                                                                          ~(list deser-name `(get-in ~let-var-sym  ~(cond
@@ -751,9 +767,11 @@
                                                             cat)
                                                    (get-in api ["shapes" shape-name "members"]))]
            (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) (get-in api ["shapes" shape-name]))
-                                                   #{"type" "event" "flattened" "eventstream" "error" "exception" "synthetic" "members" "box" "fault" "required" "xmlOrder"
-                                                     "queryName" "location" "locationName" "eventpayload" "xmlNamespace" "payload" "sensitive" "deprecatedMessage" "deprecated" "wrapper" #_"jsonvalue"}))
-             (throw (ex-info "deserialization attrs dsfdsfsdnot recognized" {:shape (get-in api ["shapes" shape-name])}))
+                                                   #{"type" "flattened" "members"  "required" "location" "locationName"
+                                                     ;; @NOTE : these are note handled attributes but we don't throw errors when encountered
+                                                     "eventstream" "error" "exception" "events" "synthetic"  "xmlOrder" "box" "fault" "event"
+                                                     "queryName" "eventpayload" "xmlNamespace" "payload" "sensitive" "deprecatedMessage" "deprecated" "wrapper" #_"jsonvalue"}))
+             (throw (ex-info "[aws-deserialization-functions]item-13 Attribute not handled" {:shape (get-in api ["shapes" shape-name])}))
              `(let [~let-var-sym ~let-declaration]
                 (cond-> ~required-function-body-part
                   ~@optional-function-body-part)))))
@@ -762,11 +780,15 @@
          [api shape-name input]
          (let [{{:strs [shape] :as member} "member"
                 flattened                  "flattened" :as sh} (get-in api ["shapes" shape-name])]
-           (if-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"type" "member" "max" "min" "sensitive" "flattened" "deprecated"}))
-                        (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) member) #{"shape" "locationName" "jsonvalue"})))
-             (throw (ex-info "LIST/deserialization, attrs not recognized " {:sh         sh
-                                                                            :member     member
-                                                                            :shape-name shape-name}))
+           (if-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"type" "member" "flattened"
+                                                                                             ;; @NOTE : these are note handled attributes but we don't throw errors when encountered
+                                                                                             "max" "min" "sensitive" "deprecated"}))
+                        (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) member) #{"shape" "locationName"
+                                                                                                 ;; @NOTE : these are note handled attributes but we don't throw errors when encountered
+                                                                                                 "jsonvalue"})))
+             (throw (ex-info "[aws-deserialization-functions]item-14 Attribute not handled" {:sh         sh
+                                                                                             :member     member
+                                                                                             :shape-name shape-name}))
              `(into []
                     (map (fn [~'coll]
                            ~(list (shape-name->deser-name shape) (if flattened `(:content ~'coll) 'coll))))
@@ -777,10 +799,12 @@
             (let [{:strs [key value] :as sh} (get-in api ["shapes" shape-name])
                   key-shape-name             (key "shape")
                   value-shape-name           (value "shape")]
-              (when-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"shape" "type" "key" "value" "sensitive" "max" "min"}))
+              (when-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"shape" "type" "key" "value"
+                                                                                                  ;; @NOTE : these are note handled attributes but we don't throw errors when encountered
+                                                                                                  "sensitive" "max" "min"}))
                              (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) key) #{"shape"}))
                              (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) value) #{"shape"})))
-                (throw (ex-info "map/deser, attrs not recognized" {:sh sh})))
+                (throw (ex-info "[aws-deserialization-functions]item-15 Attribute not handled" {:sh sh})))
               `(into {}
                      (map (fn [[~'k ~'v]]
                             [~(list (shape-name->deser-name key-shape-name) 'k)
@@ -792,10 +816,12 @@
          (let [{:strs [key flattened value] :as sh} (get-in api ["shapes" shape-name])
                key-shape-name                       (key "shape")
                value-shape-name                     (value "shape")]
-           (when-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"shape" "type" "key" "value" "min" "max" "flattened" "locationName"}))
+           (when-not (and (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh) #{"shape" "type" "key" "value" "flattened" "locationName"
+                                                                                               ;; @NOTE : these are note handled attributes but we don't throw errors when encountered
+                                                                                               "min" "max"}))
                           (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) key) #{"shape" "locationName"}))
                           (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) value) #{"shape" "locationName"})))
-             (throw (ex-info "map/deser, attrs not recognized" {:sh sh})))
+             (throw (ex-info "[aws-deserialization-functions]item-16 Attribute not handled" {:sh sh})))
            `(let [x-flattened# ~(if flattened `(map :content) `(map identity))]
               (into {}
                     (comp x-flattened#
@@ -842,7 +868,9 @@
                                                       (not (contains? #{"members" "required"} k))))
                                             (map (fn [[k v]]
                                                    [(keyword "http.request.field" (aws/dashed k)) v])))
-        handled-attributes            #{"shape" "location" "locationName" "deprecated" "deprecatedMessage" "idempotencyToken" "streaming" "xmlNamespace" "box" "jsonvalue"}
+        handled-attributes            #{"shape" "location" "locationName" "idempotencyToken" "streaming" "xmlNamespace"
+                                        ;; @NOTE : these are note handled attributes but we don't throw errors when encountered
+                                        "deprecated" "deprecatedMessage" "box" "jsonvalue"}
         required-function-body-part   (into {}
                                             (comp (x/for [required-name %
                                                           :let [shape                           (get-in api ["shapes" shape-name "members" required-name])
@@ -854,7 +882,7 @@
                                                                                                   (keyword "http.request.configuration" location))]]
                                                     (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
                                                                                             handled-attributes))
-                                                      (throw (ex-info "generate-request-function, field not recognized" {:sh sh}))
+                                                      (throw (ex-info "[generate-request-function]item-17 Attribute not handled" {:sh sh}))
                                                       [location
                                                        `(into ~(list ser-name (list request-function-input-symbol dashed-name))
                                                               ~(into {:http.request.field/name required-name} x-filter sh))]))
@@ -875,7 +903,7 @@
                                                        (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
                                                                                                handled-attributes))
 
-                                                         (throw (ex-info "generate-request-function field not recognized" {:sh sh}))
+                                                         (throw (ex-info "[generate-request-function]item-18 Attribute not handled" {:sh sh}))
                                                          `[(contains? ~request-function-input-symbol ~dashed-name)
                                                            (update-in [~location]
                                                                       (fnil conj [])
@@ -884,8 +912,10 @@
                                                      cat)
                                             (get-in api ["shapes" shape-name "members"]))]
     (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) (get-in api ["shapes" shape-name]))
-                                            #{"type" "members" "required" "locationName" "xmlNamespace" "payload" "sensitive" "deprecatedMessage" "deprecated" "jsonvalue"}))
-      (throw (ex-info "Structure REST-XML protocol does not handle type" {:shape (get-in api ["shapes" shape-name])}))
+                                            #{"type" "members" "required" "locationName" "xmlNamespace" "payload" "sensitive"
+                                              ;; @NOTE : these are note handled attributes but we don't throw errors when encountered
+                                              "deprecatedMessage" "deprecated" "jsonvalue"}))
+      (throw (ex-info "[generate-request-function]item-19 Attribute not handled" {:shape (get-in api ["shapes" shape-name])}))
       `(defn- ~(shape-name->req-name shape-name) [~request-function-input-symbol]
          (cond-> ~required-function-body-part
            ~@optional-function-body-part)))))
@@ -903,7 +933,9 @@
         raw-response-input-symbol         (symbol "input")
         transformed-response-input-symbol (gensym "rawinput")
         result-wrapper-symbol             (gensym "resultWrapper")
-        handled-attributes                #{"shape" "location" "locationName" "streaming" "deprecated" "box" "deprecatedMessage" "jsonvalue"}
+        handled-attributes                #{"shape" "location" "locationName" "streaming"
+                                            ;; @NOTE : these are note handled attributes but we don't throw errors when encountered
+                                            "deprecated" "box" "deprecatedMessage" "jsonvalue"}
         let-declaration                   (into {}
                                                 (x/for [[sname {:strs [shape] :as sh}] %
                                                         :let [shape                           (get-in api ["shapes" shape-name "members" sname])
@@ -916,9 +948,9 @@
                                                                   (cond
                                                                     (or (= location "header") (= location "headers")) `(get-in ~raw-response-input-symbol [:headers ~locationName])
                                                                     (= location "statusCode")                         `(get-in ~raw-response-input-symbol [:status ~locationName])
-                                                                    :default                                          (throw (ex-info "location no header" {:location   location
-                                                                                                                                                            :shape-name shape-name
-                                                                                                                                                            :shape      sh})))
+                                                                    :default                                          (throw (ex-info "[generate-response-function]item-20 location not handled" {:location   location
+                                                                                                                                                                                                  :shape-name shape-name
+                                                                                                                                                                                                  :shape      sh})))
                                                                   (case protocol
                                                                     ("ec2" "query" "rest-xml") (if streaming
                                                                                                  transformed-response-input-symbol
@@ -939,9 +971,9 @@
                                                               dashed-name                     (-> required-name aws/dashed keyword)]]
                                                   (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
                                                                                           handled-attributes))
-                                                    (throw (ex-info "generate-response-function / required-function-body-part" {:output-root shape-name
-                                                                                                                                :shape-name  required-name
-                                                                                                                                :shape       sh}))
+                                                    (throw (ex-info "[generate-response-function]item-21 Attribute not handled" {:output-root shape-name
+                                                                                                                                 :shape-name  required-name
+                                                                                                                                 :shape       sh}))
                                                     [dashed-name (list deser-name `(get-in ~let-var-sym ~(cond
                                                                                                            (= location "header")                            [locationName]
                                                                                                            (true? streaming)                                [locationName]
@@ -957,9 +989,9 @@
                                                                        dashed-name  (-> optional-name aws/dashed keyword)]]
                                                            (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) sh)
                                                                                                    handled-attributes))
-                                                             (throw (ex-info "generate-response-function / optional-function-body-part" {:output-root shape-name
-                                                                                                                                         :shape-name  optional-name
-                                                                                                                                         :shape       sh}))
+                                                             (throw (ex-info "[generate-response-function]item-22 Attribute not handled" {:output-root shape-name
+                                                                                                                                          :shape-name  optional-name
+                                                                                                                                          :shape       sh}))
                                                              `[(~let-var-sym ~locationName)
                                                                (assoc ~dashed-name
                                                                       ~(list deser-name `(get-in ~let-var-sym ~(cond
@@ -970,29 +1002,31 @@
                                                                                                                  :exception                                       (throw (ex-info "protocol or location not known :" {:protocol protocol}))))))]))
                                                          cat)
                                                 (get-in api ["shapes" shape-name "members"]))]
-      (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) (get-in api ["shapes" shape-name]))
-                                              #{"type" "event" "flattened" "eventstream" "error" "exception" "synthetic" "members" "box" "fault" "required" "deprecatedMessage"
-                                                "queryName" "location" "locationName" "eventpayload" "xmlOrder" "payload" "sensitive" "deprecated" "jsonvalue"}))
-        (throw (ex-info "generate-response-function / defn-part" {:output-root shape-name
-                                                                  :shape-name  shape-name
-                                                                  :shape       (get-in api ["shapes" shape-name])}))
-        `(defn- ~(shape-name->response-name shape-name)
-           ([~raw-response-input-symbol]
-            ~(list (shape-name->response-name shape-name) nil raw-response-input-symbol ))
-           ([~result-wrapper-symbol ~raw-response-input-symbol]
-            (let [~transformed-response-input-symbol ~(case protocol
-                                                        ("ec2" "rest-xml" "query") (if (true? (as-> (get-in api ["shapes" shape-name "payload"]) payload-shape
-                                                                                                (get-in api ["shapes" shape-name "members" payload-shape "streaming"])))
-                                                                                     `(:body ~raw-response-input-symbol)
-                                                                                     `(some-> ~raw-response-input-symbol
-                                                                                              :body
-                                                                                              aws/parse-xml-body))
-                                                        ("json" "rest-json")       `(some->  ~raw-response-input-symbol
-                                                                                             :body
-                                                                                             aws/parse-json-body))
-                  ~let-var-sym                       ~let-declaration]
-              (cond-> ~required-function-body-part
-                ~@optional-function-body-part)))))))
+    (if-not (empty? (clojure.set/difference (into #{} (map (fn [[k _]] k)) (get-in api ["shapes" shape-name]))
+                                            #{"type"  "flattened" "location" "locationName" "members" "required"
+                                              ;; @NOTE : these are note handled attributes but we don't throw errors when encountered
+                                              "queryName" "event" "deprecatedMessage" "eventpayload" "xmlOrder" "eventstream" "box"
+                                              "fault" "error" "exception" "synthetic" "payload" "sensitive" "deprecated" "jsonvalue"}))
+      (throw (ex-info "[generate-response-function]item-23 Attribute not handled" {:output-root shape-name
+                                                                                   :shape-name  shape-name
+                                                                                   :shape       (get-in api ["shapes" shape-name])}))
+      `(defn- ~(shape-name->response-name shape-name)
+         ([~raw-response-input-symbol]
+          ~(list (shape-name->response-name shape-name) nil raw-response-input-symbol ))
+         ([~result-wrapper-symbol ~raw-response-input-symbol]
+          (let [~transformed-response-input-symbol ~(case protocol
+                                                      ("ec2" "rest-xml" "query") (if (true? (as-> (get-in api ["shapes" shape-name "payload"]) payload-shape
+                                                                                              (get-in api ["shapes" shape-name "members" payload-shape "streaming"])))
+                                                                                   `(:body ~raw-response-input-symbol)
+                                                                                   `(some-> ~raw-response-input-symbol
+                                                                                            :body
+                                                                                            aws/parse-xml-body))
+                                                      ("json" "rest-json")       `(some->  ~raw-response-input-symbol
+                                                                                           :body
+                                                                                           aws/parse-json-body))
+                ~let-var-sym                       ~let-declaration]
+            (cond-> ~required-function-body-part
+              ~@optional-function-body-part)))))))
 
 
 ;; ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
