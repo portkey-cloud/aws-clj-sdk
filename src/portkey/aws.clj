@@ -632,6 +632,7 @@
   make the HTTP call."
   [{:keys [:http.request.configuration/endpoints
            :http.request.configuration/method
+           :http.request.configuration/service-id
            :http.request.configuration/request-uri
            :http.request.configuration/output-deser-fn
            :http.request.configuration/result-wrapper
@@ -639,7 +640,11 @@
   #_(spec/check-asserts true)
   #_(binding [spec/*compile-asserts* true]
       (spec/assert :http.request.configuration/configuration req))
-  (let [{:keys [endpoint credential-scope signature-version]} (endpoints (region))]
+  (let [{:keys [endpoint credential-scope signature-version]} (if endpoints (endpoints (region)) {:endpoint          (str "https://" service-id "." (region) ".amazonaws.com")
+                                                                                                  :credential-scope  {:service service-id
+                                                                                                                      :region  (region)}
+                                                                                                  :signature-version :v4})]
+
     (->
      (into req
            {:ring.request {:method             method
