@@ -640,6 +640,7 @@
   #_(spec/check-asserts true)
   #_(binding [spec/*compile-asserts* true]
       (spec/assert :http.request.configuration/configuration req))
+  ;; @TODO : add some logging information for when endpoints is nil from partitions.json
   (let [{:keys [endpoint credential-scope signature-version]} (if endpoints (endpoints (region)) {:endpoint          (str "https://" service-id "." (region) ".amazonaws.com")
                                                                                                   :credential-scope  {:service service-id
                                                                                                                       :region  (region)}
